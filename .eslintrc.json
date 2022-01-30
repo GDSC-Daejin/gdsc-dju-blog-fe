@@ -1,13 +1,25 @@
 // .eslintrc.json
-
 {
+  "env": {"browser": true, "node": true, "es6": true },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "@typescript-eslint", "prettier"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+  "extends": ["plugin:@typescript-eslint/recommended", "eslint:recommended"],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"],
+      "@typescript-eslint": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": ["error"]
+      }
+    }
   ],
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -15,10 +27,5 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "off"
 
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
   }
 }

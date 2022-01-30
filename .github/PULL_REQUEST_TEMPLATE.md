@@ -8,3 +8,5 @@
 - [ ] 예) XX 테이블 추가, 앱 배포 등
 - [ ] eg) Create XX table, Deploy app etc
 
+## Merge 후 필요 작업 (Checklist after merge)
+- PR이 생성되면 코드 리뷰 요청한 개발자에게 슬랙으로 알려주세요.
