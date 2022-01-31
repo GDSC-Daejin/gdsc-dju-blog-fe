@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <LayoutContainer>
-        <ContainerInner>Home</ContainerInner>
+        <ContainerInner>홈</ContainerInner>
       </LayoutContainer>
     </>
   );
