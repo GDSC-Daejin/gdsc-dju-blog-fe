@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutContainer } from '../../styles/layouts';
+import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 
 const Home = () => {
   return (
