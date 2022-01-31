@@ -1,7 +1,14 @@
 import React from 'react';
+import { LayoutContainer } from '../../styles/layouts';
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <LayoutContainer>
+        <ContainerInner>Home</ContainerInner>
+      </LayoutContainer>
+    </>
+  );
 };
 
 export default Home;
