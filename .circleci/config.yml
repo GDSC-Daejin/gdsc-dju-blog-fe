@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  slack: circleci/slack@4.3
 jobs:
   build:
     docker:
@@ -9,18 +11,69 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+              # fallback to using the latest cache if no exact match is found
+            - deps1-
       - run:
           name: Install Dependencies
           command: npm install
       - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
       - run:
           name: Build
-          command: npm build
+          command: yarn build
       - run:
           name: Firebase Deploy
           command: firebase deploy --token $FIREBASE_TOKEN --non-interactive
+      - slack/notify:
+          event: << parameters.event >>
+          custom: >
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "<< parameters.header >>",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "$(date +'%Y/%m/%d @%T')"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "CircleCI", "emoji": true
+                    },
+                    "value": "circle_ci_url",
+                    "url": "${CIRCLE_BUILD_URL}",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                      "type": "mrkdwn",
+                      "text": "> *작업 브랜치* - `$CIRCLE_PROJECT_REPONAME/$CIRCLE_BRANCH`\n> *작업자* - `$CIRCLE_USERNAME`\n>"
+                  },
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "<< parameters.img_url >>",
+                    "alt_text": "status-image"
+                  }
+                },
+                {
+                  "type": "divider"
+                }
+              ]
+            }
