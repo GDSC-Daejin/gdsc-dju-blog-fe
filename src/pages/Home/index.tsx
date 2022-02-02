@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <LayoutContainer>
-        <ContainerInner>홈</ContainerInner>
+        <ContainerInner>홈임!!!</ContainerInner>
       </LayoutContainer>
     </>
   );
