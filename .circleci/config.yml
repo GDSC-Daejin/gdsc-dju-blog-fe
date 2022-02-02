@@ -2,9 +2,6 @@ version: 2
 orbs:
   slack: circleci/slack@4.3
 jobs:
-  filters:
-    branches:
-      only: master
   build:
     docker:
       - image: circleci/node:14.17.0
@@ -17,13 +14,22 @@ jobs:
             - deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
               # fallback to using the latest cache if no exact match is found
             - deps1-
+          filters:
+            branches:
+              only: master
       - run:
           name: Install Dependencies
           command: yarn install
+          filters:
+            branches:
+              only: master
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+          filters:
+            branches:
+              only: master
       - run:
           name: Build
           command: yarn build
