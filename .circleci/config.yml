@@ -2,6 +2,9 @@ version: 2
 orbs:
   slack: circleci/slack@4.3
 jobs:
+  filters:
+    branches:
+      only: master
   build:
     docker:
       - image: circleci/node:14.17.0
@@ -24,10 +27,12 @@ jobs:
       - run:
           name: Build
           command: yarn build
+          filters:
+            branches:
+              only: master
       - run:
           name: Firebase Deploy
           command: ./node_modules/.bin/firebase deploy --only hosting --project "$FIREBASE_PROJECT_ID" --token "$FIREBASE_TOKEN"
           filters:
             branches:
-              only:
-                - master
+              only: master
