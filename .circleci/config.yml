@@ -27,3 +27,7 @@ jobs:
       - run:
           name: Firebase Deploy
           command: ./node_modules/.bin/firebase deploy --only hosting --project "$FIREBASE_PROJECT_ID" --token "$FIREBASE_TOKEN"
+          filters:
+            branches:
+              only:
+                - master
