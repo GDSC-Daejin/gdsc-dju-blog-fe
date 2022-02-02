@@ -13,14 +13,14 @@ jobs:
             - v1-dependencies-
       - run:
           name: Install Dependencies
-          command: npm install
+          command: yarn install
       - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v1-yarn-deps-{{ checksum "yarn-lock.json" }}
           paths:
             - ./node_modules
       - run:
           name: Build
-          command: npm build
+          command: yarn build
       - run:
           name: Firebase Deploy
           command: firebase deploy --token $FIREBASE_TOKEN --non-interactive
