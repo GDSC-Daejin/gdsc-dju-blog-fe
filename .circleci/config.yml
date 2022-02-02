@@ -1,23 +1,26 @@
-version: 2.0
+version: 2
 jobs:
   build:
     docker:
-      - image: node:14.9.0-alpine
+      - image: circleci/node:10.16.0
+    working_directory: ~/repo
     steps:
       - checkout
-      - run: |
-          # build client
-          yarn install && yarn build
-          # TODO: add options for dev and prod
-          # deploy client
-          yarn global add firebase-tools && firebase deploy --only hosting --token ${FIREBASE_TOKEN}
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - develop
-                - master
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build
+          command: npm build
+      - run:
+          name: Firebase Deploy
+          command: firebase deploy --token $FIREBASE_TOKEN --non-interactive
