@@ -14,9 +14,15 @@ jobs:
             - deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
               # fallback to using the latest cache if no exact match is found
             - deps1-
+          filters:
+            branches:
+              only: master
       - run:
           name: Install Dependencies
           command: yarn install
+          filters:
+            branches:
+              only: master
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
@@ -24,10 +30,12 @@ jobs:
       - run:
           name: Build
           command: yarn build
+          filters:
+            branches:
+              only: master
       - run:
           name: Firebase Deploy
           command: ./node_modules/.bin/firebase deploy --only hosting --project "$FIREBASE_PROJECT_ID" --token "$FIREBASE_TOKEN"
           filters:
             branches:
-              only:
-                - master
+              only: master

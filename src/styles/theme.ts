@@ -1,11 +1,19 @@
 import { DefaultTheme } from 'styled-components';
-
-import { colors } from './colors';
 import { windowSize } from './windowSize';
 import { fontSize } from './fontSize';
+import { assetColors } from './assetColors';
+import { light } from './lightTheme';
+import { dark } from './darkTheme';
 
-export const theme: DefaultTheme = {
-  color: colors,
+export const lightTheme: DefaultTheme = {
+  theme: light,
   windowSize: windowSize,
   fontSize: fontSize,
+  color: assetColors,
+};
+export const darkTheme: DefaultTheme = {
+  theme: dark,
+  windowSize: windowSize,
+  fontSize: fontSize,
+  color: assetColors,
 };
