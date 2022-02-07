@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 export const useTheme = () => {
   // 브라우저 기본 테마
