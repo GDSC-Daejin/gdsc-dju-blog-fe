@@ -27,9 +27,6 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
-          filters:
-            branches:
-              only: master
       - run:
           name: Build
           command: yarn build
