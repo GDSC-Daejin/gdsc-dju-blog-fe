@@ -6,17 +6,10 @@
   font-family: "Product Sans Bold";
   src: url("fonts/Product Sans Bold.ttf");
 }
-* {
-  font-family: "Noto Sans KR", sans-serif;
-  font-style: normal;
-  margin: 0;
-  word-break: keep-all;
-  -webkit-tap-highlight-color: transparent;
-}
-html {
-  background: white !important;
+html{
   font-size: 10px;
 }
+
 a {
   text-decoration: none;
 }
@@ -32,4 +25,3 @@ a:focus {
 a:active {
   text-decoration: none;
 }
-
