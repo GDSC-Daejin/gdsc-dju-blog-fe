@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
+import { useTheme } from '../../hooks/useTheme';
 
 const Home = () => {
   return (

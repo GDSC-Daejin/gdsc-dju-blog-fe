@@ -60,4 +60,4 @@ export const primaryColor = {
   ...googleLogoColor,
 };
 
-export const colors = { ...primaryColor };
+export const assetColors = { ...primaryColor };
