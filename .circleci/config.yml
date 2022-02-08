@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           keys:
             - deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-              # fallback to using the latest cache if no exact match is found
+            # fallback to using the latest cache if no exact match is found
             - deps1-
           filters:
             branches:
@@ -27,6 +27,9 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+          filters:
+            branches:
+              only: master
       - run:
           name: Build
           command: yarn build
