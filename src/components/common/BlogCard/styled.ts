@@ -1,11 +1,6 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const BlogCardWrapper = styled(motion.div)`
-  align-items: center;
-  justify-content: center;
-  width: 300px;
-`;
 export const BlogCardInner = styled(motion.div)<{ route: string }>`
   width: 276px;
   height: 328px;
@@ -60,12 +55,16 @@ export const BlogCardPostTextWrapper = styled(motion.div)`
   margin-bottom: 20px;
 `;
 export const BlogCardSubText = styled.div<{
-  color?: string;
+  subText?: boolean;
   bold?: boolean;
 }>`
   font-size: ${(props) => props.theme.fontSize.p};
-  color: ${(props) => props.color};
+
   ${(props) =>
+    props.subText &&
+    css`
+      color: ${(props) => props.theme.color.grey400};
+    `} ${(props) =>
     props.bold &&
     css`
       font-weight: 600;
