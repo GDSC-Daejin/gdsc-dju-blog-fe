@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const BlogCardWrapper = styled(motion.div)`
@@ -8,7 +8,7 @@ export const BlogCardWrapper = styled(motion.div)`
 `;
 export const BlogCardInner = styled(motion.div)<{ route: string }>`
   width: 276px;
-  height: 333px;
+  height: 328px;
   border-radius: 10px;
   display: flex;
   flex-direction: column-reverse;
@@ -21,18 +21,57 @@ export const StyledImage = styled(motion.img)`
   border-radius: 10px;
 `;
 export const BlogCardBottomBox = styled(motion.div)`
-  position: absolute;
-  z-index: 2;
   box-sizing: border-box;
-  min-width: 276px;
-  height: 92px;
+  overflow: hidden;
   border-radius: 10px;
   background: #fff;
-  box-shadow: 0 19px 32px -1px rgba(0, 0, 0, 0.1);
   padding: 12px 20px;
 `;
-export const BlogCardTitle = styled.div`
+export const BlogCardTitle = styled(motion.h6)`
   font-size: 2.4rem;
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
+`;
+export const BlogCardSubTextWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+export const BlogCardAuthorWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+`;
+export const BlogCardAuthorImage = styled.img`
+  background: ${(props) => props.theme.color.grey400};
+  border-radius: 100%;
+  margin-right: 7px;
+  height: 20px;
+  width: 20px;
+`;
+export const BlogCardPostText = styled.div`
+  font-size: 1.4rem;
+  width: 100%;
+  min-height: 160px;
+`;
+export const BlogCardPostTextWrapper = styled(motion.div)`
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+export const BlogCardSubText = styled.div<{
+  color?: string;
+  bold?: boolean;
+}>`
+  font-size: ${(props) => props.theme.fontSize.p};
+  color: ${(props) => props.color};
+  ${(props) =>
+    props.bold &&
+    css`
+      font-weight: 600;
+    `}
+  margin-right: 5px;
+  &:last-child {
+    margin-right: 0;
+  }
 `;
