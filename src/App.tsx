@@ -14,8 +14,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <button onClick={setTheme as () => void}>toggle</button>
-      <GlobalStyle />
       <Layout />
+      <GlobalStyle />
     </ThemeProvider>
   );
 }
