@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 // TASK
 // 1. google Oauth 페이지 url 연결
 // 2. 로그인 동작 확인
 /* 
-  -> token 뺴낸 뒤 테스트
+
+in-progress
+data 받아지는 것 까지 확인.
+access_token을 서버로 넘기면 끝
 
 */
 // 3. 인증 코드 받아서 서버로 넘기기
 
 function Login() {
-  const [UserData, setUserData] = useState(null);
-
   useEffect(() => {
     const url = new URL(window.location.href);
     const hash = url.hash;
