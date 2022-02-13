@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const BlogCardInner = styled(motion.div)<{ route: string }>`
-  width: 276px;
+  position: relative;
+  z-index: 9;
+  min-width: 276px;
   height: 328px;
   border-radius: 10px;
   display: flex;
@@ -64,7 +66,8 @@ export const BlogCardSubText = styled.div<{
     props.subText &&
     css`
       color: ${(props) => props.theme.color.grey400};
-    `} ${(props) =>
+    `}
+  ${(props) =>
     props.bold &&
     css`
       font-weight: 600;

@@ -13,9 +13,9 @@ function App() {
   console.log(themeMode);
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <button onClick={setTheme as () => void}>toggle</button>
       <Layout />
-      <GlobalStyle />
     </ThemeProvider>
   );
 }
