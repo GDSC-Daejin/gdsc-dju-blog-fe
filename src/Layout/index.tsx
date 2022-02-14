@@ -4,6 +4,7 @@ import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
 import { AnimatePresence } from 'framer-motion';
+import SetTheme from '../hooks/SetTheme';
 
 const Home = lazy(() => import('../pages/Home'));
 
@@ -11,6 +12,7 @@ const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   return (
     <>
+      <SetTheme />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
         <Suspense fallback={<GoogleLoader background={false} />}>
