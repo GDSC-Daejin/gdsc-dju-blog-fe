@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useTheme } from '../../hooks/useTheme';
 import BlogCard from '../../components/common/BlogCard';
-import { CardSection } from './styled';
+import { CardSection, CardWrapper } from './styled';
 import { useElementScroll, useTransform } from 'framer-motion';
 
 /* 
@@ -17,32 +17,40 @@ import { useElementScroll, useTransform } from 'framer-motion';
 
 function index() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollXProgress } = useElementScroll(ref);
-  const [Xscroll, setXscroll] = useState(0);
-  const scale = useTransform(scrollXProgress, [0, 1], [0, 3]);
+  const { scrollX } = useElementScroll(ref);
+  const [scrollXPercent, setXscroll] = useState(0);
 
-  scrollXProgress.onChange(setXscroll);
+  scrollX.onChange(setXscroll);
+  const scrollXvalue = useTransform(scrollX, [0, 1], [0, 2]);
 
+  const scrollMove = (buttonNum: number) => {
+    ref.current?.scrollTo({
+      top: 0,
+      left: buttonNum * 1212,
+      behavior: 'smooth',
+    });
+  };
   return (
     <LayoutContainer>
       <CardSection ref={ref}>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        <CardWrapper>
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+          <BlogCard />
+        </CardWrapper>
       </CardSection>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <h1>{scale.get()}</h1>
+      <button onClick={() => scrollMove(0)}>1</button>
+      <button onClick={() => scrollMove(1)}>2</button>
+      <button onClick={() => scrollMove(2)}>3</button>
     </LayoutContainer>
   );
 }

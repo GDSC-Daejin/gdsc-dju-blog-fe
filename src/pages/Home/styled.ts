@@ -10,3 +10,7 @@ export const CardSection = styled(motion.section)`
   &::-webkit-scrollbar {
   }
 `;
+
+export const CardWrapper = styled.div`
+  display: flex;
+`;
