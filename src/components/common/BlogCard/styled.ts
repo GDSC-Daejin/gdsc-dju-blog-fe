@@ -9,9 +9,10 @@ export const BlogCardInner = styled(motion.div)<{ route: string }>`
   border-radius: 10px;
   display: flex;
   flex-direction: column-reverse;
-  box-shadow: 0 19px 32px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 19px 32px -1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   background-image: url(${(props) => props.route});
+  margin: 13px;
 `;
 export const StyledImage = styled(motion.img)`
   height: 100%;

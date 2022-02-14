@@ -43,7 +43,6 @@ const BottomText = () => {
 };
 const BlogCard = () => {
   const [isHovered, setIsHovered] = useState(false);
-  console.log(isHovered);
   return (
     <AnimateSharedLayout>
       <BlogCardInner
@@ -51,7 +50,7 @@ const BlogCard = () => {
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
       >
-        <BlogCardBottomBox layout initial={{ borderRadius: 10 }}>
+        <BlogCardBottomBox layout initial={{ borderRadius: 0 }}>
           <BlogCardTitle layout>제목입니다아아아아아</BlogCardTitle>
           <AnimatePresence>{isHovered && <PostText />}</AnimatePresence>
           <motion.div layout>
