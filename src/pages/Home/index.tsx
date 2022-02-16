@@ -5,6 +5,16 @@ import BlogCard from '../../components/common/BlogCard';
 import { CardSection } from './styled';
 import { useElementScroll, useTransform } from 'framer-motion';
 
+/*
+  hover시 text 다 뭉개짐
+  text 뿐만 아니라 카드 다 뭉개짐
+  pointer 수정해야 함
+  omMouseMove의 이벤트 발생이 너무 많아 수정해야 함
+
+
+  test 더 필요할 듯
+*/
+
 function index() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDrag, setIsDrag] = useState(false);
@@ -39,7 +49,7 @@ function index() {
       <CardSection
         ref={scrollRef}
         onMouseDown={onDragStart}
-        onMouseMove={onDragMove}
+        onMouseMove={isDrag ? onDragMove : undefined}
         onMouseUp={onDragEnd}
         onMouseLeave={onDragEnd}
       >
