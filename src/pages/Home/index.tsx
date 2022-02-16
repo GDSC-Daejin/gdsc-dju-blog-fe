@@ -39,8 +39,17 @@ function index() {
   };
   const onDragMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isDrag) {
-      if (scrollRef.current?.scrollLeft !== undefined)
-        scrollRef.current.scrollLeft = startX - e.pageX;
+      if (scrollRef.current !== null) {
+        const { scrollWidth, clientWidth, scrollLeft } = scrollRef.current;
+        if (scrollRef.current?.scrollLeft !== undefined)
+          scrollRef.current.scrollLeft = startX - e.pageX;
+
+        if (scrollLeft === 0) {
+          setStartX(e.pageX);
+        } else if (scrollWidth <= clientWidth + scrollLeft) {
+          setStartX(e.pageX + scrollLeft);
+        }
+      }
     }
   };
 
@@ -52,6 +61,7 @@ function index() {
         onMouseMove={isDrag ? onDragMove : undefined}
         onMouseUp={onDragEnd}
         onMouseLeave={onDragEnd}
+        isDrag={isDrag}
       >
         <BlogCard />
         <BlogCard />
