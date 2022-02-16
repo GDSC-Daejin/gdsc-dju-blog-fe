@@ -8,9 +8,6 @@ export const CardSection = styled(motion.section)`
   height: 400px;
   overflow-x: scroll;
   &::-webkit-scrollbar {
+    display: none;
   }
-`;
-
-export const CardWrapper = styled.div`
-  display: flex;
 `;
