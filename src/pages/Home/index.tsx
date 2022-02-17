@@ -1,6 +1,5 @@
 import React from 'react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
-import { useTheme } from '../../hooks/useTheme';
 import BlogCard from '../../components/common/BlogCard';
 import { BlogCardWrapper, CardSection } from './styled';
 
