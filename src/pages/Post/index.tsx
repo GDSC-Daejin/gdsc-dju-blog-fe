@@ -6,7 +6,6 @@ import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 
 const Post = () => {
   const [themeMode] = useRecoilState(themeState);
-  console.log(themeMode);
   return (
     <LayoutContainer>
       <ContainerInner>
