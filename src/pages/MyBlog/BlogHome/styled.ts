@@ -43,3 +43,8 @@ export const IntroduceText = styled.p`
   color: ${(props) => props.theme.color.grey900};
   max-width: 555px;
 `;
+export const HashTageSection = styled.section`
+  margin-top: 25px;
+  display: flex;
+  max-width: 555px;
+`;

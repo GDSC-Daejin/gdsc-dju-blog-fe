@@ -9,6 +9,7 @@ import {
   BlogName,
   BlogNamePosition,
   BlogNameWrapper,
+  HashTageSection,
   IntroduceText,
   ProfileDetailWrapper,
   ProfileImageWrapper,
@@ -18,10 +19,12 @@ import {
 import MockProfile from '../../../Images/MockProfile.png';
 import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
+import { HashTageDark } from '../../../components/common/HashTage';
 
 const BlogHome = () => {
   const { user_name } = useParams();
-  console.log(typeof MockProfile);
+  const hashTage = ['React', 'TypeScript', 'JavaScript', 'Node.js'];
+
   return (
     <>
       <NavigationBlock />
@@ -44,6 +47,11 @@ const BlogHome = () => {
                 Pellentesque euismod, ipsum eget sagittis consectetur, nisl urna
                 aliquet nunc.
               </IntroduceText>
+              <HashTageSection>
+                {hashTage.map((tag, id) => (
+                  <HashTageDark text={tag} key={id} />
+                ))}
+              </HashTageSection>
             </ProfileDetailWrapper>
           </ProfileWrapper>
         </ContainerInner>
