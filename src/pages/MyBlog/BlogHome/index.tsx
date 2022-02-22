@@ -20,6 +20,7 @@ import MockProfile from '../../../Images/MockProfile.png';
 import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
 import { HashTageDark } from '../../../components/common/HashTage';
+import CategoryMenu from '../../../components/common/CategoryMenu';
 
 const BlogHome = () => {
   const { user_name } = useParams();
@@ -39,7 +40,7 @@ const BlogHome = () => {
               <BlogNameWrapper>
                 <BlogName>Jason</BlogName>
                 <BlogNamePosition color={positionColor('frontend')}>
-                  's Blog
+                  &apos;s Blog
                 </BlogNamePosition>
               </BlogNameWrapper>
               <IntroduceText>
@@ -54,6 +55,7 @@ const BlogHome = () => {
               </HashTageSection>
             </ProfileDetailWrapper>
           </ProfileWrapper>
+          <CategoryMenu />
         </ContainerInner>
       </LayoutContainer>
     </>
