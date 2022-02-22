@@ -4,7 +4,6 @@ export const StyledImage = styled.img`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  margin-right: 90px;
 `;
 export const PositionCircle = styled.div<{ color?: string }>`
   width: 38px;
