@@ -8,6 +8,7 @@ import SetTheme from '../hooks/SetTheme';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
+const Post = lazy(() => import('../pages/Post'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -20,6 +21,7 @@ const Layout = () => {
           <Routes>
             <Route path={'/*'} element={<Home />} />
             <Route path={'/:user_name'} element={<MyBlog />} />
+            <Route path={'/post'} element={<Post />} />
           </Routes>
         </Suspense>
       </AnimatePresence>
