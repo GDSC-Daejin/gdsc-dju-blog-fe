@@ -13,6 +13,8 @@ import {
   HashTageSection,
   HashTageWrapper,
   IntroduceText,
+  PostCardWrapper,
+  PostSectionWrapper,
   ProfileDetailWrapper,
   ProfileImageWrapper,
   ProfileWrapper,
@@ -24,7 +26,8 @@ import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
 import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
-import { GDSCButton, GDSCButtonL } from '../../../components/common/Button';
+import { GDSCButton } from '../../../components/common/Button';
+import PostCard from '../../../components/common/PostCard';
 
 const BlogHome = () => {
   const { user_name } = useParams();
@@ -74,7 +77,6 @@ const BlogHome = () => {
               </HashTageSection>
             </ProfileDetailWrapper>
           </ProfileWrapper>
-
           <TopMenuWrapper>
             <CategoryMenu />
             <ButtonWrapper>
@@ -82,6 +84,13 @@ const BlogHome = () => {
               <GDSCButton text={'글쓰기'} />
             </ButtonWrapper>
           </TopMenuWrapper>
+          <PostSectionWrapper>
+            {hashTage.map((data, id) => (
+              <PostCardWrapper key={id}>
+                <PostCard />
+              </PostCardWrapper>
+            ))}
+          </PostSectionWrapper>
         </ContainerInner>
       </LayoutContainer>
     </>

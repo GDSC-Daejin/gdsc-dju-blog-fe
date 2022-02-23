@@ -16,7 +16,6 @@ export const ProfileDetailWrapper = styled.section`
 export const Role = styled.p`
   color: ${(props) => props.theme.color.grey500};
   font-size: ${(props) => props.theme.fontSize.body1};
-  margin-bottom: 2px;
   font-family: 'Google Sans', sans-serif;
 `;
 export const BlogNameWrapper = styled.div`
@@ -31,6 +30,7 @@ export const BlogName = styled.h2`
   font-size: ${(props) => props.theme.fontSize.h2};
   font-weight: bold;
   font-family: 'Google Sans', sans-serif;
+  line-height: 1.2;
 `;
 export const BlogNamePosition = styled.p<{ color: string }>`
   font-size: ${(props) => props.theme.fontSize.h5};
@@ -64,4 +64,10 @@ export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+export const PostSectionWrapper = styled.section``;
+export const PostCardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
 `;
