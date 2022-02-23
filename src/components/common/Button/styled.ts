@@ -5,10 +5,16 @@ export const StyledButton = styled.button<{
   background?: string;
   size?: string;
   disable?: boolean;
+  border?: string;
 }>`
   display: flex;
   align-items: center;
   border: 1px solid ${(props) => props.theme.color.grey300};
+  ${(props) =>
+    props.border &&
+    css`
+      border: 1px solid ${props.border};
+    `}
   padding: 8px 30px;
   cursor: pointer;
   color: ${(props) => props.color};

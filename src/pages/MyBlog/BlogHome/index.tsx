@@ -10,6 +10,7 @@ import {
   BlogNamePosition,
   BlogNameWrapper,
   HashTageSection,
+  HashTageWrapper,
   IntroduceText,
   ProfileDetailWrapper,
   ProfileImageWrapper,
@@ -25,7 +26,20 @@ import { GDSCButton, GDSCButtonL } from '../../../components/common/Button';
 
 const BlogHome = () => {
   const { user_name } = useParams();
-  const hashTage = ['React', 'TypeScript', 'JavaScript', 'Node.js'];
+  const hashTage = [
+    'React',
+    'TypeScript',
+    'JavaScript',
+    'Node.js',
+    'SWR',
+    'Recoil',
+    'GraphQL',
+    'Apollo',
+    'Next.js',
+    'Gatsby',
+    'React Hooks',
+    'Redux',
+  ];
 
   return (
     <>
@@ -51,7 +65,9 @@ const BlogHome = () => {
               </IntroduceText>
               <HashTageSection>
                 {hashTage.map((tag, id) => (
-                  <HashTageDark text={tag} key={id} />
+                  <HashTageWrapper key={id}>
+                    <HashTageDark text={tag} />
+                  </HashTageWrapper>
                 ))}
               </HashTageSection>
             </ProfileDetailWrapper>

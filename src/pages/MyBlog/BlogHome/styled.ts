@@ -48,4 +48,8 @@ export const HashTageSection = styled.section`
   margin-top: 25px;
   display: flex;
   max-width: 555px;
+  flex-wrap: wrap;
+`;
+export const HashTageWrapper = styled.div`
+  margin-bottom: 12px;
 `;
