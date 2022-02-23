@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import SetTheme from '../hooks/SetTheme';
 
 const Home = lazy(() => import('../pages/Home'));
+const MyBlog = lazy(() => import('../pages/MyBlog'));
 const Post = lazy(() => import('../pages/Post'));
 
 const Layout = () => {
@@ -19,6 +20,7 @@ const Layout = () => {
         <Suspense fallback={<GoogleLoader background={false} />}>
           <Routes>
             <Route path={'/*'} element={<Home />} />
+            <Route path={'/:user_name'} element={<MyBlog />} />
             <Route path={'/post'} element={<Post />} />
           </Routes>
         </Suspense>
