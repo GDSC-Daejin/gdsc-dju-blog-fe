@@ -17,6 +17,7 @@ export const StyledButton = styled.button<{
     `}
   padding: 8px 30px;
   cursor: pointer;
+  font-size: ${(props) => props.theme.fontSize.body2};
   color: ${(props) => props.color};
   ${(props) =>
     props.disable &&

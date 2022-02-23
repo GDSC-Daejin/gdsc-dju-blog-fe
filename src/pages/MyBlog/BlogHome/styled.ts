@@ -37,7 +37,7 @@ export const BlogNamePosition = styled.p<{ color: string }>`
   color: ${(props) => props.color};
   font-family: 'Google Sans', sans-serif;
   position: relative;
-  bottom: -5px;
+  bottom: -8px;
 `;
 export const IntroduceText = styled.p`
   font-size: ${(props) => props.theme.fontSize.body1};
@@ -52,4 +52,16 @@ export const HashTageSection = styled.section`
 `;
 export const HashTageWrapper = styled.div`
   margin-bottom: 12px;
+`;
+export const TopMenuWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 59px;
+`;
+export const ButtonWrapper = styled.div`
+  width: 216px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-export const CategoryText = styled.div<{ active: boolean }>`
+export const CategoryText = styled.div<{ active?: boolean }>`
   font-size: ${(props) => props.theme.fontSize.h5};
 
   font-weight: normal;
@@ -11,11 +11,15 @@ export const CategoryText = styled.div<{ active: boolean }>`
     css`
       color: ${(props) => props.theme.color.grey900};
     `}
+  padding: 2px 0;
 `;
 export const CategoryTextWrapper = styled(motion.div)`
   cursor: pointer;
-  height: 65px;
   color: ${(props) => props.theme.color.grey300};
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #fff;
 `;
 export const CategoryMenuWrapper = styled(motion.div)`
   display: flex;
@@ -23,4 +27,19 @@ export const CategoryMenuWrapper = styled(motion.div)`
   flex-direction: row;
   width: 625px;
   justify-content: space-around;
+`;
+export const CategoryCircleWrapper = styled(motion.div)`
+  position: absolute;
+  left: 45%;
+  top: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+`;
+export const CategoryCircle = styled.div<{ color: string }>`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: ${(props) => props.color};
 `;

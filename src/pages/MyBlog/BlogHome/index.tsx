@@ -9,6 +9,7 @@ import {
   BlogName,
   BlogNamePosition,
   BlogNameWrapper,
+  ButtonWrapper,
   HashTageSection,
   HashTageWrapper,
   IntroduceText,
@@ -16,6 +17,7 @@ import {
   ProfileImageWrapper,
   ProfileWrapper,
   Role,
+  TopMenuWrapper,
 } from './styled';
 import MockProfile from '../../../Images/MockProfile.png';
 import ProfileImage from '../../../components/common/ProfileImage';
@@ -72,10 +74,14 @@ const BlogHome = () => {
               </HashTageSection>
             </ProfileDetailWrapper>
           </ProfileWrapper>
-          <CategoryMenu />
-          <GDSCButton text={'내 블로그'} disable={true} />
-          <GDSCButton text={'내 블로그'} color={'GDSC blue'} />
-          <GDSCButtonL text={'글쓰기'} />
+
+          <TopMenuWrapper>
+            <CategoryMenu />
+            <ButtonWrapper>
+              <GDSCButton text={'스크랩'} />
+              <GDSCButton text={'글쓰기'} />
+            </ButtonWrapper>
+          </TopMenuWrapper>
         </ContainerInner>
       </LayoutContainer>
     </>
