@@ -6,14 +6,14 @@ export const StyledImage = styled.img`
   border-radius: 50%;
 `;
 export const PositionCircle = styled.div<{ color?: string }>`
-  width: 38px;
-  height: 38px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   position: absolute;
   display: flex;
   align-items: center;
   top: 0;
-  left: 5px;
+  left: 10px;
   background: ${(props) => props.color};
 `;
 export const StyledImageWrapper = styled.div`

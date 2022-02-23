@@ -21,6 +21,7 @@ import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
 import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
+import { GDSCButton, GDSCButtonL } from '../../../components/common/Button';
 
 const BlogHome = () => {
   const { user_name } = useParams();
@@ -56,6 +57,9 @@ const BlogHome = () => {
             </ProfileDetailWrapper>
           </ProfileWrapper>
           <CategoryMenu />
+          <GDSCButton text={'내 블로그'} disable={true} />
+          <GDSCButton text={'내 블로그'} color={'GDSC blue'} />
+          <GDSCButtonL text={'글쓰기'} />
         </ContainerInner>
       </LayoutContainer>
     </>
