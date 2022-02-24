@@ -41,9 +41,7 @@ export const BlogCardAuthorImage = styled.img`
   height: 20px;
   width: 20px;
 `;
-export const BlogCardPostTextWrapper = styled(motion.div)<{
-  isHovered: boolean;
-}>`
+export const BlogCardPostTextWrapper = styled(motion.div)`
   margin-top: 10px;
   margin-bottom: 20px;
 `;
