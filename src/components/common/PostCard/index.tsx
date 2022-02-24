@@ -24,6 +24,7 @@ const PostCard = (props: Iprops) => {
   const { date, title, hashTage, content } = props;
 
   const [hover, setHover] = useState(false);
+  const [marked, setMarked] = useState(false);
   const contentFilter = () => {
     let result;
     hover
@@ -56,8 +57,12 @@ const PostCard = (props: Iprops) => {
           },
         }}
       >
-        <BookmarkWrapper>
-          <Bookmark marked={true} />
+        <BookmarkWrapper
+          onClick={() => {
+            setMarked(!marked);
+          }}
+        >
+          <Bookmark marked={marked} />
         </BookmarkWrapper>
         <PostDate>{dateFilter()}</PostDate>
         <PostTitle>{title}</PostTitle>

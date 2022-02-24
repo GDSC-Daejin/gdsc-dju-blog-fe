@@ -15,7 +15,6 @@ type Iprops = {
 };
 const CategoryMenu = (props: Iprops) => {
   const { onClick, type } = props;
-  const [hovered, setHovered] = useState('');
 
   const categoryName = [
     'all',
@@ -64,7 +63,6 @@ const CategoryMenu = (props: Iprops) => {
       <CategoryMenuWrapper>
         {category.map((item, id) => (
           <CategoryTextWrapper
-            onMouseOver={() => setHovered(categoryName[id])}
             onClick={() => {
               {
                 onClick && onClick(categoryName[id]);
