@@ -20,6 +20,7 @@ import {
   ProfileImageWrapper,
   ProfileWrapper,
   Role,
+  SettingIconWrapper,
   TopMenuWrapper,
 } from './styled';
 import MockProfile from '../../../Images/MockProfile.png';
@@ -31,6 +32,7 @@ import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
 import { postListData } from '../../../api/Mocks/postListData';
 import { useSearchParams } from 'react-router-dom';
+import Setting from '../../../Images/Setting';
 
 const BlogHome = () => {
   const { user_name } = useParams<'user_name'>();
@@ -77,6 +79,9 @@ const BlogHome = () => {
                 <BlogNamePosition color={positionColor('frontend')}>
                   &apos;s Blog
                 </BlogNamePosition>
+                <SettingIconWrapper>
+                  <Setting />
+                </SettingIconWrapper>
               </BlogNameWrapper>
               <IntroduceText>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

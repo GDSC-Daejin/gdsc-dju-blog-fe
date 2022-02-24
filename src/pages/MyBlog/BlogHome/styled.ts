@@ -37,7 +37,14 @@ export const BlogNamePosition = styled.p<{ color: string }>`
   color: ${(props) => props.color};
   font-family: 'Google Sans', sans-serif;
   position: relative;
-  bottom: -8px;
+  bottom: -7px;
+`;
+export const SettingIconWrapper = styled.div`
+  margin-left: 43px;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 36px;
+  cursor: pointer;
 `;
 export const IntroduceText = styled.p`
   font-size: ${(props) => props.theme.fontSize.body1};
