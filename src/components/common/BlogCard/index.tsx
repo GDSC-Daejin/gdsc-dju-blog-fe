@@ -21,7 +21,7 @@ const BottomText = ({ isHovered }: IisHoverdHook) => {
   return (
     <>
       <BlogCardTitle>제목입니다아아아아아</BlogCardTitle>
-      <BlogCardPostTextWrapper>
+      <BlogCardPostTextWrapper isHovered>
         <BlogCardPostText>
           본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고
           어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고
