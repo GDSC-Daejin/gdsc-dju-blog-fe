@@ -11,11 +11,32 @@ import {
   BlogCardTitle,
 } from './styled';
 import YellowBanner from '../../../Images/YellowBanner.svg';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import {
+  animate,
+  AnimatePresence,
+  AnimateSharedLayout,
+  motion,
+} from 'framer-motion';
 
 interface IisHoverdHook {
   isHovered: boolean;
 }
+
+const PostTextVariants = {
+  initial: {
+    y: 80,
+    opacity: 0,
+  },
+  visiable: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      delay: 0.3,
+      duration: 1,
+    },
+  },
+};
 
 const BottomText = ({ isHovered }: IisHoverdHook) => {
   return (
@@ -23,14 +44,24 @@ const BottomText = ({ isHovered }: IisHoverdHook) => {
       <BlogCardTitle>제목입니다아아아아아</BlogCardTitle>
       <BlogCardPostTextWrapper>
         <AnimatePresence>
-          {isHovered ? (
-            <BlogCardPostText>
+          {/* {isHovered ? (
+            <BlogCardPostText
+              variants={PostTextVariants}
+              initial={'initial'}
+              animate={'visiable'}
+            >
               본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고
               어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고
               본문 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고
               어쩌고 본문 어쩌고
             </BlogCardPostText>
-          ) : null}
+          ) : null} */}
+          <BlogCardPostText>
+            본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고
+            어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고
+            본문 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고
+            어쩌고 본문 어쩌고
+          </BlogCardPostText>
         </AnimatePresence>
       </BlogCardPostTextWrapper>
       <BlogCardSubTextWrapper>
@@ -51,7 +82,6 @@ const BlogCard = () => {
       <BlogCardInner>
         <img src="logo512.png" />
         <BlogCardBottomBox
-          initial={{ borderRadius: 0 }}
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
         >
@@ -63,3 +93,7 @@ const BlogCard = () => {
 };
 
 export default BlogCard;
+
+//올라오는 애니메이션을 주는 방법 생각해본 2가지
+// 1. hover시 고정길이로 만들고 거기다가 넣어버린다 조금 그림이 이상하다
+// 2.

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const BlogCardInner = styled(motion.div)`
+  background-color: yellow;
   position: relative;
   min-width: 276px;
   height: 328px;
@@ -14,12 +15,15 @@ export const BlogCardInner = styled(motion.div)`
 
 export const BlogCardBottomBox = styled(motion.div)`
   position: absolute;
+  transition-duration: 1s;
+  border-radius: 10px;
+  width: 100%;
   bottom: 0;
   box-sizing: border-box;
-  border-radius: 10px;
   background: #fff;
   padding: 12px 20px;
 `;
+
 export const BlogCardTitle = styled(motion.h6)`
   font-size: 2.4rem;
   font-weight: 400;
@@ -45,7 +49,7 @@ export const BlogCardPostTextWrapper = styled(motion.div)`
   margin-top: 10px;
   margin-bottom: 20px;
 `;
-export const BlogCardPostText = styled.div`
+export const BlogCardPostText = styled(motion.p)`
   font-size: 1.4rem;
   width: 100%;
   min-height: 160px;
