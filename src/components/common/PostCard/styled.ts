@@ -42,6 +42,11 @@ export const PostDate = styled.p`
   color: ${(props) => props.theme.color.grey600};
   margin-bottom: 12px;
 `;
+export const BookmarkWrapper = styled.div`
+  position: absolute;
+  top: -3px;
+  right: 39px;
+`;
 export const PostTitle = styled.h4`
   font-size: ${(props) => props.theme.fontSize.h5};
   color: ${(props) => props.theme.color.grey900};

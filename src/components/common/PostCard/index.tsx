@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  BookmarkWrapper,
   PostCardContentWrapper,
   PostCardImage,
   PostCardImageWrapper,
@@ -11,6 +12,7 @@ import {
 } from './styled';
 import MockPostImage from '../../../Images/MockPostImage.png';
 import { HashTageDark } from '../HashTage';
+import Bookmark from '../../../Images/Bookmark';
 
 type Iprops = {
   date: string;
@@ -54,6 +56,9 @@ const PostCard = (props: Iprops) => {
           },
         }}
       >
+        <BookmarkWrapper>
+          <Bookmark marked={true} />
+        </BookmarkWrapper>
         <PostDate>{dateFilter()}</PostDate>
         <PostTitle>{title}</PostTitle>
         <PostHashTageSection>

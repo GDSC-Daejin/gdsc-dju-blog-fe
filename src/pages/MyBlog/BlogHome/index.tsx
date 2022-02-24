@@ -1,6 +1,5 @@
-import React, { useEffect, useLayoutEffect } from 'react';
-import { useLocation, useParams } from 'react-router';
-import queryString from 'query-string';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 import {
   ContainerInner,
@@ -34,7 +33,7 @@ import { postListData } from '../../../api/Mocks/postListData';
 import { useSearchParams } from 'react-router-dom';
 
 const BlogHome = () => {
-  const { user_name } = useParams();
+  const { user_name } = useParams<'user_name'>();
 
   const hashTage = [
     'React',
@@ -50,9 +49,12 @@ const BlogHome = () => {
     'React Hooks',
     'Redux',
   ];
+  const [page, setPage] = useState(0);
   const [searchParams] = useSearchParams();
-  const detail = searchParams.get('keyword');
-
+  const detail = searchParams.get('page');
+  useLayoutEffect(() => {
+    setPage(Number(detail));
+  }, []);
   return (
     <>
       <NavigationBlock />
