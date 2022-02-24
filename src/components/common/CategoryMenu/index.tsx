@@ -9,11 +9,30 @@ import {
 } from './styled';
 import { positionColor } from '../../../store/positionColor';
 
-const CategoryMenu = () => {
-  const [selected, setSelected] = useState(100);
+type Iprops = {
+  onClick?: (url: string) => void;
+  type: string;
+};
+const CategoryMenu = (props: Iprops) => {
+  const { onClick, type } = props;
+  const [hovered, setHovered] = useState('');
 
-  const categoryName = ['frontend', 'backend', 'android', 'design', 'beginner'];
-  const category = ['Frontend', 'Backend', 'Android', 'Design', 'Common'];
+  const categoryName = [
+    'all',
+    'frontend',
+    'backend',
+    'android',
+    'design',
+    'beginner',
+  ];
+  const category = [
+    'ALL',
+    'Frontend',
+    'Backend',
+    'Android',
+    'Design',
+    'Common',
+  ];
   const hoverMotion = {
     isActive: {
       translateY: -10,
@@ -30,21 +49,35 @@ const CategoryMenu = () => {
       borderBottom: '1px solid #fff',
     },
   };
+  const circleMotion = {
+    isActive: {
+      opacity: 1,
+      y: 0,
+    },
+    isUnActive: {
+      y: -20,
+      opacity: 0,
+    },
+  };
   return (
     <>
       <CategoryMenuWrapper>
         {category.map((item, id) => (
           <CategoryTextWrapper
-            onMouseOver={() => setSelected(id)}
-            // onMouseLeave={() => setSelected(100)}
-            onClick={() => setSelected(id)}
+            onMouseOver={() => setHovered(categoryName[id])}
+            onClick={() => {
+              {
+                onClick && onClick(categoryName[id]);
+              }
+            }}
             variants={hoverMotion}
             whileHover={'isActive'}
-            animate={selected === id ? 'isActive' : 'isUnActive'}
+            animate={type == categoryName[id] ? 'isActive' : 'isUnActive'}
             key={id}
           >
             <CategoryCircleWrapper
-              animate={selected === id ? { opacity: 1 } : { opacity: 0 }}
+              variants={circleMotion}
+              animate={type == categoryName[id] ? 'isActive' : 'isUnActive'}
             >
               <CategoryCircle color={positionColor(categoryName[id])} />
             </CategoryCircleWrapper>

@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 import {
   ContainerInner,
@@ -49,12 +49,18 @@ const BlogHome = () => {
     'React Hooks',
     'Redux',
   ];
-  const [page, setPage] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [type, setType] = useState('all');
   const [searchParams] = useSearchParams();
-  const detail = searchParams.get('page');
-  useLayoutEffect(() => {
-    setPage(Number(detail));
-  }, []);
+  const detail = searchParams.get('type');
+  useEffect(() => {
+    setType(detail as string);
+    if (detail === null) {
+      navigate(`/${user_name}?type=all`);
+    }
+  }, [detail]);
+
   return (
     <>
       <NavigationBlock />
@@ -87,7 +93,10 @@ const BlogHome = () => {
             </ProfileDetailWrapper>
           </ProfileWrapper>
           <TopMenuWrapper>
-            <CategoryMenu />
+            <CategoryMenu
+              type={type}
+              onClick={(url: string) => navigate(`/${user_name}?type=${url}`)}
+            />
             <ButtonWrapper>
               <GDSCButton text={'스크랩'} />
               <GDSCButton text={'글쓰기'} />
