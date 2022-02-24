@@ -46,6 +46,7 @@ export const BookmarkWrapper = styled.div`
   position: absolute;
   top: -3px;
   right: 39px;
+  transition: all 0.3s ease;
 `;
 export const PostTitle = styled.h4`
   font-size: ${(props) => props.theme.fontSize.h5};

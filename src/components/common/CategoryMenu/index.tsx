@@ -6,9 +6,10 @@ import {
   CategoryMenuWrapper,
   CategoryText,
   CategoryTextWrapper,
+  GDSCLogoWrapper,
 } from './styled';
 import { positionColor } from '../../../store/positionColor';
-
+import GdscLogo from '../../../Images/GdscLogo';
 type Iprops = {
   onClick?: (url: string) => void;
   type: string;
@@ -77,7 +78,13 @@ const CategoryMenu = (props: Iprops) => {
               variants={circleMotion}
               animate={type == categoryName[id] ? 'isActive' : 'isUnActive'}
             >
-              <CategoryCircle color={positionColor(categoryName[id])} />
+              {categoryName[id] === 'all' ? (
+                <GDSCLogoWrapper>
+                  <GdscLogo />
+                </GDSCLogoWrapper>
+              ) : (
+                <CategoryCircle color={positionColor(categoryName[id])} />
+              )}
             </CategoryCircleWrapper>
             <CategoryText>{item}</CategoryText>
           </CategoryTextWrapper>

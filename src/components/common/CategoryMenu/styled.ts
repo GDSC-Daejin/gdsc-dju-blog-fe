@@ -43,3 +43,7 @@ export const CategoryCircle = styled.div<{ color: string }>`
   border-radius: 50%;
   background: ${(props) => props.color};
 `;
+export const GDSCLogoWrapper = styled.div`
+  position: absolute;
+  left: -10px;
+`;
