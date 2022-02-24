@@ -7,6 +7,7 @@ export const PostCardWrapper = styled(motion.div)`
   flex-direction: row;
   position: relative;
   width: 1160px;
+  cursor: pointer;
 `;
 export const PostCardImage = styled.img`
   width: 400px;
@@ -51,6 +52,7 @@ export const PostHashTageSection = styled.section`
   flex-direction: row;
   align-items: center;
   margin-bottom: 20px;
+  transition: all 0.2s;
 `;
 export const PostContent = styled(motion.p)<{ hover: boolean }>`
   font-size: ${(props) => props.theme.fontSize.body1};

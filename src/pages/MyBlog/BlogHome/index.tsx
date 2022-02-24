@@ -28,9 +28,10 @@ import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
-
+import { postListData } from '../../../api/Mocks/postListData';
 const BlogHome = () => {
   const { user_name } = useParams();
+
   const hashTage = [
     'React',
     'TypeScript',
@@ -85,9 +86,14 @@ const BlogHome = () => {
             </ButtonWrapper>
           </TopMenuWrapper>
           <PostSectionWrapper>
-            {hashTage.map((data, id) => (
+            {postListData.map((data, id) => (
               <PostCardWrapper key={id}>
-                <PostCard />
+                <PostCard
+                  title={data.post.title}
+                  date={data.post.uploadDate}
+                  content={data.post.content}
+                  hashTage={data.post.postHashTags}
+                />
               </PostCardWrapper>
             ))}
           </PostSectionWrapper>

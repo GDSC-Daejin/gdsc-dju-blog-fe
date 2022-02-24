@@ -12,20 +12,32 @@ import {
 import MockPostImage from '../../../Images/MockPostImage.png';
 import { HashTageDark } from '../HashTage';
 
-const PostCard = () => {
-  const hashTage = [
-    'React',
-    'TypeScript',
-    'JavaScript',
-    'Node.js',
-    'SWR',
-    'Recoil',
-    'Next.js',
-    'Gatsby',
-    'React Hooks',
-    'Redux',
-  ];
+type Iprops = {
+  date: string;
+  title: string;
+  hashTage: { tag: string }[];
+  content: string;
+};
+const PostCard = (props: Iprops) => {
+  const { date, title, hashTage, content } = props;
+
   const [hover, setHover] = useState(false);
+  const contentFilter = () => {
+    let result;
+    hover
+      ? (result = `${content.slice(0, 260)}...`)
+      : (result = `${content.slice(0, 170)}...`);
+    return result;
+  };
+  const hashTageFilter = () => {
+    let result;
+    hover ? (result = hashTage.slice(0, 10)) : (result = hashTage.slice(0, 3));
+    return result;
+  };
+  const dateFilter = () => {
+    const dateArray = date.slice(0, 10).split('-');
+    return `${dateArray[0]}.${dateArray[1]}.${dateArray[2]}`;
+  };
   return (
     <PostCardWrapper
       onMouseOver={() => setHover(true)}
@@ -42,19 +54,14 @@ const PostCard = () => {
           },
         }}
       >
-        <PostDate>22.02.10</PostDate>
-        <PostTitle>Привет, мир!</PostTitle>
+        <PostDate>{dateFilter()}</PostDate>
+        <PostTitle>{title}</PostTitle>
         <PostHashTageSection>
-          {hashTage.map((data, id) => (
-            <HashTageDark text={data} key={id} />
+          {hashTageFilter().map((data, id) => (
+            <HashTageDark text={data.tag} key={id} />
           ))}
         </PostHashTageSection>
-        <PostContent hover={hover}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          euismod, ipsum eget sagittis consectetur, nisl urna aliquet nunc.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          euismod, ipsum eget sagittis consectetur, nisl urna aliquet nunc.
-        </PostContent>
+        <PostContent hover={hover}>{contentFilter()}</PostContent>
       </PostCardContentWrapper>
     </PostCardWrapper>
   );
