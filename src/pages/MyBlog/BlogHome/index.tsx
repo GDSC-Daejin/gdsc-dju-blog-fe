@@ -1,5 +1,7 @@
-import React from 'react';
-import { useParams } from 'react-router';
+import React, { useEffect, useLayoutEffect } from 'react';
+import { useLocation, useParams } from 'react-router';
+import queryString from 'query-string';
+
 import {
   ContainerInner,
   LayoutContainer,
@@ -29,6 +31,8 @@ import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
 import { postListData } from '../../../api/Mocks/postListData';
+import { useSearchParams } from 'react-router-dom';
+
 const BlogHome = () => {
   const { user_name } = useParams();
 
@@ -46,6 +50,8 @@ const BlogHome = () => {
     'React Hooks',
     'Redux',
   ];
+  const [searchParams] = useSearchParams();
+  const detail = searchParams.get('keyword');
 
   return (
     <>
