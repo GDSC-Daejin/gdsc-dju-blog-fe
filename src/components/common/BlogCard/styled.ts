@@ -1,26 +1,21 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const BlogCardInner = styled(motion.div)<{ route: string }>`
+export const BlogCardInner = styled(motion.div)`
   position: relative;
-  z-index: 9;
   min-width: 276px;
   height: 328px;
   border-radius: 10px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   box-shadow: 0px 19px 32px -1px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  background-image: url(${(props) => props.route});
   margin: 13px;
 `;
-export const StyledImage = styled(motion.img)`
-  height: 100%;
-  border-radius: 10px;
-`;
+
 export const BlogCardBottomBox = styled(motion.div)`
+  position: absolute;
+  bottom: 0;
   box-sizing: border-box;
-  overflow: hidden;
   border-radius: 10px;
   background: #fff;
   padding: 12px 20px;
@@ -33,13 +28,11 @@ export const BlogCardTitle = styled(motion.h6)`
 export const BlogCardSubTextWrapper = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: row;
   justify-content: space-between;
 `;
 export const BlogCardAuthorWrapper = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: row;
 `;
 export const BlogCardAuthorImage = styled.img`
   background: ${(props) => props.theme.color.grey400};
