@@ -1,5 +1,4 @@
-import { useCycle } from 'framer-motion';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   CategoryCircle,
   CategoryCircleWrapper,
@@ -10,6 +9,7 @@ import {
 } from './styled';
 import { positionColor } from '../../../store/positionColor';
 import GdscLogo from '../../../Images/GdscLogo';
+
 type Iprops = {
   onClick?: (url: string) => void;
   type: string;
