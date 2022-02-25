@@ -24,10 +24,12 @@ export const BlogCardBottomBox = styled(motion.div)`
   padding: 12px 20px;
 `;
 
-export const BlogCardTitle = styled(motion.h6)`
+export const BlogCardTitle = styled(motion.h6)<{ isHover: boolean }>`
   font-size: 2.4rem;
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
+  margin-bottom: ${(props) => (props.isHover ? '190px' : '8px')};
+  transition: all 0.3s ease;
 `;
 export const BlogCardSubTextWrapper = styled.div`
   display: flex;
@@ -45,21 +47,20 @@ export const BlogCardAuthorImage = styled.img`
   height: 20px;
   width: 20px;
 `;
-export const BlogCardPostTextWrapper = styled(motion.div)`
-  margin-top: 10px;
-  margin-bottom: 20px;
-`;
 export const BlogCardPostText = styled(motion.p)`
+  position: absolute;
+  transform: translate(-50%, 0%);
+  top: 53px;
   font-size: 1.4rem;
-  width: 100%;
+  width: 224px;
   min-height: 160px;
 `;
+
 export const BlogCardSubText = styled.div<{
   subText?: boolean;
   bold?: boolean;
 }>`
   font-size: ${(props) => props.theme.fontSize.p};
-
   ${(props) =>
     props.subText &&
     css`

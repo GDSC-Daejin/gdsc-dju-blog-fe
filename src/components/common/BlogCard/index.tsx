@@ -5,7 +5,6 @@ import {
   BlogCardBottomBox,
   BlogCardInner,
   BlogCardPostText,
-  BlogCardPostTextWrapper,
   BlogCardSubText,
   BlogCardSubTextWrapper,
   BlogCardTitle,
@@ -24,7 +23,7 @@ interface IisHoverdHook {
 
 const PostTextVariants = {
   initial: {
-    y: 80,
+    y: 50,
     opacity: 0,
   },
   visiable: {
@@ -41,23 +40,21 @@ const PostTextVariants = {
 const BottomText = ({ isHovered }: IisHoverdHook) => {
   return (
     <>
-      <BlogCardTitle>제목입니다아아아아아</BlogCardTitle>
-      <BlogCardPostTextWrapper>
-        <AnimatePresence>
-          {isHovered ? (
-            <BlogCardPostText
-              variants={PostTextVariants}
-              initial={'initial'}
-              animate={'visiable'}
-            >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-              libero? Vel eius deleniti earum architecto magnam non! Eos ipsam
-              perferendis esse rerum unde dolor necessitatibus exercitationem
-              nostrum facilis sit? Eum.
-            </BlogCardPostText>
-          ) : null}
-        </AnimatePresence>
-      </BlogCardPostTextWrapper>
+      <BlogCardTitle isHover={isHovered}>제목입니다아아아아아</BlogCardTitle>
+      <AnimatePresence>
+        {isHovered ? (
+          <BlogCardPostText
+            variants={PostTextVariants}
+            initial={'initial'}
+            animate={'visiable'}
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+            libero? Vel eius deleniti earum architecto magnam non! Eos ipsam
+            perferendis esse rerum unde dolor necessitatibus exercitationem
+            nostrum facilis sit? Eum.
+          </BlogCardPostText>
+        ) : null}
+      </AnimatePresence>
       <BlogCardSubTextWrapper>
         <BlogCardAuthorWrapper>
           <BlogCardAuthorImage />
