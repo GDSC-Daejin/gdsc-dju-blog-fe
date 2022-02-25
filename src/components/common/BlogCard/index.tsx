@@ -44,24 +44,18 @@ const BottomText = ({ isHovered }: IisHoverdHook) => {
       <BlogCardTitle>제목입니다아아아아아</BlogCardTitle>
       <BlogCardPostTextWrapper>
         <AnimatePresence>
-          {/* {isHovered ? (
+          {isHovered ? (
             <BlogCardPostText
               variants={PostTextVariants}
               initial={'initial'}
               animate={'visiable'}
             >
-              본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고
-              어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고
-              본문 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고
-              어쩌고 본문 어쩌고
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+              libero? Vel eius deleniti earum architecto magnam non! Eos ipsam
+              perferendis esse rerum unde dolor necessitatibus exercitationem
+              nostrum facilis sit? Eum.
             </BlogCardPostText>
-          ) : null} */}
-          <BlogCardPostText>
-            본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고
-            어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고
-            본문 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고
-            어쩌고 본문 어쩌고
-          </BlogCardPostText>
+          ) : null}
         </AnimatePresence>
       </BlogCardPostTextWrapper>
       <BlogCardSubTextWrapper>
