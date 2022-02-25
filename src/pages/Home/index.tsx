@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useTheme } from '../../hooks/useTheme';
 import BlogCard from '../../components/common/BlogCard';
-import { CardSection } from './styled';
+import { CardSection, SlideButton, ButtonWrapper } from './styled';
 import { useElementScroll, useTransform } from 'framer-motion';
 
 /*
@@ -76,9 +76,11 @@ function index() {
         <BlogCard />
         <BlogCard />
       </CardSection>
-      <button onClick={() => scrollMove(0)}>1</button>
-      <button onClick={() => scrollMove(1)}>2</button>
-      <button onClick={() => scrollMove(2)}>3</button>
+      <ButtonWrapper>
+        <SlideButton onClick={() => scrollMove(0)}></SlideButton>
+        <SlideButton onClick={() => scrollMove(1)}></SlideButton>
+        <SlideButton onClick={() => scrollMove(2)}></SlideButton>
+      </ButtonWrapper>
     </LayoutContainer>
   );
 }
