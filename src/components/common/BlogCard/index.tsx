@@ -84,7 +84,3 @@ const BlogCard = () => {
 };
 
 export default BlogCard;
-
-//올라오는 애니메이션을 주는 방법 생각해본 2가지
-// 1. hover시 고정길이로 만들고 거기다가 넣어버린다 조금 그림이 이상하다
-// 2.
