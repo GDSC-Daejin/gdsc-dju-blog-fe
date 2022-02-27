@@ -72,9 +72,17 @@ export const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-export const PostSectionWrapper = styled.section``;
+export const PostSectionWrapper = styled.section`
+  margin-bottom: 110px;
+`;
 export const PostCardWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 30px;
+`;
+export const PageBarSection = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 215px;
 `;

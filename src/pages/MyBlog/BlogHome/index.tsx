@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
 
 import {
   ContainerInner,
@@ -14,6 +14,7 @@ import {
   HashTageSection,
   HashTageWrapper,
   IntroduceText,
+  PageBarSection,
   PostCardWrapper,
   PostSectionWrapper,
   ProfileDetailWrapper,
@@ -33,35 +34,48 @@ import PostCard from '../../../components/common/PostCard';
 import { postListData } from '../../../api/Mocks/postListData';
 import { useSearchParams } from 'react-router-dom';
 import Setting from '../../../Images/Setting';
+import PageBar from '../../../components/common/PageBar';
 
+const hashTage = [
+  'React',
+  'TypeScript',
+  'JavaScript',
+  'Node.js',
+  'SWR',
+  'Recoil',
+  'GraphQL',
+  'Apollo',
+  'Next.js',
+  'Gatsby',
+  'React Hooks',
+  'Redux',
+];
 const BlogHome = () => {
   const { user_name } = useParams<'user_name'>();
-
-  const hashTage = [
-    'React',
-    'TypeScript',
-    'JavaScript',
-    'Node.js',
-    'SWR',
-    'Recoil',
-    'GraphQL',
-    'Apollo',
-    'Next.js',
-    'Gatsby',
-    'React Hooks',
-    'Redux',
-  ];
   const navigate = useNavigate();
-  const location = useLocation();
-  const [type, setType] = useState('all');
   const [searchParams] = useSearchParams();
-  const detail = searchParams.get('type');
-  useEffect(() => {
-    setType(detail as string);
-    if (detail === null) {
-      navigate(`/${user_name}?type=all`);
+  const typeParams = searchParams.get('type');
+  const type = typeParams ? typeParams : 'all';
+  const pageParams = searchParams.get('page');
+  const page = pageParams ? parseInt(pageParams) : 1;
+  const pagination = () => {
+    return postListData.slice(page === 0 ? 0 : page * 10 + 1, (page + 1) * 10);
+  };
+  const pageHandler = (page: number, limit?: number) => {
+    if (page < 0) {
+      return;
     }
-  }, [detail]);
+    if (page === limit) {
+      return;
+    } else {
+      navigate(`/${user_name}?type=${type}&page=${page}`);
+    }
+  };
+  useEffect(() => {
+    if (page || type) {
+      navigate(`/${user_name}?type=all&page=0`);
+    }
+  }, []);
 
   return (
     <>
@@ -99,16 +113,19 @@ const BlogHome = () => {
           </ProfileWrapper>
           <TopMenuWrapper>
             <CategoryMenu
-              type={type}
-              onClick={(url: string) => navigate(`/${user_name}?type=${url}`)}
+              type={type as string}
+              onClick={(url: string) =>
+                navigate(`/${user_name}?type=${url}&page=${page}`)
+              }
             />
             <ButtonWrapper>
               <GDSCButton text={'스크랩'} />
               <GDSCButton text={'글쓰기'} />
             </ButtonWrapper>
           </TopMenuWrapper>
+
           <PostSectionWrapper>
-            {postListData.map((data, id) => (
+            {pagination().map((data, id) => (
               <PostCardWrapper key={id}>
                 <PostCard
                   title={data.post.title}
@@ -119,6 +136,9 @@ const BlogHome = () => {
               </PostCardWrapper>
             ))}
           </PostSectionWrapper>
+          <PageBarSection>
+            <PageBar page={page} onClick={pageHandler} />
+          </PageBarSection>
         </ContainerInner>
       </LayoutContainer>
     </>

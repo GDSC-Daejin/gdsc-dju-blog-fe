@@ -20,7 +20,7 @@ const Layout = () => {
         <Suspense fallback={<GoogleLoader background={false} />}>
           <Routes>
             <Route path={'/*'} element={<Home />} />
-            <Route path={'/:user_name'} element={<MyBlog />} />
+            <Route path={'/:user_name/*'} element={<MyBlog />} />
             <Route path={'/post'} element={<Post />} />
           </Routes>
         </Suspense>
