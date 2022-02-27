@@ -30,7 +30,8 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const SlideButton = styled.button`
+export const SlideButton = styled.button<{ nowWidth: boolean }>`
   width: 40px;
   height: 4px;
+  border: 2px solid ${(props) => (props.nowWidth ? 'black' : 'red')};
 `;
