@@ -1,6 +1,5 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { Route } from 'react-router-dom';
 
 function PrivateRoute({ children }: any) {
   // const auth = localStorage.getItem('auth');
