@@ -25,6 +25,7 @@ const GDSCButtonL = (props: Iprops) => {
       background={colorStyle(color)}
       color={color && '#fff'}
       size={'large'}
+      border={color && '#fff'}
       disable={disable}
     >
       {text}
@@ -37,6 +38,7 @@ const GDSCButton = (props: Iprops) => {
   return (
     <StyledButton
       color={color && '#fff'}
+      border={color && '#fff'}
       background={colorStyle(color)}
       disable={disable}
     >
