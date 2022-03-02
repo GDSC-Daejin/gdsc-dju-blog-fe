@@ -13,7 +13,6 @@ const Post = lazy(() => import('../pages/Post'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
-  console.log(typeof Post);
   return (
     <>
       <SetTheme />
