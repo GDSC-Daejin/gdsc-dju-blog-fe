@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
 import { AnimatePresence } from 'framer-motion';
 import SetTheme from '../hooks/SetTheme';
+import PrivateRoute from '../components/PrivateRoute';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
@@ -22,6 +23,14 @@ const Layout = () => {
             <Route path={'/*'} element={<Home />} />
             <Route path={'/:user_name/*'} element={<MyBlog />} />
             <Route path={'/post'} element={<Post />} />
+            <Route
+              path={'/admin'}
+              element={
+                <PrivateRoute>
+                  <Post />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </Suspense>
       </AnimatePresence>
