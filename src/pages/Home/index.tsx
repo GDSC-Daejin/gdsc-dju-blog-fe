@@ -1,12 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useTheme } from '../../hooks/useTheme';
 import BlogCard from '../../components/common/BlogCard';
-import { CardSection, SlideButton, ButtonWrapper } from './styled';
+import {
+  CardSection,
+  BlogCardWrapper,
+  SlideButton,
+  ButtonWrapper,
+} from './styled';
 import { useElementScroll, useTransform } from 'framer-motion';
 import { start } from 'repl';
 
 function index() {
+  const Card = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -57,61 +63,16 @@ function index() {
         onMouseLeave={onDragEnd}
         isDrag={isDrag}
       >
-        <BlogCard test={1} />
-        <BlogCard test={2} />
-        <BlogCard test={3} />
-        <BlogCard test={4} />
-        <BlogCard test={5} />
-        <BlogCard test={6} />
-        <BlogCard test={7} />
-        <BlogCard test={8} />
-        <BlogCard test={9} />
-        <BlogCard test={10} />
-        <BlogCard test={11} />
+        {Card.map((CardData, index) => (
+          <BlogCardWrapper key={index}>
+            <BlogCard />
+          </BlogCardWrapper>
+        ))}
       </CardSection>
       <ButtonWrapper>
-        <SlideButton
-          nowWidth={
-            Number(
-              (
-                (scrollRef.current?.scrollLeft === undefined
-                  ? 0
-                  : scrollRef.current.scrollLeft) / oneBlockWidth
-              ).toFixed(),
-            ) === 0
-              ? true
-              : false
-          }
-          onClick={() => scrollMove(0)}
-        ></SlideButton>
-        <SlideButton
-          nowWidth={
-            Number(
-              (
-                (scrollRef.current?.scrollLeft === undefined
-                  ? 0
-                  : scrollRef.current.scrollLeft) / oneBlockWidth
-              ).toFixed(),
-            ) === 1
-              ? true
-              : false
-          }
-          onClick={() => scrollMove(1)}
-        ></SlideButton>
-        <SlideButton
-          nowWidth={
-            Number(
-              (
-                (scrollRef.current?.scrollLeft === undefined
-                  ? 0
-                  : scrollRef.current.scrollLeft) / oneBlockWidth
-              ).toFixed(),
-            ) === 2
-              ? true
-              : false
-          }
-          onClick={() => scrollMove(2)}
-        ></SlideButton>
+        <SlideButton onClick={() => scrollMove(0)}></SlideButton>
+        <SlideButton onClick={() => scrollMove(1)}></SlideButton>
+        <SlideButton onClick={() => scrollMove(2)}></SlideButton>
       </ButtonWrapper>
     </LayoutContainer>
   );

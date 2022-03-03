@@ -14,6 +14,12 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   }
 `;
 
+export const BlogCardWrapper = styled(motion.div)`
+  min-width: 276px;
+  height: 328px;
+  margin: 15px;
+`;
+
 export const ButtonWrapper = styled.div`
   position: absolute;
   display: flex;
@@ -30,8 +36,7 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const SlideButton = styled.button<{ nowWidth: boolean }>`
+export const SlideButton = styled.button`
   width: 40px;
   height: 4px;
-  border: 2px solid ${(props) => (props.nowWidth ? 'black' : 'red')};
 `;
