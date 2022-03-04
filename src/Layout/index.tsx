@@ -6,6 +6,7 @@ import { loaderState } from '../store/loader';
 import { AnimatePresence } from 'framer-motion';
 import SetTheme from '../hooks/SetTheme';
 import PrivateRoute from '../components/PrivateRoute';
+import Footer from '../components/Footer';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
@@ -33,6 +34,7 @@ const Layout = () => {
             />
           </Routes>
         </Suspense>
+        <Footer />
       </AnimatePresence>
     </>
   );
