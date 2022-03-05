@@ -1,17 +1,41 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import GoogleSpinner from '../components/common/GoogleSpinner';
+import Navigation from '../components/common/Navigation';
+import GoogleLoader from '../components/common/GoogleLoader';
+import { useRecoilState } from 'recoil';
+import { loaderState } from '../store/loader';
+import { AnimatePresence } from 'framer-motion';
+import SetTheme from '../hooks/SetTheme';
+import PrivateRoute from '../components/PrivateRoute';
 
 const Home = lazy(() => import('../pages/Home'));
+const MyBlog = lazy(() => import('../pages/MyBlog'));
+const Post = lazy(() => import('../pages/Post'));
 
 const Layout = () => {
+  const [loader] = useRecoilState(loaderState);
   return (
     <>
-      <Suspense fallback={<GoogleSpinner />}>
-        <Routes>
-          <Route path={'/*'} element={<Home />} />
-        </Routes>
-      </Suspense>
+      <Navigation />
+      <SetTheme />
+      <AnimatePresence>
+        {loader.loading && <GoogleLoader background={loader.background} />}
+        <Suspense fallback={<GoogleLoader background={false} />}>
+          <Routes>
+            <Route path={'/*'} element={<Home />} />
+            <Route path={'/:user_name/*'} element={<MyBlog />} />
+            <Route path={'/post'} element={<Post />} />
+            <Route
+              path={'/admin'}
+              element={
+                <PrivateRoute>
+                  <Post />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
+      </AnimatePresence>
     </>
   );
 };
