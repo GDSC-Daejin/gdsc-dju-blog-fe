@@ -43,7 +43,7 @@ export const BlogText = styled.div`
 `;
 export const BlogBanner = styled.div`
   display: flex;
-  padding-bottom: 18px;
+  padding-bottom: 20px;
 `;
 export const Univ = styled.div`
   padding-top: 12px;
@@ -64,14 +64,12 @@ export const SearchWrapper = styled.div`
   margin-right: 60px;
 `;
 export const Search = styled.input`
-  padding-left: 10px;
-  right: 10px;
   width: 480px;
   height: 38px;
   border-radius: 50px;
   border: 1px solid #d1d6db;
   &::placeholder {
-    padding-left: 10px;
+    padding-left: 20px;
     color: #d1d6db;
   }
   &:focus {
