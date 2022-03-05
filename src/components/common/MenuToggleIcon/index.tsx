@@ -1,10 +1,21 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { MENU_KEY, menuState } from '../../../store/menu';
 import { StyledMenuButton } from './styled';
 
 const MenuToggleIcon = () => {
+  const [menu, setMenu] = useRecoilState(menuState);
+  interface StyledBar {
+    initial: boolean;
+    animate: string;
+  }
   return (
-    <StyledMenuButton>
+    <StyledMenuButton
+      initial={false}
+      animate={menu.appMenu ? 'open' : 'closed'}
+      onClick={() => setMenu({ ...menu, [MENU_KEY.APPMENU]: !menu.appMenu })}
+    >
       <svg width="23" height="23" viewBox="0 0 23 23">
         <motion.path
           fill="transparent"

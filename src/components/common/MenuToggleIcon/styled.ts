@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const StyledMenuButton = styled.button`
+export const StyledMenuButton = styled(motion.button)`
   outline: none;
   border: none;
   -webkit-user-select: none;

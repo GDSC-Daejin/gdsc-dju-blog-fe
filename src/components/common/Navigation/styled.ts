@@ -1,9 +1,30 @@
 import styled from 'styled-components';
 
+export const NavDesign = styled.nav`
+  position: sticky;
+  top: 0;
+  z-index: 990;
+  height: 120px;
+  width: 100%;
+`;
+export const NavWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+  height: 100%;
+`;
 export const Navbars = styled.div`
   background-color: #ffffff;
-  height: 12rem;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
+  align-items: center;
+`;
+export const BlogWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
 `;
 export const MenuBars = styled.a`
@@ -14,6 +35,8 @@ export const SideMenu = styled.div`
   margin-left: 60px;
   margin-right: 60px;
   width: 30px;
+  height: 25px;
+  background-color: blue;
 `;
 export const BlogText = styled.div`
   align-items: center;
@@ -22,7 +45,7 @@ export const BlogBanner = styled.div`
   display: flex;
   padding-bottom: 18px;
 `;
-export const Univ = styled.img`
+export const Univ = styled.div`
   padding-top: 12px;
   padding-bottom: 5px;
   display: flex;
@@ -31,8 +54,16 @@ export const Univ = styled.img`
 export const Logo = styled.div`
   margin-right: 20px;
 `;
+export const NavMargin = styled.div`
+  flex-basis: 505px;
+  flex-shrink: 1;
+  min-width: 20px;
+`;
+export const SearchWrapper = styled.div`
+  display: flex;
+  margin-right: 60px;
+`;
 export const Search = styled.input`
-  position: absolute;
   padding-left: 10px;
   right: 10px;
   width: 480px;
@@ -47,7 +78,7 @@ export const Search = styled.input`
     outline: 1px solid #d1d6db;
   }
 `;
-export const Span = styled.span`
+export const TitleText = styled.span`
   margin-left: 16px;
 `;
 /* 여기서부터 받아온 리액트 아이콘이다 */
