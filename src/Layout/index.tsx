@@ -1,12 +1,14 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Navigation from '../components/common/Navigation';
+import Navigation from '../components/common/Navigation/DeskNavigation';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
 import { AnimatePresence } from 'framer-motion';
 import SetTheme from '../hooks/SetTheme';
 import PrivateRoute from '../components/PrivateRoute';
+import MobileNavigation from '../components/common/Navigation/MobileNavigation';
+import { NavigationWrapper, MobileNavigationWrapper } from './styled';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
@@ -16,7 +18,12 @@ const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   return (
     <>
-      <Navigation />
+      <NavigationWrapper>
+        <Navigation />
+      </NavigationWrapper>
+      <MobileNavigationWrapper>
+        <MobileNavigation />
+      </MobileNavigationWrapper>
       <SetTheme />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}

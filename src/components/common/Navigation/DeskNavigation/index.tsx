@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SidebarData } from '../SidebarData/index';
+import { SidebarData } from '../../SidebarData';
 import {
   NavInner,
   Logo,
@@ -15,14 +15,15 @@ import {
   NavWrapper,
   SearchWrapper,
   NavMargin,
+  IconWrapper,
 } from './styled';
 /* 아이콘 컬러 전체 변경 기능 */
 import { IconContext } from 'react-icons';
-import MenuToggleIcon from '../MenuToggleIcon/index';
-import GdscBlog from '../../../Images/GdscBlog';
-import DaejinUniv from '../../../Images/DaejinUniv';
-import GdscLogo from '../../../Images/GdscLogo';
-import Index from '../MagnifyingGlassIcon';
+import MenuToggleIcon from '../../MenuToggleIcon';
+import GdscBlog from '../../../../Images/GdscBlog';
+import DaejinUniv from '../../../../Images/DaejinUniv';
+import GdscLogo from '../../../../Images/GdscLogo';
+import MagnifyingGlassIcon from '../../../../Images/MagnifyingGlassIcon';
 
 function Navigation() {
   const [sidebar, setSidebar] = useState(false);
@@ -57,7 +58,9 @@ function Navigation() {
                   type="text"
                   placeholder="궁금한 정보나 계정을 입력해주세요"
                 />
-                <Index />
+                <IconWrapper>
+                  <MagnifyingGlassIcon />
+                </IconWrapper>
               </SearchWrapper>
             </NavInner>
           </NavWrapper>

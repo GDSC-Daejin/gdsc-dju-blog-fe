@@ -15,4 +15,10 @@ export const StyledMenuButton = styled(motion.button)`
   border-radius: 50%;
   background: transparent;
   z-index: 1000;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 63px;
+    margin-top: 5px;
+  }
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Index = () => {
+const MagnifyingGlassIcon = () => {
   return (
     <svg
       className="icon"
@@ -18,4 +18,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default MagnifyingGlassIcon;

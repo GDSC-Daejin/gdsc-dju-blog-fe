@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-
+import MagnifyingGlassIcon from '../../../../Images/MagnifyingGlassIcon';
 export const NavDesign = styled.nav`
   position: sticky;
   top: 0;
   z-index: 990;
   height: 120px;
   width: 100%;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    height: 60px;
 `;
 export const NavWrapper = styled.div`
   display: flex;
@@ -21,6 +23,8 @@ export const NavInner = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    justify-content: space-between;
 `;
 export const BlogWrapper = styled.div`
   display: flex;
@@ -43,6 +47,9 @@ export const Univ = styled.div`
   padding-bottom: 5px;
   display: flex;
   margin-left: 5px;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    display: none;
+  }
 `;
 export const Logo = styled.div`
   margin-right: 20px;
@@ -52,10 +59,19 @@ export const NavMargin = styled.div`
   flex-shrink: 1;
   min-width: 20px;
 `;
-export const SearchWrapper = styled.div`
+export const IconWrapper = styled.div`
+  display: flex;
+`;
+export const SearchWrapper = styled.label`
   display: flex;
   margin-right: 60px;
 `;
+/* position: relative;
+  &:before {
+    background-image: MagnifyingGLassIcon;
+  }
+ */
+
 export const Search = styled.input`
   width: 480px;
   height: 38px;
