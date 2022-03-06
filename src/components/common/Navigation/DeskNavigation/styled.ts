@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import MagnifyingGlassIcon from '../../../../Images/MagnifyingGlassIcon';
 export const NavDesign = styled.nav`
+  background-color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 990;
@@ -18,7 +19,7 @@ export const NavWrapper = styled.div`
   height: 100%;
 `;
 export const NavInner = styled.div`
-  background-color: #ffffff;
+  padding: 0 20px;
   width: 100%;
   margin: 0 auto;
   display: flex;

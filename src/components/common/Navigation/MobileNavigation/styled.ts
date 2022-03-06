@@ -10,6 +10,5 @@ export const GdscLogoWrapper = styled.div`
 `;
 export const MobileIconWrapper = styled.div`
   display: flex;
-  width: 38px;
-  padding-left: 25px;
+  width: 18px;
 `;

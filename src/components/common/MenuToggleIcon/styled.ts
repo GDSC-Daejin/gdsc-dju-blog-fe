@@ -18,7 +18,7 @@ export const StyledMenuButton = styled(motion.button)`
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     margin-left: 0px;
     margin-right: 0px;
-    width: 63px;
+    width: 23px;
     margin-top: 5px;
   }
 `;
