@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SidebarData } from '../SidebarData/index';
 import {
-  Navbars,
+  NavInner,
   Logo,
   BlogText,
   MenuBars,
@@ -10,7 +10,6 @@ import {
   BlogWrapper,
   Univ,
   BlogBanner,
-  SideMenu,
   Search,
   NavDesign,
   NavWrapper,
@@ -23,6 +22,8 @@ import MenuToggleIcon from '../MenuToggleIcon/index';
 import GdscBlog from '../../../Images/GdscBlog';
 import DaejinUniv from '../../../Images/DaejinUniv';
 import GdscLogo from '../../../Images/GdscLogo';
+import Index from '../MagnifyingGlassIcon';
+
 function Navigation() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
@@ -33,11 +34,9 @@ function Navigation() {
         {/* 네비게이션 토글 코드*/}
         <NavDesign>
           <NavWrapper>
-            <Navbars>
+            <NavInner>
               <BlogWrapper>
-                <SideMenu>
-                  <MenuToggleIcon />
-                </SideMenu>
+                <MenuToggleIcon />
                 <MenuBars href="/">
                   <Logo>
                     <GdscLogo />
@@ -56,11 +55,11 @@ function Navigation() {
               <SearchWrapper>
                 <Search
                   type="text"
-                  className="search"
                   placeholder="궁금한 정보나 계정을 입력해주세요"
                 />
+                <Index />
               </SearchWrapper>
-            </Navbars>
+            </NavInner>
           </NavWrapper>
         </NavDesign>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

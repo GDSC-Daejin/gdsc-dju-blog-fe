@@ -15,7 +15,7 @@ export const NavWrapper = styled.div`
   margin: auto;
   height: 100%;
 `;
-export const Navbars = styled.div`
+export const NavInner = styled.div`
   background-color: #ffffff;
   width: 100%;
   margin: 0 auto;
@@ -30,13 +30,6 @@ export const BlogWrapper = styled.div`
 export const MenuBars = styled.a`
   display: flex;
   align-items: center;
-`;
-export const SideMenu = styled.div`
-  margin-left: 60px;
-  margin-right: 60px;
-  width: 30px;
-  height: 25px;
-  background-color: blue;
 `;
 export const BlogText = styled.div`
   align-items: center;

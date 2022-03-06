@@ -8,15 +8,11 @@ export const StyledMenuButton = styled(motion.button)`
   -moz-user-select: none;
   -ms-user-select: none;
   cursor: pointer;
-  position: absolute;
-  top: 9px;
-  right: 15px;
   width: 50px;
   height: 50px;
+  margin-right: 60px;
+  margin-left: 60px;
   border-radius: 50%;
   background: transparent;
   z-index: 1000;
-  @media (min-width: 500px) {
-    display: none;
-  }
 `;
