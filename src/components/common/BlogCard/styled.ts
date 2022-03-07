@@ -23,11 +23,11 @@ export const BlogCardBottomBox = styled(motion.div)`
   padding: 12px 20px;
 `;
 
-export const BlogCardTitle = styled(motion.h6)<{ isHover: boolean }>`
+export const BlogCardTitle = styled(motion.h6)<{ isHovered: boolean }>`
   font-size: 2.4rem;
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
-  margin-bottom: ${(props) => (props.isHover ? '190px' : '8px')};
+  margin-bottom: ${(props) => (props.isHovered ? '190px' : '8px')};
   transition: all 0.3s ease;
 `;
 export const BlogCardSubTextWrapper = styled.div`

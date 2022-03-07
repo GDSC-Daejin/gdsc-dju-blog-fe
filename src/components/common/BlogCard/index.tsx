@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHover } from 'react-use';
 import {
   BlogCardAuthorImage,
   BlogCardAuthorWrapper,
@@ -9,17 +10,7 @@ import {
   BlogCardSubTextWrapper,
   BlogCardTitle,
 } from './styled';
-import YellowBanner from '../../../Images/YellowBanner.svg';
-import {
-  animate,
-  AnimatePresence,
-  AnimateSharedLayout,
-  motion,
-} from 'framer-motion';
-
-interface IisHoverdHook {
-  isHovered: boolean;
-}
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 const PostTextVariants = {
   initial: {
@@ -38,29 +29,24 @@ const PostTextVariants = {
 };
 
 const BlogCard = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  console.log('refresh');
+  // const [isHovered, setIsHovered] = useState(false);
+  const [BlogCardBottomText, IsHovered] = useHover(BottomText);
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
         <img src="logo512.png" />
-        <BlogCardBottomBox
-          onMouseOver={() => setIsHovered(true)}
-          onMouseOut={() => setIsHovered(false)}
-        >
-          <BottomText isHovered={isHovered} />
-        </BlogCardBottomBox>
+        {BlogCardBottomText}
       </BlogCardInner>
     </AnimateSharedLayout>
   );
 };
 
-const BottomText = ({ isHovered }: IisHoverdHook) => {
+const BottomText = (hovered: boolean) => {
   return (
-    <>
-      <BlogCardTitle isHover={isHovered}>제목입니다아아아아아</BlogCardTitle>
+    <BlogCardBottomBox>
+      <BlogCardTitle isHovered={hovered}>제목입니다아아아아아</BlogCardTitle>
       <AnimatePresence>
-        {isHovered ? (
+        {hovered ? (
           <BlogCardPostText
             variants={PostTextVariants}
             initial={'initial'}
@@ -81,7 +67,7 @@ const BottomText = ({ isHovered }: IisHoverdHook) => {
         </BlogCardAuthorWrapper>
         <BlogCardSubText subText={true}>22.02.02</BlogCardSubText>
       </BlogCardSubTextWrapper>
-    </>
+    </BlogCardBottomBox>
   );
 };
 
