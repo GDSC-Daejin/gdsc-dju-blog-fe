@@ -39,6 +39,7 @@ const PostTextVariants = {
 
 const BlogCard = () => {
   const [isHovered, setIsHovered] = useState(false);
+  console.log('refresh');
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
@@ -65,9 +66,9 @@ const BottomText = ({ isHovered }: IisHoverdHook) => {
             initial={'initial'}
             animate={'visiable'}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-            libero? Vel eius deleniti earum architecto magnam non! Eos ipsam
-            perferendis esse rerum unde dolor necessitatibus exercitationem
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Ipsum,libero? Vel eius deleniti earum architecto magnam non! Eos
+            ipsamperferendis esse rerum unde dolor necessitatibus exercitationem
             nostrum facilis sit? Eum.
           </BlogCardPostText>
         ) : null}
@@ -84,4 +85,4 @@ const BottomText = ({ isHovered }: IisHoverdHook) => {
   );
 };
 
-export default BlogCard;
+export default React.memo(BlogCard);

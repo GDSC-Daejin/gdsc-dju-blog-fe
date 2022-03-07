@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useTheme } from '../../hooks/useTheme';
 import BlogCard from '../../components/common/BlogCard';
@@ -8,21 +8,23 @@ import {
   SlideButton,
   ButtonWrapper,
 } from './styled';
-import { useElementScroll, useTransform } from 'framer-motion';
-import { start } from 'repl';
 
 function index() {
-  const Card = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
-  const oneBlockWidth = 1212;
+  const [buttonOn, setButtonOn] = useState(0);
+  const SectionScrollWidth = scrollRef.current?.scrollWidth || 0;
 
-  const scrollMove = (buttonNumber: number) => {
+  const scrollMove = async (buttonNumber: number) => {
     scrollRef.current?.scrollTo({
       top: 0,
-      left: buttonNumber * oneBlockWidth,
+      left: (buttonNumber / 2) * SectionScrollWidth,
       behavior: 'smooth',
+    });
+    setButtonOn((prev) => {
+      return (buttonNumber / 2) * SectionScrollWidth;
     });
   };
 
@@ -53,26 +55,42 @@ function index() {
     }
   };
 
+  useEffect(() => {
+    if (scrollRef.current?.scrollLeft) {
+      setButtonOn(scrollRef.current?.scrollLeft);
+      console.log('!!!');
+    }
+  }, [scrollRef.current?.scrollLeft, buttonOn]);
+
   return (
     <LayoutContainer>
       <CardSection
         ref={scrollRef}
+        isDrag={isDrag}
         onMouseDown={onDragStart}
         onMouseMove={isDrag ? onDragMove : undefined}
         onMouseUp={onDragEnd}
         onMouseLeave={onDragEnd}
-        isDrag={isDrag}
       >
-        {Card.map((CardData, index) => (
-          <BlogCardWrapper key={index}>
+        {Cards.map((CardData, index) => (
+          <BlogCardWrapper key={CardData}>
             <BlogCard />
           </BlogCardWrapper>
         ))}
       </CardSection>
       <ButtonWrapper>
-        <SlideButton onClick={() => scrollMove(0)}></SlideButton>
-        <SlideButton onClick={() => scrollMove(1)}></SlideButton>
-        <SlideButton onClick={() => scrollMove(2)}></SlideButton>
+        <SlideButton
+          ButtonColor={buttonOn >= 0 && buttonOn < 1000 ? true : false}
+          onClick={() => scrollMove(0)}
+        ></SlideButton>
+        <SlideButton
+          ButtonColor={buttonOn >= 1000 && buttonOn < 2000 ? true : false}
+          onClick={() => scrollMove(1)}
+        ></SlideButton>
+        <SlideButton
+          ButtonColor={buttonOn >= 2000 && buttonOn < 3000 ? true : false}
+          onClick={() => scrollMove(2)}
+        ></SlideButton>
       </ButtonWrapper>
     </LayoutContainer>
   );
