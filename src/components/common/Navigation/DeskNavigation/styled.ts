@@ -62,17 +62,22 @@ export const NavMargin = styled.div`
 `;
 export const IconWrapper = styled.div`
   display: flex;
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  height: 18px;
+  & svg {
+    cursor: pointer;
+    & hover svg path {
+      fill: #d1d6db;
+    }
+  }
 `;
 export const SearchWrapper = styled.label`
   display: flex;
   margin-right: 60px;
+  position: relative;
 `;
-/* position: relative;
-  &:before {
-    background-image: MagnifyingGLassIcon;
-  }
- */
-
 export const Search = styled.input`
   width: 480px;
   height: 38px;
