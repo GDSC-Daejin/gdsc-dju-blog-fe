@@ -14,7 +14,7 @@ import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 const PostTextVariants = {
   initial: {
-    y: 50,
+    y: 0,
     opacity: 0,
   },
   visiable: {
@@ -22,7 +22,7 @@ const PostTextVariants = {
     opacity: 1,
     transition: {
       type: 'spring',
-      delay: 0.2,
+      delay: 0.1,
       duration: 0.5,
     },
   },
@@ -46,7 +46,7 @@ const BottomText = (hovered: boolean) => {
     <BlogCardBottomBox>
       <BlogCardTitle isHovered={hovered}>제목입니다아아아아아</BlogCardTitle>
       <AnimatePresence>
-        {hovered ? (
+        {hovered && (
           <BlogCardPostText
             variants={PostTextVariants}
             initial={'initial'}
@@ -57,7 +57,7 @@ const BottomText = (hovered: boolean) => {
             ipsamperferendis esse rerum unde dolor necessitatibus exercitationem
             nostrum facilis sit? Eum.
           </BlogCardPostText>
-        ) : null}
+        )}
       </AnimatePresence>
       <BlogCardSubTextWrapper>
         <BlogCardAuthorWrapper>

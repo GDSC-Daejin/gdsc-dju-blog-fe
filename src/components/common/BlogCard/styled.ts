@@ -14,7 +14,7 @@ export const BlogCardInner = styled(motion.div)`
 
 export const BlogCardBottomBox = styled(motion.div)`
   position: absolute;
-  transition: all 0.2s ease-in;
+  transition: all 0.1s ease-in;
   border-radius: 10px;
   width: 100%;
   bottom: 0;
