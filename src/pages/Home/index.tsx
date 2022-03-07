@@ -15,12 +15,12 @@ function index() {
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
-  const SectionScrollWidth = scrollRef.current?.scrollWidth || 0;
+  const SectionScrollWidth = 2457;
 
   const scrollMove = async (buttonNumber: number) => {
     scrollRef.current?.scrollTo({
       top: 0,
-      left: (buttonNumber / 2) * SectionScrollWidth,
+      left: SectionScrollWidth * (buttonNumber / 2),
       behavior: 'smooth',
     });
   };
@@ -70,15 +70,15 @@ function index() {
       </CardSection>
       <ButtonWrapper>
         <SlideButton
-          ButtonColor={x >= 0 ? true : false}
+          ButtonColor={x >= 0 && x < 1228 ? true : false}
           onClick={() => scrollMove(0)}
         ></SlideButton>
         <SlideButton
-          ButtonColor={x > 1000 ? true : false}
+          ButtonColor={x >= 1228 && x < 2450 ? true : false}
           onClick={() => scrollMove(1)}
         ></SlideButton>
         <SlideButton
-          ButtonColor={x > 2000 ? true : false}
+          ButtonColor={x >= 2450 ? true : false}
           onClick={() => scrollMove(2)}
         ></SlideButton>
       </ButtonWrapper>
