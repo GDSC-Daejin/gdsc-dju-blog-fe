@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCard from '../../components/common/BlogCard';
@@ -12,10 +12,9 @@ import {
 function index() {
   const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { x, y } = useScroll(scrollRef);
+  const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [buttonOn, setButtonOn] = useState(0);
   const SectionScrollWidth = scrollRef.current?.scrollWidth || 0;
 
   const scrollMove = async (buttonNumber: number) => {
@@ -23,9 +22,6 @@ function index() {
       top: 0,
       left: (buttonNumber / 2) * SectionScrollWidth,
       behavior: 'smooth',
-    });
-    setButtonOn((prev) => {
-      return (buttonNumber / 2) * SectionScrollWidth;
     });
   };
 
@@ -55,13 +51,6 @@ function index() {
       }
     }
   };
-
-  useEffect(() => {
-    if (scrollRef.current?.scrollLeft) {
-      setButtonOn(scrollRef.current?.scrollLeft);
-      console.log('!!!');
-    }
-  }, [scrollRef.current?.scrollLeft, buttonOn]);
 
   return (
     <LayoutContainer>
