@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ContainerInner, LayoutContainer } from '../../styles/layouts';
-import { useTheme } from '../../hooks/useTheme';
+import React, { useEffect, useRef, useState } from 'react';
+import { useScroll } from 'react-use';
+import { LayoutContainer } from '../../styles/layouts';
 import BlogCard from '../../components/common/BlogCard';
 import {
   CardSection,
@@ -12,6 +12,7 @@ import {
 function index() {
   const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { x, y } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [buttonOn, setButtonOn] = useState(0);
@@ -80,18 +81,19 @@ function index() {
       </CardSection>
       <ButtonWrapper>
         <SlideButton
-          ButtonColor={buttonOn >= 0 && buttonOn < 1000 ? true : false}
+          ButtonColor={x >= 0 ? true : false}
           onClick={() => scrollMove(0)}
         ></SlideButton>
         <SlideButton
-          ButtonColor={buttonOn >= 1000 && buttonOn < 2000 ? true : false}
+          ButtonColor={x > 1000 ? true : false}
           onClick={() => scrollMove(1)}
         ></SlideButton>
         <SlideButton
-          ButtonColor={buttonOn >= 2000 && buttonOn < 3000 ? true : false}
+          ButtonColor={x > 2000 ? true : false}
           onClick={() => scrollMove(2)}
         ></SlideButton>
       </ButtonWrapper>
+      {x}
     </LayoutContainer>
   );
 }
