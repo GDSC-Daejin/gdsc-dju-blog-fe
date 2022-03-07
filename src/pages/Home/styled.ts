@@ -13,9 +13,18 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   div:last-child {
     margin-right: 0;
   }
-  /* &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
-  } */
+  }
+  &::-moz-scrollbar {
+    display: none;
+  }
+  &::-ms-scrollbar {
+    display: none;
+  }
+  &::-o-scrollbar {
+    display: none;
+  }
 `;
 
 export const BlogCardWrapper = styled(motion.div)`
@@ -34,8 +43,8 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const SlideButton = styled.button<{ ButtonColor: boolean }>`
+export const BlogCardButton = styled.button<{ ButtonActive: boolean }>`
   width: 20px;
   height: 20px;
-  background-color: ${(props) => (props.ButtonColor ? 'red' : 'blue')};
+  background-color: ${(props) => (props.ButtonActive ? 'red' : 'blue')};
 `;

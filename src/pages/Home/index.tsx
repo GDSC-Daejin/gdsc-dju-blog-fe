@@ -5,7 +5,7 @@ import BlogCard from '../../components/common/BlogCard';
 import {
   CardSection,
   BlogCardWrapper,
-  SlideButton,
+  BlogCardButton,
   ButtonWrapper,
 } from './styled';
 
@@ -17,7 +17,7 @@ function index() {
   const [startX, setStartX] = useState(0);
   const SectionScrollWidth = 2457;
 
-  const scrollMove = async (buttonNumber: number) => {
+  const scrollMove = (buttonNumber: number) => {
     scrollRef.current?.scrollTo({
       top: 0,
       left: SectionScrollWidth * (buttonNumber / 2),
@@ -69,24 +69,21 @@ function index() {
         ))}
       </CardSection>
       <ButtonWrapper>
-        <SlideButton
-          ButtonColor={x >= 0 && x < 1228 ? true : false}
+        <BlogCardButton
+          ButtonActive={x >= 0 && x < 1228 ? true : false}
           onClick={() => scrollMove(0)}
-        ></SlideButton>
-        <SlideButton
-          ButtonColor={x >= 1228 && x < 2450 ? true : false}
+        />
+        <BlogCardButton
+          ButtonActive={x >= 1228 && x < 2450 ? true : false}
           onClick={() => scrollMove(1)}
-        ></SlideButton>
-        <SlideButton
-          ButtonColor={x >= 2450 ? true : false}
+        />
+        <BlogCardButton
+          ButtonActive={x >= 2450 ? true : false}
           onClick={() => scrollMove(2)}
-        ></SlideButton>
+        />
       </ButtonWrapper>
-      {x}
     </LayoutContainer>
   );
 }
-
-// 드래그 할때는 잘 동작하는데 버튼 누르면 동작 안됨
 
 export default index;

@@ -22,8 +22,8 @@ const PostTextVariants = {
     opacity: 1,
     transition: {
       type: 'spring',
-      delay: 0.3,
-      duration: 1,
+      delay: 0.2,
+      duration: 0.5,
     },
   },
 };
