@@ -14,16 +14,14 @@ import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 const PostTextVariants = {
   initial: {
-    y: 0,
     opacity: 0,
   },
   visiable: {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring',
-      delay: 0.1,
-      duration: 0.5,
+      delay: 0.2,
+      duration: 0.3,
     },
   },
 };
