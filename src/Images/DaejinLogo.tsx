@@ -1,14 +1,14 @@
 import React from 'react';
 import GdscLogo from './GdscLogo';
-import GdscBlog from './GdscBlog';
-import DaejinUniv from './DaejinUniv';
+import GdscBlogLogo from './GdscBlogLogo';
+import DaejinUnivLogo from './DaejinUnivLogo';
 
 const DaejinLogo = () => {
   return (
     <div>
       <GdscLogo />
-      <GdscBlog />
-      <DaejinUniv />
+      <GdscBlogLogo />
+      <DaejinUnivLogo />
     </div>
   );
 };

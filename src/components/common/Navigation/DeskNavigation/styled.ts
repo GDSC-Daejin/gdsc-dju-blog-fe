@@ -36,6 +36,14 @@ export const MenuBars = styled.a`
   display: flex;
   align-items: center;
 `;
+export const DeskNavigationWrapper = styled.div`
+  width: 100%;
+  align-items: center;
+  display: flex;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    display: none;
+  }
+`;
 export const BlogText = styled.div`
   align-items: center;
 `;
@@ -44,6 +52,7 @@ export const BlogBanner = styled.div`
   padding-bottom: 20px;
 `;
 export const Univ = styled.div`
+  width: 52px;
   padding-top: 12px;
   padding-bottom: 5px;
   display: flex;
@@ -88,11 +97,54 @@ export const Search = styled.input`
     color: #d1d6db;
   }
   &:focus {
+    &::placeholder {
+      padding-left: 2px;
+    }
+    padding-left: 20px;
+    width: 462px;
     outline: 1px solid #d1d6db;
   }
 `;
 export const TitleText = styled.span`
   margin-left: 16px;
+`;
+export const MenuToggleIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  & button {
+    width: 18px;
+  }
+  & button svg {
+    width: 20px;
+    height: 20px;
+  }
+`;
+export const MobileNavigationWrapper = styled.div`
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  display: none;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    display: flex;
+  }
+`;
+
+export const GdscLogoWrapper = styled.div`
+  display: flex;
+  & svg {
+    width: 40px;
+    height: 20px;
+  }
+`;
+export const MobileIconWrapper = styled.div`
+  display: flex;
+  width: 18px;
+  & svg {
+    cursor: pointer;
+  }
+  & svg path {
+    fill: #8b95a1;
+  }
 `;
 /* 여기서부터 받아온 리액트 아이콘이다 */
 export const NavMenu = styled.nav`

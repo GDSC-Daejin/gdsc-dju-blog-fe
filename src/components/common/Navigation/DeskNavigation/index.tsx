@@ -16,12 +16,17 @@ import {
   SearchWrapper,
   NavMargin,
   IconWrapper,
+  GdscLogoWrapper,
+  MenuToggleIconWrapper,
+  MobileIconWrapper,
+  MobileNavigationWrapper,
+  DeskNavigationWrapper,
 } from './styled';
 /* 아이콘 컬러 전체 변경 기능 */
 import { IconContext } from 'react-icons';
 import MenuToggleIcon from '../../MenuToggleIcon';
-import GdscBlog from '../../../../Images/GdscBlog';
-import DaejinUniv from '../../../../Images/DaejinUniv';
+import GdscBlogLogo from '../../../../Images/GdscBlogLogo';
+import DaejinUnivLogo from '../../../../Images/DaejinUnivLogo';
 import GdscLogo from '../../../../Images/GdscLogo';
 import MagnifyingGlassIcon from '../../../../Images/MagnifyingGlassIcon';
 
@@ -32,36 +37,52 @@ function Navigation() {
     <>
       {/* 아이콘 컬러 전체 변경 기능 */}
       <IconContext.Provider value={{ color: '#fff' }}>
-        {/* 네비게이션 토글 코드*/}
+        {/*Desk Navigation */}
         <NavDesign>
           <NavWrapper>
             <NavInner>
-              <BlogWrapper>
-                <MenuToggleIcon />
+              <DeskNavigationWrapper>
+                <BlogWrapper>
+                  <MenuToggleIcon />
+                  <MenuBars href="/">
+                    <Logo>
+                      <GdscLogo />
+                    </Logo>
+                    <BlogText>
+                      <Univ>
+                        <DaejinUnivLogo />
+                      </Univ>
+                      <BlogBanner>
+                        <GdscBlogLogo />
+                      </BlogBanner>
+                    </BlogText>
+                  </MenuBars>
+                </BlogWrapper>
+                <NavMargin />
+                <SearchWrapper>
+                  <Search
+                    type="text"
+                    placeholder="궁금한 정보나 계정을 입력해주세요"
+                  />
+                  <IconWrapper>
+                    <MagnifyingGlassIcon />
+                  </IconWrapper>
+                </SearchWrapper>
+              </DeskNavigationWrapper>
+              {/* Mobile Navigation */}
+              <MobileNavigationWrapper>
+                <MenuToggleIconWrapper>
+                  <MenuToggleIcon />
+                </MenuToggleIconWrapper>
                 <MenuBars href="/">
-                  <Logo>
+                  <GdscLogoWrapper>
                     <GdscLogo />
-                  </Logo>
-                  <BlogText>
-                    <Univ>
-                      <DaejinUniv />
-                    </Univ>
-                    <BlogBanner>
-                      <GdscBlog />
-                    </BlogBanner>
-                  </BlogText>
+                  </GdscLogoWrapper>
                 </MenuBars>
-              </BlogWrapper>
-              <NavMargin />
-              <SearchWrapper>
-                <Search
-                  type="text"
-                  placeholder="궁금한 정보나 계정을 입력해주세요"
-                />
-                <IconWrapper>
+                <MobileIconWrapper>
                   <MagnifyingGlassIcon />
-                </IconWrapper>
-              </SearchWrapper>
+                </MobileIconWrapper>
+              </MobileNavigationWrapper>
             </NavInner>
           </NavWrapper>
         </NavDesign>

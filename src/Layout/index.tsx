@@ -7,8 +7,6 @@ import { loaderState } from '../store/loader';
 import { AnimatePresence } from 'framer-motion';
 import SetTheme from '../hooks/SetTheme';
 import PrivateRoute from '../components/PrivateRoute';
-import MobileNavigation from '../components/common/Navigation/MobileNavigation';
-import { NavigationWrapper, MobileNavigationWrapper } from './styled';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
@@ -18,12 +16,7 @@ const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   return (
     <>
-      <NavigationWrapper>
-        <Navigation />
-      </NavigationWrapper>
-      <MobileNavigationWrapper>
-        <MobileNavigation />
-      </MobileNavigationWrapper>
+      <Navigation />
       <SetTheme />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}

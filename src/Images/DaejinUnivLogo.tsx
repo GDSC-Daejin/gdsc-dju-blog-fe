@@ -1,10 +1,9 @@
 import React from 'react';
 
-const DaejinUniv = () => {
+const DaejinUnivLogo = () => {
   return (
     <svg
-      className="univ"
-      width="52"
+      width="100%"
       height="10"
       viewBox="0 0 52 10"
       fill="none"
@@ -58,4 +57,4 @@ const DaejinUniv = () => {
   );
 };
 
-export default DaejinUniv;
+export default DaejinUnivLogo;

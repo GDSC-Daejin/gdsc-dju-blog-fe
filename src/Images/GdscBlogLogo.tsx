@@ -1,9 +1,8 @@
 import React from 'react';
 
-const GdscBlog = () => {
+const GdscBlogLogo = () => {
   return (
     <svg
-      className="GDSC-Blog"
       width="151"
       height="29"
       viewBox="0 0 151 29"
@@ -46,4 +45,4 @@ const GdscBlog = () => {
   );
 };
 
-export default GdscBlog;
+export default GdscBlogLogo;
