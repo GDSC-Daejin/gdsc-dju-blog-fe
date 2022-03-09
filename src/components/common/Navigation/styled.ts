@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MagnifyingGlassIcon from '../../../../Images/MagnifyingGlassIcon';
+import MagnifyingGlassIcon from '../../../Images/MagnifyingGlassIcon';
 export const NavDesign = styled.nav`
   background-color: #ffffff;
   position: sticky;

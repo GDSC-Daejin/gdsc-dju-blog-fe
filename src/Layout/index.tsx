@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Navigation from '../components/common/Navigation/DeskNavigation';
+import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
