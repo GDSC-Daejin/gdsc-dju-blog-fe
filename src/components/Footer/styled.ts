@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const FooterWrapper = styled.footer`
   display: flex;
-  justify-content: center;
+  position: relative;
+  justify-content: flex-start;
   align-items: center;
   background: linear-gradient(
       180deg,
@@ -24,16 +25,51 @@ export const CreatorTitle = styled.div`
   font-weight: bold;
   font-size: ${(props) => props.theme.fontSize.body1};
   margin-bottom: 10px;
+  min-width: 100px;
 `;
-export const CreatorName = styled.div`
-  color: ${(props) => props.theme.color.grey900};
-
+export const CreatorName = styled.p`
+  color: ${(props) => props.theme.color.grey600};
   font-size: ${(props) => props.theme.fontSize.body2};
+  //display: inline-block;
+  max-width: 120px;
 `;
-export const CreatorSection = styled.div`
+export const CreatorSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  flex-wrap: wrap;
+  &:nth-child(3) {
+    margin-right: 0;
+  }
+`;
+export const CreatorSectionInner = styled.div`
   display: flex;
   flex-direction: row;
-  margin-right: 28px;
-  width: 100px;
-  flex-wrap: wrap;
+`;
+export const StyledTr = styled.tr`
+  margin-right: 16px;
+  &:nth-child(2) {
+    margin-right: 0;
+  }
+`;
+export const StyledColumn = styled.div`
+  width: 1px;
+  height: 100px;
+  background: ${(props) => props.theme.color.grey300};
+  margin: 0 30px;
+  border: 0 solid;
+`;
+export const StyledBlogIcon = styled.img`
+  margin-right: 60px;
+`;
+export const ColumnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const Copyright = styled.span`
+  position: absolute;
+  width: 162px;
+  display: flex;
+  right: 0;
+  bottom: 20px;
 `;
