@@ -15,25 +15,24 @@ const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   return (
     <>
-      <SetTheme />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
-        <Suspense fallback={<GoogleLoader background={false} />}>
-          <Routes>
-            <Route path={'/*'} element={<Home />} />
-            <Route path={'/:user_name/*'} element={<MyBlog />} />
-            <Route path={'/post'} element={<Post />} />
-            <Route
-              path={'/admin'}
-              element={
-                <PrivateRoute>
-                  <Post />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </Suspense>
       </AnimatePresence>
+      <Suspense fallback={<GoogleLoader background={false} />}>
+        <Routes>
+          <Route path={'/*'} element={<Home />} />
+          <Route path={'/:user_name/*'} element={<MyBlog />} />
+          <Route path={'/post'} element={<Post />} />
+          <Route
+            path={'/admin'}
+            element={
+              <PrivateRoute>
+                <Post />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
     </>
   );
 };
