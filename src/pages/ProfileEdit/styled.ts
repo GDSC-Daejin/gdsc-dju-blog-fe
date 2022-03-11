@@ -49,4 +49,10 @@ export const FormLabel = styled.label<{ essential?: boolean }>`
 `;
 export const FormElementWrapper = styled.div`
   margin-bottom: 40px;
+  width: 100%;
+`;
+export const FormButtonWrapper = styled.div`
+  justify-content: flex-end;
+  display: flex;
+  margin-bottom: 220px;
 `;

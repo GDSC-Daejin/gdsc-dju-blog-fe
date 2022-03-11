@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import {
+  FormButtonWrapper,
   FormElementWrapper,
   FormInner,
   FormLabel,
@@ -10,6 +11,7 @@ import {
 } from './styled';
 import TextInput from '../../components/common/input/TextInput';
 import ProfileEditImage from '../../components/common/ProfileEditImage';
+import { GDSCButton } from '../../components/common/Button';
 
 const ProfileEdit = () => {
   const image = '';
@@ -65,6 +67,17 @@ const ProfileEdit = () => {
               <FormLabel essential={true}>깃허브 주소</FormLabel>
               <TextInput placeholder={'https://'} />
             </FormElementWrapper>
+            <FormElementWrapper>
+              <FormLabel essential={true}>블로그 주소</FormLabel>
+              <TextInput placeholder={'https://'} />
+            </FormElementWrapper>
+            <FormElementWrapper>
+              <FormLabel essential={true}>포트폴리오/이력서 주소</FormLabel>
+              <TextInput placeholder={'https://'} />
+            </FormElementWrapper>
+            <FormButtonWrapper>
+              <GDSCButton text={'저장하기'} color={'GDSC blue'} />
+            </FormButtonWrapper>
           </FormInner>
         </FormWrapper>
       </ContainerInner>
