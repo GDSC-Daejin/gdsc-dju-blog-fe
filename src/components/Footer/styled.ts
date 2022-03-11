@@ -48,6 +48,7 @@ export const CreatorName = styled.p`
   @media (max-width: 512px) {
     font-size: ${(props) => props.theme.fontSize.body3};
   }
+  cursor: pointer;
 }
 `;
 export const CreatorSection = styled.section`

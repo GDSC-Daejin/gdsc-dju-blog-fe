@@ -14,8 +14,27 @@ import {
   StyledTr,
 } from './styled';
 import BlogIcon from '../../Images/BlogIcon';
+import { useNavigate } from 'react-router';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const route = {
+    home: '/',
+    blog: '/blog', //추후 수정
+    frontend: '/category/fe',
+    backend: '/category/be',
+    android: '/category/and',
+    design: '/category/de',
+    common: '/category/common',
+  };
+  const otherSite = {
+    googleDevelopers: 'https://developers.google.com/community/gdsc',
+    gdsc: 'https://gdsc.community.dev/',
+    gdscdju: 'https://gdsc-dju.web.app/',
+  };
+  const navigateHandler = (data: string) => {
+    navigate(`${route[data as keyof typeof route]}`);
+  };
   return (
     <FooterWrapper>
       <FooterInner>
@@ -51,14 +70,50 @@ const Footer = () => {
             <CreatorTitle>Site Map</CreatorTitle>
             <CreatorSectionInner>
               <StyledTr>
-                <CreatorName>Home</CreatorName>
-                <CreatorName>Frontend</CreatorName>
-                <CreatorName>Backend</CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateHandler('home');
+                  }}
+                >
+                  Home
+                </CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateHandler('frontend');
+                  }}
+                >
+                  Frontend
+                </CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateHandler('backend');
+                  }}
+                >
+                  Backend
+                </CreatorName>
               </StyledTr>
               <StyledTr>
-                <CreatorName>Android</CreatorName>
-                <CreatorName>Design</CreatorName>
-                <CreatorName>Common</CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateHandler('android');
+                  }}
+                >
+                  Android
+                </CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateHandler('design');
+                  }}
+                >
+                  Design
+                </CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateHandler('common');
+                  }}
+                >
+                  Common
+                </CreatorName>
               </StyledTr>
             </CreatorSectionInner>
           </CreatorSection>

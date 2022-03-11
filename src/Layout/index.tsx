@@ -33,8 +33,8 @@ const Layout = () => {
             />
           </Routes>
         </Suspense>
-        <Footer />
       </AnimatePresence>
+      <Footer />
     </>
   );
 };
