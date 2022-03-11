@@ -29,11 +29,15 @@ export const CreatorWrapper = styled.div`
   flex-direction: row;
 `;
 export const CreatorTitle = styled.div`
-  color: ${(props) => props.theme.color.grey900};
+  color: ${(props) => props.theme.color.grey700};
   font-weight: bold;
   font-size: ${(props) => props.theme.fontSize.body1};
   margin-bottom: 10px;
   min-width: 100px;
+  @media (max-width: 512px) {
+    font-size: ${(props) => props.theme.fontSize.body2};
+  }
+}
 `;
 export const CreatorName = styled.p`
   color: ${(props) => props.theme.color.grey600};
@@ -41,17 +45,33 @@ export const CreatorName = styled.p`
   //display: inline-block;
   max-width: 120px;
   margin-bottom: 6px;
+  @media (max-width: 512px) {
+    font-size: ${(props) => props.theme.fontSize.body3};
+  }
+}
 `;
 export const CreatorSection = styled.section`
   display: flex;
   flex-direction: column;
   margin-right: 30px;
   //flex-wrap: wrap;
+  @media (max-width: 512px) {
+    margin-right: 20px;
+  }
+
   &:nth-child(3) {
     margin-right: 0;
   }
+  &:nth-child(5) {
+    @media (max-width: 720px) {
+      display: none;
+    }
+  }
   &:nth-child(6) {
     margin-right: 0;
+    @media (max-width: 875px) {
+      display: none;
+    }
   }
 `;
 export const CreatorSectionInner = styled.div`
@@ -70,9 +90,15 @@ export const StyledColumn = styled.div`
   background: ${(props) => props.theme.color.grey300};
   margin: 0 30px;
   border: 0 solid;
+  @media (max-width: 720px) {
+    display: none;
+  }
 `;
-export const StyledBlogIcon = styled.img`
+export const BlogIconWrapper = styled.div`
   margin-right: 60px;
+  @media (max-width: 512px) {
+    margin-right: 38px;
+  }
 `;
 export const ColumnWrapper = styled.div`
   display: flex;

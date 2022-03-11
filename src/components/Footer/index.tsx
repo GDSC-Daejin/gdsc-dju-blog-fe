@@ -1,26 +1,28 @@
 import React from 'react';
 import {
-  StyledBlogIcon,
+  BlogIconWrapper,
+  ColumnWrapper,
+  Copyright,
   CreatorName,
   CreatorSection,
   CreatorSectionInner,
   CreatorTitle,
   CreatorWrapper,
+  FooterInner,
   FooterWrapper,
   StyledColumn,
   StyledTr,
-  ColumnWrapper,
-  Copyright,
-  FooterInner,
 } from './styled';
-import BlogIcon from '../../Images/BlogIcon.svg';
+import BlogIcon from '../../Images/BlogIcon';
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <FooterInner>
         <CreatorWrapper>
-          <StyledBlogIcon src={BlogIcon} />
+          <BlogIconWrapper>
+            <BlogIcon />
+          </BlogIconWrapper>
           <CreatorSection>
             <CreatorTitle>Designed by</CreatorTitle>
             <ColumnWrapper>
