@@ -10,12 +10,14 @@ export const FooterWrapper = styled.footer`
     ),
     #ffffff;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 `;
 export const FooterInner = styled.div`
   display: flex;
-  padding: 55px 10%;
+  justify-content: center;
+  align-items: center;
+  padding: 55px 0;
   box-sizing: border-box;
   overflow: hidden;
   border-top: 1px solid #eaeaea;
@@ -38,6 +40,7 @@ export const CreatorName = styled.p`
   font-size: ${(props) => props.theme.fontSize.body2};
   //display: inline-block;
   max-width: 120px;
+  margin-bottom: 6px;
 `;
 export const CreatorSection = styled.section`
   display: flex;
@@ -45,6 +48,9 @@ export const CreatorSection = styled.section`
   margin-right: 30px;
   //flex-wrap: wrap;
   &:nth-child(3) {
+    margin-right: 0;
+  }
+  &:nth-child(6) {
     margin-right: 0;
   }
 `;
