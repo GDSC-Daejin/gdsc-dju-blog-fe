@@ -3,18 +3,24 @@ import styled from 'styled-components';
 export const FooterWrapper = styled.footer`
   display: flex;
   position: relative;
-  justify-content: flex-start;
-  align-items: center;
   background: linear-gradient(
       180deg,
       rgba(135, 135, 135, 0.1) 0%,
       rgba(177, 177, 177, 0) 18.76%
     ),
     #ffffff;
-  padding: 55px 140px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+`;
+export const FooterInner = styled.div`
+  display: flex;
+  padding: 55px 10%;
+  box-sizing: border-box;
+  overflow: hidden;
   border-top: 1px solid #eaeaea;
-  font-size: 0.8rem;
-  color: #666;
+  width: 100vw;
+  height: 100%;
 `;
 export const CreatorWrapper = styled.div`
   display: flex;
@@ -37,7 +43,7 @@ export const CreatorSection = styled.section`
   display: flex;
   flex-direction: column;
   margin-right: 30px;
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
   &:nth-child(3) {
     margin-right: 0;
   }
