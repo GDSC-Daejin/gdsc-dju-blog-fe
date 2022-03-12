@@ -17,20 +17,18 @@ import {
   NavMargin,
   IconWrapper,
   GdscLogoWrapper,
-  MenuToggleIconWrapper,
   MobileIconWrapper,
   MobileNavigationWrapper,
   DeskNavigationWrapper,
   NavMenuItems,
-  NavbarToogle,
   Sidebar,
 } from './styled';
 /* 아이콘 컬러 전체 변경 기능 */
-import MenuToggleIcon from '../MenuToggleIcon';
 import GdscBlogLogo from '../../../Images/GdscBlogLogo';
 import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
 import GdscLogo from '../../../Images/GdscLogo';
 import MagnifyingGlassIcon from '../../../Images/MagnifyingGlassIcon';
+import MenuIcon from '../MenuIcon';
 
 function Navigation() {
   const [sidebar, setSidebar] = useState(false);
@@ -43,8 +41,8 @@ function Navigation() {
         <NavWrapper>
           <NavInner>
             <DeskNavigationWrapper>
+              <MenuIcon />
               <BlogWrapper>
-                <MenuToggleIcon />
                 <MenuBars href="/">
                   <Logo>
                     <GdscLogo />
@@ -72,9 +70,7 @@ function Navigation() {
             </DeskNavigationWrapper>
             {/* Mobile Navigation */}
             <MobileNavigationWrapper>
-              <MenuToggleIconWrapper>
-                <MenuToggleIcon />
-              </MenuToggleIconWrapper>
+              <MenuIcon />
               <MenuBars href="/">
                 <GdscLogoWrapper>
                   <GdscLogo />
@@ -90,7 +86,6 @@ function Navigation() {
       {/* 사이드바 */}
       <Sidebar>
         <NavMenuItems onClick={showSidebar}>
-          <NavbarToogle />
           {/* SidebarData를 순서대로 담기*/}
           {SidebarData.map((item, index) => {
             return (

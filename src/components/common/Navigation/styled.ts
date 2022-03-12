@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MagnifyingGlassIcon from '../../../Images/MagnifyingGlassIcon';
+
 export const NavDesign = styled.nav`
   background-color: #ffffff;
   position: sticky;
@@ -108,17 +108,6 @@ export const Search = styled.input`
 export const TitleText = styled.span`
   margin-left: 16px;
 `;
-export const MenuToggleIconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  & button {
-    width: 18px;
-  }
-  & button svg {
-    width: 20px;
-    height: 20px;
-  }
-`;
 export const MobileNavigationWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
@@ -138,7 +127,7 @@ export const GdscLogoWrapper = styled.div`
 `;
 export const MobileIconWrapper = styled.div`
   display: flex;
-  width: 18px;
+  width: 20px;
   & svg {
     cursor: pointer;
   }
@@ -147,20 +136,7 @@ export const MobileIconWrapper = styled.div`
   }
 `;
 /* 여기서부터 받아온 리액트 아이콘이다 */
-export const NavMenu = styled.nav`
-  background-color: #060b26;
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  transition: 850ms;
-  &:active {
-    left: 0;
-    transition: 350ms;
-  }
-`;
+
 export const NavText = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -186,14 +162,7 @@ export const NavText = styled.div`
 export const NavMenuItems = styled.ul`
   width: 100%;
 `;
-export const NavbarToogle = styled.li`
-  background-color: #060b26;
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
+
 export const Sidebar = styled.span`
   margin-left: 16px;
 `;
