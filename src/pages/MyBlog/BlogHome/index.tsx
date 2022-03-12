@@ -93,7 +93,7 @@ const BlogHome = () => {
             <ProfileWrapper>
               <ProfileImageWrapper>
                 <ProfileImage
-                  image={userData.profileImageUrl}
+                  image={MockProfile}
                   position={userData.memberInfo.positionType.toLowerCase()}
                 />
               </ProfileImageWrapper>

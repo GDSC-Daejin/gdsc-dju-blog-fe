@@ -53,7 +53,7 @@ export interface userDataType {
         uploadDate: string;
       },
     ];
-    nickname: string;
+    nickName: string;
     phoneNumber: string;
     positionType: string;
     studentID: string;

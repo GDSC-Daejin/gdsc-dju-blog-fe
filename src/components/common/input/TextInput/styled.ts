@@ -1,6 +1,7 @@
+import { Field } from 'formik';
 import styled, { css } from 'styled-components';
 
-export const StyledInput = styled.input<{ disabled?: boolean }>`
+export const StyledInput = styled(Field)<{ disabled?: boolean }>`
   padding: 0 18px;
   margin: 2px 0;
   border: 0;
@@ -80,10 +81,10 @@ export const InputImageWrapper = styled.div`
   align-items: center;
 `;
 export const ErrorBox = styled.div`
-  height: 30px;
+  height: 20px;
   display: flex;
   align-items: center;
   color: ${(props) => props.theme.color.tossRed};
-  font-size: ${(props) => props.theme.fontSize.h7};
+  font-size: ${(props) => props.theme.fontSize.body2};
   padding-left: 5px;
 `;

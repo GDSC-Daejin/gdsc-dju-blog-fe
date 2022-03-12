@@ -48,7 +48,7 @@ export const FormLabel = styled.label<{ essential?: boolean }>`
   }
 `;
 export const FormElementWrapper = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   width: 100%;
 `;
 export const FormButtonWrapper = styled.div`

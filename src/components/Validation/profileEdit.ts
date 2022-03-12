@@ -1,7 +1,38 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-const emailSchema = Yup.object().shape({
+export const nameSchema = {
+  name: Yup.string()
+    .matches(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/, '한글만 입력 가능합니다.')
+    .required('필수입력란입니다.'),
+};
+export const nicknameSchema = {
+  nickname: Yup.string()
+    .min(3, '3글자이상 작성해주세요')
+    .max(15, '2~15사이의 길이로 입력해주세요')
+    .matches(/^[A-Z]/, '대문자로 시작해야합니다.')
+    // .notOneOf(nicknameList ? nicknameList : [], '중복된 닉네임입니다.')
+    .required('필수입력란입니다.'),
+};
+export const introduceSchema = {
+  introduce: Yup.string()
+    .min(10, '10글자 이상 작성해주세요')
+    .max(70, '최대 70자 입니다.')
+    .required('필수입력란입니다.'),
+};
+export const hashTagSchema = {
+  hashTag: Yup.string()
+    .min(10, '10글자 이상 작성해주세요')
+    .required('필수입력란입니다.'),
+};
+export const phoneNumberSchema = {
+  phoneNumber: Yup.string()
+    .matches(
+      /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/,
+      '전화번호 형식에 맞춰 입력해주세요',
+    )
+    .required('필수입력란입니다.'),
+};
+export const emailSchema = {
   email: Yup.string()
     .min(4, '필수입력란입니다.')
     .matches(
@@ -9,42 +40,43 @@ const emailSchema = Yup.object().shape({
       'gmail.com형식으로 작성해주세요',
     )
     .required('필수입력란입니다.'),
-});
-const nicknameSchema = Yup.object().shape({
-  nickname: Yup.string()
-    .min(3, '3글자이상 작성해주세요')
-    .max(15, '2~15사이의 길이로 입력해주세요')
-    .matches(/^[A-Z]/, '대문자로 시작해야합니다.')
-    // .notOneOf(nicknameList ? nicknameList : [], '중복된 닉네임입니다.')
+};
+export const majorSchema = {
+  major: Yup.string()
+    .min(3, '3글자 이상 작성해주세요')
     .required('필수입력란입니다.'),
-});
+};
+export const studentIDSchema = {
+  studentID: Yup.string()
+    .matches(/^[0-9]{8}$/, '학번 형식에 맞춰 입력해주세요')
+    .required('필수입력란입니다.'),
+};
+export const gitEmailSchema = {
+  gitEmail: Yup.string()
+    .matches(
+      /(http(s)?:\/\/)+[github]+\.[com]+\/[A-Z]}/,
+      'github.com 형식으로 작성해주세요',
+    )
+    .required('필수입력란입니다.'),
+};
+export const urlsSchema = {
+  memberPortfolioUrls: Yup.string().matches(
+    /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
+    'http/https 형식으로 작성해주세요',
+  ),
+};
 
-export const profileEditValidation = useFormik({
-  initialValues: {
-    name: '',
-    nickname: '',
-    introduce: '',
-    hashTag: '',
-    phoneNumber: '',
-    email: '',
-    major: '',
-    studentID: '',
-    position: '',
-    gitEmail: '',
-    memberPortfolioUrls: [],
-  },
-  onSubmit: () => {
-    return;
-  },
-  //validation setting
-  validationSchema: Yup.object({
-    emailSchema,
-
-    major: Yup.string()
-      .min(3, '3글자 이상 작성해주세요')
-      .required('필수입력란입니다.'),
-    introduce: Yup.string()
-      .min(10, '10글자 이상 작성해주세요')
-      .required('필수입력란입니다. 각 단어는 ,로 구분합니다.'),
-  }),
+export const profileEditSchema = Yup.object().shape({
+  ...nameSchema,
+  ...nicknameSchema,
+  ...introduceSchema,
+  ...hashTagSchema,
+  ...phoneNumberSchema,
+  ...emailSchema,
+  ...nicknameSchema,
+  ...majorSchema,
+  ...introduceSchema,
+  ...studentIDSchema,
+  ...gitEmailSchema,
+  ...urlsSchema,
 });

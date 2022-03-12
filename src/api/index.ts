@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { userDataType } from '../type/userDataType';
-import { userInfoDataType } from '../type/userInfoData';
+import { userDataType } from '../types/userDataType';
+import { userInfoDataType } from '../types/userInfoData';
 
 export class Api {
   private API: string;
@@ -28,7 +28,9 @@ export class Api {
   };
   getUserData = () => {
     return axios.get<userDataType>(`${this.API}/user/me`, {
-      headers: this.Header,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     });
   };
 }
