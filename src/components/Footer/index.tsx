@@ -35,6 +35,9 @@ const Footer = () => {
   const navigateHandler = (data: string) => {
     navigate(`${route[data as keyof typeof route]}`);
   };
+  const navigateFamilyHandler = (data: string) => {
+    window.open(`${otherSite[data as keyof typeof otherSite]}`);
+  };
   return (
     <FooterWrapper>
       <FooterInner>
@@ -120,11 +123,28 @@ const Footer = () => {
           <CreatorSection>
             <CreatorTitle>Family site</CreatorTitle>
             <StyledTr>
-              <CreatorName style={{ width: '120px' }}>
+              <CreatorName
+                style={{ width: '120px' }}
+                onClick={() => {
+                  navigateFamilyHandler('googleDevelopers');
+                }}
+              >
                 Google Developers
               </CreatorName>
-              <CreatorName>GDSC</CreatorName>
-              <CreatorName>GDSC DJU</CreatorName>
+              <CreatorName
+                onClick={() => {
+                  navigateFamilyHandler('gdsc');
+                }}
+              >
+                GDSC
+              </CreatorName>
+              <CreatorName
+                onClick={() => {
+                  navigateFamilyHandler('gdscdju');
+                }}
+              >
+                GDSC DJU
+              </CreatorName>
             </StyledTr>
           </CreatorSection>
           <Copyright>Copyright© GDSC Daejin 2021</Copyright>
