@@ -44,6 +44,7 @@ export const emailSchema = {
 export const majorSchema = {
   major: Yup.string()
     .min(3, '3글자 이상 작성해주세요')
+    .matches(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/, '한글만 입력 가능합니다.')
     .required('필수입력란입니다.'),
 };
 export const studentIDSchema = {
@@ -52,12 +53,10 @@ export const studentIDSchema = {
     .required('필수입력란입니다.'),
 };
 export const gitEmailSchema = {
-  gitEmail: Yup.string()
-    .matches(
-      /(http(s)?:\/\/)+[github]+\.[com]+\/[A-Z]}/,
-      'github.com 형식으로 작성해주세요',
-    )
-    .required('필수입력란입니다.'),
+  gitEmail: Yup.string().matches(
+    /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
+    'github.com 형식으로 작성해주세요',
+  ),
 };
 export const urlsSchema = {
   memberPortfolioUrls: Yup.string().matches(

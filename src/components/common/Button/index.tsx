@@ -17,9 +17,10 @@ interface Iprops {
   color?: string;
   disable?: boolean;
   onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
 }
 const GDSCButtonL = (props: Iprops) => {
-  const { text, color, disable, onClick } = props;
+  const { text, color, disable, onClick, type } = props;
 
   return (
     <StyledButton
@@ -29,13 +30,14 @@ const GDSCButtonL = (props: Iprops) => {
       border={color && '#fff'}
       disable={disable}
       onClick={onClick}
+      type={type}
     >
       {text}
     </StyledButton>
   );
 };
 const GDSCButton = (props: Iprops) => {
-  const { text, color, disable, onClick } = props;
+  const { text, color, disable, onClick, type } = props;
 
   return (
     <StyledButton
@@ -44,6 +46,7 @@ const GDSCButton = (props: Iprops) => {
       background={colorStyle(color)}
       disable={disable}
       onClick={onClick}
+      type={type}
     >
       {text}
     </StyledButton>

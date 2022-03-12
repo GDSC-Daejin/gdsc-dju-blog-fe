@@ -14,30 +14,33 @@ import TextInput from '../../components/common/input/TextInput';
 import ProfileEditImage from '../../components/common/ProfileEditImage';
 import { GDSCButton } from '../../components/common/Button';
 import { profileEditSchema } from '../../components/Validation/profileEdit';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../store/user';
 
 const ProfileEdit = () => {
   const image = '';
+  const [user, setUser] = useRecoilState(userState);
   const userEditFormik = useFormik({
     initialValues: {
-      name: '',
-      nickname: '',
-      introduce: '',
-      hashTag: '',
-      phoneNumber: '',
-      email: '',
-      major: '',
-      studentID: '',
-      position: '',
-      gitEmail: '',
-      memberPortfolioUrls: [''],
+      name: user.name,
+      nickname: user.nickname,
+      introduce: user.introduce,
+      hashTag: user.hashTag,
+      phoneNumber: user.phoneNumber,
+      email: user.email,
+      major: user.major,
+      studentID: user.studentID,
+      position: user.position,
+      gitEmail: user.gitEmail,
+      memberPortfolioUrls: user.memberPortfolioUrls,
     },
-    onSubmit: () => {
+    onSubmit: (values) => {
+      console.log(values);
       return;
     },
     //validation setting
     validationSchema: profileEditSchema,
   });
-  console.log(userEditFormik.touched.introduce);
   return (
     <LayoutContainer>
       <ContainerInner>
@@ -135,12 +138,12 @@ const ProfileEdit = () => {
                 <TextInput
                   disabled={true}
                   placeholder={'Frontend'}
-                  name={'studentID'}
+                  name={'position'}
                   value={userEditFormik.values.position}
                 />
               </FormElementWrapper>
               <FormElementWrapper>
-                <FormLabel essential={true}>깃허브 주소</FormLabel>
+                <FormLabel>깃허브 주소</FormLabel>
                 <TextInput
                   placeholder={'https://'}
                   name={'gitEmail'}
@@ -151,21 +154,33 @@ const ProfileEdit = () => {
                 />
               </FormElementWrapper>
               <FormElementWrapper>
-                <FormLabel essential={true}>블로그 주소</FormLabel>
+                <FormLabel>블로그 주소</FormLabel>
                 <TextInput
                   placeholder={'https://'}
-                  name={'memberPortfolioUrls'}
+                  name={'memberPortfolioUrls.[0]'}
                   value={userEditFormik.values.memberPortfolioUrls[0]}
                   onChange={userEditFormik.handleChange}
-                  // error={userEditFormik.errors.memberPortfolioUrls}
+                  error={userEditFormik.errors.memberPortfolioUrls}
                 />
               </FormElementWrapper>
               <FormElementWrapper>
-                <FormLabel essential={true}>포트폴리오/이력서 주소</FormLabel>
-                <TextInput placeholder={'https://'} />
+                <FormLabel>포트폴리오/이력서 주소</FormLabel>
+                <TextInput
+                  placeholder={'https://'}
+                  name={'memberPortfolioUrls.[1]'}
+                  value={userEditFormik.values.memberPortfolioUrls[1]}
+                  onChange={userEditFormik.handleChange}
+                  error={userEditFormik.errors.memberPortfolioUrls}
+                />
               </FormElementWrapper>
-              <FormButtonWrapper>
-                <GDSCButton text={'저장하기'} color={'GDSC blue'} />
+              <FormButtonWrapper
+                onClick={() => console.log(userEditFormik.values)}
+              >
+                <GDSCButton
+                  text={'저장하기'}
+                  color={'GDSC blue'}
+                  type={'submit'}
+                />
               </FormButtonWrapper>
             </FormikProvider>
           </FormInner>

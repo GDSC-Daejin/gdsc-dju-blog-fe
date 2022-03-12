@@ -1,11 +1,17 @@
 import React, { memo, useEffect, useState } from 'react';
 
 import { ErrorBox, StyledInput, StyledInputWrapper } from './styled';
+import { FormikErrors, FormikTouched } from 'formik';
 
 export interface Iprops {
   name?: string;
-  error?: string;
-  touched?: boolean;
+  error?:
+    | string
+    | string[]
+    | FormikErrors<any>
+    | FormikErrors<any>[]
+    | undefined;
+  touched?: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
   placeholder?: string;
   image?: string;
   file?: boolean;
@@ -17,10 +23,7 @@ export interface Iprops {
 }
 const TextInput = (props: Iprops) => {
   const { name, placeholder, onChange, type, disabled, error, touched } = props;
-  console.log(`${name}: ${error}`);
   const errorToggle = !!(error && touched);
-  console.log(error);
-  console.log(touched);
   return (
     <>
       <StyledInputWrapper error={errorToggle}>
@@ -33,7 +36,7 @@ const TextInput = (props: Iprops) => {
           disabled={disabled}
         />
       </StyledInputWrapper>
-      {error && touched && <ErrorBox>{error}</ErrorBox>}
+      <ErrorBox>{error && touched && <>{error}</>}</ErrorBox>
     </>
   );
 };
