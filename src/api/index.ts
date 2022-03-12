@@ -28,9 +28,7 @@ export class Api {
   };
   getUserData = () => {
     return axios.get<userDataType>(`${this.API}/user/me`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
+      headers: this.Header,
     });
   };
 }
