@@ -9,7 +9,7 @@ import PrivateRoute from '../components/PrivateRoute';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
-const Post = lazy(() => import('../pages/Post'));
+const Posts = lazy(() => import('../pages/Posts'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -22,12 +22,12 @@ const Layout = () => {
         <Routes>
           <Route path={'/*'} element={<Home />} />
           <Route path={'/:user_name/*'} element={<MyBlog />} />
-          <Route path={'/post'} element={<Post />} />
+          <Route path={'/post'} element={<Posts />} />
           <Route
             path={'/admin'}
             element={
               <PrivateRoute>
-                <Post />
+                <Posts />
               </PrivateRoute>
             }
           />

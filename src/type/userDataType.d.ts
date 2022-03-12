@@ -2,11 +2,19 @@ export interface userDataType {
   email: string;
   emailVerifiedYn: string;
   memberInfo: {
+    generation: number;
     gitEmail: string;
     hashTag: string;
     introduce: string;
     major: string;
     memberInfoId: number;
+    birthday: string;
+    memberPortfolioUrls: [
+      {
+        id: number;
+        webUrl: string;
+      },
+    ];
     memberScrapPostList: [
       {
         id: number;
@@ -45,7 +53,7 @@ export interface userDataType {
         uploadDate: string;
       },
     ];
-    nickName: string;
+    nickname: string;
     phoneNumber: string;
     positionType: string;
     studentID: string;

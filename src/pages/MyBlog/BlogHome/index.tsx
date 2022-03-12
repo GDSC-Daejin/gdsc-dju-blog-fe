@@ -77,7 +77,6 @@ const BlogHome = () => {
   const hashTageSpreader = (hashTages: string) => {
     return hashTages.split(',');
   };
-
   useEffect(() => {
     if (page || type) {
       navigate(`/${user_name}?type=all&page=0`);
@@ -94,7 +93,7 @@ const BlogHome = () => {
             <ProfileWrapper>
               <ProfileImageWrapper>
                 <ProfileImage
-                  image={MockProfile}
+                  image={userData.profileImageUrl}
                   position={userData.memberInfo.positionType.toLowerCase()}
                 />
               </ProfileImageWrapper>
@@ -137,7 +136,10 @@ const BlogHome = () => {
                 }
               />
               <ButtonWrapper>
-                <GDSCButton text={'스크랩'} />
+                <GDSCButton
+                  text={'스크랩'}
+                  onClick={() => navigate(`${user_name}/likes`)}
+                />
                 <GDSCButton text={'글쓰기'} />
               </ButtonWrapper>
             </TopMenuWrapper>
