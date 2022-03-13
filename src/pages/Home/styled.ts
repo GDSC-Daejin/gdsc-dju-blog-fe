@@ -36,15 +36,10 @@ export const BlogCardWrapper = styled(motion.div)`
 export const ButtonWrapper = styled.div`
   display: flex;
   position: absolute;
-  top: 500;
-
+  left: 0;
+  bottom: 0;
+  top: 862px;
   button:nth-child(2) {
-    margin: 0px 8px;
+    margin: 0px 16px;
   }
-`;
-
-export const BlogCardButton = styled.button<{ ButtonActive: boolean }>`
-  width: 20px;
-  height: 20px;
-  background-color: ${(props) => (props.ButtonActive ? 'red' : 'blue')};
 `;

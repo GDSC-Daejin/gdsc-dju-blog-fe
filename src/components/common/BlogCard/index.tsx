@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHover } from 'react-use';
+import MockPostImage from '../../../Images/unknown.png';
 import {
   BlogCardAuthorImage,
   BlogCardAuthorWrapper,
@@ -9,8 +10,9 @@ import {
   BlogCardSubText,
   BlogCardSubTextWrapper,
   BlogCardTitle,
+  BlogCardThumbnail,
 } from './styled';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 const PostTextVariants = {
   initial: {
@@ -32,7 +34,7 @@ const BlogCard = () => {
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
-        <img src="logo512.png" />
+        <img src={MockPostImage} />
         {BlogCardBottomText}
       </BlogCardInner>
     </AnimateSharedLayout>

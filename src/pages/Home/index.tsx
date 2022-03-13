@@ -1,13 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
+import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
-import {
-  CardSection,
-  BlogCardWrapper,
-  BlogCardButton,
-  ButtonWrapper,
-} from './styled';
+import { CardSection, BlogCardWrapper, ButtonWrapper } from './styled';
 
 function index() {
   const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -15,15 +11,6 @@ function index() {
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
-  const SectionScrollWidth = 2457;
-
-  const scrollMove = (buttonNumber: number) => {
-    scrollRef.current?.scrollTo({
-      top: 0,
-      left: SectionScrollWidth * (buttonNumber / 2),
-      behavior: 'smooth',
-    });
-  };
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -69,17 +56,20 @@ function index() {
         ))}
       </CardSection>
       <ButtonWrapper>
-        <BlogCardButton
-          ButtonActive={x >= 0 && x < 1228 ? true : false}
-          onClick={() => scrollMove(0)}
+        <BlogCardScrollButton
+          ScrollX={x}
+          scrollRef={scrollRef}
+          buttonNumber={0}
         />
-        <BlogCardButton
-          ButtonActive={x >= 1228 && x < 2450 ? true : false}
-          onClick={() => scrollMove(1)}
+        <BlogCardScrollButton
+          ScrollX={x}
+          scrollRef={scrollRef}
+          buttonNumber={1}
         />
-        <BlogCardButton
-          ButtonActive={x >= 2450 ? true : false}
-          onClick={() => scrollMove(2)}
+        <BlogCardScrollButton
+          ScrollX={x}
+          scrollRef={scrollRef}
+          buttonNumber={2}
         />
       </ButtonWrapper>
     </LayoutContainer>

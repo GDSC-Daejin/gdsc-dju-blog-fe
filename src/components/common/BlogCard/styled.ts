@@ -2,14 +2,17 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const BlogCardInner = styled(motion.div)`
-  background-color: yellow;
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   box-shadow: 0px 19px 32px -1px rgba(0, 0, 0, 0.1);
+`;
+
+export const BlogCardThumbnail = styled.img`
+  width: 276px;
+  height: 328px;
 `;
 
 export const BlogCardBottomBox = styled(motion.div)`
@@ -22,7 +25,6 @@ export const BlogCardBottomBox = styled(motion.div)`
   background: #fff;
   padding: 12px 20px;
 `;
-
 export const BlogCardTitle = styled(motion.h6)<{ isHovered: boolean }>`
   font-size: 2.4rem;
   font-weight: 400;
