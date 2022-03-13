@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHover } from 'react-use';
-import MockPostImage from '../../../Images/unknown.png';
+import BlogCardImage from '../../../Images/unknown.png';
 import {
   BlogCardAuthorImage,
   BlogCardAuthorWrapper,
@@ -34,7 +34,10 @@ const BlogCard = () => {
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
-        <img src={MockPostImage} />
+        <BlogCardThumbnail src={BlogCardImage} />
+        <div>
+          <span>123</span>
+        </div>
         {BlogCardBottomText}
       </BlogCardInner>
     </AnimateSharedLayout>

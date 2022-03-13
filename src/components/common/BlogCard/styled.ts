@@ -7,12 +7,14 @@ export const BlogCardInner = styled(motion.div)`
   height: 100%;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   box-shadow: 0px 19px 32px -1px rgba(0, 0, 0, 0.1);
 `;
 
 export const BlogCardThumbnail = styled.img`
   width: 276px;
   height: 328px;
+  border-radius: 13px;
 `;
 
 export const BlogCardBottomBox = styled(motion.div)`

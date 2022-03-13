@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+export const MainBannerText = styled.div``;
+
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   position: relative;
   display: flex;
@@ -30,12 +32,12 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
 export const BlogCardWrapper = styled(motion.div)`
   width: 276px;
   height: 328px;
-  margin: 15px;
+  margin: 0px 15px;
 `;
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   top: 862px;
