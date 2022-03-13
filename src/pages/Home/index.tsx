@@ -3,12 +3,7 @@ import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
-import {
-  MainBannerText,
-  CardSection,
-  BlogCardWrapper,
-  ButtonWrapper,
-} from './styled';
+import { CardSection, BlogCardWrapper, ButtonWrapper } from './styled';
 
 function index() {
   const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -46,12 +41,6 @@ function index() {
 
   return (
     <LayoutContainer>
-      <MainBannerText>
-        <p>from ...</p>
-        <p>Google Developer Student Club</p>
-        <p>Daejin Univ. Blog 에 오신걸 환영합니다.</p>
-        <p>by ...</p>
-      </MainBannerText>
       <CardSection
         ref={scrollRef}
         isDrag={isDrag}

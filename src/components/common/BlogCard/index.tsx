@@ -11,6 +11,7 @@ import {
   BlogCardSubTextWrapper,
   BlogCardTitle,
   BlogCardThumbnail,
+  BlogCardTag,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
@@ -35,9 +36,9 @@ const BlogCard = () => {
     <AnimateSharedLayout>
       <BlogCardInner>
         <BlogCardThumbnail src={BlogCardImage} />
-        <div>
-          <span>123</span>
-        </div>
+        <BlogCardTag>
+          <span>#123</span>
+        </BlogCardTag>
         {BlogCardBottomText}
       </BlogCardInner>
     </AnimateSharedLayout>

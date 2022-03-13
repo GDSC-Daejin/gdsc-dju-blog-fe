@@ -17,6 +17,31 @@ export const BlogCardThumbnail = styled.img`
   border-radius: 13px;
 `;
 
+export const BlogCardTag = styled.div`
+  position: absolute;
+  bottom: 103px;
+  left: 20px;
+  width: 73px;
+  height: 17px;
+  padding: 1px 10px;
+  border-radius: 50px;
+  border: 1px solid #ffffff99;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-family: Google Sans Display;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #ffffff;
+  }
+`;
+
 export const BlogCardBottomBox = styled(motion.div)`
   position: absolute;
   transition: all 0.3s ease-in;
