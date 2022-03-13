@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const SideBarWrapper = styled.div`
@@ -18,8 +18,6 @@ export const SideBarContainer = styled(motion.div)`
   margin: 4.5rem 1.4rem;
 `;
 export const SidebarBtnWrapper = styled.div`
-  background-color: blue;
-  z-index: 1002;
   position: absolute;
   top: 48px;
   left: 60px;
@@ -36,4 +34,21 @@ export const SideBarBtnInner = styled.div`
   cursor: pointer;
   border: none;
   background-color: #ffffff;
+`;
+export const GrayBox = styled.div<{ open: boolean }>`
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1001;
+  background-color: #191f18;
+  ${(props: any) =>
+    props.open
+      ? css`
+          opacity: 0.35;
+        `
+      : css`
+          opacity: 0;
+        `};
 `;
