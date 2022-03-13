@@ -13,6 +13,7 @@ export const NavDesign = styled.nav`
 export const NavWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  position: relative;
   max-width: 1440px;
   width: 100%;
   margin: auto;
@@ -63,6 +64,11 @@ export const Univ = styled.div`
 `;
 export const Logo = styled.div`
   margin-right: 20px;
+`;
+export const BeforeMargin = styled.div`
+  display: flex;
+  width: 130px;
+  height: 100%;
 `;
 export const NavMargin = styled.div`
   flex-basis: 505px;

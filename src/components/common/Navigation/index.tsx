@@ -22,13 +22,15 @@ import {
   DeskNavigationWrapper,
   NavMenuItems,
   Sidebar,
+  BeforeMargin,
 } from './styled';
 /* 아이콘 컬러 전체 변경 기능 */
 import GdscBlogLogo from '../../../Images/GdscBlogLogo';
 import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
 import GdscLogo from '../../../Images/GdscLogo';
 import MagnifyingGlassIcon from '../../../Images/MagnifyingGlassIcon';
-import MenuIcon from '../MenuIcon';
+import SideBar from '../SideBar';
+import MenuToggleIcon from '../MenuToggleIcon';
 
 function Navigation() {
   const [sidebar, setSidebar] = useState(false);
@@ -41,8 +43,9 @@ function Navigation() {
         <NavWrapper>
           <NavInner>
             <DeskNavigationWrapper>
-              <MenuIcon />
               <BlogWrapper>
+                <SideBar />
+                <BeforeMargin />
                 <MenuBars href="/">
                   <Logo>
                     <GdscLogo />
@@ -70,7 +73,7 @@ function Navigation() {
             </DeskNavigationWrapper>
             {/* Mobile Navigation */}
             <MobileNavigationWrapper>
-              <MenuIcon />
+              <MenuToggleIcon />
               <MenuBars href="/">
                 <GdscLogoWrapper>
                   <GdscLogo />
