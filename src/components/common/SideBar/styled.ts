@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export const SideBarWrapper = styled.div`
   display: flex;
   position: absolute;
-  z-index: 1001;
+  z-index: 1002;
   left: 0px;
   top: 0px;
   height: 100vh;

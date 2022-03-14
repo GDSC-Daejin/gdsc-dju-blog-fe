@@ -9,7 +9,7 @@ const MenuToggleIcon = () => {
   return (
     <StyledMenuButton
       initial={false}
-      animate={menu.appMenu ? 'open' : 'closed'}
+      animate={'closed'}
       onClick={() => setMenu({ ...menu, [MENU_KEY.APPMENU]: !menu.appMenu })}
     >
       <svg width="23" height="23" viewBox="0 0 23 23">
