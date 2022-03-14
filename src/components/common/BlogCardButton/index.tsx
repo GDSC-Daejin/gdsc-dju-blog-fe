@@ -4,14 +4,13 @@ import { BlogCardButton } from './styled';
 interface IBlogCardButton {
   ScrollX: number;
   scrollRef: React.RefObject<HTMLDivElement>;
-  buttonNumber: number;
 }
 
 export const BlogCardScrollButton = ({
   ScrollX,
   scrollRef,
-  buttonNumber,
 }: IBlogCardButton) => {
+  const ButtonNumber: number[] = [0, 1, 2];
   const SectionScrollWidth = 2450;
   const scrollMove = (buttonNumber: number) => {
     scrollRef.current?.scrollTo({
@@ -22,15 +21,20 @@ export const BlogCardScrollButton = ({
   };
 
   return (
-    <BlogCardButton
-      ButtonActive={
-        ScrollX >= (SectionScrollWidth * buttonNumber) / 2 &&
-        ScrollX < (SectionScrollWidth * (buttonNumber + 1)) / 2
-          ? true
-          : false
-      }
-      onClick={() => scrollMove(buttonNumber)}
-    ></BlogCardButton>
+    <>
+      {ButtonNumber.map((BtnNumber: number, index: number) => (
+        <BlogCardButton
+          key={index}
+          ButtonActive={
+            ScrollX >= (SectionScrollWidth * BtnNumber) / 2 &&
+            ScrollX < (SectionScrollWidth * (BtnNumber + 1)) / 2
+              ? true
+              : false
+          }
+          onClick={() => scrollMove(BtnNumber)}
+        />
+      ))}
+    </>
   );
 };
 

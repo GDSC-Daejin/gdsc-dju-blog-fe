@@ -56,21 +56,7 @@ function index() {
         ))}
       </CardSection>
       <ButtonWrapper>
-        <BlogCardScrollButton
-          ScrollX={x}
-          scrollRef={scrollRef}
-          buttonNumber={0}
-        />
-        <BlogCardScrollButton
-          ScrollX={x}
-          scrollRef={scrollRef}
-          buttonNumber={1}
-        />
-        <BlogCardScrollButton
-          ScrollX={x}
-          scrollRef={scrollRef}
-          buttonNumber={2}
-        />
+        <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
       </ButtonWrapper>
     </LayoutContainer>
   );
