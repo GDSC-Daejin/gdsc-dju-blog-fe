@@ -21,6 +21,7 @@ export const StyledInput = styled(Field)<{ disabled?: boolean }>`
     props.disabled &&
     css`
       background: ${(props) => props.theme.color.grey100};
+      color: ${(props) => props.theme.color.grey400};
     `}
 `;
 export const StyledFileInput = styled.form`
@@ -36,6 +37,7 @@ export const StyledFileInput = styled.form`
 
 export const StyledInputWrapper = styled.div<{
   color?: string;
+  disabled?: boolean;
   error?: boolean;
 }>`
   overflow: hidden;
@@ -49,6 +51,7 @@ export const StyledInputWrapper = styled.div<{
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: inset 0 0 0 1px ${(props) => props.theme.color.grey300};
+
   ${(props) =>
     props.error &&
     css`
@@ -72,6 +75,13 @@ export const StyledInputWrapper = styled.div<{
         box-shadow: inset 0 0 0 2px ${props.theme.color.tossRed};
       `}
   }
+  ${(props) =>
+    !props.disabled &&
+    css`
+      &:hover {
+        box-shadow: none;
+      }
+    `}
 `;
 export const InputImageWrapper = styled.div`
   height: 20px;

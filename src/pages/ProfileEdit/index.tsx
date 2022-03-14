@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useLayoutEffect, useState } from 'react';
 import { FormikProvider, useFormik } from 'formik';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import {
@@ -16,31 +16,58 @@ import { GDSCButton } from '../../components/common/Button';
 import { profileEditSchema } from '../../components/Validation/profileEdit';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../store/user';
+import API from '../../api';
+import {
+  memberPortfolioUrlsType,
+  userInfoDataType,
+} from '../../types/userInfoData';
+import { useGetUserData } from '../../api/hooks/useGetUserData';
+import { userDataType } from '../../types/userDataType';
 
 const ProfileEdit = () => {
   const image = '';
   const [user, setUser] = useRecoilState(userState);
+  const { userData } = useGetUserData();
+
+  useLayoutEffect(() => {
+    if (userData) {
+      setUser({
+        ...user,
+        ...userData.memberInfo,
+        name: userData.username,
+        email: userData.email,
+      });
+    }
+  }, []);
+
   const userEditFormik = useFormik({
     initialValues: {
-      name: user.name,
+      generation: 0,
       nickname: user.nickname,
+      gitEmail: user.gitEmail,
+      birthday: user.birthday,
       introduce: user.introduce,
       hashTag: user.hashTag,
+      memberInfoId: user.memberInfoId,
       phoneNumber: user.phoneNumber,
-      email: user.email,
       major: user.major,
-      studentID: user.studentID,
-      position: user.position,
-      gitEmail: user.gitEmail,
+      positionType: user.positionType,
       memberPortfolioUrls: user.memberPortfolioUrls,
-    },
-    onSubmit: (values) => {
-      console.log(values);
+    } as userInfoDataType,
+    onSubmit: () => {
       return;
     },
     //validation setting
     validationSchema: profileEditSchema,
   });
+  const onSubmit = async (values: any) => {
+    await API.updateUserData(values as userDataType).then((res) => {
+      setUser({
+        ...user,
+        ...values,
+      });
+    });
+  };
   return (
     <LayoutContainer>
       <ContainerInner>
@@ -54,17 +81,17 @@ const ProfileEdit = () => {
               <FormElementWrapper>
                 <FormLabel essential={true}>이름(실명)</FormLabel>
                 <TextInput
+                  name={'name'}
                   disabled={true}
-                  placeholder={'김구글'}
-                  value={userEditFormik.values.name}
+                  placeholder={userData?.username}
                 />
               </FormElementWrapper>
               <FormElementWrapper>
-                <FormLabel>닉네임</FormLabel>
+                <FormLabel essential={true}>닉네임</FormLabel>
                 <TextInput
                   disabled={true}
-                  placeholder={'정제슨'}
-                  value={userEditFormik.values.nickname}
+                  name={'nickname'}
+                  placeholder={userData?.memberInfo.nickname}
                 />
               </FormElementWrapper>
               <FormElementWrapper>
@@ -104,11 +131,8 @@ const ProfileEdit = () => {
                 <FormLabel essential={true}>gmail</FormLabel>
                 <TextInput
                   name={'email'}
-                  value={userEditFormik.values.email}
-                  placeholder={'gdsc@gmail.com'}
-                  onChange={userEditFormik.handleChange}
-                  error={userEditFormik.errors.email}
-                  touched={userEditFormik.touched.email}
+                  disabled={true}
+                  placeholder={userData?.email}
                 />
               </FormElementWrapper>
               <FormElementWrapper>
@@ -126,26 +150,22 @@ const ProfileEdit = () => {
                 <FormLabel essential={true}>학번</FormLabel>
                 <TextInput
                   name={'studentID'}
-                  placeholder={'20221234'}
-                  value={userEditFormik.values.studentID}
-                  onChange={userEditFormik.handleChange}
-                  error={userEditFormik.errors.studentID}
-                  touched={userEditFormik.touched.studentID}
+                  placeholder={userData?.memberInfo.studentID}
+                  disabled={true}
                 />
               </FormElementWrapper>
               <FormElementWrapper>
                 <FormLabel essential={true}>포지션</FormLabel>
                 <TextInput
                   disabled={true}
-                  placeholder={'Frontend'}
-                  name={'position'}
-                  value={userEditFormik.values.position}
+                  name={'positionType'}
+                  placeholder={userData?.memberInfo.positionType}
                 />
               </FormElementWrapper>
               <FormElementWrapper>
-                <FormLabel>깃허브 주소</FormLabel>
+                <FormLabel>깃허브 이메일</FormLabel>
                 <TextInput
-                  placeholder={'https://'}
+                  placeholder={'깃허브 아이디로 사용 중인 이메일을 적어주세요.'}
                   name={'gitEmail'}
                   value={userEditFormik.values.gitEmail}
                   onChange={userEditFormik.handleChange}
@@ -154,11 +174,21 @@ const ProfileEdit = () => {
                 />
               </FormElementWrapper>
               <FormElementWrapper>
+                <FormLabel>깃허브 주소</FormLabel>
+                <TextInput
+                  placeholder={' https:// 깃허브 주소를 적어주세요 '}
+                  name={'memberPortfolioUrls[0].webUrl'}
+                  value={userEditFormik.values.memberPortfolioUrls[0].webUrl}
+                  onChange={userEditFormik.handleChange}
+                  error={userEditFormik.errors.memberPortfolioUrls}
+                />
+              </FormElementWrapper>
+              <FormElementWrapper>
                 <FormLabel>블로그 주소</FormLabel>
                 <TextInput
                   placeholder={'https://'}
-                  name={'memberPortfolioUrls.[0]'}
-                  value={userEditFormik.values.memberPortfolioUrls[0]}
+                  name={'memberPortfolioUrls.[1].webUrl'}
+                  value={userEditFormik.values.memberPortfolioUrls[1].webUrl}
                   onChange={userEditFormik.handleChange}
                   error={userEditFormik.errors.memberPortfolioUrls}
                 />
@@ -167,14 +197,14 @@ const ProfileEdit = () => {
                 <FormLabel>포트폴리오/이력서 주소</FormLabel>
                 <TextInput
                   placeholder={'https://'}
-                  name={'memberPortfolioUrls.[1]'}
-                  value={userEditFormik.values.memberPortfolioUrls[1]}
+                  name={'memberPortfolioUrls.[2].webUrl'}
+                  value={userEditFormik.values.memberPortfolioUrls[2].webUrl}
                   onChange={userEditFormik.handleChange}
                   error={userEditFormik.errors.memberPortfolioUrls}
                 />
               </FormElementWrapper>
               <FormButtonWrapper
-                onClick={() => console.log(userEditFormik.values)}
+                onClick={() => onSubmit(userEditFormik.values)}
               >
                 <GDSCButton
                   text={'저장하기'}
@@ -190,4 +220,4 @@ const ProfileEdit = () => {
   );
 };
 
-export default ProfileEdit;
+export default memo(ProfileEdit);

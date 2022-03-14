@@ -54,6 +54,12 @@ export const studentIDSchema = {
 };
 export const gitEmailSchema = {
   gitEmail: Yup.string().matches(
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/,
+    '이메일 형식으로 작성해주세요',
+  ),
+};
+export const gitLinkSchema = {
+  gitEmail: Yup.string().matches(
     /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
     'github.com 형식으로 작성해주세요',
   ),
@@ -67,15 +73,11 @@ export const urlsSchema = {
 
 export const profileEditSchema = Yup.object().shape({
   ...nameSchema,
-  ...nicknameSchema,
   ...introduceSchema,
   ...hashTagSchema,
   ...phoneNumberSchema,
-  ...emailSchema,
   ...nicknameSchema,
   ...majorSchema,
-  ...introduceSchema,
-  ...studentIDSchema,
   ...gitEmailSchema,
   ...urlsSchema,
 });

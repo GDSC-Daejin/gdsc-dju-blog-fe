@@ -37,6 +37,8 @@ import Setting from '../../../Images/Setting';
 import PageBar from '../../../components/common/PageBar';
 import API from '../../../api/index';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../../store/user';
 
 const hashTage = [
   'React',
@@ -61,6 +63,7 @@ const BlogHome = () => {
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
   const { userData } = useGetUserData();
+
   const pagination = () => {
     return postListData.slice(page === 0 ? 0 : page * 10 + 1, (page + 1) * 10);
   };
@@ -100,7 +103,7 @@ const BlogHome = () => {
               <ProfileDetailWrapper>
                 <Role>{userData.role}</Role>
                 <BlogNameWrapper>
-                  <BlogName>{userData.memberInfo.nickName}</BlogName>
+                  <BlogName>{userData.memberInfo.nickname}</BlogName>
                   <BlogNamePosition
                     color={positionColor(userData.memberInfo.positionType)}
                   >
@@ -112,11 +115,7 @@ const BlogHome = () => {
                     <Setting />
                   </SettingIconWrapper>
                 </BlogNameWrapper>
-                <IntroduceText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Pellentesque euismod, ipsum eget sagittis consectetur, nisl
-                  urna aliquet nunc.
-                </IntroduceText>
+                <IntroduceText>{userData.memberInfo.introduce}</IntroduceText>
                 <HashTageSection>
                   {hashTageSpreader(userData.memberInfo.hashTag).map(
                     (tag, id) => (

@@ -17,7 +17,7 @@ export interface Iprops {
   file?: boolean;
   onChange?: (e: any) => void;
   type?: string;
-  value?: string;
+  value?: string | null;
   checkError?: (props: boolean) => void;
   disabled?: boolean;
 }
@@ -26,7 +26,7 @@ const TextInput = (props: Iprops) => {
   const errorToggle = !!(error && touched);
   return (
     <>
-      <StyledInputWrapper error={errorToggle}>
+      <StyledInputWrapper error={errorToggle} disabled={!disabled}>
         <StyledInput
           className={'formInput'}
           name={name}

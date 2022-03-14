@@ -13,9 +13,9 @@ export const UserState = {
   email: '',
   major: '',
   studentID: '',
-  position: '',
+  positionType: '',
   gitEmail: '',
-  memberPortfolioUrls: ['', '', ''],
+  memberPortfolioUrls: [{ id: 0, webUrl: '' }],
 };
 export const userState = atom({
   key: USER,

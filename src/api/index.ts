@@ -21,7 +21,7 @@ export class Api {
         localStorage.setItem('token', res.data.body.token);
       });
   };
-  updateUserData = (userInfoData: userInfoDataType) => {
+  updateUserData = (userInfoData: userDataType) => {
     return axios.put(`${this.API}/api/member/v1/update/me`, userInfoData, {
       headers: this.Header,
     });
