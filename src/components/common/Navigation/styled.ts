@@ -36,6 +36,7 @@ export const BlogWrapper = styled.div`
 export const MenuBars = styled.a`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 export const DeskNavigationWrapper = styled.div`
   width: 100%;
@@ -111,9 +112,6 @@ export const Search = styled.input`
     outline: 1px solid #d1d6db;
   }
 `;
-export const TitleText = styled.span`
-  margin-left: 16px;
-`;
 export const MobileNavigationWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
@@ -140,35 +138,4 @@ export const MobileIconWrapper = styled.div`
   & svg path {
     fill: #8b95a1;
   }
-`;
-/* 여기서부터 받아온 리액트 아이콘이다 */
-
-export const NavText = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 8px 0px 8px 16px;
-  list-style: none;
-  height: 60px;
-  a {
-    text-decoration: none;
-    color: #f5f5f5;
-    font-size: 18px;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    border-radius: 4px;
-  }
-  &:hover {
-    background-color: #1a83ff;
-  }
-`;
-export const NavMenuItems = styled.ul`
-  width: 100%;
-`;
-
-export const Sidebar = styled.span`
-  margin-left: 16px;
 `;

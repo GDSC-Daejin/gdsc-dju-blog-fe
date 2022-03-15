@@ -45,7 +45,7 @@ export const SideBar = () => {
               }}
               exit={{
                 width: 0,
-                transition: { delay: 0.7, duration: 0.3 },
+                transition: { delay: 0.1, duration: 0.1 },
               }}
             >
               <SideBarContainer
@@ -60,6 +60,7 @@ export const SideBar = () => {
                     href={to}
                     whileHover={{ scale: 1.1 }}
                     variants={itemVariants}
+                    transition={{ delay: 0.5, duration: 0.1 }}
                   >
                     {name}
                   </SideBarText>

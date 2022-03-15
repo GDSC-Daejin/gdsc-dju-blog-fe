@@ -10,9 +10,9 @@ export const SideBarWrapper = styled.div`
   height: 100vh;
 `;
 export const SideBarInner = styled(motion.aside)`
-  background-color: #ffffff;
   width: 18.75rem;
   height: 100vh;
+  background-color: #ffffff;
 `;
 export const SideBarContainer = styled(motion.div)`
   margin: 4.5rem 1.4rem;
@@ -23,29 +23,31 @@ export const SidebarBtnWrapper = styled.div`
   left: 60px;
 `;
 export const SideBarText = styled(motion.a)`
+  display: block;
+  margin: 20px;
   color: black;
   text-decoration: none;
   font-size: 1.75rem;
   font-weight: 600;
-  display: block;
-  margin: 20px;
 `;
 export const SideBarBtnInner = styled.div`
-  cursor: pointer;
   border: none;
   background-color: #ffffff;
+  cursor: pointer;
 `;
 export const GrayBox = styled.div<{ open: boolean }>`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1001;
-  background-color: #191f18;
+  display: none;
   ${(props: any) =>
     props.open
       ? css`
+          display: flex;
+          position: fixed;
+          width: 100vw;
+          height: 100vh;
+          background-color: #191f18;
+          right: 0px;
+          top: 0px;
+          z-index: 1001;
           opacity: 0.35;
         `
       : css`

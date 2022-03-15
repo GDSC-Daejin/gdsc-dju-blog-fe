@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { SidebarData } from '../SidebarData';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
   NavInner,
   Logo,
   BlogText,
   MenuBars,
-  TitleText,
   BlogWrapper,
   Univ,
   BlogBanner,
@@ -20,8 +19,6 @@ import {
   MobileIconWrapper,
   MobileNavigationWrapper,
   DeskNavigationWrapper,
-  NavMenuItems,
-  Sidebar,
   BeforeMargin,
 } from './styled';
 /* 아이콘 컬러 전체 변경 기능 */
@@ -33,8 +30,7 @@ import SideBar from '../SideBar';
 import MenuToggleIcon from '../MenuToggleIcon';
 
 function Navigation() {
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
+  const navigate = useNavigate();
   return (
     <>
       {/* 아이콘 컬러 전체 변경 기능 */}
@@ -46,7 +42,7 @@ function Navigation() {
               <BlogWrapper>
                 <SideBar />
                 <BeforeMargin />
-                <MenuBars href="/">
+                <MenuBars onClick={() => navigate('/')}>
                   <Logo>
                     <GdscLogo />
                   </Logo>
@@ -74,7 +70,7 @@ function Navigation() {
             {/* Mobile Navigation */}
             <MobileNavigationWrapper>
               <MenuToggleIcon />
-              <MenuBars href="/">
+              <MenuBars onClick={() => navigate('/')}>
                 <GdscLogoWrapper>
                   <GdscLogo />
                 </GdscLogoWrapper>
@@ -86,22 +82,6 @@ function Navigation() {
           </NavInner>
         </NavWrapper>
       </NavDesign>
-      {/* 사이드바 */}
-      <Sidebar>
-        <NavMenuItems onClick={showSidebar}>
-          {/* SidebarData를 순서대로 담기*/}
-          {SidebarData.map((item, index) => {
-            return (
-              <li key={index} className={item.cName}>
-                <Link to={item.path}>
-                  {item.icon}
-                  <TitleText>{item.title}</TitleText>
-                </Link>
-              </li>
-            );
-          })}
-        </NavMenuItems>
-      </Sidebar>
     </>
   );
 }
