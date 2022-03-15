@@ -12,6 +12,7 @@ import {
   BlogCardTitle,
   BlogCardThumbnail,
   BlogCardTag,
+  BlogCardTagWrapper,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
@@ -29,6 +30,8 @@ const PostTextVariants = {
   },
 };
 
+const CardTag: string[] = ['darkmode', 'darkmode'];
+
 const BlogCard = () => {
   // const [isHovered, setIsHovered] = useState(false);
   const [BlogCardBottomText, IsHovered] = useHover(BottomText);
@@ -36,9 +39,13 @@ const BlogCard = () => {
     <AnimateSharedLayout>
       <BlogCardInner>
         <BlogCardThumbnail src={BlogCardImage} />
-        <BlogCardTag>
-          <span>#123</span>
-        </BlogCardTag>
+        <BlogCardTagWrapper IsHovered={IsHovered}>
+          {CardTag.map((data: string, index: number) => (
+            <BlogCardTag key={index}>
+              <span>#{data}</span>
+            </BlogCardTag>
+          ))}
+        </BlogCardTagWrapper>
         {BlogCardBottomText}
       </BlogCardInner>
     </AnimateSharedLayout>

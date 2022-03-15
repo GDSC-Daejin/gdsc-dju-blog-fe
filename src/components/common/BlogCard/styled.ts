@@ -17,10 +17,16 @@ export const BlogCardThumbnail = styled.img`
   border-radius: 13px;
 `;
 
-export const BlogCardTag = styled.div`
+export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
+  display: flex;
   position: absolute;
-  bottom: 103px;
+  bottom: ${(props) => (props.IsHovered ? '290px' : '103px')};
+  transition: all 0.3s ease;
   left: 20px;
+  gap: 8px;
+`;
+
+export const BlogCardTag = styled.div`
   width: 73px;
   height: 17px;
   padding: 1px 10px;
