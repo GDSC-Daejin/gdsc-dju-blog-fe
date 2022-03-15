@@ -18,7 +18,7 @@ import SettingIcon from '../../../../Images/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
 import { SideBarData } from '../../SideBarData';
 
-const itemVariants = {
+const opacityVariants = {
   closed: {
     opacity: 0,
   },
@@ -58,7 +58,7 @@ const SideBarLogin = () => {
           key={id}
           href={to}
           whileHover={{ scale: 1.1 }}
-          variants={itemVariants}
+          variants={opacityVariants}
           transition={{ delay: 0.5, duration: 0.1 }}
         >
           {name}

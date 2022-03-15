@@ -109,13 +109,33 @@ export const LogoutButtonWrapper = styled.div`
 `;
 export const GdscSideLogoWrapper = styled.div`
   display: flex;
+  margin-top: 150px;
+  padding-bottom: 25px;
 `;
 export const GdscSideUnivWrapper = styled.div`
   display: flex;
+  width: 100px;
+  padding-bottom: 10px;
+  & svg {
+    height: 18px;
+  }
 `;
 export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
+  padding-bottom: 8px;
 `;
 export const GoogleLoaderWrapper = styled.div`
   display: flex;
+  & div {
+    position: absolute;
+    width: 34px;
+    height: 32px;
+    top: 1px;
+    left: 20px;
+  }
+`;
+export const GoogleButtonWrapper = styled.div`
+  display: flex;
+  position: relative;
+  padding-bottom: 80px;
 `;

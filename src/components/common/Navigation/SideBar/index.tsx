@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import MenuToggleIcon from '../../MenuToggleIcon';
 import SideBarLogin from '../SideBarLogin';
+import SideBarLogout from '../SideBarLogout';
 
 const DeskAnimate = {
   width: 486,
@@ -44,7 +45,10 @@ export const SideBar = () => {
                 exit="closed"
               >
                 {/* Login version */}
-                <SideBarDesign>{/*<SideBarLogin />*/}</SideBarDesign>
+                <SideBarDesign>
+                  <SideBarLogout />
+                  {/*<SideBarLogin />*/}
+                </SideBarDesign>
               </SideBarContainer>
             </SideBarInner>
           )}
