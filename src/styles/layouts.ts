@@ -4,11 +4,10 @@ export const LayoutContainer = styled.div`
   position: relative;
   z-index: 0;
   display: flex;
-  align-items: center;
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  max-width: 1440px;
+  max-width: 1200px;
   margin: auto;
   min-width: 320px;
 `;

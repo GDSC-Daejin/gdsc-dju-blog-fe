@@ -3,7 +3,13 @@ import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
-import { CardSection, BlogCardWrapper, ButtonWrapper } from './styled';
+import {
+  MainContentWrapper,
+  CardSection,
+  BlogCardWrapper,
+  ButtonWrapper,
+  CardSectionBlur,
+} from './styled';
 
 function index() {
   const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -41,23 +47,26 @@ function index() {
 
   return (
     <LayoutContainer>
-      <CardSection
-        ref={scrollRef}
-        isDrag={isDrag}
-        onMouseDown={onDragStart}
-        onMouseMove={isDrag ? onDragMove : undefined}
-        onMouseUp={onDragEnd}
-        onMouseLeave={onDragEnd}
-      >
-        {Cards.map((CardData, index) => (
-          <BlogCardWrapper key={CardData}>
-            <BlogCard />
-          </BlogCardWrapper>
-        ))}
-      </CardSection>
-      <ButtonWrapper>
-        <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
-      </ButtonWrapper>
+      <MainContentWrapper>
+        <CardSection
+          ref={scrollRef}
+          isDrag={isDrag}
+          onMouseDown={onDragStart}
+          onMouseMove={isDrag ? onDragMove : undefined}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
+        >
+          {Cards.map((CardData, index) => (
+            <BlogCardWrapper key={CardData}>
+              <BlogCard />
+            </BlogCardWrapper>
+          ))}
+        </CardSection>
+        <ButtonWrapper>
+          <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
+        </ButtonWrapper>
+        <CardSectionBlur />
+      </MainContentWrapper>
     </LayoutContainer>
   );
 }

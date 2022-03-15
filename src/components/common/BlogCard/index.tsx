@@ -30,11 +30,11 @@ const PostTextVariants = {
   },
 };
 
-const CardTag: string[] = ['darkmode', 'darkmode'];
-
 const BlogCard = () => {
   // const [isHovered, setIsHovered] = useState(false);
   const [BlogCardBottomText, IsHovered] = useHover(BottomText);
+  const CardTag: string[] = ['darkmode', 'darkmode'];
+
   return (
     <AnimateSharedLayout>
       <BlogCardInner>

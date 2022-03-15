@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const MainBannerText = styled.div``;
+export const MainContentWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   position: relative;
@@ -36,12 +42,25 @@ export const BlogCardWrapper = styled(motion.div)`
 `;
 
 export const ButtonWrapper = styled.div`
+  position: absolute;
   display: flex;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  top: 862px;
-  button:nth-child(2) {
-    margin: 0px 16px;
-  }
+  gap: 16px;
+  left: 15px;
+  bottom: 0px;
+  margin-top: 3px;
+`;
+
+export const CardSectionBlur = styled.div`
+  position: absolute;
+  width: 150px;
+  height: 432px;
+  z-index: 2;
+  right: 0;
+  background: linear-gradient(
+    270.96deg,
+    #ffffff 13.01%,
+    rgba(255, 255, 255, 0.859167) 30.46%,
+    rgba(255, 255, 255, 0.386709) 58.16%,
+    rgba(255, 255, 255, 0) 89.38%
+  );
 `;

@@ -57,6 +57,7 @@ export const BlogCardBottomBox = styled(motion.div)`
   box-sizing: border-box;
   background: #fff;
   padding: 12px 20px;
+  cursor: pointer;
 `;
 export const BlogCardTitle = styled(motion.h6)<{ isHovered: boolean }>`
   font-size: 2.4rem;
