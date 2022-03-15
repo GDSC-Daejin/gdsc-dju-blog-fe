@@ -1260,6 +1260,11 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
+"@giscus/react@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@giscus/react/-/react-1.1.2.tgz#c97f06aab1272c0fbe567c69ebffe3bad7206e7a"
+  integrity sha512-htSAAiTtoHTRE8GqSSkWmT+Iq7LJhtqSmr+HjEC1cXlNd1WeLVZXjnuiIj7+L8DOUnAdfh+1FClN304FVxIcsQ==
+
 "@google-cloud/paginator@^3.0.6":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/@google-cloud/paginator/-/paginator-3.0.6.tgz#02a59dccd348d515069779a4f77a4a4fd15594da"

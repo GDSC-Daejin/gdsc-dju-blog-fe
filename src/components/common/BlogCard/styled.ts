@@ -95,7 +95,7 @@ export const BlogCardSubText = styled.div<{
   subText?: boolean;
   bold?: boolean;
 }>`
-  font-size: ${(props) => props.theme.fontSize.p};
+  font-size: ${(props) => props.theme.fontSize.body1};
   ${(props) =>
     props.subText &&
     css`
