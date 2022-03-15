@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHover } from 'react-use';
 import BlogCardImage from '../../../Images/unknown.png';
 import {
