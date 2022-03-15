@@ -26,7 +26,7 @@ import GdscBlogLogo from '../../../Images/GdscBlogLogo';
 import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
 import GdscLogo from '../../../Images/GdscLogo';
 import MagnifyingGlassIcon from '../../../Images/MagnifyingGlassIcon';
-import SideBar from '../SideBar';
+import SideBar from './SideBar';
 import MenuToggleIcon from '../MenuToggleIcon';
 
 function Navigation() {
