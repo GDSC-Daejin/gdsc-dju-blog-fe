@@ -7,6 +7,7 @@ export const MainContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
