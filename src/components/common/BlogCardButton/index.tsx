@@ -19,18 +19,19 @@ export const BlogCardScrollButton = ({
       behavior: 'smooth',
     });
   };
+  const CalcScrollBtnActive = (BtnActiveNumber: number) => {
+    return ScrollX >= (SectionScrollWidth * BtnActiveNumber) / 2 &&
+      ScrollX < (SectionScrollWidth * (BtnActiveNumber + 1)) / 2
+      ? true
+      : false;
+  };
 
   return (
     <>
       {ButtonNumber.map((BtnNumber: number, index: number) => (
         <BlogCardButton
           key={index}
-          ButtonActive={
-            ScrollX >= (SectionScrollWidth * BtnNumber) / 2 &&
-            ScrollX < (SectionScrollWidth * (BtnNumber + 1)) / 2
-              ? true
-              : false
-          }
+          ButtonActive={CalcScrollBtnActive(BtnNumber)}
           onClick={() => scrollMove(BtnNumber)}
         />
       ))}

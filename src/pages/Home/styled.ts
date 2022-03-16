@@ -14,7 +14,7 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
-  width: 1200px;
+  width: 1195px;
   height: 400px;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
