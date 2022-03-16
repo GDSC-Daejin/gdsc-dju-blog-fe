@@ -7,6 +7,7 @@ export const MainContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
@@ -55,7 +56,7 @@ export const CardSectionBlur = styled.div`
   width: 150px;
   height: 432px;
   z-index: 2;
-  right: 0;
+  right: 0px;
   background: linear-gradient(
     270.96deg,
     #ffffff 13.01%,
