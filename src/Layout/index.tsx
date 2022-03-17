@@ -12,6 +12,7 @@ const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
 const Post = lazy(() => import('../pages/Post'));
 const SignUp = lazy(() => import('../pages/SignUp'));
+const OauthRedirectPage = lazy(() => import('../pages/OauthRedirectPage'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -33,6 +34,10 @@ const Layout = () => {
               }
             />
             <Route path={'/signup'} element={<SignUp />} />
+            <Route
+              path={'/oauthredirectpage'}
+              element={<OauthRedirectPage />}
+            />
           </Routes>
         </Suspense>
       </AnimatePresence>
