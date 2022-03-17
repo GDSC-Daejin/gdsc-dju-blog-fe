@@ -52,6 +52,14 @@ export const BlogText = styled.div`
 export const BlogBanner = styled.div`
   display: flex;
   padding-bottom: 20px;
+  @media screen and (max-width: 700px) {
+    & svg {
+      width: 100px;
+    }
+  }
+  @media screen and (max-width: 520px) {
+    display: none;
+  }
 `;
 export const Univ = styled.div`
   width: 52px;
@@ -59,12 +67,18 @@ export const Univ = styled.div`
   padding-bottom: 5px;
   display: flex;
   margin-left: 5px;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+  @media screen and (max-width: 520px) {
     display: none;
   }
 `;
 export const Logo = styled.div`
   margin-right: 20px;
+  @media screen and (max-width: 520px) {
+    & svg {
+      width: 40px;
+      height: 20px;
+    }
+  }
 `;
 export const BeforeMargin = styled.div`
   display: flex;
@@ -82,6 +96,13 @@ export const IconWrapper = styled.div`
   right: 20px;
   top: 12px;
   height: 18px;
+  @media screen and (max-width: 630px) {
+    & svg {
+      position: absolute;
+      top: -20px;
+      right: 0px;
+    }
+  }
   & svg {
     cursor: pointer;
     & hover svg path {
@@ -99,6 +120,18 @@ export const Search = styled.input`
   height: 38px;
   border-radius: 50px;
   border: 1px solid #d1d6db;
+  @media screen and (max-width:1000px)
+  {
+    width: 280px;
+  }
+  @media screen and (max-width:780px)
+  {
+    width: 250px;
+  }
+  @media screen and (max-width:630px)
+  {
+    display: none;
+  }
   &::placeholder {
     padding-left: 20px;
     color: #d1d6db;
@@ -110,7 +143,6 @@ export const Search = styled.input`
     padding-left: 20px;
     width: 462px;
     outline: 1px solid #d1d6db;
-  }
 `;
 export const MobileNavigationWrapper = styled.div`
   align-items: center;
