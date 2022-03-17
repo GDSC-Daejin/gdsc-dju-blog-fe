@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlogCardButton } from './styled';
+// import { BlogCardButton } from './styled';
 
 interface IBlogCardButton {
   ScrollX: number;
@@ -28,13 +28,13 @@ export const BlogCardScrollButton = ({
 
   return (
     <>
-      {ButtonNumber.map((BtnNumber: number, index: number) => (
+      {/* {ButtonNumber.map((BtnNumber: number, index: number) => (
         <BlogCardButton
           key={index}
           ButtonActive={CalcScrollBtnActive(BtnNumber)}
           onClick={() => scrollMove(BtnNumber)}
         />
-      ))}
+      ))} */}
     </>
   );
 };
