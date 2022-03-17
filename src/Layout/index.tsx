@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
 const Post = lazy(() => import('../pages/Post'));
+const SignUp = lazy(() => import('../pages/SignUp'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -31,6 +32,7 @@ const Layout = () => {
                 </PrivateRoute>
               }
             />
+            <Route path={'/signup'} element={<SignUp />} />
           </Routes>
         </Suspense>
       </AnimatePresence>
