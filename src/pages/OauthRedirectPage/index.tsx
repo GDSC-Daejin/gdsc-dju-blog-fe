@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
 
 const OauthRedirectPage = () => {
+  //Oauth redirecturl
   useEffect(() => {
     async function querystring() {
       console.log('query string confirm');
@@ -9,7 +10,7 @@ const OauthRedirectPage = () => {
     }
     querystring();
   }, []);
-  return <div></div>;
+  return <></>;
 };
 
 export default OauthRedirectPage;
