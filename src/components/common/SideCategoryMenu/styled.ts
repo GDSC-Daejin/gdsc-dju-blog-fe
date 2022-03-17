@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
-export const CategoryText = styled.div<{ active?: boolean }>`
+export const CategoryText = styled(motion.div)<{ active?: boolean }>`
   font-size: ${(props) => props.theme.fontSize.h5};
   font-weight: normal;
   font-family: 'Google Sans', sans-serif;
@@ -10,14 +10,13 @@ export const CategoryText = styled.div<{ active?: boolean }>`
     css`
       color: ${(props) => props.theme.color.grey900};
     `}
-  padding: 2px 0;
+  padding-bottom: 8px;
 `;
 export const CategoryTextWrapper = styled(motion.div)`
   cursor: pointer;
   color: ${(props) => props.theme.color.grey300};
   position: relative;
   display: flex;
-  flex-direction: column;
   border-bottom: 1px solid #fff;
   margin-bottom: 34px;
 `;

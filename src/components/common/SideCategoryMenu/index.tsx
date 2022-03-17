@@ -25,7 +25,6 @@ const SideCategoryMenu = (props: Iprops) => {
         delay: 0.1,
         duration: 0.3,
       },
-      borderBottom: '1px solid #000',
     },
     isUnActive: {
       translateY: 0,
@@ -41,6 +40,22 @@ const SideCategoryMenu = (props: Iprops) => {
     isUnActive: {
       x: -20,
       opacity: 0,
+    },
+  };
+  const hoverTextMotion = {
+    isActive: {
+      transition: {
+        delay: 0.1,
+        duration: 0.3,
+      },
+      borderBottom: '1px solid #000',
+    },
+    isUnActive: {
+      transition: {
+        delay: 0.1,
+        duration: 0.3,
+      },
+      borderBottom: '1px solid #fff',
     },
   };
   return (
@@ -60,11 +75,16 @@ const SideCategoryMenu = (props: Iprops) => {
           >
             <CategoryCircleWrapper
               variants={circleMotion}
-              animate={type == categoryName[id] ? 'isActive' : 'isUnActive'}
+              animate={type === categoryName[id] ? 'isActive' : 'isUnActive'}
             >
               <CategoryCircle color={positionColor(categoryName[id])} />
             </CategoryCircleWrapper>
-            <CategoryText>{item}</CategoryText>
+            <CategoryText
+              variants={hoverTextMotion}
+              animate={type === categoryName[id] ? 'isActive' : 'isUnActive'}
+            >
+              {item}
+            </CategoryText>
           </CategoryTextWrapper>
         ))}
       </CategoryMenuWrapper>
