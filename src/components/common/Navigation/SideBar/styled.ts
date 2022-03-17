@@ -128,14 +128,18 @@ export const GoogleLoaderWrapper = styled.div`
   display: flex;
   & div {
     position: absolute;
+    border-radius: 5px;
     width: 34px;
     height: 32px;
     top: 1px;
-    left: 20px;
+    left: 10px;
   }
 `;
 export const GoogleButtonWrapper = styled.div`
   display: flex;
   position: relative;
   padding-bottom: 80px;
+`;
+export const SideMenuWrapper = styled.div`
+  display: flex;
 `;

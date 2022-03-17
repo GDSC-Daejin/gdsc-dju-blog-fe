@@ -9,21 +9,12 @@ import {
   ProfileJobPosition,
   ProfileName,
   SettingIconWrapper,
-  SideBarText,
   WrittingButtonWrapper,
 } from '../SideBar/styled';
 import ProfileImage from '../../ProfileImage';
 import MockProfile from '../../../../Images/MockProfile.png';
 import SettingIcon from '../../../../Images/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
-import { SideBarData } from '../../SideBarData';
-
-const opacityVariants = {
-  closed: {
-    opacity: 0,
-  },
-  open: { opacity: 1 },
-};
 
 const SideBarLogin = () => {
   return (
@@ -52,18 +43,6 @@ const SideBarLogin = () => {
           <GDSCButton text="로그아웃" disable={true} />
         </LogoutButtonWrapper>
       </BottomButtonWrapper>
-
-      {SideBarData.map(({ name, to, id }) => (
-        <SideBarText
-          key={id}
-          href={to}
-          whileHover={{ scale: 1.1 }}
-          variants={opacityVariants}
-          transition={{ delay: 0.5, duration: 0.1 }}
-        >
-          {name}
-        </SideBarText>
-      ))}
     </>
   );
 };

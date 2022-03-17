@@ -6,12 +6,15 @@ import {
   SideBarBtnInner,
   GrayBox,
   SideBarDesign,
+  SideMenuWrapper,
 } from './styled';
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import MenuToggleIcon from '../../MenuToggleIcon';
 import SideBarLogin from '../SideBarLogin';
 import SideBarLogout from '../SideBarLogout';
+import SideCategoryMenu from '../../SideCategoryMenu';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 const DeskAnimate = {
   width: 486,
@@ -20,6 +23,13 @@ const DeskAnimate = {
 export const SideBar = () => {
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(true);
+  const { user_name } = useParams<'user_name'>();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const typeParams = searchParams.get('type');
+  const type = typeParams ? typeParams : '/';
+  const pageParams = searchParams.get('page');
+  const page = pageParams ? parseInt(pageParams) : 1;
 
   const onClickHandler = () => {
     setOpen(true);
@@ -48,6 +58,14 @@ export const SideBar = () => {
                 <SideBarDesign>
                   <SideBarLogout />
                   {/*<SideBarLogin />*/}
+                  <SideMenuWrapper>
+                    <SideCategoryMenu
+                      type={type}
+                      onClick={(url) =>
+                        navigate(`/${user_name}?type=${url}&page=${page}`)
+                      }
+                    />
+                  </SideMenuWrapper>
                 </SideBarDesign>
               </SideBarContainer>
             </SideBarInner>
