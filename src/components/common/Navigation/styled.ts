@@ -33,7 +33,7 @@ export const BlogWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const MenuBars = styled.a`
+export const LogoWrapper = styled.a`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -71,7 +71,7 @@ export const Univ = styled.div`
     display: none;
   }
 `;
-export const Logo = styled.div`
+export const LogoInner = styled.div`
   margin-right: 20px;
   @media screen and (max-width: 520px) {
     & svg {
@@ -90,7 +90,7 @@ export const NavMargin = styled.div`
   flex-shrink: 1;
   min-width: 20px;
 `;
-export const IconWrapper = styled.div`
+export const VectorWrapper = styled.div`
   display: flex;
   position: absolute;
   right: 20px;
@@ -161,7 +161,7 @@ export const GdscLogoWrapper = styled.div`
     height: 20px;
   }
 `;
-export const MobileIconWrapper = styled.div`
+export const MobileVectorWrapper = styled.div`
   display: flex;
   width: 20px;
   & svg {

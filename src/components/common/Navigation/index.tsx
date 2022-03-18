@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   NavInner,
-  Logo,
+  LogoInner,
   BlogText,
-  MenuBars,
+  LogoWrapper,
   BlogWrapper,
   Univ,
   BlogBanner,
@@ -14,9 +14,9 @@ import {
   NavWrapper,
   SearchWrapper,
   NavMargin,
-  IconWrapper,
+  VectorWrapper,
   GdscLogoWrapper,
-  MobileIconWrapper,
+  MobileVectorWrapper,
   MobileNavigationWrapper,
   DeskNavigationWrapper,
   BeforeMargin,
@@ -25,9 +25,9 @@ import {
 import GdscBlogLogo from '../../../Images/GdscBlogLogo';
 import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
 import GdscLogo from '../../../Images/GdscLogo';
-import MagnifyingGlassIcon from '../../../Images/MagnifyingGlassIcon';
-import SideBar from './SideBar';
+import SideBar from '../SideBar';
 import MenuToggleIcon from '../MenuToggleIcon';
+import Vector from '../../../Images/Vector';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -35,26 +35,20 @@ function Navigation() {
     <>
       {/* 아이콘 컬러 전체 변경 기능 */}
       {/*Desk Navigation */}
+      <SideBar />
       <NavDesign>
         <NavWrapper>
           <NavInner>
             <DeskNavigationWrapper>
               <BlogWrapper>
-                <SideBar />
                 <BeforeMargin />
-                <MenuBars onClick={() => navigate('/')}>
-                  <Logo>
+                <LogoWrapper onClick={() => navigate('/')}>
+                  <LogoInner>
                     <GdscLogo />
-                  </Logo>
-                  <BlogText>
-                    <Univ>
-                      <DaejinUnivLogo />
-                    </Univ>
-                    <BlogBanner>
-                      <GdscBlogLogo />
-                    </BlogBanner>
-                  </BlogText>
-                </MenuBars>
+                    <DaejinUnivLogo />
+                    <GdscBlogLogo />
+                  </LogoInner>
+                </LogoWrapper>
               </BlogWrapper>
               <NavMargin />
               <SearchWrapper>
@@ -62,22 +56,22 @@ function Navigation() {
                   type="text"
                   placeholder="궁금한 정보나 계정을 입력해주세요"
                 />
-                <IconWrapper>
-                  <MagnifyingGlassIcon />
-                </IconWrapper>
+                <VectorWrapper>
+                  <Vector />
+                </VectorWrapper>
               </SearchWrapper>
             </DeskNavigationWrapper>
             {/* Mobile Navigation */}
             <MobileNavigationWrapper>
               <MenuToggleIcon />
-              <MenuBars onClick={() => navigate('/')}>
+              <LogoWrapper onClick={() => navigate('/')}>
                 <GdscLogoWrapper>
                   <GdscLogo />
                 </GdscLogoWrapper>
-              </MenuBars>
-              <MobileIconWrapper>
-                <MagnifyingGlassIcon />
-              </MobileIconWrapper>
+              </LogoWrapper>
+              <MobileVectorWrapper>
+                <Vector />
+              </MobileVectorWrapper>
             </MobileNavigationWrapper>
           </NavInner>
         </NavWrapper>

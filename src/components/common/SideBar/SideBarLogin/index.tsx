@@ -10,7 +10,7 @@ import {
   ProfileName,
   SettingIconWrapper,
   WrittingButtonWrapper,
-} from '../SideBar/styled';
+} from '../styled';
 import ProfileImage from '../../ProfileImage';
 import MockProfile from '../../../../Images/MockProfile.png';
 import SettingIcon from '../../../../Images/SettingIcon';

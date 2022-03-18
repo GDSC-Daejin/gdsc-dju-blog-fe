@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MagnifyingGlassIcon = () => {
+const Vector = () => {
   return (
     <svg
       className="icon"
@@ -18,4 +18,4 @@ const MagnifyingGlassIcon = () => {
   );
 };
 
-export default MagnifyingGlassIcon;
+export default Vector;

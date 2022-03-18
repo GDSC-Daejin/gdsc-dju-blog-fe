@@ -5,7 +5,7 @@ import {
   GdscSideBlogLogoWrapper,
   GoogleLoaderWrapper,
   GoogleButtonWrapper,
-} from '../SideBar/styled';
+} from '../styled';
 import GdscLogo from '../../../../Images/GdscLogo';
 import DaejinUnivLogo from '../../../../Images/DaejinUnivLogo';
 import GdscBlogLogo from '../../../../Images/GdscBlogLogo';

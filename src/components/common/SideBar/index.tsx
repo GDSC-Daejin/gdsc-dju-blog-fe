@@ -10,10 +10,10 @@ import {
 } from './styled';
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import MenuToggleIcon from '../../MenuToggleIcon';
-import SideBarLogin from '../SideBarLogin';
-import SideBarLogout from '../SideBarLogout';
-import SideCategoryMenu from '../../SideCategoryMenu';
+import MenuToggleIcon from '../MenuToggleIcon';
+import SideBarLogin from './SideBarLogin';
+import SideBarLogout from './SideBarLogout';
+import SideCategoryMenu from '../SideCategoryMenu';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 const DeskAnimate = {
@@ -56,15 +56,10 @@ export const SideBar = () => {
               >
                 {/* Login version */}
                 <SideBarDesign>
-                  <SideBarLogout />
-                  {/*<SideBarLogin />*/}
+                  {/*<SideBarLogout />*/}
+                  <SideBarLogin />
                   <SideMenuWrapper>
-                    <SideCategoryMenu
-                      type={type}
-                      onClick={(url) =>
-                        navigate(`/${user_name}?type=${url}&page=${page}`)
-                      }
-                    />
+                    <SideCategoryMenu type={type} />
                   </SideMenuWrapper>
                 </SideBarDesign>
               </SideBarContainer>
