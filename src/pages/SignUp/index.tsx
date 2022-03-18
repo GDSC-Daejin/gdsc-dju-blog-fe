@@ -6,9 +6,13 @@ import {
   SignUpInputWrapper,
   SignUpInputLabel,
   SignUpInputBox,
+  SignUpErrorMessage,
   SignUpInputLabelCircle,
   SignUpInputLabelText,
+  SignUpSelecttBox,
+  SignUpButton,
 } from './styled';
+import { GDSCButton } from '../../components/common/Button';
 
 const SignUp = () => {
   const {
@@ -23,7 +27,7 @@ const SignUp = () => {
       <SignUpForm onSubmit={handleSubmit(onSubmit)}>
         <SignUpInputWrapper>
           <SignUpInputLabel>
-            <SignUpInputLabelText htmlFor="email">
+            <SignUpInputLabelText htmlFor="name">
               이름(실명)
             </SignUpInputLabelText>
             <SignUpInputLabelCircle />
@@ -32,10 +36,12 @@ const SignUp = () => {
             type="text"
             placeholder="김구글"
             {...register('name', {
-              required: true,
+              required: '필수 입력사항입니다',
             })}
           />
-          <span>{errors.email && errors.email.message}</span>
+          <SignUpErrorMessage>
+            {errors.name && errors.name.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
         <SignUpInputWrapper>
@@ -49,10 +55,12 @@ const SignUp = () => {
             type="text"
             placeholder="GDSC DJU 닉네임을 입력하세요."
             {...register('nickname', {
-              required: true,
+              required: '필수 입력사항입니다',
             })}
           />
-          <span>{errors.nickname && errors.nickname.message}</span>
+          <SignUpErrorMessage>
+            {errors.nickname && errors.nickname.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
         <SignUpInputWrapper>
@@ -66,10 +74,16 @@ const SignUp = () => {
             type="tel"
             placeholder="010-0000-0000"
             {...register('phone', {
-              required: true,
+              required: '필수 입력사항입니다',
+              pattern: {
+                value: /^\d{3}-\d{3,4}-\d{4}$/,
+                message: '010-0000-0000 형식을 맞춰주세요',
+              },
             })}
           />
-          <span>{errors.phone && errors.phone.message}</span>
+          <SignUpErrorMessage>
+            {errors.phone && errors.phone.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
         <SignUpInputWrapper>
@@ -81,14 +95,16 @@ const SignUp = () => {
             type="email"
             placeholder="GDSC@gmail.com"
             {...register('email', {
-              required: true,
+              required: '필수 입력사항입니다',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3,}$/i,
                 message: 'invalid email address',
               },
             })}
           />
-          <span>{errors.email && errors.email.message}</span>
+          <SignUpErrorMessage>
+            {errors.email && errors.email.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
         <SignUpInputWrapper>
@@ -102,10 +118,12 @@ const SignUp = () => {
             type="text"
             placeholder="소속 되어있는 학과를 입력하세요."
             {...register('department', {
-              required: true,
+              required: '필수 입력사항입니다',
             })}
           />
-          <span>{errors.email && errors.email.message}</span>
+          <SignUpErrorMessage>
+            {errors.department && errors.department.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
         <SignUpInputWrapper>
@@ -119,11 +137,14 @@ const SignUp = () => {
             type="text"
             placeholder="20XXXXXX"
             {...register('studentNum', {
-              required: true,
+              required: '필수 입력사항입니다',
             })}
           />
-          <span>{errors.email && errors.email.message}</span>
+          <SignUpErrorMessage>
+            {errors.studentNum && errors.studentNum.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
+
         <SignUpInputWrapper>
           <SignUpInputLabel>
             <SignUpInputLabelText htmlFor="position">
@@ -131,14 +152,21 @@ const SignUp = () => {
             </SignUpInputLabelText>
             <SignUpInputLabelCircle />
           </SignUpInputLabel>
-          <select {...register('position')}>
-            <option value="" disabled>
-              Select...
+          <SignUpSelecttBox
+            {...(register('position'),
+            {
+              required: true,
+            })}
+          >
+            <option value="" disabled selected>
+              선택
             </option>
             <option value="A">Option A</option>
             <option value="B">Option B</option>
-          </select>
-          <span>{errors.email && errors.email.message}</span>
+          </SignUpSelecttBox>
+          <SignUpErrorMessage>
+            {errors.position && errors.position.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
         <SignUpInputWrapper>
@@ -149,10 +177,12 @@ const SignUp = () => {
             type="url"
             placeholder="깃허브 주소를 입력하세요"
             {...register('github', {
-              required: true,
+              required: '필수 입력사항입니다',
             })}
           />
-          <span>{errors.email && errors.email.message}</span>
+          <SignUpErrorMessage>
+            {errors.github && errors.github.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
         <SignUpInputWrapper>
@@ -163,13 +193,16 @@ const SignUp = () => {
             type="text"
             placeholder="자신을 소개하는 글을 작성하세요."
             {...register('intro', {
-              required: true,
+              required: '필수 입력사항입니다',
             })}
           />
-          <span>{errors.email && errors.email.message}</span>
+          <SignUpErrorMessage>
+            {errors.intro && errors.intro.message}&nbsp;
+          </SignUpErrorMessage>
         </SignUpInputWrapper>
 
-        <button type="submit">가입하기</button>
+        <SignUpButton type="submit">가입하기</SignUpButton>
+        {/* <GDSCButton type="submit" text="가입하기" color="toss blue 200" /> */}
       </SignUpForm>
     </LayoutContainer>
   );
