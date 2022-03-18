@@ -176,9 +176,7 @@ const SignUp = () => {
           <SignUpInputBox
             type="url"
             placeholder="깃허브 주소를 입력하세요"
-            {...register('github', {
-              required: '필수 입력사항입니다',
-            })}
+            {...register('github')}
           />
           <SignUpErrorMessage>
             {errors.github && errors.github.message}&nbsp;
@@ -192,16 +190,16 @@ const SignUp = () => {
           <SignUpInputBox
             type="text"
             placeholder="자신을 소개하는 글을 작성하세요."
-            {...register('intro', {
-              required: '필수 입력사항입니다',
-            })}
+            {...register('intro')}
           />
           <SignUpErrorMessage>
             {errors.intro && errors.intro.message}&nbsp;
           </SignUpErrorMessage>
         </SignUpInputWrapper>
 
-        <SignUpButton type="submit">가입하기</SignUpButton>
+        <SignUpButton isValid={isValid} type="submit">
+          가입하기
+        </SignUpButton>
         {/* <GDSCButton type="submit" text="가입하기" color="toss blue 200" /> */}
       </SignUpForm>
     </LayoutContainer>

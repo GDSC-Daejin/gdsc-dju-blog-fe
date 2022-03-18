@@ -86,11 +86,12 @@ export const SignUpSelecttBox = styled.select`
   }
 `;
 
-export const SignUpButton = styled.button`
+export const SignUpButton = styled.button<{ isValid: boolean }>`
   align-content: flex-end;
   width: 111px;
   height: 36px;
-  background-color: ${(props) => props.theme.color.tossBlue200};
+  background-color: ${(props) =>
+    props.isValid ? '#4385F3' : props.theme.color.tossBlue200};
   color: #fff;
   border: 1px solid ${(props) => props.theme.color.grey200};
   box-sizing: border-box;
@@ -104,4 +105,5 @@ export const SignUpButton = styled.button`
   text-align: center;
   letter-spacing: -0.03em;
   align-self: flex-end;
+  cursor: ${(props) => (props.isValid ? 'pointer' : 'not-allowed')};
 `;
