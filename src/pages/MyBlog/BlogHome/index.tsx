@@ -35,6 +35,10 @@ import { postListData } from '../../../api/Mocks/postListData';
 import { useSearchParams } from 'react-router-dom';
 import Setting from '../../../Images/Setting';
 import PageBar from '../../../components/common/PageBar';
+import API from '../../../api/index';
+import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../../store/user';
 
 const hashTage = [
   'React',
@@ -58,6 +62,8 @@ const BlogHome = () => {
   const type = typeParams ? typeParams : 'all';
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
+  const { userData } = useGetUserData();
+
   const pagination = () => {
     return postListData.slice(page === 0 ? 0 : page * 10 + 1, (page + 1) * 10);
   };
@@ -71,76 +77,90 @@ const BlogHome = () => {
       navigate(`/${user_name}?type=${type}&page=${page}`);
     }
   };
+  const hashTageSpreader = (hashTages: string) => {
+    return hashTages.split(',');
+  };
   useEffect(() => {
     if (page || type) {
       navigate(`/${user_name}?type=all&page=0`);
     }
+    API.postForceLogin();
   }, []);
 
   return (
     <>
       <NavigationBlock />
-      <LayoutContainer>
-        <ContainerInner>
-          <ProfileWrapper>
-            <ProfileImageWrapper>
-              <ProfileImage image={MockProfile} position={'frontend'} />
-            </ProfileImageWrapper>
-            <ProfileDetailWrapper>
-              <Role>Core Member</Role>
-              <BlogNameWrapper>
-                <BlogName>Jason</BlogName>
-                <BlogNamePosition color={positionColor('frontend')}>
-                  &apos;s Blog
-                </BlogNamePosition>
-                <SettingIconWrapper>
-                  <Setting />
-                </SettingIconWrapper>
-              </BlogNameWrapper>
-              <IntroduceText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque euismod, ipsum eget sagittis consectetur, nisl urna
-                aliquet nunc.
-              </IntroduceText>
-              <HashTageSection>
-                {hashTage.map((tag, id) => (
-                  <HashTageWrapper key={id}>
-                    <HashTageDark text={tag} />
-                  </HashTageWrapper>
-                ))}
-              </HashTageSection>
-            </ProfileDetailWrapper>
-          </ProfileWrapper>
-          <TopMenuWrapper>
-            <CategoryMenu
-              type={type as string}
-              onClick={(url: string) =>
-                navigate(`/${user_name}?type=${url}&page=${page}`)
-              }
-            />
-            <ButtonWrapper>
-              <GDSCButton text={'스크랩'} />
-              <GDSCButton text={'글쓰기'} />
-            </ButtonWrapper>
-          </TopMenuWrapper>
-
-          <PostSectionWrapper>
-            {pagination().map((data, id) => (
-              <PostCardWrapper key={id}>
-                <PostCard
-                  title={data.post.title}
-                  date={data.post.uploadDate}
-                  content={data.post.content}
-                  hashTage={data.post.postHashTags}
+      {userData && (
+        <LayoutContainer>
+          <ContainerInner>
+            <ProfileWrapper>
+              <ProfileImageWrapper>
+                <ProfileImage
+                  image={MockProfile}
+                  position={userData.memberInfo.positionType.toLowerCase()}
                 />
-              </PostCardWrapper>
-            ))}
-          </PostSectionWrapper>
-          <PageBarSection>
-            <PageBar page={page} onClick={pageHandler} />
-          </PageBarSection>
-        </ContainerInner>
-      </LayoutContainer>
+              </ProfileImageWrapper>
+              <ProfileDetailWrapper>
+                <Role>{userData.role}</Role>
+                <BlogNameWrapper>
+                  <BlogName>{userData.memberInfo.nickname}</BlogName>
+                  <BlogNamePosition
+                    color={positionColor(userData.memberInfo.positionType)}
+                  >
+                    &apos;s Blog
+                  </BlogNamePosition>
+                  <SettingIconWrapper
+                    onClick={() => navigate(`/${user_name}/edit`)}
+                  >
+                    <Setting />
+                  </SettingIconWrapper>
+                </BlogNameWrapper>
+                <IntroduceText>{userData.memberInfo.introduce}</IntroduceText>
+                <HashTageSection>
+                  {hashTageSpreader(userData.memberInfo.hashTag).map(
+                    (tag, id) => (
+                      <HashTageWrapper key={id}>
+                        <HashTageDark text={tag} />
+                      </HashTageWrapper>
+                    ),
+                  )}
+                </HashTageSection>
+              </ProfileDetailWrapper>
+            </ProfileWrapper>
+            <TopMenuWrapper>
+              <CategoryMenu
+                type={type as string}
+                onClick={(url: string) =>
+                  navigate(`/${user_name}?type=${url}&page=${page}`)
+                }
+              />
+              <ButtonWrapper>
+                <GDSCButton
+                  text={'스크랩'}
+                  onClick={() => navigate(`${user_name}/likes`)}
+                />
+                <GDSCButton text={'글쓰기'} />
+              </ButtonWrapper>
+            </TopMenuWrapper>
+
+            <PostSectionWrapper>
+              {pagination().map((data, id) => (
+                <PostCardWrapper key={id}>
+                  <PostCard
+                    title={data.post.title}
+                    date={data.post.uploadDate}
+                    content={data.post.content}
+                    hashTage={data.post.postHashTags}
+                  />
+                </PostCardWrapper>
+              ))}
+            </PostSectionWrapper>
+            <PageBarSection>
+              <PageBar page={page} onClick={pageHandler} />
+            </PageBarSection>
+          </ContainerInner>
+        </LayoutContainer>
+      )}
     </>
   );
 };

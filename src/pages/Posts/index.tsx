@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 import { themeState } from '../../store/theme';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 
-const Post = () => {
+const Posts = () => {
   const [themeMode] = useRecoilState(themeState);
   return (
     <LayoutContainer>
@@ -23,4 +23,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default Posts;

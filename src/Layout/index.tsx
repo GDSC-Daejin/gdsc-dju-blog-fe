@@ -7,10 +7,12 @@ import { AnimatePresence } from 'framer-motion';
 
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
+import Category from '../pages/Category';
+import SearchResult from '../pages/SearchResult';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
-const Post = lazy(() => import('../pages/Post'));
+const Posts = lazy(() => import('../pages/Posts'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -18,22 +20,24 @@ const Layout = () => {
     <>
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
-        <Suspense fallback={<GoogleLoader background={false} />}>
-          <Routes>
-            <Route path={'/*'} element={<Home />} />
-            <Route path={'/:user_name/*'} element={<MyBlog />} />
-            <Route path={'/post'} element={<Post />} />
-            <Route
-              path={'/admin'}
-              element={
-                <PrivateRoute>
-                  <Post />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </Suspense>
       </AnimatePresence>
+      <Suspense fallback={<GoogleLoader background={false} />}>
+        <Routes>
+          <Route path={'/*'} element={<Home />} />
+          <Route path={'/:user_name/*'} element={<MyBlog />} />
+          <Route path={'/post'} element={<Posts />} />
+          <Route path={'/category'} element={<Category />} />
+          <Route path={'/search'} element={<SearchResult />} />
+          <Route
+            path={'/admin'}
+            element={
+              <PrivateRoute>
+                <Posts />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
       <Footer />
     </>
   );
