@@ -1,36 +1,47 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { LayoutContainer } from '../../styles/layouts';
-import { SignUpForm, SignUpInputBox } from './styled';
+import {
+  SignUpForm,
+  SignUpInputWrapper,
+  SignUpInputLabel,
+  SignUpInputBox,
+  SignUpInputLabelCircle,
+  SignUpInputLabelText,
+} from './styled';
 
 const SignUp = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, isValid },
+  } = useForm({ mode: 'onChange' });
   const onSubmit = (values: any) => console.log(values);
+  console.log(isValid);
+
   return (
     <LayoutContainer>
       <SignUpForm onSubmit={handleSubmit(onSubmit)}>
-        <SignUpInputBox
-          type="email"
-          placeholder="Email"
-          {...register('email', {
-            required: 'Required',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'invalid email address',
-            },
-          })}
-        />
-        {errors.email && errors.email.message}
-        <SignUpInputBox
-          {...register('username', {
-            validate: (value) => value !== 'admin' || 'Nice try!',
-          })}
-        />
-        {errors.username && errors.username.message}
+        <SignUpInputWrapper>
+          <SignUpInputLabel>
+            <SignUpInputLabelText htmlFor="email">
+              이름(실명)
+            </SignUpInputLabelText>
+            <SignUpInputLabelCircle />
+          </SignUpInputLabel>
+          <SignUpInputBox
+            type="email"
+            placeholder="Email"
+            {...register('email', {
+              required: '필수 입력란입니다.',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3,}$/i,
+                message: 'invalid email address',
+              },
+            })}
+          />
+          <span>{errors.email && errors.email.message}</span>
+        </SignUpInputWrapper>
         <button type="submit">가입하기</button>
       </SignUpForm>
     </LayoutContainer>
@@ -38,3 +49,12 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+{
+  /* <SignUpInputBox
+{...register('username', {
+  validate: (value) => value !== 'admin' || 'Nice try!',
+})}
+/>
+{errors.username && errors.username.message} */
+}
