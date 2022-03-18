@@ -17,6 +17,7 @@ export const SignUpInputWrapper = styled.div`
 
 export const SignUpErrorMessage = styled.span`
   position: absolute;
+  color: ${(props) => props.theme.color.tossRed};
   bottom: -20px;
   font-family: 'Noto Sans KR';
   font-style: normal;
