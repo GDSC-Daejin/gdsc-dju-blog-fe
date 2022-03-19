@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
+import API from '../api';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
@@ -14,6 +15,9 @@ const Posts = lazy(() => import('../pages/Posts'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
+  useEffect(() => {
+    API.postForceLogin();
+  }, []);
   return (
     <>
       <AnimatePresence>
