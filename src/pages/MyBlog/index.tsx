@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BlogHome from './BlogHome';
-import ProfileEdit from '../ProfileEdit';
+import ProfileEdit from './ProfileEdit';
 
 const MyBlog = () => {
   return (

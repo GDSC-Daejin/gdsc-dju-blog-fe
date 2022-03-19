@@ -37,8 +37,6 @@ import Setting from '../../../Images/Setting';
 import PageBar from '../../../components/common/PageBar';
 import API from '../../../api/index';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { useRecoilState } from 'recoil';
-import { userState } from '../../../store/user';
 
 const hashTage = [
   'React',
@@ -84,7 +82,6 @@ const BlogHome = () => {
     if (page || type) {
       navigate(`/${user_name}?type=all&page=0`);
     }
-    API.postForceLogin();
   }, []);
 
   return (
