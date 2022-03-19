@@ -1,6 +1,6 @@
 import { date } from 'yup';
 
-export interface userInfoDataType {
+export interface userDataType {
   generation: number;
   gitEmail: string;
   hashTag: string;
@@ -8,10 +8,6 @@ export interface userInfoDataType {
   major: string;
   memberInfoId: number;
   birthday: string | date;
-  memberPortfolioUrls: {
-    id: number;
-    webUrl: string;
-  }[];
   nickname: string;
   phoneNumber: string;
   positionType: string;
@@ -22,6 +18,14 @@ export interface userInfoDataType {
 }
 export interface memberPortfolioUrlsType {
   id: number;
-  webUrl: string;
-  memberInfo: number;
+  webUrl: string | undefined;
+}
+export interface userDataExtendUrlType extends userDataType {
+  memberPortfolioUrls: memberPortfolioUrlsType[];
+}
+
+export interface userEditDataType extends userDataType {
+  githubUrl?: string | undefined;
+  blogUrl?: string | undefined;
+  resumeUrl?: string | undefined;
 }

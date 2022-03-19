@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { userDataType } from '../types/userDataType';
-import { userInfoDataType } from '../types/userInfoData';
+import { memberDataInfoType, userDataType } from '../types/userDataType';
 
 export class Api {
   private API: string;
@@ -21,7 +20,7 @@ export class Api {
         localStorage.setItem('token', res.data.body.token);
       });
   };
-  updateUserData = (userInfoData: userDataType) => {
+  updateUserData = (userInfoData: memberDataInfoType) => {
     return axios.put(`${this.API}/api/member/v1/update/me`, userInfoData, {
       headers: this.Header,
     });

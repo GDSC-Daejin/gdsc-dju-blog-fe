@@ -28,3 +28,21 @@ export interface userDataType {
   userId: string;
   username: string;
 }
+export interface memberDataInfoType {
+  generation: number;
+  gitEmail: string;
+  hashTag: string;
+  introduce: string;
+  major: string;
+  memberInfoId: number;
+  birthday: string;
+  memberPortfolioUrls: {
+    id: number;
+    webUrl: string | null;
+  }[];
+  nickname: string;
+  phoneNumber: string;
+  positionType: string;
+  studentID: string;
+  userID: string;
+}

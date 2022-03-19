@@ -64,10 +64,16 @@ export const gitLinkSchema = {
     'github.com 형식으로 작성해주세요',
   ),
 };
-export const urlsSchema = {
-  memberPortfolioUrls: Yup.string().matches(
-    /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
-    'http/https 형식으로 작성해주세요',
+export const urlsSchema = Yup.string().matches(
+  /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
+  'http/https 형식으로 작성해주세요',
+);
+export const memberPortfolioSchema = {
+  memberPortfolioUrls: Yup.array().of(
+    Yup.string().matches(
+      /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
+      'http/https 형식으로 작성해주세요',
+    ),
   ),
 };
 
@@ -79,5 +85,7 @@ export const profileEditSchema = Yup.object().shape({
   ...nicknameSchema,
   ...majorSchema,
   ...gitEmailSchema,
-  ...urlsSchema,
+  githubUrl: urlsSchema,
+  blogUrl: urlsSchema,
+  resumeUrl: urlsSchema,
 });
