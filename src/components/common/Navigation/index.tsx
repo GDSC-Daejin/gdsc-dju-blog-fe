@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   NavInner,
-  LogoInner,
-  BlogText,
   LogoWrapper,
   BlogWrapper,
   Univ,
@@ -28,6 +26,7 @@ import GdscLogo from '../../../Images/GdscLogo';
 import SideBar from '../SideBar';
 import MenuToggleIcon from '../MenuToggleIcon';
 import Vector from '../../../Images/Vector';
+import Index from '../MainLogo';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -35,7 +34,6 @@ function Navigation() {
     <>
       {/* 아이콘 컬러 전체 변경 기능 */}
       {/*Desk Navigation */}
-      <SideBar />
       <NavDesign>
         <NavWrapper>
           <NavInner>
@@ -43,11 +41,7 @@ function Navigation() {
               <BlogWrapper>
                 <BeforeMargin />
                 <LogoWrapper onClick={() => navigate('/')}>
-                  <LogoInner>
-                    <GdscLogo />
-                    <DaejinUnivLogo />
-                    <GdscBlogLogo />
-                  </LogoInner>
+                  <Index />
                 </LogoWrapper>
               </BlogWrapper>
               <NavMargin />

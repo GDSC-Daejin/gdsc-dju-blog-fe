@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 export const SideBarWrapper = styled.div`
   display: flex;
-  position: absolute;
-  z-index: 1002;
+  position: fixed;
+  z-index: 1005;
   left: 0px;
   top: 0px;
   height: 100vh;
@@ -17,10 +17,14 @@ export const SideBarInner = styled(motion.aside)`
 export const SideBarContainer = styled(motion.div)`
   margin: 0px;
 `;
-export const SidebarBtnWrapper = styled.div`
+export const SideBarBtnInner = styled.div`
   position: absolute;
+  left: 55px;
+`;
+export const SideBarBtnWrapper = styled.div`
+  position: sticky;
   top: 48px;
-  left: 60px;
+  z-index: 1002;
 `;
 export const SideBarText = styled(motion.a)`
   display: block;
@@ -30,7 +34,7 @@ export const SideBarText = styled(motion.a)`
   font-size: 1.75rem;
   font-weight: 600;
 `;
-export const SideBarBtnInner = styled.div`
+export const SideBarBtnIcon = styled.div`
   border: none;
   background-color: #ffffff;
   cursor: pointer;

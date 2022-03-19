@@ -71,18 +71,9 @@ export const Univ = styled.div`
     display: none;
   }
 `;
-export const LogoInner = styled.div`
-  margin-right: 20px;
-  @media screen and (max-width: 520px) {
-    & svg {
-      width: 40px;
-      height: 20px;
-    }
-  }
-`;
 export const BeforeMargin = styled.div`
   display: flex;
-  width: 130px;
+  width: 110px;
   height: 100%;
 `;
 export const NavMargin = styled.div`

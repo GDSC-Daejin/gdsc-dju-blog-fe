@@ -1,9 +1,10 @@
 import {
-  SidebarBtnWrapper,
+  SideBarBtnWrapper,
   SideBarWrapper,
   SideBarContainer,
   SideBarInner,
   SideBarBtnInner,
+  SideBarBtnIcon,
   GrayBox,
   SideBarDesign,
   SideMenuWrapper,
@@ -66,12 +67,14 @@ export const SideBar = () => {
             </SideBarInner>
           )}
         </AnimatePresence>
-        <SidebarBtnWrapper>
-          <SideBarBtnInner onClick={onClickHandler}>
-            {open ? visible && <MenuToggleIcon /> : <MenuToggleIcon />}
-          </SideBarBtnInner>
-        </SidebarBtnWrapper>
       </SideBarWrapper>
+      <SideBarBtnWrapper>
+        <SideBarBtnInner>
+          <SideBarBtnIcon onClick={onClickHandler}>
+            {open ? visible && <MenuToggleIcon /> : <MenuToggleIcon />}
+          </SideBarBtnIcon>
+        </SideBarBtnInner>
+      </SideBarBtnWrapper>
       <GrayBox onClick={() => setOpen(false)} open={open} />
     </>
   );

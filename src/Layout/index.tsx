@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
+import SideBar from '../components/common/SideBar';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
@@ -17,6 +18,7 @@ const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   return (
     <>
+      <SideBar />
       <Navigation />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
