@@ -19,20 +19,32 @@ const Posts = lazy(() => import('../pages/Posts'));
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
-  const { userData } = useGetUserData();
+  // const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
-    API.postForceLogin();
-    //로그인 정보 가져오기
-    if (userData) {
-      setUser({
-        ...user,
-        ...userData.memberInfo,
-        name: userData.username,
-        email: userData.email,
+    API.postForceLogin().then((res) => {
+      API.getUserData().then((res) => {
+        const userData = res.data;
+        setUser({
+          ...user,
+          ...userData.memberInfo,
+          name: userData.username,
+          email: userData.email,
+        });
       });
-    }
+    });
+    // if (localStorage.getItem('token')) {
+    //   if (userData) {
+    //     setUser({
+    //       ...user,
+    //       ...userData.memberInfo,
+    //       name: userData.username,
+    //       email: userData.email,
+    //     });
+    //   }
+
+    //로그인 정보 가져오기
   }, []);
 
   return (
