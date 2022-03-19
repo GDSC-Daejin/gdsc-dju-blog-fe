@@ -1,10 +1,25 @@
 import styled from 'styled-components';
 
+export const SignUpContentWrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-bottom: 250px;
+`;
+
+export const SignUpFormTitle = styled.h4`
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: ${(props) => props.theme.fontSize.h4};
+  line-height: 46px;
+  letter-spacing: -0.03em;
+`;
+
 export const SignUpForm = styled.form`
   display: flex;
-  margin: 0 auto;
   flex-direction: column;
-  margin-bottom: 250px;
 `;
 
 export const SignUpInputWrapper = styled.div`
@@ -51,11 +66,13 @@ export const SignUpInputLabelCircle = styled.div`
   background-color: red;
 `;
 
-export const SignUpInputBox = styled.input`
+export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   width: 512px;
   height: 48px;
   padding: 8px 20px;
-  border: 1px solid ${(props) => props.theme.color.grey400};
+  border: 1px solid
+    ${(props) =>
+      props.errorCheck ? props.theme.color.tossRed : props.theme.color.grey400};
   box-sizing: border-box;
   border-radius: 10px;
   ::placeholder {
