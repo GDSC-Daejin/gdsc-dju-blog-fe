@@ -44,6 +44,7 @@ const ProfileEdit = () => {
   const userEditFormik = useFormik({
     initialValues: {
       generation: 0,
+      name: user.name,
       nickname: user.nickname,
       gitEmail: user.gitEmail,
       birthday: user.birthday,

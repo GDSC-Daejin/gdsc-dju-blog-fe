@@ -15,6 +15,8 @@ export const UserState = {
   studentID: '',
   positionType: '',
   gitEmail: '',
+  birthday: '',
+  userInfoId: 0,
   memberPortfolioUrls: [
     { id: 0, webUrl: '' },
     { id: 0, webUrl: '' },
