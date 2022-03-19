@@ -5,8 +5,6 @@ import {
   NavInner,
   LogoWrapper,
   BlogWrapper,
-  Univ,
-  BlogBanner,
   Search,
   NavDesign,
   NavWrapper,
@@ -27,6 +25,7 @@ import SideBar from '../SideBar';
 import MenuToggleIcon from '../MenuToggleIcon';
 import Vector from '../../../Images/Vector';
 import Index from '../MainLogo';
+import MainLogo from '../MainLogo';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -41,7 +40,7 @@ function Navigation() {
               <BlogWrapper>
                 <BeforeMargin />
                 <LogoWrapper onClick={() => navigate('/')}>
-                  <Index />
+                  <MainLogo />
                 </LogoWrapper>
               </BlogWrapper>
               <NavMargin />

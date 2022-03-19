@@ -23,7 +23,6 @@ const DeskAnimate = {
 
 export const SideBar = () => {
   const [open, setOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
   const { user_name } = useParams<'user_name'>();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -32,10 +31,6 @@ export const SideBar = () => {
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const onClickHandler = () => {
-    setOpen(true);
-    setVisible(false);
-  };
   return (
     <>
       <SideBarWrapper>
@@ -60,7 +55,12 @@ export const SideBar = () => {
                   {/*<SideBarLogout />*/}
                   <SideBarLogin />
                   <SideMenuWrapper>
-                    <SideCategoryMenu type={type} />
+                    <SideCategoryMenu
+                      type={type}
+                      onClick={(url) =>
+                        navigate(`/${user_name}?type=${url}&page=${page}`)
+                      }
+                    />
                   </SideMenuWrapper>
                 </SideBarDesign>
               </SideBarContainer>
@@ -70,8 +70,8 @@ export const SideBar = () => {
       </SideBarWrapper>
       <SideBarBtnWrapper>
         <SideBarBtnInner>
-          <SideBarBtnIcon onClick={onClickHandler}>
-            {open ? visible && <MenuToggleIcon /> : <MenuToggleIcon />}
+          <SideBarBtnIcon onClick={() => setOpen(true)}>
+            <MenuToggleIcon />
           </SideBarBtnIcon>
         </SideBarBtnInner>
       </SideBarBtnWrapper>

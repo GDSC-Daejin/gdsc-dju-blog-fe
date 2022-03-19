@@ -3,13 +3,13 @@ import {
   GdscSideLogoWrapper,
   GdscSideUnivWrapper,
   GdscSideBlogLogoWrapper,
-  GoogleLoaderWrapper,
   GoogleButtonWrapper,
+  GoogleLogoWrapper,
 } from '../styled';
 import GdscLogo from '../../../../Images/GdscLogo';
 import DaejinUnivLogo from '../../../../Images/DaejinUnivLogo';
 import GdscBlogLogo from '../../../../Images/GdscBlogLogo';
-import GoogleLoader from '../../GoogleLoader';
+import GoogleLogo from '../../../../Images/GoogleLogo';
 import { GDSCButton } from '../../Button';
 
 const SideBarLogout = () => {
@@ -25,10 +25,10 @@ const SideBarLogout = () => {
         <GdscBlogLogo />
       </GdscSideBlogLogoWrapper>
       <GoogleButtonWrapper>
-        <GDSCButton text={'\u00A0\u00A0\u00A0\u00A0 Google로 계속'} />
-        <GoogleLoaderWrapper>
-          <GoogleLoader background={false} />
-        </GoogleLoaderWrapper>
+        <GDSCButton text={' Google로 계속'} />
+        <GoogleLogoWrapper>
+          <GoogleLogo />
+        </GoogleLogoWrapper>
       </GoogleButtonWrapper>
     </>
   );

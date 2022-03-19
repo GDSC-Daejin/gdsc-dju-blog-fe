@@ -1,16 +1,11 @@
-export const positionColor = (position?: string) => {
-  switch (position) {
-    case 'frontend':
-      return '#4385F3';
-    case 'backend':
-      return '#E94436';
-    case 'android':
-      return '#109D58';
-    case 'design':
-      return '#FABC05';
-    case 'beginner':
-      return '#FF740F';
-    default:
-      return '#fff';
-  }
+const colorList = {
+  frontend: '#4385F3',
+  backend: '#E94436',
+  android: '#109D58',
+  design: '#FABC05',
+  beginner: '#FF740F',
+} as const;
+export const positionColor = (position: string) => {
+  const lowerCasePosition = position.toLowerCase();
+  return colorList[lowerCasePosition as keyof typeof colorList];
 };

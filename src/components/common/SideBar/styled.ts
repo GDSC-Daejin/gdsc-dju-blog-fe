@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const SideBarWrapper = styled.div`
+export const SideBarWrapper = styled(motion.div)`
   display: flex;
   position: fixed;
   z-index: 1005;
@@ -128,10 +128,12 @@ export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
   padding-bottom: 8px;
 `;
-export const GoogleLoaderWrapper = styled.div`
+export const GoogleLogoWrapper = styled.div`
   display: flex;
+  position: absolute;
+  left: 10px;
+  top: 7px;
   & div {
-    position: absolute;
     border-radius: 5px;
     width: 34px;
     height: 32px;
