@@ -8,6 +8,8 @@ import { AnimatePresence } from 'framer-motion';
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
 import API from '../api';
+import Category from '../pages/Category';
+import SearchResult from '../pages/SearchResult';
 
 const Home = lazy(() => import('../pages/Home'));
 const MyBlog = lazy(() => import('../pages/MyBlog'));
@@ -28,6 +30,8 @@ const Layout = () => {
           <Route path={'/*'} element={<Home />} />
           <Route path={'/:user_name/*'} element={<MyBlog />} />
           <Route path={'/post'} element={<Posts />} />
+          <Route path={'/category'} element={<Category />} />
+          <Route path={'/search'} element={<SearchResult />} />
           <Route
             path={'/admin'}
             element={
