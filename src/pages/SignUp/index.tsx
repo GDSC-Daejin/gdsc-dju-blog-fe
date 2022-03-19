@@ -15,6 +15,7 @@ import {
   SignUpButton,
 } from './styled';
 import { GDSCButton } from '../../components/common/Button';
+import InputWarning from '../../Images/InputWarning';
 
 const SignUp = () => {
   const {
@@ -44,12 +45,15 @@ const SignUp = () => {
               placeholder="김구글"
               errorCheck={errorCheck(errors.name?.type)}
               {...register('name', {
-                required: '필수 입력사항입니다',
+                required: '필수 입력란입니다',
               })}
             />
-            <SignUpErrorMessage>
-              {errors.name && errors.name.message}&nbsp;
-            </SignUpErrorMessage>
+            {errors.name && (
+              <SignUpErrorMessage>
+                <InputWarning />
+                <span>{errors.name.message}</span>
+              </SignUpErrorMessage>
+            )}
           </SignUpInputWrapper>
 
           <SignUpInputWrapper>
@@ -64,12 +68,15 @@ const SignUp = () => {
               placeholder="GDSC DJU 닉네임을 입력하세요."
               errorCheck={errorCheck(errors.nickname?.type)}
               {...register('nickname', {
-                required: '필수 입력사항입니다',
+                required: '필수 입력란입니다',
               })}
             />
-            <SignUpErrorMessage>
-              {errors.nickname && errors.nickname.message}&nbsp;
-            </SignUpErrorMessage>
+            {errors.nickname && (
+              <SignUpErrorMessage>
+                <InputWarning />
+                <span>{errors.nickname.message}</span>
+              </SignUpErrorMessage>
+            )}
           </SignUpInputWrapper>
 
           <SignUpInputWrapper>
@@ -84,16 +91,19 @@ const SignUp = () => {
               placeholder="01012345678"
               errorCheck={errorCheck(errors.phone?.type)}
               {...register('phone', {
-                required: '필수 입력사항입니다',
+                required: '필수 입력란입니다',
                 maxLength: {
                   value: 11,
-                  message: '입력값 초과',
+                  message: '전화번호형식이 아닙니다',
                 },
               })}
             />
-            <SignUpErrorMessage>
-              {errors.phone && errors.phone.message}&nbsp;
-            </SignUpErrorMessage>
+            {errors.phone && (
+              <SignUpErrorMessage>
+                <InputWarning />
+                <span>{errors.phone.message}</span>
+              </SignUpErrorMessage>
+            )}
           </SignUpInputWrapper>
 
           <SignUpInputWrapper>
@@ -106,16 +116,19 @@ const SignUp = () => {
               placeholder="GDSC@gmail.com"
               errorCheck={errorCheck(errors.email?.type)}
               {...register('email', {
-                required: '필수 입력사항입니다',
+                required: '필수 입력란입니다',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3,}$/i,
-                  message: 'invalid email address',
+                  message: '잘못된 이메일 형식입니다.',
                 },
               })}
             />
-            <SignUpErrorMessage>
-              {errors.email && errors.email.message}&nbsp;
-            </SignUpErrorMessage>
+            {errors.email && (
+              <SignUpErrorMessage>
+                <InputWarning />
+                <span>{errors.email.message}</span>
+              </SignUpErrorMessage>
+            )}
           </SignUpInputWrapper>
 
           <SignUpInputWrapper>
@@ -130,12 +143,15 @@ const SignUp = () => {
               placeholder="소속 되어있는 학과를 입력하세요."
               errorCheck={errorCheck(errors.department?.type)}
               {...register('department', {
-                required: '필수 입력사항입니다',
+                required: '필수 입력란입니다',
               })}
             />
-            <SignUpErrorMessage>
-              {errors.department && errors.department.message}&nbsp;
-            </SignUpErrorMessage>
+            {errors.department && (
+              <SignUpErrorMessage>
+                <InputWarning />
+                <span>{errors.department.message}</span>
+              </SignUpErrorMessage>
+            )}
           </SignUpInputWrapper>
 
           <SignUpInputWrapper>
@@ -150,20 +166,23 @@ const SignUp = () => {
               placeholder="20XXXXXX"
               errorCheck={errorCheck(errors.studentNum?.type)}
               {...register('studentNum', {
-                required: '필수 입력사항입니다',
+                required: '필수 입력란입니다',
                 minLength: {
                   value: 8,
-                  message: '학번은 8자리 이하입니다',
+                  message: '학번은 8자리 입니다',
                 },
                 maxLength: {
                   value: 8,
-                  message: '학번은 8자리 이하입니다',
+                  message: '학번은 8자리 입니다',
                 },
               })}
             />
-            <SignUpErrorMessage>
-              {errors.studentNum && errors.studentNum.message}&nbsp;
-            </SignUpErrorMessage>
+            {errors.studentNum && (
+              <SignUpErrorMessage>
+                <InputWarning />
+                <span>{errors.studentNum.message}</span>
+              </SignUpErrorMessage>
+            )}
           </SignUpInputWrapper>
 
           <SignUpInputWrapper>
@@ -185,7 +204,7 @@ const SignUp = () => {
               <option value="B">Option B</option>
             </SignUpSelecttBox>
             <SignUpErrorMessage>
-              {errors.position && errors.position.message}&nbsp;
+              {errors.position && errors.position.message}
             </SignUpErrorMessage>
           </SignUpInputWrapper>
 
@@ -202,7 +221,7 @@ const SignUp = () => {
               {...register('github')}
             />
             <SignUpErrorMessage>
-              {errors.github && errors.github.message}&nbsp;
+              {errors.github && errors.github.message}
             </SignUpErrorMessage>
           </SignUpInputWrapper>
 
@@ -219,7 +238,7 @@ const SignUp = () => {
               {...register('intro')}
             />
             <SignUpErrorMessage>
-              {errors.intro && errors.intro.message}&nbsp;
+              {errors.intro && errors.intro.message}
             </SignUpErrorMessage>
           </SignUpInputWrapper>
 
