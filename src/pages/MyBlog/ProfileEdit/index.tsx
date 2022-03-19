@@ -1,6 +1,6 @@
 import React, { memo, useLayoutEffect, useState } from 'react';
 import { FormikProvider, useFormik } from 'formik';
-import { ContainerInner, LayoutContainer } from '../../styles/layouts';
+import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
 import {
   FormButtonWrapper,
   FormElementWrapper,
@@ -10,19 +10,20 @@ import {
   FormTitleWrapper,
   FormWrapper,
 } from './styled';
-import TextInput from '../../components/common/input/TextInput';
-import ProfileEditImage from '../../components/common/ProfileEditImage';
-import { GDSCButton } from '../../components/common/Button';
-import { profileEditSchema } from '../../components/Validation/profileEdit';
+import TextInput from '../../../components/common/input/TextInput';
+import ProfileEditImage from '../../../components/common/ProfileEditImage';
+import { GDSCButton } from '../../../components/common/Button';
+import { profileEditSchema } from '../../../components/Validation/profileEdit';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../store/user';
-import API from '../../api';
+import { userState } from '../../../store/user';
+
+import API from '../../../api';
 import {
   memberPortfolioUrlsType,
   userInfoDataType,
-} from '../../types/userInfoData';
-import { useGetUserData } from '../../api/hooks/useGetUserData';
-import { userDataType } from '../../types/userDataType';
+} from '../../../types/userInfoData';
+import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { userDataType } from '../../../types/userDataType';
 
 const ProfileEdit = () => {
   const image = '';

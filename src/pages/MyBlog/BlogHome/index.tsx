@@ -39,6 +39,7 @@ import API from '../../../api/index';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../../store/user';
+import { userData } from '../../../api/Mocks/userData';
 
 const hashTage = [
   'React',
@@ -62,7 +63,7 @@ const BlogHome = () => {
   const type = typeParams ? typeParams : 'all';
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
-  const { userData } = useGetUserData();
+  // const { userData } = useGetUserData();
 
   const pagination = () => {
     return postListData.slice(page === 0 ? 0 : page * 10 + 1, (page + 1) * 10);
