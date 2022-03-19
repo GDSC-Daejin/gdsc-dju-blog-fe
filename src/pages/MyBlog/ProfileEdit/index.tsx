@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useLayoutEffect } from 'react';
 import { FormikProvider, useFormik } from 'formik';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
 import {
@@ -30,7 +30,7 @@ const ProfileEdit = () => {
   const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (userData) {
       setUser({
         ...user,
