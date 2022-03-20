@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   SignUpFormStyle,
   SignUpButton,
   SelectBoxWrapper,
+  SignUpSelectBoxWrapper,
+  SignUpDefaultSelectBox,
   SignUpSelectBox,
+  SignUpSelectOption,
   LeftArrowWrapper,
 } from './styled';
 import SignUpInput from '../SignUpInput';
 import { IFormStructure } from './FormInterface';
 import BottomArrow from '../../../Images/BottomArrow';
+import {
+  SignUpInputLabel,
+  SignUpInputLabelText,
+  SignUpInputLabelCircle,
+} from '../SignUpInput/styled';
 
 const SignUpForm = () => {
   const {
@@ -49,8 +57,8 @@ const SignUpForm = () => {
       title: '전화번호',
       condition: {
         required: '필수 입력란입니다',
-        minLength: {
-          value: 10,
+        pattern: {
+          value: /^[0-9]{11}$/,
           message: '잘못된 전화번호 형식입니다.',
         },
       },
@@ -129,6 +137,7 @@ const SignUpForm = () => {
       errors: errors.intro,
     },
   ];
+  const [selectValue, setSelectValue] = useState('');
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) => (
@@ -144,17 +153,31 @@ const SignUpForm = () => {
         />
       ))}
       <SelectBoxWrapper>
-        <SignUpSelectBox {...register('position', { required: true })}>
-          <option value="0">선택</option>
-          <option value="FE">FE</option>
-          <option value="BE">BE</option>
-          <option value="DE">DE</option>
-          <option value="Android">Android</option>
-          <option value="Common">Common</option>
-        </SignUpSelectBox>
-        <LeftArrowWrapper>
-          <BottomArrow />
-        </LeftArrowWrapper>
+        <SignUpInputLabel>
+          <SignUpInputLabelText htmlFor="position">포지션</SignUpInputLabelText>
+          <SignUpInputLabelCircle />
+        </SignUpInputLabel>
+        <SignUpSelectBoxWrapper>
+          <SignUpDefaultSelectBox
+            value={selectValue}
+            {...register('position', {
+              required: '필수 입력란입니다',
+            })}
+          />
+          <SignUpSelectBox>
+            <SignUpSelectOption>선택</SignUpSelectOption>
+            <SignUpSelectOption onClick={() => setSelectValue('1')}>
+              FE
+            </SignUpSelectOption>
+            <SignUpSelectOption>BE</SignUpSelectOption>
+            <SignUpSelectOption>DE</SignUpSelectOption>
+            <SignUpSelectOption>Android</SignUpSelectOption>
+            <SignUpSelectOption>Common</SignUpSelectOption>
+          </SignUpSelectBox>
+          <LeftArrowWrapper>
+            <BottomArrow />
+          </LeftArrowWrapper>
+        </SignUpSelectBoxWrapper>
       </SelectBoxWrapper>
       <SignUpButton isValid={isValid} type="submit">
         가입하기
