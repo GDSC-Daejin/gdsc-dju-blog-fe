@@ -33,13 +33,13 @@ const SignUpInput = ({
       <SignUpInputBox
         type={type}
         placeholder={placeholder}
-        errorCheck={errorCheck(errors.name?.type)}
+        errorCheck={errorCheck(errors?.message)}
         {...register(refName, condition)}
       />
-      {errors.name && (
+      {errors && (
         <SignUpErrorMessage>
           <InputWarning />
-          <span>{errors.name.message}</span>
+          <span>{errors?.message}</span>
         </SignUpErrorMessage>
       )}
     </SignUpInputWrapper>

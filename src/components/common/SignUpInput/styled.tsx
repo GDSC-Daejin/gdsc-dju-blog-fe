@@ -105,5 +105,5 @@ export const SignUpButton = styled.button<{ isValid: boolean }>`
   text-align: center;
   letter-spacing: -0.03em;
   align-self: flex-end;
-  cursor: ${(props) => (props.isValid ? 'pointer' : 'not-allowed')};
+  cursor: pointer;
 `;

@@ -1,9 +1,4 @@
-import {
-  RegisterOptions,
-  UseFormRegister,
-  FieldValues,
-  FieldError,
-} from 'react-hook-form';
+import { RegisterOptions, UseFormRegister, FieldValues } from 'react-hook-form';
 
 export interface IFormStructure {
   refName: string;
