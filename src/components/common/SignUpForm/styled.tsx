@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { assetColors } from '../../../styles/assetColors';
 
 export const SignUpFormStyle = styled.form`
   display: flex;
@@ -32,12 +33,11 @@ export const SelectBoxWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 512px;
 `;
 
 export const SignUpSelectBoxWrapper = styled.div`
   position: relative;
-  width: 512px;
-  height: 288px;
 `;
 
 export const SignUpDefaultSelectBox = styled.input`
@@ -45,8 +45,8 @@ export const SignUpDefaultSelectBox = styled.input`
 `;
 
 export const SignUpSelectBox = styled.ul`
-  width: 100%;
-  height: 100%;
+  width: 512px;
+  height: 288px;
   list-style-type: none;
   overflow: hidden;
   border: 1px solid ${(props) => props.theme.color.grey400};
@@ -64,6 +64,9 @@ export const SignUpSelectBox = styled.ul`
 
 export const SignUpSelectOption = styled.li`
   width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   box-sizing: border-box;
   cursor: pointer;
   padding: 11px 32px;
@@ -76,6 +79,28 @@ export const SignUpSelectOption = styled.li`
   &:hover {
     background-color: ${(props) => props.theme.color.grey100};
   }
+`;
+
+const handleColorType = (color: string) => {
+  switch (color) {
+    case 'FE':
+      return assetColors.GDSC_Red;
+    case 'BE':
+      return assetColors.GDSC_Blue;
+    case 'DE':
+      return assetColors.GDSC_Yellow;
+    case 'Android':
+      return assetColors.GDSC_Green;
+    case 'Common':
+      return assetColors.Common;
+  }
+};
+
+export const SignUpColorCircle = styled.div<{ color: string }>`
+  width: 8px;
+  height: 8px;
+  background-color: ${(props) => handleColorType(props.color)};
+  border-radius: 50%;
 `;
 
 export const LeftArrowWrapper = styled.div`

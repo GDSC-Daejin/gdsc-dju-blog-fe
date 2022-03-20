@@ -9,6 +9,7 @@ import {
   SignUpSelectBox,
   SignUpSelectOption,
   LeftArrowWrapper,
+  SignUpColorCircle,
 } from './styled';
 import SignUpInput from '../SignUpInput';
 import { IFormStructure } from './FormInterface';
@@ -172,12 +173,25 @@ const SignUpForm = () => {
               </LeftArrowWrapper>
             </SignUpSelectOption>
             <SignUpSelectOption onClick={() => setSelectValue('1')}>
+              <SignUpColorCircle color="FE" />
               FE
             </SignUpSelectOption>
-            <SignUpSelectOption>BE</SignUpSelectOption>
-            <SignUpSelectOption>DE</SignUpSelectOption>
-            <SignUpSelectOption>Android</SignUpSelectOption>
-            <SignUpSelectOption>Common</SignUpSelectOption>
+            <SignUpSelectOption>
+              <SignUpColorCircle color="BE" />
+              BE
+            </SignUpSelectOption>
+            <SignUpSelectOption>
+              <SignUpColorCircle color="DE" />
+              DE
+            </SignUpSelectOption>
+            <SignUpSelectOption>
+              <SignUpColorCircle color="Android" />
+              Android
+            </SignUpSelectOption>
+            <SignUpSelectOption>
+              <SignUpColorCircle color="Common" />
+              Common
+            </SignUpSelectOption>
           </SignUpSelectBox>
         </SignUpSelectBoxWrapper>
       </SelectBoxWrapper>
