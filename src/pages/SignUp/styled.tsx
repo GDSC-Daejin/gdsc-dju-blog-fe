@@ -94,20 +94,6 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   }
 `;
 
-export const SignUpSelecttBox = styled.select`
-  width: 512px;
-  height: 48px;
-  border: 1px solid ${(props) => props.theme.color.grey400};
-  box-sizing: border-box;
-  border-radius: 10px;
-  &:hover {
-    filter: drop-shadow(0px 0px 2px #90c2ff);
-  }
-  &:focus {
-    filter: drop-shadow(0px 0px 2px #3182f6);
-  }
-`;
-
 export const SignUpButton = styled.button<{ isValid: boolean }>`
   align-content: flex-end;
   width: 111px;

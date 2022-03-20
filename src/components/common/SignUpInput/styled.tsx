@@ -5,7 +5,6 @@ export const SignUpInputWrapper = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 38px;
 `;
 
 export const SignUpErrorMessage = styled.div`
@@ -76,6 +75,7 @@ export const SignUpSelecttBox = styled.select`
   width: 512px;
   height: 48px;
   border: 1px solid ${(props) => props.theme.color.grey400};
+  padding: 10px;
   box-sizing: border-box;
   border-radius: 10px;
   &:hover {
@@ -97,13 +97,6 @@ export const SignUpButton = styled.button<{ isValid: boolean }>`
   box-sizing: border-box;
   box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
   border-radius: 18px;
-  font-family: 'Noto Sans KR';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: -0.03em;
   align-self: flex-end;
   cursor: pointer;
 `;

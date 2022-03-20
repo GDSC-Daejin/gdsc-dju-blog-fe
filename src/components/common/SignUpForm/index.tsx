@@ -1,8 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { SignUpFormStyle, SignUpButton } from './styled';
+import {
+  SignUpFormStyle,
+  SignUpButton,
+  SelectBoxWrapper,
+  SignUpSelectBox,
+  LeftArrowWrapper,
+} from './styled';
 import SignUpInput from '../SignUpInput';
 import { IFormStructure } from './FormInterface';
+import BottomArrow from '../../../Images/BottomArrow';
 
 const SignUpForm = () => {
   const {
@@ -12,7 +19,6 @@ const SignUpForm = () => {
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
   const onSubmit = (values: any) => console.log(values);
-
   const formData: IFormStructure[] = [
     {
       refName: 'name',
@@ -123,7 +129,6 @@ const SignUpForm = () => {
       errors: errors.intro,
     },
   ];
-
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) => (
@@ -138,7 +143,19 @@ const SignUpForm = () => {
           errors={data.errors}
         />
       ))}
-
+      <SelectBoxWrapper>
+        <SignUpSelectBox {...register('position', { required: true })}>
+          <option value="0">선택</option>
+          <option value="FE">FE</option>
+          <option value="BE">BE</option>
+          <option value="DE">DE</option>
+          <option value="Android">Android</option>
+          <option value="Common">Common</option>
+        </SignUpSelectBox>
+        <LeftArrowWrapper>
+          <BottomArrow />
+        </LeftArrowWrapper>
+      </SelectBoxWrapper>
       <SignUpButton isValid={isValid} type="submit">
         가입하기
       </SignUpButton>
