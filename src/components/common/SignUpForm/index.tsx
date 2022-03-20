@@ -165,7 +165,12 @@ const SignUpForm = () => {
             })}
           />
           <SignUpSelectBox>
-            <SignUpSelectOption>선택</SignUpSelectOption>
+            <SignUpSelectOption>
+              선택
+              <LeftArrowWrapper>
+                <BottomArrow />
+              </LeftArrowWrapper>
+            </SignUpSelectOption>
             <SignUpSelectOption onClick={() => setSelectValue('1')}>
               FE
             </SignUpSelectOption>
@@ -174,9 +179,6 @@ const SignUpForm = () => {
             <SignUpSelectOption>Android</SignUpSelectOption>
             <SignUpSelectOption>Common</SignUpSelectOption>
           </SignUpSelectBox>
-          <LeftArrowWrapper>
-            <BottomArrow />
-          </LeftArrowWrapper>
         </SignUpSelectBoxWrapper>
       </SelectBoxWrapper>
       <SignUpButton isValid={isValid} type="submit">

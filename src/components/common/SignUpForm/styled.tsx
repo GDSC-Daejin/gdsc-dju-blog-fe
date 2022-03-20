@@ -38,9 +38,6 @@ export const SignUpSelectBoxWrapper = styled.div`
   position: relative;
   width: 512px;
   height: 288px;
-  border: 1px solid ${(props) => props.theme.color.grey400};
-  box-sizing: border-box;
-  border-radius: 10px;
 `;
 
 export const SignUpDefaultSelectBox = styled.input`
@@ -51,24 +48,37 @@ export const SignUpSelectBox = styled.ul`
   width: 100%;
   height: 100%;
   list-style-type: none;
+  overflow: hidden;
+  border: 1px solid ${(props) => props.theme.color.grey400};
+  box-sizing: border-box;
+  border-radius: 10px;
+  li:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
 `;
 
 export const SignUpSelectOption = styled.li`
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
   padding: 11px 32px;
+  color: ${(props) => props.theme.color.grey400};
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
+  &:hover {
+    background-color: ${(props) => props.theme.color.grey100};
+  }
 `;
 
 export const LeftArrowWrapper = styled.div`
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 19px;
-  right: 22px;
   transition: all 0.3s ease;
   svg {
     transform: rotate(180deg);
