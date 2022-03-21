@@ -90,7 +90,7 @@ const ProfileEdit = () => {
       memberPortfolioUrls: memberPortfolioUrls,
     };
     try {
-      await API.updateUserData(memberData as memberDataInfoType).then((res) => {
+      await API.updateUserData(memberData as memberDataInfoType).then(() => {
         setUser({
           ...user,
           ...values,
