@@ -1,4 +1,3 @@
-import { watch } from 'fs';
 import React, { useState } from 'react';
 import BottomArrow from '../../../Images/BottomArrow';
 import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
@@ -26,7 +25,13 @@ const SignUpSelect = ({
   errors,
 }: IFormStructure) => {
   const [selectOpen, setSelectOpen] = useState(false);
-  const PositionOption = ['FE', 'BE', 'DE', 'Android', 'Common'];
+  const PositionOption = [
+    'Frontend',
+    'Backend',
+    'Designer',
+    'Android',
+    'Beginner',
+  ];
   const OptionOnClick = (data: string) => {
     setSelectOpen((prev) => {
       return !prev;

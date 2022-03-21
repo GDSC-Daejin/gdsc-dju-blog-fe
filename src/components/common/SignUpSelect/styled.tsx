@@ -58,7 +58,7 @@ export const SignUpSelectOption = styled.li<{ selected: boolean }>`
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 26px;
   background-color: ${(props) => props.selected && props.theme.color.grey100};
   &:hover {
@@ -68,15 +68,15 @@ export const SignUpSelectOption = styled.li<{ selected: boolean }>`
 
 const handleColorType = (color: string) => {
   switch (color) {
-    case 'FE':
+    case 'Frontend':
       return assetColors.GDSC_Red;
-    case 'BE':
+    case 'Backend':
       return assetColors.GDSC_Blue;
-    case 'DE':
+    case 'Designer':
       return assetColors.GDSC_Yellow;
     case 'Android':
       return assetColors.GDSC_Green;
-    case 'Common':
+    case 'Beginner':
       return assetColors.Common;
   }
 };
@@ -89,7 +89,8 @@ export const SignUpColorCircle = styled.div<{ color: string }>`
 `;
 
 export const ArrowWrapper = styled.div<{ BoxOpen: boolean }>`
-  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
   svg {
     transform: ${(props) => props.BoxOpen && 'rotate(180deg)'};
   }
@@ -104,7 +105,7 @@ export const SignUpInputLabel = styled.div`
 
 export const SignUpInputLabelText = styled.label`
   font-family: Noto Sans KR;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 26px;
