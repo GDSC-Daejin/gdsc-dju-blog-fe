@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   NavInner,
   LogoWrapper,
-  MainLogoWrapper,
+  BlogWrapper,
   Search,
   NavDesign,
   NavWrapper,
@@ -18,9 +18,13 @@ import {
   BeforeMargin,
 } from './styled';
 /* 아이콘 컬러 전체 변경 기능 */
+import GdscBlogLogo from '../../../Images/GdscBlogLogo';
+import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
 import GdscLogo from '../../../Images/GdscLogo';
+import SideBar from '../SideBar';
 import MenuToggleIcon from '../MenuToggleIcon';
 import Vector from '../../../Images/Vector';
+import Index from '../MainLogo';
 import MainLogo from '../MainLogo';
 
 function Navigation() {
@@ -33,12 +37,12 @@ function Navigation() {
         <NavWrapper>
           <NavInner>
             <DeskNavigationWrapper>
-              <MainLogoWrapper>
+              <BlogWrapper>
                 <BeforeMargin />
                 <LogoWrapper onClick={() => navigate('/')}>
                   <MainLogo />
                 </LogoWrapper>
-              </MainLogoWrapper>
+              </BlogWrapper>
               <NavMargin />
               <SearchWrapper>
                 <Search

@@ -17,6 +17,7 @@ export const CategoryTextWrapper = styled(motion.div)`
   color: ${(props) => props.theme.color.grey300};
   position: relative;
   display: flex;
+  border-bottom: 1px solid #fff;
   margin-bottom: 34px;
 `;
 export const CategoryMenuWrapper = styled(motion.div)`
