@@ -24,6 +24,7 @@ const SignUpInput = ({
   const errorCheck = (error: string | undefined) => {
     return error !== undefined ? true : false;
   };
+  console.log(errors + title);
   return (
     <SignUpInputWrapper>
       <SignUpInputLabel>

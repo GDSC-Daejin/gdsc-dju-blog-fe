@@ -41,7 +41,7 @@ export const SignUpSelectBoxWrapper = styled.div`
 `;
 
 export const SignUpDefaultSelectBox = styled.input`
-  display: none;
+  /* display: none; */
 `;
 
 export const SignUpSelectBox = styled.ul`

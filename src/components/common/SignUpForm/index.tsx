@@ -67,19 +67,19 @@ const SignUpForm = () => {
       errors: errors.phone,
     },
     {
-      refName: 'email',
+      refName: 'gmail',
       type: 'email',
       placeholder: 'GDSC@gmail.com',
       title: 'gmail',
       condition: {
         required: '필수 입력란입니다',
         pattern: {
-          value: /^[A-Z0-9._%+-]+@[gmail]+\.[A-Z]{3}$/i,
+          value: /^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/i,
           message: '잘못된 이메일 형식입니다.',
         },
       },
       register: register,
-      errors: errors.email,
+      errors: errors.gmail,
     },
     {
       refName: 'department',
@@ -99,14 +99,6 @@ const SignUpForm = () => {
       placeholder: '20XXXXXXX',
       condition: {
         required: '필수 입력란입니다',
-        minLength: {
-          value: 8,
-          message: '학번은 8자리 입니다',
-        },
-        maxLength: {
-          value: 8,
-          message: '학번은 8자리 입니다',
-        },
         pattern: {
           value: /^[0-9]{8}$/,
           message: '학번 형식에 맞춰 입력해주세요',
@@ -121,10 +113,10 @@ const SignUpForm = () => {
       title: '깃허브',
       placeholder: '깃허브 주소를 입력하세요',
       condition: {
-        pattern: {
-          value: /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
-          message: 'github.com 형식으로 작성해주세요',
-        },
+        // pattern: {
+        //   value: /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
+        //   message: 'github.com 형식으로 작성해주세요',
+        // },
       },
       register: register,
       errors: errors.github,
@@ -139,6 +131,8 @@ const SignUpForm = () => {
     },
   ];
   const [selectValue, setSelectValue] = useState('');
+  const PositionOption = ['FE', 'BE', 'DE', 'Android', 'Common'];
+
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) => (
@@ -163,6 +157,7 @@ const SignUpForm = () => {
             value={selectValue}
             {...register('position', {
               required: '필수 입력란입니다',
+              value: selectValue,
             })}
           />
           <SignUpSelectBox>
@@ -172,26 +167,15 @@ const SignUpForm = () => {
                 <BottomArrow />
               </LeftArrowWrapper>
             </SignUpSelectOption>
-            <SignUpSelectOption onClick={() => setSelectValue('1')}>
-              <SignUpColorCircle color="FE" />
-              FE
-            </SignUpSelectOption>
-            <SignUpSelectOption>
-              <SignUpColorCircle color="BE" />
-              BE
-            </SignUpSelectOption>
-            <SignUpSelectOption>
-              <SignUpColorCircle color="DE" />
-              DE
-            </SignUpSelectOption>
-            <SignUpSelectOption>
-              <SignUpColorCircle color="Android" />
-              Android
-            </SignUpSelectOption>
-            <SignUpSelectOption>
-              <SignUpColorCircle color="Common" />
-              Common
-            </SignUpSelectOption>
+            {PositionOption.map((data, index) => (
+              <SignUpSelectOption
+                key={index}
+                onClick={() => setSelectValue(data)}
+              >
+                <SignUpColorCircle color={data} />
+                {data}
+              </SignUpSelectOption>
+            ))}
           </SignUpSelectBox>
         </SignUpSelectBoxWrapper>
       </SelectBoxWrapper>
