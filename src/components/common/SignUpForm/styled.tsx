@@ -36,10 +36,11 @@ export const SelectBoxWrapper = styled.div`
   width: 512px;
 `;
 
-export const SignUpSelectBoxWrapper = styled.div`
+export const SignUpSelectBoxInner = styled.div`
   position: relative;
   width: 512px;
   height: 48px;
+  background-color: #fff;
 `;
 
 export const SignUpDefaultSelectBox = styled.input`
@@ -49,8 +50,12 @@ export const SignUpDefaultSelectBox = styled.input`
 export const SignUpSelectBox = styled.ul<{
   errorCheck: boolean;
 }>`
+  position: relative;
   width: 512px;
-  height: px;
+  height: 288px;
+  //height:48px
+  z-index: 30;
+  background-color: yellow;
   list-style-type: none;
   overflow: hidden;
   border: 1px solid ${(props) => props.theme.color.grey400};

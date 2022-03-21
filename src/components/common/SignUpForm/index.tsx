@@ -4,7 +4,7 @@ import {
   SignUpFormStyle,
   SignUpButton,
   SelectBoxWrapper,
-  SignUpSelectBoxWrapper,
+  SignUpSelectBoxInner,
   SignUpDefaultSelectBox,
   SignUpSelectBox,
   SignUpSelectOption,
@@ -12,7 +12,7 @@ import {
   SignUpColorCircle,
 } from './styled';
 import SignUpInput from '../SignUpInput';
-import { IFormStructure } from './FormInterface';
+import { IFormStructure, errorCheck } from './FormStructureInfo';
 import BottomArrow from '../../../Images/BottomArrow';
 import {
   SignUpInputLabel,
@@ -109,6 +109,13 @@ const SignUpForm = () => {
       errors: errors.studentNum,
     },
     {
+      refName: 'position',
+      type: 'text',
+      title: '포지션',
+      register: register,
+      errors: errors.studentNum,
+    },
+    {
       refName: 'github',
       type: 'text',
       title: '깃허브',
@@ -132,59 +139,64 @@ const SignUpForm = () => {
     },
   ];
   const PositionOption = ['FE', 'BE', 'DE', 'Android', 'Common'];
-  const errorCheck = (error: string | undefined) => {
-    return error !== undefined ? true : false;
-  };
 
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
-      {formData.map((data, index) => (
-        <SignUpInput
-          key={index}
-          refName={data.refName}
-          placeholder={data.placeholder}
-          type={data.type}
-          title={data.title}
-          register={register}
-          condition={data.condition}
-          errors={data.errors}
-        />
-      ))}
-      <SelectBoxWrapper>
-        <SignUpInputLabel>
-          <SignUpInputLabelText htmlFor="position">포지션</SignUpInputLabelText>
-          <SignUpInputLabelCircle />
-        </SignUpInputLabel>
-        <SignUpSelectBoxWrapper>
-          <SignUpDefaultSelectBox
-            {...register('position', {
-              required: true,
-            })}
-          />
-          <SignUpSelectBox errorCheck={errorCheck(errors.position?.message)}>
-            <SignUpSelectOption>
-              선택
-              <LeftArrowWrapper>
-                <BottomArrow />
-              </LeftArrowWrapper>
-            </SignUpSelectOption>
-            {PositionOption.map((data, index) => (
-              <SignUpSelectOption
-                key={index}
-                onClick={() =>
-                  setValue('position', data, {
-                    shouldTouch: true,
-                    shouldValidate: true,
-                  })
-                }
+      {formData.map((data, index) =>
+        data.refName === 'position' ? (
+          <SelectBoxWrapper key={index}>
+            <SignUpInputLabel>
+              <SignUpInputLabelText htmlFor="position">
+                포지션
+              </SignUpInputLabelText>
+              <SignUpInputLabelCircle />
+            </SignUpInputLabel>
+            <SignUpSelectBoxInner>
+              <SignUpDefaultSelectBox
+                {...register('position', {
+                  required: true,
+                })}
+              />
+              <SignUpSelectBox
+                errorCheck={errorCheck(errors.position?.message)}
               >
-                <SignUpColorCircle color={data} />
-                {data}
-              </SignUpSelectOption>
-            ))}
-          </SignUpSelectBox>
-        </SignUpSelectBoxWrapper>
-      </SelectBoxWrapper>
+                <SignUpSelectOption>
+                  선택
+                  <LeftArrowWrapper>
+                    <BottomArrow />
+                  </LeftArrowWrapper>
+                </SignUpSelectOption>
+                {PositionOption.map((data, index) => (
+                  <SignUpSelectOption
+                    key={index}
+                    onClick={() =>
+                      setValue('position', data, {
+                        shouldTouch: true,
+                        shouldValidate: true,
+                      })
+                    }
+                  >
+                    <SignUpColorCircle color={data} />
+                    {data}
+                  </SignUpSelectOption>
+                ))}
+              </SignUpSelectBox>
+            </SignUpSelectBoxInner>
+          </SelectBoxWrapper>
+        ) : (
+          <SignUpInput
+            key={index}
+            refName={data.refName}
+            placeholder={data.placeholder}
+            type={data.type}
+            title={data.title}
+            register={register}
+            condition={data.condition}
+            errors={data.errors}
+          />
+        ),
+      )}
+
       <SignUpButton isValid={isValid} type="submit">
         가입하기
       </SignUpButton>

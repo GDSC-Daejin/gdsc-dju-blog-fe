@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { IFormStructure } from '../SignUpForm/FormInterface';
+import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
 import {
   SignUpInputWrapper,
   SignUpInputLabel,
@@ -20,9 +20,6 @@ const SignUpInput = ({
   condition,
   errors,
 }: IFormStructure) => {
-  const errorCheck = (error: string | undefined) => {
-    return error !== undefined ? true : false;
-  };
   return (
     <SignUpInputWrapper>
       <SignUpInputLabel>
