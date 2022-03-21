@@ -52,10 +52,14 @@ const hashTage = [
   'React Hooks',
   'Redux',
 ];
+
+export const hashTageSpreader = (hashTages: string) => {
+  return hashTages.split(',');
+};
 const BlogHome = () => {
   const { user_name } = useParams<'user_name'>();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const typeParams = searchParams.get('type');
   const type = typeParams ? typeParams : 'all';
   const pageParams = searchParams.get('page');
@@ -75,12 +79,13 @@ const BlogHome = () => {
       navigate(`/${user_name}?type=${type}&page=${page}`);
     }
   };
-  const hashTageSpreader = (hashTages: string) => {
-    return hashTages.split(',');
-  };
+
   useEffect(() => {
     if (page || type) {
-      navigate(`/${user_name}?type=all&page=0`);
+      setSearchParams({
+        type: 'all',
+        page: '0',
+      });
     }
   }, []);
 
@@ -143,12 +148,7 @@ const BlogHome = () => {
             <PostSectionWrapper>
               {pagination().map((data, id) => (
                 <PostCardWrapper key={id}>
-                  <PostCard
-                    title={data.post.title}
-                    date={data.post.uploadDate}
-                    content={data.post.content}
-                    hashTage={data.post.postHashTags}
-                  />
+                  <PostCard {...data.post} />
                 </PostCardWrapper>
               ))}
             </PostSectionWrapper>
