@@ -5,7 +5,7 @@ export const NavDesign = styled.nav`
   position: sticky;
   top: 0;
   z-index: 990;
-  height: 120px;
+  height: 70px;
   width: 100%;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     height: 60px;
@@ -28,7 +28,7 @@ export const NavInner = styled.div`
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     justify-content: space-between;
 `;
-export const BlogWrapper = styled.div`
+export const MainLogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,9 +45,6 @@ export const DeskNavigationWrapper = styled.div`
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     display: none;
   }
-`;
-export const BlogText = styled.div`
-  align-items: center;
 `;
 export const BeforeMargin = styled.div`
   display: flex;
