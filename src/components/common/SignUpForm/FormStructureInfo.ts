@@ -10,7 +10,7 @@ export interface IFormStructure {
   type: 'text' | 'tel' | 'email';
   title: string;
   register: UseFormRegister<FieldValues>;
-  setValue?: UseFormSetValue<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   placeholder?: string;
   condition?: RegisterOptions;
   errors: {

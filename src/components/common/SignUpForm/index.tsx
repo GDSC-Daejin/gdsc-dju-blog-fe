@@ -1,30 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  SignUpFormStyle,
-  SignUpButton,
-  SelectBoxWrapper,
-  SignUpSelectBoxInner,
-  SignUpDefaultSelectBox,
-  SignUpSelectBox,
-  SignUpSelectOption,
-  ArrowWrapper,
-  SignUpColorCircle,
-} from './styled';
+import { SignUpFormStyle, SignUpButton } from './styled';
 import SignUpInput from '../SignUpInput';
-import { IFormStructure, errorCheck } from './FormStructureInfo';
-import BottomArrow from '../../../Images/BottomArrow';
-import {
-  SignUpInputLabel,
-  SignUpInputLabelText,
-  SignUpInputLabelCircle,
-} from '../SignUpInput/styled';
+import SignUpSelect from '../SignUpSelect';
+import { IFormStructure } from './FormStructureInfo';
 
 const SignUpForm = () => {
   const {
     handleSubmit,
     register,
-    getValues,
     setValue,
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
@@ -41,6 +25,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
+      setValue: setValue,
       errors: errors.name,
     },
     {
@@ -52,6 +37,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
+      setValue: setValue,
       errors: errors.nickname,
     },
     {
@@ -67,6 +53,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      setValue: setValue,
       errors: errors.phone,
     },
     {
@@ -82,6 +69,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      setValue: setValue,
       errors: errors.gmail,
     },
     {
@@ -93,6 +81,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
+      setValue: setValue,
       errors: errors.department,
     },
     {
@@ -108,14 +97,19 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      setValue: setValue,
       errors: errors.studentNum,
     },
     {
       refName: 'position',
       type: 'text',
       title: '포지션',
+      condition: {
+        required: '필수 입력란입니다',
+      },
       register: register,
-      errors: errors.studentNum,
+      setValue: setValue,
+      errors: errors.position,
     },
     {
       refName: 'github',
@@ -129,6 +123,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      setValue: setValue,
       errors: errors.github,
     },
     {
@@ -137,6 +132,7 @@ const SignUpForm = () => {
       title: '소개글',
       placeholder: '자신을 소개하는 글을 작성하세요',
       register: register,
+      setValue: setValue,
       errors: errors.intro,
     },
   ];
@@ -155,44 +151,52 @@ const SignUpForm = () => {
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) =>
         data.refName === 'position' ? (
-          <SelectBoxWrapper key={index}>
-            <SignUpInputLabel>
-              <SignUpInputLabelText htmlFor="position">
-                포지션
-              </SignUpInputLabelText>
-              <SignUpInputLabelCircle />
-            </SignUpInputLabel>
-            <SignUpSelectBoxInner>
-              <SignUpDefaultSelectBox
-                {...register('position', {
-                  required: true,
-                })}
-              />
-              <SignUpSelectBox
-                errorCheck={errorCheck(errors.position?.message)}
-                BoxOpen={selectOpen}
-              >
-                <SignUpSelectOption onClick={() => setSelectOpen(!selectOpen)}>
-                  {getValues('position') === undefined
-                    ? '선택'
-                    : getValues('position')}
-                  <ArrowWrapper BoxOpen={selectOpen}>
-                    <BottomArrow />
-                  </ArrowWrapper>
-                </SignUpSelectOption>
-                {PositionOption.map((data, index) => (
-                  <SignUpSelectOption
-                    key={index}
-                    onClick={() => OptionOnClick(data)}
-                  >
-                    <SignUpColorCircle color={data} />
-                    {data}
-                  </SignUpSelectOption>
-                ))}
-              </SignUpSelectBox>
-            </SignUpSelectBoxInner>
-          </SelectBoxWrapper>
+          <SignUpSelect
+            key={index}
+            refName={data.refName}
+            type={data.type}
+            title={data.title}
+            register={register}
+            setValue={setValue}
+            condition={data.condition}
+            errors={data.errors}
+          />
         ) : (
+          // <SelectBoxWrapper key={index}>
+          //   <SignUpInputLabel>
+          //     <SignUpInputLabelText htmlFor="position">
+          //       포지션
+          //     </SignUpInputLabelText>
+          //     <SignUpInputLabelCircle />
+          //   </SignUpInputLabel>
+          //   <SignUpSelectBoxInner>
+          //     <SignUpDefaultSelectBox
+          //       {...register('position', {
+          //         required: true,
+          //       })}
+          //     />
+          //     <SignUpSelectBox
+          //       errorCheck={errorCheck(errors.position?.message)}
+          //       BoxOpen={selectOpen}
+          //     >
+          //       <SignUpSelectOption onClick={() => setSelectOpen(!selectOpen)}>
+          //         선택
+          //         <ArrowWrapper BoxOpen={selectOpen}>
+          //           <BottomArrow />
+          //         </ArrowWrapper>
+          //       </SignUpSelectOption>
+          //       {PositionOption.map((data, index) => (
+          //         <SignUpSelectOption
+          //           key={index}
+          //           onClick={() => OptionOnClick(data)}
+          //         >
+          //           <SignUpColorCircle color={data} />
+          //           {data}
+          //         </SignUpSelectOption>
+          //       ))}
+          //     </SignUpSelectBox>
+          //   </SignUpSelectBoxInner>
+          // </SelectBoxWrapper>
           <SignUpInput
             key={index}
             refName={data.refName}
@@ -200,6 +204,7 @@ const SignUpForm = () => {
             type={data.type}
             title={data.title}
             register={register}
+            setValue={setValue}
             condition={data.condition}
             errors={data.errors}
           />
