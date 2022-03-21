@@ -1,13 +1,11 @@
 import {
   SideBarBtnWrapper,
   SideBarWrapper,
-  SideBarContainer,
   SideBarInner,
   SideBarBtnInner,
   SideBarBtnIcon,
   GrayBox,
   SideBarDesign,
-  SideMenuWrapper,
 } from './styled';
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
@@ -15,58 +13,62 @@ import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
 import SideBarLogout from './SideBarLogout';
 import SideCategoryMenu from '../SideCategoryMenu';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import SideBarCategory from './SideBarCategory';
+import { SideBarMotion } from '../Animation';
 
-const DeskAnimate = {
-  width: 486,
-};
+export const sideBarMenuData = [
+  {
+    route: '/all',
+    title: 'ALL',
+    subtitle: 'all',
+  },
+  {
+    route: '/frontend',
+    title: 'Frontend',
+    subtitle: 'frontend',
+  },
+  {
+    route: '/backend',
+    title: 'Backend',
+    subtitle: 'backend',
+  },
+  {
+    route: '/android',
+    title: 'Android',
+    subtitle: 'android',
+  },
+  {
+    route: '/design',
+    title: 'Design',
+    subtitle: 'design',
+  },
+  {
+    route: '/common',
+    title: 'Common',
+    subtitle: 'beginner',
+  },
+];
 
 export const SideBar = () => {
   const [open, setOpen] = useState(false);
-  const { user_name } = useParams<'user_name'>();
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const typeParams = searchParams.get('type');
-  const type = typeParams ? typeParams : '/';
-  const pageParams = searchParams.get('page');
-  const page = pageParams ? parseInt(pageParams) : 1;
-
+  const location = useLocation();
   return (
     <>
-      <SideBarWrapper>
-        <AnimatePresence>
-          {open && (
-            <SideBarInner
-              initial={{ width: 0 }}
-              animate={DeskAnimate}
-              exit={{
-                width: 0,
-                transition: { delay: 0.5, duration: 0.3 },
-              }}
-            >
-              <SideBarContainer
-                className="container"
-                initial="closed"
-                animate="open"
-                exit="closed"
-              >
-                {/* Login version */}
-                <SideBarDesign>
-                  {/*<SideBarLogout />*/}
-                  <SideBarLogin />
-                  <SideMenuWrapper>
-                    <SideCategoryMenu
-                      type={type}
-                      onClick={(url) =>
-                        navigate(`/${user_name}?type=${url}&page=${page}`)
-                      }
-                    />
-                  </SideMenuWrapper>
-                </SideBarDesign>
-              </SideBarContainer>
-            </SideBarInner>
-          )}
-        </AnimatePresence>
+      <SideBarWrapper
+        initial={false}
+        variants={SideBarMotion}
+        animate={open ? 'isActive' : 'isUnActive'}
+      >
+        <SideBarInner>
+          {/* Login version */}
+          <SideBarDesign>
+            {/*<SideBarLogout />*/}
+            <SideBarLogin />
+            <SideBarCategory locationStyle={location.pathname} />
+          </SideBarDesign>
+        </SideBarInner>
       </SideBarWrapper>
       <SideBarBtnWrapper>
         <SideBarBtnInner>
@@ -79,4 +81,5 @@ export const SideBar = () => {
     </>
   );
 };
+
 export default SideBar;

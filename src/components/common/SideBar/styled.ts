@@ -4,18 +4,16 @@ import { motion } from 'framer-motion';
 export const SideBarWrapper = styled(motion.div)`
   display: flex;
   position: fixed;
-  z-index: 1005;
+  z-index: 1009;
   left: 0px;
   top: 0px;
+  width: 486px;
   height: 100vh;
 `;
 export const SideBarInner = styled(motion.aside)`
-  width: 300px;
+  width: 100%;
   height: 100vh;
   background-color: #ffffff;
-`;
-export const SideBarContainer = styled(motion.div)`
-  margin: 0px;
 `;
 export const SideBarBtnInner = styled.div`
   position: absolute;
@@ -23,7 +21,7 @@ export const SideBarBtnInner = styled.div`
 `;
 export const SideBarBtnWrapper = styled.div`
   position: sticky;
-  top: 48px;
+  top: 25px;
   z-index: 1002;
 `;
 export const SideBarText = styled(motion.a)`
@@ -51,7 +49,7 @@ export const GrayBox = styled.div<{ open: boolean }>`
           background-color: #191f18;
           right: 0px;
           top: 0px;
-          z-index: 1001;
+          z-index: 1003;
           opacity: 0.35;
         `
       : css`
@@ -89,12 +87,12 @@ export const ProfileJobPosition = styled.div`
 `;
 export const SettingIconWrapper = styled.div`
   display: flex;
-  padding-bottom: 10px;
+  padding-bottom: 7px;
 `;
 export const ProfileIntroduceWrapper = styled.div`
   display: flex;
   font-size: 1.6rem;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   color: #191f28;
 `;
 export const MyBlogButtonWrapper = styled.div`
@@ -103,6 +101,7 @@ export const MyBlogButtonWrapper = styled.div`
 `;
 export const BottomButtonWrapper = styled.div`
   display: flex;
+  margin-bottom: 50px;
 `;
 export const WrittingButtonWrapper = styled.div`
   display: flex;

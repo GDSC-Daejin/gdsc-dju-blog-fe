@@ -5,7 +5,7 @@ export const NavDesign = styled.nav`
   position: sticky;
   top: 0;
   z-index: 990;
-  height: 120px;
+  height: 70px;
   width: 100%;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     height: 60px;
@@ -46,25 +46,20 @@ export const DeskNavigationWrapper = styled.div`
     display: none;
   }
 `;
-export const BlogText = styled.div`
-  align-items: center;
-`;
 export const BeforeMargin = styled.div`
   display: flex;
   width: 110px;
   height: 100%;
 `;
 export const NavMargin = styled.div`
-  flex-basis: 505px;
-  flex-shrink: 1;
+  flex-grow: 1;
   min-width: 20px;
 `;
 export const VectorWrapper = styled.div`
   display: flex;
   position: absolute;
   right: 20px;
-  top: 12px;
-  height: 18px;
+  top: 9px;
   @media screen and (max-width: 630px) {
     & svg {
       position: absolute;
@@ -85,8 +80,8 @@ export const SearchWrapper = styled.label`
   position: relative;
 `;
 export const Search = styled.input`
-  width: 480px;
-  height: 38px;
+  min-width: 400px;
+  height: 30px;
   border-radius: 50px;
   border: 1px solid #d1d6db;
   @media screen and (max-width:1000px)
@@ -110,7 +105,6 @@ export const Search = styled.input`
       padding-left: 2px;
     }
     padding-left: 20px;
-    width: 462px;
     outline: 1px solid #d1d6db;
 `;
 export const MobileNavigationWrapper = styled.div`

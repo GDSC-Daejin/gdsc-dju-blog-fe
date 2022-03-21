@@ -21,10 +21,8 @@ import {
 import GdscBlogLogo from '../../../Images/GdscBlogLogo';
 import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
 import GdscLogo from '../../../Images/GdscLogo';
-import SideBar from '../SideBar';
 import MenuToggleIcon from '../MenuToggleIcon';
 import Vector from '../../../Images/Vector';
-import Index from '../MainLogo';
 import MainLogo from '../MainLogo';
 
 function Navigation() {

@@ -18,8 +18,8 @@ export const PositionCircle = styled.div<{ color?: string }>`
 `;
 export const StyledImageWrapper = styled.div`
   display: flex;
-  width: 200px;
-  height: 200px;
+  width: 170px;
+  height: 170px;
   align-items: center;
   position: relative;
 `;

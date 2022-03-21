@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const GdscLogoWrapper = styled.div`
-  margin-right: 20px;
+  margin-right: 14px;
   @media screen and (max-width: 520px) {
     & svg {
       width: 40px;
@@ -10,7 +10,7 @@ export const GdscLogoWrapper = styled.div`
   }
 `;
 export const DaejinUnivLogoWrapper = styled.div`
-  width: 52px;
+  width: 35px;
   padding-top: 12px;
   padding-bottom: 5px;
   display: flex;
