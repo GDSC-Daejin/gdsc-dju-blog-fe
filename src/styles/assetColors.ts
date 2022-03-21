@@ -56,7 +56,7 @@ export const googleLogoColor = {
   GDSC_Blue: '#4385F3',
   GDSC_Yellow: '#FABC05',
   GDSC_Green: '#179D58',
-  Common: '#FF740F',
+  GDSC_Beginner: '#FF740F',
 };
 export const primaryColor = {
   ...assetGrey,

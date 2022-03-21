@@ -77,7 +77,7 @@ const handleColorType = (color: string) => {
     case 'Android':
       return assetColors.GDSC_Green;
     case 'Beginner':
-      return assetColors.Common;
+      return assetColors.GDSC_Beginner;
   }
 };
 
