@@ -25,7 +25,7 @@ const SignUpForm = () => {
     handleSubmit,
     register,
     setValue,
-    formState: { errors, isValid, touchedFields },
+    formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
   const onSubmit = (values: any) => console.log(values);
@@ -132,6 +132,9 @@ const SignUpForm = () => {
     },
   ];
   const PositionOption = ['FE', 'BE', 'DE', 'Android', 'Common'];
+  const errorCheck = (error: string | undefined) => {
+    return error !== undefined ? true : false;
+  };
 
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
@@ -158,7 +161,7 @@ const SignUpForm = () => {
               required: true,
             })}
           />
-          <SignUpSelectBox>
+          <SignUpSelectBox errorCheck={errorCheck(errors.position?.message)}>
             <SignUpSelectOption>
               선택
               <LeftArrowWrapper>
@@ -182,7 +185,6 @@ const SignUpForm = () => {
           </SignUpSelectBox>
         </SignUpSelectBoxWrapper>
       </SelectBoxWrapper>
-      {errors && errors.position?.type}
       <SignUpButton isValid={isValid} type="submit">
         가입하기
       </SignUpButton>

@@ -38,20 +38,27 @@ export const SelectBoxWrapper = styled.div`
 
 export const SignUpSelectBoxWrapper = styled.div`
   position: relative;
+  width: 512px;
+  height: 48px;
 `;
 
 export const SignUpDefaultSelectBox = styled.input`
-  /* display: none; */
+  display: none;
 `;
 
-export const SignUpSelectBox = styled.ul`
+export const SignUpSelectBox = styled.ul<{
+  errorCheck: boolean;
+}>`
   width: 512px;
-  height: 288px;
+  height: px;
   list-style-type: none;
   overflow: hidden;
   border: 1px solid ${(props) => props.theme.color.grey400};
   box-sizing: border-box;
   border-radius: 10px;
+  border: 1px solid
+    ${(props) =>
+      props.errorCheck ? props.theme.color.tossRed : props.theme.color.grey400};
   li:first-child {
     display: flex;
     justify-content: space-between;
@@ -61,7 +68,6 @@ export const SignUpSelectBox = styled.ul`
     }
   }
 `;
-
 export const SignUpSelectOption = styled.li`
   width: 100%;
   display: flex;
