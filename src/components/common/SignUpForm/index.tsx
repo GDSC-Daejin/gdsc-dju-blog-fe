@@ -8,7 +8,7 @@ import {
   SignUpDefaultSelectBox,
   SignUpSelectBox,
   SignUpSelectOption,
-  LeftArrowWrapper,
+  ArrowWrapper,
   SignUpColorCircle,
 } from './styled';
 import SignUpInput from '../SignUpInput';
@@ -24,11 +24,13 @@ const SignUpForm = () => {
   const {
     handleSubmit,
     register,
+    getValues,
     setValue,
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
   const onSubmit = (values: any) => console.log(values);
+  const [selectOpen, setSelectOpen] = useState(false);
   const formData: IFormStructure[] = [
     {
       refName: 'name',
@@ -139,6 +141,15 @@ const SignUpForm = () => {
     },
   ];
   const PositionOption = ['FE', 'BE', 'DE', 'Android', 'Common'];
+  const OptionOnClick = (data: string) => {
+    setSelectOpen((prev) => {
+      return !prev;
+    });
+    setValue('position', data, {
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
 
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
@@ -159,22 +170,20 @@ const SignUpForm = () => {
               />
               <SignUpSelectBox
                 errorCheck={errorCheck(errors.position?.message)}
+                BoxOpen={selectOpen}
               >
-                <SignUpSelectOption>
-                  선택
-                  <LeftArrowWrapper>
+                <SignUpSelectOption onClick={() => setSelectOpen(!selectOpen)}>
+                  {getValues('position') === undefined
+                    ? '선택'
+                    : getValues('position')}
+                  <ArrowWrapper BoxOpen={selectOpen}>
                     <BottomArrow />
-                  </LeftArrowWrapper>
+                  </ArrowWrapper>
                 </SignUpSelectOption>
                 {PositionOption.map((data, index) => (
                   <SignUpSelectOption
                     key={index}
-                    onClick={() =>
-                      setValue('position', data, {
-                        shouldTouch: true,
-                        shouldValidate: true,
-                      })
-                    }
+                    onClick={() => OptionOnClick(data)}
                   >
                     <SignUpColorCircle color={data} />
                     {data}

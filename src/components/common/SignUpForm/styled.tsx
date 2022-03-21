@@ -49,13 +49,14 @@ export const SignUpDefaultSelectBox = styled.input`
 
 export const SignUpSelectBox = styled.ul<{
   errorCheck: boolean;
+  BoxOpen: boolean;
 }>`
   position: relative;
   width: 512px;
-  height: 288px;
-  //height:48px
+  /* height: 48px; 288px; */
+  height: ${(props) => (props.BoxOpen ? '288px' : '48px')};
   z-index: 30;
-  background-color: yellow;
+  background-color: #fff;
   list-style-type: none;
   overflow: hidden;
   border: 1px solid ${(props) => props.theme.color.grey400};
@@ -80,7 +81,7 @@ export const SignUpSelectOption = styled.li`
   gap: 4px;
   box-sizing: border-box;
   cursor: pointer;
-  padding: 11px 32px;
+  padding: 11px 20px;
   color: ${(props) => props.theme.color.grey400};
   font-family: 'Noto Sans KR';
   font-style: normal;
@@ -114,9 +115,9 @@ export const SignUpColorCircle = styled.div<{ color: string }>`
   border-radius: 50%;
 `;
 
-export const LeftArrowWrapper = styled.div`
+export const ArrowWrapper = styled.div<{ BoxOpen: boolean }>`
   transition: all 0.3s ease;
   svg {
-    transform: rotate(180deg);
+    transform: ${(props) => props.BoxOpen && 'rotate(180deg)'};
   }
 `;
