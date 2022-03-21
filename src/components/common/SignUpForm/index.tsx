@@ -14,7 +14,6 @@ const SignUpForm = () => {
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
   const onSubmit = (values: any) => console.log(values);
-  const [selectOpen, setSelectOpen] = useState(false);
   const formData: IFormStructure[] = [
     {
       refName: 'name',
@@ -136,16 +135,6 @@ const SignUpForm = () => {
       errors: errors.intro,
     },
   ];
-  const PositionOption = ['FE', 'BE', 'DE', 'Android', 'Common'];
-  const OptionOnClick = (data: string) => {
-    setSelectOpen((prev) => {
-      return !prev;
-    });
-    setValue('position', data, {
-      shouldTouch: true,
-      shouldValidate: true,
-    });
-  };
 
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
@@ -162,41 +151,6 @@ const SignUpForm = () => {
             errors={data.errors}
           />
         ) : (
-          // <SelectBoxWrapper key={index}>
-          //   <SignUpInputLabel>
-          //     <SignUpInputLabelText htmlFor="position">
-          //       포지션
-          //     </SignUpInputLabelText>
-          //     <SignUpInputLabelCircle />
-          //   </SignUpInputLabel>
-          //   <SignUpSelectBoxInner>
-          //     <SignUpDefaultSelectBox
-          //       {...register('position', {
-          //         required: true,
-          //       })}
-          //     />
-          //     <SignUpSelectBox
-          //       errorCheck={errorCheck(errors.position?.message)}
-          //       BoxOpen={selectOpen}
-          //     >
-          //       <SignUpSelectOption onClick={() => setSelectOpen(!selectOpen)}>
-          //         선택
-          //         <ArrowWrapper BoxOpen={selectOpen}>
-          //           <BottomArrow />
-          //         </ArrowWrapper>
-          //       </SignUpSelectOption>
-          //       {PositionOption.map((data, index) => (
-          //         <SignUpSelectOption
-          //           key={index}
-          //           onClick={() => OptionOnClick(data)}
-          //         >
-          //           <SignUpColorCircle color={data} />
-          //           {data}
-          //         </SignUpSelectOption>
-          //       ))}
-          //     </SignUpSelectBox>
-          //   </SignUpSelectBoxInner>
-          // </SelectBoxWrapper>
           <SignUpInput
             key={index}
             refName={data.refName}
