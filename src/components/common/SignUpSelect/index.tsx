@@ -1,3 +1,4 @@
+import { watch } from 'fs';
 import React, { useState } from 'react';
 import BottomArrow from '../../../Images/BottomArrow';
 import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
@@ -21,6 +22,7 @@ const SignUpSelect = ({
   condition,
   register,
   setValue,
+  watch,
   errors,
 }: IFormStructure) => {
   const [selectOpen, setSelectOpen] = useState(false);
@@ -47,14 +49,21 @@ const SignUpSelect = ({
           errorCheck={errorCheck(errors?.message)}
           BoxOpen={selectOpen}
         >
-          <SignUpSelectOption onClick={() => setSelectOpen(!selectOpen)}>
-            선택
+          <SignUpSelectOption
+            onClick={() => setSelectOpen(!selectOpen)}
+            selected={false}
+          >
+            {watch('position', '') === '' ? '선택' : watch('position')}
             <ArrowWrapper BoxOpen={selectOpen}>
               <BottomArrow />
             </ArrowWrapper>
           </SignUpSelectOption>
           {PositionOption.map((data, index) => (
-            <SignUpSelectOption key={index} onClick={() => OptionOnClick(data)}>
+            <SignUpSelectOption
+              key={index}
+              onClick={() => OptionOnClick(data)}
+              selected={watch('position') === data ? true : false}
+            >
               <SignUpColorCircle color={data} />
               {data}
             </SignUpSelectOption>

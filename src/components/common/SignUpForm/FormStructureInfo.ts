@@ -3,6 +3,7 @@ import {
   UseFormRegister,
   FieldValues,
   UseFormSetValue,
+  UseFormWatch,
 } from 'react-hook-form';
 
 export interface IFormStructure {
@@ -11,6 +12,7 @@ export interface IFormStructure {
   title: string;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  watch: UseFormWatch<FieldValues>;
   placeholder?: string;
   condition?: RegisterOptions;
   errors: {

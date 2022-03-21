@@ -46,7 +46,7 @@ export const SignUpSelectBox = styled.ul<{
     }
   }
 `;
-export const SignUpSelectOption = styled.li`
+export const SignUpSelectOption = styled.li<{ selected: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -60,6 +60,7 @@ export const SignUpSelectOption = styled.li`
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
+  background-color: ${(props) => props.selected && props.theme.color.grey100};
   &:hover {
     background-color: ${(props) => props.theme.color.grey100};
   }

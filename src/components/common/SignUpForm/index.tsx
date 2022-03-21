@@ -10,6 +10,7 @@ const SignUpForm = () => {
     handleSubmit,
     register,
     setValue,
+    watch,
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
@@ -24,6 +25,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.name,
     },
@@ -36,6 +38,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.nickname,
     },
@@ -52,6 +55,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.phone,
     },
@@ -68,6 +72,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.gmail,
     },
@@ -80,6 +85,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.department,
     },
@@ -96,6 +102,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.studentNum,
     },
@@ -107,6 +114,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.position,
     },
@@ -122,6 +130,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.github,
     },
@@ -131,6 +140,7 @@ const SignUpForm = () => {
       title: '소개글',
       placeholder: '자신을 소개하는 글을 작성하세요',
       register: register,
+      watch: watch,
       setValue: setValue,
       errors: errors.intro,
     },
@@ -146,6 +156,7 @@ const SignUpForm = () => {
             type={data.type}
             title={data.title}
             register={register}
+            watch={watch}
             setValue={setValue}
             condition={data.condition}
             errors={data.errors}
@@ -161,6 +172,7 @@ const SignUpForm = () => {
             setValue={setValue}
             condition={data.condition}
             errors={data.errors}
+            watch={watch}
           />
         ),
       )}
