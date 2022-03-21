@@ -24,7 +24,8 @@ const SignUpForm = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    setValue,
+    formState: { errors, isValid, touchedFields },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
   const onSubmit = (values: any) => console.log(values);
@@ -113,10 +114,10 @@ const SignUpForm = () => {
       title: '깃허브',
       placeholder: '깃허브 주소를 입력하세요',
       condition: {
-        // pattern: {
-        //   value: /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
-        //   message: 'github.com 형식으로 작성해주세요',
-        // },
+        pattern: {
+          value: /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
+          message: 'github.com 형식으로 작성해주세요',
+        },
       },
       register: register,
       errors: errors.github,
@@ -130,7 +131,6 @@ const SignUpForm = () => {
       errors: errors.intro,
     },
   ];
-  const [selectValue, setSelectValue] = useState('');
   const PositionOption = ['FE', 'BE', 'DE', 'Android', 'Common'];
 
   return (
@@ -154,10 +154,8 @@ const SignUpForm = () => {
         </SignUpInputLabel>
         <SignUpSelectBoxWrapper>
           <SignUpDefaultSelectBox
-            value={selectValue}
             {...register('position', {
-              required: '필수 입력란입니다',
-              value: selectValue,
+              required: true,
             })}
           />
           <SignUpSelectBox>
@@ -170,7 +168,12 @@ const SignUpForm = () => {
             {PositionOption.map((data, index) => (
               <SignUpSelectOption
                 key={index}
-                onClick={() => setSelectValue(data)}
+                onClick={() =>
+                  setValue('position', data, {
+                    shouldTouch: true,
+                    shouldValidate: true,
+                  })
+                }
               >
                 <SignUpColorCircle color={data} />
                 {data}
@@ -179,6 +182,7 @@ const SignUpForm = () => {
           </SignUpSelectBox>
         </SignUpSelectBoxWrapper>
       </SelectBoxWrapper>
+      {errors && errors.position?.type}
       <SignUpButton isValid={isValid} type="submit">
         가입하기
       </SignUpButton>
