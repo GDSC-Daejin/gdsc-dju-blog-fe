@@ -108,6 +108,10 @@ export const GdscSideLogoWrapper = styled.div`
   display: flex;
   margin-top: 150px;
   padding-bottom: 25px;
+  & svg {
+    width: 95px;
+    height: 45px;
+  }
 `;
 export const GdscSideUnivWrapper = styled.div`
   display: flex;
@@ -120,11 +124,15 @@ export const GdscSideUnivWrapper = styled.div`
 export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
   padding-bottom: 8px;
+  & svg {
+    width: 216px;
+    height: 40px;
+  }
 `;
 export const GoogleLogoWrapper = styled.div`
   display: flex;
   position: absolute;
-  left: 10px;
+  left: 28px;
   top: 7px;
   & div {
     border-radius: 5px;
@@ -138,7 +146,7 @@ export const GoogleButtonWrapper = styled.div`
   display: flex;
   position: relative;
   padding-bottom: 80px;
-`;
-export const SideMenuWrapper = styled.div`
-  display: flex;
+  & button {
+    padding: 8px 25px 8px 50px;
+  }
 `;

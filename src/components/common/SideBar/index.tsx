@@ -62,8 +62,8 @@ export const SideBar = () => {
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>
-            {/*<SideBarLogout />*/}
-            <SideBarLogin />
+            <SideBarLogout />
+            {/*<SideBarLogin />*/}
             <SideBarCategory locationStyle={location.pathname} />
           </SideBarDesign>
         </SideBarInner>
