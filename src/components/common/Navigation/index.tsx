@@ -54,7 +54,6 @@ function Navigation() {
             </DeskNavigationWrapper>
             {/* Mobile Navigation */}
             <MobileNavigationWrapper>
-              <MenuToggleIcon />
               <LogoWrapper onClick={() => navigate('/')}>
                 <GdscLogoWrapper>
                   <GdscLogo />

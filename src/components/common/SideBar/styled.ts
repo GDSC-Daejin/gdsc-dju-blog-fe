@@ -18,6 +18,9 @@ export const SideBarInner = styled(motion.aside)`
 export const SideBarBtnInner = styled.div`
   position: absolute;
   left: 55px;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    top: -10px;
+    left: 20px;
 `;
 export const SideBarBtnWrapper = styled.div`
   position: sticky;
@@ -36,6 +39,12 @@ export const SideBarBtnIcon = styled.div`
   border: none;
   background-color: #ffffff;
   cursor: pointer;
+  & svg {
+    @media screen and (max-width: ${(props) =>
+      props.theme.windowSize.mobile}px) {
+      width: 20px;
+      height: 16px;
+  }
 `;
 export const GrayBox = styled.div<{ open: boolean }>`
   display: none;

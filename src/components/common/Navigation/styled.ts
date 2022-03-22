@@ -118,6 +118,9 @@ export const MobileNavigationWrapper = styled.div`
 
 export const GdscLogoWrapper = styled.div`
   display: flex;
+  position: absolute;
+  left: 43%;
+  top: 20px;
   & svg {
     width: 40px;
     height: 20px;
