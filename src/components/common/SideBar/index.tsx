@@ -11,7 +11,6 @@ import React, { useState } from 'react';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
 import SideBarLogout from './SideBarLogout';
-import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import SideBarCategory from './SideBarCategory';
 import { SideBarMotion } from '../Animation';
@@ -62,8 +61,8 @@ export const SideBar = () => {
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>
-            <SideBarLogout />
-            {/*<SideBarLogin />*/}
+            {/*<SideBarLogout />*/}
+            <SideBarLogin />
             <SideBarCategory locationStyle={location.pathname} />
           </SideBarDesign>
         </SideBarInner>

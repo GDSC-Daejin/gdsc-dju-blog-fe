@@ -6,7 +6,7 @@ export const NavDesign = styled.nav`
   top: 0;
   z-index: 990;
   height: 70px;
-  width: 100%;
+  width: 100vw;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     height: 60px;
 `;
@@ -14,7 +14,6 @@ export const NavWrapper = styled.div`
   display: flex;
   flex-direction: row;
   position: relative;
-  max-width: 1440px;
   width: 100%;
   margin: auto;
   height: 100%;
