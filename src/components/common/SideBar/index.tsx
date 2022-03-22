@@ -8,11 +8,9 @@ import {
   SideBarDesign,
 } from './styled';
 import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
 import SideBarLogout from './SideBarLogout';
-import SideCategoryMenu from '../SideCategoryMenu';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import SideBarCategory from './SideBarCategory';
@@ -25,22 +23,22 @@ export const sideBarMenuData = [
     subtitle: 'all',
   },
   {
-    route: '/frontend',
+    route: '/fe',
     title: 'Frontend',
     subtitle: 'frontend',
   },
   {
-    route: '/backend',
+    route: '/be',
     title: 'Backend',
     subtitle: 'backend',
   },
   {
-    route: '/android',
+    route: '/and',
     title: 'Android',
     subtitle: 'android',
   },
   {
-    route: '/design',
+    route: '/de',
     title: 'Design',
     subtitle: 'design',
   },

@@ -89,12 +89,6 @@ export const SettingIconWrapper = styled.div`
   display: flex;
   padding-bottom: 7px;
 `;
-export const ProfileIntroduceWrapper = styled.div`
-  display: flex;
-  font-size: 1.6rem;
-  padding-bottom: 20px;
-  color: #191f28;
-`;
 export const MyBlogButtonWrapper = styled.div`
   display: flex;
   padding-bottom: 12px;

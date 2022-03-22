@@ -17,7 +17,7 @@ export const SideCategoryTextWrapper = styled(motion.div)`
   color: ${(props) => props.theme.color.grey300};
   position: relative;
   display: flex;
-  margin-bottom: 34px;
+  margin-bottom: 24px;
 `;
 export const SideCategoryMenuWrapper = styled(motion.div)`
   display: flex;

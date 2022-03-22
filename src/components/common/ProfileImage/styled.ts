@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledImage = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
 `;
 export const PositionCircle = styled.div<{ color?: string }>`

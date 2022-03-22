@@ -24,7 +24,7 @@ const SideBarCategory = ({ locationStyle }: any) => {
           <SideCategoryTextWrapper
             key={id}
             onClick={() => {
-              navigate(data.route);
+              navigate(`/category${data.route}`);
             }}
           >
             <SideCategoryCircleWrapper

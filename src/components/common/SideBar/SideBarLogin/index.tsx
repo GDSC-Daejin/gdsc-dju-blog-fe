@@ -5,7 +5,6 @@ import {
   MyBlogButtonWrapper,
   ProfileImageWrapper,
   ProfileInformation,
-  ProfileIntroduceWrapper,
   ProfileJobPosition,
   ProfileName,
   SettingIconWrapper,
@@ -29,9 +28,6 @@ const SideBarLogin = () => {
           <SettingIcon />
         </SettingIconWrapper>
       </ProfileInformation>
-      <ProfileIntroduceWrapper>
-        한 줄 소개글 쓰면 됩니다
-      </ProfileIntroduceWrapper>
       <MyBlogButtonWrapper>
         <GDSCButtonL text="내 블로그" disable={false} />
       </MyBlogButtonWrapper>
