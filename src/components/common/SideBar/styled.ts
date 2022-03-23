@@ -79,7 +79,7 @@ export const ProfileImageWrapper = styled.div`
 export const ProfileInformation = styled.div`
   display: flex;
   align-items: end;
-  padding-bottom: 4px;
+  padding-bottom: 20px;
 `;
 export const ProfileName = styled.div`
   display: flex;
@@ -104,7 +104,7 @@ export const MyBlogButtonWrapper = styled.div`
 `;
 export const BottomButtonWrapper = styled.div`
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 `;
 export const WrittingButtonWrapper = styled.div`
   display: flex;

@@ -39,6 +39,7 @@ export const LogoWrapper = styled.a`
 `;
 export const DeskNavigationWrapper = styled.div`
   width: 100%;
+  height: 100%;
   align-items: center;
   display: flex;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
