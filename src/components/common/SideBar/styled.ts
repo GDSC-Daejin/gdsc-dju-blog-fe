@@ -154,7 +154,7 @@ export const GoogleLogoWrapper = styled.div`
 export const GoogleButtonWrapper = styled.div`
   display: flex;
   position: relative;
-  padding-bottom: 64px;
+  padding-bottom: 60px;
   & button {
     padding: 8px 25px 8px 50px;
   }
