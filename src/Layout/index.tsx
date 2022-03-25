@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
+=======
+import React, { lazy, Suspense } from 'react';
+>>>>>>> 71591b5ad2bcd855f8345e722a17d10069865244
 import { Route, Routes } from 'react-router-dom';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';

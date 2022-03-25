@@ -21,6 +21,7 @@ interface Iprops {
 }
 const GDSCButtonL = (props: Iprops) => {
   const { text, color, disable, onClick, type } = props;
+}
 
   return (
     <StyledButton
