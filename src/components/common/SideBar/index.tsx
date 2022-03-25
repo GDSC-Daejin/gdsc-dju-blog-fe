@@ -14,8 +14,6 @@ import SideBarLogout from './SideBarLogout';
 import { useLocation } from 'react-router';
 import SideBarCategory from './SideBarCategory';
 import { SideBarMotion } from '../Animation';
-import { MENU_KEY, menuState } from '../../../store/menu';
-import { useRecoilState } from 'recoil';
 
 export const sideBarMenuData = [
   {
@@ -51,38 +49,32 @@ export const sideBarMenuData = [
 ];
 
 export const SideBar = () => {
-  const [menu, setMenu] = useRecoilState(menuState);
-
+  const [open, setOpen] = useState(false);
   const location = useLocation();
   return (
     <>
       <SideBarWrapper
         initial={false}
         variants={SideBarMotion}
-        animate={menu.appMenu ? 'isActive' : 'isUnActive'}
+        animate={open ? 'isActive' : 'isUnActive'}
       >
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>
-            {/*<SideBarLogout />*/}
-            <SideBarLogin />
+            <SideBarLogout />
+            {/*<SideBarLogin />*/}
             <SideBarCategory locationStyle={location.pathname} />
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
       <SideBarBtnWrapper>
         <SideBarBtnInner>
-          <SideBarBtnIcon>
+          <SideBarBtnIcon onClick={() => setOpen(true)}>
             <MenuToggleIcon />
           </SideBarBtnIcon>
         </SideBarBtnInner>
       </SideBarBtnWrapper>
-      <GrayBox
-        onClick={() => {
-          setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
-        }}
-        open={menu.appMenu}
-      />
+      <GrayBox onClick={() => setOpen(false)} open={open} />
     </>
   );
 };

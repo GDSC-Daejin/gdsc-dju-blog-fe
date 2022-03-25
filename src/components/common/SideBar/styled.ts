@@ -13,8 +13,6 @@ export const SideBarWrapper = styled(motion.div)`
 export const SideBarInner = styled(motion.aside)`
   width: 100%;
   height: 100vh;
-  display: flex;
-  justify-content: center;
   background-color: #ffffff;
 `;
 export const SideBarBtnInner = styled.div`
@@ -70,11 +68,11 @@ export const GrayBox = styled.div<{ open: boolean }>`
 export const SideBarDesign = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 143px;
   white-space: nowrap;
 `;
 export const ProfileImageWrapper = styled.div`
   display: flex;
-  justify-content: center;
   margin-top: 60px;
   padding-bottom: 24px;
 `;
@@ -85,7 +83,6 @@ export const ProfileInformation = styled.div`
 `;
 export const ProfileName = styled.div`
   display: flex;
-  padding-left: 10px;
   padding-right: 10px;
   font-size: 3.2rem;
   font-weight: bold;
@@ -119,7 +116,6 @@ export const LogoutButtonWrapper = styled.div`
 export const GdscSideLogoWrapper = styled.div`
   display: flex;
   margin-top: 150px;
-  padding-left: 10px;
   padding-bottom: 25px;
   & svg {
     width: 95px;
@@ -129,7 +125,6 @@ export const GdscSideLogoWrapper = styled.div`
 export const GdscSideUnivWrapper = styled.div`
   display: flex;
   width: 100px;
-  padding-left: 7px;
   padding-bottom: 10px;
   & svg {
     height: 18px;
@@ -147,7 +142,7 @@ export const GoogleLogoWrapper = styled.div`
   display: flex;
   position: absolute;
   left: 28px;
-  top: 8px;
+  top: 7px;
   & div {
     border-radius: 5px;
     width: 34px;

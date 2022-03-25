@@ -14,7 +14,6 @@ import ProfileImage from '../../ProfileImage';
 import MockProfile from '../../../../Images/MockProfile.png';
 import SettingIcon from '../../../../Images/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
-import { userData } from '../../../../api/Mocks/userData';
 
 const SideBarLogin = () => {
   return (
@@ -23,23 +22,21 @@ const SideBarLogin = () => {
         <ProfileImage image={MockProfile} position="frontend" />
       </ProfileImageWrapper>
       <ProfileInformation>
-        <ProfileName>{userData.memberInfo.nickname}</ProfileName>
-        <ProfileJobPosition>
-          {userData.memberInfo.positionType}
-        </ProfileJobPosition>
+        <ProfileName>Gabi</ProfileName>
+        <ProfileJobPosition>member</ProfileJobPosition>
         <SettingIconWrapper>
           <SettingIcon />
         </SettingIconWrapper>
       </ProfileInformation>
       <MyBlogButtonWrapper>
-        <GDSCButtonL text="내 블로그" />
+        <GDSCButtonL text="내 블로그" disable={false} />
       </MyBlogButtonWrapper>
       <BottomButtonWrapper>
         <WrittingButtonWrapper>
-          <GDSCButton text="글쓰기" />
+          <GDSCButton text="글쓰기" disable={false} />
         </WrittingButtonWrapper>
         <LogoutButtonWrapper>
-          <GDSCButton text="로그아웃" />
+          <GDSCButton text="로그아웃" disable={true} />
         </LogoutButtonWrapper>
       </BottomButtonWrapper>
     </>
