@@ -45,7 +45,7 @@ export const userData = {
         uploadDate: '2022-01-06 14:57:42.777000',
       },
     ],
-    nickName: 'Rocoli',
+    nickname: 'Rocoli',
     phoneNumber: '010-9132-1234',
     positionType: 'Beginner',
     studentID: 'string',
