@@ -11,6 +11,15 @@ export const BlogCardInner = styled(motion.div)`
   box-shadow: 0px 19px 32px -1px rgba(0, 0, 0, 0.1);
 `;
 
+export const BookMarkWrapper = styled.div`
+  position: absolute;
+  width: 23.33px;
+  height: 30px;
+  right: 17px;
+  top: -3px;
+  cursor: pointer;
+`;
+
 export const BlogCardThumbnail = styled.img`
   width: 276px;
   height: 328px;

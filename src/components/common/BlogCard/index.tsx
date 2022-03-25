@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHover } from 'react-use';
 import BlogCardImage from '../../../Images/unknown.png';
+import { useNavigate } from 'react-router';
 import {
   BlogCardAuthorImage,
   BlogCardAuthorWrapper,
   BlogCardBottomBox,
   BlogCardInner,
+  BookMarkWrapper,
   BlogCardPostText,
   BlogCardSubText,
   BlogCardSubTextWrapper,
@@ -15,6 +17,7 @@ import {
   BlogCardTagWrapper,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import Bookmark from '../../../Images/Bookmark';
 
 const PostTextVariants = {
   initial: {
@@ -31,13 +34,28 @@ const PostTextVariants = {
 };
 
 const BlogCard = () => {
-  // const [isHovered, setIsHovered] = useState(false);
   const [BlogCardBottomText, IsHovered] = useHover(BottomText);
+  const nowLogin = false;
+  const Navigate = useNavigate();
+  const [marked, setMarked] = useState(false);
   const CardTag: string[] = ['darkmode', 'darkmode'];
+  const setBookmarkClip = () => {
+    if (nowLogin)
+      setMarked((prev) => {
+        return !prev;
+      });
+    else {
+      alert('로그인 후 이용가능합니다');
+      Navigate('/123', { replace: false });
+    }
+  };
 
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
+        <BookMarkWrapper onClick={setBookmarkClip}>
+          <Bookmark marked={marked} />
+        </BookMarkWrapper>
         <BlogCardThumbnail src={BlogCardImage} />
         <BlogCardTagWrapper IsHovered={IsHovered}>
           {CardTag.map((data: string, index: number) => (
