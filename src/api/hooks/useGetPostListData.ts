@@ -1,14 +1,15 @@
 import useSWR from 'swr';
 import API from '../index';
 import { detailPostDataType } from '../../types/postData';
+import { url } from './postPagination';
 
-async function getPostListData(category: string) {
-  const res = await API.getPostListData(category);
+async function getPostListData(params: string) {
+  const res = await API.getPostListData(params);
   return res.data;
 }
-export function useGetPostListData(category: string) {
-  const { data, error } = useSWR<detailPostDataType[]>(
-    [`/userPost/${category}`, category],
+export function useGetPostListData(category: string, page = 0) {
+  const { data, error } = useSWR(
+    [`post/list/${url(category, page)}`],
     getPostListData,
   );
   return {

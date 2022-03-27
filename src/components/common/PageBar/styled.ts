@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
 export const PageBarWrapper = styled.div`
@@ -8,6 +9,15 @@ export const PageBarWrapper = styled.div`
 export const Number = styled.p`
   font-size: ${(props) => props.theme.fontSize.body1};
 `;
+export const NumberCircle = styled(motion.div)`
+  background: ${(props) => props.theme.color.grey900};
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  border-radius: 50%;
+  top: -10px;
+  opacity: 0;
+`;
 export const NumberWrapper = styled.div<{ active: boolean }>`
   cursor: pointer;
   display: flex;
@@ -16,6 +26,8 @@ export const NumberWrapper = styled.div<{ active: boolean }>`
   width: 16px;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  position: relative;
   color: ${(props) => props.theme.color.grey400};
   transition: all 0.3s ease-in-out;
   ${(props) =>

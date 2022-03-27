@@ -14,15 +14,10 @@ import MockPostImage from '../../../Images/MockPostImage.png';
 import { HashTageDark } from '../HashTage';
 import Bookmark from '../../../Images/Bookmark';
 import { hashTageSpreader } from '../../../pages/MyBlog/BlogHome';
+import { detailPostDataType } from '../../../types/postData';
 
-type Iprops = {
-  uploadDate: string;
-  title: string;
-  postHashTags: string;
-  content: string;
-};
-const PostCard = (props: Iprops) => {
-  const { uploadDate, title, postHashTags, content } = props;
+const PostCard = (props: detailPostDataType) => {
+  const { title, category, content, postId, postHashTags } = props;
 
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
@@ -65,7 +60,7 @@ const PostCard = (props: Iprops) => {
         >
           <Bookmark marked={marked} />
         </BookmarkWrapper>
-        <PostDate>{dateFilter(uploadDate)}</PostDate>
+        <PostDate>{dateFilter(category.uploadDate)}</PostDate>
         <PostTitle>{title}</PostTitle>
         <PostHashTageSection>
           {hashTageSpreader(postHashTags).map((data, id) => (

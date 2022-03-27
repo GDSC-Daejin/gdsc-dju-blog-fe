@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { memberDataInfoType, userDataType } from '../types/userDataType';
-import { detailPostDataType } from '../types/postData';
+import { detailPostDataType, rowDetailPostDataType } from '../types/postData';
 
 export class Api {
   private API: string;
@@ -31,15 +31,16 @@ export class Api {
       headers: this.Header,
     });
   };
-  getUserPostListData = (category?: string) => {
-    return axios.get(`${this.API}/api/member/v1/myPost/${category}`, {
-      headers: this.Header,
-    });
-  };
-  getPostListData = (category?: string) => {
-    return axios.get<detailPostDataType[]>(
-      `${this.API}/api/v1/post/list/${category}`,
+  getUserPostListData = (params: string) => {
+    return axios.get<rowDetailPostDataType>(
+      `${this.API}/api/member/v1/${params}`,
+      {
+        headers: this.Header,
+      },
     );
+  };
+  getPostListData = (params: string) => {
+    return axios.get<rowDetailPostDataType>(`${this.API}/api/v1/${params}`);
   };
   getPostDetailData = (postId: string) => {
     return axios.get(`${this.API}/api/v1/post/${postId}`);

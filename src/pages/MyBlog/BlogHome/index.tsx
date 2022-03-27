@@ -37,6 +37,7 @@ import Setting from '../../../Images/Setting';
 import PageBar from '../../../components/common/PageBar';
 import API from '../../../api/index';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { useGetUserPostListData } from '../../../api/hooks/useGetUserPostListData';
 
 const hashTage = [
   'React',
@@ -65,10 +66,9 @@ const BlogHome = () => {
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
   const { userData } = useGetUserData();
+  const { userPostData } = useGetUserPostListData(type, page);
+  console.log(userPostData);
 
-  const pagination = () => {
-    return postListData.slice(page === 0 ? 0 : page * 10 + 1, (page + 1) * 10);
-  };
   const pageHandler = (page: number, limit?: number) => {
     if (page < 0) {
       return;
@@ -92,9 +92,10 @@ const BlogHome = () => {
   return (
     <>
       <NavigationBlock />
-      {userData && (
-        <LayoutContainer>
-          <ContainerInner>
+
+      <LayoutContainer>
+        <ContainerInner>
+          {userData && (
             <ProfileWrapper>
               <ProfileImageWrapper>
                 <ProfileImage
@@ -129,35 +130,43 @@ const BlogHome = () => {
                 </HashTageSection>
               </ProfileDetailWrapper>
             </ProfileWrapper>
-            <TopMenuWrapper>
-              <CategoryMenu
-                type={type as string}
-                onClick={(url: string) =>
-                  navigate(`/${user_name}?type=${url}&page=${page}`)
-                }
+          )}
+          <TopMenuWrapper>
+            <CategoryMenu
+              type={type as string}
+              onClick={(url: string) =>
+                navigate(`/${user_name}?type=${url}&page=${page}`)
+              }
+            />
+            <ButtonWrapper>
+              <GDSCButton
+                text={'스크랩'}
+                onClick={() => navigate(`/${user_name}/likes`)}
               />
-              <ButtonWrapper>
-                <GDSCButton
-                  text={'스크랩'}
-                  onClick={() => navigate(`${user_name}/likes`)}
+              <GDSCButton text={'글쓰기'} />
+            </ButtonWrapper>
+          </TopMenuWrapper>
+          {userPostData && (
+            <>
+              <PostSectionWrapper>
+                {!userPostData.empty &&
+                  userPostData.content.map((data) => (
+                    <PostCardWrapper key={data.postId}>
+                      <PostCard {...data} />
+                    </PostCardWrapper>
+                  ))}
+              </PostSectionWrapper>
+              <PageBarSection>
+                <PageBar
+                  page={page}
+                  totalPage={userPostData.totalPages}
+                  onClick={pageHandler}
                 />
-                <GDSCButton text={'글쓰기'} />
-              </ButtonWrapper>
-            </TopMenuWrapper>
-
-            <PostSectionWrapper>
-              {pagination().map((data, id) => (
-                <PostCardWrapper key={id}>
-                  <PostCard {...data.post} />
-                </PostCardWrapper>
-              ))}
-            </PostSectionWrapper>
-            <PageBarSection>
-              <PageBar page={page} onClick={pageHandler} />
-            </PageBarSection>
-          </ContainerInner>
-        </LayoutContainer>
-      )}
+              </PageBarSection>
+            </>
+          )}
+        </ContainerInner>
+      </LayoutContainer>
     </>
   );
 };
