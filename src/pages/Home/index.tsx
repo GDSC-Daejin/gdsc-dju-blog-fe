@@ -19,6 +19,7 @@ const Home = () => {
               </BlogCardWrapper>
             ))}
           </CardSection>
+          <button>로그인</button>
         </ContainerInner>
       </LayoutContainer>
     </>

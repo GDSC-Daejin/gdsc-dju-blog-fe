@@ -17,12 +17,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-{
-  /* <SignUpInputBox
-{...register('username', {
-  validate: (value) => value !== 'admin' || 'Nice try!',
-})}
-/>
-{errors.username && errors.username.message} */
-}

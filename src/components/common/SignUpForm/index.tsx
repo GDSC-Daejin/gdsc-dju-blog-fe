@@ -180,7 +180,6 @@ const SignUpForm = () => {
       <SignUpButton isValid={isValid} type="submit">
         가입하기
       </SignUpButton>
-      {/* <GDSCButton type="submit" text="가입하기" color="toss blue 200" /> */}
     </SignUpFormStyle>
   );
 };
