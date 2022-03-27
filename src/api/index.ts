@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { memberDataInfoType, userDataType } from '../types/userDataType';
+import { detailPostDataType } from '../types/postData';
 
 export class Api {
   private API: string;
@@ -36,7 +37,9 @@ export class Api {
     });
   };
   getPostListData = (category?: string) => {
-    return axios.get(`${this.API}/api/v1/post/list/${category}`);
+    return axios.get<detailPostDataType[]>(
+      `${this.API}/api/v1/post/list/${category}`,
+    );
   };
   getPostDetailData = (postId: string) => {
     return axios.get(`${this.API}/api/v1/post/${postId}`);
