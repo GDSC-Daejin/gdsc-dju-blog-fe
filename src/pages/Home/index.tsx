@@ -1,26 +1,34 @@
 import React from 'react';
+import axios from 'axios';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import BlogCard from '../../components/common/BlogCard';
 import { BlogCardWrapper, CardSection } from './styled';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../../store/theme';
 
+const config = {
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+  },
+};
+export const API_BASE_URL = 'https://gdsc-dju.com';
+
+export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/OauthRedirectPage';
+
+export const GOOGLE_AUTH_URL =
+  API_BASE_URL +
+  '/oauth2/authorization/google?redirect_uri=' +
+  OAUTH2_REDIRECT_URI;
+
 const Home = () => {
   const number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const data = {
-    id: 'gudcks0305',
-    password: '$10$8lDyClwH.ET3BA44inQLKuRNISg4paTPwgD2V5pw/RMmtTGJvhPvy',
-  };
-  const handleClick = () => {
-    fetch('https://gdsc-dju.com/test/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((response) => console.log('Success:', JSON.stringify(response)));
+
+  const handleClick = async () => {
+    const res = await axios.get(
+      'https://gdsc-dju.com/api/admin/v1/all/list',
+      config,
+    );
+    console.log(res);
   };
 
   return (
@@ -34,7 +42,8 @@ const Home = () => {
               </BlogCardWrapper>
             ))}
           </CardSection>
-          <button onClick={handleClick}>로그인</button>
+          <a href={GOOGLE_AUTH_URL}>로그인</a>
+          <button onClick={handleClick}>로그인확인</button>
         </ContainerInner>
       </LayoutContainer>
     </>
