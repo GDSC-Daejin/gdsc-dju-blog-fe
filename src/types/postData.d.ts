@@ -1,3 +1,5 @@
+import { memberDataInfoType } from './userDataType';
+
 export interface detailPostDataType {
   imagePath: string;
   example: string;
@@ -10,6 +12,7 @@ export interface detailPostDataType {
   postHashTags: string;
   postId: number;
   title: string;
+  memberInfo: memberDataInfoType;
 }
 export interface postPostDataType extends detailPostDataType {
   base64Thumbnail: string;
