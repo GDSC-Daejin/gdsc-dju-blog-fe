@@ -33,7 +33,11 @@ const PostTextVariants = {
   },
 };
 
-const BlogCard = () => {
+interface IBlogCardProps {
+  Home: boolean;
+}
+
+const BlogCard = ({ Home }: IBlogCardProps) => {
   const [BlogCardBottomText, IsHovered] = useHover(BottomText);
   const nowLogin = false;
   const Navigate = useNavigate();

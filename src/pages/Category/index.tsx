@@ -1,7 +1,16 @@
 import React from 'react';
+import { LayoutContainer } from '../../styles/layouts';
+import BlogCard from '../../components/common/BlogCard';
+import { BlogCardWrapper } from './styled';
 
 const Category = () => {
-  return <div>카테고리</div>;
+  return (
+    <LayoutContainer>
+      <BlogCardWrapper>
+        <BlogCard Home={false} />
+      </BlogCardWrapper>
+    </LayoutContainer>
+  );
 };
 
 export default Category;

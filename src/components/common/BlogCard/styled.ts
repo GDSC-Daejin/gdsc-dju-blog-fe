@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 export const BlogCardInner = styled(motion.div)`
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -21,8 +21,8 @@ export const BookMarkWrapper = styled.div`
 `;
 
 export const BlogCardThumbnail = styled.img`
-  width: 276px;
-  height: 328px;
+  width: inherit;
+  height: inherit;
   border-radius: 13px;
 `;
 
