@@ -5,7 +5,6 @@ import { themeState } from '../../store/theme';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 
 const Posts = () => {
-  const [themeMode] = useRecoilState(themeState);
   return (
     <LayoutContainer>
       <ContainerInner>
@@ -15,7 +14,7 @@ const Posts = () => {
           category="Announcements"
           categoryId="DIC_kwDOGwlX0c4CBQA5"
           mapping="pathname"
-          theme={themeMode.light ? 'light' : 'dark'}
+          theme={'light'}
           lang="ko"
         />
       </ContainerInner>
