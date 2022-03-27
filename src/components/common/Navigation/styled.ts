@@ -84,6 +84,8 @@ export const Search = styled.input`
   height: 30px;
   border-radius: 50px;
   border: 1px solid ${(props) => props.theme.color.grey300};
+  padding-left: 20px;
+  color: ${(props) => props.theme.color.grey900};
   @media screen and (max-width: 1000px) {
     width: 280px;
   }
@@ -94,15 +96,7 @@ export const Search = styled.input`
     display: none;
   }
   &::placeholder {
-    padding-left: 20px;
     color: ${(props) => props.theme.color.grey300};
-  }
-  &:focus {
-    &::placeholder {
-      padding-left: 2px;
-    }
-    padding-left: 20px;
-    outline: 1px solid ${(props) => props.theme.color.grey300};
   }
 `;
 export const MobileNavigationWrapper = styled.div`
