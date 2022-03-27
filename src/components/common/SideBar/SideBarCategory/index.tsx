@@ -1,7 +1,10 @@
 import React from 'react';
 import { sideBarMenuData } from '../../SideBar/index';
 import { useNavigate } from 'react-router';
-import { SideBarCircleMotion, SideBarCategoryMotion } from '../../Animation';
+import {
+  SideBarCircleAnimation,
+  SideBarCategoryAnimation,
+} from '../../Animation';
 import {
   SideCategoryMenuWrapper,
   SideCategoryCircleWrapper,
@@ -13,9 +16,12 @@ import {
 import { positionColor } from '../../../../store/positionColor';
 import { GDSCLogoWrapper } from '../../CategoryMenu/styled';
 import GdscLogo from '../../../../Images/GdscLogo';
+import { useRecoilState } from 'recoil';
+import { MENU_KEY, menuState } from '../../../../store/menu';
 
 const SideBarCategory = ({ locationStyle }: any) => {
   const navigate = useNavigate();
+  const [menu, setMenu] = useRecoilState(menuState);
 
   return (
     <>
@@ -25,10 +31,11 @@ const SideBarCategory = ({ locationStyle }: any) => {
             key={id}
             onClick={() => {
               navigate(`/category${data.route}`);
+              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
             }}
           >
             <SideCategoryCircleWrapper
-              variants={SideBarCircleMotion}
+              variants={SideBarCircleAnimation}
               animate={
                 locationStyle.includes(data.route) ? 'isActive' : 'isUnActive'
               }
@@ -42,7 +49,7 @@ const SideBarCategory = ({ locationStyle }: any) => {
               )}
             </SideCategoryCircleWrapper>
             <SideCategoryText
-              variants={SideBarCategoryMotion}
+              variants={SideBarCategoryAnimation}
               whileHover={'isActive'}
               animate={
                 locationStyle.includes(data.route) ? 'isActive' : 'isUnActive'

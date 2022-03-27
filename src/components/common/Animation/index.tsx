@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const SideBarMotion = {
+export const SideBarAnimation = {
   isActive: {
     x: 0,
     transition: {
@@ -16,7 +16,7 @@ export const SideBarMotion = {
     },
   },
 };
-export const SideBarCategoryMotion = {
+export const SideBarCategoryAnimation = {
   isActive: {
     translateX: 10,
     color: '#191F28',
@@ -33,7 +33,7 @@ export const SideBarCategoryMotion = {
     },
   },
 };
-export const SideBarCircleMotion = {
+export const SideBarCircleAnimation = {
   isActive: {
     opacity: 1,
     x: 0,

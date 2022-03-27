@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const NavDesign = styled.nav`
-  background-color: #ffffff;
+  color: ${(props) => props.theme.color.white};
   position: sticky;
   top: 0;
   z-index: 990;
@@ -70,7 +70,7 @@ export const VectorWrapper = styled.div`
   & svg {
     cursor: pointer;
     & hover svg path {
-      fill: #d1d6db;
+      fill: ${(props) => props.theme.color.grey300};
     }
   }
 `;
@@ -83,29 +83,27 @@ export const Search = styled.input`
   min-width: 400px;
   height: 30px;
   border-radius: 50px;
-  border: 1px solid #d1d6db;
-  @media screen and (max-width:1000px)
-  {
+  border: 1px solid ${(props) => props.theme.color.grey300};
+  @media screen and (max-width: 1000px) {
     width: 280px;
   }
-  @media screen and (max-width:780px)
-  {
+  @media screen and (max-width: 780px) {
     width: 250px;
   }
-  @media screen and (max-width:630px)
-  {
+  @media screen and (max-width: 630px) {
     display: none;
   }
   &::placeholder {
     padding-left: 20px;
-    color: #d1d6db;
+    color: ${(props) => props.theme.color.grey300};
   }
   &:focus {
     &::placeholder {
       padding-left: 2px;
     }
     padding-left: 20px;
-    outline: 1px solid #d1d6db;
+    outline: 1px solid ${(props) => props.theme.color.grey300};
+  }
 `;
 export const MobileNavigationWrapper = styled.div`
   align-items: center;
@@ -134,6 +132,6 @@ export const MobileVectorWrapper = styled.div`
     cursor: pointer;
   }
   & svg path {
-    fill: #8b95a1;
+    fill: ${(props) => props.theme.color.grey300};
   }
 `;
