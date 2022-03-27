@@ -20,14 +20,16 @@ export const SideBarInner = styled(motion.aside)`
 export const SideBarBtnInner = styled.div`
   position: absolute;
   left: 55px;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
-    top: -10px;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+   /* top: -10px;*/
     left: 20px;
 `;
 export const SideBarBtnWrapper = styled.div`
   position: sticky;
-  top: 25px;
+  top: 24px;
   z-index: 1002;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    top: 17px;
 `;
 export const SideBarText = styled(motion.a)`
   display: block;
@@ -37,7 +39,7 @@ export const SideBarText = styled(motion.a)`
   font-size: ${(props) => props.theme.fontSize.h7};
   font-weight: 600;
 `;
-export const SideBarBtnIcon = styled.div`
+export const SideBarBtnIconWrapper = styled.div`
   border: none;
   color: ${(props) => props.theme.color.white};
   cursor: pointer;
@@ -45,7 +47,7 @@ export const SideBarBtnIcon = styled.div`
     @media screen and (max-width: ${(props) =>
       props.theme.windowSize.mobile}px) {
       width: 20px;
-      height: 16px;
+      height: 20px;
   }
 `;
 export const GrayBox = styled.div<{ open: boolean }>`

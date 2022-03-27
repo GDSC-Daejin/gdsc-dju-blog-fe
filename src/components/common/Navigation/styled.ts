@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const NavDesign = styled.nav`
-  color: ${(props) => props.theme.color.white};
+  background-color: ${(props) => props.theme.color.white};
   position: sticky;
   top: 0;
   z-index: 990;
   height: 70px;
-  width: 100vw;
+  width: 100%;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     height: 60px;
 `;
@@ -24,7 +24,7 @@ export const NavInner = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     justify-content: space-between;
 `;
 export const BlogWrapper = styled.div`
@@ -32,7 +32,7 @@ export const BlogWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const LogoWrapper = styled.a`
+export const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -42,7 +42,7 @@ export const DeskNavigationWrapper = styled.div`
   height: 100%;
   align-items: center;
   display: flex;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     display: none;
   }
 `;
@@ -60,7 +60,7 @@ export const VectorWrapper = styled.div`
   position: absolute;
   right: 20px;
   top: 9px;
-  @media screen and (max-width: 630px) {
+  @media screen and (max-width: 760px) {
     & svg {
       position: absolute;
       top: -20px;
@@ -86,13 +86,10 @@ export const Search = styled.input`
   border: 1px solid ${(props) => props.theme.color.grey300};
   padding-left: 20px;
   color: ${(props) => props.theme.color.grey900};
-  @media screen and (max-width: 1000px) {
-    width: 280px;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.desk}px) {
+    min-width: 280px;
   }
-  @media screen and (max-width: 780px) {
-    width: 250px;
-  }
-  @media screen and (max-width: 630px) {
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     display: none;
   }
   &::placeholder {
@@ -104,7 +101,7 @@ export const MobileNavigationWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   display: none;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     display: flex;
   }
 `;
@@ -113,11 +110,9 @@ export const GdscLogoWrapper = styled.div`
   display: flex;
   position: absolute;
   left: 43%;
-  top: 20px;
   & svg {
     width: 40px;
     height: 20px;
-  }
 `;
 export const MobileVectorWrapper = styled.div`
   display: flex;

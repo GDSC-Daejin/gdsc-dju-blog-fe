@@ -3,7 +3,7 @@ import {
   SideBarWrapper,
   SideBarInner,
   SideBarBtnInner,
-  SideBarBtnIcon,
+  SideBarBtnIconWrapper,
   GrayBox,
   SideBarDesign,
 } from './styled';
@@ -71,9 +71,9 @@ export const SideBar = () => {
       </SideBarWrapper>
       <SideBarBtnWrapper>
         <SideBarBtnInner>
-          <SideBarBtnIcon>
+          <SideBarBtnIconWrapper>
             <MenuToggleIcon />
-          </SideBarBtnIcon>
+          </SideBarBtnIconWrapper>
         </SideBarBtnInner>
       </SideBarBtnWrapper>
       <GrayBox
