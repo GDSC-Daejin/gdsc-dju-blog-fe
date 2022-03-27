@@ -7,6 +7,21 @@ import { themeState } from '../../store/theme';
 
 const Home = () => {
   const number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const data = {
+    id: 'gudcks0305',
+    password: '$10$8lDyClwH.ET3BA44inQLKuRNISg4paTPwgD2V5pw/RMmtTGJvhPvy',
+  };
+  const handleClick = () => {
+    fetch('https://gdsc-dju.com/test/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((response) => console.log('Success:', JSON.stringify(response)));
+  };
 
   return (
     <>
@@ -19,7 +34,7 @@ const Home = () => {
               </BlogCardWrapper>
             ))}
           </CardSection>
-          <button>로그인</button>
+          <button onClick={handleClick}>로그인</button>
         </ContainerInner>
       </LayoutContainer>
     </>
