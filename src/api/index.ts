@@ -30,5 +30,15 @@ export class Api {
       headers: this.Header,
     });
   };
+  getScrapData = () => {
+    return axios.get(`${this.API}/api/member/v1/myScrap`, {
+      headers: this.Header,
+    });
+  };
+  updateScrapData = (postId: string) => {
+    return axios.post(`${this.API}/api/member/v1/myScrap${postId}`, {
+      headers: this.Header,
+    });
+  };
 }
 export default new Api();
