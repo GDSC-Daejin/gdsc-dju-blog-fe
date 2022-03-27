@@ -30,12 +30,24 @@ export class Api {
       headers: this.Header,
     });
   };
-  getScrapData = () => {
+  getUserPostListData = (category?: string) => {
+    return axios.get(`${this.API}/api/member/v1/myPost/${category}`, {
+      headers: this.Header,
+    });
+  };
+  getPostListData = (category?: string) => {
+    return axios.get(`${this.API}/api/v1/post/list/${category}`);
+  };
+  getPostDetailData = (postId: string) => {
+    return axios.get(`${this.API}/api/v1/post/${postId}`);
+  };
+
+  getUserScrapData = () => {
     return axios.get(`${this.API}/api/member/v1/myScrap`, {
       headers: this.Header,
     });
   };
-  updateScrapData = (postId: string) => {
+  updateUserScrapData = (postId: string) => {
     return axios.post(`${this.API}/api/member/v1/myScrap${postId}`, {
       headers: this.Header,
     });
