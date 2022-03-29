@@ -37,8 +37,8 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
 `;
 
 export const BlogCardWrapper = styled(motion.div)`
-  width: 276px;
-  height: 328px;
+  width: 248px;
+  height: 294px;
   margin: 0px 15px;
 `;
 
@@ -49,19 +49,4 @@ export const ButtonWrapper = styled.div`
   left: 15px;
   bottom: 0px;
   margin-top: 3px;
-`;
-
-export const CardSectionBlur = styled.div`
-  position: absolute;
-  width: 150px;
-  height: 432px;
-  z-index: 2;
-  right: 0px;
-  background: linear-gradient(
-    270.96deg,
-    #ffffff 13.01%,
-    rgba(255, 255, 255, 0.859167) 30.46%,
-    rgba(255, 255, 255, 0.386709) 58.16%,
-    rgba(255, 255, 255, 0) 89.38%
-  );
 `;

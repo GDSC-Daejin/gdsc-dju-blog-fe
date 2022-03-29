@@ -8,7 +8,6 @@ import {
   CardSection,
   BlogCardWrapper,
   ButtonWrapper,
-  CardSectionBlur,
 } from './styled';
 
 function index() {
@@ -65,7 +64,6 @@ function index() {
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
         </ButtonWrapper>
-        <CardSectionBlur />
       </MainContentWrapper>
     </LayoutContainer>
   );

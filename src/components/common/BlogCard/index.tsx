@@ -50,7 +50,7 @@ const BlogCard = ({ Home }: IBlogCardProps) => {
       });
     else {
       alert('로그인 후 이용가능합니다');
-      Navigate('/123', { replace: false });
+      Navigate('/', { replace: false });
     }
   };
 
