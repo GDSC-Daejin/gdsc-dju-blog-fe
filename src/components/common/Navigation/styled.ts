@@ -24,8 +24,6 @@ export const NavInner = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    justify-content: space-between;
 `;
 export const BlogWrapper = styled.div`
   display: flex;
@@ -60,7 +58,7 @@ export const VectorWrapper = styled.div`
   position: absolute;
   right: 20px;
   top: 9px;
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     & svg {
       position: absolute;
       top: -20px;

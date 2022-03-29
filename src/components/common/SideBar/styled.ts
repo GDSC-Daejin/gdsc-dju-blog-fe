@@ -21,7 +21,6 @@ export const SideBarBtnInner = styled.div`
   position: absolute;
   left: 55px;
   @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-   /* top: -10px;*/
     left: 20px;
 `;
 export const SideBarBtnWrapper = styled.div`

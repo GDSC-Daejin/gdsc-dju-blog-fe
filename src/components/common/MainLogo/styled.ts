@@ -2,12 +2,6 @@ import styled from 'styled-components';
 
 export const GdscLogoWrapper = styled.div`
   margin-right: 14px;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    & svg {
-      width: 40px;
-      height: 20px;
-    }
-  }
 `;
 export const DaejinUnivLogoWrapper = styled.div`
   width: 35px;

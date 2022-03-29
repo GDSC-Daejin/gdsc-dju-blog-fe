@@ -18,7 +18,7 @@ export const StyledMenuButton = styled(motion.button)`
     margin-left: 0px;
     margin-right: 0px;
     padding: 0;
-    width: 23px;
+    width: 20px;
     margin-top: 5px;
   }
 `;
