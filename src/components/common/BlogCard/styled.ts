@@ -34,7 +34,6 @@ export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
   left: 20px;
   gap: 8px;
 `;
-
 export const BlogCardTag = styled.div`
   height: 17px;
   padding: 1px 10px;
@@ -55,24 +54,25 @@ export const BlogCardTag = styled.div`
     color: #ffffff;
   }
 `;
-
-export const BlogCardBottomBox = styled(motion.div)`
+export const BlogCardBottomBox = styled(motion.div)<{ isHovered: boolean }>`
   position: absolute;
   transition: all 0.3s ease-in;
   border-radius: 10px;
   width: 100%;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   background: #fff;
-  padding: 12px 20px;
+  padding: 8px 20px 12px;
+  gap: ${(props) => (props.isHovered ? '170px' : '8px')};
+  transition: all 0.3s ease;
   cursor: pointer;
 `;
-export const BlogCardTitle = styled(motion.h6)<{ isHovered: boolean }>`
+export const BlogCardTitle = styled(motion.h6)`
   font-size: ${(props) => props.theme.fontSize.h6};
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
-  margin-bottom: ${(props) => (props.isHovered ? '170px' : '8px')};
-  transition: all 0.3s ease;
 `;
 export const BlogCardSubTextWrapper = styled.div`
   display: flex;

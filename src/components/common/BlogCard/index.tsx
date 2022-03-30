@@ -27,21 +27,61 @@ const PostTextVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      delay: 0.2,
-      duration: 0.3,
+      delay: 0.1,
+      duration: 0.2,
     },
   },
 };
 
+export interface ICardData {
+  memberInfo: {
+    nickname: string;
+  };
+  category: {
+    categoryName: string; //타입에 대한 수정 필요
+    modifiedAt: string;
+    uploadDate: string;
+  };
+  title: string;
+  tmpStore: boolean;
+  postHashTags: string;
+  postId: number;
+  likes: [];
+  modifiedAt: string;
+  uploadDate: string;
+  content: string;
+}
+
+// props: ICardData
 const BlogCard = () => {
-  const [BlogCardBottomText, IsHovered] = useHover(BottomText);
+  const mookdata = {
+    memberInfo: {
+      nickname: 'Roccccolliiiii',
+    },
+    category: {
+      categoryName: 'Backend',
+      modifiedAt: '2022-03-27T15:09:30.366',
+      uploadDate: '2022-03-27T15:09:30.444',
+    },
+    title: '제목33',
+    tmpStore: false,
+    postHashTags: 'hi,h,h,h,h',
+    postId: 51,
+    likes: [],
+    modifiedAt: '2022-03-27T07:58:13.501+00:00',
+    uploadDate: '2022-03-27T07:58:13.501+00:00',
+    content: '내용',
+  };
+
+  // const [BlogCardBottomText, IsHovered] = useHover(BottomText);
+  const [IsHovered, setIsHovered] = useState(false);
   const nowLogin = false;
   const Navigate = useNavigate();
   const [marked, setMarked] = useState(false);
-  const CardTag: string[] = [
-    'darkmodeeeeeeeeeeeeeeeeeeee',
-    'darkmodeeeeeeeeeeeeeeeeeeeeee',
-  ];
+  const CardTag: string[] = mookdata.postHashTags.split(',');
+  /* ----------------------- */
+  /* ----------------------- */
+
   const setBookmarkClip = () => {
     if (nowLogin)
       setMarked((prev) => {
@@ -56,52 +96,58 @@ const BlogCard = () => {
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
+        {/* 북마크 */}
         <BookMarkWrapper onClick={setBookmarkClip}>
           <Bookmark marked={marked} />
         </BookMarkWrapper>
+        {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} />
         <BlogCardTagWrapper IsHovered={IsHovered}>
-          {CardTag.map((data: string, index: number) => (
-            <BlogCardTag key={index}>
-              <span>
-                #{data.length > 12 ? data.substring(0, 12).concat('...') : data}
-              </span>
-            </BlogCardTag>
-          ))}
+          {CardTag.filter((data, index) => index < 2).map(
+            (data: string, index: number) => (
+              <BlogCardTag key={index}>
+                <span>
+                  #
+                  {data.length > 12
+                    ? data.substring(0, 12).concat('...')
+                    : data}
+                </span>
+              </BlogCardTag>
+            ),
+          )}
         </BlogCardTagWrapper>
-        {BlogCardBottomText}
+        {/* 태그 */}
+        <BlogCardBottomBox
+          isHovered={IsHovered}
+          onMouseOver={() => setIsHovered(true)}
+          onMouseOut={() => setIsHovered(false)}
+        >
+          <BlogCardTitle>제목입니다123</BlogCardTitle>
+          <AnimatePresence>
+            {IsHovered && (
+              <BlogCardPostText
+                variants={PostTextVariants}
+                initial={'initial'}
+                animate={'visiable'}
+              >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Ipsum,libero? Vel eius deleniti earum architecto magnam non! Eos
+                ipsamperferendis esse rerum unde dolor necessitatibus
+                exercitationem nostrum facilis sit? Eum.
+              </BlogCardPostText>
+            )}
+          </AnimatePresence>
+          <BlogCardSubTextWrapper>
+            <BlogCardAuthorWrapper>
+              <BlogCardAuthorImage />
+              <BlogCardSubText subText={true}>by</BlogCardSubText>
+              <BlogCardSubText bold={true}>Jason</BlogCardSubText>
+            </BlogCardAuthorWrapper>
+            <BlogCardSubText subText={true}>22.02.02</BlogCardSubText>
+          </BlogCardSubTextWrapper>
+        </BlogCardBottomBox>
       </BlogCardInner>
     </AnimateSharedLayout>
-  );
-};
-
-const BottomText = (hovered: boolean) => {
-  return (
-    <BlogCardBottomBox>
-      <BlogCardTitle isHovered={hovered}>제목입니다아아아아아</BlogCardTitle>
-      <AnimatePresence>
-        {hovered && (
-          <BlogCardPostText
-            variants={PostTextVariants}
-            initial={'initial'}
-            animate={'visiable'}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ipsum,libero? Vel eius deleniti earum architecto magnam non! Eos
-            ipsamperferendis esse rerum unde dolor necessitatibus exercitationem
-            nostrum facilis sit? Eum.
-          </BlogCardPostText>
-        )}
-      </AnimatePresence>
-      <BlogCardSubTextWrapper>
-        <BlogCardAuthorWrapper>
-          <BlogCardAuthorImage />
-          <BlogCardSubText subText={true}>by</BlogCardSubText>
-          <BlogCardSubText bold={true}>Jason</BlogCardSubText>
-        </BlogCardAuthorWrapper>
-        <BlogCardSubText subText={true}>22.02.02</BlogCardSubText>
-      </BlogCardSubTextWrapper>
-    </BlogCardBottomBox>
   );
 };
 
