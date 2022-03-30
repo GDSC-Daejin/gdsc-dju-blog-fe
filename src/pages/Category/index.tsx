@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCard from '../../components/common/BlogCard';
 import { BlogCardWrapper, BlogCardGridLayout } from './styled';
@@ -9,42 +9,45 @@ const Category = () => {
   const arr = Array(100)
     .fill(null)
     .map((v, i) => i + 1);
+  const [PostData, setPostData] = useState<ICardData[]>();
 
   useEffect(() => {
-    axios
-      .get('https://gdsc-dju.com/api/v1/post/list?page=0&size=16')
-      .then(function (res) {
-        console.log(res.data);
-      });
+    async function fetchData() {
+      const result = await axios.get(
+        'https://gdsc-dju.com/api/v1/post/list?page=0&size=16',
+      );
+      setPostData(result.data.body.data.content);
+    }
+    fetchData();
   }, []);
 
-  const mookdata = {
+  interface ICardData {
     memberInfo: {
-      nickname: 'Roccccolliiiii',
-    },
+      nickname: string;
+    };
     category: {
-      categoryName: 'Backend',
-      modifiedAt: '2022-03-27T15:09:30.366',
-      uploadDate: '2022-03-27T15:09:30.444',
-    },
-    title: '제목33',
-    tmpStore: false,
-    postHashTags: 'hi,h,h,h,h',
-    postId: 51,
-    likes: [],
-    modifiedAt: '2022-03-27T07:58:13.501+00:00',
-    uploadDate: '2022-03-27T07:58:13.501+00:00',
-    content: '내용',
-  };
+      categoryName: string; //타입에 대한 수정 필요
+      modifiedAt: string;
+      uploadDate: string;
+    };
+    title: string;
+    tmpStore: boolean;
+    postHashTags: string;
+    postId: number;
+    likes: [];
+    modifiedAt: string;
+    uploadDate: string;
+    content: string;
+  }
 
   return (
     <LayoutContainer>
       <h3>카테고리 페이지</h3>
       <CategoryMenu type="frontend" />
       <BlogCardGridLayout>
-        {arr.map((data, index) => (
-          <BlogCardWrapper key={data}>
-            <BlogCard />
+        {PostData?.map((data, index) => (
+          <BlogCardWrapper key={data.postId}>
+            <BlogCard CardData={data} />
           </BlogCardWrapper>
         ))}
       </BlogCardGridLayout>

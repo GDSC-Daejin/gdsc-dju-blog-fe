@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
 import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
@@ -11,8 +12,8 @@ import {
 } from './styled';
 
 function index() {
-  const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [PostData, setPostData] = useState<ICardData[]>();
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -44,6 +45,35 @@ function index() {
     }
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get(
+        'https://gdsc-dju.com/api/v1/post/list?page=0&size=16',
+      );
+      setPostData(result.data.body.data.content);
+    }
+    fetchData();
+  }, []);
+
+  interface ICardData {
+    memberInfo: {
+      nickname: string;
+    };
+    category: {
+      categoryName: string; //타입에 대한 수정 필요
+      modifiedAt: string;
+      uploadDate: string;
+    };
+    title: string;
+    tmpStore: boolean;
+    postHashTags: string;
+    postId: number;
+    likes: [];
+    modifiedAt: string;
+    uploadDate: string;
+    content: string;
+  }
+
   return (
     <LayoutContainer>
       <MainContentWrapper>
@@ -55,9 +85,9 @@ function index() {
           onMouseUp={onDragEnd}
           onMouseLeave={onDragEnd}
         >
-          {Cards.map((CardData, index) => (
-            <BlogCardWrapper key={CardData}>
-              <BlogCard />
+          {PostData?.map((data, index) => (
+            <BlogCardWrapper key={data.postId}>
+              <BlogCard CardData={data} />
             </BlogCardWrapper>
           ))}
         </CardSection>

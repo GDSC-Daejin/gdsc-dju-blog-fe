@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHover } from 'react-use';
 import BlogCardImage from '../../../Images/unknown.png';
 import { useNavigate } from 'react-router';
 import {
@@ -33,27 +32,29 @@ const PostTextVariants = {
   },
 };
 
-export interface ICardData {
-  memberInfo: {
-    nickname: string;
-  };
-  category: {
-    categoryName: string; //타입에 대한 수정 필요
+export interface IBlogCardProps {
+  CardData: {
+    memberInfo: {
+      nickname: string;
+    };
+    category: {
+      categoryName: string; //타입에 대한 수정 필요
+      modifiedAt: string;
+      uploadDate: string;
+    };
+    title: string;
+    tmpStore: boolean;
+    postHashTags: string;
+    postId: number;
+    likes: [];
     modifiedAt: string;
     uploadDate: string;
+    content: string;
   };
-  title: string;
-  tmpStore: boolean;
-  postHashTags: string;
-  postId: number;
-  likes: [];
-  modifiedAt: string;
-  uploadDate: string;
-  content: string;
 }
 
 // props: ICardData
-const BlogCard = () => {
+const BlogCard = (props: IBlogCardProps) => {
   const mockdata = {
     memberInfo: {
       nickname: 'Roccccolliiiii',
@@ -73,16 +74,15 @@ const BlogCard = () => {
     content: '내용',
   };
 
-  // const [BlogCardBottomText, IsHovered] = useHover(BottomText);
+  const { CardData } = props;
+
   const [IsHovered, setIsHovered] = useState(false);
   const nowLogin = false;
   const Navigate = useNavigate();
   const [marked, setMarked] = useState(false);
-  const CardTag: string[] = mockdata.postHashTags.split(',');
+  const CardTag: string[] = CardData.postHashTags.split(',');
   const handleUploadDate = (data: string) =>
     data.substring(2, 10).replaceAll('-', '.');
-  /* ----------------------- */
-  /* ----------------------- */
 
   const setBookmarkClip = () => {
     if (nowLogin)
@@ -125,7 +125,7 @@ const BlogCard = () => {
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
         >
-          <BlogCardTitle>{mockdata.title}</BlogCardTitle>
+          <BlogCardTitle>{CardData.title}</BlogCardTitle>
           <AnimatePresence>
             {IsHovered && (
               <BlogCardPostText
@@ -133,7 +133,7 @@ const BlogCard = () => {
                 initial={'initial'}
                 animate={'visiable'}
               >
-                {mockdata.content}
+                {CardData.content}
               </BlogCardPostText>
             )}
           </AnimatePresence>
@@ -142,11 +142,11 @@ const BlogCard = () => {
               <BlogCardAuthorImage />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>
-                {mockdata.memberInfo.nickname}
+                {CardData.memberInfo.nickname}
               </BlogCardSubText>
             </BlogCardAuthorWrapper>
             <BlogCardSubText subText={true}>
-              {handleUploadDate(mockdata.uploadDate)}
+              {handleUploadDate(CardData.uploadDate)}
             </BlogCardSubText>
           </BlogCardSubTextWrapper>
         </BlogCardBottomBox>
