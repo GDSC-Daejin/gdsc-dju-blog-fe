@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { IBlogCardProps } from '../../../types/postDataType';
 import BlogCardImage from '../../../Images/unknown.png';
 import { useNavigate } from 'react-router';
 import {
@@ -32,50 +33,8 @@ const PostTextVariants = {
   },
 };
 
-export interface IBlogCardProps {
-  CardData: {
-    memberInfo: {
-      nickname: string;
-    };
-    category: {
-      categoryName: string; //타입에 대한 수정 필요
-      modifiedAt: string;
-      uploadDate: string;
-    };
-    title: string;
-    tmpStore: boolean;
-    postHashTags: string;
-    postId: number;
-    likes: [];
-    modifiedAt: string;
-    uploadDate: string;
-    content: string;
-  };
-}
-
-// props: ICardData
 const BlogCard = (props: IBlogCardProps) => {
-  const mockdata = {
-    memberInfo: {
-      nickname: 'Roccccolliiiii',
-    },
-    category: {
-      categoryName: 'Backend',
-      modifiedAt: '2022-03-27T15:09:30.366',
-      uploadDate: '2022-03-27T15:09:30.444',
-    },
-    title: '제목33',
-    tmpStore: false,
-    postHashTags: 'hi,h,h,h,h',
-    postId: 51,
-    likes: [],
-    modifiedAt: '2022-03-27T07:58:13.501+00:00',
-    uploadDate: '2022-03-27T07:58:13.501+00:00',
-    content: '내용',
-  };
-
   const { CardData } = props;
-
   const [IsHovered, setIsHovered] = useState(false);
   const nowLogin = false;
   const Navigate = useNavigate();
@@ -83,7 +42,6 @@ const BlogCard = (props: IBlogCardProps) => {
   const CardTag: string[] = CardData.postHashTags.split(',');
   const handleUploadDate = (data: string) =>
     data.substring(2, 10).replaceAll('-', '.');
-
   const setBookmarkClip = () => {
     if (nowLogin)
       setMarked((prev) => {

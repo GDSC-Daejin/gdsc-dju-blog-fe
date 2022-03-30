@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { IBlogCardDataProps } from '../../types/postDataType';
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCard from '../../components/common/BlogCard';
 import { BlogCardWrapper, BlogCardGridLayout } from './styled';
@@ -9,7 +10,7 @@ const Category = () => {
   const arr = Array(100)
     .fill(null)
     .map((v, i) => i + 1);
-  const [PostData, setPostData] = useState<ICardData[]>();
+  const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
 
   useEffect(() => {
     async function fetchData() {
@@ -20,25 +21,6 @@ const Category = () => {
     }
     fetchData();
   }, []);
-
-  interface ICardData {
-    memberInfo: {
-      nickname: string;
-    };
-    category: {
-      categoryName: string; //타입에 대한 수정 필요
-      modifiedAt: string;
-      uploadDate: string;
-    };
-    title: string;
-    tmpStore: boolean;
-    postHashTags: string;
-    postId: number;
-    likes: [];
-    modifiedAt: string;
-    uploadDate: string;
-    content: string;
-  }
 
   return (
     <LayoutContainer>

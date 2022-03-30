@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { IBlogCardDataProps } from '../../types/postDataType';
 import axios from 'axios';
 import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
@@ -12,8 +13,8 @@ import {
 } from './styled';
 
 function index() {
+  const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [PostData, setPostData] = useState<ICardData[]>();
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -44,6 +45,7 @@ function index() {
       }
     }
   };
+  const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
 
   useEffect(() => {
     async function fetchData() {
@@ -54,25 +56,6 @@ function index() {
     }
     fetchData();
   }, []);
-
-  interface ICardData {
-    memberInfo: {
-      nickname: string;
-    };
-    category: {
-      categoryName: string; //타입에 대한 수정 필요
-      modifiedAt: string;
-      uploadDate: string;
-    };
-    title: string;
-    tmpStore: boolean;
-    postHashTags: string;
-    postId: number;
-    likes: [];
-    modifiedAt: string;
-    uploadDate: string;
-    content: string;
-  }
 
   return (
     <LayoutContainer>
@@ -85,9 +68,9 @@ function index() {
           onMouseUp={onDragEnd}
           onMouseLeave={onDragEnd}
         >
-          {PostData?.map((data, index) => (
-            <BlogCardWrapper key={data.postId}>
-              <BlogCard CardData={data} />
+          {PostData?.map((CardData, index) => (
+            <BlogCardWrapper key={CardData.postId}>
+              <BlogCard CardData={CardData} />
             </BlogCardWrapper>
           ))}
         </CardSection>
