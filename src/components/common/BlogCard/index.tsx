@@ -54,7 +54,7 @@ export interface ICardData {
 
 // props: ICardData
 const BlogCard = () => {
-  const mookdata = {
+  const mockdata = {
     memberInfo: {
       nickname: 'Roccccolliiiii',
     },
@@ -78,7 +78,9 @@ const BlogCard = () => {
   const nowLogin = false;
   const Navigate = useNavigate();
   const [marked, setMarked] = useState(false);
-  const CardTag: string[] = mookdata.postHashTags.split(',');
+  const CardTag: string[] = mockdata.postHashTags.split(',');
+  const handleUploadDate = (data: string) =>
+    data.substring(2, 10).replaceAll('-', '.');
   /* ----------------------- */
   /* ----------------------- */
 
@@ -102,6 +104,7 @@ const BlogCard = () => {
         </BookMarkWrapper>
         {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} />
+        {/* 태그 */}
         <BlogCardTagWrapper IsHovered={IsHovered}>
           {CardTag.filter((data, index) => index < 2).map(
             (data: string, index: number) => (
@@ -116,13 +119,13 @@ const BlogCard = () => {
             ),
           )}
         </BlogCardTagWrapper>
-        {/* 태그 */}
+        {/* 하단 Content */}
         <BlogCardBottomBox
           isHovered={IsHovered}
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
         >
-          <BlogCardTitle>제목입니다123</BlogCardTitle>
+          <BlogCardTitle>{mockdata.title}</BlogCardTitle>
           <AnimatePresence>
             {IsHovered && (
               <BlogCardPostText
@@ -130,10 +133,7 @@ const BlogCard = () => {
                 initial={'initial'}
                 animate={'visiable'}
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Ipsum,libero? Vel eius deleniti earum architecto magnam non! Eos
-                ipsamperferendis esse rerum unde dolor necessitatibus
-                exercitationem nostrum facilis sit? Eum.
+                {mockdata.content}
               </BlogCardPostText>
             )}
           </AnimatePresence>
@@ -141,9 +141,13 @@ const BlogCard = () => {
             <BlogCardAuthorWrapper>
               <BlogCardAuthorImage />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
-              <BlogCardSubText bold={true}>Jason</BlogCardSubText>
+              <BlogCardSubText bold={true}>
+                {mockdata.memberInfo.nickname}
+              </BlogCardSubText>
             </BlogCardAuthorWrapper>
-            <BlogCardSubText subText={true}>22.02.02</BlogCardSubText>
+            <BlogCardSubText subText={true}>
+              {handleUploadDate(mockdata.uploadDate)}
+            </BlogCardSubText>
           </BlogCardSubTextWrapper>
         </BlogCardBottomBox>
       </BlogCardInner>
