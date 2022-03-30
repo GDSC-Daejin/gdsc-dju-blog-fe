@@ -57,7 +57,7 @@ function index() {
         >
           {Cards.map((CardData, index) => (
             <BlogCardWrapper key={CardData}>
-              <BlogCard Home={true} />
+              <BlogCard />
             </BlogCardWrapper>
           ))}
         </CardSection>

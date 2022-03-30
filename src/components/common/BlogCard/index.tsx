@@ -33,16 +33,15 @@ const PostTextVariants = {
   },
 };
 
-interface IBlogCardProps {
-  Home: boolean;
-}
-
-const BlogCard = ({ Home }: IBlogCardProps) => {
+const BlogCard = () => {
   const [BlogCardBottomText, IsHovered] = useHover(BottomText);
   const nowLogin = false;
   const Navigate = useNavigate();
   const [marked, setMarked] = useState(false);
-  const CardTag: string[] = ['darkmode', 'darkmode'];
+  const CardTag: string[] = [
+    'darkmodeeeeeeeeeeeeeeeeeeee',
+    'darkmodeeeeeeeeeeeeeeeeeeeeee',
+  ];
   const setBookmarkClip = () => {
     if (nowLogin)
       setMarked((prev) => {
@@ -64,7 +63,9 @@ const BlogCard = ({ Home }: IBlogCardProps) => {
         <BlogCardTagWrapper IsHovered={IsHovered}>
           {CardTag.map((data: string, index: number) => (
             <BlogCardTag key={index}>
-              <span>#{data}</span>
+              <span>
+                #{data.length > 12 ? data.substring(0, 12).concat('...') : data}
+              </span>
             </BlogCardTag>
           ))}
         </BlogCardTagWrapper>

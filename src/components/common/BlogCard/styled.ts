@@ -36,7 +36,6 @@ export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
 `;
 
 export const BlogCardTag = styled.div`
-  width: 73px;
   height: 17px;
   padding: 1px 10px;
   border-radius: 50px;
