@@ -95,7 +95,7 @@ export const BlogCardPostText = styled(motion.p)`
   position: absolute;
   transform: translate(-50%, 0%);
   top: 53px;
-  font-size: ${(props) => props.theme.fontSize.body3};
+  font-size: 12px;
   width: 224px;
   min-height: 160px;
 `;
