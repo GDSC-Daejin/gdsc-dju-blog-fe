@@ -13,15 +13,11 @@ import {
 import MockPostImage from '../../../Images/MockPostImage.png';
 import { HashTageDark } from '../HashTage';
 import Bookmark from '../../../Images/Bookmark';
+import { hashTageSpreader } from '../../../pages/MyBlog/BlogHome';
+import { detailPostDataType } from '../../../types/postData';
 
-type Iprops = {
-  date: string;
-  title: string;
-  hashTage: { tag: string }[];
-  content: string;
-};
-const PostCard = (props: Iprops) => {
-  const { date, title, hashTage, content } = props;
+const PostCard = (props: detailPostDataType) => {
+  const { title, category, content, postId, postHashTags } = props;
 
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
@@ -32,12 +28,12 @@ const PostCard = (props: Iprops) => {
       : (result = `${content.slice(0, 170)}...`);
     return result;
   };
-  const hashTageFilter = () => {
+  const hashTageFilter = (hashTage: { tage: string }[]) => {
     let result;
     hover ? (result = hashTage.slice(0, 10)) : (result = hashTage.slice(0, 3));
     return result;
   };
-  const dateFilter = () => {
+  const dateFilter = (date: string) => {
     const dateArray = date.slice(0, 10).split('-');
     return `${dateArray[0].slice(2, 4)}.${dateArray[1]}.${dateArray[2]}`;
   };
@@ -64,11 +60,11 @@ const PostCard = (props: Iprops) => {
         >
           <Bookmark marked={marked} />
         </BookmarkWrapper>
-        <PostDate>{dateFilter()}</PostDate>
+        <PostDate>{dateFilter(category.uploadDate)}</PostDate>
         <PostTitle>{title}</PostTitle>
         <PostHashTageSection>
-          {hashTageFilter().map((data, id) => (
-            <HashTageDark text={data.tag} key={id} />
+          {hashTageSpreader(postHashTags).map((data, id) => (
+            <HashTageDark text={data} key={id} />
           ))}
         </PostHashTageSection>
         <PostContent hover={hover}>{contentFilter()}</PostContent>
