@@ -1,53 +1,87 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { IBlogCardDataProps } from '../../types/postDataType';
 import axios from 'axios';
-import { ContainerInner, LayoutContainer } from '../../styles/layouts';
+import { useScroll } from 'react-use';
+import { LayoutContainer } from '../../styles/layouts';
+import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
-import { BlogCardWrapper, CardSection } from './styled';
-import { useRecoilState } from 'recoil';
-import { themeState } from '../../store/theme';
+import {
+  MainContentWrapper,
+  CardSection,
+  BlogCardWrapper,
+  ButtonWrapper,
+} from './styled';
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8',
-  },
-};
-export const API_BASE_URL = 'https://gdsc-dju.com';
+function index() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { x } = useScroll(scrollRef);
+  const [isDrag, setIsDrag] = useState(false);
+  const [startX, setStartX] = useState(0);
 
-export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/OauthRedirectPage';
-
-export const GOOGLE_AUTH_URL =
-  API_BASE_URL +
-  '/oauth2/authorization/google?redirect_uri=' +
-  OAUTH2_REDIRECT_URI;
-
-const Home = () => {
-  const number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  const handleClick = async () => {
-    const res = await axios.get(
-      'https://gdsc-dju.com/api/admin/v1/all/list',
-      config,
-    );
-    console.log(res);
+  const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsDrag(true);
+    if (scrollRef.current?.scrollLeft !== undefined)
+      setStartX(e.pageX + scrollRef.current.scrollLeft);
   };
 
-  return (
-    <>
-      <LayoutContainer>
-        <ContainerInner>
-          <CardSection>
-            {number.map((item) => (
-              <BlogCardWrapper key={item}>
-                <BlogCard />
-              </BlogCardWrapper>
-            ))}
-          </CardSection>
-          <a href={GOOGLE_AUTH_URL}>로그인</a>
-          <button onClick={handleClick}>로그인확인</button>
-        </ContainerInner>
-      </LayoutContainer>
-    </>
-  );
-};
+  const onDragEnd = () => {
+    setIsDrag(false);
+  };
 
-export default Home;
+  const onDragMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isDrag) {
+      if (scrollRef.current !== null) {
+        const { scrollWidth, clientWidth, scrollLeft } = scrollRef.current;
+        if (scrollRef.current?.scrollLeft !== undefined)
+          scrollRef.current.scrollLeft = startX - e.pageX;
+
+        if (scrollLeft === 0) {
+          setStartX(e.pageX);
+        } else if (scrollWidth <= clientWidth + scrollLeft) {
+          setStartX(e.pageX + scrollLeft);
+        }
+      }
+    }
+  };
+  const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
+
+  useEffect(() => {
+    console.log('123123');
+    async function fetchData() {
+      const result = await axios.get(
+        'https://gdsc-dju.com/api/v1/post/list?page=0&size=16',
+      );
+      setPostData(result.data.body.data.content);
+    }
+    console.log('123123456789');
+    fetchData();
+    console.log('abcdefg');
+  }, []);
+
+  return (
+    <LayoutContainer>
+      <MainContentWrapper>
+        <CardSection
+          ref={scrollRef}
+          isDrag={isDrag}
+          onMouseDown={onDragStart}
+          onMouseMove={isDrag ? onDragMove : undefined}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
+        >
+          {PostData?.map((CardData, index) => (
+            <BlogCardWrapper key={CardData.postId}>
+              <BlogCard CardData={CardData} />
+            </BlogCardWrapper>
+          ))}
+        </CardSection>
+        <ButtonWrapper>
+          <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
+        </ButtonWrapper>
+      </MainContentWrapper>
+    </LayoutContainer>
+  );
+}
+
+export default index;
