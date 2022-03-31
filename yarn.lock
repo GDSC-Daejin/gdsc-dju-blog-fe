@@ -1887,6 +1887,37 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@toast-ui/chart@^4.1.4":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@toast-ui/chart/-/chart-4.4.1.tgz#a1d5fadc420dbcd8300869e773429b933186018e"
+  integrity sha512-0naYSTqBmPGI1NuRbt3XWWP9dxpjarJkjMpYNclcFy7AQa/++MBwjcqMsPF453lk3/NBSKrF5HkPUXDdcvHBfg==
+
+"@toast-ui/editor-plugin-chart@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-chart/-/editor-plugin-chart-3.0.1.tgz#3d1efe078abc4b28c315f2a9948cb05e7eade294"
+  integrity sha512-mdqJerDo836kxKZEa3B6NZOJLrb+acRMkPIanYo//9GFPJcllG7KFdZU+K0bSMapEED7W7OJCsOzM0VNThndHg==
+  dependencies:
+    "@toast-ui/chart" "^4.1.4"
+
+"@toast-ui/editor-plugin-code-syntax-highlight@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-code-syntax-highlight/-/editor-plugin-code-syntax-highlight-3.0.0.tgz#a82a7b75f12386280be7efdc7c6f5bf5b48744f3"
+  integrity sha512-62XB3IcFgvRxVZzj2kTeQao0xACotv/mD6jScSDkWac2V0jkCsTh0kZRG4TSW5bGdKvx4xz3YjFm7gWgw1I/Aw==
+  dependencies:
+    prismjs "^1.23.0"
+
+"@toast-ui/editor-plugin-color-syntax@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-color-syntax/-/editor-plugin-color-syntax-3.0.2.tgz#6fa501f5a8167da5fa603b1a769eaea918114670"
+  integrity sha512-bY356w1VSiPKEslmEyE6dNcGosa6iowEY7FDVPLXHKnZ3IFGi7duwsThnkgi84aLOONAZxu6JaJmuyv1Vari+Q==
+  dependencies:
+    tui-color-picker "^2.2.6"
+
+"@toast-ui/editor-plugin-table-merged-cell@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-table-merged-cell/-/editor-plugin-table-merged-cell-3.0.2.tgz#31b7a83c20a1f9b651ab32e05749be5b9988c9b7"
+  integrity sha512-GKV/jIm7WY04ExdxuNxwYJxWoGCAFntC7LyCcXoXkIovTOudRizsQhcv9LuDH3azPy2aTdzTEuw8qs4BWOwK/w==
+
 "@toast-ui/editor@^3.1.3":
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/@toast-ui/editor/-/editor-3.1.3.tgz#12f15dab1fc9c1db336683f51208f8ba8017abb9"
@@ -2093,6 +2124,11 @@
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.4.3.tgz#a3c65525b91fca7da00ab1a3ac2b5a2a4afbffbf"
   integrity sha512-QzSuZMBuG5u8HqYz01qtMdg/Jfctlnvj1z/lYnIDXs/golxw0fxtRAHd9KrzjR7Yxz1qVeI00o0kiO3PmVdJ9w==
+
+"@types/prismjs@^1.26.0":
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/@types/prismjs/-/prismjs-1.26.0.tgz#a1c3809b0ad61c62cac6d4e0c56d610c910b7654"
+  integrity sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==
 
 "@types/prop-types@*":
   version "15.7.4"
@@ -11262,6 +11298,11 @@ printj@~1.3.1:
   resolved "https://registry.yarnpkg.com/printj/-/printj-1.3.1.tgz#9af6b1d55647a1587ac44f4c1654a4b95b8e12cb"
   integrity sha512-GA3TdL8szPK4AQ2YnOe/b+Y1jUFwmmGMMK/qbY7VcE3Z7FU8JstbKiKRzO6CIiAKPhTO8m01NoQ0V5f3jc4OGg==
 
+prismjs@^1.23.0:
+  version "1.27.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.27.0.tgz#bb6ee3138a0b438a3653dd4d6ce0cc6510a45057"
+  integrity sha512-t13BGPUlFDR7wRB5kQDG4jjl7XeuH6jbJGt11JHPL96qwsEHNX2+68tFXqc1/k+/jALsbSWJKUOT/hcYAZ5LkA==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -13671,6 +13712,11 @@ tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
+
+tui-color-picker@^2.2.6:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/tui-color-picker/-/tui-color-picker-2.2.7.tgz#233cd501b17568ae6d604e06898b0c8553851186"
+  integrity sha512-y7gUe6PdVBq8ruZbiOkeaN7N/DX+ogVyLkK53OM4qW5Vrc4pDWYEKlnOBCsPODb4/RSzS9iTd6fXYirXxeakJA==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
