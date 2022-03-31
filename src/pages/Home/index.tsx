@@ -1,87 +1,36 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IBlogCardDataProps } from '../../types/postDataType';
 import axios from 'axios';
-import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
-import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
-import {
-  MainContentWrapper,
-  CardSection,
-  BlogCardWrapper,
-  ButtonWrapper,
-} from './styled';
+import { CardSection, BlogCardWrapper } from './styled';
 
-function index() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const { x } = useScroll(scrollRef);
-  const [isDrag, setIsDrag] = useState(false);
-  const [startX, setStartX] = useState(0);
-
-  const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsDrag(true);
-    if (scrollRef.current?.scrollLeft !== undefined)
-      setStartX(e.pageX + scrollRef.current.scrollLeft);
+const Home = () => {
+  const data = {
+    id: 'gudcks0305',
+    password: '$10$8lDyClwH.ET3BA44inQLKuRNISg4paTPwgD2V5pw/RMmtTGJvhPvy',
   };
-
-  const onDragEnd = () => {
-    setIsDrag(false);
+  const handleClick = () => {
+    fetch('https://gdsc-dju.com/test/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((response) => console.log('Success:', JSON.stringify(response)));
   };
-
-  const onDragMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (isDrag) {
-      if (scrollRef.current !== null) {
-        const { scrollWidth, clientWidth, scrollLeft } = scrollRef.current;
-        if (scrollRef.current?.scrollLeft !== undefined)
-          scrollRef.current.scrollLeft = startX - e.pageX;
-
-        if (scrollLeft === 0) {
-          setStartX(e.pageX);
-        } else if (scrollWidth <= clientWidth + scrollLeft) {
-          setStartX(e.pageX + scrollLeft);
-        }
-      }
-    }
-  };
-  const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
-
-  useEffect(() => {
-    console.log('123123');
-    async function fetchData() {
-      const result = await axios.get(
-        'https://gdsc-dju.com/api/v1/post/list?page=0&size=16',
-      );
-      setPostData(result.data.body.data.content);
-    }
-    console.log('123123456789');
-    fetchData();
-    console.log('abcdefg');
-  }, []);
+  <button onClick={handleClick}>로그인</button>;
 
   return (
-    <LayoutContainer>
-      <MainContentWrapper>
-        <CardSection
-          ref={scrollRef}
-          isDrag={isDrag}
-          onMouseDown={onDragStart}
-          onMouseMove={isDrag ? onDragMove : undefined}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-        >
-          {PostData?.map((CardData, index) => (
-            <BlogCardWrapper key={CardData.postId}>
-              <BlogCard CardData={CardData} />
-            </BlogCardWrapper>
-          ))}
+    <>
+      <LayoutContainer>
+        <CardSection>
+          <BlogCard />
         </CardSection>
-        <ButtonWrapper>
-          <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
-        </ButtonWrapper>
-      </MainContentWrapper>
-    </LayoutContainer>
+      </LayoutContainer>
+    </>
   );
-}
+};
 
-export default index;
+export default Home;

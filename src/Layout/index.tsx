@@ -61,7 +61,6 @@ const Layout = () => {
         <Route path={'/category'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route path={'/signup'} element={<SignUp />} />
-        <Route path={'/OauthRedirectPage'} element={<OauthRedirectPage />} />
         <Route
           path={'/admin'}
           element={
