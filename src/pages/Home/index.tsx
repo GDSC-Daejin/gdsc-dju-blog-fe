@@ -51,9 +51,11 @@ function index() {
   });
   useEffect(() => {
     // console.log(useGetPostListData('all', 0));
-    instance.get('/api/v1/post/list').then(function (response) {
-      console.log(response);
-    });
+    instance
+      .get('https://gdsc-dju.com/api/v1/category')
+      .then(function (response) {
+        console.log(response);
+      });
   }, []);
 
   return (
@@ -67,11 +69,11 @@ function index() {
           onMouseUp={onDragEnd}
           onMouseLeave={onDragEnd}
         >
-          {/* {PostData?.map((CardData, index) => (
+          {PostData?.map((CardData, index) => (
             <BlogCardWrapper key={CardData.postId}>
               <BlogCard CardData={CardData} />
             </BlogCardWrapper>
-          ))} */}
+          ))}
         </CardSection>
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
