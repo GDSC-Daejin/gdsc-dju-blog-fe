@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { IBlogCardDataProps } from '../../types/postDataType';
 import { LayoutContainer } from '../../styles/layouts';
-import BlogCard from '../../components/common/BlogCard';
-import { BlogCardWrapper, BlogCardGridLayout } from './styled';
+import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
+
 import CategoryMenu from '../../components/common/CategoryMenu';
 import axios from 'axios';
 
 const Category = () => {
-  const arr = Array(100)
-    .fill(null)
-    .map((v, i) => i + 1);
   const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
 
   useEffect(() => {
@@ -26,13 +23,7 @@ const Category = () => {
     <LayoutContainer>
       <h3>카테고리 페이지</h3>
       <CategoryMenu type="frontend" />
-      <BlogCardGridLayout>
-        {PostData?.map((data, index) => (
-          <BlogCardWrapper key={data.postId}>
-            <BlogCard CardData={data} />
-          </BlogCardWrapper>
-        ))}
-      </BlogCardGridLayout>
+      <BlogCardGridLayout PostData={PostData} />
     </LayoutContainer>
   );
 };

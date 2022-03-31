@@ -13,7 +13,6 @@ import {
 } from './styled';
 
 function index() {
-  const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const scrollRef = useRef<HTMLDivElement>(null);
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
@@ -48,13 +47,17 @@ function index() {
   const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
 
   useEffect(() => {
+    console.log('123123');
     async function fetchData() {
       const result = await axios.get(
         'https://gdsc-dju.com/api/v1/post/list?page=0&size=16',
+        //  api/v1/post/list?page=0&size=5&sort=postId.desc
       );
       setPostData(result.data.body.data.content);
     }
+    console.log('123123456789');
     fetchData();
+    console.log('abcdefg');
   }, []);
 
   return (
