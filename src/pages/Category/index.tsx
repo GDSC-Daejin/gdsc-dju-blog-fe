@@ -7,7 +7,7 @@ import CategoryMenu from '../../components/common/CategoryMenu';
 import axios from 'axios';
 
 const Category = () => {
-  const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
+  const [PostData, setPostData] = useState<IBlogCardDataProps[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,6 +18,11 @@ const Category = () => {
     }
     fetchData();
   }, []);
+  // axios
+  // .get('https://gdsc-dju.com/api/v1/post/list?page=0&size=16')
+  // .then((data) => {
+  //   setPostData(data);
+  // });
 
   return (
     <LayoutContainer>
