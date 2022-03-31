@@ -28,7 +28,7 @@ const Category = () => {
     <LayoutContainer>
       <h3>카테고리 페이지</h3>
       <CategoryMenu type="frontend" />
-      <BlogCardGridLayout PostData={PostData} />
+      {/* <BlogCardGridLayout PostData={PostData} /> */}
     </LayoutContainer>
   );
 };

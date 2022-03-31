@@ -1,7 +1,3 @@
-export interface IBlogCardProps {
-  CardData: IBlogCardDataProps;
-}
-
 export interface IBlogCardDataProps {
   memberInfo: {
     nickname: string;

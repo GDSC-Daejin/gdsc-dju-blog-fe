@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IBlogCardProps } from '../../../types/postDataType';
 import BlogCardImage from '../../../Images/unknown.png';
 import { useNavigate } from 'react-router';
 import {
@@ -18,6 +17,7 @@ import {
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Bookmark from '../../../Images/Bookmark';
+import { detailPostDataType } from '../../../types/postData';
 
 const PostTextVariants = {
   initial: {
@@ -33,6 +33,9 @@ const PostTextVariants = {
   },
 };
 
+interface IBlogCardProps {
+  CardData: detailPostDataType;
+}
 const BlogCard = (props: IBlogCardProps) => {
   const { CardData } = props;
   const [IsHovered, setIsHovered] = useState(false);
@@ -104,7 +107,7 @@ const BlogCard = (props: IBlogCardProps) => {
               </BlogCardSubText>
             </BlogCardAuthorWrapper>
             <BlogCardSubText subText={true}>
-              {handleUploadDate(CardData.uploadDate)}
+              {handleUploadDate(CardData.category.uploadDate)}
             </BlogCardSubText>
           </BlogCardSubTextWrapper>
         </BlogCardBottomBox>

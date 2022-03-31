@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IBlogCardDataProps } from '../../types/postDataType';
 import axios from 'axios';
 import { useScroll } from 'react-use';
 import { LayoutContainer } from '../../styles/layouts';
@@ -11,6 +10,8 @@ import {
   BlogCardWrapper,
   ButtonWrapper,
 } from './styled';
+import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import { detailPostDataType } from '../../types/postData';
 
 function index() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -24,11 +25,9 @@ function index() {
     if (scrollRef.current?.scrollLeft !== undefined)
       setStartX(e.pageX + scrollRef.current.scrollLeft);
   };
-
   const onDragEnd = () => {
     setIsDrag(false);
   };
-
   const onDragMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isDrag) {
       if (scrollRef.current !== null) {
@@ -44,17 +43,17 @@ function index() {
       }
     }
   };
-  const [PostData, setPostData] = useState<IBlogCardDataProps[]>();
+  const [PostData, setPostData] = useState<detailPostDataType[]>();
 
+  const instance = axios.create({
+    baseURL: 'https://gdsc-dju.com',
+    timeout: 15000,
+  });
   useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get(
-        'https://gdsc-dju.com/api/v1/post/list?page=0',
-        //  api/v1/post/list?page=0&size=5&sort=postId.desc
-      );
-      setPostData(result.data.body.data.content);
-    }
-    fetchData();
+    // console.log(useGetPostListData('all', 0));
+    instance.get('/api/v1/post/list').then(function (response) {
+      console.log(response);
+    });
   }, []);
 
   return (
@@ -68,11 +67,11 @@ function index() {
           onMouseUp={onDragEnd}
           onMouseLeave={onDragEnd}
         >
-          {PostData?.map((CardData, index) => (
+          {/* {PostData?.map((CardData, index) => (
             <BlogCardWrapper key={CardData.postId}>
               <BlogCard CardData={CardData} />
             </BlogCardWrapper>
-          ))}
+          ))} */}
         </CardSection>
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
