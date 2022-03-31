@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { memberDataInfoType, userDataType } from '../types/userDataType';
+import { detailPostDataType, rowDetailPostDataType } from '../types/postData';
 
 export class Api {
   private API: string;
@@ -27,6 +28,31 @@ export class Api {
   };
   getUserData = () => {
     return axios.get<userDataType>(`${this.API}/user/me`, {
+      headers: this.Header,
+    });
+  };
+  getUserPostListData = (params: string) => {
+    return axios.get<rowDetailPostDataType>(
+      `${this.API}/api/member/v1/${params}`,
+      {
+        headers: this.Header,
+      },
+    );
+  };
+  getPostListData = (params: string) => {
+    return axios.get<rowDetailPostDataType>(`${this.API}/api/v1/${params}`);
+  };
+  getPostDetailData = (postId: string) => {
+    return axios.get(`${this.API}/api/v1/post/${postId}`);
+  };
+
+  getUserScrapData = () => {
+    return axios.get(`${this.API}/api/member/v1/myScrap`, {
+      headers: this.Header,
+    });
+  };
+  updateUserScrapData = (postId: string) => {
+    return axios.post(`${this.API}/api/member/v1/myScrap${postId}`, {
       headers: this.Header,
     });
   };

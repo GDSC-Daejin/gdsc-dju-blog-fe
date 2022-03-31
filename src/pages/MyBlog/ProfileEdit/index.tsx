@@ -24,12 +24,13 @@ import {
 } from '../../../types/userInfoData';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { memberDataInfoType } from '../../../types/userDataType';
+import { useNavigate } from 'react-router';
 
 const ProfileEdit = () => {
   const image = '';
   const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
-
+  const navigate = useNavigate();
   useLayoutEffect(() => {
     if (userData) {
       setUser({
@@ -39,7 +40,7 @@ const ProfileEdit = () => {
         email: userData.email,
       });
     }
-  }, []);
+  }, [userData]);
 
   const userEditFormik = useFormik({
     initialValues: {
@@ -67,7 +68,6 @@ const ProfileEdit = () => {
   });
   const onSubmit = async (values: userEditDataType) => {
     const { githubUrl, blogUrl, resumeUrl } = values;
-
     const memberPortfolioUrls: memberPortfolioUrlsType[] = [
       {
         id: 1,
@@ -85,17 +85,22 @@ const ProfileEdit = () => {
     delete values.githubUrl;
     delete values.blogUrl;
     delete values.resumeUrl;
-
     const memberData = {
       ...values,
       memberPortfolioUrls: memberPortfolioUrls,
     };
-    await API.updateUserData(memberData as memberDataInfoType).then((res) => {
-      setUser({
-        ...user,
-        ...values,
+    try {
+      await API.updateUserData(memberData as memberDataInfoType).then(() => {
+        setUser({
+          ...user,
+          ...values,
+        });
       });
-    });
+      await navigate(-1);
+      // await openModal
+    } catch (err) {
+      console.log(err);
+    }
   };
   console.log(userEditFormik.errors);
   console.log(userEditFormik.values);

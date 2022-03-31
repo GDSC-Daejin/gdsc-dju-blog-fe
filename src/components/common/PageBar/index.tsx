@@ -4,19 +4,29 @@ import LeftArrow from '../../../Images/LeftArrow';
 import {
   ArrowWrapper,
   Number,
+  NumberCircle,
   NumberSection,
   NumberWrapper,
   PageBarWrapper,
 } from './styled';
-import { postListData } from '../../../api/Mocks/postListData';
 
+const circleMotion = {
+  isActive: {
+    opacity: 1,
+    y: 0,
+  },
+  isUnActive: {
+    y: -10,
+    opacity: 0,
+  },
+};
 const PageBar = (props: {
   page: number;
+  totalPage: number;
   onClick: (page: number, limit?: number) => void;
 }) => {
-  const { page, onClick } = props;
-  const pageNumber = Math.ceil(postListData.length / 10);
-  const array = Array(pageNumber).fill(0);
+  const { page, onClick, totalPage } = props;
+  const array = Array(totalPage).fill(0);
   return (
     <PageBarWrapper>
       <ArrowWrapper onClick={() => onClick(page - 1)}>
@@ -29,11 +39,15 @@ const PageBar = (props: {
             onClick={() => onClick(id)}
             active={page === id}
           >
+            <NumberCircle
+              variants={circleMotion}
+              animate={page === id ? 'isActive' : 'isUnActive'}
+            />
             <Number>{id + 1}</Number>
           </NumberWrapper>
         ))}
       </NumberSection>
-      <ArrowWrapper onClick={() => onClick(page + 1, pageNumber)}>
+      <ArrowWrapper onClick={() => onClick(page + 1, totalPage)}>
         <RightArrow />
       </ArrowWrapper>
     </PageBarWrapper>
