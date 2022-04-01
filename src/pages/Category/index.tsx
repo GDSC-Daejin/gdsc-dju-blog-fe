@@ -11,6 +11,10 @@ const Category = () => {
   const [PostData, setPostData] = useState<detailPostDataType[]>([]);
   const params = useParams();
   const navigate = useNavigate();
+  const checkCategoryType = () => {
+    if (params.categoryName === undefined) return 'all';
+    return params.categoryName;
+  };
   const instance = axios.create({
     baseURL: 'https://gdsc-dju.com',
     timeout: 15000,
@@ -30,8 +34,9 @@ const Category = () => {
   return (
     <LayoutContainer>
       <h3>카테고리 페이지</h3>
-      <CategoryMenu type={params.categoryName!} onClick={handleCategoryMenu} />
+      <CategoryMenu type={checkCategoryType()} onClick={handleCategoryMenu} />
       <BlogCardGridLayout PostData={PostData} />
+      {/* <PageBar/> */}
     </LayoutContainer>
   );
 };
