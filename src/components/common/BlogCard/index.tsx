@@ -103,7 +103,9 @@ const BlogCard = (props: IBlogCardProps) => {
               <BlogCardAuthorImage />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>
-                {CardData.memberInfo.nickname}
+                {CardData.memberInfo.nickname === null
+                  ? 'Guest'
+                  : CardData.memberInfo.nickname}
               </BlogCardSubText>
             </BlogCardAuthorWrapper>
             <BlogCardSubText subText={true}>

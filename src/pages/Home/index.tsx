@@ -51,11 +51,9 @@ function index() {
   });
   useEffect(() => {
     // console.log(useGetPostListData('all', 0));
-    instance
-      .get('https://gdsc-dju.com/api/v1/category')
-      .then(function (response) {
-        console.log(response);
-      });
+    instance.get('/api/v1/post/list?page=0&size=11').then(function (response) {
+      setPostData(response.data.body.data.content);
+    });
   }, []);
 
   return (

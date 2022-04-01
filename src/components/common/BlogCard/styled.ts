@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const BlogCardInner = styled(motion.div)`
+export const BlogCardInner = styled(motion.article)`
   position: relative;
-  width: inherit;
-  height: inherit;
+  width: 248px;
+  height: 294px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -118,4 +118,8 @@ export const BlogCardSubText = styled.div<{
   &:last-child {
     margin-right: 0;
   }
+`;
+export const SilverCard = styled.div`
+  width: 248px;
+  height: 294px;
 `;
