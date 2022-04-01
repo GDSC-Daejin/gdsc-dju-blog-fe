@@ -56,7 +56,7 @@ const Layout = () => {
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
         <Route path={'/post'} element={<Posts />} />
-        <Route path={'/category'} element={<Category />} />
+        <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route
           path={'/admin'}

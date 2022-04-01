@@ -5,29 +5,35 @@ import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import axios from 'axios';
 import PageBar from '../../components/common/PageBar';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const Category = () => {
   const [PostData, setPostData] = useState<IBlogCardDataProps[]>([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get(
-        'https://gdsc-dju.com/api/v1/post/list?page=0&size=16',
-      );
-      setPostData(result.data.body.data.content);
-    }
-    fetchData();
-  }, []);
-  // axios
-  // .get('https://gdsc-dju.com/api/v1/post/list?page=0&size=16')
-  // .then((data) => {
-  //   setPostData(data);
-  // });
+  const params = useParams();
+  const navigate = useNavigate();
+  const instance = axios.create({
+    baseURL: 'https://gdsc-dju.com',
+    timeout: 15000,
+  });
+  console.log(params);
+  // useEffect(() => {
+  //   instance.get('/api/v1/post/list?page=0&size=5').then(function (response) {
+  //     console.log(`check1 : ${response}`);
+  //   });
+  //   instance
+  //     .get(`/api/v1/post/list/${params.categoryName}?page=0&size=16`)
+  //     .then(function (response) {
+  //       console.log(`check2 : ${response}`);
+  //     });
+  // }, []);
+  const handleCategoryMenu = (categoryName: string) => {
+    navigate(`/category/${categoryName}`);
+  };
 
   return (
     <LayoutContainer>
       <h3>카테고리 페이지</h3>
-      <CategoryMenu type="frontend" />
+      <CategoryMenu type={params.categoryName!} onClick={handleCategoryMenu} />
       {/* <BlogCardGridLayout PostData={PostData} /> */}
       {/* <PageBar page={10} totalPage={123} /> */}
     </LayoutContainer>
