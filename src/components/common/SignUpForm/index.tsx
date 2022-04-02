@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
 import { SignUpFormStyle, SignUpButton } from './styled';
 import SignUpInput from '../SignUpInput';
 import SignUpSelect from '../SignUpSelect';
@@ -110,6 +111,7 @@ const SignUpForm = () => {
       refName: 'position',
       type: 'text',
       title: '포지션',
+      select: true,
       condition: {
         required: '필수 입력란입니다',
       },
@@ -149,34 +151,19 @@ const SignUpForm = () => {
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) =>
-        data.refName === 'position' ? (
-          <SignUpSelect
-            key={index}
-            refName={data.refName}
-            type={data.type}
-            title={data.title}
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            condition={data.condition}
-            errors={data.errors}
-          />
-        ) : (
-          <SignUpInput
-            key={index}
-            refName={data.refName}
-            placeholder={data.placeholder}
-            type={data.type}
-            title={data.title}
-            register={register}
-            setValue={setValue}
-            condition={data.condition}
-            errors={data.errors}
-            watch={watch}
-          />
-        ),
+        data.select ? <SignUpSelect {...data} /> : <SignUpInput {...data} />,
       )}
-
+      {/* 
+            넘겨주는 값들
+            key={index}
+            refName={data.refName}
+            type={data.type}
+            title={data.title}
+            register={register}
+            watch={watch}
+            setValue={setValue}
+            condition={data.condition}
+            errors={data.errors}*/}
       <SignUpButton isValid={isValid} type="submit">
         가입하기
       </SignUpButton>

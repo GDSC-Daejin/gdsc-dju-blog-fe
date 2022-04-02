@@ -10,6 +10,7 @@ export interface IFormStructure {
   refName: string;
   type: 'text' | 'tel' | 'email';
   title: string;
+  select?: boolean;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   watch: UseFormWatch<FieldValues>;
