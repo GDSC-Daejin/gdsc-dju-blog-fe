@@ -5,6 +5,11 @@ import {
   PostThumbnailWrapper,
   PostTitle,
   PostHashtag,
+  PostGDSCButtonWrapper,
+  PostBottomButtonWrapper,
+  PostBottomButtonLWrapper,
+  PostBottomButtonCWrapper,
+  PostBottomButtonRWrapper,
 } from './styled';
 import {
   LayoutContainer,
@@ -31,6 +36,8 @@ import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
+import PostThumbnail from '../../Images/PostThumbnail';
+import { GDSCButton } from '../../components/common/Button';
 
 const PostWrite = () => {
   const editorRef: any = createRef<HTMLInputElement>();
@@ -42,11 +49,18 @@ const PostWrite = () => {
       <LayoutContainer>
         <ContainerInner>
           <PostCategoryMenu />
-          <PostInformation />
-          <PostThumbnailWrapper />
-          <PostContentWrapper />
-          <PostTitle>sfsaf</PostTitle>
-          <PostHashtag>dfasdfsa</PostHashtag>
+          <PostInformation>
+            <PostThumbnailWrapper>
+              <PostThumbnail />
+            </PostThumbnailWrapper>
+            <PostContentWrapper>
+              <PostTitle>제목을 입력하세요.</PostTitle>
+              <PostHashtag>#해시태그 ,로 구분하세요</PostHashtag>
+            </PostContentWrapper>
+            <PostGDSCButtonWrapper>
+              <GDSCButton text="임시글" />
+            </PostGDSCButtonWrapper>
+          </PostInformation>
           <Editor
             previewStyle="vertical"
             height="400px"
@@ -60,6 +74,17 @@ const PostWrite = () => {
               tableMergedCell,
             ]}
           />
+          <PostBottomButtonWrapper>
+            <PostBottomButtonLWrapper>
+              <GDSCButton text="작성취소" />
+            </PostBottomButtonLWrapper>
+            <PostBottomButtonCWrapper>
+              <GDSCButton text="임시저장" />
+            </PostBottomButtonCWrapper>
+            <PostBottomButtonRWrapper>
+              <GDSCButton text="업로드" color="GDSC blue" />
+            </PostBottomButtonRWrapper>
+          </PostBottomButtonWrapper>
         </ContainerInner>
       </LayoutContainer>
     </>

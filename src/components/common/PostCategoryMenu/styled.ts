@@ -25,8 +25,8 @@ export const PostCategoryMenuWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
   flex-direction: row;
-  width: 378px;
-  justify-content: space-around;
+  width: 400px;
+  justify-content: space-between;
 `;
 export const PostCategoryCircleWrapper = styled(motion.div)`
   position: absolute;
