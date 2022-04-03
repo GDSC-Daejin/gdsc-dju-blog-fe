@@ -39,12 +39,10 @@ interface IBlogCardProps {
 const BlogCard = (props: IBlogCardProps) => {
   const { CardData } = props;
   const [IsHovered, setIsHovered] = useState(false);
+  const [marked, setMarked] = useState(false);
+
   const nowLogin = false;
   const Navigate = useNavigate();
-  const [marked, setMarked] = useState(false);
-  const CardTag: string[] = CardData.postHashTags.split(',');
-  const handleUploadDate = (data: string) =>
-    data.substring(2, 10).replaceAll('-', '.');
   const setBookmarkClip = () => {
     if (nowLogin)
       setMarked((prev) => {
@@ -55,6 +53,10 @@ const BlogCard = (props: IBlogCardProps) => {
       Navigate('/', { replace: false });
     }
   };
+
+  const CardTag: string[] = CardData.postHashTags.split(',');
+  const handleUploadDate = (data: string) =>
+    data.substring(2, 10).replaceAll('-', '.');
 
   return (
     <AnimateSharedLayout>
