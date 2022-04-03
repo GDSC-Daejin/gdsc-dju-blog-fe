@@ -12,7 +12,6 @@ export function useGetPostListData(category: string, page = 0) {
     [`post/list/${url(category, page)}`],
     getPostListData,
   );
-  console.log(error);
   return {
     data: data && data,
     error: error && error,

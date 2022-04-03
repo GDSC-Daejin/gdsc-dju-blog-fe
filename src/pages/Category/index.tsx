@@ -9,10 +9,14 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 
 const Category = () => {
+  console.log('hello');
+
   const params = useParams();
   const navigate = useNavigate();
-  const [ParamsData, setParamsData] = useState('all');
-  const { data, error } = useGetPostListData(ParamsData, 0);
+  const { data, error } = useGetPostListData(
+    params.categoryName === undefined ? 'all' : params.categoryName,
+    0,
+  );
 
   const handlePostData = () => {
     return data?.body.data.content === undefined ? [] : data?.body.data.content;
@@ -20,28 +24,28 @@ const Category = () => {
   const handleCategoryMenu = (categoryName: string) => {
     navigate(`/category/${categoryName}`);
   };
-  useEffect(() => {
-    setParamsData((prev) => {
-      return params.categoryName === undefined ? prev : params.categoryName;
-    });
-    // const instance = axios.create({
-    //   baseURL: 'https://gdsc-dju.com',
-    //   timeout: 15000,
-    // });
-    // instance
-    //   .get(`/api/v1/post/list/${params.categoryName}?page=0&size=16`)
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-  }, [params]);
+  // useEffect(() => {
+  //   const instance = axios.create({
+  //     baseURL: 'https://gdsc-dju.com',
+  //     timeout: 15000,
+  //   });
+  //   instance
+  //     .get(`/api/v1/post/list/${params.categoryName}?page=0&size=16`)
+  //     .then(function (response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, [params]);
 
   return (
     <LayoutContainer>
       <h3>카테고리 페이지</h3>
-      <CategoryMenu type={ParamsData} onClick={handleCategoryMenu} />
+      <CategoryMenu
+        type={params.categoryName === undefined ? 'all' : params.categoryName}
+        onClick={handleCategoryMenu}
+      />
       <BlogCardGridLayout PostData={handlePostData()} />
       {/* <PageBar/> */}
     </LayoutContainer>
