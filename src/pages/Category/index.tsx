@@ -9,35 +9,32 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 
 const Category = () => {
-  console.log('hello');
-
   const params = useParams();
   const navigate = useNavigate();
-  const { data, error } = useGetPostListData(
-    params.categoryName === undefined ? 'all' : params.categoryName,
-    0,
-  );
-
-  const handlePostData = () => {
-    return data?.body.data.content === undefined ? [] : data?.body.data.content;
-  };
+  // const { data, error } = useGetPostListData(
+  //   params.categoryName === undefined ? 'all' : params.categoryName,
+  //   0,
+  // );
+  // const handlePostData = () => {
+  //   return data?.body.data.content === undefined ? [] : data?.body.data.content;
+  // };
   const handleCategoryMenu = (categoryName: string) => {
     navigate(`/category/${categoryName}`);
   };
-  // useEffect(() => {
-  //   const instance = axios.create({
-  //     baseURL: 'https://gdsc-dju.com',
-  //     timeout: 15000,
-  //   });
-  //   instance
-  //     .get(`/api/v1/post/list/${params.categoryName}?page=0&size=16`)
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }, [params]);
+  useEffect(() => {
+    const instance = axios.create({
+      baseURL: 'https://gdsc-dju.com',
+      timeout: 15000,
+    });
+    instance
+      .get(`/api/v1/post/list/${params.categoryName}?page=0&size=16`)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [params]);
 
   return (
     <LayoutContainer>
@@ -46,7 +43,7 @@ const Category = () => {
         type={params.categoryName === undefined ? 'all' : params.categoryName}
         onClick={handleCategoryMenu}
       />
-      <BlogCardGridLayout PostData={handlePostData()} />
+      {/* <BlogCardGridLayout PostData={handlePostData()} /> */}
       {/* <PageBar/> */}
     </LayoutContainer>
   );
