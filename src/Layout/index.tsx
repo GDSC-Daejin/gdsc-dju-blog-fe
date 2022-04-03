@@ -21,7 +21,6 @@ const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   // const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
-
   useEffect(() => {
     API.postForceLogin().then((res) => {
       API.getUserData().then((res) => {
