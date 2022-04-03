@@ -1,8 +1,6 @@
 import React from 'react';
 import SideBarCategory from '../SideBar/SideBarCategory';
 import { useNavigate } from 'react-router';
-import { useRecoilState } from 'recoil';
-import { menuState } from '../../../store/menu';
 import {
   PostCategoryCircle,
   PostCategoryCircleWrapper,
@@ -29,13 +27,7 @@ const PostCategoryMenu = () => {
             whileHover={'isActive'}
           >
             <PostCategoryCircleWrapper variants={circleMotion}>
-              {data.subtitle === 'all' ? (
-                <PostGDSCLogoWrapper>
-                  <GdscLogo />
-                </PostGDSCLogoWrapper>
-              ) : (
-                <PostCategoryCircle color={positionColor(data.subtitle)} />
-              )}
+              <PostCategoryCircle color={positionColor(data.subtitle)} />
             </PostCategoryCircleWrapper>
             <PostCategoryText>{data.title}</PostCategoryText>
           </PostCategoryTextWrapper>

@@ -1,10 +1,5 @@
 export const PostMenuData = [
   {
-    route: '/all',
-    title: 'ALL',
-    subtitle: 'all',
-  },
-  {
     route: '/fe',
     title: 'Frontend',
     subtitle: 'frontend',

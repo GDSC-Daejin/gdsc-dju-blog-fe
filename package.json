@@ -25,7 +25,7 @@
     "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
-    "axios": "^0.24.0",
+    "axios": "^0.26.1",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "firebase-tools": "^10.1.5",

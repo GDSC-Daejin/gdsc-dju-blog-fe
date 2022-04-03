@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   PostInformation,
   PostContentWrapper,
@@ -38,11 +38,31 @@ import CategoryMenu from '../../components/common/CategoryMenu';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
+import axios from 'axios';
+interface PostData {
+  title: string;
+  PostHastags: string;
+  content: string;
+}
 
 const PostWrite = () => {
-  const editorRef: any = createRef<HTMLInputElement>();
-  const [content, setContent] = useState('');
-
+  const editorRef: any = useRef();
+  const [title, setTitle] = useState('');
+  const [state, setState] = useState('');
+  const handleSubmit = () => {
+    const content = editorRef.current.getInstance().getHTML();
+    setState(content);
+    console.log(title);
+    console.log(content);
+    getPostData();
+    axios.post('https://gdsc-dju.com/api/member/v2/post', {
+      title: title,
+      content: content,
+    });
+  };
+  const getPostData = async () => {
+    const post = await axios.get('https://gdsc-dju.com/api/member/v2/post');
+  };
   return (
     <>
       <NavigationBlock />
@@ -54,7 +74,11 @@ const PostWrite = () => {
               <PostThumbnail />
             </PostThumbnailWrapper>
             <PostContentWrapper>
-              <PostTitle>제목을 입력하세요.</PostTitle>
+              <PostTitle
+                placeholder="제목을 입력하세요."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              ></PostTitle>
               <PostHashtag>#해시태그 ,로 구분하세요</PostHashtag>
             </PostContentWrapper>
             <PostGDSCButtonWrapper>
@@ -63,7 +87,7 @@ const PostWrite = () => {
           </PostInformation>
           <Editor
             previewStyle="vertical"
-            height="400px"
+            height="627px"
             initialEditType="markdown"
             initialValue="hello"
             ref={editorRef}
@@ -82,7 +106,11 @@ const PostWrite = () => {
               <GDSCButton text="임시저장" />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
-              <GDSCButton text="업로드" color="GDSC blue" />
+              <GDSCButton
+                text="업로드"
+                color="GDSC blue"
+                onClick={handleSubmit}
+              />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
         </ContainerInner>

@@ -14,11 +14,14 @@ export const PostContentWrapper = styled.div`
   flex-direction: column;
   padding-left: 30px;
 `;
-export const PostTitle = styled.div`
+export const PostTitle = styled.input`
   display: flex;
+  border: none;
   padding-bottom: 10px;
-  font-size: ${(props) => props.theme.fontSize.h3};
-  color: ${(props) => props.theme.color.grey400};
+  font-size: ${(props) => props.theme.fontSize.h4};
+  &::placeholder {
+    color: ${(props) => props.theme.color.grey400};
+  }
 `;
 export const PostHashtag = styled.div`
   display: flex;
@@ -33,7 +36,7 @@ export const PostGDSCButtonWrapper = styled.div`
 export const PostBottomButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
-  margin: 40px 0px 100px 0px;
+  margin: 40px 0px 200px 0px;
 `;
 export const PostBottomButtonLWrapper = styled.div`
   display: flex;
