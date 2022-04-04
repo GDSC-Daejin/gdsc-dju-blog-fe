@@ -4,15 +4,13 @@ export const SideBarAnimation = {
   isActive: {
     x: 0,
     transition: {
-      delay: 0.1,
-      duration: 0.2,
+      duration: 0.3,
     },
   },
   isUnActive: {
     x: -486,
     transition: {
-      delay: 0.1,
-      duration: 0.2,
+      duration: 0.3,
     },
   },
 };
@@ -41,5 +39,20 @@ export const SideBarCircleAnimation = {
   isUnActive: {
     x: -20,
     opacity: 0,
+  },
+};
+export const SideBarGrayBoxAnimation = {
+  isActive: {
+    display: 'block',
+    opacity: 0.6,
+    transition: {
+      duration: 0.3,
+    },
+  },
+  isUnActive: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+    },
   },
 };
