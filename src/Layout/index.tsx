@@ -38,9 +38,6 @@ const Layout = () => {
 
   return (
     <>
-      <AnimatePresence>
-        {loader.loading && <GoogleLoader background={loader.background} />}
-      </AnimatePresence>
       <Routes>
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
