@@ -54,6 +54,9 @@ function index() {
     instance.get('/api/v1/post/list?page=0&size=11').then(function (response) {
       setPostData(response.data.body.data.content);
     });
+    instance.get('/api/admin/v1/all/list').then(function (response) {
+      console.log(response);
+    });
   }, []);
 
   return (
