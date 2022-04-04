@@ -50,7 +50,8 @@ export const majorSchema = {
     .min(3, '3글자 이상 작성해주세요')
     .matches(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/, '한글만 입력 가능합니다.')
     .nullable()
-    .required('필수입력란입니다.'),
+    .required('필수입력란입니다.')
+    .nullable(),
 };
 export const studentIDSchema = {
   studentID: Yup.string()
@@ -58,28 +59,36 @@ export const studentIDSchema = {
     .required('필수입력란입니다.'),
 };
 export const gitEmailSchema = {
-  gitEmail: Yup.string().matches(
-    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/,
-    '이메일 형식으로 작성해주세요',
-  ),
+  gitEmail: Yup.string()
+    .matches(
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/,
+      '이메일 형식으로 작성해주세요',
+    )
+    .nullable(),
 };
 export const gitLinkSchema = {
-  gitEmail: Yup.string().matches(
-    /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
-    'github.com 형식으로 작성해주세요',
-  ),
+  gitEmail: Yup.string()
+    .matches(
+      /(http(s)?:\/\/)+(github)+\.+(com\/)+[A-Z,a-z]/,
+      'github.com 형식으로 작성해주세요',
+    )
+    .nullable(),
 };
-export const urlsSchema = Yup.string().matches(
-  /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
-  'http/https 형식으로 작성해주세요',
-);
+export const urlsSchema = Yup.string()
+  .matches(
+    /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
+    'http/https 형식으로 작성해주세요',
+  )
+  .nullable();
 export const memberPortfolioSchema = {
-  memberPortfolioUrls: Yup.array().of(
-    Yup.string().matches(
-      /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
-      'http/https 형식으로 작성해주세요',
-    ),
-  ),
+  memberPortfolioUrls: Yup.array()
+    .of(
+      Yup.string().matches(
+        /(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/,
+        'http/https 형식으로 작성해주세요',
+      ),
+    )
+    .nullable(),
 };
 
 export const profileEditSchema = Yup.object().shape({
