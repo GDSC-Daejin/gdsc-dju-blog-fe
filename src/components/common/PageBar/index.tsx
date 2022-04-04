@@ -9,6 +9,7 @@ import {
   NumberWrapper,
   PageBarWrapper,
 } from './styled';
+import { useNavigate } from 'react-router';
 
 const circleMotion = {
   isActive: {
@@ -23,20 +24,33 @@ const circleMotion = {
 const PageBar = (props: {
   page: number;
   totalPage: number;
-  onClick: (page: number, limit?: number) => void;
+  nickname?: string;
+  type?: string;
 }) => {
-  const { page, onClick, totalPage } = props;
+  const { page, nickname, totalPage, type } = props;
   const array = Array(totalPage).fill(0);
+  const navigate = useNavigate();
+  const pageHandler = (page: number, limit?: number) => {
+    if (page < 0) {
+      return;
+    }
+    if (page === limit) {
+      return;
+    } else {
+      navigate(`/${nickname}?type=${type}&page=${page}`);
+    }
+  };
+
   return (
     <PageBarWrapper>
-      <ArrowWrapper onClick={() => onClick(page - 1)}>
+      <ArrowWrapper onClick={() => pageHandler(page - 1)}>
         <LeftArrow />
       </ArrowWrapper>
       <NumberSection>
         {array.map((num, id) => (
           <NumberWrapper
             key={id}
-            onClick={() => onClick(id)}
+            onClick={() => pageHandler(id)}
             active={page === id}
           >
             <NumberCircle
@@ -47,7 +61,7 @@ const PageBar = (props: {
           </NumberWrapper>
         ))}
       </NumberSection>
-      <ArrowWrapper onClick={() => onClick(page + 1, totalPage)}>
+      <ArrowWrapper onClick={() => pageHandler(page + 1, totalPage)}>
         <RightArrow />
       </ArrowWrapper>
     </PageBarWrapper>
