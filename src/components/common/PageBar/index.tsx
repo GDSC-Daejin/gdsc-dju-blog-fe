@@ -27,7 +27,6 @@ const PageBar = (props: {
 }) => {
   const { page, onClick, totalPage } = props;
   const array = Array(totalPage).fill(0);
-  console.log(page);
   return (
     <PageBarWrapper>
       <ArrowWrapper onClick={() => onClick(page < 1 ? 0 : page - 1)}>

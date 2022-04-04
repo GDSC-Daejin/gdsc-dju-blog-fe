@@ -30,7 +30,9 @@ const Category = () => {
     navigate(`/category/${categoryName}`);
   };
   const handlePageNavigation = (nowPage: number) => {
-    navigate(`/category/${params.categoryName}?page=${nowPage}`);
+    nowPage === nowParamsPageNumber()
+      ? null
+      : navigate(`/category/${params.categoryName}?page=${nowPage}`);
   };
 
   return (
