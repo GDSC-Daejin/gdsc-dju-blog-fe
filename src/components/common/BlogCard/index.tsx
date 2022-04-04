@@ -1,66 +1,103 @@
 import React, { useState } from 'react';
+import { useHover } from 'react-use';
+import BlogCardImage from '../../../Images/unknown.png';
+import { useNavigate } from 'react-router';
 import {
   BlogCardAuthorImage,
   BlogCardAuthorWrapper,
   BlogCardBottomBox,
   BlogCardInner,
+  BookMarkWrapper,
   BlogCardPostText,
-  BlogCardPostTextWrapper,
   BlogCardSubText,
   BlogCardSubTextWrapper,
   BlogCardTitle,
+  BlogCardThumbnail,
+  BlogCardTag,
+  BlogCardTagWrapper,
 } from './styled';
-import YellowBanner from '../../../Images/YellowBanner.svg';
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import Bookmark from '../../../Images/Bookmark';
 
-const PostText = () => {
-  return (
-    <BlogCardPostTextWrapper
-      layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <BlogCardPostText>
-        본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고
-        어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고
-        어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고 어쩌고 어쩌고 본문 어쩌고
-      </BlogCardPostText>
-    </BlogCardPostTextWrapper>
-  );
+const PostTextVariants = {
+  initial: {
+    opacity: 0,
+  },
+  visiable: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: 0.2,
+      duration: 0.3,
+    },
+  },
 };
-const BottomText = () => {
-  return (
-    <BlogCardSubTextWrapper>
-      <BlogCardAuthorWrapper>
-        <BlogCardAuthorImage />
-        <BlogCardSubText subText={true}>by</BlogCardSubText>
-        <BlogCardSubText bold={true}>Jason</BlogCardSubText>
-      </BlogCardAuthorWrapper>
-      <BlogCardSubText subText={true}>22.02.02</BlogCardSubText>
-    </BlogCardSubTextWrapper>
-  );
-};
+
 const BlogCard = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  console.log(isHovered);
+  const [BlogCardBottomText, IsHovered] = useHover(BottomText);
+  const nowLogin = false;
+  const Navigate = useNavigate();
+  const [marked, setMarked] = useState(false);
+  const CardTag: string[] = ['darkmode', 'darkmode'];
+  const setBookmarkClip = () => {
+    if (nowLogin)
+      setMarked((prev) => {
+        return !prev;
+      });
+    else {
+      alert('로그인 후 이용가능합니다');
+      Navigate('/123', { replace: false });
+    }
+  };
+
   return (
     <AnimateSharedLayout>
-      <BlogCardInner
-        route={YellowBanner}
-        onMouseOver={() => setIsHovered(true)}
-        onMouseOut={() => setIsHovered(false)}
-      >
-        <BlogCardBottomBox layout initial={{ borderRadius: 10 }}>
-          <BlogCardTitle layout>제목입니다아아아아아</BlogCardTitle>
-          <AnimatePresence>{isHovered && <PostText />}</AnimatePresence>
-          <motion.div layout>
-            <BottomText />
-          </motion.div>
-        </BlogCardBottomBox>
+      <BlogCardInner>
+        <BookMarkWrapper onClick={setBookmarkClip}>
+          <Bookmark marked={marked} />
+        </BookMarkWrapper>
+        <BlogCardThumbnail src={BlogCardImage} />
+        <BlogCardTagWrapper IsHovered={IsHovered}>
+          {CardTag.map((data: string, index: number) => (
+            <BlogCardTag key={index}>
+              <span>#{data}</span>
+            </BlogCardTag>
+          ))}
+        </BlogCardTagWrapper>
+        {BlogCardBottomText}
       </BlogCardInner>
     </AnimateSharedLayout>
   );
 };
 
-export default BlogCard;
+const BottomText = (hovered: boolean) => {
+  return (
+    <BlogCardBottomBox>
+      <BlogCardTitle isHovered={hovered}>제목입니다아아아아아</BlogCardTitle>
+      <AnimatePresence>
+        {hovered && (
+          <BlogCardPostText
+            variants={PostTextVariants}
+            initial={'initial'}
+            animate={'visiable'}
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Ipsum,libero? Vel eius deleniti earum architecto magnam non! Eos
+            ipsamperferendis esse rerum unde dolor necessitatibus exercitationem
+            nostrum facilis sit? Eum.
+          </BlogCardPostText>
+        )}
+      </AnimatePresence>
+      <BlogCardSubTextWrapper>
+        <BlogCardAuthorWrapper>
+          <BlogCardAuthorImage />
+          <BlogCardSubText subText={true}>by</BlogCardSubText>
+          <BlogCardSubText bold={true}>Jason</BlogCardSubText>
+        </BlogCardAuthorWrapper>
+        <BlogCardSubText subText={true}>22.02.02</BlogCardSubText>
+      </BlogCardSubTextWrapper>
+    </BlogCardBottomBox>
+  );
+};
+
+export default React.memo(BlogCard);
