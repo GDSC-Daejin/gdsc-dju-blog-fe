@@ -80,6 +80,7 @@ export const SearchWrapper = styled.label`
 export const Search = styled.input`
   min-width: 400px;
   height: 30px;
+  font-size: ${(props) => props.theme.fontSize.body2};
   border-radius: 50px;
   border: 1px solid ${(props) => props.theme.color.grey300};
   padding-left: 20px;

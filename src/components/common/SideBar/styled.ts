@@ -58,7 +58,7 @@ export const GrayBox = styled.div<{ open: boolean }>`
           position: fixed;
           width: 100vw;
           height: 100vh;
-          color: ${(props) => props.theme.color.grey900};
+          background-color: ${(props) => props.theme.color.grey900};
           right: 0px;
           top: 0px;
           z-index: 1003;
