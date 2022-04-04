@@ -11,28 +11,27 @@ import API from '../api';
 import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
 import { userState } from '../store/user';
-
-const Home = lazy(() => import('../pages/Home'));
-const MyBlog = lazy(() => import('../pages/MyBlog'));
-const Posts = lazy(() => import('../pages/Posts'));
+import MyBlog from '../pages/MyBlog';
+import Home from '../pages/Home';
+import Posts from '../pages/Posts';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   // const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
-  useEffect(() => {
-    API.postForceLogin().then((res) => {
-      API.getUserData().then((res) => {
-        const userData = res.data;
-        setUser({
-          ...user,
-          ...userData.memberInfo,
-          name: userData.username,
-          email: userData.email,
-        });
-      });
+  const forceLogin = async () => {
+    await API.postForceLogin();
+    const res = await API.getUserData();
+    const userData = res.data;
+    setUser({
+      ...user,
+      ...userData.memberInfo,
+      name: userData.username,
+      email: userData.email,
     });
-
+  };
+  useEffect(() => {
+    forceLogin();
     //로그인 정보 가져오기
   }, []);
 
