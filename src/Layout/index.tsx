@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
@@ -10,7 +10,6 @@ import Footer from '../components/Footer';
 import API from '../api';
 import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
-import { useGetUserData } from '../api/hooks/useGetUserData';
 import { userState } from '../store/user';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -33,15 +32,6 @@ const Layout = () => {
         });
       });
     });
-    // if (localStorage.getItem('token')) {
-    //   if (userData) {
-    //     setUser({
-    //       ...user,
-    //       ...userData.memberInfo,
-    //       name: userData.username,
-    //       email: userData.email,
-    //     });
-    //   }
 
     //로그인 정보 가져오기
   }, []);
