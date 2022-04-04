@@ -47,7 +47,7 @@ const Category = () => {
           <PageBar
             page={nowParamsPageNumber()}
             totalPage={10}
-            onClick={handlePageNavigation}
+            // onClick={handlePageNavigation}
           />
         </PageBarWrapper>
       </CategoryInner>
