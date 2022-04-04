@@ -40,7 +40,6 @@ export class Api {
     );
   };
   getPostListData = (params: string) => {
-    console.log(`params ${params}`);
     return axios.get<rowDetailPostDataType>(`${this.API}/api/v1/${params}`);
   };
   getPostDetailData = (postId: string) => {

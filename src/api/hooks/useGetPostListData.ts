@@ -8,7 +8,6 @@ async function getPostListData(params: string) {
   return res.data;
 }
 export function useGetPostListData(category: string, page = 0) {
-  console.log(`카테고리는 ${category}`);
   const { data, error } = useSWR(
     [`post/list/${url(category, page)}`],
     getPostListData,
