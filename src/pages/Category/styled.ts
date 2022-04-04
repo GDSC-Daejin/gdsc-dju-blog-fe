@@ -5,6 +5,11 @@ export const CategoryInner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 60px;
-  margin-top: 110px;
+  gap: 80px;
+  margin: 110px 0px;
+`;
+
+export const PageBarWrapper = styled.div`
+  align-self: center;
+  margin: 30px 0px;
 `;

@@ -94,4 +94,4 @@ const CategoryMenu = (props: Iprops) => {
   );
 };
 
-export default CategoryMenu;
+export default React.memo(CategoryMenu);

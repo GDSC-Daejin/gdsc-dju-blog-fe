@@ -7,7 +7,6 @@ export const BlogCardGridLayoutStyle = styled.section`
   align-items: center;
   grid-row-gap: 80px;
   grid-column-gap: 30px;
-  margin: 35px 0px 140px;
 `;
 
 export const BlogCardWrapper = styled.article`
