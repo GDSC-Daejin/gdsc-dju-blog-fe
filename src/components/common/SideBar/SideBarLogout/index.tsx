@@ -6,10 +6,10 @@ import {
   GoogleButtonWrapper,
   GoogleLogoWrapper,
 } from '../styled';
-import GdscLogo from '../../../../Assets/GdscLogo';
-import DaejinUnivLogo from '../../../../Assets/DaejinUnivLogo';
-import GdscBlogLogo from '../../../../Assets/GdscBlogLogo';
-import GoogleLogo from '../../../../Assets/GoogleLogo';
+import GdscLogo from '../../../../assets/GdscLogo';
+import DaejinUnivLogo from '../../../../assets/DaejinUnivLogo';
+import GdscBlogLogo from '../../../../assets/GdscBlogLogo';
+import GoogleLogo from '../../../../assets/GoogleLogo';
 import { GDSCButton } from '../../Button';
 
 const SideBarLogout = () => {

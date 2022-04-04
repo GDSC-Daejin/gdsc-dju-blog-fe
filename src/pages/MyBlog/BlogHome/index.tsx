@@ -24,7 +24,7 @@ import {
   SettingIconWrapper,
   TopMenuWrapper,
 } from './styled';
-import MockProfile from '../../../Assets/MockProfile.png';
+import MockProfile from '../../../assets/MockProfile.png';
 import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
 import { HashTageDark } from '../../../components/common/HashTage';
@@ -32,7 +32,7 @@ import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
 import { useSearchParams } from 'react-router-dom';
-import Setting from '../../../Assets/Setting';
+import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { useGetUserPostListData } from '../../../api/hooks/useGetUserPostListData';

@@ -1,6 +1,6 @@
 import React from 'react';
-import RightArrow from '../../../Assets/RightArrow';
-import LeftArrow from '../../../Assets/LeftArrow';
+import RightArrow from '../../../assets/RightArrow';
+import LeftArrow from '../../../assets/LeftArrow';
 import {
   ArrowWrapper,
   Number,

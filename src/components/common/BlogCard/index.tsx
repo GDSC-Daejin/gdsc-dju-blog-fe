@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHover } from 'react-use';
-import BlogCardImage from '../../../Assets/unknown.png';
+import BlogCardImage from '../../../assets/unknown.png';
 import { useNavigate } from 'react-router';
 import {
   BlogCardAuthorImage,
@@ -17,7 +17,7 @@ import {
   BlogCardTagWrapper,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import Bookmark from '../../../Assets/Bookmark';
+import Bookmark from '../../../assets/Bookmark';
 
 const PostTextVariants = {
   initial: {

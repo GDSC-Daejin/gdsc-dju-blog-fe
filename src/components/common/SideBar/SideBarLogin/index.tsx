@@ -11,8 +11,8 @@ import {
   WrittingButtonWrapper,
 } from '../styled';
 import ProfileImage from '../../ProfileImage';
-import MockProfile from '../../../../Assets/MockProfile.png';
-import SettingIcon from '../../../../Assets/SettingIcon';
+import MockProfile from '../../../../assets/MockProfile.png';
+import SettingIcon from '../../../../assets/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
 import { userData } from '../../../../api/Mocks/userData';
 

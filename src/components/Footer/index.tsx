@@ -13,7 +13,7 @@ import {
   StyledColumn,
   StyledTr,
 } from './styled';
-import BlogIcon from '../../Assets/BlogIcon';
+import BlogIcon from '../../assets/BlogIcon';
 import { useNavigate } from 'react-router';
 
 const Footer = () => {
