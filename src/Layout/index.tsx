@@ -1,12 +1,15 @@
 import React, { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
 import { AnimatePresence } from 'framer-motion';
-
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
+import SideBar from '../components/common/SideBar';
+import CategoryDetail from '../pages/Category/CategoryDetail';
+
 import API from '../api';
 import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
@@ -49,6 +52,8 @@ const Layout = () => {
 
   return (
     <>
+      <SideBar />
+      <Navigation />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
       </AnimatePresence>
@@ -56,7 +61,8 @@ const Layout = () => {
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
         <Route path={'/post'} element={<Posts />} />
-        <Route path={'/category'} element={<Category />} />
+        <Route path={'/category/*'} element={<Category />} />
+        <Route path={'/category/:id'} element={<CategoryDetail />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route
           path={'/admin'}
