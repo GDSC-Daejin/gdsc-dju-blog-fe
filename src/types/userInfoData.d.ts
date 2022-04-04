@@ -1,13 +1,13 @@
 import { date } from 'yup';
 
-export interface userDataType {
+export interface UserDataType {
   generation: number;
   gitEmail: string;
   hashTag: string;
   introduce: string;
   major: string;
   memberInfoId: number;
-  birthday: string | date;
+  birthday: string;
   nickname: string;
   phoneNumber: string;
   positionType: string;
@@ -16,16 +16,16 @@ export interface userDataType {
   name: string;
   email: string;
 }
-export interface memberPortfolioUrlsType {
+export interface MemberUrlsType {
   id: number;
   webUrl: string | undefined;
 }
-export interface userDataExtendUrlType extends userDataType {
-  memberPortfolioUrls: memberPortfolioUrlsType[];
+export interface UserDataExtendUrlType extends UserDataType {
+  memberPortfolioUrls: memberUrlsType[];
 }
 
-export interface userEditDataType extends userDataType {
-  githubUrl?: string | undefined;
-  blogUrl?: string | undefined;
-  resumeUrl?: string | undefined;
+export interface UserEditDataType extends UserDataType {
+  githubUrl?: string;
+  blogUrl?: string;
+  resumeUrl?: string;
 }

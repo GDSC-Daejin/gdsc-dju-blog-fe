@@ -3,7 +3,7 @@ import API from '../../api';
 
 const getUserData = async () => {
   const response = await API.getUserData();
-  return response.data;
+  return response.data.body.data;
 };
 export const useGetUserData = () => {
   const { data: userData, error } = useSWR(['api/user'], getUserData, {

@@ -22,7 +22,7 @@ const Layout = () => {
   const forceLogin = async () => {
     await API.postForceLogin();
     const res = await API.getUserData();
-    const userData = res.data;
+    const userData = res.data.body.data;
     setUser({
       ...user,
       ...userData.memberInfo,

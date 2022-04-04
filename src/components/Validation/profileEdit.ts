@@ -17,11 +17,13 @@ export const introduceSchema = {
   introduce: Yup.string()
     .min(10, '10글자 이상 작성해주세요')
     .max(70, '최대 70자 입니다.')
+    .nullable()
     .required('필수입력란입니다.'),
 };
 export const hashTagSchema = {
   hashTag: Yup.string()
     .min(10, '10글자 이상 작성해주세요')
+    .nullable()
     .required('필수입력란입니다.'),
 };
 export const phoneNumberSchema = {
@@ -30,6 +32,7 @@ export const phoneNumberSchema = {
       /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/,
       '전화번호 형식에 맞춰 입력해주세요',
     )
+    .nullable()
     .required('필수입력란입니다.'),
 };
 export const emailSchema = {
@@ -39,12 +42,14 @@ export const emailSchema = {
       /^[A-Z0-9._%+-]+@[gmail]+\.[A-Z]{3}$/i,
       'gmail.com형식으로 작성해주세요',
     )
+    .nullable()
     .required('필수입력란입니다.'),
 };
 export const majorSchema = {
   major: Yup.string()
     .min(3, '3글자 이상 작성해주세요')
     .matches(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/, '한글만 입력 가능합니다.')
+    .nullable()
     .required('필수입력란입니다.'),
 };
 export const studentIDSchema = {

@@ -12,13 +12,7 @@ function App() {
   return (
     <>
       <ErrorBoundary fallback={<Error />}>
-        <Suspense
-          fallback={
-            <AnimatePresence>
-              <GoogleLoader background={false} />
-            </AnimatePresence>
-          }
-        >
+        <Suspense fallback={<GoogleLoader background={false} />}>
           <ThemeProvider theme={theme}>
             <Layout />
           </ThemeProvider>
