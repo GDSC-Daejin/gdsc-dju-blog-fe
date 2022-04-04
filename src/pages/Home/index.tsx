@@ -1,23 +1,29 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useScroll } from 'react-use';
+import { useSearchParams } from 'react-router-dom';
+
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
 import {
   MainContentWrapper,
+  WelcomePhrase,
   CardSection,
   BlogCardWrapper,
   ButtonWrapper,
 } from './styled';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import { detailPostDataType } from '../../types/postData';
+import CategoryMenu from '../../components/common/CategoryMenu';
 
 function index() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [searchParams] = useSearchParams();
+  const currentParamsPageNumber = searchParams.get('category');
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -44,6 +50,13 @@ function index() {
     }
   };
   const [PostData, setPostData] = useState<detailPostDataType[]>();
+  const nowParamsCategory = () => {
+    return currentParamsPageNumber === null
+      ? 'all'
+      : parseInt(currentParamsPageNumber);
+  };
+
+  console.log(nowParamsCategory());
 
   const instance = axios.create({
     baseURL: 'https://gdsc-dju.com',
@@ -62,6 +75,16 @@ function index() {
   return (
     <LayoutContainer>
       <MainContentWrapper>
+        <WelcomePhrase>
+          <span>from Cindy</span>
+          <p>
+            Google Developer Student Club
+            <br />
+            Daejin Univ. Blog 에 오신걸 환영합니다.
+          </p>
+          <span>by Cindy</span>
+        </WelcomePhrase>
+        <CategoryMenu type="frontend" />
         <CardSection
           ref={scrollRef}
           isDrag={isDrag}
