@@ -11,6 +11,7 @@ export function useGetUserPostListData(category: string, page = 0) {
   const { data: userPostData, error } = useSWR(
     [`myPost${url(category, page)}`],
     getUserPostListData,
+    { suspense: true },
   );
-  return { userPostData: userPostData && userPostData, error: error && error };
+  return { userPostData: userPostData && userPostData };
 }

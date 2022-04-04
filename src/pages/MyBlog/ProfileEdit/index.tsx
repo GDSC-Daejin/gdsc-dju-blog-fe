@@ -55,57 +55,54 @@ const ProfileEdit = () => {
       blogUrl: user.memberPortfolioUrls[1].webUrl,
       resumeUrl: user.memberPortfolioUrls[2].webUrl,
     } as UserEditDataType,
-    onSubmit: () => {
-      return;
+    onSubmit: async (values) => {
+      const { githubUrl, blogUrl, resumeUrl } = values;
+      const memberPortfolioUrls: MemberUrlsType[] = [
+        { id: 0, webUrl: githubUrl },
+        { id: 1, webUrl: blogUrl },
+        { id: 2, webUrl: resumeUrl },
+      ];
+      const memberData: MemberDataInfoType = {
+        generation: values.generation,
+        gitEmail: values.gitEmail,
+        hashTag: values.hashTag,
+        introduce: values.introduce,
+        major: values.major,
+        memberInfoId: values.memberInfoId,
+        birthday: values.birthday,
+        phoneNumber: values.phoneNumber,
+        nickname: values.nickname,
+        studentID: values.studentID,
+        positionType: values.positionType,
+        userID: values.userID,
+        name: values.name,
+        email: values.email,
+        memberPortfolioUrls: memberPortfolioUrls,
+      };
+      try {
+        await API.updateUserData(memberData).then(() => {
+          setUser({
+            ...user,
+            ...values,
+          });
+        });
+        // await navigate(-1);
+        // await openModal
+      } catch (err) {
+        console.log(err);
+      }
     },
     //validation setting
     validationSchema: profileEditSchema,
   });
-  const onSubmit = async (values: UserEditDataType) => {
-    const { githubUrl, blogUrl, resumeUrl } = values;
-    const memberPortfolioUrls: MemberUrlsType[] = [
-      { id: 0, webUrl: githubUrl },
-      { id: 1, webUrl: blogUrl },
-      { id: 2, webUrl: resumeUrl },
-    ];
-    const memberData: MemberDataInfoType = {
-      generation: values.generation,
-      gitEmail: values.gitEmail,
-      hashTag: values.hashTag,
-      introduce: values.introduce,
-      major: values.major,
-      memberInfoId: values.memberInfoId,
-      birthday: values.birthday,
-      phoneNumber: values.phoneNumber,
-      nickname: values.nickname,
-      studentID: values.studentID,
-      positionType: values.positionType,
-      userID: values.userID,
-      name: values.name,
-      email: values.email,
-      memberPortfolioUrls: memberPortfolioUrls,
-    };
 
-    try {
-      await API.updateUserData(memberData).then(() => {
-        setUser({
-          ...user,
-          ...values,
-        });
-      });
-      await navigate(-1);
-      // await openModal
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <LayoutContainer>
       <ContainerInner>
         {user && (
-          <FormWrapper>
-            <FormInner>
-              <FormikProvider value={userEditFormik}>
+          <FormikProvider value={userEditFormik}>
+            <FormWrapper>
+              <FormInner onSubmit={userEditFormik.handleSubmit}>
                 <FormTitleWrapper>
                   <FormTitle>개인정보수정</FormTitle>
                 </FormTitleWrapper>
@@ -245,18 +242,16 @@ const ProfileEdit = () => {
                     error={userEditFormik.errors.resumeUrl}
                   />
                 </FormElementWrapper>
-                <FormButtonWrapper
-                  onClick={() => onSubmit(userEditFormik.values)}
-                >
+                <FormButtonWrapper>
                   <GDSCButton
                     text={'저장하기'}
                     color={'GDSC blue'}
                     type={'submit'}
                   />
                 </FormButtonWrapper>
-              </FormikProvider>
-            </FormInner>
-          </FormWrapper>
+              </FormInner>
+            </FormWrapper>
+          </FormikProvider>
         )}
       </ContainerInner>
     </LayoutContainer>

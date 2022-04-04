@@ -11,7 +11,7 @@ import Error from './pages/Error';
 function App() {
   return (
     <>
-      <ErrorBoundary fallback={<Error />}>
+      <ErrorBoundary FallbackComponent={Error}>
         <Suspense fallback={<GoogleLoader background={false} />}>
           <ThemeProvider theme={theme}>
             <Layout />

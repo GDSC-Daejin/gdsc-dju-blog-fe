@@ -11,9 +11,9 @@ export function useGetPostListData(category: string, page = 0) {
   const { data, error } = useSWR(
     [`post/list/${url(category, page)}`],
     getPostListData,
+    { suspense: true },
   );
   return {
     data: data && data,
-    error: error && error,
   };
 }
