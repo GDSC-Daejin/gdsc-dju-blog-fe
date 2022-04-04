@@ -93,5 +93,4 @@ const CategoryMenu = (props: Iprops) => {
     </>
   );
 };
-
 export default CategoryMenu;

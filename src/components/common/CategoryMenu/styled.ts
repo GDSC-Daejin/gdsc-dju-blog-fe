@@ -45,5 +45,6 @@ export const CategoryCircle = styled.div<{ color: string }>`
 `;
 export const GDSCLogoWrapper = styled.div`
   position: absolute;
-  left: -10px;
+  width: 30px;
+  left: -12px;
 `;
