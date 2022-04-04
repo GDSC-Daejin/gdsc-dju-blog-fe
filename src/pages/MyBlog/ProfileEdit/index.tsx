@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useLayoutEffect } from 'react';
+import React, { memo, useLayoutEffect } from 'react';
 import { FormikProvider, useFormik } from 'formik';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
 import {
@@ -18,18 +18,15 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../../../store/user';
 
 import API from '../../../api';
-import {
-  memberPortfolioUrlsType,
-  userEditDataType,
-} from '../../../types/userInfoData';
+import { MemberUrlsType, UserEditDataType } from '../../../types/userInfoData';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { memberDataInfoType } from '../../../types/userDataType';
+import { MemberDataInfoType } from '../../../types/userDataType';
+import { useNavigate } from 'react-router';
 
 const ProfileEdit = () => {
-  const image = '';
   const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
-
+  const navigate = useNavigate();
   useLayoutEffect(() => {
     if (userData) {
       setUser({
@@ -39,7 +36,7 @@ const ProfileEdit = () => {
         email: userData.email,
       });
     }
-  }, []);
+  }, [userData]);
 
   const userEditFormik = useFormik({
     initialValues: {
@@ -54,73 +51,74 @@ const ProfileEdit = () => {
       phoneNumber: user.phoneNumber,
       major: user.major,
       positionType: user.positionType,
-      // memberPortfolioUrls: user.memberPortfolioUrls,
-      githubUrl: user.memberPortfolioUrls[0]?.webUrl,
-      blogUrl: user.memberPortfolioUrls[1]?.webUrl,
-      resumeUrl: user.memberPortfolioUrls[2]?.webUrl,
-    } as userEditDataType,
-    onSubmit: () => {
-      return;
+      githubUrl: user.memberPortfolioUrls[0].webUrl,
+      blogUrl: user.memberPortfolioUrls[1].webUrl,
+      resumeUrl: user.memberPortfolioUrls[2].webUrl,
+    } as UserEditDataType,
+    onSubmit: async (values) => {
+      const { githubUrl, blogUrl, resumeUrl } = values;
+      const memberPortfolioUrls: MemberUrlsType[] = [
+        { id: 0, webUrl: githubUrl },
+        { id: 1, webUrl: blogUrl },
+        { id: 2, webUrl: resumeUrl },
+      ];
+      const memberData: MemberDataInfoType = {
+        generation: values.generation,
+        gitEmail: values.gitEmail,
+        hashTag: values.hashTag,
+        introduce: values.introduce,
+        major: values.major,
+        memberInfoId: values.memberInfoId,
+        birthday: values.birthday,
+        phoneNumber: values.phoneNumber,
+        nickname: values.nickname,
+        studentID: values.studentID,
+        positionType: values.positionType,
+        userID: values.userID,
+        name: values.name,
+        email: values.email,
+        memberPortfolioUrls: memberPortfolioUrls,
+      };
+      try {
+        await API.updateUserData(memberData).then(() => {
+          setUser({
+            ...user,
+            ...values,
+          });
+        });
+        // await navigate(-1);
+        // await openModal
+      } catch (err) {
+        console.log(err);
+      }
     },
     //validation setting
     validationSchema: profileEditSchema,
   });
-  const onSubmit = async (values: userEditDataType) => {
-    const { githubUrl, blogUrl, resumeUrl } = values;
 
-    const memberPortfolioUrls: memberPortfolioUrlsType[] = [
-      {
-        id: 1,
-        webUrl: githubUrl,
-      },
-      {
-        id: 2,
-        webUrl: blogUrl,
-      },
-      {
-        id: 3,
-        webUrl: resumeUrl,
-      },
-    ];
-    delete values.githubUrl;
-    delete values.blogUrl;
-    delete values.resumeUrl;
-
-    const memberData = {
-      ...values,
-      memberPortfolioUrls: memberPortfolioUrls,
-    };
-    await API.updateUserData(memberData as memberDataInfoType).then((res) => {
-      setUser({
-        ...user,
-        ...values,
-      });
-    });
-  };
-  console.log(userEditFormik.errors);
-  console.log(userEditFormik.values);
-  console.log(profileEditSchema);
   return (
     <LayoutContainer>
       <ContainerInner>
         {user && (
-          <FormWrapper>
-            <FormInner>
-              <FormikProvider value={userEditFormik}>
+          <FormikProvider value={userEditFormik}>
+            <FormWrapper>
+              <FormInner onSubmit={userEditFormik.handleSubmit}>
                 <FormTitleWrapper>
                   <FormTitle>개인정보수정</FormTitle>
                 </FormTitleWrapper>
-                <ProfileEditImage image={image} />
-                <FormElementWrapper>
-                  <FormLabel essential={true}>이름(실명)</FormLabel>
-                  <TextInput
-                    name={'name'}
-                    // disabled={true}
-                    placeholder={userData?.username}
-                    value={userEditFormik.values.name}
-                    onChange={userEditFormik.handleChange}
-                  />
-                </FormElementWrapper>
+                <ProfileEditImage image={userData?.profileImageUrl} />
+                {userData && (
+                  <FormElementWrapper>
+                    <FormLabel essential={true}>이름(실명)</FormLabel>
+                    <TextInput
+                      name={'name'}
+                      // disabled={true}
+                      placeholder={userData.username}
+                      value={userEditFormik.values.name}
+                      onChange={userEditFormik.handleChange}
+                    />
+                  </FormElementWrapper>
+                )}
                 <FormElementWrapper>
                   <FormLabel essential={true}>닉네임</FormLabel>
                   <TextInput
@@ -244,18 +242,16 @@ const ProfileEdit = () => {
                     error={userEditFormik.errors.resumeUrl}
                   />
                 </FormElementWrapper>
-                <FormButtonWrapper
-                  onClick={() => onSubmit(userEditFormik.values)}
-                >
+                <FormButtonWrapper>
                   <GDSCButton
                     text={'저장하기'}
                     color={'GDSC blue'}
                     type={'submit'}
                   />
                 </FormButtonWrapper>
-              </FormikProvider>
-            </FormInner>
-          </FormWrapper>
+              </FormInner>
+            </FormWrapper>
+          </FormikProvider>
         )}
       </ContainerInner>
     </LayoutContainer>

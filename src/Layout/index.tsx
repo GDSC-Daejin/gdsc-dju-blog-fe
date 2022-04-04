@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
@@ -12,41 +12,29 @@ import CategoryDetail from '../pages/Category/CategoryDetail';
 import API from '../api';
 import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
-import { useGetUserData } from '../api/hooks/useGetUserData';
 import { userState } from '../store/user';
-
-const Home = lazy(() => import('../pages/Home'));
-const MyBlog = lazy(() => import('../pages/MyBlog'));
-const Posts = lazy(() => import('../pages/Posts'));
-const PostWrite = lazy(() => import('../pages/PostWrite'));
+import PostWrite from '../pages/PostWrite';
+import MyBlog from '../pages/MyBlog';
+import Home from '../pages/Home';
+import Posts from '../pages/Posts';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
   // const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
-
-  useEffect(() => {
-    API.postForceLogin().then((res) => {
-      API.getUserData().then((res) => {
-        const userData = res.data;
-        setUser({
-          ...user,
-          ...userData.memberInfo,
-          name: userData.username,
-          email: userData.email,
-        });
-      });
+  const forceLogin = async () => {
+    await API.postForceLogin();
+    const res = await API.getUserData();
+    const userData = res.data.body.data;
+    setUser({
+      ...user,
+      ...userData.memberInfo,
+      name: userData.username,
+      email: userData.email,
     });
-    // if (localStorage.getItem('token')) {
-    //   if (userData) {
-    //     setUser({
-    //       ...user,
-    //       ...userData.memberInfo,
-    //       name: userData.username,
-    //       email: userData.email,
-    //     });
-    //   }
-
+  };
+  useEffect(() => {
+    forceLogin();
     //로그인 정보 가져오기
   }, []);
 

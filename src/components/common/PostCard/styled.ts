@@ -6,7 +6,7 @@ export const PostCardWrapper = styled(motion.div)`
   align-items: center;
   flex-direction: row;
   position: relative;
-  width: 1160px;
+  width: 100%;
   cursor: pointer;
 `;
 export const PostCardImage = styled.img`
@@ -27,7 +27,6 @@ export const PostCardImageWrapper = styled.div`
 export const PostCardContentWrapper = styled(motion.div)`
   box-sizing: border-box;
   height: 240px;
-  //width: 800px;
   box-shadow: 0 2px 12px rgba(25, 31, 40, 0.08);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;

@@ -1,5 +1,4 @@
 import React from 'react';
-import SideBarCategory from '../SideBar/SideBarCategory';
 import { useNavigate } from 'react-router';
 import {
   PostCategoryCircle,
@@ -7,11 +6,9 @@ import {
   PostCategoryMenuWrapper,
   PostCategoryText,
   PostCategoryTextWrapper,
-  PostGDSCLogoWrapper,
 } from './styled';
 import { PostMenuData } from './PostMenuData';
-import { hoverMotion, circleMotion } from '../Animation';
-import GdscLogo from '../../../Images/GdscLogo';
+import { SideBarCategoryAnimation, SideBarCircleAnimation } from '../Animation';
 import { positionColor } from '../../../store/positionColor';
 
 const PostCategoryMenu = () => {
@@ -23,10 +20,10 @@ const PostCategoryMenu = () => {
         {PostMenuData.map((data, id) => (
           <PostCategoryTextWrapper
             key={id}
-            variants={hoverMotion}
+            variants={SideBarCategoryAnimation}
             whileHover={'isActive'}
           >
-            <PostCategoryCircleWrapper variants={circleMotion}>
+            <PostCategoryCircleWrapper variants={SideBarCircleAnimation}>
               <PostCategoryCircle color={positionColor(data.subtitle)} />
             </PostCategoryCircleWrapper>
             <PostCategoryText>{data.title}</PostCategoryText>

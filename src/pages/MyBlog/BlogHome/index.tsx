@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import {
   ContainerInner,
@@ -24,47 +24,35 @@ import {
   SettingIconWrapper,
   TopMenuWrapper,
 } from './styled';
-import MockProfile from '../../../Images/MockProfile.png';
+import MockProfile from '../../../assets/MockProfile.png';
 import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
 import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
-import { postListData } from '../../../api/Mocks/postListData';
 import { useSearchParams } from 'react-router-dom';
-import Setting from '../../../Images/Setting';
+import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
-import API from '../../../api/index';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { useGetUserPostListData } from '../../../api/hooks/useGetUserPostListData';
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 
-const hashTage = [
-  'React',
-  'TypeScript',
-  'JavaScript',
-  'Node.js',
-  'SWR',
-  'Recoil',
-  'GraphQL',
-  'Apollo',
-  'Next.js',
-  'Gatsby',
-  'React Hooks',
-  'Redux',
-];
 const BlogHome = () => {
-  const { user_name } = useParams<'user_name'>();
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const typeParams = searchParams.get('type');
   const type = typeParams ? typeParams : 'all';
+
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
-  const { userData } = useGetUserData();
 
-  const pagination = () => {
-    return postListData.slice(page === 0 ? 0 : page * 10 + 1, (page + 1) * 10);
-  };
+  const { userData } = useGetUserData();
+  const userInfoData = userData?.memberInfo;
+  const { userPostData } = useGetUserPostListData(type, page);
+
+  const navigate = useNavigate();
+
   const pageHandler = (page: number, limit?: number) => {
     if (page < 0) {
       return;
@@ -72,92 +60,111 @@ const BlogHome = () => {
     if (page === limit) {
       return;
     } else {
-      navigate(`/${user_name}?type=${type}&page=${page}`);
+      navigate(`/${userInfoData?.nickname}?type=${type}&page=${page}`);
     }
   };
-  const hashTageSpreader = (hashTages: string) => {
-    return hashTages.split(',');
-  };
+
   useEffect(() => {
     if (page || type) {
-      navigate(`/${user_name}?type=all&page=0`);
+      setSearchParams({
+        type: 'all',
+        page: '0',
+      });
     }
   }, []);
 
   return (
     <>
       <NavigationBlock />
-      {userData && (
-        <LayoutContainer>
-          <ContainerInner>
-            <ProfileWrapper>
-              <ProfileImageWrapper>
-                <ProfileImage
-                  image={MockProfile}
-                  position={userData.memberInfo.positionType.toLowerCase()}
-                />
-              </ProfileImageWrapper>
-              <ProfileDetailWrapper>
-                <Role>{userData.role}</Role>
-                <BlogNameWrapper>
-                  <BlogName>{userData.memberInfo.nickname}</BlogName>
-                  <BlogNamePosition
-                    color={positionColor(userData.memberInfo.positionType)}
-                  >
-                    &apos;s Blog
-                  </BlogNamePosition>
-                  <SettingIconWrapper
-                    onClick={() => navigate(`/${user_name}/edit`)}
-                  >
-                    <Setting />
-                  </SettingIconWrapper>
-                </BlogNameWrapper>
-                <IntroduceText>{userData.memberInfo.introduce}</IntroduceText>
-                <HashTageSection>
-                  {hashTageSpreader(userData.memberInfo.hashTag).map(
-                    (tag, id) => (
+      <LayoutContainer>
+        <ContainerInner>
+          {userInfoData && (
+            <>
+              <ProfileWrapper>
+                <ProfileImageWrapper>
+                  <ProfileImage
+                    image={MockProfile}
+                    position={userInfoData.positionType}
+                  />
+                </ProfileImageWrapper>
+                <ProfileDetailWrapper>
+                  <Role>{userData.role}</Role>
+                  <BlogNameWrapper>
+                    <BlogName>{userInfoData.nickname}</BlogName>
+                    <BlogNamePosition
+                      color={positionColor(userInfoData.positionType)}
+                    >
+                      &apos;s Blog
+                    </BlogNamePosition>
+                    <SettingIconWrapper
+                      onClick={() => navigate(`/${userInfoData.nickname}/edit`)}
+                    >
+                      <Setting />
+                    </SettingIconWrapper>
+                  </BlogNameWrapper>
+                  <IntroduceText>{userInfoData.introduce}</IntroduceText>
+                  <HashTageSection>
+                    {hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
                       <HashTageWrapper key={id}>
                         <HashTageDark text={tag} />
                       </HashTageWrapper>
-                    ),
-                  )}
-                </HashTageSection>
-              </ProfileDetailWrapper>
-            </ProfileWrapper>
-            <TopMenuWrapper>
-              <CategoryMenu
-                type={type as string}
-                onClick={(url: string) =>
-                  navigate(`/${user_name}?type=${url}&page=${page}`)
-                }
-              />
-              <ButtonWrapper>
-                <GDSCButton
-                  text={'스크랩'}
-                  onClick={() => navigate(`${user_name}/likes`)}
-                />
-                <GDSCButton text={'글쓰기'} />
-              </ButtonWrapper>
-            </TopMenuWrapper>
+                    ))}
+                  </HashTageSection>
+                </ProfileDetailWrapper>
+              </ProfileWrapper>
 
-            <PostSectionWrapper>
-              {pagination().map((data, id) => (
-                <PostCardWrapper key={id}>
-                  <PostCard
-                    title={data.post.title}
-                    date={data.post.uploadDate}
-                    content={data.post.content}
-                    hashTage={data.post.postHashTags}
+              <TopMenuWrapper>
+                <CategoryMenu
+                  type={type as string}
+                  onClick={(url: string) =>
+                    navigate(
+                      `/${userInfoData.nickname}?type=${url}&page=${page}`,
+                    )
+                  }
+                />
+                <ButtonWrapper>
+                  <GDSCButton
+                    text={'스크랩'}
+                    onClick={() => navigate(`/${userInfoData.nickname}/likes`)}
                   />
-                </PostCardWrapper>
-              ))}
+                  <GDSCButton
+                    text={'글쓰기'}
+                    onClick={() => navigate('/post/write')}
+                  />
+                </ButtonWrapper>
+              </TopMenuWrapper>
+            </>
+          )}
+          {userPostData && (
+            <PostSectionWrapper>
+              {!userPostData.empty ? (
+                userPostData.content.map((data) => (
+                  <PostCardWrapper
+                    key={data.postId}
+                    onClick={() =>
+                      navigate(`/${data.memberInfo.nickname}/${data.postId}`)
+                    }
+                  >
+                    <PostCard {...data} />
+                  </PostCardWrapper>
+                ))
+              ) : (
+                <div>작성된 글이 없습니다.</div>
+              )}
             </PostSectionWrapper>
-            <PageBarSection>
-              <PageBar page={page} onClick={pageHandler} />
-            </PageBarSection>
-          </ContainerInner>
-        </LayoutContainer>
-      )}
+          )}
+          <PageBarSection>
+            {userPostData && userInfoData && (
+              <PageBar
+                page={page}
+                totalPage={userPostData.totalPages}
+                nickname={userInfoData.nickname}
+                type={type}
+              />
+            )}
+          </PageBarSection>
+        </ContainerInner>
+      </LayoutContainer>
     </>
   );
 };
