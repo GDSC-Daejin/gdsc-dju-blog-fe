@@ -8,7 +8,7 @@ import {
   GDSCLogoWrapper,
 } from './styled';
 import { positionColor } from '../../../store/positionColor';
-import GdscLogo from '../../../Images/GdscLogo';
+import GdscLogo from '../../../Assets/GdscLogo';
 
 type Iprops = {
   onClick?: (url: string) => void;

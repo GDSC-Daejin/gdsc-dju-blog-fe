@@ -18,11 +18,11 @@ import {
   BeforeMargin,
 } from './styled';
 /* 아이콘 컬러 전체 변경 기능 */
-import GdscBlogLogo from '../../../Images/GdscBlogLogo';
-import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
-import GdscLogo from '../../../Images/GdscLogo';
+import GdscBlogLogo from '../../../Assets/GdscBlogLogo';
+import DaejinUnivLogo from '../../../Assets/DaejinUnivLogo';
+import GdscLogo from '../../../Assets/GdscLogo';
 import MenuToggleIcon from '../MenuToggleIcon';
-import Vector from '../../../Images/Vector';
+import Vector from '../../../Assets/Vector';
 import MainLogo from '../MainLogo';
 
 function Navigation() {

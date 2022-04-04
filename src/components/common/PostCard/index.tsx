@@ -10,9 +10,9 @@ import {
   PostHashTageSection,
   PostTitle,
 } from './styled';
-import MockPostImage from '../../../Images/MockPostImage.png';
+import MockPostImage from '../../../Assets/MockPostImage.png';
 import { HashTageDark } from '../HashTage';
-import Bookmark from '../../../Images/Bookmark';
+import Bookmark from '../../../Assets/Bookmark';
 
 import { detailPostDataType } from '../../../types/postData';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
