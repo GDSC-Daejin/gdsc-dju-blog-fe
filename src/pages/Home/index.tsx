@@ -51,24 +51,19 @@ function index() {
   };
   const [PostData, setPostData] = useState<detailPostDataType[]>();
   const nowParamsCategory = () => {
-    return currentParamsPageNumber === null
-      ? 'all'
-      : parseInt(currentParamsPageNumber);
+    return currentParamsPageNumber === null ? 'all' : currentParamsPageNumber;
   };
-
-  console.log(nowParamsCategory());
 
   const instance = axios.create({
     baseURL: 'https://gdsc-dju.com',
     timeout: 15000,
   });
   useEffect(() => {
-    // console.log(useGetPostListData('all', 0));
     instance.get('/api/v1/post/list?page=0&size=11').then(function (response) {
       setPostData(response.data.body.data.content);
     });
     instance.get('/api/admin/v1/all/list').then(function (response) {
-      console.log(response);
+      // console.log(response);
     });
   }, []);
 
@@ -84,7 +79,7 @@ function index() {
           </p>
           <span>by Cindy</span>
         </WelcomePhrase>
-        <CategoryMenu type="frontend" />
+        <CategoryMenu type={nowParamsCategory()} />
         <CardSection
           ref={scrollRef}
           isDrag={isDrag}
