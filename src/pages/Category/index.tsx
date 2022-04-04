@@ -19,7 +19,7 @@ const Category = () => {
       ? 0
       : parseInt(currentParamsPageNumber);
   };
-  const { data, error } = useGetPostListData(
+  const { data } = useGetPostListData(
     params.categoryName === undefined ? 'all' : params.categoryName,
     nowParamsPageNumber(),
   );
@@ -42,7 +42,7 @@ const Category = () => {
           type={params.categoryName === undefined ? 'all' : params.categoryName}
           onClick={handleCategoryMenuNavigation}
         />
-        <BlogCardGridLayout PostData={handlePostData()} error={error} />
+        <BlogCardGridLayout PostData={handlePostData()} />
         <PageBarWrapper>
           <PageBar
             page={nowParamsPageNumber()}

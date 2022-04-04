@@ -8,9 +8,10 @@ async function getUserPostListData(params: string) {
 }
 
 export function useGetUserPostListData(category: string, page = 0) {
-  const { data: userPostData, error } = useSWR(
+  const { data: userPostData } = useSWR(
     [`myPost${url(category, page)}`],
     getUserPostListData,
+    { suspense: true },
   );
-  return { userPostData: userPostData && userPostData, error: error && error };
+  return { userPostData: userPostData && userPostData };
 }

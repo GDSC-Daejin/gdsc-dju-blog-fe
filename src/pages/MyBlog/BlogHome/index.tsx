@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import {
   ContainerInner,
@@ -24,7 +24,7 @@ import {
   SettingIconWrapper,
   TopMenuWrapper,
 } from './styled';
-import MockProfile from '../../../Images/MockProfile.png';
+import MockProfile from '../../../assets/MockProfile.png';
 import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
 import { HashTageDark } from '../../../components/common/HashTage';
@@ -32,14 +32,12 @@ import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
 import { useSearchParams } from 'react-router-dom';
-import Setting from '../../../Images/Setting';
+import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { useGetUserPostListData } from '../../../api/hooks/useGetUserPostListData';
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 
-export const hashTageSpreader = (hashTages: string) => {
-  return hashTages.split(',');
-};
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -86,7 +84,7 @@ const BlogHome = () => {
                 <ProfileImageWrapper>
                   <ProfileImage
                     image={MockProfile}
-                    position={userInfoData.positionType.toLowerCase()}
+                    position={userInfoData.positionType}
                   />
                 </ProfileImageWrapper>
                 <ProfileDetailWrapper>
@@ -138,29 +136,33 @@ const BlogHome = () => {
             </>
           )}
           {userPostData && (
-            <>
-              <PostSectionWrapper>
-                {!userPostData.empty &&
-                  userPostData.content.map((data) => (
-                    <PostCardWrapper
-                      key={data.postId}
-                      onClick={() =>
-                        navigate(`/${data.memberInfo.nickname}/${data.postId}`)
-                      }
-                    >
-                      <PostCard {...data} />
-                    </PostCardWrapper>
-                  ))}
-              </PostSectionWrapper>
-              <PageBarSection>
-                <PageBar
-                  page={page}
-                  totalPage={userPostData.totalPages}
-                  onClick={pageHandler}
-                />
-              </PageBarSection>
-            </>
+            <PostSectionWrapper>
+              {!userPostData.empty ? (
+                userPostData.content.map((data) => (
+                  <PostCardWrapper
+                    key={data.postId}
+                    onClick={() =>
+                      navigate(`/${data.memberInfo.nickname}/${data.postId}`)
+                    }
+                  >
+                    <PostCard {...data} />
+                  </PostCardWrapper>
+                ))
+              ) : (
+                <div>작성된 글이 없습니다.</div>
+              )}
+            </PostSectionWrapper>
           )}
+          <PageBarSection>
+            {userPostData && userInfoData && (
+              <PageBar
+                page={page}
+                totalPage={userPostData.totalPages}
+                nickname={userInfoData.nickname}
+                type={type}
+              />
+            )}
+          </PageBarSection>
         </ContainerInner>
       </LayoutContainer>
     </>

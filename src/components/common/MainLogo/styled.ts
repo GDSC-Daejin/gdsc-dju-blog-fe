@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const GdscLogoWrapper = styled.div`
   margin-right: 14px;
+  width: 42px;
 `;
 export const DaejinUnivLogoWrapper = styled.div`
   width: 35px;

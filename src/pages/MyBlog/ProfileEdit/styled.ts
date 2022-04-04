@@ -8,7 +8,7 @@ export const FormWrapper = styled.div`
   justify-content: center;
   margin: 0 auto;
 `;
-export const FormInner = styled.div`
+export const FormInner = styled.form`
   width: 100%;
   height: 100%;
   display: flex;

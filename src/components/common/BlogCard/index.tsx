@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BlogCardImage from '../../../Images/unknown.png';
+import BlogCardImage from '../../../assets/unknown.png';
 import { useNavigate } from 'react-router';
 import {
   BlogCardAuthorImage,
@@ -16,8 +16,8 @@ import {
   BlogCardTagWrapper,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import Bookmark from '../../../Images/Bookmark';
 import { detailPostDataType } from '../../../types/postData';
+import Bookmark from '../../../assets/Bookmark';
 
 const PostTextVariants = {
   initial: {

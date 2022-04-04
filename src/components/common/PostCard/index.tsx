@@ -10,11 +10,12 @@ import {
   PostHashTageSection,
   PostTitle,
 } from './styled';
-import MockPostImage from '../../../Images/MockPostImage.png';
+import MockPostImage from '../../../assets/MockPostImage.png';
 import { HashTageDark } from '../HashTage';
-import Bookmark from '../../../Images/Bookmark';
-import { hashTageSpreader } from '../../../pages/MyBlog/BlogHome';
+import Bookmark from '../../../assets/Bookmark';
+
 import { detailPostDataType } from '../../../types/postData';
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 
 const PostCard = (props: detailPostDataType) => {
   const { title, category, content, postId, postHashTags } = props;

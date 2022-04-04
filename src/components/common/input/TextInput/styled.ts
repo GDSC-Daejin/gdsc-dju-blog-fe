@@ -51,7 +51,6 @@ export const StyledInputWrapper = styled.div<{
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: inset 0 0 0 1px ${(props) => props.theme.color.grey300};
-
   ${(props) =>
     props.error &&
     css`
