@@ -31,21 +31,19 @@ export const FormLabel = styled.label<{ essential?: boolean }>`
   font-weight: 400;
   line-height: 1.5;
   color: ${(props) => props.theme.color.grey900};
-   {
-    ${(props) =>
-      props.essential &&
-      css`
-        &::after {
-          display: inline-block;
-          margin: 0 0 2px 6px;
-          content: '';
-          width: 6px;
-          height: 6px;
-          background-color: ${(props) => props.theme.color.tossRed};
-          border-radius: 3px;
-        }
-      `}
-  }
+  ${(props) =>
+    props.essential &&
+    css`
+      &::after {
+        display: inline-block;
+        margin: 0 0 2px 6px;
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: ${(props) => props.theme.color.tossRed};
+        border-radius: 3px;
+      }
+    `}
 `;
 export const FormElementWrapper = styled.div`
   margin-bottom: 20px;
