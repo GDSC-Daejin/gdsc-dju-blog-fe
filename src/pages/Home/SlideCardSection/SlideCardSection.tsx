@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { CardSection, BlogCardWrapper, ButtonWrapper } from './styled';
 import { useScroll } from 'react-use';
-import BlogCardScrollButton from '../../components/common/BlogCardButton';
-import BlogCard from '../../components/common/BlogCard';
-import { detailPostDataType } from '../../types/postData';
+import BlogCardScrollButton from '../../../components/common/BlogCardButton';
+import BlogCard from '../../../components/common/BlogCard';
+import { detailPostDataType } from '../../../types/postData';
 
 interface ISlideCardSectionProps {
   PostData: detailPostDataType[];

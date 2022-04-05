@@ -7,7 +7,7 @@ import { MainContentWrapper } from './styled';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import WelcomePhraseText from './WelcomePhraseText';
-import SlideCardSection from './SlideCardSection';
+import SlideCardSection from './SlideCardSection/SlideCardSection';
 
 function index() {
   const navigate = useNavigate();
