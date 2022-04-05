@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
 import SideBar from '../components/common/SideBar';
+import CategoryDetail from '../pages/Category/CategoryDetail';
 import API from '../api';
 import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
@@ -50,7 +51,7 @@ const Layout = () => {
         <Route path={'/post'} element={<Posts />} />
         <Route path={'/post/write'} element={<PostWrite />} />
         <Route path={'/category/*'} element={<Category />} />
-        <Route path={'/category/:categoryName'} element={<Category />} />
+        <Route path={'/category/:id'} element={<CategoryDetail />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route
           path={'/admin'}
