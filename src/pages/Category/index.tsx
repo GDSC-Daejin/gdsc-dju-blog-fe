@@ -50,7 +50,7 @@ const Category = () => {
           {handleTotalPageData() && (
             <PageBar
               page={nowParamsPageNumber()}
-              totalPage={20}
+              totalPage={handleTotalPageData()}
               onClick={handlePageNavigation}
             />
           )}
