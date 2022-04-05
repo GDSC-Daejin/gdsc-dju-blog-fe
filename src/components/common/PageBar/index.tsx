@@ -26,8 +26,9 @@ const PageBar = (props: {
   totalPage: number;
   nickname?: string;
   type?: string;
+  onClick?: (page: number) => void;
 }) => {
-  const { page, nickname, totalPage, type } = props;
+  const { page, nickname, totalPage, type, onClick } = props;
   const array = Array(totalPage).fill(0);
   const navigate = useNavigate();
   const pageHandler = (page: number, limit?: number) => {
@@ -37,7 +38,9 @@ const PageBar = (props: {
     if (page === limit) {
       return;
     } else {
-      navigate(`/${nickname}?type=${type}&page=${page}`);
+      onClick === undefined
+        ? navigate(`/${nickname}?type=${type}&page=${page}`)
+        : onClick(page);
     }
   };
 

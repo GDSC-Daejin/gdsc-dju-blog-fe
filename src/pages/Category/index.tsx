@@ -34,6 +34,9 @@ const Category = () => {
       ? null
       : navigate(`/category/${params.categoryName}?page=${nowPage}`);
   };
+  const handleTotalPageData = () => {
+    return data?.body.data.totalPages ? data.body.data.totalPages : 0;
+  };
 
   return (
     <LayoutContainer>
@@ -44,11 +47,13 @@ const Category = () => {
         />
         <BlogCardGridLayout PostData={handlePostData()} />
         <PageBarWrapper>
-          <PageBar
-            page={nowParamsPageNumber()}
-            totalPage={10}
-            // onClick={handlePageNavigation}
-          />
+          {handleTotalPageData() && (
+            <PageBar
+              page={nowParamsPageNumber()}
+              totalPage={20}
+              onClick={handlePageNavigation}
+            />
+          )}
         </PageBarWrapper>
       </CategoryInner>
     </LayoutContainer>
