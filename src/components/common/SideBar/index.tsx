@@ -6,6 +6,7 @@ import {
   SideBarBtnIconWrapper,
   GrayBox,
   SideBarDesign,
+  MobileMenuIconWrapper,
 } from './styled';
 import React from 'react';
 import MenuToggleIcon from '../MenuToggleIcon';
@@ -61,6 +62,9 @@ export const SideBar = () => {
         variants={SideBarAnimation}
         animate={menu.appMenu ? 'isActive' : 'isUnActive'}
       >
+        <MobileMenuIconWrapper>
+          <MenuToggleIcon active="open" />
+        </MobileMenuIconWrapper>
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>

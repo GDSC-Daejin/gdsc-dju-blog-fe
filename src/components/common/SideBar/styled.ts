@@ -130,7 +130,7 @@ export const GdscSideUnivWrapper = styled.div`
 `;
 export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
-  padding-bottom: 8px;
+  padding-bottom: 19px;
   & svg {
     width: 216px;
     height: 40px;
@@ -152,8 +152,13 @@ export const GoogleLogoWrapper = styled.div`
 export const GoogleButtonWrapper = styled.div`
   display: flex;
   position: relative;
-  padding-bottom: 60px;
+  padding-bottom: 22px;
   & button {
-    padding: 8px 25px 8px 50px;
+    padding: 5px 25px 8px 50px;
   }
+`;
+export const MobileMenuIconWrapper = styled.div`
+  position: absolute;
+  top: 54px;
+  right: 31px;
 `;
