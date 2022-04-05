@@ -49,7 +49,7 @@ const PostWrite = () => {
   const editorRef: any = useRef();
   const [title, setTitle] = useState('');
   const [state, setState] = useState('');
-  const handleSubmit = () => {
+  /*const handleSubmit = () => {
     const content = editorRef.current.getInstance().getHTML();
     setState(content);
     console.log(title);
@@ -62,7 +62,7 @@ const PostWrite = () => {
   };
   const getPostData = async () => {
     const post = await axios.get('https://gdsc-dju.com/api/member/v2/post');
-  };
+  };*/
   return (
     <>
       <NavigationBlock />
@@ -106,11 +106,7 @@ const PostWrite = () => {
               <GDSCButton text="임시저장" />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
-              <GDSCButton
-                text="업로드"
-                color="GDSC blue"
-                onClick={handleSubmit}
-              />
+              <GDSCButton text="업로드" color="GDSC blue" />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
         </ContainerInner>
