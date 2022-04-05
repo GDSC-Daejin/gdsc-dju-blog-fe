@@ -73,7 +73,7 @@ export const SideBar = () => {
       <SideBarBtnWrapper>
         <SideBarBtnInner>
           <SideBarBtnIconWrapper>
-            <MenuToggleIcon />
+            <MenuToggleIcon active="closed" />
           </SideBarBtnIconWrapper>
         </SideBarBtnInner>
       </SideBarBtnWrapper>

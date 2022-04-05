@@ -4,12 +4,16 @@ import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { StyledMenuButton } from './styled';
 
-const MenuToggleIcon = () => {
+interface Iprops {
+  active: string;
+}
+const MenuToggleIcon = (props: Iprops) => {
+  const { active } = props;
   const [menu, setMenu] = useRecoilState(menuState);
   return (
     <StyledMenuButton
       initial={false}
-      animate={'closed'}
+      animate={active}
       onClick={() => setMenu({ ...menu, [MENU_KEY.APPMENU]: !menu.appMenu })}
     >
       <svg width="23" height="23" viewBox="0 0 23 23">
