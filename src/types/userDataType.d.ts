@@ -1,4 +1,6 @@
-export interface userDataType {
+import { MemberUrlsType } from './userInfoData';
+
+export interface UserDataType {
   email: string;
   emailVerifiedYn: string;
   memberInfo: {
@@ -28,7 +30,13 @@ export interface userDataType {
   userId: string;
   username: string;
 }
-export interface memberDataInfoType {
+export interface RowMemberDataType {
+  header: string;
+  body: {
+    data: UserDataType;
+  };
+}
+export interface MemberDataInfoType {
   generation: number;
   gitEmail: string;
   hashTag: string;
@@ -36,13 +44,12 @@ export interface memberDataInfoType {
   major: string;
   memberInfoId: number;
   birthday: string;
-  memberPortfolioUrls: {
-    id: number;
-    webUrl: string | null;
-  }[];
   nickname: string;
   phoneNumber: string;
   positionType: string;
   studentID: string;
   userID: string;
+  name: string;
+  email: string;
+  memberPortfolioUrls: MemberUrlsType[];
 }

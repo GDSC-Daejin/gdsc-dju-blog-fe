@@ -1,39 +1,67 @@
 import React from 'react';
-import RightArrow from '../../../Images/RightArrow';
-import LeftArrow from '../../../Images/LeftArrow';
+import RightArrow from '../../../assets/RightArrow';
+import LeftArrow from '../../../assets/LeftArrow';
 import {
   ArrowWrapper,
   Number,
+  NumberCircle,
   NumberSection,
   NumberWrapper,
   PageBarWrapper,
 } from './styled';
-import { postListData } from '../../../api/Mocks/postListData';
+import { useNavigate } from 'react-router';
 
+const circleMotion = {
+  isActive: {
+    opacity: 1,
+    y: 0,
+  },
+  isUnActive: {
+    y: -10,
+    opacity: 0,
+  },
+};
 const PageBar = (props: {
   page: number;
-  onClick: (page: number, limit?: number) => void;
+  totalPage: number;
+  nickname?: string;
+  type?: string;
 }) => {
-  const { page, onClick } = props;
-  const pageNumber = Math.ceil(postListData.length / 10);
-  const array = Array(pageNumber).fill(0);
+  const { page, nickname, totalPage, type } = props;
+  const array = Array(totalPage).fill(0);
+  const navigate = useNavigate();
+  const pageHandler = (page: number, limit?: number) => {
+    if (page < 0) {
+      return;
+    }
+    if (page === limit) {
+      return;
+    } else {
+      navigate(`/${nickname}?type=${type}&page=${page}`);
+    }
+  };
+
   return (
     <PageBarWrapper>
-      <ArrowWrapper onClick={() => onClick(page - 1)}>
+      <ArrowWrapper onClick={() => pageHandler(page - 1)}>
         <LeftArrow />
       </ArrowWrapper>
       <NumberSection>
         {array.map((num, id) => (
           <NumberWrapper
             key={id}
-            onClick={() => onClick(id)}
+            onClick={() => pageHandler(id)}
             active={page === id}
           >
+            <NumberCircle
+              variants={circleMotion}
+              animate={page === id ? 'isActive' : 'isUnActive'}
+            />
             <Number>{id + 1}</Number>
           </NumberWrapper>
         ))}
       </NumberSection>
-      <ArrowWrapper onClick={() => onClick(page + 1, pageNumber)}>
+      <ArrowWrapper onClick={() => pageHandler(page + 1, totalPage)}>
         <RightArrow />
       </ArrowWrapper>
     </PageBarWrapper>

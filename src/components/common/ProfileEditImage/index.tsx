@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormImage, FormImageWrapper, ImageText } from './styled';
 
-const ProfileEditImage = (props: { image: string }) => {
+const ProfileEditImage = (props: { image?: string }) => {
   const { image } = props;
   return (
     <FormImageWrapper>

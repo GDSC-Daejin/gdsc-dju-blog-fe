@@ -13,9 +13,10 @@ import SideBarLogin from './SideBarLogin';
 import SideBarLogout from './SideBarLogout';
 import { useLocation } from 'react-router';
 import SideBarCategory from './SideBarCategory';
-import { SideBarAnimation } from '../Animation';
+import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { useRecoilState } from 'recoil';
+import { AnimatePresence } from 'framer-motion';
 
 export const sideBarMenuData = [
   {
@@ -76,12 +77,18 @@ export const SideBar = () => {
           </SideBarBtnIconWrapper>
         </SideBarBtnInner>
       </SideBarBtnWrapper>
-      <GrayBox
-        onClick={() => {
-          setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
-        }}
-        open={menu.appMenu}
-      />
+      <AnimatePresence>
+        {menu.appMenu && (
+          <GrayBox
+            variants={SideBarGrayBoxAnimation}
+            animate={'isActive'}
+            exit={'isUnActive'}
+            onClick={() => {
+              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
+            }}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

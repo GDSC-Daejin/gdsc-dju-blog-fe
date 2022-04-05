@@ -5,9 +5,9 @@ import {
   DaejinUnivLogoWrapper,
   SubLogoWrapper,
 } from './styled';
-import GdscLogo from '../../../Images/GdscLogo';
-import DaejinUnivLogo from '../../../Images/DaejinUnivLogo';
-import GdscBlogLogo from '../../../Images/GdscBlogLogo';
+import GdscLogo from '../../../assets/GdscLogo';
+import DaejinUnivLogo from '../../../assets/DaejinUnivLogo';
+import GdscBlogLogo from '../../../assets/GdscBlogLogo';
 
 const MainLogo = () => {
   return (

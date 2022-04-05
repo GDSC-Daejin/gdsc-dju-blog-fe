@@ -8,7 +8,7 @@ import {
   GDSCLogoWrapper,
 } from './styled';
 import { positionColor } from '../../../store/positionColor';
-import GdscLogo from '../../../Images/GdscLogo';
+import GdscLogo from '../../../assets/GdscLogo';
 
 type Iprops = {
   onClick?: (url: string) => void;
@@ -23,7 +23,7 @@ const CategoryMenu = (props: Iprops) => {
     'backend',
     'android',
     'design',
-    'beginner',
+    'common',
   ];
   const category = [
     'ALL',
@@ -93,5 +93,4 @@ const CategoryMenu = (props: Iprops) => {
     </>
   );
 };
-
 export default CategoryMenu;
