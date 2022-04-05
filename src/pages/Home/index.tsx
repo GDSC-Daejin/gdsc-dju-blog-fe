@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useScroll } from 'react-use';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
@@ -22,6 +22,7 @@ function index() {
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const currentParamsPageNumber = searchParams.get('category');
 
@@ -49,23 +50,15 @@ function index() {
       }
     }
   };
-  const [PostData, setPostData] = useState<detailPostDataType[]>();
-  const nowParamsCategory = () => {
+
+  const nowParamsCategoryData = () => {
     return currentParamsPageNumber === null ? 'all' : currentParamsPageNumber;
   };
+  const categoryMenuHandler = (categoryName: string) => {
+    navigate(`?category=${categoryName}`);
+  };
 
-  const instance = axios.create({
-    baseURL: 'https://gdsc-dju.com',
-    timeout: 15000,
-  });
-  useEffect(() => {
-    instance.get('/api/v1/post/list?page=0&size=11').then(function (response) {
-      setPostData(response.data.body.data.content);
-    });
-    instance.get('/api/admin/v1/all/list').then(function (response) {
-      // console.log(response);
-    });
-  }, []);
+  const { data: PostData } = useGetPostListData(nowParamsCategoryData());
 
   return (
     <LayoutContainer>
@@ -79,24 +72,33 @@ function index() {
           </p>
           <span>by Cindy</span>
         </WelcomePhrase>
-        <CategoryMenu type={nowParamsCategory()} />
-        <CardSection
-          ref={scrollRef}
-          isDrag={isDrag}
-          onMouseDown={onDragStart}
-          onMouseMove={isDrag ? onDragMove : undefined}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-        >
-          {PostData?.map((CardData, index) => (
-            <BlogCardWrapper key={CardData.postId}>
-              <BlogCard CardData={CardData} />
-            </BlogCardWrapper>
-          ))}
-        </CardSection>
-        <ButtonWrapper>
-          <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
-        </ButtonWrapper>
+        <CategoryMenu
+          type={nowParamsCategoryData()}
+          onClick={categoryMenuHandler}
+        />
+        {PostData?.body.data.empty ? (
+          '해당 카테고리 데이터는 없습니다..'
+        ) : (
+          <>
+            <CardSection
+              ref={scrollRef}
+              isDrag={isDrag}
+              onMouseDown={onDragStart}
+              onMouseMove={isDrag ? onDragMove : undefined}
+              onMouseUp={onDragEnd}
+              onMouseLeave={onDragEnd}
+            >
+              {PostData?.body.data.content.map((CardData, index) => (
+                <BlogCardWrapper key={CardData.postId}>
+                  <BlogCard CardData={CardData} />
+                </BlogCardWrapper>
+              ))}
+            </CardSection>
+            <ButtonWrapper>
+              <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
+            </ButtonWrapper>
+          </>
+        )}
       </MainContentWrapper>
     </LayoutContainer>
   );
