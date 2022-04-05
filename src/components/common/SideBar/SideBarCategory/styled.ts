@@ -11,6 +11,7 @@ export const SideCategoryText = styled(motion.div)<{ active?: boolean }>`
       color: ${(props) => props.theme.color.grey900};
     `}
   padding-bottom: 8px;
+  border-bottom: 1px solid ${(props) => props.theme.color.white};
 `;
 export const SideCategoryTextWrapper = styled(motion.div)`
   cursor: pointer;
