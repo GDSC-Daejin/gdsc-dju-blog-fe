@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const WelcomePhrase = styled.div`
+  margin-top: 50px;
   span {
     //styleName: E h7;
     font-family: Google Sans Display;
@@ -8,7 +9,6 @@ export const WelcomePhrase = styled.div`
     font-weight: 400;
     line-height: 23px;
     letter-spacing: 0em;
-    text-align: left;
   }
   p {
     font-family: Noto Sans KR;
