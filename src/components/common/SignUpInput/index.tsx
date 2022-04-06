@@ -4,6 +4,7 @@ import {
   SignUpInputWrapper,
   SignUpInputLabel,
   SignUpInputBox,
+  NickNameCheck,
   SignUpErrorMessage,
   SignUpInputLabelCircle,
   SignUpInputLabelText,
@@ -15,6 +16,7 @@ const SignUpInput = ({
   type,
   title,
   register,
+  nickNameCheck,
   placeholder,
   condition,
   errors,
@@ -31,6 +33,7 @@ const SignUpInput = ({
         errorCheck={errorCheck(errors?.message)}
         {...register(refName, condition)}
       />
+      {nickNameCheck && <NickNameCheck>중복확인</NickNameCheck>}
       {errors && (
         <SignUpErrorMessage>
           <InputWarning />

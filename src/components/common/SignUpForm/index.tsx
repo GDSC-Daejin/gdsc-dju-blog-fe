@@ -35,6 +35,7 @@ const SignUpForm = () => {
       type: 'text',
       placeholder: 'GDSC DJU 닉네임을 입력하세요.',
       title: '닉네임',
+      nickNameCheck: true,
       condition: {
         required: '필수 입력란입니다',
       },

@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const SignUpContentWrapper = styled.div`
-  margin: 0 auto;
+  margin: 100px auto 250px;
   display: flex;
   flex-direction: column;
   gap: 50px;
-  margin-bottom: 250px;
 `;
 
 export const SignUpFormTitle = styled.h4`

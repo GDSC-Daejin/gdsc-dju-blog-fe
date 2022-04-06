@@ -7,23 +7,6 @@ export const SignUpInputWrapper = styled.div`
   justify-content: center;
 `;
 
-export const SignUpErrorMessage = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: ${(props) => props.theme.color.tossRed};
-  bottom: -20px;
-  span {
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 17px;
-    letter-spacing: -0.03em;
-  }
-`;
-
 export const SignUpInputLabel = styled.div`
   display: flex;
   align-items: center;
@@ -58,6 +41,9 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   box-sizing: border-box;
   border-radius: 10px;
   ::placeholder {
+    font-family: Noto Sans KR;
+    font-weight: normal;
+    font-size: ${(props) => props.theme.fontSize.body1};
     color: ${(props) => props.theme.color.grey400};
   }
   ::-webkit-input-placeholder {
@@ -68,5 +54,24 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   }
   &:focus {
     filter: drop-shadow(0px 0px 2px #3182f6);
+  }
+`;
+
+export const NickNameCheck = styled.button``;
+
+export const SignUpErrorMessage = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: ${(props) => props.theme.color.tossRed};
+  bottom: -20px;
+  span {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    letter-spacing: -0.03em;
   }
 `;

@@ -11,6 +11,7 @@ export interface IFormStructure {
   type: 'text' | 'tel' | 'email';
   title: string;
   select?: boolean;
+  nickNameCheck?: boolean;
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   watch: UseFormWatch<FieldValues>;
