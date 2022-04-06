@@ -6,18 +6,27 @@
   unicode-range: U+AC00-D7A3;
 }
 @font-face {
-  font-family: "Product Sans";
-  src: url("fonts/Product Sans Regular.ttf");
-  unicode-range: U+0041-005A, U+0061-007A, U+0030-0039, U+0020-002F, U+003A-0040, U+005B-0060, U+007B-007E;
+  font-family: "Google Sans Display";
+  src: url("fonts/GoogleSansDisplay-Regular.ttf");
+  font-weight: normal;
 }@font-face {
-  font-family: "Product Sans Bold";
-  src: url("fonts/Product Sans Bold.ttf");
-  unicode-range: U+0041-005A, U+0061-007A, U+0030-0039, U+0020-002F, U+003A-0040, U+005B-0060, U+007B-007E;
+  font-family: "Google Sans Display";
+  src: url("fonts/GoogleSansDisplay-Bold.ttf");
+  font-weight: bold;
+
+}@font-face {
+  font-family: "Google Sans Display";
+  src: url("fonts/GoogleSansDisplay-Medium.ttf");
+
+  font-weight: 600;
 }
-html{
+* {
+  font-family: 'Google Sans Display','Noto Sans KR', sans-serif;
   font-size: 10px;
-  font-family: "Product Sans", "Noto Sans KR", sans-serif;
-  margin: 0
+  font-style: normal;
+  margin: 0;
+  word-break: keep-all;
+  -webkit-tap-highlight-color: transparent;
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,

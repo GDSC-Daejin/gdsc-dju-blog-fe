@@ -74,6 +74,9 @@ export const ButtonWrapper = styled.div`
 `;
 export const PostSectionWrapper = styled.section`
   margin-bottom: 110px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 export const PostCardWrapper = styled.div`
   display: flex;
