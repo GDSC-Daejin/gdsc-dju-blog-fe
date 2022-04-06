@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { CardSection, BlogCardWrapper, ButtonWrapper } from './styled';
 import { useScroll } from 'react-use';
-import BlogCardScrollButton from '../../../components/common/BlogCardButton';
+import BlogCardScrollButton from '../BlogCardButton';
 import BlogCard from '../../../components/common/BlogCard';
 import { detailPostDataType } from '../../../types/postData';
 
@@ -40,6 +40,7 @@ const SlideCardSection = (props: ISlideCardSectionProps) => {
       }
     }
   };
+  console.log(x);
   return PostData.length === 0 ? (
     <h3>해당 카테고리 데이터는 없습니다..</h3>
   ) : (
