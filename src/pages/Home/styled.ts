@@ -2,12 +2,14 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const MainContentWrapper = styled.div`
-  width: 100%;
+  width: 1550px;
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  overflow: hidden;
-  gap: 3.75rem;
-  margin-top: 50px;
+  margin-top: 60px;
+  gap: 50px;
+`;
+
+export const CategoryMenuWrapper = styled.div`
+  margin-top: 60px;
 `;

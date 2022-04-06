@@ -3,10 +3,10 @@ import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { LayoutContainer } from '../../styles/layouts';
-import { MainContentWrapper } from './styled';
+import { MainContentWrapper, CategoryMenuWrapper } from './styled';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import CategoryMenu from '../../components/common/CategoryMenu';
-import WelcomePhraseText from './WelcomePhraseText';
+import WelcomePhraseText from './WelcomePharaseText/WelcomePhraseText';
 import SlideCardSection from './SlideCardSection/SlideCardSection';
 
 function index() {
@@ -17,7 +17,7 @@ function index() {
   const nowParamsCategoryData = () => {
     return currentParamsPageNumber === null ? 'all' : currentParamsPageNumber;
   };
-  const { data: PostData } = useGetPostListData(nowParamsCategoryData());
+  const { data: PostData } = useGetPostListData(nowParamsCategoryData(), 0, 11);
 
   const categoryMenuHandler = (categoryName: string) => {
     navigate(`?category=${categoryName}`);
@@ -30,12 +30,14 @@ function index() {
 
   return (
     <LayoutContainer>
-      <MainContentWrapper>
-        <WelcomePhraseText />
+      <WelcomePhraseText />
+      <CategoryMenuWrapper>
         <CategoryMenu
           type={nowParamsCategoryData()}
           onClick={categoryMenuHandler}
         />
+      </CategoryMenuWrapper>
+      <MainContentWrapper>
         <SlideCardSection PostData={PostDataHandler()} />
       </MainContentWrapper>
     </LayoutContainer>
