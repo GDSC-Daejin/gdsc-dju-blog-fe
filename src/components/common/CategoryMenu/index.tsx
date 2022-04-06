@@ -23,7 +23,7 @@ const CategoryMenu = (props: Iprops) => {
     'backend',
     'android',
     'design',
-    'beginner',
+    'common',
   ];
   const category = [
     'ALL',
