@@ -2,7 +2,7 @@ import React from 'react';
 import { LayoutContainer } from '../../styles/layouts';
 import { SignUpContentWrapper, SignUpFormTitle } from './styled';
 import { GDSCButton } from '../../components/common/Button';
-import InputWarning from '../../Images/InputWarning';
+import InputWarning from '../../assets/InputWarning';
 import SignUpForm from '../../components/common/SignUpForm';
 
 const SignUp = () => {

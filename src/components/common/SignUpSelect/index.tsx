@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BottomArrow from '../../../Images/BottomArrow';
+import BottomArrow from '../../../assets/BottomArrow';
 import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
 import {
   SelectBoxWrapper,

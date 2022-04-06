@@ -8,7 +8,7 @@ import {
   SignUpInputLabelCircle,
   SignUpInputLabelText,
 } from './styled';
-import InputWarning from '../../../Images/InputWarning';
+import InputWarning from '../../../assets/InputWarning';
 
 const SignUpInput = ({
   refName,
