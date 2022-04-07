@@ -10,7 +10,7 @@ export const SignUpInputWrapper = styled.div`
 export const SignUpInputLabel = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   margin-bottom: 12px;
 `;
 
@@ -19,7 +19,6 @@ export const SignUpInputLabelText = styled.label`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 26px;
   letter-spacing: 0em;
   color: ${(props) => props.theme.color.grey900};
 `;
@@ -29,6 +28,10 @@ export const SignUpInputLabelCircle = styled.div`
   height: 6px;
   border-radius: 50%;
   background-color: red;
+`;
+
+export const SignUpInputBoxWrapper = styled.div`
+  position: relative;
 `;
 
 export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
@@ -58,9 +61,13 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   }
 `;
 
-export const NickNameCheck = styled.button`
+export const NickNameCheckButton = styled.button`
+  position: absolute;
+  right: 20px;
+  top: 7px;
   width: 90px;
   height: 34px;
+  font-size: 16px;
   background-color: ${(props) => props.theme.color.grey500};
   border-radius: 17px;
   color: ${(props) => props.theme.color.grey50};
@@ -81,5 +88,16 @@ export const SignUpErrorMessage = styled.div`
     font-size: 12px;
     line-height: 17px;
     letter-spacing: -0.03em;
+  }
+`;
+
+export const CheckCircleWrapper = styled.div<{
+  checkState: boolean | undefined;
+}>`
+  path {
+    fill: ${(props) =>
+      props.checkState
+        ? props.theme.color.googleGreen
+        : props.theme.color.grey300};
   }
 `;

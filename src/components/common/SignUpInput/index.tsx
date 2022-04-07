@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
 import {
   SignUpInputWrapper,
   SignUpInputLabel,
-  SignUpInputBox,
-  NickNameCheck,
-  SignUpErrorMessage,
   SignUpInputLabelCircle,
   SignUpInputLabelText,
+  CheckCircleWrapper,
+  SignUpInputBoxWrapper,
+  SignUpInputBox,
+  NickNameCheckButton,
+  SignUpErrorMessage,
 } from './styled';
 import InputWarning from '../../../assets/InputWarning';
 import { check } from 'prettier';
+import CheckCircle from '../../../assets/CheckCircle';
 
 const SignUpInput = ({
   refName,
@@ -29,10 +32,7 @@ const SignUpInput = ({
   setCheckNickname,
 }: IFormStructure) => {
   const handleNicknameCheck = async () => {
-    if (checkNicknameState) {
-      alert('중복검사가 완료된 닉네임입니다');
-      return;
-    } else if (watch(refName) === '') {
+    if (watch(refName) === '') {
       alert('닉네임을 입력하세요');
       return;
     }
@@ -43,37 +43,56 @@ const SignUpInput = ({
           categoryName: watch(refName),
         },
       );
-      setCheckNickname &&
-        setCheckNickname((prev) => {
-          return response.data.body.data;
-        });
-      trigger && trigger(refName);
+      if (response.data.body.data) {
+        console.log(response.data.body.data);
+        setCheckNickname &&
+          setCheckNickname((prev) => {
+            return true;
+          });
+        trigger && trigger(refName);
+      } else alert('이미 존재하는 닉네임입니다.');
     } catch (err) {
       console.log('ERROR', err);
     }
   };
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = () => {
     setCheckNickname && setCheckNickname(false);
   };
+
+  useEffect(() => {
+    handleChange();
+  }, [watch('nickname')]);
 
   return (
     <SignUpInputWrapper>
       <SignUpInputLabel>
         <SignUpInputLabelText htmlFor={refName}>{title}</SignUpInputLabelText>
         {condition?.required && <SignUpInputLabelCircle />}
+        {nickNameCheck && (
+          <CheckCircleWrapper
+            checkState={checkNicknameState && checkNicknameState}
+          >
+            <CheckCircle />
+          </CheckCircleWrapper>
+        )}
       </SignUpInputLabel>
-      <SignUpInputBox
-        type={type}
-        placeholder={placeholder}
-        errorCheck={errorCheck(errors?.message)}
-        {...register(refName, condition)}
-        onChange={nickNameCheck ? handleChange : undefined}
-      />
-      {nickNameCheck && (
-        <NickNameCheck onClick={handleNicknameCheck} type="button">
-          중복확인 {checkNicknameState ? 1 : 0}
-        </NickNameCheck>
-      )}
+      <SignUpInputBoxWrapper>
+        <SignUpInputBox
+          type={type}
+          placeholder={placeholder}
+          errorCheck={errorCheck(errors?.message)}
+          {...register(refName, condition)}
+        />
+        {nickNameCheck && (
+          <NickNameCheckButton
+            onClick={handleNicknameCheck}
+            type="button"
+            disabled={checkNicknameState}
+          >
+            중복확인
+          </NickNameCheckButton>
+        )}
+      </SignUpInputBoxWrapper>
       {errors && (
         <SignUpErrorMessage>
           <InputWarning />
@@ -84,4 +103,4 @@ const SignUpInput = ({
   );
 };
 
-export default SignUpInput;
+export default React.memo(SignUpInput);
