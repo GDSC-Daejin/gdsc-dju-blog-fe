@@ -44,7 +44,7 @@ const SignUpForm = () => {
           checkName: () => checkNickname || '닉네임 설정에 실패했습니다.',
         },
       },
-      checkNickname: checkNickname,
+      checkNicknameState: checkNickname,
       setCheckNickname: setCheckNickname,
       register: register,
       watch: watch,

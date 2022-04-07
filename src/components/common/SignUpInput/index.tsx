@@ -25,12 +25,15 @@ const SignUpInput = ({
   errors,
   trigger,
   watch,
-  checkNickname,
+  checkNicknameState,
   setCheckNickname,
 }: IFormStructure) => {
   const handleNicknameCheck = async () => {
-    if (checkNickname) {
-      alert('중복검사가 완료된 아이디입니다');
+    if (checkNicknameState) {
+      alert('중복검사가 완료된 닉네임입니다');
+      return;
+    } else if (watch(refName) === '') {
+      alert('닉네임을 입력하세요');
       return;
     }
     try {
@@ -45,11 +48,14 @@ const SignUpInput = ({
           return response.data.body.data;
         });
       trigger && trigger(refName);
-      console.log(checkNickname + ' 123');
     } catch (err) {
       console.log('ERROR', err);
     }
   };
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setCheckNickname && setCheckNickname(false);
+  };
+
   return (
     <SignUpInputWrapper>
       <SignUpInputLabel>
@@ -61,10 +67,11 @@ const SignUpInput = ({
         placeholder={placeholder}
         errorCheck={errorCheck(errors?.message)}
         {...register(refName, condition)}
+        onChange={nickNameCheck ? handleChange : undefined}
       />
       {nickNameCheck && (
         <NickNameCheck onClick={handleNicknameCheck} type="button">
-          중복확인 {checkNickname ? 1 : 0}
+          중복확인 {checkNicknameState ? 1 : 0}
         </NickNameCheck>
       )}
       {errors && (

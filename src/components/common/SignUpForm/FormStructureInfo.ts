@@ -17,7 +17,7 @@ export interface IFormStructure {
   setValue: UseFormSetValue<FieldValues>;
   watch: UseFormWatch<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
-  checkNickname?: boolean;
+  checkNicknameState?: boolean;
   setCheckNickname?: React.Dispatch<React.SetStateAction<boolean>>;
   placeholder?: string;
   condition?: RegisterOptions;
