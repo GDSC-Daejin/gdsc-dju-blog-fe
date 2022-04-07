@@ -35,6 +35,7 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   width: 512px;
   height: 48px;
   padding: 8px 20px;
+  font-size: ${(props) => props.theme.fontSize.body1};
   border: 1px solid
     ${(props) =>
       props.errorCheck ? props.theme.color.tossRed : props.theme.color.grey400};
@@ -57,7 +58,14 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   }
 `;
 
-export const NickNameCheck = styled.button``;
+export const NickNameCheck = styled.button`
+  width: 90px;
+  height: 34px;
+  background-color: ${(props) => props.theme.color.grey500};
+  border-radius: 17px;
+  color: ${(props) => props.theme.color.grey50};
+  border: 0px;
+`;
 
 export const SignUpErrorMessage = styled.div`
   position: absolute;

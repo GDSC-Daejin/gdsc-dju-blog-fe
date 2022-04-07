@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 import { SignUpFormStyle, SignUpButton } from './styled';
 import SignUpInput from '../SignUpInput';
@@ -12,6 +13,7 @@ const SignUpForm = () => {
     register,
     setValue,
     watch,
+    trigger,
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
@@ -38,10 +40,25 @@ const SignUpForm = () => {
       nickNameCheck: true,
       condition: {
         required: '필수 입력란입니다',
+        validate: {
+          checkName: async (v: string) => {
+            const response = await axios.post(
+              'https://gdsc-dju.com/api/guest/v1/validation/nickname',
+              {
+                data: {
+                  nickname: v,
+                },
+              },
+            );
+            console.log(response.data.body.data);
+            return true || '닉네임 중복검사가 필요합니다';
+          },
+        },
       },
       register: register,
       watch: watch,
       setValue: setValue,
+      trigger: trigger,
       errors: errors.nickname,
     },
     {

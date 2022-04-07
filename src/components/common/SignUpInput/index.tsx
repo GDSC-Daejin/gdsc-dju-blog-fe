@@ -20,6 +20,8 @@ const SignUpInput = ({
   placeholder,
   condition,
   errors,
+  trigger,
+  watch,
 }: IFormStructure) => {
   return (
     <SignUpInputWrapper>
@@ -33,7 +35,16 @@ const SignUpInput = ({
         errorCheck={errorCheck(errors?.message)}
         {...register(refName, condition)}
       />
-      {nickNameCheck && <NickNameCheck>중복확인</NickNameCheck>}
+      {nickNameCheck && trigger && (
+        <NickNameCheck
+          onClick={async () => {
+            const result = await trigger(`${refName}`);
+          }}
+          type="button"
+        >
+          중복확인
+        </NickNameCheck>
+      )}
       {errors && (
         <SignUpErrorMessage>
           <InputWarning />
