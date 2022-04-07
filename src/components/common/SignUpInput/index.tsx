@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
 import {
   SignUpInputWrapper,
@@ -10,6 +12,7 @@ import {
   SignUpInputLabelText,
 } from './styled';
 import InputWarning from '../../../assets/InputWarning';
+import { check } from 'prettier';
 
 const SignUpInput = ({
   refName,
@@ -22,7 +25,31 @@ const SignUpInput = ({
   errors,
   trigger,
   watch,
+  checkNickname,
+  setCheckNickname,
 }: IFormStructure) => {
+  const handleNicknameCheck = async () => {
+    if (checkNickname) {
+      alert('중복검사가 완료된 아이디입니다');
+      return;
+    }
+    try {
+      const response = await axios.post(
+        'https://gdsc-dju.com/api/guest/v1/validation/nickname',
+        {
+          categoryName: watch(refName),
+        },
+      );
+      setCheckNickname &&
+        setCheckNickname((prev) => {
+          return response.data.body.data;
+        });
+      trigger && trigger(refName);
+      console.log(checkNickname + ' 123');
+    } catch (err) {
+      console.log('ERROR', err);
+    }
+  };
   return (
     <SignUpInputWrapper>
       <SignUpInputLabel>
@@ -35,14 +62,9 @@ const SignUpInput = ({
         errorCheck={errorCheck(errors?.message)}
         {...register(refName, condition)}
       />
-      {nickNameCheck && trigger && (
-        <NickNameCheck
-          onClick={async () => {
-            const result = await trigger(`${refName}`);
-          }}
-          type="button"
-        >
-          중복확인
+      {nickNameCheck && (
+        <NickNameCheck onClick={handleNicknameCheck} type="button">
+          중복확인 {checkNickname ? 1 : 0}
         </NickNameCheck>
       )}
       {errors && (
