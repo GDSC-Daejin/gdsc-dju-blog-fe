@@ -112,7 +112,6 @@ const BlogHome = () => {
                   </HashTageSection>
                 </ProfileDetailWrapper>
               </ProfileWrapper>
-
               <TopMenuWrapper>
                 <CategoryMenu
                   type={type as string}
