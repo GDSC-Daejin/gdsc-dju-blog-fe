@@ -4,6 +4,10 @@ const category = {
   de: 'design',
   common: 'common',
   and: 'android',
+  frontend: 'frontend',
+  backend: 'backend',
+  design: 'design',
+  android: 'android',
 } as const;
 
 export const url = (tage: string, page: number, size = 16) => {
