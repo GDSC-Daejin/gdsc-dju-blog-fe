@@ -49,7 +49,7 @@ const BlogHome = () => {
 
   const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
-  const { userPostData } = useGetUserPostListData(type, page);
+  const { userPostData } = useGetUserPostListData(type, page, 6);
 
   const navigate = useNavigate();
 
