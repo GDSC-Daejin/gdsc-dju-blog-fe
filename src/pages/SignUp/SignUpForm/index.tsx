@@ -13,6 +13,7 @@ const SignUpForm = () => {
     setValue,
     watch,
     trigger,
+    setFocus,
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
@@ -43,6 +44,7 @@ const SignUpForm = () => {
         validate: {
           checkName: () => checkNickname || '닉네임 설정에 실패했습니다.',
         },
+        onChange: (e) => setCheckNickname(false),
       },
       checkNicknameState: checkNickname,
       setCheckNickname: setCheckNickname,

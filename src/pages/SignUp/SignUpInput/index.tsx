@@ -28,6 +28,7 @@ const SignUpInput = ({
   errors,
   trigger,
   watch,
+  setFocus,
   checkNicknameState,
   setCheckNickname,
 }: IFormStructure) => {
@@ -40,28 +41,20 @@ const SignUpInput = ({
       const response = await axios.post(
         'https://gdsc-dju.com/api/guest/v1/validation/nickname',
         {
-          categoryName: watch(refName),
+          categoryName: watch('position'),
         },
       );
       if (response.data.body.data) {
-        console.log(response.data.body.data);
         setCheckNickname &&
           setCheckNickname((prev) => {
             return true;
           });
-        trigger && trigger(refName);
+        trigger && trigger(refName, { shouldFocus: true });
       } else alert('이미 존재하는 닉네임입니다.');
     } catch (err) {
       console.log('ERROR', err);
     }
   };
-  const handleChange = () => {
-    setCheckNickname && setCheckNickname(false);
-  };
-
-  useEffect(() => {
-    handleChange();
-  }, [watch('nickname')]);
 
   return (
     <SignUpInputWrapper>
@@ -84,11 +77,7 @@ const SignUpInput = ({
           {...register(refName, condition)}
         />
         {nickNameCheck && (
-          <NickNameCheckButton
-            onClick={handleNicknameCheck}
-            type="button"
-            disabled={checkNicknameState}
-          >
+          <NickNameCheckButton onClick={handleNicknameCheck} type="button">
             중복확인
           </NickNameCheckButton>
         )}
