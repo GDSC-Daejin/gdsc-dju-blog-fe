@@ -162,7 +162,11 @@ const SignUpForm = () => {
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) =>
-        data.select ? <SignUpSelect {...data} /> : <SignUpInput {...data} />,
+        data.select ? (
+          <SignUpSelect {...data} key={data.refName} />
+        ) : (
+          <SignUpInput {...data} key={data.refName} />
+        ),
       )}
       {/* 
             넘겨주는 값들
