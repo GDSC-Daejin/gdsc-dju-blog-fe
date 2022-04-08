@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { LayoutContainer } from '../../styles/layouts';
 import { CategoryInner, PageBarWrapper } from './styled';
@@ -13,19 +12,20 @@ const Category = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const currentParamsType = params.categoryName
+    ? params.categoryName.replace('/', '')
+    : 'all';
   const currentParamsPageNumber = searchParams.get('page');
   const nowParamsPageNumber = () => {
     return currentParamsPageNumber === null
       ? 0
       : parseInt(currentParamsPageNumber);
   };
-  const { data } = useGetPostListData(
-    params.categoryName === undefined ? 'all' : params.categoryName,
+  const { postListData } = useGetPostListData(
+    currentParamsType,
     nowParamsPageNumber(),
   );
-  const handlePostData = () => {
-    return data?.body.data.content === undefined ? [] : data?.body.data.content;
-  };
+
   const handleCategoryMenuNavigation = (categoryName: string) => {
     navigate(`/category/${categoryName}`);
   };
@@ -39,17 +39,25 @@ const Category = () => {
     <LayoutContainer>
       <CategoryInner>
         <CategoryMenu
-          type={params.categoryName === undefined ? 'all' : params.categoryName}
+          type={currentParamsType}
           onClick={handleCategoryMenuNavigation}
         />
-        <BlogCardGridLayout PostData={handlePostData()} />
-        <PageBarWrapper>
-          <PageBar
-            page={nowParamsPageNumber()}
-            totalPage={10}
-            // onClick={handlePageNavigation}
-          />
-        </PageBarWrapper>
+        {postListData && (
+          <>
+            <BlogCardGridLayout PostData={postListData.content} />
+            {postListData.empty ? (
+              <PageBarWrapper>
+                <PageBar
+                  page={nowParamsPageNumber()}
+                  totalPage={10}
+                  // onClick={handlePageNavigation}
+                />
+              </PageBarWrapper>
+            ) : (
+              <h3>해당 페이지에 문제가 발생했습니다..!</h3>
+            )}
+          </>
+        )}
       </CategoryInner>
     </LayoutContainer>
   );
