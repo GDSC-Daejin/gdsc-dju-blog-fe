@@ -46,15 +46,15 @@ const Category = () => {
           <>
             <BlogCardGridLayout PostData={postListData.content} />
             {postListData.empty ? (
+              <h3>해당 페이지에 문제가 발생했습니다..!</h3>
+            ) : (
               <PageBarWrapper>
                 <PageBar
                   page={nowParamsPageNumber()}
-                  totalPage={10}
+                  totalPage={postListData.totalPages}
                   // onClick={handlePageNavigation}
                 />
               </PageBarWrapper>
-            ) : (
-              <h3>해당 페이지에 문제가 발생했습니다..!</h3>
             )}
           </>
         )}
