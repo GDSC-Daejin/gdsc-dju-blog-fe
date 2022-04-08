@@ -5,7 +5,6 @@ import {
   UseFormSetValue,
   UseFormWatch,
   UseFormTrigger,
-  UseFormSetFocus,
 } from 'react-hook-form';
 
 export interface IFormStructure {
@@ -15,10 +14,9 @@ export interface IFormStructure {
   select?: boolean;
   nickNameCheck?: boolean;
   register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
-  watch: UseFormWatch<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  watch?: UseFormWatch<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
-  setFocus?: UseFormSetFocus<FieldValues>;
   checkNicknameState?: boolean;
   setCheckNickname?: React.Dispatch<React.SetStateAction<boolean>>;
   placeholder?: string;

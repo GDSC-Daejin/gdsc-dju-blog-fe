@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import axios from 'axios';
 
 import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
@@ -14,7 +14,6 @@ import {
   SignUpErrorMessage,
 } from './styled';
 import InputWarning from '../../../assets/InputWarning';
-import { check } from 'prettier';
 import CheckCircle from '../../../assets/CheckCircle';
 
 const SignUpInput = ({
@@ -28,12 +27,14 @@ const SignUpInput = ({
   errors,
   trigger,
   watch,
-  setFocus,
   checkNicknameState,
   setCheckNickname,
 }: IFormStructure) => {
-  const handleNicknameCheck = async () => {
-    if (watch(refName) === '') {
+  const handleInputValue = (refName: string) => {
+    return watch && watch(refName);
+  };
+  const handleNicknameCheck = useCallback(async () => {
+    if (handleInputValue('nickname') === '') {
       alert('닉네임을 입력하세요');
       return;
     }
@@ -41,7 +42,7 @@ const SignUpInput = ({
       const response = await axios.post(
         'https://gdsc-dju.com/api/guest/v1/validation/nickname',
         {
-          categoryName: watch('position'),
+          categoryName: handleInputValue('nickname'),
         },
       );
       if (response.data.body.data) {
@@ -52,9 +53,9 @@ const SignUpInput = ({
         trigger && trigger(refName, { shouldFocus: true });
       } else alert('이미 존재하는 닉네임입니다.');
     } catch (err) {
-      console.log('ERROR', err);
+      console.log('ERROR');
     }
-  };
+  }, [checkNicknameState]);
 
   return (
     <SignUpInputWrapper>

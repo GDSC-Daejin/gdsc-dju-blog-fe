@@ -8,12 +8,9 @@ export const SignUpContentWrapper = styled.div`
 `;
 
 export const SignUpFormTitle = styled.h4`
-  font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 700;
   font-size: ${(props) => props.theme.fontSize.h4};
-  line-height: 46px;
-  letter-spacing: -0.03em;
 `;
 
 export const SignUpForm = styled.form`
@@ -37,12 +34,9 @@ export const SignUpErrorMessage = styled.div`
   color: ${(props) => props.theme.color.tossRed};
   bottom: -20px;
   span {
-    font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 17px;
-    letter-spacing: -0.03em;
   }
 `;
 
@@ -54,12 +48,9 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-family: Noto Sans KR;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 26px;
-  letter-spacing: 0em;
   color: ${(props) => props.theme.color.grey900};
 `;
 
@@ -104,13 +95,10 @@ export const SignUpButton = styled.button<{ isValid: boolean }>`
   box-sizing: border-box;
   box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
   border-radius: 18px;
-  font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
   text-align: center;
-  letter-spacing: -0.03em;
   align-self: flex-end;
   cursor: ${(props) => (props.isValid ? 'pointer' : 'not-allowed')};
 `;

@@ -15,12 +15,24 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-family: Noto Sans KR;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0em;
   color: ${(props) => props.theme.color.grey900};
+`;
+
+export const CheckCircleWrapper = styled.div<{
+  checkState: boolean | undefined;
+}>`
+  display: flex;
+  align-items: center;
+  path {
+    fill: ${(props) =>
+      props.checkState
+        ? props.theme.color.googleGreen
+        : props.theme.color.grey300};
+  }
 `;
 
 export const SignUpInputLabelCircle = styled.div`
@@ -88,16 +100,5 @@ export const SignUpErrorMessage = styled.div`
     font-size: 12px;
     line-height: 17px;
     letter-spacing: -0.03em;
-  }
-`;
-
-export const CheckCircleWrapper = styled.div<{
-  checkState: boolean | undefined;
-}>`
-  path {
-    fill: ${(props) =>
-      props.checkState
-        ? props.theme.color.googleGreen
-        : props.theme.color.grey300};
   }
 `;

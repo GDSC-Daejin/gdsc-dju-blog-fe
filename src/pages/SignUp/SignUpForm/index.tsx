@@ -13,7 +13,6 @@ const SignUpForm = () => {
     setValue,
     watch,
     trigger,
-    setFocus,
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
