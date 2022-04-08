@@ -17,14 +17,7 @@ type Iprops = {
 const CategoryMenu = (props: Iprops) => {
   const { onClick, type } = props;
 
-  const categoryName = [
-    'all',
-    'frontend',
-    'backend',
-    'android',
-    'design',
-    'common',
-  ];
+  const categoryName = ['all', 'fe', 'be', 'and', 'de', 'common'];
   const category = [
     'ALL',
     'Frontend',
