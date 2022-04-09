@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { detailPostDataType } from '../../types/postData';
 import { LayoutContainer } from '../../styles/layouts';
@@ -11,34 +11,7 @@ import PageBar from '../../components/common/PageBar';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 
 const Category = () => {
-  // const params = useParams();
-  // const navigate = useNavigate();
-  // const [searchParams] = useSearchParams();
-  // const currentParamsPageNumber = searchParams.get('page');
-  // const nowParamsPageNumber = () => {
-  //   return currentParamsPageNumber === null
-  //     ? 0
-  //     : parseInt(currentParamsPageNumber);
-  // };
-  // const { data } = useGetPostListData(
-  //   params.categoryName === undefined ? 'all' : params.categoryName,
-  //   nowParamsPageNumber(),
-  // );
-  // const handlePostData = () => {
-  //   return data?.body.data.content === undefined ? [] : data?.body.data.content;
-  // };
-  // const handleCategoryMenuNavigation = (categoryName: string) => {
-  //   navigate(`/category/${categoryName}`); //수정사항
-  // };
-
-  // const handlePageNavigation = (nowPage: number) => {
-  //   nowPage === nowParamsPageNumber()
-  //     ? null
-  //     : navigate(`/category/${params.categoryName}?page=${nowPage}`); //수정사항
-  // };
-  // const handleTotalPageData = () => {
-  //   return data?.body.data.totalPages ? data.body.data.totalPages : 0;
-  // };
+  const location = useLocation();
   const [PostData, setPostData] = useState<detailPostDataType[]>([]);
   const [categoryName, setCategoryName] = useState('all');
   const instance = axios.create({
@@ -61,8 +34,9 @@ const Category = () => {
         .then(function (response) {
           setPostData(response.data.body.data.content);
         });
-    console.log('리렌더링 되었음!');
   }, [categoryName]);
+
+  console.log(window.location.href);
 
   return (
     <LayoutContainer>
@@ -87,3 +61,32 @@ const Category = () => {
 };
 
 export default Category;
+
+// const navigate = useNavigate();
+// const params = useParams();
+// const [searchParams] = useSearchParams();
+// const currentParamsPageNumber = searchParams.get('page');
+// const nowParamsPageNumber = () => {
+//   return currentParamsPageNumber === null
+//     ? 0
+//     : parseInt(currentParamsPageNumber);
+// };
+// const { data } = useGetPostListData(
+//   params.categoryName === undefined ? 'all' : params.categoryName,
+//   nowParamsPageNumber(),
+// );
+// const handlePostData = () => {
+//   return data?.body.data.content === undefined ? [] : data?.body.data.content;
+// };
+// const handleCategoryMenuNavigation = (categoryName: string) => {
+//   navigate(`/category/${categoryName}`); //수정사항
+// };
+
+// const handlePageNavigation = (nowPage: number) => {
+//   nowPage === nowParamsPageNumber()
+//     ? null
+//     : navigate(`/category/${params.categoryName}?page=${nowPage}`); //수정사항
+// };
+// const handleTotalPageData = () => {
+//   return data?.body.data.totalPages ? data.body.data.totalPages : 0;
+// };
