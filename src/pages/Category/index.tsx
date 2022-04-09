@@ -46,6 +46,8 @@ const Category = () => {
     timeout: 15000,
   });
   const handleCategoryMenuNavigation = (categoryName: string) => {
+    const pageTitle = '페이지제목';
+    window.history.pushState('', pageTitle, `/category/${categoryName}`);
     setCategoryName(categoryName);
   };
   useEffect(() => {
@@ -59,10 +61,8 @@ const Category = () => {
         .then(function (response) {
           setPostData(response.data.body.data.content);
         });
+    console.log('리렌더링 되었음!');
   }, [categoryName]);
-
-  console.log(PostData);
-  console.log(categoryName);
 
   return (
     <LayoutContainer>
