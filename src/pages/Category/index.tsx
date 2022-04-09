@@ -11,7 +11,6 @@ import PageBar from '../../components/common/PageBar';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 
 const Category = () => {
-  const location = useLocation();
   const [PostData, setPostData] = useState<detailPostDataType[]>([]);
   const [categoryName, setCategoryName] = useState('all');
   const [nowPage, setNowPage] = useState(0);
@@ -19,13 +18,19 @@ const Category = () => {
     baseURL: 'https://gdsc-dju.com',
     timeout: 15000,
   });
-  const handlePageNavigation = (nowPage: number) => {
-    setNowPage(nowPage);
-  };
   const handleCategoryMenuNavigation = (categoryName: string) => {
     const pageTitle = '페이지제목';
     window.history.pushState('', pageTitle, `/category/${categoryName}`);
     setCategoryName(categoryName);
+  };
+  const handlePageNavigation = (nowPage: number) => {
+    const pageTitle = '페이지제목';
+    window.history.pushState(
+      '',
+      pageTitle,
+      `/category/${categoryName}/page=${nowPage}`,
+    );
+    setNowPage(nowPage);
   };
   useEffect(() => {
     if (categoryName === 'all')
