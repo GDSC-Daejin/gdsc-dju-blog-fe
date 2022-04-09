@@ -14,10 +14,14 @@ const Category = () => {
   const location = useLocation();
   const [PostData, setPostData] = useState<detailPostDataType[]>([]);
   const [categoryName, setCategoryName] = useState('all');
+  const [nowPage, setNowPage] = useState(0);
   const instance = axios.create({
     baseURL: 'https://gdsc-dju.com',
     timeout: 15000,
   });
+  const handlePageNavigation = (nowPage: number) => {
+    setNowPage(nowPage);
+  };
   const handleCategoryMenuNavigation = (categoryName: string) => {
     const pageTitle = '페이지제목';
     window.history.pushState('', pageTitle, `/category/${categoryName}`);
@@ -25,18 +29,18 @@ const Category = () => {
   };
   useEffect(() => {
     if (categoryName === 'all')
-      instance.get('/api/v1/post/list?page=0').then(function (response) {
-        setPostData(response.data.body.data.content);
-      });
-    else
       instance
-        .get(`/api/v1/post/list/${categoryName}`)
+        .get(`/api/v1/post/list?page=${nowPage}`)
         .then(function (response) {
           setPostData(response.data.body.data.content);
         });
-  }, [categoryName]);
-
-  console.log(window.location.href);
+    else
+      instance
+        .get(`/api/v1/post/list/${categoryName}?page=${nowPage}`)
+        .then(function (response) {
+          setPostData(response.data.body.data.content);
+        });
+  }, [categoryName, nowPage]);
 
   return (
     <LayoutContainer>
@@ -46,15 +50,13 @@ const Category = () => {
           onClick={handleCategoryMenuNavigation}
         />
         <BlogCardGridLayout PostData={PostData} />
-        {/* <PageBarWrapper>
-          {handleTotalPageData() && (
-            <PageBar
-              page={nowParamsPageNumber()}
-              totalPage={10}
-              onClick={handlePageNavigation}
-            />
-          )}
-        </PageBarWrapper> */}
+        <PageBarWrapper>
+          <PageBar
+            page={nowPage}
+            totalPage={10}
+            onClick={handlePageNavigation}
+          />
+        </PageBarWrapper>
       </CategoryInner>
     </LayoutContainer>
   );
