@@ -10,10 +10,18 @@ import CategoryMenu from '../../components/common/CategoryMenu';
 import PageBar from '../../components/common/PageBar';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 
+// total page 데이터 넘기기
+// SWR 깜빡이는 오류 처리하기
+
 const Category = () => {
   const [PostData, setPostData] = useState<detailPostDataType[]>([]);
-  const [categoryName, setCategoryName] = useState('all');
-  const [nowPage, setNowPage] = useState(0);
+  const location = useLocation();
+  const [categoryName, setCategoryName] = useState(
+    location.pathname.split('/').slice(-1)[0],
+  );
+  const [nowPage, setNowPage] = useState(
+    parseInt(location.search.split('=').slice(-1)[0]) || 0,
+  );
   const instance = axios.create({
     baseURL: 'https://gdsc-dju.com',
     timeout: 15000,
@@ -22,16 +30,20 @@ const Category = () => {
     const pageTitle = '페이지제목';
     window.history.pushState('', pageTitle, `/category/${categoryName}`);
     setCategoryName(categoryName);
+    setNowPage(0);
   };
   const handlePageNavigation = (nowPage: number) => {
     const pageTitle = '페이지제목';
     window.history.pushState(
       '',
       pageTitle,
-      `/category/${categoryName}/page=${nowPage}`,
+      `/category/${categoryName}?page=${nowPage}`,
     );
     setNowPage(nowPage);
   };
+
+  // const { data } = useGetPostListData(categoryName, nowPage);
+
   useEffect(() => {
     if (categoryName === 'all')
       instance
@@ -78,10 +90,7 @@ export default Category;
 //     ? 0
 //     : parseInt(currentParamsPageNumber);
 // };
-// const { data } = useGetPostListData(
-//   params.categoryName === undefined ? 'all' : params.categoryName,
-//   nowParamsPageNumber(),
-// );
+
 // const handlePostData = () => {
 //   return data?.body.data.content === undefined ? [] : data?.body.data.content;
 // };
