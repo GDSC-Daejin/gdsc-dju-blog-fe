@@ -55,7 +55,6 @@ export const SignUpSelectOption = styled.li<{ selected: boolean }>`
   cursor: pointer;
   padding: 11px 20px;
   color: ${(props) => props.theme.color.grey400};
-  font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -104,7 +103,6 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;

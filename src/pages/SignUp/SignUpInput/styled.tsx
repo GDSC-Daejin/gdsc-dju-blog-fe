@@ -57,7 +57,6 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   box-sizing: border-box;
   border-radius: 10px;
   ::placeholder {
-    font-family: Noto Sans KR;
     font-weight: normal;
     font-size: ${(props) => props.theme.fontSize.body1};
     color: ${(props) => props.theme.color.grey400};
@@ -94,7 +93,6 @@ export const SignUpErrorMessage = styled.div`
   color: ${(props) => props.theme.color.tossRed};
   bottom: -20px;
   span {
-    font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
