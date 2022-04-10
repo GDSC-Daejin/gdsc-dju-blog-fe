@@ -18,6 +18,11 @@ import {
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Bookmark from '../../../assets/Bookmark';
+import { detailPostDataType } from '../../../types/postData';
+
+interface IBlogCardProps {
+  CardData: detailPostDataType;
+}
 
 const PostTextVariants = {
   initial: {
@@ -33,7 +38,7 @@ const PostTextVariants = {
   },
 };
 
-const BlogCard = () => {
+const BlogCard = (props: IBlogCardProps) => {
   const [BlogCardBottomText, IsHovered] = useHover(BottomText);
   const nowLogin = false;
   const Navigate = useNavigate();

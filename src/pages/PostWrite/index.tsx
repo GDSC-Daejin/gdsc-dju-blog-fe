@@ -37,12 +37,9 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
+import API from '../../api';
 
 export const PostCategoryMenuData = [
-  {
-    title: 'ALL',
-    subtitle: 'all',
-  },
   {
     title: 'Frontend',
     subtitle: 'frontend',
@@ -69,20 +66,24 @@ const PostWrite = () => {
   const editorRef: any = useRef();
   const [title, setTitle] = useState('');
   const [state, setState] = useState('');
-  /*const handleSubmit = () => {
+  const handleSubmit = async () => {
     const content = editorRef.current.getInstance().getHTML();
     setState(content);
     console.log(title);
     console.log(content);
-    getPostData();
-    axios.post('https://gdsc-dju.com/api/member/v2/post', {
+    const postData: { title: string; content: string; postId: number } = {
       title: title,
       content: content,
-    });
+      postId: 1,
+    };
+    try {
+      await API.updatePostData(postData);
+    } catch (err) {
+      console.log(err);
+    }
   };
-  const getPostData = async () => {
-    const post = await axios.get('https://gdsc-dju.com/api/member/v2/post');
-  };*/
+  /* const { postDetailData } = useGetPostDetailData(1);
+  console.log(postDetailData);*/
   return (
     <>
       <NavigationBlock />

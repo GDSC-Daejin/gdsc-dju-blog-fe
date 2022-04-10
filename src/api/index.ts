@@ -9,12 +9,14 @@ import { detailPostDataType, rowDetailPostDataType } from '../types/postData';
 export class Api {
   private API: string;
   private Header: { Authorization: string };
+
   constructor() {
     this.API = 'https://gdsc-dju.com';
     this.Header = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
   }
+
   postForceLogin = () => {
     return axios
       .post(`${this.API}/test/auth/login`, {
@@ -46,7 +48,7 @@ export class Api {
   getPostListData = (params: string) => {
     return axios.get<rowDetailPostDataType>(`${this.API}/api/v1/${params}`);
   };
-  getPostDetailData = (postId: string) => {
+  getPostDetailData = (postId: number) => {
     return axios.get(`${this.API}/api/v1/post/${postId}`);
   };
 
@@ -60,8 +62,12 @@ export class Api {
       headers: this.Header,
     });
   };
-  getPostData = () => {
-    return axios.get(`${this.API}/api/member/v2/myPost`, {
+  updatePostData = (PostData: {
+    title: string;
+    content: string;
+    postId: number;
+  }) => {
+    return axios.post(`${this.API}/api/member/v1/post$`, {
       headers: this.Header,
     });
   };
