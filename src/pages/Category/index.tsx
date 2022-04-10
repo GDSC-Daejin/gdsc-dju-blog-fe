@@ -59,21 +59,7 @@ const Category = () => {
     handleServerAPI(),
     fetcher,
   );
-
-  // useEffect(() => {
-  //   if (categoryName === 'all')
-  //     instance
-  //       .get(`/api/v1/post/list?page=${nowPage}`)
-  //       .then(function (response) {
-  //         setPostData(response.data.body.data.content);
-  //       });
-  //   else
-  //     instance
-  //       .get(`/api/v1/post/list/${categoryName}?page=${nowPage}`)
-  //       .then(function (response) {
-  //         setPostData(response.data.body.data.content);
-  //       });
-  // }, [categoryName, nowPage]);
+  // const { data } = useGetPostListData(categoryName, nowPage);
 
   return (
     <LayoutContainer>
@@ -82,7 +68,7 @@ const Category = () => {
           type={categoryName}
           onClick={handleCategoryMenuNavigation}
         />
-        <BlogCardGridLayout PostData={data?.body.data.content} />
+        <BlogCardGridLayout PostData={data?.body.data.content} error={error} />
         <PageBarWrapper>
           <PageBar
             page={nowPage}
@@ -107,7 +93,20 @@ export default Category;
 //     : parseInt(currentParamsPageNumber);
 // };
 
-// const { data } = useGetPostListData(categoryName, nowPage);
+// useEffect(() => {
+//   if (categoryName === 'all')
+//     instance
+//       .get(`/api/v1/post/list?page=${nowPage}`)
+//       .then(function (response) {
+//         setPostData(response.data.body.data.content);
+//       });
+//   else
+//     instance
+//       .get(`/api/v1/post/list/${categoryName}?page=${nowPage}`)
+//       .then(function (response) {
+//         setPostData(response.data.body.data.content);
+//       });
+// }, [categoryName, nowPage]);
 
 // function useUser (id) {
 //   const { data, error } = useSWR(`/api/user/${id}`, fetcher)
