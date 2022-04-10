@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-import { detailPostDataType } from '../../types/postData';
+import {
+  detailPostDataType,
+  rowDetailPostDataType,
+} from '../../types/postData';
 import { LayoutContainer } from '../../styles/layouts';
 import { CategoryInner, PageBarWrapper } from './styled';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import PageBar from '../../components/common/PageBar';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import useSWR from 'swr';
 
 // total page 데이터 넘기기
 // SWR 깜빡이는 오류 처리하기
@@ -44,23 +48,32 @@ const Category = () => {
     baseURL: 'https://gdsc-dju.com',
     timeout: 15000,
   });
+  const handleServerAPI = () => {
+    if (categoryName === 'all') return `/api/v1/post/list?page=${nowPage}`;
+    else return `/api/v1/post/list/${categoryName}?page=${nowPage}`;
+  };
 
-  useEffect(() => {
-    if (categoryName === 'all')
-      instance
-        .get(`/api/v1/post/list?page=${nowPage}`)
-        .then(function (response) {
-          setPostData(response.data.body.data.content);
-        });
-    else
-      instance
-        .get(`/api/v1/post/list/${categoryName}?page=${nowPage}`)
-        .then(function (response) {
-          setPostData(response.data.body.data.content);
-        });
-  }, [categoryName, nowPage]);
+  const fetcher = (url: string) =>
+    instance.get(url).then((response) => response.data);
+  const { data, error } = useSWR<rowDetailPostDataType>(
+    handleServerAPI(),
+    fetcher,
+  );
 
-  console.log(nowPage);
+  // useEffect(() => {
+  //   if (categoryName === 'all')
+  //     instance
+  //       .get(`/api/v1/post/list?page=${nowPage}`)
+  //       .then(function (response) {
+  //         setPostData(response.data.body.data.content);
+  //       });
+  //   else
+  //     instance
+  //       .get(`/api/v1/post/list/${categoryName}?page=${nowPage}`)
+  //       .then(function (response) {
+  //         setPostData(response.data.body.data.content);
+  //       });
+  // }, [categoryName, nowPage]);
 
   return (
     <LayoutContainer>
@@ -69,7 +82,7 @@ const Category = () => {
           type={categoryName}
           onClick={handleCategoryMenuNavigation}
         />
-        <BlogCardGridLayout PostData={PostData} />
+        <BlogCardGridLayout PostData={data?.body.data.content} />
         <PageBarWrapper>
           <PageBar
             page={nowPage}

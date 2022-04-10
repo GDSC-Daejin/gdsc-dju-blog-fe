@@ -40,7 +40,6 @@ const SlideCardSection = (props: ISlideCardSectionProps) => {
       }
     }
   };
-  console.log(x);
   return PostData.length === 0 ? (
     <h3>해당 카테고리 데이터는 없습니다..</h3>
   ) : (
