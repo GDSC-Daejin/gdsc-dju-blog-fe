@@ -1,10 +1,21 @@
-export const url = (category: string, page: number) => {
-  if (category === 'all') {
-    return `?page=${page}&size=6`;
-  }
-  if (category === 'common') {
-    return `/common/?size=6&featured=true`;
+const category = {
+  fe: 'frontend',
+  be: 'backend',
+  de: 'design',
+  common: 'common',
+  and: 'android',
+  frontend: 'frontend',
+  backend: 'backend',
+  design: 'design',
+  android: 'android',
+} as const;
+
+export const url = (tage: string, page: number, size = 16) => {
+  if (tage === 'all') {
+    return `?page=${page}&size=${size}`;
   } else {
-    return `/${category}?page=${page}&size=6`;
+    return `/${
+      category[tage as keyof typeof category]
+    }?page=${page}&size=${size}`;
   }
 };

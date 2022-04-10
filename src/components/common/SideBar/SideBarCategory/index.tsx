@@ -1,27 +1,31 @@
 import React from 'react';
 import { sideBarMenuData } from '../../SideBar/index';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import {
-  SideBarCircleAnimation,
   SideBarCategoryAnimation,
+  SideBarCircleAnimation,
 } from '../../Animation';
 import {
-  SideCategoryMenuWrapper,
-  SideCategoryCircleWrapper,
-  SideCategoryText,
-  SideCategoryCircle,
-  SideCategoryTextWrapper,
   SideBarGDSCLogoWrapper,
+  SideCategoryCircle,
+  SideCategoryCircleWrapper,
+  SideCategoryMenuWrapper,
+  SideCategoryText,
+  SideCategoryTextWrapper,
 } from './styled';
 import { positionColor } from '../../../../store/positionColor';
 import GdscLogo from '../../../../assets/GdscLogo';
 import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../../store/menu';
 
-const SideBarCategory = ({ locationStyle }: any) => {
+const SideBarCategory = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [menu, setMenu] = useRecoilState(menuState);
 
+  const sideBarAnimate = (category: string) => {
+    return location.pathname.includes(category) ? 'isActive' : 'isUnActive';
+  };
   return (
     <>
       <SideCategoryMenuWrapper>
@@ -29,15 +33,13 @@ const SideBarCategory = ({ locationStyle }: any) => {
           <SideCategoryTextWrapper
             key={id}
             onClick={() => {
-              navigate(`/category${data.route}`);
+              navigate(`/category/${data.subtitle}`);
               setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
             }}
           >
             <SideCategoryCircleWrapper
               variants={SideBarCircleAnimation}
-              animate={
-                locationStyle.includes(data.route) ? 'isActive' : 'isUnActive'
-              }
+              animate={sideBarAnimate(data.subtitle)}
             >
               {data.subtitle === 'all' ? (
                 <SideBarGDSCLogoWrapper>
@@ -50,9 +52,7 @@ const SideBarCategory = ({ locationStyle }: any) => {
             <SideCategoryText
               variants={SideBarCategoryAnimation}
               whileHover={'isActive'}
-              animate={
-                locationStyle.includes(data.route) ? 'isActive' : 'isUnActive'
-              }
+              animate={sideBarAnimate(data.subtitle)}
             >
               {data.title}
             </SideCategoryText>
