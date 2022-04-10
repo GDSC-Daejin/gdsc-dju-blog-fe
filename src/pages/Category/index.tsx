@@ -55,11 +55,20 @@ const Category = () => {
 
   const fetcher = (url: string) =>
     instance.get(url).then((response) => response.data);
-  const { data, error } = useSWR<rowDetailPostDataType>(
-    handleServerAPI(),
-    fetcher,
-  );
-  // const { data } = useGetPostListData(categoryName, nowPage);
+
+  function useGetPostData(categoryName: string, nowPage: number) {
+    const { data, error } = useSWR<rowDetailPostDataType>(
+      handleServerAPI(),
+      fetcher,
+    );
+
+    return {
+      data,
+      isLoading: !error && !data,
+      isError: error,
+    };
+  }
+  const { data, isLoading, isError } = useGetPostData(categoryName, nowPage);
 
   return (
     <LayoutContainer>
@@ -68,7 +77,11 @@ const Category = () => {
           type={categoryName}
           onClick={handleCategoryMenuNavigation}
         />
-        <BlogCardGridLayout PostData={data?.body.data.content} error={error} />
+        <BlogCardGridLayout
+          PostData={data?.body.data.content}
+          isLoading={isLoading}
+          isError={isError}
+        />
         <PageBarWrapper>
           <PageBar
             page={nowPage}
