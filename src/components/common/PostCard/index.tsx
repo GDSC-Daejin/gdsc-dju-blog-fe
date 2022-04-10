@@ -46,14 +46,7 @@ const PostCard = (props: detailPostDataType) => {
       <PostCardImageWrapper>
         <PostCardImage src={MockPostImage} />
       </PostCardImageWrapper>
-      <PostCardContentWrapper
-        whileHover={{
-          transition: {
-            duration: 0.3,
-            delay: 0.2,
-          },
-        }}
-      >
+      <PostCardContentWrapper>
         <BookmarkWrapper
           onClick={() => {
             setMarked(!marked);
