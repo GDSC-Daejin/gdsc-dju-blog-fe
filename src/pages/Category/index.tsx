@@ -20,12 +20,11 @@ const Category = () => {
     location.pathname.split('/').slice(-1)[0],
   );
   const [nowPage, setNowPage] = useState(
-    parseInt(location.search.split('=').slice(-1)[0]) || 0,
+    location.search.split('=').slice(-1)[0] === ''
+      ? 0
+      : parseInt(location.search.split('=').slice(-1)[0]),
   );
-  const instance = axios.create({
-    baseURL: 'https://gdsc-dju.com',
-    timeout: 15000,
-  });
+
   const handleCategoryMenuNavigation = (categoryName: string) => {
     const pageTitle = '페이지제목';
     window.history.pushState('', pageTitle, `/category/${categoryName}`);
@@ -41,8 +40,10 @@ const Category = () => {
     );
     setNowPage(nowPage);
   };
-
-  // const { data } = useGetPostListData(categoryName, nowPage);
+  const instance = axios.create({
+    baseURL: 'https://gdsc-dju.com',
+    timeout: 15000,
+  });
 
   useEffect(() => {
     if (categoryName === 'all')
@@ -58,6 +59,8 @@ const Category = () => {
           setPostData(response.data.body.data.content);
         });
   }, [categoryName, nowPage]);
+
+  console.log(nowPage);
 
   return (
     <LayoutContainer>
@@ -91,6 +94,17 @@ export default Category;
 //     : parseInt(currentParamsPageNumber);
 // };
 
+// const { data } = useGetPostListData(categoryName, nowPage);
+
+// function useUser (id) {
+//   const { data, error } = useSWR(`/api/user/${id}`, fetcher)
+
+//   return {
+//     user: data,
+//     isLoading: !error && !data,
+//     isError: error
+//   }
+// }
 // const handlePostData = () => {
 //   return data?.body.data.content === undefined ? [] : data?.body.data.content;
 // };
