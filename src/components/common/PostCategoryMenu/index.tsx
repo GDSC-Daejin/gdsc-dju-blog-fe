@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   PostCategoryCircle,
   PostCategoryCircleWrapper,
@@ -6,7 +6,7 @@ import {
   PostCategoryText,
   PostCategoryTextWrapper,
 } from './styled';
-import { PostMenuData } from './PostMenuData';
+import { PostCategoryMenuData } from '../../../pages/PostWrite';
 import { PostCategoryAnimation, PostcircleAnimation } from '../Animation';
 import { positionColor } from '../../../store/positionColor';
 
@@ -14,7 +14,7 @@ const PostCategoryMenu = () => {
   return (
     <>
       <PostCategoryMenuWrapper>
-        {PostMenuData.map((data, id) => (
+        {PostCategoryMenuData.map((data, id) => (
           <PostCategoryTextWrapper
             key={id}
             variants={PostCategoryAnimation}
@@ -30,5 +30,4 @@ const PostCategoryMenu = () => {
     </>
   );
 };
-
 export default PostCategoryMenu;

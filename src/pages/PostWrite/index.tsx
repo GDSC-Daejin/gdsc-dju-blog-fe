@@ -34,16 +34,36 @@ import chart from '@toast-ui/editor-plugin-chart';
 import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
 import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import CategoryMenu from '../../components/common/CategoryMenu';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
-import axios from 'axios';
-interface PostData {
-  title: string;
-  PostHastags: string;
-  content: string;
-}
+
+export const PostCategoryMenuData = [
+  {
+    title: 'ALL',
+    subtitle: 'all',
+  },
+  {
+    title: 'Frontend',
+    subtitle: 'frontend',
+  },
+  {
+    title: 'Backend',
+    subtitle: 'backend',
+  },
+  {
+    title: 'Android',
+    subtitle: 'android',
+  },
+  {
+    title: 'Design',
+    subtitle: 'design',
+  },
+  {
+    title: 'Common',
+    subtitle: 'beginner',
+  },
+];
 
 const PostWrite = () => {
   const editorRef: any = useRef();

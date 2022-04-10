@@ -14,7 +14,6 @@ import {
   SideBarGDSCLogoWrapper,
 } from './styled';
 import { positionColor } from '../../../../store/positionColor';
-import { GDSCLogoWrapper } from '../../CategoryMenu/styled';
 import GdscLogo from '../../../../assets/GdscLogo';
 import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../../store/menu';

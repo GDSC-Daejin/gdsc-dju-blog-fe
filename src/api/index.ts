@@ -60,9 +60,10 @@ export class Api {
       headers: this.Header,
     });
   };
-  /*getPostData = () => {
-    return axios.get(`${this.API}/api/member/v2/post`, {
+  getPostData = () => {
+    return axios.get(`${this.API}/api/member/v2/myPost`, {
       headers: this.Header,
-    });*/
+    });
+  };
 }
 export default new Api();

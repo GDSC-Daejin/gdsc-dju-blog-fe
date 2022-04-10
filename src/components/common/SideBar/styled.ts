@@ -154,6 +154,6 @@ export const GoogleButtonWrapper = styled.div`
   position: relative;
   padding-bottom: 60px;
   & button {
-    padding: 8px 25px 8px 50px;
+    padding: 5px 25px 8px 50px;
   }
 `;
