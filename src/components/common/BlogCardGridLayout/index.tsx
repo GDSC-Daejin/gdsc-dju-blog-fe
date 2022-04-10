@@ -15,6 +15,8 @@ const BlogCardGridLayout = (props: IBlogCardGridLayout) => {
     <BlogCardGridLayoutStyle>
       {isLoading ? (
         <h3>Loading..</h3>
+      ) : PostData?.length === 0 ? (
+        <h3>해당 카테고리 데이터가 없습니다</h3>
       ) : (
         PostData?.map((data) => (
           <BlogCardWrapper key={data.postId}>

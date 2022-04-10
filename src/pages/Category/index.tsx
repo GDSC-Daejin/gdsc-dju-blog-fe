@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-import {
-  detailPostDataType,
-  rowDetailPostDataType,
-} from '../../types/postData';
+import { detailPostDataType } from '../../types/postData';
 import { LayoutContainer } from '../../styles/layouts';
 import { CategoryInner, PageBarWrapper } from './styled';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import PageBar from '../../components/common/PageBar';
-import { useGetPostListData } from '../../api/hooks/useGetPostListData';
-import useSWR from 'swr';
+import { useGetPostsData } from '../../api/hooks/useGetPostListData';
 
 // total page 데이터 넘기기
 // SWR 깜빡이는 오류 처리하기
@@ -44,31 +40,8 @@ const Category = () => {
     );
     setNowPage(nowPage);
   };
-  const instance = axios.create({
-    baseURL: 'https://gdsc-dju.com',
-    timeout: 15000,
-  });
-  const handleServerAPI = () => {
-    if (categoryName === 'all') return `/api/v1/post/list?page=${nowPage}`;
-    else return `/api/v1/post/list/${categoryName}?page=${nowPage}`;
-  };
 
-  const fetcher = (url: string) =>
-    instance.get(url).then((response) => response.data);
-
-  function useGetPostData(categoryName: string, nowPage: number) {
-    const { data, error } = useSWR<rowDetailPostDataType>(
-      handleServerAPI(),
-      fetcher,
-    );
-
-    return {
-      data,
-      isLoading: !error && !data,
-      isError: error,
-    };
-  }
-  const { data, isLoading, isError } = useGetPostData(categoryName, nowPage);
+  const { data, isLoading, isError } = useGetPostsData(categoryName, nowPage);
 
   return (
     <LayoutContainer>
@@ -85,7 +58,7 @@ const Category = () => {
         <PageBarWrapper>
           <PageBar
             page={nowPage}
-            totalPage={10}
+            totalPage={data?.body.data.totalPages || 0}
             onClick={handlePageNavigation}
           />
         </PageBarWrapper>
