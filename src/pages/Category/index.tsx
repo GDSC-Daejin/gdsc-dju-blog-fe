@@ -39,7 +39,6 @@ const Category = () => {
     <LayoutContainer>
       <CategoryInner>
         <CategoryMenu
-<<<<<<< HEAD
           type={handleSelectCategory()}
           onClick={handleCategoryMenuNavigation}
         />
@@ -55,27 +54,6 @@ const Category = () => {
             onClick={handlePageNavigation}
           />
         </PageBarWrapper>
-=======
-          type={currentParamsType}
-          onClick={handleCategoryMenuNavigation}
-        />
-        {postListData && (
-          <>
-            <BlogCardGridLayout PostData={postListData.content} />
-            {postListData.empty ? (
-              <h3>해당 페이지에 문제가 발생했습니다..!</h3>
-            ) : (
-              <PageBarWrapper>
-                <PageBar
-                  page={nowParamsPageNumber()}
-                  totalPage={postListData.totalPages}
-                  // onClick={handlePageNavigation}
-                />
-              </PageBarWrapper>
-            )}
-          </>
-        )}
->>>>>>> develop
       </CategoryInner>
     </LayoutContainer>
   );
