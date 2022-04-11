@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-
 import {
   ContainerInner,
   LayoutContainer,
@@ -64,17 +63,18 @@ const BlogHome = () => {
 
   return (
     <>
-      <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
           {userInfoData && (
             <>
               <ProfileWrapper>
                 <ProfileImageWrapper>
-                  <ProfileImage
-                    image={MockProfile}
-                    position={userInfoData.positionType}
-                  />
+                  <Suspense fallback={<div>이미지</div>}>
+                    <ProfileImage
+                      image={MockProfile}
+                      position={userInfoData.positionType}
+                    />
+                  </Suspense>
                 </ProfileImageWrapper>
                 <ProfileDetailWrapper>
                   <Role>{userData.role}</Role>
