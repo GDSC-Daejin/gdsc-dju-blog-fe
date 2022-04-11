@@ -12,12 +12,13 @@ export function useGetPostListData(category: string, page = 0, size?: number) {
   const { data, error } = useSWR(
     [`post/list${url(category, page, size)}`],
     getPostListData,
-    { suspense: true },
   );
   return {
     data: data && data,
   };
 }
+
+/* ------------------------------------------------------------------------------- */
 
 const instance = axios.create({
   baseURL: 'https://gdsc-dju.com',

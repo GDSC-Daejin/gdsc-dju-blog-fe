@@ -10,13 +10,9 @@ import ErrorFallback from './pages/ErrorFallback';
 function App() {
   return (
     <>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Suspense fallback={<GoogleLoader background={false} />}>
-          <ThemeProvider theme={theme}>
-            <Layout />
-          </ThemeProvider>
-        </Suspense>
-      </ErrorBoundary>
+      <ThemeProvider theme={theme}>
+        <Layout />
+      </ThemeProvider>
     </>
   );
 }

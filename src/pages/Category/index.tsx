@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { LayoutContainer } from '../../styles/layouts';
@@ -9,34 +9,37 @@ import PageBar from '../../components/common/PageBar';
 import { useGetPostsData } from '../../api/hooks/useGetPostListData';
 
 const Category = () => {
+  //router hook
   const location = useLocation();
   const navigate = useNavigate();
-  const [categoryName, setCategoryName] = useState(
-    location.pathname.split('/').slice(-1)[0],
-  );
-  const [nowPage, setNowPage] = useState(
-    location.search.split('=').slice(-1)[0] === ''
-      ? 0
-      : parseInt(location.search.split('=').slice(-1)[0]),
-  );
 
+  // 데이터 가공 처리
   const handleCategoryMenuNavigation = (categoryName: string) => {
     navigate(`/category/${categoryName}`);
-    setCategoryName(categoryName);
-    setNowPage(0);
   };
   const handlePageNavigation = (nowPage: number) => {
-    navigate(`/category/${categoryName}?page=${nowPage}`);
-    setNowPage(nowPage);
+    navigate(`/category/${handleSelectCategory()}?page=${nowPage}`);
+  };
+  const handleSelectPage = () => {
+    return location.search.split('=').slice(-1)[0] === ''
+      ? 0
+      : parseInt(location.search.split('=').slice(-1)[0]);
+  };
+  const handleSelectCategory = () => {
+    return location.pathname.split('/').slice(-1)[0];
   };
 
-  const { data, isLoading, isError } = useGetPostsData(categoryName, nowPage);
+  // API 요청
+  const { data, isLoading, isError } = useGetPostsData(
+    handleSelectCategory(),
+    handleSelectPage(),
+  );
 
   return (
     <LayoutContainer>
       <CategoryInner>
         <CategoryMenu
-          type={categoryName}
+          type={handleSelectCategory()}
           onClick={handleCategoryMenuNavigation}
         />
         <BlogCardGridLayout
@@ -46,7 +49,7 @@ const Category = () => {
         />
         <PageBarWrapper>
           <PageBar
-            page={nowPage}
+            page={handleSelectPage()}
             totalPage={data?.body.data.totalPages || 0}
             onClick={handlePageNavigation}
           />

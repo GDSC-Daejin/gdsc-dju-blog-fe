@@ -40,6 +40,7 @@ const SlideCardSection = (props: ISlideCardSectionProps) => {
       }
     }
   };
+
   return PostData.length === 0 ? (
     <h3>해당 카테고리 데이터는 없습니다..</h3>
   ) : (
@@ -59,7 +60,10 @@ const SlideCardSection = (props: ISlideCardSectionProps) => {
         ))}
       </CardSection>
       <ButtonWrapper>
-        <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
+        <BlogCardScrollButton
+          scrollX={scrollRef.current?.scrollLeft || 0}
+          scrollRef={scrollRef}
+        />
       </ButtonWrapper>
     </>
   );

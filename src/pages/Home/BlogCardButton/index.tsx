@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { BlogCardButton } from './styled';
 
 interface IBlogCardButton {
-  ScrollX: number;
+  scrollX: number;
   scrollRef: React.RefObject<HTMLDivElement>;
 }
 
 export const BlogCardScrollButton = ({
-  ScrollX,
+  scrollX,
   scrollRef,
 }: IBlogCardButton) => {
   const [buttonDisabled, setButtonDisabled] = useState(-1);
   const ButtonNumber: number[] = [0, 1, 2];
-  const SectionScrollWidth = 1485;
+  const SectionScrollWidth = 1;
   const scrollMove = (buttonNumber: number) => {
     setButtonDisabled(buttonNumber);
     scrollRef.current?.scrollTo({
@@ -24,9 +24,9 @@ export const BlogCardScrollButton = ({
       setButtonDisabled(-1);
     }, 1000);
   };
-  const CalcScrollBtnActive = (BtnActiveNumber: number) => {
-    return ScrollX >= (SectionScrollWidth * BtnActiveNumber) / 2 &&
-      ScrollX < (SectionScrollWidth * (BtnActiveNumber + 1)) / 2
+  const ScrollBtnActive = (BtnActiveNumber: number) => {
+    return scrollX >= (SectionScrollWidth * BtnActiveNumber) / 2 &&
+      scrollX < (SectionScrollWidth * (BtnActiveNumber + 1)) / 2
       ? true
       : false;
   };
@@ -36,7 +36,7 @@ export const BlogCardScrollButton = ({
       {ButtonNumber.map((BtnNumber: number, index: number) => (
         <BlogCardButton
           key={index}
-          ButtonActive={CalcScrollBtnActive(BtnNumber)}
+          ButtonActive={ScrollBtnActive(BtnNumber)}
           onClick={() => scrollMove(BtnNumber)}
           disabled={buttonDisabled === BtnNumber && true}
         />
