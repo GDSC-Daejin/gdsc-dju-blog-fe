@@ -12,7 +12,7 @@ export const BlogCardScrollButton = ({
 }: IBlogCardButton) => {
   const [buttonDisabled, setButtonDisabled] = useState(-1);
   const ButtonNumber: number[] = [0, 1, 2];
-  const SectionScrollWidth = 1;
+  const SectionScrollWidth = 1497;
   const scrollMove = (buttonNumber: number) => {
     setButtonDisabled(buttonNumber);
     scrollRef.current?.scrollTo({
@@ -25,10 +25,13 @@ export const BlogCardScrollButton = ({
     }, 1000);
   };
   const ScrollBtnActive = (BtnActiveNumber: number) => {
-    return scrollX >= (SectionScrollWidth * BtnActiveNumber) / 2 &&
-      scrollX < (SectionScrollWidth * (BtnActiveNumber + 1)) / 2
-      ? true
-      : false;
+    if (BtnActiveNumber === 0) {
+      return scrollX >= 0 && scrollX < 498 ? true : false;
+    } else if (BtnActiveNumber === 1) {
+      return scrollX >= 499 && scrollX < 997 ? true : false;
+    } else if (BtnActiveNumber === 2)
+      return scrollX >= 998 && scrollX < 1497 ? true : false;
+    else return false;
   };
 
   return (
