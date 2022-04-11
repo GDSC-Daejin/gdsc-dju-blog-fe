@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-export const url = (category: string, page: number, size?: number) => {
-  const pageSize = size === undefined ? 16 : size;
-  if (category === 'all') return `?page=${page}&size=${pageSize}`;
-  return `/${category}?page=${page}&size=${pageSize}`;
-=======
 const category = {
   fe: 'frontend',
   be: 'backend',
@@ -24,5 +18,4 @@ export const url = (tage: string, page: number, size = 16) => {
       category[tage as keyof typeof category]
     }?page=${page}&size=${size}`;
   }
->>>>>>> develop
 };

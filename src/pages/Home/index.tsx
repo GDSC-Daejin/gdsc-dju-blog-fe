@@ -10,32 +10,21 @@ import WelcomePhraseText from './WelcomePharaseText/WelcomePhraseText';
 import SlideCardSection from './SlideCardSection/SlideCardSection';
 
 function index() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const currentParamsPageNumber = searchParams.get('category');
-
-  const nowParamsCategoryData = () => {
-    return currentParamsPageNumber === null ? 'all' : currentParamsPageNumber;
-  };
-  const { data: PostData } = useGetPostListData(nowParamsCategoryData(), 0, 11);
+  const [categoryName, setcategoryName] = useState('all');
+  const { postListData } = useGetPostListData(categoryName, 0, 11);
 
   const categoryMenuHandler = (categoryName: string) => {
-    navigate(`?category=${categoryName}`);
+    setcategoryName(categoryName);
   };
   const PostDataHandler = () => {
-    return PostData?.body.data.content === undefined
-      ? []
-      : PostData?.body.data.content;
+    return postListData?.content === undefined ? [] : postListData.content;
   };
 
   return (
     <LayoutContainer>
       <WelcomePhraseText />
       <CategoryMenuWrapper>
-        <CategoryMenu
-          type={nowParamsCategoryData()}
-          onClick={categoryMenuHandler}
-        />
+        <CategoryMenu type={categoryName} onClick={categoryMenuHandler} />
       </CategoryMenuWrapper>
       <MainContentWrapper>
         <SlideCardSection PostData={PostDataHandler()} />

@@ -9,11 +9,7 @@ async function getPostListData(params: string) {
   return res.data.body.data;
 }
 export function useGetPostListData(category: string, page = 0, size?: number) {
-<<<<<<< HEAD
-  const { data, error } = useSWR(
-=======
   const { data: postListData } = useSWR(
->>>>>>> develop
     [`post/list${url(category, page, size)}`],
     getPostListData,
   );
