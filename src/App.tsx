@@ -11,11 +11,9 @@ function App() {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Suspense fallback={<GoogleLoader background={false} />}>
-          <ThemeProvider theme={theme}>
-            <Layout />
-          </ThemeProvider>
-        </Suspense>
+        <ThemeProvider theme={theme}>
+          <Layout />
+        </ThemeProvider>
       </ErrorBoundary>
     </>
   );
