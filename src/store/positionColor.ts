@@ -4,6 +4,7 @@ const colorList = {
   android: '#109D58',
   design: '#FABC05',
   beginner: '#FF740F',
+  common: '#FF740F',
 } as const;
 export const positionColor = (position: string) => {
   const lowerCasePosition = position.toLowerCase();

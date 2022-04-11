@@ -6,15 +6,19 @@ import axios from 'axios';
 
 async function getPostListData(params: string) {
   const res = await API.getPostListData(params);
-  return res.data;
+  return res.data.body.data;
 }
 export function useGetPostListData(category: string, page = 0, size?: number) {
+<<<<<<< HEAD
   const { data, error } = useSWR(
+=======
+  const { data: postListData } = useSWR(
+>>>>>>> develop
     [`post/list${url(category, page, size)}`],
     getPostListData,
   );
   return {
-    data: data && data,
+    postListData: postListData && postListData,
   };
 }
 

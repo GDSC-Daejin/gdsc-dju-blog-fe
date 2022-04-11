@@ -31,7 +31,7 @@ export const CategoryMenuWrapper = styled(motion.div)`
 export const CategoryCircleWrapper = styled(motion.div)`
   position: absolute;
   left: 45%;
-  top: -8px;
+  top: -10px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -10,9 +10,11 @@ import ErrorFallback from './pages/ErrorFallback';
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Layout />
-      </ThemeProvider>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ThemeProvider theme={theme}>
+          <Layout />
+        </ThemeProvider>
+      </ErrorBoundary>
     </>
   );
 }
