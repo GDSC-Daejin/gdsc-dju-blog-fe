@@ -5,15 +5,14 @@ import { url } from './postPagination';
 
 async function getPostListData(params: string) {
   const res = await API.getPostListData(params);
-  return res.data;
+  return res.data.body.data;
 }
 export function useGetPostListData(category: string, page = 0, size?: number) {
-  const { data, error } = useSWR(
-    [`post/list/${url(category, page, size)}`],
+  const { data: postListData } = useSWR(
+    [`post/list${url(category, page, size)}`],
     getPostListData,
-    { suspense: true },
   );
   return {
-    data: data && data,
+    postListData: postListData && postListData,
   };
 }

@@ -6,8 +6,6 @@ const getUserData = async () => {
   return response.data.body.data;
 };
 export const useGetUserData = () => {
-  const { data: userData } = useSWR(['api/user'], getUserData, {
-    suspense: true,
-  });
+  const { data: userData } = useSWR(['api/user'], getUserData);
   return { userData: userData && userData };
 };

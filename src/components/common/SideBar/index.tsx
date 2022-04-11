@@ -20,40 +20,33 @@ import { AnimatePresence } from 'framer-motion';
 
 export const sideBarMenuData = [
   {
-    route: '/all',
     title: 'ALL',
     subtitle: 'all',
   },
   {
-    route: '/fe',
     title: 'Frontend',
     subtitle: 'frontend',
   },
   {
-    route: '/be',
     title: 'Backend',
     subtitle: 'backend',
   },
   {
-    route: '/and',
     title: 'Android',
     subtitle: 'android',
   },
   {
-    route: '/de',
     title: 'Design',
     subtitle: 'design',
   },
   {
-    route: '/common',
     title: 'Common',
-    subtitle: 'beginner',
+    subtitle: 'common',
   },
 ];
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
-  const location = useLocation();
   return (
     <>
       <SideBarWrapper
@@ -66,7 +59,7 @@ export const SideBar = () => {
           <SideBarDesign>
             <SideBarLogout />
             {/*<SideBarLogin />*/}
-            <SideBarCategory locationStyle={location.pathname} />
+            <SideBarCategory />
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
