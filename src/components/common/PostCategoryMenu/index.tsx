@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   PostCategoryCircle,
   PostCategoryCircleWrapper,
@@ -10,6 +10,12 @@ import { PostCategoryMenuData } from '../../../pages/PostWrite';
 import { PostCategoryAnimation, PostcircleAnimation } from '../Animation';
 import { positionColor } from '../../../store/positionColor';
 
+/*type Iprops = {
+  onClick?: (url: string) => void;
+  type: string;
+};
+const [animate, setAnimate] = useState('');
+*/
 const PostCategoryMenu = () => {
   return (
     <>

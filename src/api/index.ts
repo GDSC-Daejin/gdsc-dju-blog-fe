@@ -62,12 +62,8 @@ export class Api {
       headers: this.Header,
     });
   };
-  updatePostData = (PostData: {
-    title: string;
-    content: string;
-    postId: number;
-  }) => {
-    return axios.post(`${this.API}/api/member/v1/post$`, {
+  PostData = (PostData: { title: string; content: string; postId: number }) => {
+    return axios.post(`${this.API}/api/member/v1/post`, {
       headers: this.Header,
     });
   };

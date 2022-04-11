@@ -37,6 +37,7 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
+import axios from 'axios';
 import API from '../../api';
 
 export const PostCategoryMenuData = [
@@ -71,19 +72,25 @@ const PostWrite = () => {
     setState(content);
     console.log(title);
     console.log(content);
-    const postData: { title: string; content: string; postId: number } = {
-      title: title,
-      content: content,
-      postId: 1,
-    };
-    try {
-      await API.updatePostData(postData);
-    } catch (err) {
-      console.log(err);
-    }
+    axios
+      .post('https://gdsc-dju.com/api/member/v2/post', {
+        base64Thumbnail: 'base64인코딩자료',
+        blocked: false,
+        category: {
+          categoryName: 'string',
+          modifiedAt: '2022-04-11T15:35:34.892Z',
+          uploadDate: '2022-01-06 14:57:42.777000',
+        },
+        content: '내용',
+        fileName: 'base64인코딩해서보낼때 필요한 파일이름',
+        postHashTags: 'HashtagContent',
+        title: '제목',
+      })
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
-  /* const { postDetailData } = useGetPostDetailData(1);
-  console.log(postDetailData);*/
   return (
     <>
       <NavigationBlock />
@@ -127,7 +134,11 @@ const PostWrite = () => {
               <GDSCButton text="임시저장" />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
-              <GDSCButton text="업로드" color="GDSC blue" />
+              <GDSCButton
+                text="업로드"
+                onClick={handleSubmit}
+                color="GDSC blue"
+              />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
         </ContainerInner>
