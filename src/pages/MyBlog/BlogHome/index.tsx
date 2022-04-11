@@ -53,17 +53,6 @@ const BlogHome = () => {
 
   const navigate = useNavigate();
 
-  const pageHandler = (page: number, limit?: number) => {
-    if (page < 0) {
-      return;
-    }
-    if (page === limit) {
-      return;
-    } else {
-      navigate(`/${userInfoData?.nickname}?type=${type}&page=${page}`);
-    }
-  };
-
   useEffect(() => {
     if (page || type) {
       setSearchParams({
