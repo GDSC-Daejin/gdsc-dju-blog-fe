@@ -29,8 +29,7 @@ export const BlogCardScrollButton = ({
       return scrollX >= 0 && scrollX < 498 ? true : false;
     } else if (BtnActiveNumber === 1) {
       return scrollX >= 499 && scrollX < 997 ? true : false;
-    } else if (BtnActiveNumber === 2)
-      return scrollX >= 998 && scrollX < 1497 ? true : false;
+    } else if (BtnActiveNumber === 2) return scrollX >= 998 && true;
     else return false;
   };
 

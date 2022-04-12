@@ -9,6 +9,7 @@ export const MainContentWrapper = styled.section<{ isDrag: boolean }>`
   flex-direction: column;
   overflow-x: scroll;
   box-sizing: border-box;
+  scrollbar-width: none;
   @media (min-width: 1700px) {
     padding: 0px 50px 0px 330px;
   }
