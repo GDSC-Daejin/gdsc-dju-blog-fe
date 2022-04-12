@@ -3,7 +3,6 @@ import { ThemeProvider } from 'styled-components';
 import './App.css';
 import Layout from './Layout';
 import { theme } from './styles/theme';
-import GoogleLoader from './components/common/GoogleLoader';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './pages/ErrorFallback';
 

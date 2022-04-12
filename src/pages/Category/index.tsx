@@ -47,13 +47,16 @@ const Category = () => {
           isLoading={isLoading}
           isError={isError}
         />
-        <PageBarWrapper>
-          <PageBar
-            page={handleSelectPage()}
-            totalPage={data?.body.data.totalPages || 0}
-            onClick={handlePageNavigation}
-          />
-        </PageBarWrapper>
+        {isLoading ||
+          (data?.body.data.totalPages !== 0 && (
+            <PageBarWrapper>
+              <PageBar
+                page={handleSelectPage()}
+                totalPage={data?.body.data.totalPages || 0}
+                onClick={handlePageNavigation}
+              />
+            </PageBarWrapper>
+          ))}
       </CategoryInner>
     </LayoutContainer>
   );
