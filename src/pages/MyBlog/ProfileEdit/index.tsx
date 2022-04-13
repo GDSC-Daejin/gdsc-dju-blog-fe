@@ -245,7 +245,7 @@ const ProfileEdit = () => {
                 <FormButtonWrapper>
                   <GDSCButton
                     text={'저장하기'}
-                    color={'GDSC blue'}
+                    color={'googleBlue'}
                     type={'submit'}
                   />
                 </FormButtonWrapper>
