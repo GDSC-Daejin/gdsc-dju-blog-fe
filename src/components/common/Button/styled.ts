@@ -33,5 +33,9 @@ export const StyledButton = styled.button<{
     `}
   box-shadow: 0 2px 12px rgba(25, 31, 40, 0.08);
   border-radius: 50px;
-  background: ${(props) => props.background};
+  ${({ background }) =>
+    background &&
+    css`
+      background: ${({ theme }: any) => theme.color[background]};
+    `}
 `;
