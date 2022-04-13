@@ -11,7 +11,7 @@ export const MainContentWrapper = styled.section<{ isDrag: boolean }>`
   box-sizing: border-box;
   scrollbar-width: none;
   @media (min-width: 1700px) {
-    padding: 0px 50px 0px 330px;
+    padding: 0px 50px 0px 345px;
   }
   &::-webkit-scrollbar {
     display: none;

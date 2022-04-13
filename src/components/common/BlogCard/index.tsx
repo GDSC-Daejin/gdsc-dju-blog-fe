@@ -66,7 +66,7 @@ const BlogCard = (props: IBlogCardProps) => {
           <Bookmark marked={marked} />
         </BookMarkWrapper>
         {/* 이미지 */}
-        <BlogCardThumbnail src={BlogCardImage} />
+        <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}
         <BlogCardTagWrapper IsHovered={IsHovered}>
           {CardTag.filter((data, index) => index < 2).map(
@@ -102,7 +102,7 @@ const BlogCard = (props: IBlogCardProps) => {
           </AnimatePresence>
           <BlogCardSubTextWrapper>
             <BlogCardAuthorWrapper>
-              <BlogCardAuthorImage />
+              <BlogCardAuthorImage alt="AuthorImage" />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>
                 {CardData.memberInfo.nickname === null
