@@ -8,9 +8,9 @@ export const MODAL_KEY = {
   TYPE: 'type',
 };
 export const ModalState = {
-  [MODAL_KEY.SHOW]: false,
+  [MODAL_KEY.SHOW]: true,
   [MODAL_KEY.TITLE]: '',
-  [MODAL_KEY.CONTENT]: '',
+  [MODAL_KEY.CONTENT]: '정말 이대로 나가시겠어요? 작성해둔 글이 사라져요!',
   [MODAL_KEY.TYPE]: '',
   onClick: () => {
     return 0;

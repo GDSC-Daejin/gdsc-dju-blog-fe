@@ -16,6 +16,7 @@ import { userState } from '../store/user';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Posts from '../pages/Posts';
+import Modal from '../components/common/modal';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -39,6 +40,7 @@ const Layout = () => {
 
   return (
     <>
+      <Modal />
       <SideBar />
       <Navigation />
       <AnimatePresence>

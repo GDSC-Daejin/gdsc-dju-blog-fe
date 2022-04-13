@@ -4,9 +4,16 @@ import { GDSCButton } from '../Button';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
 import { modalState, MODAL_KEY } from '../../../store/modal';
-import { ModalInner } from './styled';
+import {
+  ModalBackground,
+  ModalButtonWrapper,
+  ModalContent,
+  ModalContentWrapper,
+  ModalInner,
+} from './styled';
+import OutsideClickHandler from '../../../Utils/OutsideClickHandler';
 
-const variants = {
+const modalAnimate = {
   active: {
     opacity: 1,
     scale: 1,
@@ -18,21 +25,43 @@ const variants = {
     y: 200,
   },
 };
-const ApplyModal: React.FC = () => {
+const Modal: React.FC = () => {
   const [modal, setModal] = useRecoilState(modalState);
   return (
     <AnimatePresence>
       {modal.show && (
-        <ModalInner>
-          <GDSCButton text={'제출하기'} color={'GDSC blue'} />
-          <GDSCButton
-            text={'돌아가기'}
-            onClick={() => setModal({ ...modal, [MODAL_KEY.SHOW]: false })}
-          />
-        </ModalInner>
+        <ModalBackground
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <OutsideClickHandler
+            outsideClick={() => setModal({ ...modal, [MODAL_KEY.SHOW]: false })}
+          >
+            <ModalInner
+              variants={modalAnimate}
+              initial={'unActive'}
+              animate={'active'}
+              transition={{ duration: 0.5 }}
+            >
+              <ModalContentWrapper>
+                <ModalContent>{modal.content}</ModalContent>
+                <ModalButtonWrapper>
+                  <GDSCButton
+                    text={'임시저장'}
+                    onClick={() =>
+                      setModal({ ...modal, [MODAL_KEY.SHOW]: false })
+                    }
+                  />
+                  <GDSCButton text={'삭제하기'} color={'toss red'} />
+                </ModalButtonWrapper>
+              </ModalContentWrapper>
+            </ModalInner>
+          </OutsideClickHandler>
+        </ModalBackground>
       )}
     </AnimatePresence>
   );
 };
 
-export default ApplyModal;
+export default Modal;
