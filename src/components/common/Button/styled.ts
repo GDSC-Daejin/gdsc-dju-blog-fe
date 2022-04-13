@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
+import { theme } from '../../../styles/theme';
 
 export const StyledButton = styled.button<{
-  color?: string;
+  color?: keyof typeof theme.color;
   background?: string;
   size?: string;
   disable?: boolean;
