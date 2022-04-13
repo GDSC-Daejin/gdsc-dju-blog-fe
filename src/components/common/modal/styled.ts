@@ -6,21 +6,20 @@ export const ModalInner = styled(motion.div)`
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
   border-radius: 10px;
-  padding: 20px 30px;
   display: flex;
   flex-direction: column;
   z-index: 999;
 `;
 export const ModalContent = styled.div`
   font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSize.h5};
-  max-width: 270px;
+  font-size: ${({ theme }) => theme.fontSize.h7};
+  max-width: 200px;
   text-align: center;
 `;
 export const ModalContentWrapper = styled.div`
-  padding: 0 106px;
-  padding-top: 60px;
-  padding-bottom: 48px;
+  padding: 0 46px;
+  padding-top: 40px;
+  padding-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,9 +28,9 @@ export const ModalContentWrapper = styled.div`
 export const ModalButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 234px;
+  min-width: 230px;
   justify-content: space-between;
-  margin-top: 34px;
+  margin-top: 20px;
 `;
 export const ModalBackground = styled(motion.div)`
   background: rgba(0, 0, 0, 0.35);

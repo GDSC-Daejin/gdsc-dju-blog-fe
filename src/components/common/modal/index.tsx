@@ -25,6 +25,18 @@ const modalAnimate = {
     y: 200,
   },
 };
+const modalType = {
+  login: {
+    description: '로그인이 필요한 서비스입니다.',
+    leftButton: '뒤로가기',
+    rightButton: '로그인',
+  },
+  savePost: {
+    description: '정말 이대로 나가시겠어요? 작성해둔 글이 사라져요!',
+    leftButton: '임시저장',
+    rightButton: '삭제하기',
+  },
+};
 const Modal: React.FC = () => {
   const [modal, setModal] = useRecoilState(modalState);
   return (
@@ -45,15 +57,25 @@ const Modal: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               <ModalContentWrapper>
-                <ModalContent>{modal.content}</ModalContent>
+                <ModalContent>
+                  {modalType[modal.type as keyof typeof modalType].description}
+                </ModalContent>
                 <ModalButtonWrapper>
                   <GDSCButton
-                    text={'임시저장'}
+                    text={
+                      modalType[modal.type as keyof typeof modalType].leftButton
+                    }
                     onClick={() =>
                       setModal({ ...modal, [MODAL_KEY.SHOW]: false })
                     }
                   />
-                  <GDSCButton text={'삭제하기'} color={'toss red'} />
+                  <GDSCButton
+                    text={
+                      modalType[modal.type as keyof typeof modalType]
+                        .rightButton
+                    }
+                    color={'toss red'}
+                  />
                 </ModalButtonWrapper>
               </ModalContentWrapper>
             </ModalInner>
