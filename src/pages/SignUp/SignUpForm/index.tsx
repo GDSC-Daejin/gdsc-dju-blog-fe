@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { SignUpFormStyle, SignUpButton } from './styled';
+import { SignUpFormStyle } from './styled';
 import SignUpInput from '../SignUpInput';
 import SignUpSelect from '../SignUpSelect';
 import { IFormStructure } from './FormStructureInfo';
+import { GDSCButton } from '../../../components/common/Button';
 
 const SignUpForm = () => {
   const {
@@ -158,6 +159,8 @@ const SignUpForm = () => {
     },
   ];
 
+  console.log(isValid);
+
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) =>
@@ -179,9 +182,12 @@ const SignUpForm = () => {
             condition={data.condition}
             trigger={trigger}
             errors={data.errors}*/}
-      <SignUpButton isValid={isValid} type="submit">
-        가입하기
-      </SignUpButton>
+      <GDSCButton
+        color={isValid ? 'GDSC blue' : 'toss blue 200'}
+        text="가입하기"
+        disable={!isValid}
+        type="submit"
+      />
     </SignUpFormStyle>
   );
 };
