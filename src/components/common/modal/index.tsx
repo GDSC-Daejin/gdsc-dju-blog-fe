@@ -74,7 +74,7 @@ const Modal: React.FC = () => {
                       modalType[modal.type as keyof typeof modalType]
                         .rightButton
                     }
-                    color={'toss red'}
+                    color={'tossRed'}
                   />
                 </ModalButtonWrapper>
               </ModalContentWrapper>
