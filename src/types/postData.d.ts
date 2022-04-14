@@ -5,7 +5,6 @@ export interface detailPostDataType {
   example: string;
   category: {
     categoryName: string;
-    modifiedAt: string;
     uploadDate: string;
   };
   content: string;
@@ -14,9 +13,15 @@ export interface detailPostDataType {
   title: string;
   memberInfo: memberDataInfoType;
 }
-export interface postPostDataType extends detailPostDataType {
+export interface postPostDataType {
   base64Thumbnail: string;
   fileName: string;
+  title: string;
+  category: {
+    categoryName: string;
+  };
+  content: string;
+  postHashTags: string;
 }
 export interface rowDetailPostDataType {
   body: {

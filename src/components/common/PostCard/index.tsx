@@ -17,9 +17,13 @@ import Bookmark from '../../../assets/Bookmark';
 import { detailPostDataType } from '../../../types/postData';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 
-const PostCard = (props: detailPostDataType) => {
-  const { title, category, content, postId, postHashTags } = props;
-
+const PostCard: React.FC<detailPostDataType> = ({
+  title,
+  category,
+  content,
+  postId,
+  postHashTags,
+}) => {
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
   const contentFilter = () => {

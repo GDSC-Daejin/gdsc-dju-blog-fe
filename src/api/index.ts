@@ -1,10 +1,14 @@
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import {
   MemberDataInfoType,
   RowMemberDataType,
   UserDataType,
 } from '../types/userDataType';
-import { detailPostDataType, rowDetailPostDataType } from '../types/postData';
+import {
+  detailPostDataType,
+  postPostDataType,
+  rowDetailPostDataType,
+} from '../types/postData';
 
 export class Api {
   private API: string;
@@ -62,8 +66,8 @@ export class Api {
       headers: this.Header,
     });
   };
-  PostData = (PostData: { title: string; content: string; postId: number }) => {
-    return axios.post(`${this.API}/api/member/v1/post`, {
+  postPostData = (postData: postPostDataType) => {
+    return axios.post(`${this.API}/api/member/v1/post`, postData, {
       headers: this.Header,
     });
   };

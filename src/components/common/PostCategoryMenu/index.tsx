@@ -16,7 +16,10 @@ import { positionColor } from '../../../store/positionColor';
 };
 const [animate, setAnimate] = useState('');
 */
-const PostCategoryMenu = () => {
+const PostCategoryMenu: React.FC<{
+  onClick: (category: string) => void;
+  category: string;
+}> = ({ onClick, category }) => {
   return (
     <>
       <PostCategoryMenuWrapper>
@@ -25,6 +28,8 @@ const PostCategoryMenu = () => {
             key={id}
             variants={PostCategoryAnimation}
             whileHover={'isActive'}
+            onClick={() => onClick(data.title)}
+            animate={data.title === category ? 'isActive' : 'unActive'}
           >
             <PostCategoryCircleWrapper variants={PostcircleAnimation}>
               <PostCategoryCircle color={positionColor(data.subtitle)} />

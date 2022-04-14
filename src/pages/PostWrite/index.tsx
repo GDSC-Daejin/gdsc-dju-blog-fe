@@ -1,19 +1,19 @@
 import React, { useRef, useState } from 'react';
 import {
-  PostInformation,
+  PostBottomButtonCWrapper,
+  PostBottomButtonLWrapper,
+  PostBottomButtonRWrapper,
+  PostBottomButtonWrapper,
   PostContentWrapper,
+  PostGDSCButtonWrapper,
+  PostHashtag,
+  PostInformation,
   PostThumbnailWrapper,
   PostTitle,
-  PostHashtag,
-  PostGDSCButtonWrapper,
-  PostBottomButtonWrapper,
-  PostBottomButtonLWrapper,
-  PostBottomButtonCWrapper,
-  PostBottomButtonRWrapper,
 } from './styled';
 import {
-  LayoutContainer,
   ContainerInner,
+  LayoutContainer,
   NavigationBlock,
 } from '../../styles/layouts';
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -37,7 +37,6 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
-import axios from 'axios';
 import API from '../../api';
 
 export const PostCategoryMenuData = [
@@ -67,7 +66,18 @@ const PostWrite = () => {
   const editorRef: any = useRef();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
+  const [hashtag, setHashtag] = useState('');
   const handleSubmit = async () => {
+    const postData = {
+      title: title,
+      content: content,
+      category: { categoryName: category },
+      postHashTags: hashtag,
+      fileName: '',
+      base64Thumbnail: '',
+    };
+    API.postPostData(postData);
     console.log(content);
   };
   const setEditorValue = () => {
@@ -79,7 +89,7 @@ const PostWrite = () => {
       <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
-          <PostCategoryMenu />
+          <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
               <PostThumbnail />
@@ -90,7 +100,12 @@ const PostWrite = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <PostHashtag placeholder={'#해시태그 ,로 구분하세요'} />
+              <PostHashtag
+                placeholder={'#해시태그 ,로 구분하세요'}
+                onChange={(e) => {
+                  setHashtag(e.target.value);
+                }}
+              />
             </PostContentWrapper>
             <PostGDSCButtonWrapper>
               <GDSCButton text="임시글" />
