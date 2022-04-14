@@ -36,6 +36,7 @@ export const StyledButton = styled.button<{
   ${({ background }) =>
     background &&
     css`
-      background: ${({ theme }: any) => theme.color[background]};
+      background: ${({ theme }) =>
+        theme.color[background as keyof typeof theme.color]};
     `}
 `;
