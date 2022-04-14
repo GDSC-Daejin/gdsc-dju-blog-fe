@@ -66,30 +66,13 @@ export const PostCategoryMenuData = [
 const PostWrite = () => {
   const editorRef: any = useRef();
   const [title, setTitle] = useState('');
-  const [state, setState] = useState('');
+  const [content, setContent] = useState('');
   const handleSubmit = async () => {
-    const content = editorRef.current.getInstance().getHTML();
-    setState(content);
-    console.log(title);
     console.log(content);
-    axios
-      .post('https://gdsc-dju.com/api/member/v2/post', {
-        base64Thumbnail: 'base64인코딩자료',
-        blocked: false,
-        category: {
-          categoryName: 'string',
-          modifiedAt: '2022-04-11T15:35:34.892Z',
-          uploadDate: '2022-01-06 14:57:42.777000',
-        },
-        content: '내용',
-        fileName: 'base64인코딩해서보낼때 필요한 파일이름',
-        postHashTags: 'HashtagContent',
-        title: '제목',
-      })
-      .then((response) => console.log(response))
-      .catch((error) => {
-        console.log(error.response);
-      });
+  };
+  const setEditorValue = () => {
+    const editorContent = editorRef.current.getInstance().getMarkdown();
+    setContent(editorContent);
   };
   return (
     <>
@@ -106,8 +89,8 @@ const PostWrite = () => {
                 placeholder="제목을 입력하세요."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-              ></PostTitle>
-              <PostHashtag>#해시태그 ,로 구분하세요</PostHashtag>
+              />
+              <PostHashtag placeholder={'#해시태그 ,로 구분하세요'} />
             </PostContentWrapper>
             <PostGDSCButtonWrapper>
               <GDSCButton text="임시글" />
@@ -119,6 +102,7 @@ const PostWrite = () => {
             initialEditType="markdown"
             initialValue="hello"
             ref={editorRef}
+            onChange={setEditorValue}
             plugins={[
               colorSyntax,
               [codeSyntaxHighlight, { highlighter: Prism }],
@@ -137,7 +121,7 @@ const PostWrite = () => {
               <GDSCButton
                 text="업로드"
                 onClick={handleSubmit}
-                color="GDSC blue"
+                color={'googleBlue'}
               />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>

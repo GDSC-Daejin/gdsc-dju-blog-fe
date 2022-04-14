@@ -23,10 +23,13 @@ export const PostTitle = styled.input`
     color: ${(props) => props.theme.color.grey400};
   }
 `;
-export const PostHashtag = styled.div`
+export const PostHashtag = styled.input`
   display: flex;
   font-size: ${(props) => props.theme.fontSize.body1};
-  color: ${(props) => props.theme.color.grey400};
+  &::placeholder {
+    color: ${(props) => props.theme.color.grey400};
+  }
+  border: none;
 `;
 export const PostGDSCButtonWrapper = styled.div`
   position: absolute;
