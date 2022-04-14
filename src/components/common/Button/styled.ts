@@ -3,7 +3,7 @@ import { theme } from '../../../styles/theme';
 
 export const StyledButton = styled.button<{
   color?: keyof typeof theme.color;
-  background?: string;
+  background?: keyof typeof theme.color;
   size?: string;
   disable?: boolean;
   border?: string;
@@ -19,7 +19,6 @@ export const StyledButton = styled.button<{
   padding: 8px 30px;
   cursor: pointer;
   font-size: ${(props) => props.theme.fontSize.body2};
-  color: ${(props) => props.color};
   ${(props) =>
     props.disable &&
     css`
@@ -36,7 +35,11 @@ export const StyledButton = styled.button<{
   ${({ background }) =>
     background &&
     css`
-      background: ${({ theme }) =>
-        theme.color[background as keyof typeof theme.color]};
+      background: ${({ theme }) => theme.color[background]};
+    `}
+  ${({ color }) =>
+    color &&
+    css`
+      color: ${({ theme }) => theme.color[color]};
     `}
 `;
