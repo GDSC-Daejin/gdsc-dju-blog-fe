@@ -115,7 +115,7 @@ const PostWrite = () => {
             previewStyle="vertical"
             height="627px"
             initialEditType="markdown"
-            initialValue="hello"
+            initialValue="helloWorld"
             ref={editorRef}
             onChange={setEditorValue}
             plugins={[
