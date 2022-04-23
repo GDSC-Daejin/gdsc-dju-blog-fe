@@ -48,7 +48,7 @@ const BlogHome = () => {
 
   const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
-  const { userPostData } = useGetUserPostListData(type, page, 6);
+  const { userPostData } = useGetUserPostListData(type, page - 1, 6);
 
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const BlogHome = () => {
     if (page || type) {
       setSearchParams({
         type: 'all',
-        page: '0',
+        page: '1',
       });
     }
   }, []);
