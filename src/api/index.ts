@@ -67,7 +67,7 @@ export class Api {
     });
   };
   postPostData = (postData: postPostDataType) => {
-    return axios.post(`${this.API}/api/member/v1/post`, postData, {
+    return axios.post(`${this.API}/api/member/v2/post`, postData, {
       headers: this.Header,
     });
   };

@@ -68,15 +68,15 @@ const PostWrite = () => {
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
   const [hashtag, setHashtag] = useState('');
+  const postData = {
+    title: title,
+    content: content,
+    category: { categoryName: category },
+    postHashTags: hashtag,
+    fileName: '',
+    base64Thumbnail: '',
+  };
   const handleSubmit = async () => {
-    const postData = {
-      title: title,
-      content: content,
-      category: { categoryName: category },
-      postHashTags: hashtag,
-      fileName: '',
-      base64Thumbnail: '',
-    };
     API.postPostData(postData);
     console.log(content);
   };
