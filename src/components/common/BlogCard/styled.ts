@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const BlogCardInner = styled(motion.div)`
+export const BlogCardInner = styled(motion.article)`
   position: relative;
-  width: 100%;
+  width: 248px;
+  height: 294px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -20,33 +21,23 @@ export const BookMarkWrapper = styled.div`
 `;
 
 export const BlogCardThumbnail = styled.img`
+  width: inherit;
+  height: inherit;
   border-radius: 13px;
 `;
 
-export const BlogCardTagWrapper = styled.div`
+export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
   display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  margin-bottom: 12px;
-`;
-
-export const BlogCardBottom = styled.div<{ isHovered: boolean }>`
-  display: flex;
-  flex-direction: column;
   position: absolute;
+  bottom: ${(props) => (props.IsHovered ? '254px' : '92px')};
   transition: all 0.3s ease;
-  height: ${({ isHovered }) => (isHovered ? '280' : '115')}px;
-  width: 100%;
-  left: 0;
-  bottom: 0;
+  left: 9px;
 `;
 export const BlogCardTag = styled.div`
-  width: 73px;
   height: 17px;
   padding: 1px 10px;
   border-radius: 50px;
-  border: 1px solid #ffffff99;
+  border: 1px solid #ffffff;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -56,27 +47,29 @@ export const BlogCardTag = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 15px;
-    letter-spacing: 0em;
     text-align: left;
     color: #ffffff;
   }
 `;
-
-export const BlogCardBottomBox = styled(motion.div)`
-  transition: all 0.3s ease-in-out;
+export const BlogCardBottomBox = styled(motion.div)<{ isHovered: boolean }>`
+  position: absolute;
+  transition: all 0.3s ease-in;
   border-radius: 10px;
   width: 100%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   background: #fff;
-  padding: 12px 20px;
+  padding: 8px 20px 12px;
+  gap: ${(props) => (props.isHovered ? '170px' : '8px')};
+  transition: all 0.3s ease;
   cursor: pointer;
 `;
-export const BlogCardTitle = styled(motion.h6)<{ isHovered: boolean }>`
-  font-size: ${({ theme }) => theme.fontSize.h6};
+export const BlogCardTitle = styled(motion.h6)`
+  font-size: ${(props) => props.theme.fontSize.h6};
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
-  margin-bottom: ${(props) => (props.isHovered ? '8' : '12')}px;
-  transition: all 0.3s ease;
   white-space: nowrap;
 `;
 export const BlogCardSubTextWrapper = styled.div`
@@ -92,14 +85,18 @@ export const BlogCardAuthorImage = styled.img`
   background: ${(props) => props.theme.color.grey400};
   border-radius: 100%;
   margin-right: 7px;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
 `;
 export const BlogCardPostText = styled(motion.p)`
-  font-size: 1.4rem;
-  min-height: 208px;
+  position: absolute;
+  transform: translate(-50%, 0%);
+  top: 53px;
+  font-size: 12px;
+  width: 208px;
+  min-height: 120px;
+  max-height: 120px;
   overflow: hidden;
-  margin-bottom: 39px;
 `;
 
 export const BlogCardSubText = styled.div<{
@@ -107,18 +104,22 @@ export const BlogCardSubText = styled.div<{
   bold?: boolean;
 }>`
   font-size: ${(props) => props.theme.fontSize.body3};
-  ${({ subText }) =>
-    subText &&
+  ${(props) =>
+    props.subText &&
     css`
       color: ${(props) => props.theme.color.grey400};
     `}
-  ${({ bold }) =>
-    bold &&
+  ${(props) =>
+    props.bold &&
     css`
       font-weight: 600;
     `}
-  margin-right: 3px;
+  margin-right: 5px;
   &:last-child {
     margin-right: 0;
   }
+`;
+export const SilverCard = styled.div`
+  width: 248px;
+  height: 294px;
 `;
