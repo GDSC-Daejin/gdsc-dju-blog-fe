@@ -29,27 +29,24 @@ export const BlogCardThumbnail = styled.img`
 export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
   display: flex;
   position: absolute;
-  bottom: ${(props) => (props.IsHovered ? '260px' : '92px')};
+  bottom: ${(props) => (props.IsHovered ? '254px' : '92px')};
   transition: all 0.3s ease;
-  left: 20px;
-  gap: 8px;
+  left: 9px;
 `;
 export const BlogCardTag = styled.div`
   height: 17px;
   padding: 1px 10px;
   border-radius: 50px;
-  border: 1px solid #ffffff99;
+  border: 1px solid #ffffff;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   span {
-    font-family: Google Sans Display;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
     line-height: 15px;
-    letter-spacing: 0em;
     text-align: left;
     color: #ffffff;
   }
@@ -73,6 +70,7 @@ export const BlogCardTitle = styled(motion.h6)`
   font-size: ${(props) => props.theme.fontSize.h6};
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
+  white-space: nowrap;
 `;
 export const BlogCardSubTextWrapper = styled.div`
   display: flex;
@@ -95,8 +93,10 @@ export const BlogCardPostText = styled(motion.p)`
   transform: translate(-50%, 0%);
   top: 53px;
   font-size: 12px;
-  width: 224px;
-  min-height: 160px;
+  width: 208px;
+  min-height: 120px;
+  max-height: 120px;
+  overflow: hidden;
 `;
 
 export const BlogCardSubText = styled.div<{

@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { createRef, useState } from 'react';
 import { Giscus } from '@giscus/react';
-import { useRecoilState } from 'recoil';
-import { themeState } from '../../store/theme';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 
 const Posts = () => {

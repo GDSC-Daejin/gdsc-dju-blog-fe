@@ -1,6 +1,6 @@
 import React from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { LayoutContainer } from '../../styles/layouts';
 import { CategoryInner, PageBarWrapper } from './styled';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
@@ -9,11 +9,11 @@ import PageBar from '../../components/common/PageBar';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 
 const Category = () => {
-  const params = useParams();
+  const { categoryName } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const currentParamsType = params.categoryName
-    ? params.categoryName.replace('/', '')
+  const currentParamsType = categoryName
+    ? categoryName.replace('/', '')
     : 'all';
   const currentParamsPageNumber = searchParams.get('page');
   const nowParamsPageNumber = () => {
@@ -21,6 +21,7 @@ const Category = () => {
       ? 0
       : parseInt(currentParamsPageNumber);
   };
+
   const { postListData } = useGetPostListData(
     currentParamsType,
     nowParamsPageNumber(),
@@ -32,7 +33,7 @@ const Category = () => {
   const handlePageNavigation = (nowPage: number) => {
     nowPage === nowParamsPageNumber()
       ? null
-      : navigate(`/category/${params.categoryName}?page=${nowPage}`);
+      : navigate(`/category/${categoryName}?page=${nowPage}`);
   };
 
   return (

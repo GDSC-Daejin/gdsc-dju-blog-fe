@@ -16,10 +16,15 @@ import Bookmark from '../../../assets/Bookmark';
 
 import { detailPostDataType } from '../../../types/postData';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import { dateFilter } from '../../../Utils/dateFilter';
 
-const PostCard = (props: detailPostDataType) => {
-  const { title, category, content, postHashTags } = props;
-
+const PostCard: React.FC<detailPostDataType> = ({
+  title,
+  category,
+  content,
+  postId,
+  postHashTags,
+}) => {
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
   const contentFilter = useCallback(() => {
@@ -28,11 +33,6 @@ const PostCard = (props: detailPostDataType) => {
       ? (result = `${content.slice(0, 260)}...`)
       : (result = `${content.slice(0, 170)}...`);
     return result;
-  }, []);
-
-  const dateFilter = useCallback((date: string) => {
-    const dateArray = date.slice(0, 10).split('-');
-    return `${dateArray[0].slice(2, 4)}.${dateArray[1]}.${dateArray[2]}`;
   }, []);
   return (
     <PostCardWrapper

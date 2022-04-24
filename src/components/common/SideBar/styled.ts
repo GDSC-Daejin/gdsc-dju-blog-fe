@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const SideBarWrapper = styled(motion.div)`
@@ -154,6 +154,6 @@ export const GoogleButtonWrapper = styled.div`
   position: relative;
   padding-bottom: 60px;
   & button {
-    padding: 8px 25px 8px 50px;
+    padding: 5px 25px 8px 50px;
   }
 `;

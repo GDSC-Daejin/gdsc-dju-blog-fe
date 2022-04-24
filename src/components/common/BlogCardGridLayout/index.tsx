@@ -13,7 +13,7 @@ const BlogCardGridLayout = (props: IBlogCardGridLayout) => {
     <BlogCardGridLayoutStyle>
       {PostData.map((data) => (
         <BlogCardWrapper key={data.postId}>
-          <BlogCard CardData={data} />
+          <BlogCard postData={data} />
         </BlogCardWrapper>
       ))}
     </BlogCardGridLayoutStyle>

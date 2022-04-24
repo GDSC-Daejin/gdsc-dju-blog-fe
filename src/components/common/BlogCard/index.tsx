@@ -18,12 +18,15 @@ import {
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { detailPostDataType } from '../../../types/postData';
 import Bookmark from '../../../assets/Bookmark';
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import { dateFilter } from '../../../Utils/dateFilter';
+import { HashTageLight } from '../HashTage';
 
 const PostTextVariants = {
   initial: {
     opacity: 0,
   },
-  visiable: {
+  visible: {
     y: 0,
     opacity: 1,
     transition: {
@@ -33,11 +36,10 @@ const PostTextVariants = {
   },
 };
 
-interface IBlogCardProps {
-  CardData: detailPostDataType;
+interface BlogCardProps {
+  postData: detailPostDataType;
 }
-const BlogCard = (props: IBlogCardProps) => {
-  const { CardData } = props;
+const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const [IsHovered, setIsHovered] = useState(false);
   const [marked, setMarked] = useState(false);
 
@@ -54,10 +56,6 @@ const BlogCard = (props: IBlogCardProps) => {
     }
   };
 
-  const CardTag: string[] = CardData.postHashTags.split(',');
-  const handleUploadDate = (data: string) =>
-    data.substring(2, 10).replaceAll('-', '.');
-
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
@@ -69,18 +67,11 @@ const BlogCard = (props: IBlogCardProps) => {
         <BlogCardThumbnail src={BlogCardImage} />
         {/* 태그 */}
         <BlogCardTagWrapper IsHovered={IsHovered}>
-          {CardTag.filter((data, index) => index < 2).map(
-            (data: string, index: number) => (
-              <BlogCardTag key={index}>
-                <span>
-                  #
-                  {data.length > 12
-                    ? data.substring(0, 12).concat('...')
-                    : data}
-                </span>
-              </BlogCardTag>
-            ),
-          )}
+          {hashTageSpreader(postData.postHashTags)
+            .filter((data, index) => index < 2)
+            .map((data: string, index: number) => (
+              <HashTageLight key={index} text={data} />
+            ))}
         </BlogCardTagWrapper>
         {/* 하단 Content */}
         <BlogCardBottomBox
@@ -88,15 +79,15 @@ const BlogCard = (props: IBlogCardProps) => {
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
         >
-          <BlogCardTitle>{CardData.title}</BlogCardTitle>
+          <BlogCardTitle>{postData.title}</BlogCardTitle>
           <AnimatePresence>
             {IsHovered && (
               <BlogCardPostText
                 variants={PostTextVariants}
                 initial={'initial'}
-                animate={'visiable'}
+                animate={'visible'}
               >
-                {CardData.content}
+                {postData.content}
               </BlogCardPostText>
             )}
           </AnimatePresence>
@@ -105,13 +96,11 @@ const BlogCard = (props: IBlogCardProps) => {
               <BlogCardAuthorImage />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>
-                {CardData.memberInfo.nickname === null
-                  ? 'Guest'
-                  : CardData.memberInfo.nickname}
+                {postData.memberInfo.nickname}
               </BlogCardSubText>
             </BlogCardAuthorWrapper>
             <BlogCardSubText subText={true}>
-              {handleUploadDate(CardData.category.uploadDate)}
+              {dateFilter(postData.category.uploadDate)}
             </BlogCardSubText>
           </BlogCardSubTextWrapper>
         </BlogCardBottomBox>
