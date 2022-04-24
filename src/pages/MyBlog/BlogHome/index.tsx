@@ -143,7 +143,7 @@ const BlogHome = () => {
             </PostSectionWrapper>
           )}
           <PageBarSection>
-            {userPostData && userInfoData && (
+            {userPostData && userInfoData && !userPostData.empty && (
               <PageBar
                 page={page}
                 totalPage={userPostData.totalPages}
