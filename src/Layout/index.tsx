@@ -17,6 +17,7 @@ import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Posts from '../pages/Posts';
 import ScrollTop from '../Utils/ScrollTop';
+import Modal from '../components/common/modal';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -40,6 +41,7 @@ const Layout = () => {
 
   return (
     <>
+      <Modal />
       <SideBar />
       <Navigation />
       <AnimatePresence>
