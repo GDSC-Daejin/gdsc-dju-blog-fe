@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-
 import {
   ContainerInner,
   LayoutContainer,
@@ -14,6 +13,7 @@ import {
   HashTageSection,
   HashTageWrapper,
   IntroduceText,
+  NoPosts,
   PageBarSection,
   PostCardWrapper,
   PostSectionWrapper,
@@ -31,7 +31,7 @@ import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
-import { useSearchParams } from 'react-router-dom';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
@@ -49,43 +49,33 @@ const BlogHome = () => {
 
   const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
-  const { userPostData } = useGetUserPostListData(type, page, 6);
+  const { userPostData } = useGetUserPostListData(type, page - 1, 6);
 
   const navigate = useNavigate();
-
-  const pageHandler = (page: number, limit?: number) => {
-    if (page < 0) {
-      return;
-    }
-    if (page === limit) {
-      return;
-    } else {
-      navigate(`/${userInfoData?.nickname}?type=${type}&page=${page}`);
-    }
-  };
 
   useEffect(() => {
     if (page || type) {
       setSearchParams({
         type: 'all',
-        page: '0',
+        page: '1',
       });
     }
   }, []);
 
   return (
     <>
-      <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
           {userInfoData && (
             <>
               <ProfileWrapper>
                 <ProfileImageWrapper>
-                  <ProfileImage
-                    image={MockProfile}
-                    position={userInfoData.positionType}
-                  />
+                  <Suspense fallback={<div>이미지</div>}>
+                    <ProfileImage
+                      image={MockProfile}
+                      position={userInfoData.positionType}
+                    />
+                  </Suspense>
                 </ProfileImageWrapper>
                 <ProfileDetailWrapper>
                   <Role>{userData.role}</Role>
@@ -97,7 +87,11 @@ const BlogHome = () => {
                       &apos;s Blog
                     </BlogNamePosition>
                     <SettingIconWrapper
-                      onClick={() => navigate(`/${userInfoData.nickname}/edit`)}
+                      onClick={() =>
+                        navigate({
+                          pathname: `/${userInfoData.nickname}/edit`,
+                        })
+                      }
                     >
                       <Setting />
                     </SettingIconWrapper>
@@ -116,9 +110,13 @@ const BlogHome = () => {
                 <CategoryMenu
                   type={type as string}
                   onClick={(url: string) =>
-                    navigate(
-                      `/${userInfoData.nickname}?type=${url}&page=${page}`,
-                    )
+                    navigate({
+                      pathname: `/${userInfoData.nickname}`,
+                      search: `?${createSearchParams({
+                        type: url,
+                        page: page.toString(),
+                      })}`,
+                    })
                   }
                 />
                 <ButtonWrapper>
@@ -148,12 +146,12 @@ const BlogHome = () => {
                   </PostCardWrapper>
                 ))
               ) : (
-                <div>작성된 글이 없습니다.</div>
+                <NoPosts>작성된 글이 없습니다.</NoPosts>
               )}
             </PostSectionWrapper>
           )}
           <PageBarSection>
-            {userPostData && userInfoData && (
+            {userPostData && userInfoData && !userPostData.empty && (
               <PageBar
                 page={page}
                 totalPage={userPostData.totalPages}

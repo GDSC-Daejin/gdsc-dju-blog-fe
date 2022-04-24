@@ -19,9 +19,9 @@ const GDSCButtonL: React.FC<ButtonProps> = ({
   return (
     <StyledButton
       background={color}
-      color={color && 'white'}
+      color={color ? color : 'white'}
       size={'large'}
-      border={color && 'white'}
+      border={color ? color : 'white'}
       disable={disable}
       onClick={onClick}
       type={type}
@@ -39,9 +39,9 @@ const GDSCButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <StyledButton
-      color={color && 'white'}
-      border={color && 'white'}
-      background={color}
+      color={color ? 'white' : 'grey900'}
+      border={color ? color : 'white'}
+      background={color ? color : 'white'}
       disable={disable}
       onClick={onClick}
       type={type}
