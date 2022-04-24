@@ -16,6 +16,7 @@ import { userState } from '../store/user';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Posts from '../pages/Posts';
+import ScrollTop from '../Utils/ScrollTop';
 import Modal from '../components/common/modal';
 
 const Layout = () => {
@@ -46,6 +47,7 @@ const Layout = () => {
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
       </AnimatePresence>
+
       <Routes>
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />

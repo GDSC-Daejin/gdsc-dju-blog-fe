@@ -1,0 +1,42 @@
+name: Deploy to Live Channel
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - main
+    types: [ closed ]
+jobs:
+  Deploy_Live_channel:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: ${{ steps.run_firebase_deploy.outputs.details_url }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: 'yarn && yarn build'
+        if: github.event.pull_request.merged == 'true'
+        env:
+          CI: ""
+      # Add additional build steps here
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: run_firebase_deploy
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLOG_PROJECT }}'
+          channelId: live
+          projectId: gdsc-dju-blog
+      - name: Commit Comment
+        uses: peter-evans/commit-comment@v2.0.0
+        with:
+          body: |
+            ## Deployed ${{steps.run_firebase_preview.conclusion}} to Live channel.
+            > Contributor: ${{github.actor}}
+            
+            - Event Status: ${{github.event_name}}
+            - URL: ${{steps.run_firebase_deploy.outputs.details_url}}
+            - Build Time: ${{steps.run_firebase_deploy.outputs.expire_time}}

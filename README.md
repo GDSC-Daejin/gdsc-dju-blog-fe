@@ -1,15 +1,21 @@
-# (GDSC) Daejin University Tech blog Project
+## (GDSC) Daejin University Tech blog Project
 
-## Description
+### Description
 
----
 GDSC DJU의 기술 블로그 프로젝트입니다. 
-기간은 약 2달~3달이며 스프린트 형식으로 진행됩니다.
 
-## Prerequisites
+### Get Started
 
----
-- `yarn install`로 설치 및 세팅을 진행하시면 됩니다.
+```angular2html
+ yarn install
+```
+
+```angular2html
+ yarn start
+```
+
+### Prerequisites
+
 - React Typescript
 - React Router V6
 - axios
@@ -17,17 +23,28 @@ GDSC DJU의 기술 블로그 프로젝트입니다.
 - SWR
 - Styled-Components
 
-# Usage
+### Usage
 
-`styles` : 스타일 에셋, 다크/라이트 모드 세팅이 정의되어있습니다.
+```angular2html
 
-`pages` : 페이지가 정의되어있습니다.
-
-`Layout` : Header, Body, Footer가 정의되어있습니다.
-
-`api` : api 관련 파일이 정의되어있습니다.
-
-`api/hooks` : SWR세팅이 되어있습니다.
-
-`hooks` custom hook이 정의되어있습니다.
+├── src
+│   ├── App.css
+│   ├── App.tsx
+│   ├── Layout //Header, Body, Footer를 정리한 파일
+│   ├── Utils //유틸리티 파일
+│   ├── api
+│   │   ├── Mocks //Mock data 파일
+│   │   ├── hooks //SWR 파일
+│   │   └── index.ts //api 파일
+│   ├── assets // 사진폴더
+│   ├── components // 컴포넌트 폴더
+│   ├── fonts // 폰트 폴더
+│   ├── index.tsx
+│   ├── pages  //페이지가 정의되어있습니다.
+│   ├── react-app-env.d.ts
+│   ├── store //recoil 상태관리 폴더
+│   ├── styles  //스타일 에셋
+│   └── types
+└── yarn.lock
+```
 

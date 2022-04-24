@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { positionColor } from '../../../store/positionColor';
 import { PositionCircle, StyledImage, StyledImageWrapper } from './styled';
 
@@ -14,4 +14,4 @@ const ProfileImage = (props: Props) => {
   );
 };
 
-export default ProfileImage;
+export default memo(ProfileImage);

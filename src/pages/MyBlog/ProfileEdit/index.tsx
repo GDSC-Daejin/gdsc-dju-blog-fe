@@ -223,7 +223,7 @@ const ProfileEdit = () => {
                   />
                 </FormElementWrapper>
                 <FormElementWrapper>
-                  <FormLabel>블로그 주소</FormLabel>
+                  <FormLabel>블로그 주소</FormLabel>:Qw
                   <TextInput
                     placeholder={'https://'}
                     name={'blogUrl'}
