@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import {
   BookmarkWrapper,
   PostCardContentWrapper,
@@ -26,22 +26,18 @@ const PostCard: React.FC<detailPostDataType> = ({
 }) => {
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
-  const contentFilter = () => {
+  const contentFilter = useCallback(() => {
     let result;
     hover
       ? (result = `${content.slice(0, 260)}...`)
       : (result = `${content.slice(0, 170)}...`);
     return result;
-  };
-  const hashTageFilter = (hashTage: { tage: string }[]) => {
-    let result;
-    hover ? (result = hashTage.slice(0, 10)) : (result = hashTage.slice(0, 3));
-    return result;
-  };
-  const dateFilter = (date: string) => {
+  }, []);
+
+  const dateFilter = useCallback((date: string) => {
     const dateArray = date.slice(0, 10).split('-');
     return `${dateArray[0].slice(2, 4)}.${dateArray[1]}.${dateArray[2]}`;
-  };
+  }, []);
   return (
     <PostCardWrapper
       onMouseOver={() => setHover(true)}
@@ -50,14 +46,7 @@ const PostCard: React.FC<detailPostDataType> = ({
       <PostCardImageWrapper>
         <PostCardImage src={MockPostImage} />
       </PostCardImageWrapper>
-      <PostCardContentWrapper
-        whileHover={{
-          transition: {
-            duration: 0.3,
-            delay: 0.2,
-          },
-        }}
-      >
+      <PostCardContentWrapper>
         <BookmarkWrapper
           onClick={() => {
             setMarked(!marked);
@@ -78,4 +67,4 @@ const PostCard: React.FC<detailPostDataType> = ({
   );
 };
 
-export default PostCard;
+export default memo(PostCard);

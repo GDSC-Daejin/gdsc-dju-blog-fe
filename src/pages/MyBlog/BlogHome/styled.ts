@@ -78,6 +78,11 @@ export const PostSectionWrapper = styled.section`
   flex-direction: column;
   width: 100%;
 `;
+export const NoPosts = styled.div`
+  margin-top: 50px;
+  font-size: ${({ theme }) => theme.fontSize.h7};
+  color: ${({ theme }) => theme.color.grey400};
+`;
 export const PostCardWrapper = styled.div`
   display: flex;
   flex-direction: row;
