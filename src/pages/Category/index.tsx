@@ -21,6 +21,8 @@ const Category = () => {
       ? 0
       : parseInt(currentParamsPageNumber);
   };
+  console.log(params.categoryName);
+  console.log(currentParamsType);
   const { postListData } = useGetPostListData(
     currentParamsType,
     nowParamsPageNumber(),

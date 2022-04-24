@@ -54,6 +54,7 @@ const Layout = () => {
         <Route path={'/post'} element={<Posts />} />
         <Route path={'/post/write'} element={<PostWrite />} />
         <Route path={'/category/*'} element={<Category />} />
+        <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route
           path={'/admin'}
