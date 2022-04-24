@@ -1,21 +1,41 @@
 name: Deploy to Preview Channel
 
 on:
+  push:
+    branches-ignore:
+      - master
   pull_request:
+    branches-ignore:
+      - master
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
+    environment:
+      name: Preview
+      url: ${{ steps.run_firebase_preview.outputs.details_url }}
     steps:
       - uses: actions/checkout@v2
       - run: 'yarn && yarn build'
-      # Add additional build steps here
-      # - run: ...
+        env:
+          CI: ""
+        # Add additional build steps here
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: run_firebase_preview
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLOG_PROJECT }}'
           projectId: gdsc-dju-blog
-          # default expire value 7 days
-          # expires: 7d
+          channelId: ' pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }} '
+          expires: 14d
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+      - name: Commit Comment
+        uses: peter-evans/commit-comment@v2.0.0
+        with:
+          body: |
+            ## Deployed ${{steps.run_firebase_preview.conclusion}} to preview channel.
+            > Contributor: ${{github.actor}}
+            
+            - Event Status: ${{github.event_name}}
+            - URL: ${{steps.run_firebase_preview.outputs.details_url}}
+            - Build Time: ${{steps.run_firebase_preview.outputs.expire_time}}
