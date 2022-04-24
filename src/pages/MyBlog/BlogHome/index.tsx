@@ -31,7 +31,7 @@ import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
-import { useSearchParams } from 'react-router-dom';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
@@ -87,7 +87,11 @@ const BlogHome = () => {
                       &apos;s Blog
                     </BlogNamePosition>
                     <SettingIconWrapper
-                      onClick={() => navigate(`/${userInfoData.nickname}/edit`)}
+                      onClick={() =>
+                        navigate({
+                          pathname: `/${userInfoData.nickname}/edit`,
+                        })
+                      }
                     >
                       <Setting />
                     </SettingIconWrapper>
@@ -106,9 +110,13 @@ const BlogHome = () => {
                 <CategoryMenu
                   type={type as string}
                   onClick={(url: string) =>
-                    navigate(
-                      `/${userInfoData.nickname}?type=${url}&page=${page}`,
-                    )
+                    navigate({
+                      pathname: `/${userInfoData.nickname}/edit`,
+                      search: `?${createSearchParams({
+                        type: url,
+                        page: page.toString(),
+                      })}`,
+                    })
                   }
                 />
                 <ButtonWrapper>
