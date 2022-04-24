@@ -15,20 +15,20 @@ import {
   BlogCardThumbnail,
   BlogCardTag,
   BlogCardTagWrapper,
+  BlogCardBottom,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Bookmark from '../../../assets/Bookmark';
 import { detailPostDataType } from '../../../types/postData';
-
-interface IBlogCardProps {
-  CardData: detailPostDataType;
-}
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import { dateFilter } from '../../../Utils/dateFilter';
+import { HashTageLight } from '../HashTage';
 
 const PostTextVariants = {
   initial: {
     opacity: 0,
   },
-  visiable: {
+  visible: {
     y: 0,
     opacity: 1,
     transition: {
@@ -37,15 +37,17 @@ const PostTextVariants = {
     },
   },
 };
+interface BlogCardProps {
+  postData: detailPostDataType;
+}
 
-const BlogCard = (props: IBlogCardProps) => {
-  const [BlogCardBottomText, IsHovered] = useHover(BottomText);
+const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const nowLogin = false;
   const Navigate = useNavigate();
   const [marked, setMarked] = useState(false);
-  const CardTag: string[] = ['darkmode', 'darkmode'];
-  const setBookmarkClip = () => {
-    if (nowLogin)
+  const [isHovered, setHovered] = useState(false);
+  const setBookmarkClip = (isLogin: boolean) => {
+    if (isLogin)
       setMarked((prev) => {
         return !prev;
       });
@@ -54,42 +56,44 @@ const BlogCard = (props: IBlogCardProps) => {
       Navigate('/123', { replace: false });
     }
   };
-
   return (
     <AnimateSharedLayout>
       <BlogCardInner>
-        <BookMarkWrapper onClick={setBookmarkClip}>
+        <BookMarkWrapper onClick={() => setBookmarkClip(nowLogin)}>
           <Bookmark marked={marked} />
         </BookMarkWrapper>
         <BlogCardThumbnail src={BlogCardImage} />
-        <BlogCardTagWrapper IsHovered={IsHovered}>
-          {CardTag.map((data: string, index: number) => (
-            <BlogCardTag key={index}>
-              <span>#{data}</span>
-            </BlogCardTag>
-          ))}
-        </BlogCardTagWrapper>
-        {BlogCardBottomText}
+        <BlogCardBottom
+          isHovered={isHovered}
+          onMouseOver={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          <BlogCardTagWrapper>
+            {hashTageSpreader(postData.postHashTags).map((data, id) => (
+              <HashTageLight text={data} key={id} />
+            ))}
+          </BlogCardTagWrapper>
+          <BottomText isHovered={isHovered} postData={postData} />
+        </BlogCardBottom>
       </BlogCardInner>
     </AnimateSharedLayout>
   );
 };
-
-const BottomText = (hovered: boolean) => {
+const BottomText: React.FC<{
+  isHovered: boolean;
+  postData: detailPostDataType;
+}> = ({ isHovered, postData }) => {
   return (
     <BlogCardBottomBox>
-      <BlogCardTitle isHovered={hovered}>제목입니다아아아아아</BlogCardTitle>
+      <BlogCardTitle isHovered={isHovered}>{postData.title}</BlogCardTitle>
       <AnimatePresence>
-        {hovered && (
+        {isHovered && (
           <BlogCardPostText
             variants={PostTextVariants}
             initial={'initial'}
-            animate={'visiable'}
+            animate={'visible'}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ipsum,libero? Vel eius deleniti earum architecto magnam non! Eos
-            ipsamperferendis esse rerum unde dolor necessitatibus exercitationem
-            nostrum facilis sit? Eum.
+            {postData.content}
           </BlogCardPostText>
         )}
       </AnimatePresence>
@@ -97,12 +101,15 @@ const BottomText = (hovered: boolean) => {
         <BlogCardAuthorWrapper>
           <BlogCardAuthorImage />
           <BlogCardSubText subText={true}>by</BlogCardSubText>
-          <BlogCardSubText bold={true}>Jason</BlogCardSubText>
+          <BlogCardSubText bold={true}>
+            {postData.memberInfo.nickname}
+          </BlogCardSubText>
         </BlogCardAuthorWrapper>
-        <BlogCardSubText subText={true}>22.02.02</BlogCardSubText>
+        <BlogCardSubText subText={true}>
+          {dateFilter(postData.uploadDate)}
+        </BlogCardSubText>
       </BlogCardSubTextWrapper>
     </BlogCardBottomBox>
   );
 };
-
 export default React.memo(BlogCard);

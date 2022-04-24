@@ -1,7 +1,8 @@
-import { memberDataInfoType } from './userDataType';
+import memberDataInfoType from './userDataType';
 
 export interface detailPostDataType {
-  imagePath: string;
+  modifiedAt: string;
+  uploadDate: string;
   example: string;
   category: {
     categoryName: string;
@@ -11,6 +12,7 @@ export interface detailPostDataType {
   postHashTags: string;
   postId: number;
   title: string;
+  likes: string[];
   memberInfo: memberDataInfoType;
 }
 export interface postPostDataType {
