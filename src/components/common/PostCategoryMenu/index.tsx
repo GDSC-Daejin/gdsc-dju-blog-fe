@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   PostCategoryCircle,
   PostCategoryCircleWrapper,
@@ -7,31 +7,25 @@ import {
   PostCategoryTextWrapper,
 } from './styled';
 import { PostCategoryMenuData } from '../../../pages/PostWrite';
-import { PostCategoryAnimation, PostcircleAnimation } from '../Animation';
+import { PostCategoryAnimation, PostCircleAnimation } from '../Animation';
 import { positionColor } from '../../../store/positionColor';
 
-/*type Iprops = {
-  onClick?: (url: string) => void;
-  type: string;
-};
-const [animate, setAnimate] = useState('');
-*/
 const PostCategoryMenu: React.FC<{
   onClick: (category: string) => void;
   category: string;
 }> = ({ onClick, category }) => {
   return (
     <>
-      <PostCategoryMenuWrapper>
+      <PostCategoryMenuWrapper variants={PostCategoryAnimation}>
         {PostCategoryMenuData.map((data, id) => (
           <PostCategoryTextWrapper
             key={id}
-            variants={PostCategoryAnimation}
             whileHover={'isActive'}
+            variants={PostCategoryAnimation}
             onClick={() => onClick(data.title)}
             animate={data.title === category ? 'isActive' : 'unActive'}
           >
-            <PostCategoryCircleWrapper variants={PostcircleAnimation}>
+            <PostCategoryCircleWrapper variants={PostCircleAnimation}>
               <PostCategoryCircle color={positionColor(data.subtitle)} />
             </PostCategoryCircleWrapper>
             <PostCategoryText>{data.title}</PostCategoryText>

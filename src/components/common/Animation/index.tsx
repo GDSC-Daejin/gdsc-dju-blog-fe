@@ -57,7 +57,7 @@ export const SideBarGrayBoxAnimation = {
 };
 export const PostCategoryAnimation = {
   isActive: {
-    translateY: -10,
+    translateY: -5,
     color: '#191F28',
     transition: {
       delay: 0.1,
@@ -71,7 +71,7 @@ export const PostCategoryAnimation = {
     borderBottom: '1px solid #fff',
   },
 };
-export const PostcircleAnimation = {
+export const PostCircleAnimation = {
   isActive: {
     opacity: 1,
     y: 0,
