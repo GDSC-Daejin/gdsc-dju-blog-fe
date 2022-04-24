@@ -111,7 +111,7 @@ const BlogHome = () => {
                   type={type as string}
                   onClick={(url: string) =>
                     navigate({
-                      pathname: `/${userInfoData.nickname}/edit`,
+                      pathname: `/${userInfoData.nickname}`,
                       search: `?${createSearchParams({
                         type: url,
                         page: page.toString(),
