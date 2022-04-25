@@ -13,6 +13,7 @@ import {
   BlogCardThumbnail,
   BlogCardTitle,
   BookMarkWrapper,
+  PostText,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { detailPostDataType } from '../../../types/postData';
@@ -20,6 +21,7 @@ import Bookmark from '../../../assets/Bookmark';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { HashTageLight } from '../HashTage';
+import ReactMarkdown from 'react-markdown';
 
 const PostTextVariants = {
   initial: {
@@ -78,7 +80,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
         >
-          <BlogCardTitle>{postData.title}</BlogCardTitle>
+          <BlogCardTitle>{postData.title.slice(0, 13)}</BlogCardTitle>
           <AnimatePresence>
             {IsHovered && (
               <BlogCardPostText
@@ -86,7 +88,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
                 initial={'initial'}
                 animate={'visible'}
               >
-                {postData.content}
+                <PostText children={postData.content} />
               </BlogCardPostText>
             )}
           </AnimatePresence>

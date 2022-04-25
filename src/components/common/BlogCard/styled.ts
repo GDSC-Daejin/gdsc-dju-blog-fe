@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 export const BlogCardInner = styled(motion.article)`
   position: relative;
@@ -98,6 +99,61 @@ export const BlogCardPostText = styled(motion.p)`
   max-height: 120px;
   overflow: hidden;
   word-break: break-word;
+`;
+export const PostText = styled(ReactMarkdown)`
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend {
+    font-size: ${({ theme }) => theme.fontSize.body3};
+  }
 `;
 
 export const BlogCardSubText = styled.div<{
