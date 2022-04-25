@@ -81,3 +81,36 @@ export const PostCircleAnimation = {
     opacity: 0,
   },
 };
+export const listAnimate = {
+  start: {
+    opacity: 0,
+  },
+  end: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+export const blogCardAnimate = {
+  start: {
+    opacity: 0,
+    x: `calc((100vw - 1200px) / 2)`,
+    y: 100,
+  },
+  end: {
+    x: `calc((100vw - 1200px) / 2)`,
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};

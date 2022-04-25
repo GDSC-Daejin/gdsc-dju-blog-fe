@@ -15,6 +15,10 @@ import CategoryMenu from '../../components/common/CategoryMenu';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import HomePhrase from '../../components/common/HomePhrase';
 import { homePhraseData } from '../../api/Mocks/homePhraseData';
+import {
+  blogCardAnimate,
+  listAnimate,
+} from '../../components/common/Animation';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -82,21 +86,25 @@ function Home() {
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
-      <CardSection
-        ref={scrollRef}
-        isDrag={isDrag}
-        onMouseDown={onDragStart}
-        onMouseMove={isDrag ? onDragMove : undefined}
-        onMouseUp={onDragEnd}
-        onMouseLeave={onDragEnd}
-      >
-        {postListData &&
-          postListData.content.map((postData) => (
-            <BlogCardWrapper key={postData.postId}>
+      {postListData && (
+        <CardSection
+          ref={scrollRef}
+          isDrag={isDrag}
+          onMouseDown={onDragStart}
+          onMouseMove={isDrag ? onDragMove : undefined}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
+          variants={listAnimate}
+          initial={'start'}
+          animate={'end'}
+        >
+          {postListData.content.map((postData) => (
+            <BlogCardWrapper key={postData.postId} variants={blogCardAnimate}>
               <BlogCard postData={postData} />
             </BlogCardWrapper>
           ))}
-      </CardSection>
+        </CardSection>
+      )}
       <HomeLayoutContainer>
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
