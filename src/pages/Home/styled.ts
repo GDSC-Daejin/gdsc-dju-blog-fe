@@ -11,22 +11,9 @@ export const MainContentWrapper = styled.div`
   gap: 3.75rem;
   margin-top: 50px;
 `;
-
-export const WelcomePhrase = styled.div`
-  span {
-    font-size: ${(props) => props.theme.fontSize.h7};
-    font-weight: 400;
-    line-height: 23px;
-    letter-spacing: 0em;
-    text-align: left;
-  }
-  p {
-    font-size: 2.25rem;
-    font-weight: 500;
-    line-height: 3.25rem;
-    letter-spacing: 0em;
-    margin: 10px 0px 26px;
-  }
+export const HomePhraseWrapper = styled.div`
+  margin-top: 50px;
+  margin-bottom: 30px;
 `;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`

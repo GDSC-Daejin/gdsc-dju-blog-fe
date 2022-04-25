@@ -1,19 +1,19 @@
-import React, { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useRef, useState } from 'react';
 import { useScroll } from 'react-use';
 import { useSearchParams } from 'react-router-dom';
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
 import {
-  MainContentWrapper,
-  WelcomePhrase,
-  CardSection,
   BlogCardWrapper,
   ButtonWrapper,
+  CardSection,
+  HomePhraseWrapper,
+  MainContentWrapper,
 } from './styled';
-import { detailPostDataType } from '../../types/postData';
 import CategoryMenu from '../../components/common/CategoryMenu';
+import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import HomePhrase from '../../components/common/HomePhrase';
 
 function index() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -21,6 +21,7 @@ function index() {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [searchParams] = useSearchParams();
+  const [category, setCategory] = useState('all');
   const currentParamsPageNumber = searchParams.get('category');
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -47,37 +48,38 @@ function index() {
       }
     }
   };
-  const [PostData, setPostData] = useState<detailPostDataType[]>();
-  const nowParamsCategory = () => {
-    return currentParamsPageNumber === null ? 'all' : currentParamsPageNumber;
+  const changeCategory = (category: string) => {
+    setCategory(category);
   };
-
-  const instance = axios.create({
-    baseURL: 'https://gdsc-dju.com',
-    timeout: 15000,
-  });
-  useEffect(() => {
-    instance.get('/api/v1/post/list?page=0&size=11').then(function (response) {
-      setPostData(response.data.body.data.content);
-    });
-    instance.get('/api/admin/v1/all/list').then(function (response) {
-      // console.log(response);
-    });
-  }, []);
+  const { postListData } = useGetPostListData(category, 0, 11);
+  //
+  // const instance = axios.create({
+  //   baseURL: 'https://gdsc-dju.com',
+  //   timeout: 15000,
+  // });
+  // useEffect(() => {
+  //   instance.get('/api/v1/post/list?page=0&size=11').then(function (response) {
+  //     setPostData(response.data.body.data.content);
+  //   });
+  //   instance.get('/api/admin/v1/all/list').then(function (response) {
+  //     // console.log(response);
+  //   });
+  // }, []);
 
   return (
     <LayoutContainer>
       <MainContentWrapper>
-        <WelcomePhrase>
-          <span>from Cindy</span>
-          <p>
-            Google Developer Student Club
-            <br />
-            Daejin Univ. Blog 에 오신걸 환영합니다.
-          </p>
-          <span>by Cindy</span>
-        </WelcomePhrase>
-        <CategoryMenu type={nowParamsCategory()} />
+        <HomePhraseWrapper>
+          <HomePhrase
+            phrase={
+              'Google Developer Student Club\n' +
+              ' Daejin Univ. Blog 에 오신걸 환영합니다.'
+            }
+            by={'by Cindy'}
+            from={'from Cindy'}
+          />
+        </HomePhraseWrapper>
+        <CategoryMenu type={category} onClick={changeCategory} />
         <CardSection
           ref={scrollRef}
           isDrag={isDrag}
@@ -86,11 +88,12 @@ function index() {
           onMouseUp={onDragEnd}
           onMouseLeave={onDragEnd}
         >
-          {PostData?.map((CardData, index) => (
-            <BlogCardWrapper key={CardData.postId}>
-              <BlogCard postData={CardData} />
-            </BlogCardWrapper>
-          ))}
+          {postListData &&
+            postListData.content.map((postData, index) => (
+              <BlogCardWrapper key={postData.postId}>
+                <BlogCard postData={postData} />
+              </BlogCardWrapper>
+            ))}
         </CardSection>
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />

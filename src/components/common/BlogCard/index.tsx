@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import BlogCardImage from '../../../assets/unknown.png';
 import { useNavigate } from 'react-router';
 import {
@@ -6,14 +6,13 @@ import {
   BlogCardAuthorWrapper,
   BlogCardBottomBox,
   BlogCardInner,
-  BookMarkWrapper,
   BlogCardPostText,
   BlogCardSubText,
   BlogCardSubTextWrapper,
-  BlogCardTitle,
-  BlogCardThumbnail,
-  BlogCardTag,
   BlogCardTagWrapper,
+  BlogCardThumbnail,
+  BlogCardTitle,
+  BookMarkWrapper,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { detailPostDataType } from '../../../types/postData';
@@ -109,4 +108,4 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   );
 };
 
-export default React.memo(BlogCard);
+export default memo(BlogCard);

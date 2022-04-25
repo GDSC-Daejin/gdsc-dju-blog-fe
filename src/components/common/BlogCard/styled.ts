@@ -97,6 +97,7 @@ export const BlogCardPostText = styled(motion.p)`
   min-height: 120px;
   max-height: 120px;
   overflow: hidden;
+  word-break: break-word;
 `;
 
 export const BlogCardSubText = styled.div<{

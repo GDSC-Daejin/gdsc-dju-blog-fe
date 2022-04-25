@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CardSection, BlogCardWrapper } from './styled';
 import BlogCard from '../../../components/common/BlogCard';
 import { detailPostDataType } from '../../../types/postData';
@@ -12,13 +12,13 @@ const SlideCardSection = (props: ISlideCardSectionProps) => {
 
   return (
     <CardSection>
-      {PostData.map((CardData, index) => (
-        <BlogCardWrapper key={CardData.postId}>
-          <BlogCard CardData={CardData} />
+      {PostData.map((postData, index) => (
+        <BlogCardWrapper key={postData.postId}>
+          <BlogCard postData={postData} />
         </BlogCardWrapper>
       ))}
     </CardSection>
   );
 };
 
-export default SlideCardSection;
+export default memo(SlideCardSection);
