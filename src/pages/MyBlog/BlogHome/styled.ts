@@ -85,7 +85,7 @@ export const NoPosts = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${({ theme }) => theme.fontSize.h7};
+  font-size: ${({ theme }) => theme.fontSize.h5};
   color: ${({ theme }) => theme.color.grey400};
 `;
 export const PostCardWrapper = styled.div`
