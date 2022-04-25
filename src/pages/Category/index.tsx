@@ -1,12 +1,13 @@
 import React from 'react';
-
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+
 import { LayoutContainer } from '../../styles/layouts';
 import { CategoryInner, PageBarWrapper } from './styled';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import PageBar from '../../components/common/PageBar';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import { NoPosts } from '../MyBlog/BlogHome/styled';
 
 const Category = () => {
   const { categoryName } = useParams();
@@ -47,7 +48,7 @@ const Category = () => {
           <>
             <BlogCardGridLayout PostData={postListData.content} />
             {postListData.empty ? (
-              <h3>해당 페이지에 문제가 발생했습니다..!</h3>
+              <NoPosts>포스팅된 글이 없습니다</NoPosts>
             ) : (
               <PageBarWrapper>
                 <PageBar

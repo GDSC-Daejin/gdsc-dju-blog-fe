@@ -1,7 +1,8 @@
 import useSWR from 'swr';
 import API from '../index';
-import { detailPostDataType } from '../../types/postData';
+import { rowDetailPostDataType } from '../../types/postData';
 import { url } from './postPagination';
+import axios from 'axios';
 
 async function getPostListData(params: string) {
   const res = await API.getPostListData(params);

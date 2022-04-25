@@ -1,22 +1,33 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useScroll } from 'react-use';
-import { LayoutContainer } from '../../styles/layouts';
+import { useSearchParams } from 'react-router-dom';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
 import {
-  MainContentWrapper,
-  CardSection,
   BlogCardWrapper,
   ButtonWrapper,
-  CardSectionBlur,
+  CardSection,
+  CardSectionWrapper,
+  HomeContentWrapper,
+  HomeLayoutContainer,
+  HomePhraseWrapper,
 } from './styled';
+import CategoryMenu from '../../components/common/CategoryMenu';
+import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import HomePhrase from '../../components/common/HomePhrase';
+import { homePhraseData } from '../../api/Mocks/homePhraseData';
+import {
+  blogCardAnimate,
+  listAnimate,
+} from '../../components/common/Animation';
 
-function index() {
-  const Cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [category, setCategory] = useState('all');
+  const [phrase, setPhrase] = useState(homePhraseData[0]);
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -24,11 +35,9 @@ function index() {
     if (scrollRef.current?.scrollLeft !== undefined)
       setStartX(e.pageX + scrollRef.current.scrollLeft);
   };
-
   const onDragEnd = () => {
     setIsDrag(false);
   };
-
   const onDragMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isDrag) {
       if (scrollRef.current !== null) {
@@ -44,31 +53,67 @@ function index() {
       }
     }
   };
+  const changeCategory = (category: string) => {
+    setCategory(category);
+  };
+  const { postListData } = useGetPostListData(category, 0, 11);
+
+  const setPhraseData = useCallback(() => {
+    let index = 0;
+    setInterval(() => {
+      setPhrase(homePhraseData[index]);
+      index++;
+      if (index >= homePhraseData.length) index = 0;
+    }, 5000);
+  }, []);
+  useEffect(() => {
+    setPhraseData();
+  }, []);
 
   return (
-    <LayoutContainer>
-      <MainContentWrapper>
-        <CardSection
-          ref={scrollRef}
-          isDrag={isDrag}
-          onMouseDown={onDragStart}
-          onMouseMove={isDrag ? onDragMove : undefined}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-        >
-          {Cards.map((CardData, index) => (
-            <BlogCardWrapper key={CardData}>
-              {/* <BlogCard CardData={CardData}/>*/}
-            </BlogCardWrapper>
-          ))}
-        </CardSection>
+    <>
+      <HomeLayoutContainer>
+        <HomeContentWrapper>
+          <HomePhraseWrapper
+            key={phrase.phrase}
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            exit={{ opacity: 1, y: -20 }}
+            transition={{ duration: 0.6 }}
+          >
+            <HomePhrase phraseData={phrase} />
+          </HomePhraseWrapper>
+          <CategoryMenu type={category} onClick={changeCategory} />
+        </HomeContentWrapper>
+      </HomeLayoutContainer>
+      <CardSectionWrapper>
+        {postListData && (
+          <CardSection
+            ref={scrollRef}
+            isDrag={isDrag}
+            onMouseDown={onDragStart}
+            onMouseMove={isDrag ? onDragMove : undefined}
+            onMouseUp={onDragEnd}
+            onMouseLeave={onDragEnd}
+            variants={listAnimate}
+            initial={'start'}
+            animate={'end'}
+          >
+            {postListData.content.map((postData) => (
+              <BlogCardWrapper key={postData.postId} variants={blogCardAnimate}>
+                <BlogCard postData={postData} />
+              </BlogCardWrapper>
+            ))}
+          </CardSection>
+        )}
+      </CardSectionWrapper>
+      <HomeLayoutContainer>
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
         </ButtonWrapper>
-        <CardSectionBlur />
-      </MainContentWrapper>
-    </LayoutContainer>
+      </HomeLayoutContainer>
+    </>
   );
 }
 
-export default index;
+export default Home;
