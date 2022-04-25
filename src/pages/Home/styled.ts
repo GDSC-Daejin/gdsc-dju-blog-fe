@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const MainContentWrapper = styled.div`
+export const HomeContentWrapper = styled.div`
   width: 100%;
   position: relative;
   display: flex;
@@ -10,6 +10,16 @@ export const MainContentWrapper = styled.div`
   gap: 3.75rem;
   margin-top: 50px;
 `;
+export const HomeLayoutContainer = styled.div`
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-width: 320px;
+`;
 export const HomePhraseWrapper = styled(motion.div)`
   height: 180px;
   margin-top: 50px;
@@ -17,11 +27,9 @@ export const HomePhraseWrapper = styled(motion.div)`
 `;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
-  z-index: 2;
   position: relative;
   display: flex;
   align-items: center;
-  width: 1195px;
   height: 400px;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
@@ -36,11 +44,19 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
 export const BlogCardWrapper = styled(motion.div)`
   width: 248px;
   height: 294px;
-  margin: 0px 15px;
+  margin: 0 15px;
+  transform: translateX(calc((100vw - 1200px) / 2));
+  :first-child {
+    margin-left: 0;
+  }
+  :last-child {
+    margin-right: 0;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
-  position: absolute;
+  position: relative;
+  margin-bottom: 230px;
   display: flex;
   gap: 16px;
   left: 15px;

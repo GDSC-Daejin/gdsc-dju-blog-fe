@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useScroll } from 'react-use';
 import { useSearchParams } from 'react-router-dom';
-import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
 import {
   BlogCardWrapper,
   ButtonWrapper,
   CardSection,
+  HomeContentWrapper,
+  HomeLayoutContainer,
   HomePhraseWrapper,
-  MainContentWrapper,
 } from './styled';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
@@ -24,7 +24,6 @@ function Home() {
   const [searchParams] = useSearchParams();
   const [category, setCategory] = useState('all');
   const [phrase, setPhrase] = useState(homePhraseData[0]);
-  const currentParamsPageNumber = searchParams.get('category');
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -54,19 +53,6 @@ function Home() {
     setCategory(category);
   };
   const { postListData } = useGetPostListData(category, 0, 11);
-  //
-  // const instance = axios.create({
-  //   baseURL: 'https://gdsc-dju.com',
-  //   timeout: 15000,
-  // });
-  // useEffect(() => {
-  //   instance.get('/api/v1/post/list?page=0&size=11').then(function (response) {
-  //     setPostData(response.data.body.data.content);
-  //   });
-  //   instance.get('/api/admin/v1/all/list').then(function (response) {
-  //     // console.log(response);
-  //   });
-  // }, []);
 
   const setPhraseData = useCallback(() => {
     let index = 0;
@@ -81,38 +67,42 @@ function Home() {
   }, []);
 
   return (
-    <LayoutContainer>
-      <MainContentWrapper>
-        <HomePhraseWrapper
-          key={phrase.phrase}
-          animate={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 20 }}
-          exit={{ opacity: 1, y: -20 }}
-          transition={{ duration: 0.6 }}
-        >
-          <HomePhrase phraseData={phrase} />
-        </HomePhraseWrapper>
-        <CategoryMenu type={category} onClick={changeCategory} />
-        <CardSection
-          ref={scrollRef}
-          isDrag={isDrag}
-          onMouseDown={onDragStart}
-          onMouseMove={isDrag ? onDragMove : undefined}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-        >
-          {postListData &&
-            postListData.content.map((postData, index) => (
-              <BlogCardWrapper key={postData.postId}>
-                <BlogCard postData={postData} />
-              </BlogCardWrapper>
-            ))}
-        </CardSection>
+    <>
+      <HomeLayoutContainer>
+        <HomeContentWrapper>
+          <HomePhraseWrapper
+            key={phrase.phrase}
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            exit={{ opacity: 1, y: -20 }}
+            transition={{ duration: 0.6 }}
+          >
+            <HomePhrase phraseData={phrase} />
+          </HomePhraseWrapper>
+          <CategoryMenu type={category} onClick={changeCategory} />
+        </HomeContentWrapper>
+      </HomeLayoutContainer>
+      <CardSection
+        ref={scrollRef}
+        isDrag={isDrag}
+        onMouseDown={onDragStart}
+        onMouseMove={isDrag ? onDragMove : undefined}
+        onMouseUp={onDragEnd}
+        onMouseLeave={onDragEnd}
+      >
+        {postListData &&
+          postListData.content.map((postData) => (
+            <BlogCardWrapper key={postData.postId}>
+              <BlogCard postData={postData} />
+            </BlogCardWrapper>
+          ))}
+      </CardSection>
+      <HomeLayoutContainer>
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
         </ButtonWrapper>
-      </MainContentWrapper>
-    </LayoutContainer>
+      </HomeLayoutContainer>
+    </>
   );
 }
 
