@@ -16,7 +16,7 @@ import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import HomePhrase from '../../components/common/HomePhrase';
 import { homePhraseData } from '../../api/Mocks/homePhraseData';
 
-function index() {
+function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
@@ -116,4 +116,4 @@ function index() {
   );
 }
 
-export default index;
+export default Home;

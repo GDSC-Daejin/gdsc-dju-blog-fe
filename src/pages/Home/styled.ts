@@ -7,7 +7,6 @@ export const MainContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  overflow: hidden;
   gap: 3.75rem;
   margin-top: 50px;
 `;
@@ -18,6 +17,7 @@ export const HomePhraseWrapper = styled(motion.div)`
 `;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
+  z-index: 2;
   position: relative;
   display: flex;
   align-items: center;
@@ -25,7 +25,6 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   height: 400px;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
-  overflow-y: hidden;
   div:last-child {
     margin-right: 0;
   }
