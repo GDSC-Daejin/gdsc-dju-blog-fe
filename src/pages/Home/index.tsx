@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useScroll } from 'react-use';
 import { useSearchParams } from 'react-router-dom';
-
 import { LayoutContainer } from '../../styles/layouts';
 import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
