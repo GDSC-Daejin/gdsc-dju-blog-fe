@@ -1,8 +1,8 @@
 export const homePhraseData = [
   {
-    by: 'jimmy',
-    phrase: 'I am a developer',
-    from: 'jimmy',
+    by: 'Blaire',
+    phrase: '안녕 나는 아가 디자이너 블레어 응앙응앙',
+    from: 'Blaire',
   },
   {
     by: 'Jason',

@@ -7,6 +7,7 @@ import {
   BlogCardWrapper,
   ButtonWrapper,
   CardSection,
+  CardSectionWrapper,
   HomeContentWrapper,
   HomeLayoutContainer,
   HomePhraseWrapper,
@@ -25,7 +26,6 @@ function Home() {
   const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [searchParams] = useSearchParams();
   const [category, setCategory] = useState('all');
   const [phrase, setPhrase] = useState(homePhraseData[0]);
 
@@ -86,25 +86,27 @@ function Home() {
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
-      {postListData && (
-        <CardSection
-          ref={scrollRef}
-          isDrag={isDrag}
-          onMouseDown={onDragStart}
-          onMouseMove={isDrag ? onDragMove : undefined}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-          variants={listAnimate}
-          initial={'start'}
-          animate={'end'}
-        >
-          {postListData.content.map((postData) => (
-            <BlogCardWrapper key={postData.postId} variants={blogCardAnimate}>
-              <BlogCard postData={postData} />
-            </BlogCardWrapper>
-          ))}
-        </CardSection>
-      )}
+      <CardSectionWrapper>
+        {postListData && (
+          <CardSection
+            ref={scrollRef}
+            isDrag={isDrag}
+            onMouseDown={onDragStart}
+            onMouseMove={isDrag ? onDragMove : undefined}
+            onMouseUp={onDragEnd}
+            onMouseLeave={onDragEnd}
+            variants={listAnimate}
+            initial={'start'}
+            animate={'end'}
+          >
+            {postListData.content.map((postData) => (
+              <BlogCardWrapper key={postData.postId} variants={blogCardAnimate}>
+                <BlogCard postData={postData} />
+              </BlogCardWrapper>
+            ))}
+          </CardSection>
+        )}
+      </CardSectionWrapper>
       <HomeLayoutContainer>
         <ButtonWrapper>
           <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />

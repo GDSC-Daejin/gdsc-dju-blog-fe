@@ -25,12 +25,15 @@ export const HomePhraseWrapper = styled(motion.div)`
   margin-top: 50px;
   margin-bottom: 30px;
 `;
+export const CardSectionWrapper = styled.div`
+  height: 400px;
+`;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
-  height: 400px;
+  height: 100%;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
   div:last-child {

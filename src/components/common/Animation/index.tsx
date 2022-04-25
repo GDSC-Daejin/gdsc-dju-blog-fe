@@ -89,7 +89,7 @@ export const listAnimate = {
     opacity: 1,
     transition: {
       staggerChildren: 0.2,
-      delayChildren: 0.3,
+      delayChildren: 0.1,
     },
   },
   exit: {
@@ -99,13 +99,11 @@ export const listAnimate = {
 export const blogCardAnimate = {
   start: {
     opacity: 0,
-    x: `calc((100vw - 1200px) / 2)`,
-    y: 100,
+    x: '50%',
   },
   end: {
     x: `calc((100vw - 1200px) / 2)`,
     opacity: 1,
-    y: 0,
     transition: {
       duration: 0.3,
     },
