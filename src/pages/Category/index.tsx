@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+
 import { LayoutContainer } from '../../styles/layouts';
 import { CategoryInner, PageBarWrapper } from './styled';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';

@@ -64,7 +64,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
           <Bookmark marked={marked} />
         </BookMarkWrapper>
         {/* 이미지 */}
-        <BlogCardThumbnail src={BlogCardImage} />
+        <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}
         <BlogCardTagWrapper IsHovered={IsHovered}>
           {hashTageSpreader(postData.postHashTags)
@@ -93,7 +93,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
           </AnimatePresence>
           <BlogCardSubTextWrapper>
             <BlogCardAuthorWrapper>
-              <BlogCardAuthorImage />
+              <BlogCardAuthorImage alt="AuthorImage" />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>
                 {postData.memberInfo.nickname}

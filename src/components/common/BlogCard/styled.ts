@@ -21,8 +21,8 @@ export const BookMarkWrapper = styled.div`
 `;
 
 export const BlogCardThumbnail = styled.img`
-  width: inherit;
-  height: inherit;
+  width: 248px;
+  height: 294px;
   border-radius: 13px;
 `;
 

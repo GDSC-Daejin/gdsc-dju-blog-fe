@@ -1,11 +1,20 @@
 import React from 'react';
-import { BlogCardButton } from './styled';
+import styled from 'styled-components';
 
 interface IBlogCardButton {
   ScrollX: number;
   scrollRef: React.RefObject<HTMLDivElement>;
 }
 
+export const BlogCardButton = styled.button<{ ButtonActive: boolean }>`
+  width: 40px;
+  height: 4px;
+  background-color: ${(props) =>
+    props.ButtonActive ? props.theme.color.grey500 : props.theme.color.grey300};
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+`;
 export const BlogCardScrollButton = ({
   ScrollX,
   scrollRef,

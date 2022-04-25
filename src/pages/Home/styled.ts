@@ -6,8 +6,27 @@ export const MainContentWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
+  gap: 3.75rem;
+  margin-top: 50px;
+`;
+
+export const WelcomePhrase = styled.div`
+  span {
+    font-size: ${(props) => props.theme.fontSize.h7};
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  p {
+    font-size: 2.25rem;
+    font-weight: 500;
+    line-height: 3.25rem;
+    letter-spacing: 0em;
+    margin: 10px 0px 26px;
+  }
 `;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
@@ -25,20 +44,11 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   &::-webkit-scrollbar {
     display: none;
   }
-  &::-moz-scrollbar {
-    display: none;
-  }
-  &::-ms-scrollbar {
-    display: none;
-  }
-  &::-o-scrollbar {
-    display: none;
-  }
 `;
 
 export const BlogCardWrapper = styled(motion.div)`
-  width: 276px;
-  height: 328px;
+  width: 248px;
+  height: 294px;
   margin: 0px 15px;
 `;
 
@@ -49,19 +59,4 @@ export const ButtonWrapper = styled.div`
   left: 15px;
   bottom: 0px;
   margin-top: 3px;
-`;
-
-export const CardSectionBlur = styled.div`
-  position: absolute;
-  width: 150px;
-  height: 432px;
-  z-index: 2;
-  right: 0px;
-  background: linear-gradient(
-    270.96deg,
-    #ffffff 13.01%,
-    rgba(255, 255, 255, 0.859167) 30.46%,
-    rgba(255, 255, 255, 0.386709) 58.16%,
-    rgba(255, 255, 255, 0) 89.38%
-  );
 `;
