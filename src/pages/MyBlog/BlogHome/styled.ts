@@ -80,7 +80,11 @@ export const PostSectionWrapper = styled.section`
   width: 100%;
 `;
 export const NoPosts = styled.div`
-  margin-top: 50px;
+  height: 600px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: ${({ theme }) => theme.fontSize.h7};
   color: ${({ theme }) => theme.color.grey400};
 `;
