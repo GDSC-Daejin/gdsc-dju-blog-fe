@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useScroll } from 'react-use';
 import { useSearchParams } from 'react-router-dom';
 import { LayoutContainer } from '../../styles/layouts';
@@ -14,6 +14,7 @@ import {
 import CategoryMenu from '../../components/common/CategoryMenu';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import HomePhrase from '../../components/common/HomePhrase';
+import { homePhraseData } from '../../api/Mocks/homePhraseData';
 
 function index() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ function index() {
   const [startX, setStartX] = useState(0);
   const [searchParams] = useSearchParams();
   const [category, setCategory] = useState('all');
+  const [phrase, setPhrase] = useState(homePhraseData[0]);
   const currentParamsPageNumber = searchParams.get('category');
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -66,18 +68,29 @@ function index() {
   //   });
   // }, []);
 
+  const setPhraseData = useCallback(() => {
+    let index = 0;
+    setInterval(() => {
+      setPhrase(homePhraseData[index]);
+      index++;
+      if (index >= homePhraseData.length) index = 0;
+    }, 5000);
+  }, []);
+  useEffect(() => {
+    setPhraseData();
+  }, []);
+
   return (
     <LayoutContainer>
       <MainContentWrapper>
-        <HomePhraseWrapper>
-          <HomePhrase
-            phrase={
-              'Google Developer Student Club\n' +
-              ' Daejin Univ. Blog 에 오신걸 환영합니다.'
-            }
-            by={'by Cindy'}
-            from={'from Cindy'}
-          />
+        <HomePhraseWrapper
+          key={phrase.phrase}
+          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          exit={{ opacity: 1, y: -20 }}
+          transition={{ duration: 0.6 }}
+        >
+          <HomePhrase phraseData={phrase} />
         </HomePhraseWrapper>
         <CategoryMenu type={category} onClick={changeCategory} />
         <CardSection

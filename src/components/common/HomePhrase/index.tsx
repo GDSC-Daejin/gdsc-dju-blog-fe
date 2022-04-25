@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface HomePhraseProps {
-  from: string;
-  by: string;
-  phrase: string;
+  phraseData: {
+    from: string;
+    by: string;
+    phrase: string;
+  };
 }
 const From = styled.div`
   font-size: ${({ theme }) => theme.fontSize.h7};
@@ -15,17 +17,18 @@ const Phrase = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.h3};
   margin-bottom: 26px;
   color: ${({ theme }) => theme.color.grey900};
-  font-weight: bold;
+  font-weight: 500;
+  width: 600px;
 `;
 const By = styled.div`
   font-size: ${({ theme }) => theme.fontSize.body1};
   color: ${({ theme }) => theme.color.grey900};
 `;
-const HomePhrase: React.FC<HomePhraseProps> = ({ from, by, phrase }) => {
-  const phrases = phrase.split('\n');
+const HomePhrase: React.FC<HomePhraseProps> = ({ phraseData }) => {
+  const phrases = phraseData.phrase.split('\n');
   return (
     <div>
-      <From>{from}</From>
+      <From>From {phraseData.from}</From>
       <Phrase>
         {phrases.map((text, id) => (
           <>
@@ -34,7 +37,7 @@ const HomePhrase: React.FC<HomePhraseProps> = ({ from, by, phrase }) => {
           </>
         ))}
       </Phrase>
-      <By>{by}</By>
+      <By>By {phraseData.by}</By>
     </div>
   );
 };

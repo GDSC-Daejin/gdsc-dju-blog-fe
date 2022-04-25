@@ -11,7 +11,8 @@ export const MainContentWrapper = styled.div`
   gap: 3.75rem;
   margin-top: 50px;
 `;
-export const HomePhraseWrapper = styled.div`
+export const HomePhraseWrapper = styled(motion.div)`
+  height: 180px;
   margin-top: 50px;
   margin-bottom: 30px;
 `;
