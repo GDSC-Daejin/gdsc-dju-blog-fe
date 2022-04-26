@@ -80,7 +80,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const removeImageInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
     .replace(/\(.*\)/gi, ''); // ( ) 제거
-  console.log(removeImageInContent);
 
   return (
     <AnimateSharedLayout>
@@ -113,7 +112,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
                 initial={'initial'}
                 animate={'visible'}
               >
-                <PostText children={removeImageInContent} />
+                <PostText children={removeImageInContent.slice(0, 160)} />
               </BlogCardPostText>
             )}
           </AnimatePresence>

@@ -89,7 +89,7 @@ export const BlogCardAuthorImage = styled.img`
   height: 18px;
   width: 18px;
 `;
-export const BlogCardPostText = styled(motion.p)`
+export const BlogCardPostText = styled(motion.article)`
   position: absolute;
   transform: translate(-50%, 0%);
   top: 53px;
@@ -101,6 +101,7 @@ export const BlogCardPostText = styled(motion.p)`
   word-break: break-word;
 `;
 export const PostText = styled(ReactMarkdown)`
+  height: 100%;
   div,
   span,
   applet,
@@ -153,6 +154,7 @@ export const PostText = styled(ReactMarkdown)`
   label,
   legend {
     font-size: ${({ theme }) => theme.fontSize.body3};
+    word-break: break-all;
   }
 `;
 
