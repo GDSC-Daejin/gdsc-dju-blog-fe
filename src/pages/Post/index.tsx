@@ -7,12 +7,12 @@ import { Viewer } from '@toast-ui/react-editor';
 import './post.css';
 import styled, { css } from 'styled-components';
 import { PostAuthorWrapper, PostHead, PostTitle } from './styled';
-import { MemberDataInfoType } from '../../types/userDataType';
 import { AuthorProps } from '../../types/postData';
 import { theme } from '../../styles/theme';
 import { dateFilter } from '../../Utils/dateFilter';
 import { hashTageSpreader } from '../../Utils/hashTageSpreader';
-import { HashTageDark, HashTageLight } from '../../components/common/HashTage';
+import { HashTageDark } from '../../components/common/HashTage';
+import { positionColor } from '../../store/positionColor';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -38,10 +38,16 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
 
   return (
-    <div>
+    <>
       {postData && (
         <>
           <PostHead>
+            <CategoryWrapper>
+              <PositionCircle
+                color={positionColor(postData.category.categoryName)}
+              />
+              <Category>{postData.category.categoryName}</Category>
+            </CategoryWrapper>
             <PostTitle>{postData.title}</PostTitle>
             <PostAuthorWrapper>
               <AuthorBox {...postData.memberInfo} {...postData} />
@@ -50,10 +56,22 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
           <Viewer initialValue={postData.content} />
         </>
       )}
-    </div>
+    </>
   );
 };
 
+const PositionCircle = styled.div<{ color: string }>`
+  display: flex;
+  position: absolute;
+  top: -10px;
+  left: 45%;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  ${({ color }) => css`
+    background-color: ${color};
+  `}
+`;
 const AuthorWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -91,6 +109,22 @@ const Date = styled.p`
 const HashTageSection = styled.section`
   display: flex;
   flex-direction: row;
+`;
+const CategoryWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+`;
+const Category = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.body1};
+  color: ${({ theme }) => theme.color.grey900};
+  font-weight: 400;
+  flex-wrap: wrap;
+  border-bottom: 1px solid black;
+  display: flex;
+  padding: 4px 0;
+  margin-bottom: 20px;
 `;
 interface AuthorBoxProps extends AuthorProps {
   uploadDate: string;
