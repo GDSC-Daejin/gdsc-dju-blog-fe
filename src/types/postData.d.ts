@@ -13,8 +13,15 @@ export interface DetailPostDataType {
   postId: number;
   title: string;
   likes: string[];
-  memberInfo: MemberDataInfoType;
+  memberInfo: AuthorProps;
 }
+export interface AuthorProps {
+  member: {
+    profileImageUrl: string;
+  };
+  nickname: string;
+}
+
 export interface RowPostDataType {
   body: {
     data: DetailPostDataType;
