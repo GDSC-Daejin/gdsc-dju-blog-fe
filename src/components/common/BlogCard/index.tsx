@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import BlogCardImage from '../../../assets/unknown.png';
 import { useNavigate } from 'react-router';
 import {
@@ -16,12 +16,12 @@ import {
   PostText,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import { detailPostDataType } from '../../../types/postData';
 import Bookmark from '../../../assets/Bookmark';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { HashTageLight } from '../HashTage';
 import ReactMarkdown from 'react-markdown';
+import { detailPostDataType } from '../../../types/postData';
 
 const PostTextVariants = {
   initial: {
@@ -45,7 +45,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const [marked, setMarked] = useState(false);
 
   const nowLogin = false;
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const linkToPost = useCallback(() => {
+    navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
+  }, [postData]);
+
   const setBookmarkClip = () => {
     if (nowLogin)
       setMarked((prev) => {
@@ -53,13 +58,33 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
       });
     else {
       alert('로그인 후 이용가능합니다');
-      Navigate('/', { replace: false });
+      navigate('/', { replace: false });
     }
   };
+  const sliceTitle = useCallback(() => {
+    const korean = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+    if (korean.test(postData.title)) {
+      if (postData.title.length > 12) {
+        return postData.title.slice(0, 12) + '...';
+      } else {
+        return postData.title;
+      }
+    } else {
+      if (postData.title.length > 15) {
+        return postData.title.slice(0, 15) + '...';
+      } else {
+        return postData.title;
+      }
+    }
+  }, []);
+  const removeImageInContent = postData.content
+    .replace(/!\[.*\]/gi, '') // ![] 제거
+    .replace(/\(.*\)/gi, ''); // ( ) 제거
+  console.log(removeImageInContent);
 
   return (
     <AnimateSharedLayout>
-      <BlogCardInner>
+      <BlogCardInner onClick={linkToPost}>
         {/* 북마크 */}
         <BookMarkWrapper onClick={setBookmarkClip}>
           <Bookmark marked={marked} />
@@ -80,7 +105,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
         >
-          <BlogCardTitle>{postData.title.slice(0, 13)}</BlogCardTitle>
+          <BlogCardTitle>{sliceTitle()}</BlogCardTitle>
           <AnimatePresence>
             {IsHovered && (
               <BlogCardPostText
@@ -88,7 +113,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
                 initial={'initial'}
                 animate={'visible'}
               >
-                <PostText children={postData.content} />
+                <PostText children={removeImageInContent} />
               </BlogCardPostText>
             )}
           </AnimatePresence>
