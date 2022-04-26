@@ -2,7 +2,7 @@ import React, { createRef, useState } from 'react';
 import { Giscus } from '@giscus/react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 
-const Posts = () => {
+const Post = () => {
   return (
     <LayoutContainer>
       <ContainerInner>
@@ -20,4 +20,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default Post;
