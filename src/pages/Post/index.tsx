@@ -1,12 +1,14 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React from 'react';
 import { Giscus } from '@giscus/react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useParams } from 'react-router-dom';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-
-import ReactMarkdown from 'react-markdown';
+import { Viewer } from '@toast-ui/react-editor';
 import './post.css';
 import styled from 'styled-components';
+import { PostAuthorWrapper, PostHead, PostTitle } from './styled';
+import { MemberDataInfoType } from '../../types/userDataType';
+
 const Post = () => {
   const { postId } = useParams<'postId'>();
 
@@ -33,26 +35,37 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   return (
     <div>
       {postData && (
-        <div>
-          <h1>{postData.title}</h1>
-          <PostArticle
-            children={postData.content}
-            className={'markdown-body'}
-          />
-          <p>{postData.content}</p>
-          {/*<p>{postData.postHashTags}</p>*/}
-          <div>{postData.uploadDate}</div>
-        </div>
+        <>
+          <PostHead>
+            <PostTitle>{postData.title}</PostTitle>
+            <PostAuthorWrapper>
+              <Author author={postData.memberInfo} />
+            </PostAuthorWrapper>
+          </PostHead>
+          <Viewer initialValue={postData.content} />
+        </>
       )}
     </div>
   );
 };
-const PostArticle = styled(ReactMarkdown)`
-  p,
-  a {
-    font-size: ${({ theme }) => theme.fontSize.body1};
-    line-height: 2;
-  }
+
+const AuthorWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 `;
+const AuthorImage = styled.img`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
+`;
+const Author: React.FC<{ author: MemberDataInfoType }> = ({ author }) => {
+  return (
+    <AuthorWrapper>
+      <AuthorImage />
+    </AuthorWrapper>
+  );
+};
 
 export default Post;

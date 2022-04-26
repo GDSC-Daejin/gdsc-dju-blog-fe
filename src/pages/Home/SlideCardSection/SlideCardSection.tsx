@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import { CardSection, BlogCardWrapper } from './styled';
 import BlogCard from '../../../components/common/BlogCard';
-import { detailPostDataType } from '../../../types/postData';
+import { DetailPostDataType } from '../../../types/postData';
 
 interface ISlideCardSectionProps {
-  PostData: detailPostDataType[];
+  PostData: DetailPostDataType[];
 }
 
 const SlideCardSection = (props: ISlideCardSectionProps) => {

@@ -1,4 +1,4 @@
-.markdown-body {
+.toastui-editor-contents {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     margin: 0;
@@ -10,18 +10,21 @@
     word-wrap: break-word;
 }
 
-.markdown-body .octicon {
+.toastui-editor-contents .octicon {
     display: inline-block;
     fill: currentColor;
     vertical-align: text-bottom;
 }
+.toastui-editor-contents p, strong, b, em, i, small, a, li, ol, ul {
+    font-size: 16px;
+}
 
-.markdown-body h1:hover .anchor .octicon-link:before,
-.markdown-body h2:hover .anchor .octicon-link:before,
-.markdown-body h3:hover .anchor .octicon-link:before,
-.markdown-body h4:hover .anchor .octicon-link:before,
-.markdown-body h5:hover .anchor .octicon-link:before,
-.markdown-body h6:hover .anchor .octicon-link:before {
+.toastui-editor-contents h1:hover .anchor .octicon-link:before,
+.toastui-editor-contents h2:hover .anchor .octicon-link:before,
+.toastui-editor-contents h3:hover .anchor .octicon-link:before,
+.toastui-editor-contents h4:hover .anchor .octicon-link:before,
+.toastui-editor-contents h5:hover .anchor .octicon-link:before,
+.toastui-editor-contents h6:hover .anchor .octicon-link:before {
     width: 16px;
     height: 16px;
     content: ' ';
@@ -31,46 +34,46 @@
     mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
 }
 
-.markdown-body details,
-.markdown-body figcaption,
-.markdown-body figure {
+.toastui-editor-contents details,
+.toastui-editor-contents figcaption,
+.toastui-editor-contents figure {
     display: block;
 }
 
-.markdown-body summary {
+.toastui-editor-contents summary {
     display: list-item;
 }
 
-.markdown-body [hidden] {
+.toastui-editor-contents [hidden] {
     display: none !important;
 }
 
-.markdown-body a {
+.toastui-editor-contents a {
     background-color: transparent;
     color: #0969da;
     text-decoration: none;
 }
 
-.markdown-body a:active,
-.markdown-body a:hover {
+.toastui-editor-contents a:active,
+.toastui-editor-contents a:hover {
     outline-width: 0;
 }
 
-.markdown-body abbr[title] {
+.toastui-editor-contents abbr[title] {
     border-bottom: none;
     text-decoration: underline dotted;
 }
 
-.markdown-body b,
-.markdown-body strong {
+.toastui-editor-contents b,
+.toastui-editor-contents strong {
     font-weight: 600;
 }
 
-.markdown-body dfn {
+.toastui-editor-contents dfn {
     font-style: italic;
 }
 
-.markdown-body h1 {
+.toastui-editor-contents h1 {
     margin: .67em 0;
     font-weight: 600;
     padding-bottom: .3em;
@@ -78,51 +81,51 @@
     border-bottom: 1px solid hsla(210,18%,87%,1);
 }
 
-.markdown-body mark {
+.toastui-editor-contents mark {
     background-color: #fff8c5;
     color: #24292f;
 }
 
-.markdown-body small {
+.toastui-editor-contents small {
     font-size: 90%;
 }
 
-.markdown-body sub,
-.markdown-body sup {
+.toastui-editor-contents sub,
+.toastui-editor-contents sup {
     font-size: 75%;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
 }
 
-.markdown-body sub {
+.toastui-editor-contents sub {
     bottom: -0.25em;
 }
 
-.markdown-body sup {
+.toastui-editor-contents sup {
     top: -0.5em;
 }
 
-.markdown-body img {
+.toastui-editor-contents img {
     border-style: none;
     max-width: 100%;
     box-sizing: content-box;
     background-color: #ffffff;
 }
 
-.markdown-body code,
-.markdown-body kbd,
-.markdown-body pre,
-.markdown-body samp {
+.toastui-editor-contents code,
+.toastui-editor-contents kbd,
+.toastui-editor-contents pre,
+.toastui-editor-contents samp {
     font-family: monospace,monospace;
     font-size: 1em;
 }
 
-.markdown-body figure {
+.toastui-editor-contents figure {
     margin: 1em 40px;
 }
 
-.markdown-body hr {
+.toastui-editor-contents hr {
     box-sizing: content-box;
     overflow: hidden;
     background: transparent;
@@ -134,7 +137,7 @@
     border: 0;
 }
 
-.markdown-body input {
+.toastui-editor-contents input {
     font: inherit;
     margin: 0;
     overflow: visible;
@@ -143,72 +146,72 @@
     line-height: inherit;
 }
 
-.markdown-body [type=button],
-.markdown-body [type=reset],
-.markdown-body [type=submit] {
+.toastui-editor-contents [type=button],
+.toastui-editor-contents [type=reset],
+.toastui-editor-contents [type=submit] {
     -webkit-appearance: button;
 }
 
-.markdown-body [type=button]::-moz-focus-inner,
-.markdown-body [type=reset]::-moz-focus-inner,
-.markdown-body [type=submit]::-moz-focus-inner {
+.toastui-editor-contents [type=button]::-moz-focus-inner,
+.toastui-editor-contents [type=reset]::-moz-focus-inner,
+.toastui-editor-contents [type=submit]::-moz-focus-inner {
     border-style: none;
     padding: 0;
 }
 
-.markdown-body [type=button]:-moz-focusring,
-.markdown-body [type=reset]:-moz-focusring,
-.markdown-body [type=submit]:-moz-focusring {
+.toastui-editor-contents [type=button]:-moz-focusring,
+.toastui-editor-contents [type=reset]:-moz-focusring,
+.toastui-editor-contents [type=submit]:-moz-focusring {
     outline: 1px dotted ButtonText;
 }
 
-.markdown-body [type=checkbox],
-.markdown-body [type=radio] {
+.toastui-editor-contents [type=checkbox],
+.toastui-editor-contents [type=radio] {
     box-sizing: border-box;
     padding: 0;
 }
 
-.markdown-body [type=number]::-webkit-inner-spin-button,
-.markdown-body [type=number]::-webkit-outer-spin-button {
+.toastui-editor-contents [type=number]::-webkit-inner-spin-button,
+.toastui-editor-contents [type=number]::-webkit-outer-spin-button {
     height: auto;
 }
 
-.markdown-body [type=search] {
+.toastui-editor-contents [type=search] {
     -webkit-appearance: textfield;
     outline-offset: -2px;
 }
 
-.markdown-body [type=search]::-webkit-search-cancel-button,
-.markdown-body [type=search]::-webkit-search-decoration {
+.toastui-editor-contents [type=search]::-webkit-search-cancel-button,
+.toastui-editor-contents [type=search]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
-.markdown-body ::-webkit-input-placeholder {
+.toastui-editor-contents ::-webkit-input-placeholder {
     color: inherit;
     opacity: .54;
 }
 
-.markdown-body ::-webkit-file-upload-button {
+.toastui-editor-contents ::-webkit-file-upload-button {
     -webkit-appearance: button;
     font: inherit;
 }
 
-.markdown-body a:hover {
+.toastui-editor-contents a:hover {
     text-decoration: underline;
 }
 
-.markdown-body hr::before {
+.toastui-editor-contents hr::before {
     display: table;
     content: "";
 }
 
-.markdown-body hr::after {
+.toastui-editor-contents hr::after {
     display: table;
     clear: both;
     content: "";
 }
 
-.markdown-body table {
+.toastui-editor-contents table {
     border-spacing: 0;
     border-collapse: collapse;
     display: block;
@@ -217,20 +220,20 @@
     overflow: auto;
 }
 
-.markdown-body td,
-.markdown-body th {
+.toastui-editor-contents td,
+.toastui-editor-contents th {
     padding: 0;
 }
 
-.markdown-body details summary {
+.toastui-editor-contents details summary {
     cursor: pointer;
 }
 
-.markdown-body details:not([open])>*:not(summary) {
+.toastui-editor-contents details:not([open])>*:not(summary) {
     display: none !important;
 }
 
-.markdown-body kbd {
+.toastui-editor-contents kbd {
     display: inline-block;
     padding: 3px 5px;
     font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
@@ -244,88 +247,88 @@
     box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
+.toastui-editor-contents h1,
+.toastui-editor-contents h2,
+.toastui-editor-contents h3,
+.toastui-editor-contents h4,
+.toastui-editor-contents h5,
+.toastui-editor-contents h6 {
     margin-top: 24px;
     margin-bottom: 16px;
     font-weight: 600;
     line-height: 1.25;
 }
 
-.markdown-body h2 {
+.toastui-editor-contents h2 {
     font-weight: 600;
     padding-bottom: .3em;
     font-size: 1.5em;
     border-bottom: 1px solid hsla(210,18%,87%,1);
 }
 
-.markdown-body h3 {
+.toastui-editor-contents h3 {
     font-weight: 600;
     font-size: 1.25em;
 }
 
-.markdown-body h4 {
+.toastui-editor-contents h4 {
     font-weight: 600;
     font-size: 1em;
 }
 
-.markdown-body h5 {
+.toastui-editor-contents h5 {
     font-weight: 600;
     font-size: .875em;
 }
 
-.markdown-body h6 {
+.toastui-editor-contents h6 {
     font-weight: 600;
     font-size: .85em;
     color: #57606a;
 }
 
-.markdown-body p {
+.toastui-editor-contents p {
     margin-top: 0;
     margin-bottom: 10px;
 }
 
-.markdown-body blockquote {
+.toastui-editor-contents blockquote {
     margin: 0;
     padding: 0 1em;
     color: #57606a;
     border-left: .25em solid #d0d7de;
 }
 
-.markdown-body ul,
-.markdown-body ol {
+.toastui-editor-contents ul,
+.toastui-editor-contents ol {
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 2em;
 }
 
-.markdown-body ol ol,
-.markdown-body ul ol {
+.toastui-editor-contents ol ol,
+.toastui-editor-contents ul ol {
     list-style-type: lower-roman;
 }
 
-.markdown-body ul ul ol,
-.markdown-body ul ol ol,
-.markdown-body ol ul ol,
-.markdown-body ol ol ol {
+.toastui-editor-contents ul ul ol,
+.toastui-editor-contents ul ol ol,
+.toastui-editor-contents ol ul ol,
+.toastui-editor-contents ol ol ol {
     list-style-type: lower-alpha;
 }
 
-.markdown-body dd {
+.toastui-editor-contents dd {
     margin-left: 0;
 }
 
-.markdown-body tt,
-.markdown-body code {
+.toastui-editor-contents tt,
+.toastui-editor-contents code {
     font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
     font-size: 12px;
 }
 
-.markdown-body pre {
+.toastui-editor-contents pre {
     margin-top: 0;
     margin-bottom: 0;
     font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
@@ -333,150 +336,150 @@
     word-wrap: normal;
 }
 
-.markdown-body .octicon {
+.toastui-editor-contents .octicon {
     display: inline-block;
     overflow: visible !important;
     vertical-align: text-bottom;
     fill: currentColor;
 }
 
-.markdown-body ::placeholder {
+.toastui-editor-contents ::placeholder {
     color: #6e7781;
     opacity: 1;
 }
 
-.markdown-body input::-webkit-outer-spin-button,
-.markdown-body input::-webkit-inner-spin-button {
+.toastui-editor-contents input::-webkit-outer-spin-button,
+.toastui-editor-contents input::-webkit-inner-spin-button {
     margin: 0;
     -webkit-appearance: none;
     appearance: none;
 }
 
-.markdown-body .pl-c {
+.toastui-editor-contents .pl-c {
     color: #6e7781;
 }
 
-.markdown-body .pl-c1,
-.markdown-body .pl-s .pl-v {
+.toastui-editor-contents .pl-c1,
+.toastui-editor-contents .pl-s .pl-v {
     color: #0550ae;
 }
 
-.markdown-body .pl-e,
-.markdown-body .pl-en {
+.toastui-editor-contents .pl-e,
+.toastui-editor-contents .pl-en {
     color: #8250df;
 }
 
-.markdown-body .pl-smi,
-.markdown-body .pl-s .pl-s1 {
+.toastui-editor-contents .pl-smi,
+.toastui-editor-contents .pl-s .pl-s1 {
     color: #24292f;
 }
 
-.markdown-body .pl-ent {
+.toastui-editor-contents .pl-ent {
     color: #116329;
 }
 
-.markdown-body .pl-k {
+.toastui-editor-contents .pl-k {
     color: #cf222e;
 }
 
-.markdown-body .pl-s,
-.markdown-body .pl-pds,
-.markdown-body .pl-s .pl-pse .pl-s1,
-.markdown-body .pl-sr,
-.markdown-body .pl-sr .pl-cce,
-.markdown-body .pl-sr .pl-sre,
-.markdown-body .pl-sr .pl-sra {
+.toastui-editor-contents .pl-s,
+.toastui-editor-contents .pl-pds,
+.toastui-editor-contents .pl-s .pl-pse .pl-s1,
+.toastui-editor-contents .pl-sr,
+.toastui-editor-contents .pl-sr .pl-cce,
+.toastui-editor-contents .pl-sr .pl-sre,
+.toastui-editor-contents .pl-sr .pl-sra {
     color: #0a3069;
 }
 
-.markdown-body .pl-v,
-.markdown-body .pl-smw {
+.toastui-editor-contents .pl-v,
+.toastui-editor-contents .pl-smw {
     color: #953800;
 }
 
-.markdown-body .pl-bu {
+.toastui-editor-contents .pl-bu {
     color: #82071e;
 }
 
-.markdown-body .pl-ii {
+.toastui-editor-contents .pl-ii {
     color: #f6f8fa;
     background-color: #82071e;
 }
 
-.markdown-body .pl-c2 {
+.toastui-editor-contents .pl-c2 {
     color: #f6f8fa;
     background-color: #cf222e;
 }
 
-.markdown-body .pl-sr .pl-cce {
+.toastui-editor-contents .pl-sr .pl-cce {
     font-weight: bold;
     color: #116329;
 }
 
-.markdown-body .pl-ml {
+.toastui-editor-contents .pl-ml {
     color: #3b2300;
 }
 
-.markdown-body .pl-mh,
-.markdown-body .pl-mh .pl-en,
-.markdown-body .pl-ms {
+.toastui-editor-contents .pl-mh,
+.toastui-editor-contents .pl-mh .pl-en,
+.toastui-editor-contents .pl-ms {
     font-weight: bold;
     color: #0550ae;
 }
 
-.markdown-body .pl-mi {
+.toastui-editor-contents .pl-mi {
     font-style: italic;
     color: #24292f;
 }
 
-.markdown-body .pl-mb {
+.toastui-editor-contents .pl-mb {
     font-weight: bold;
     color: #24292f;
 }
 
-.markdown-body .pl-md {
+.toastui-editor-contents .pl-md {
     color: #82071e;
     background-color: #FFEBE9;
 }
 
-.markdown-body .pl-mi1 {
+.toastui-editor-contents .pl-mi1 {
     color: #116329;
     background-color: #dafbe1;
 }
 
-.markdown-body .pl-mc {
+.toastui-editor-contents .pl-mc {
     color: #953800;
     background-color: #ffd8b5;
 }
 
-.markdown-body .pl-mi2 {
+.toastui-editor-contents .pl-mi2 {
     color: #eaeef2;
     background-color: #0550ae;
 }
 
-.markdown-body .pl-mdr {
+.toastui-editor-contents .pl-mdr {
     font-weight: bold;
     color: #8250df;
 }
 
-.markdown-body .pl-ba {
+.toastui-editor-contents .pl-ba {
     color: #57606a;
 }
 
-.markdown-body .pl-sg {
+.toastui-editor-contents .pl-sg {
     color: #8c959f;
 }
 
-.markdown-body .pl-corl {
+.toastui-editor-contents .pl-corl {
     text-decoration: underline;
     color: #0a3069;
 }
 
-.markdown-body [data-catalyst] {
+.toastui-editor-contents [data-catalyst] {
     display: block;
 }
 
-.markdown-body g-emoji {
+.toastui-editor-contents g-emoji {
     font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size: 1em;
     font-style: normal !important;
@@ -485,166 +488,166 @@
     vertical-align: -0.075em;
 }
 
-.markdown-body g-emoji img {
+.toastui-editor-contents g-emoji img {
     width: 1em;
     height: 1em;
 }
 
-.markdown-body::before {
+.toastui-editor-contents::before {
     display: table;
     content: "";
 }
 
-.markdown-body::after {
+.toastui-editor-contents::after {
     display: table;
     clear: both;
     content: "";
 }
 
-.markdown-body>*:first-child {
+.toastui-editor-contents>*:first-child {
     margin-top: 0 !important;
 }
 
-.markdown-body>*:last-child {
+.toastui-editor-contents>*:last-child {
     margin-bottom: 0 !important;
 }
 
-.markdown-body a:not([href]) {
+.toastui-editor-contents a:not([href]) {
     color: inherit;
     text-decoration: none;
 }
 
-.markdown-body .absent {
+.toastui-editor-contents .absent {
     color: #cf222e;
 }
 
-.markdown-body .anchor {
+.toastui-editor-contents .anchor {
     float: left;
     padding-right: 4px;
     margin-left: -20px;
     line-height: 1;
 }
 
-.markdown-body .anchor:focus {
+.toastui-editor-contents .anchor:focus {
     outline: none;
 }
 
-.markdown-body p,
-.markdown-body blockquote,
-.markdown-body ul,
-.markdown-body ol,
-.markdown-body dl,
-.markdown-body table,
-.markdown-body pre,
-.markdown-body details {
+.toastui-editor-contents p,
+.toastui-editor-contents blockquote,
+.toastui-editor-contents ul,
+.toastui-editor-contents ol,
+.toastui-editor-contents dl,
+.toastui-editor-contents table,
+.toastui-editor-contents pre,
+.toastui-editor-contents details {
     margin-top: 0;
     margin-bottom: 16px;
 }
 
-.markdown-body blockquote>:first-child {
+.toastui-editor-contents blockquote>:first-child {
     margin-top: 0;
 }
 
-.markdown-body blockquote>:last-child {
+.toastui-editor-contents blockquote>:last-child {
     margin-bottom: 0;
 }
 
-.markdown-body sup>a::before {
+.toastui-editor-contents sup>a::before {
     content: "[";
 }
 
-.markdown-body sup>a::after {
+.toastui-editor-contents sup>a::after {
     content: "]";
 }
 
-.markdown-body h1 .octicon-link,
-.markdown-body h2 .octicon-link,
-.markdown-body h3 .octicon-link,
-.markdown-body h4 .octicon-link,
-.markdown-body h5 .octicon-link,
-.markdown-body h6 .octicon-link {
+.toastui-editor-contents h1 .octicon-link,
+.toastui-editor-contents h2 .octicon-link,
+.toastui-editor-contents h3 .octicon-link,
+.toastui-editor-contents h4 .octicon-link,
+.toastui-editor-contents h5 .octicon-link,
+.toastui-editor-contents h6 .octicon-link {
     color: #24292f;
     vertical-align: middle;
     visibility: hidden;
 }
 
-.markdown-body h1:hover .anchor,
-.markdown-body h2:hover .anchor,
-.markdown-body h3:hover .anchor,
-.markdown-body h4:hover .anchor,
-.markdown-body h5:hover .anchor,
-.markdown-body h6:hover .anchor {
+.toastui-editor-contents h1:hover .anchor,
+.toastui-editor-contents h2:hover .anchor,
+.toastui-editor-contents h3:hover .anchor,
+.toastui-editor-contents h4:hover .anchor,
+.toastui-editor-contents h5:hover .anchor,
+.toastui-editor-contents h6:hover .anchor {
     text-decoration: none;
 }
 
-.markdown-body h1:hover .anchor .octicon-link,
-.markdown-body h2:hover .anchor .octicon-link,
-.markdown-body h3:hover .anchor .octicon-link,
-.markdown-body h4:hover .anchor .octicon-link,
-.markdown-body h5:hover .anchor .octicon-link,
-.markdown-body h6:hover .anchor .octicon-link {
+.toastui-editor-contents h1:hover .anchor .octicon-link,
+.toastui-editor-contents h2:hover .anchor .octicon-link,
+.toastui-editor-contents h3:hover .anchor .octicon-link,
+.toastui-editor-contents h4:hover .anchor .octicon-link,
+.toastui-editor-contents h5:hover .anchor .octicon-link,
+.toastui-editor-contents h6:hover .anchor .octicon-link {
     visibility: visible;
 }
 
-.markdown-body h1 tt,
-.markdown-body h1 code,
-.markdown-body h2 tt,
-.markdown-body h2 code,
-.markdown-body h3 tt,
-.markdown-body h3 code,
-.markdown-body h4 tt,
-.markdown-body h4 code,
-.markdown-body h5 tt,
-.markdown-body h5 code,
-.markdown-body h6 tt,
-.markdown-body h6 code {
+.toastui-editor-contents h1 tt,
+.toastui-editor-contents h1 code,
+.toastui-editor-contents h2 tt,
+.toastui-editor-contents h2 code,
+.toastui-editor-contents h3 tt,
+.toastui-editor-contents h3 code,
+.toastui-editor-contents h4 tt,
+.toastui-editor-contents h4 code,
+.toastui-editor-contents h5 tt,
+.toastui-editor-contents h5 code,
+.toastui-editor-contents h6 tt,
+.toastui-editor-contents h6 code {
     padding: 0 .2em;
     font-size: inherit;
 }
 
-.markdown-body ul.no-list,
-.markdown-body ol.no-list {
+.toastui-editor-contents ul.no-list,
+.toastui-editor-contents ol.no-list {
     padding: 0;
     list-style-type: none;
 }
 
-.markdown-body ol[type="1"] {
+.toastui-editor-contents ol[type="1"] {
     list-style-type: decimal;
 }
 
-.markdown-body ol[type=a] {
+.toastui-editor-contents ol[type=a] {
     list-style-type: lower-alpha;
 }
 
-.markdown-body ol[type=i] {
+.toastui-editor-contents ol[type=i] {
     list-style-type: lower-roman;
 }
 
-.markdown-body div>ol:not([type]) {
+.toastui-editor-contents div>ol:not([type]) {
     list-style-type: decimal;
 }
 
-.markdown-body ul ul,
-.markdown-body ul ol,
-.markdown-body ol ol,
-.markdown-body ol ul {
+.toastui-editor-contents ul ul,
+.toastui-editor-contents ul ol,
+.toastui-editor-contents ol ol,
+.toastui-editor-contents ol ul {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-.markdown-body li>p {
+.toastui-editor-contents li>p {
     margin-top: 16px;
 }
 
-.markdown-body li+li {
+.toastui-editor-contents li+li {
     margin-top: .25em;
 }
 
-.markdown-body dl {
+.toastui-editor-contents dl {
     padding: 0;
 }
 
-.markdown-body dl dt {
+.toastui-editor-contents dl dt {
     padding: 0;
     margin-top: 16px;
     font-size: 1em;
@@ -652,54 +655,54 @@
     font-weight: 600;
 }
 
-.markdown-body dl dd {
+.toastui-editor-contents dl dd {
     padding: 0 16px;
     margin-bottom: 16px;
 }
 
-.markdown-body table th {
+.toastui-editor-contents table th {
     font-weight: 600;
 }
 
-.markdown-body table th,
-.markdown-body table td {
+.toastui-editor-contents table th,
+.toastui-editor-contents table td {
     padding: 6px 13px;
     border: 1px solid #d0d7de;
 }
 
-.markdown-body table tr {
+.toastui-editor-contents table tr {
     background-color: #ffffff;
     border-top: 1px solid hsla(210,18%,87%,1);
 }
 
-.markdown-body table tr:nth-child(2n) {
+.toastui-editor-contents table tr:nth-child(2n) {
     background-color: #f6f8fa;
 }
 
-.markdown-body table img {
+.toastui-editor-contents table img {
     background-color: transparent;
 }
 
-.markdown-body img[align=right] {
+.toastui-editor-contents img[align=right] {
     padding-left: 20px;
 }
 
-.markdown-body img[align=left] {
+.toastui-editor-contents img[align=left] {
     padding-right: 20px;
 }
 
-.markdown-body .emoji {
+.toastui-editor-contents .emoji {
     max-width: none;
     vertical-align: text-top;
     background-color: transparent;
 }
 
-.markdown-body span.frame {
+.toastui-editor-contents span.frame {
     display: block;
     overflow: hidden;
 }
 
-.markdown-body span.frame>span {
+.toastui-editor-contents span.frame>span {
     display: block;
     float: left;
     width: auto;
@@ -709,81 +712,81 @@
     border: 1px solid #d0d7de;
 }
 
-.markdown-body span.frame span img {
+.toastui-editor-contents span.frame span img {
     display: block;
     float: left;
 }
 
-.markdown-body span.frame span span {
+.toastui-editor-contents span.frame span span {
     display: block;
     padding: 5px 0 0;
     clear: both;
     color: #24292f;
 }
 
-.markdown-body span.align-center {
+.toastui-editor-contents span.align-center {
     display: block;
     overflow: hidden;
     clear: both;
 }
 
-.markdown-body span.align-center>span {
+.toastui-editor-contents span.align-center>span {
     display: block;
     margin: 13px auto 0;
     overflow: hidden;
     text-align: center;
 }
 
-.markdown-body span.align-center span img {
+.toastui-editor-contents span.align-center span img {
     margin: 0 auto;
     text-align: center;
 }
 
-.markdown-body span.align-right {
+.toastui-editor-contents span.align-right {
     display: block;
     overflow: hidden;
     clear: both;
 }
 
-.markdown-body span.align-right>span {
+.toastui-editor-contents span.align-right>span {
     display: block;
     margin: 13px 0 0;
     overflow: hidden;
     text-align: right;
 }
 
-.markdown-body span.align-right span img {
+.toastui-editor-contents span.align-right span img {
     margin: 0;
     text-align: right;
 }
 
-.markdown-body span.float-left {
+.toastui-editor-contents span.float-left {
     display: block;
     float: left;
     margin-right: 13px;
     overflow: hidden;
 }
 
-.markdown-body span.float-left span {
+.toastui-editor-contents span.float-left span {
     margin: 13px 0 0;
 }
 
-.markdown-body span.float-right {
+.toastui-editor-contents span.float-right {
     display: block;
     float: right;
     margin-left: 13px;
     overflow: hidden;
 }
 
-.markdown-body span.float-right>span {
+.toastui-editor-contents span.float-right>span {
     display: block;
     margin: 13px auto 0;
     overflow: hidden;
     text-align: right;
 }
 
-.markdown-body code,
-.markdown-body tt {
+.toastui-editor-contents code,
+.toastui-editor-contents tt {
     padding: .2em .4em;
     margin: 0;
     font-size: 85%;
@@ -791,20 +794,20 @@
     border-radius: 6px;
 }
 
-.markdown-body code br,
-.markdown-body tt br {
+.toastui-editor-contents code br,
+.toastui-editor-contents tt br {
     display: none;
 }
 
-.markdown-body del code {
+.toastui-editor-contents del code {
     text-decoration: inherit;
 }
 
-.markdown-body pre code {
+.toastui-editor-contents pre code {
     font-size: 100%;
 }
 
-.markdown-body pre>code {
+.toastui-editor-contents pre>code {
     padding: 0;
     margin: 0;
     word-break: normal;
@@ -813,17 +816,17 @@
     border: 0;
 }
 
-.markdown-body .highlight {
+.toastui-editor-contents .highlight {
     margin-bottom: 16px;
 }
 
-.markdown-body .highlight pre {
+.toastui-editor-contents .highlight pre {
     margin-bottom: 0;
     word-break: normal;
 }
 
-.markdown-body .highlight pre,
-.markdown-body pre {
+.toastui-editor-contents .highlight pre,
+.toastui-editor-contents pre {
     padding: 16px;
     overflow: auto;
     font-size: 85%;
@@ -832,8 +835,8 @@
     border-radius: 6px;
 }
 
-.markdown-body pre code,
-.markdown-body pre tt {
+.toastui-editor-contents pre code,
+.toastui-editor-contents pre tt {
     display: inline;
     max-width: auto;
     padding: 0;
@@ -845,8 +848,8 @@
     border: 0;
 }
 
-.markdown-body .csv-data td,
-.markdown-body .csv-data th {
+.toastui-editor-contents .csv-data td,
+.toastui-editor-contents .csv-data th {
     padding: 5px;
     overflow: hidden;
     font-size: 12px;
@@ -855,38 +858,38 @@
     white-space: nowrap;
 }
 
-.markdown-body .csv-data .blob-num {
+.toastui-editor-contents .csv-data .blob-num {
     padding: 10px 8px 9px;
     text-align: right;
     background: #ffffff;
     border: 0;
 }
 
-.markdown-body .csv-data tr {
+.toastui-editor-contents .csv-data tr {
     border-top: 0;
 }
 
-.markdown-body .csv-data th {
+.toastui-editor-contents .csv-data th {
     font-weight: 600;
     background: #f6f8fa;
     border-top: 0;
 }
 
-.markdown-body .footnotes {
+.toastui-editor-contents .footnotes {
     font-size: 12px;
     color: #57606a;
     border-top: 1px solid #d0d7de;
 }
 
-.markdown-body .footnotes ol {
+.toastui-editor-contents .footnotes ol {
     padding-left: 16px;
 }
 
-.markdown-body .footnotes li {
+.toastui-editor-contents .footnotes li {
     position: relative;
 }
 
-.markdown-body .footnotes li:target::before {
+.toastui-editor-contents .footnotes li:target::before {
     position: absolute;
     top: -8px;
     right: -8px;
@@ -898,43 +901,43 @@
     border-radius: 6px;
 }
 
-.markdown-body .footnotes li:target {
+.toastui-editor-contents .footnotes li:target {
     color: #24292f;
 }
 
-.markdown-body .footnotes .data-footnote-backref g-emoji {
+.toastui-editor-contents .footnotes .data-footnote-backref g-emoji {
     font-family: monospace;
 }
 
-.markdown-body .task-list-item {
+.toastui-editor-contents .task-list-item {
     list-style-type: none;
 }
 
-.markdown-body .task-list-item label {
+.toastui-editor-contents .task-list-item label {
     font-weight: 400;
 }
 
-.markdown-body .task-list-item.enabled label {
+.toastui-editor-contents .task-list-item.enabled label {
     cursor: pointer;
 }
 
-.markdown-body .task-list-item+.task-list-item {
+.toastui-editor-contents .task-list-item+.task-list-item {
     margin-top: 3px;
 }
 
-.markdown-body .task-list-item .handle {
+.toastui-editor-contents .task-list-item .handle {
     display: none;
 }
 
-.markdown-body .task-list-item-checkbox {
+.toastui-editor-contents .task-list-item-checkbox {
     margin: 0 .2em .25em -1.6em;
     vertical-align: middle;
 }
 
-.markdown-body .contains-task-list:dir(rtl) .task-list-item-checkbox {
+.toastui-editor-contents .contains-task-list:dir(rtl) .task-list-item-checkbox {
     margin: 0 -1.6em .25em .2em;
 }
 
-.markdown-body ::-webkit-calendar-picker-indicator {
+.toastui-editor-contents ::-webkit-calendar-picker-indicator {
     filter: invert(50%);
 }

@@ -1,6 +1,6 @@
-import { memberDataInfoType } from './userDataType';
+import { MemberDataInfoType } from './userDataType';
 
-export interface detailPostDataType {
+export interface DetailPostDataType {
   modifiedAt: string;
   uploadDate: string;
   example: string;
@@ -13,14 +13,14 @@ export interface detailPostDataType {
   postId: number;
   title: string;
   likes: string[];
-  memberInfo: memberDataInfoType;
+  memberInfo: MemberDataInfoType;
 }
-export interface rowPostDataType {
+export interface RowPostDataType {
   body: {
-    data: detailPostDataType;
+    data: DetailPostDataType;
   };
 }
-export interface postPostDataType {
+export interface PostPostDataType {
   base64Thumbnail: string;
   fileName: string;
   title: string;
@@ -30,10 +30,10 @@ export interface postPostDataType {
   content: string;
   postHashTags: string;
 }
-export interface rowDetailPostListType {
+export interface RowDetailPostListType {
   body: {
     data: {
-      content: detailPostDataType[];
+      content: DetailPostDataType[];
       totalElements: number;
       totalPages: number;
       empty: boolean;

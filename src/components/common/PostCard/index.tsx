@@ -16,9 +16,9 @@ import Bookmark from '../../../assets/Bookmark';
 
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 import { dateFilter } from '../../../Utils/dateFilter';
-import { detailPostDataType } from '../../../types/postData';
+import { DetailPostDataType } from '../../../types/postData';
 
-const PostCard: React.FC<detailPostDataType> = ({
+const PostCard: React.FC<DetailPostDataType> = ({
   title,
   category,
   content,
