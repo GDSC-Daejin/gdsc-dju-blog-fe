@@ -10,6 +10,7 @@ import {
   PageBarWrapper,
 } from './styled';
 import { useNavigate } from 'react-router';
+import { createSearchParams } from 'react-router-dom';
 
 const circleMotion = {
   isActive: {
@@ -28,13 +29,14 @@ const PageBar = (props: {
   type?: string;
 }) => {
   const { page, nickname, totalPage, type } = props;
+  const navigate = useNavigate();
+
   const division = (array: number[], num: number) => {
     const length = array.length;
     const copy = [...array];
     const divide =
       Math.floor(length / num) + (Math.floor(length % num) > 0 ? 1 : 0);
     const newArray = [];
-
     for (let i = 0; i <= divide; i++) {
       newArray.push(copy.splice(0, num));
     }
@@ -55,15 +57,21 @@ const PageBar = (props: {
     console.log(pageNum);
     return PAGES[pageNum];
   };
-  const navigate = useNavigate();
+
   const pageHandler = (page: number, limit?: number) => {
-    if (page < 0) {
+    if (page < 1) {
       return;
     }
     if (page === limit) {
       return;
     } else {
-      navigate(`/${nickname}?type=${type}&page=${page}`);
+      navigate({
+        pathname: `/${nickname}`,
+        search: `?${createSearchParams({
+          type: type as string,
+          page: page.toString(),
+        })}`,
+      });
     }
   };
   return (
@@ -89,7 +97,7 @@ const PageBar = (props: {
         ))}
       </NumberSection>
       {totalPage !== 1 && (
-        <ArrowWrapper onClick={() => pageHandler(page + 1, totalPage)}>
+        <ArrowWrapper onClick={() => pageHandler(page + 1, totalPage + 1)}>
           <RightArrow />
         </ArrowWrapper>
       )}
