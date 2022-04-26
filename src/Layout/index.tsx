@@ -14,7 +14,7 @@ import { userState } from '../store/user';
 import PostWrite from '../pages/PostWrite';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
-import Posts from '../pages/Post';
+import Post from '../pages/Post';
 import ScrollTop from '../Utils/ScrollTop';
 import Modal from '../components/common/modal';
 import Category from '../pages/Category';
@@ -51,7 +51,7 @@ const Layout = () => {
       <Routes>
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
-        <Route path={'/:user_name/:postId'} element={<Posts />} />
+        <Route path={'/:user_name/:postId'} element={<Post />} />
         <Route path={'/post/write'} element={<PostWrite />} />
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
@@ -60,7 +60,7 @@ const Layout = () => {
           path={'/admin'}
           element={
             <PrivateRoute>
-              <Posts />
+              <Post />
             </PrivateRoute>
           }
         />

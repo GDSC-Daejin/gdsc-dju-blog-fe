@@ -15,6 +15,11 @@ export interface detailPostDataType {
   likes: string[];
   memberInfo: memberDataInfoType;
 }
+export interface rowPostDataType {
+  body: {
+    data: detailPostDataType;
+  };
+}
 export interface postPostDataType {
   base64Thumbnail: string;
   fileName: string;
@@ -25,7 +30,7 @@ export interface postPostDataType {
   content: string;
   postHashTags: string;
 }
-export interface rowDetailPostDataType {
+export interface rowDetailPostListType {
   body: {
     data: {
       content: detailPostDataType[];
