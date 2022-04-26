@@ -14,9 +14,9 @@ import MockPostImage from '../../../assets/MockPostImage.png';
 import { HashTageDark } from '../HashTage';
 import Bookmark from '../../../assets/Bookmark';
 
-import { detailPostDataType } from '../../../types/postData';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 import { dateFilter } from '../../../Utils/dateFilter';
+import { detailPostDataType } from '../../../types/postData';
 
 const PostCard: React.FC<detailPostDataType> = ({
   title,
