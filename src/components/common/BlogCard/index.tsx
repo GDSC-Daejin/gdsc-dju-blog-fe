@@ -20,8 +20,7 @@ import Bookmark from '../../../assets/Bookmark';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { HashTageLight } from '../HashTage';
-import ReactMarkdown from 'react-markdown';
-import { detailPostDataType } from '../../../types/postData';
+import { DetailPostDataType } from '../../../types/postData';
 
 const PostTextVariants = {
   initial: {
@@ -38,7 +37,7 @@ const PostTextVariants = {
 };
 
 interface BlogCardProps {
-  postData: detailPostDataType;
+  postData: DetailPostDataType;
 }
 const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const [IsHovered, setIsHovered] = useState(false);
