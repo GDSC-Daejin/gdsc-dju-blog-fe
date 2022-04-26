@@ -90,7 +90,7 @@ export const StyledColumn = styled.div`
   width: 1px;
   height: 100px;
   background: ${(props) => props.theme.color.grey300};
-  margin: 0 30px;
+  margin: 0 50px;
   border: 0 solid;
   @media (max-width: 720px) {
     display: none;
