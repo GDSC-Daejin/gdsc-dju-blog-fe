@@ -117,7 +117,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
           </AnimatePresence>
           <BlogCardSubTextWrapper>
             <BlogCardAuthorWrapper>
-              <BlogCardAuthorImage alt="AuthorImage" />
+              <BlogCardAuthorImage
+                alt="AuthorImage"
+                src={postData.memberInfo.member.profileImageUrl}
+              />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>
                 {postData.memberInfo.nickname}
