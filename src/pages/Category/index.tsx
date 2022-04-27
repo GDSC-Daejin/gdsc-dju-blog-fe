@@ -22,7 +22,7 @@ const Category = () => {
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const { postListData } = useGetPostListData(category, page);
+  const { postListData } = useGetPostListData(category, page - 1);
 
   const navigate = useNavigate();
   useEffect(() => {
