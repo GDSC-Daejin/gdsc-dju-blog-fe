@@ -44,8 +44,7 @@ import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { categoryName } = useParams();
-
+  const categoryName = searchParams.get('type');
   const category = categoryName ? categoryName : 'all';
 
   const pageParams = searchParams.get('page');
@@ -60,6 +59,7 @@ const BlogHome = () => {
   useEffect(() => {
     if (page) {
       setSearchParams({
+        type: category,
         page: '1',
       });
     }
@@ -73,8 +73,9 @@ const BlogHome = () => {
       return;
     } else {
       navigate({
-        pathname: `/${userInfoData?.nickname}/${category}`,
+        pathname: `/${userInfoData?.nickname}`,
         search: `?${createSearchParams({
+          type: category,
           page: page.toString(),
         })}`,
       });
@@ -82,8 +83,9 @@ const BlogHome = () => {
   };
   const categoryHandler = (category: string) =>
     navigate({
-      pathname: `/${userInfoData?.nickname}/${category}`,
+      pathname: `/${userInfoData?.nickname}`,
       search: `?${createSearchParams({
+        type: category,
         page: page.toString(),
       })}`,
     });
