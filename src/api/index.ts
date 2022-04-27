@@ -1,13 +1,9 @@
-import axios, { Axios } from 'axios';
+import axios from 'axios';
+import { MemberDataInfoType, RowMemberDataType } from '../types/userDataType';
 import {
-  MemberDataInfoType,
-  RowMemberDataType,
-  UserDataType,
-} from '../types/userDataType';
-import {
-  detailPostDataType,
-  postPostDataType,
-  rowDetailPostDataType,
+  PostPostDataType,
+  RowDetailPostListType,
+  RowPostDataType,
 } from '../types/postData';
 
 export class Api {
@@ -42,7 +38,7 @@ export class Api {
     });
   };
   getUserPostListData = (params: string) => {
-    return axios.get<rowDetailPostDataType>(
+    return axios.get<RowDetailPostListType>(
       `${this.API}/api/member/v1/${params}`,
       {
         headers: this.Header,
@@ -50,10 +46,10 @@ export class Api {
     );
   };
   getPostListData = (params: string) => {
-    return axios.get<rowDetailPostDataType>(`${this.API}/api/v1/${params}`);
+    return axios.get<RowDetailPostListType>(`${this.API}/api/v1/${params}`);
   };
-  getPostDetailData = (postId: number) => {
-    return axios.get(`${this.API}/api/v1/post/${postId}`);
+  getPostData = (postId: string) => {
+    return axios.get<RowPostDataType>(`${this.API}/api/v1/post/${postId}`);
   };
 
   getUserScrapData = () => {
@@ -66,7 +62,7 @@ export class Api {
       headers: this.Header,
     });
   };
-  postPostData = (postData: postPostDataType) => {
+  postPostData = (postData: PostPostDataType) => {
     return axios.post(`${this.API}/api/member/v2/post`, postData, {
       headers: this.Header,
     });

@@ -9,15 +9,15 @@ import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
 import SideBar from '../components/common/SideBar';
 import API from '../api';
-import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
 import { userState } from '../store/user';
 import PostWrite from '../pages/PostWrite';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
-import Posts from '../pages/Posts';
+import Post from '../pages/Post';
 import ScrollTop from '../Utils/ScrollTop';
 import Modal from '../components/common/modal';
+import Category from '../pages/Category';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -51,8 +51,8 @@ const Layout = () => {
       <Routes>
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
+        <Route path={'/:user_name/:postId'} element={<Post />} />
         <Route path={'/:user_name/:categoryName'} element={<MyBlog />} />
-        <Route path={'/post'} element={<Posts />} />
         <Route path={'/post/write'} element={<PostWrite />} />
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
@@ -61,7 +61,7 @@ const Layout = () => {
           path={'/admin'}
           element={
             <PrivateRoute>
-              <Posts />
+              <Post />
             </PrivateRoute>
           }
         />
