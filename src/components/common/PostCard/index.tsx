@@ -24,6 +24,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
   content,
   postId,
   postHashTags,
+  memberInfo,
 }) => {
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
@@ -40,7 +41,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
       onMouseLeave={() => setHover(false)}
     >
       <PostCardImageWrapper>
-        <PostCardImage src={MockPostImage} />
+        <PostCardImage src={memberInfo.member.profileImageUrl} />
       </PostCardImageWrapper>
       <PostCardContentWrapper>
         <BookmarkWrapper
