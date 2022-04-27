@@ -33,10 +33,11 @@ jobs:
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: Github Actions
         uses: Ilshidur/action-discord@master
         with:
           args: '
-            The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.
+            ${{steps.run_firebase_preview.conclusion}} has been deployed.
             > Contributor: ${{github.actor}}
             
             - Event Status: ${{github.event_name}}
