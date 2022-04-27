@@ -100,7 +100,7 @@ const BlogHome = () => {
                 <ProfileImageWrapper>
                   <Suspense fallback={<div>이미지</div>}>
                     <ProfileImage
-                      image={MockProfile}
+                      image={userData.profileImageUrl}
                       position={userInfoData.positionType}
                     />
                   </Suspense>
