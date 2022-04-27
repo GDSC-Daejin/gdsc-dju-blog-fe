@@ -20,7 +20,8 @@ jobs:
         env:
           CI: ""
         # Add additional build steps here
-      - id: shortsha
+      - uses: actions/checkout@v3
+        id: shortsha
         run: echo "::set-output name=shortsha::$(git rev-parse --short HEAD)"
       outputs:
         shortsha: ${{steps.shortsha.outputs.shortsha}}
