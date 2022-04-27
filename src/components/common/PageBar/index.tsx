@@ -27,8 +27,9 @@ const PageBar = (props: {
   totalPage: number;
   nickname?: string;
   type?: string;
+  onClick: (page: number, limit?: number) => void;
 }) => {
-  const { page, nickname, totalPage, type } = props;
+  const { page, nickname, totalPage, type, onClick } = props;
   const navigate = useNavigate();
 
   const division = (array: number[], num: number) => {
@@ -58,26 +59,10 @@ const PageBar = (props: {
     return PAGES[pageNum];
   };
 
-  const pageHandler = (page: number, limit?: number) => {
-    if (page < 1) {
-      return;
-    }
-    if (page === limit) {
-      return;
-    } else {
-      navigate({
-        pathname: `/${nickname}`,
-        search: `?${createSearchParams({
-          type: type as string,
-          page: page.toString(),
-        })}`,
-      });
-    }
-  };
   return (
     <PageBarWrapper>
       {totalPage !== 1 && (
-        <ArrowWrapper onClick={() => pageHandler(page - 1)}>
+        <ArrowWrapper onClick={() => onClick(page - 1)}>
           <LeftArrow />
         </ArrowWrapper>
       )}
@@ -85,7 +70,7 @@ const PageBar = (props: {
         {divideArray().map((num, id) => (
           <NumberWrapper
             key={id}
-            onClick={() => pageHandler(num)}
+            onClick={() => onClick(num)}
             active={page === num}
           >
             <NumberCircle
@@ -97,7 +82,7 @@ const PageBar = (props: {
         ))}
       </NumberSection>
       {totalPage !== 1 && (
-        <ArrowWrapper onClick={() => pageHandler(page + 1, totalPage + 1)}>
+        <ArrowWrapper onClick={() => onClick(page + 1, totalPage + 1)}>
           <RightArrow />
         </ArrowWrapper>
       )}
