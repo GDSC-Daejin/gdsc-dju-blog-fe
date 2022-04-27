@@ -26,7 +26,8 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLOG_PROJECT }}'
           projectId: gdsc-dju-blog
-          channelId: ' pr-${{ github.sha }}-${{ github.event.pull_request.head.ref }} '
+          channelId: ' pr-$(echo ${{github.sha}} | cut -d- -f2)-${{ github.event.pull_request.head.ref }} '
+
           expires: 14d
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels

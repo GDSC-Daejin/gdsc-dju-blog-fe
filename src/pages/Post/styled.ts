@@ -18,7 +18,6 @@ export const ContentWrapper = styled.article`
 `;
 export const GiscusWrapper = styled.div`
   margin-bottom: 150px;
-  height: 350px;
 `;
 export const PostAuthorWrapper = styled.h1`
   margin-bottom: 23px;
