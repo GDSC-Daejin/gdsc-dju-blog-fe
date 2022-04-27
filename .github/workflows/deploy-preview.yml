@@ -20,13 +20,19 @@ jobs:
         env:
           CI: ""
         # Add additional build steps here
+
+      - uses: actions/checkout@v2
+      - id: shortsha
+        run: echo "::set-output name=shortsha::$(git rev-parse --short HEAD)"
+      outputs:
+        shortsha: ${{steps.shortsha.outputs.shortsha}}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         id: run_firebase_preview
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLOG_PROJECT }}'
           projectId: gdsc-dju-blog
-          channelId: ' pr-$(echo ${GITHUB_SHA} | cut -c1-8)-${{ github.event.pull_request.head.ref }} '
+          channelId: ' pr-${{ shortsha.outputs.shortsha }}-${{ github.event.pull_request.head.ref }} '
 
           expires: 14d
         env:
