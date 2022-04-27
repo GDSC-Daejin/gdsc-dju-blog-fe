@@ -26,12 +26,11 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLOG_PROJECT }}'
           projectId: gdsc-dju-blog
-          channelId: ' pr-${{github.sha}}-${{ github.event.pull_request.head.ref }} '
+          channelId: ' pr-${{github.sha::8}}-${{ github.event.pull_request.head.ref }} '
 
           expires: 14d
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
-          GIT_SHA: <git commit sha>
       - name: Discord Message Notify
         uses: appleboy/discord-action@0.0.3
         with:
