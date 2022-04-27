@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Giscus } from '@giscus/react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useParams } from 'react-router-dom';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-import { Viewer } from '@toast-ui/react-editor';
 import './post.css';
-import styled, { css } from 'styled-components';
 import {
   Author,
   AuthorImage,
   AuthorWrapper,
   Category,
   CategoryWrapper,
+  ContentWrapper,
   Date,
+  GiscusWrapper,
   HashTageSection,
   PositionCircle,
   PostAuthorWrapper,
@@ -20,11 +20,12 @@ import {
   PostTitle,
 } from './styled';
 import { AuthorProps } from '../../types/postData';
-import { theme } from '../../styles/theme';
 import { dateFilter } from '../../Utils/dateFilter';
 import { hashTageSpreader } from '../../Utils/hashTageSpreader';
 import { HashTageDark } from '../../components/common/HashTage';
 import { positionColor } from '../../store/positionColor';
+import hljs from 'highlight.js';
+import { Viewer } from '@toast-ui/react-editor';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -32,22 +33,33 @@ const Post = () => {
   return (
     <LayoutContainer>
       <ContainerInner>
-        {postId && <PostContent postId={postId} />}
-        <Giscus
-          repo="GDSC-Daejin/gdsc-dju-blog-fe"
-          repoId="R_kgDOGwlX0Q"
-          category="Announcements"
-          categoryId="DIC_kwDOGwlX0c4CBQA5"
-          mapping="pathname"
-          theme={'light'}
-          lang="ko"
-        />
+        <ContentWrapper>
+          {postId && <PostContent postId={postId} />}
+        </ContentWrapper>
+        <GiscusWrapper>
+          <Giscus
+            repo="GDSC-Daejin/gdsc-dju-blog-fe"
+            repoId="R_kgDOGwlX0Q"
+            category="Announcements"
+            categoryId="DIC_kwDOGwlX0c4CBQA5"
+            mapping="pathname"
+            theme={'light'}
+            lang="ko"
+          />
+        </GiscusWrapper>
       </ContainerInner>
     </LayoutContainer>
   );
 };
+
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
+
+  useEffect(() => {
+    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+      hljs.highlightElement(el as HTMLElement);
+    });
+  }, [postData]);
 
   return (
     <>

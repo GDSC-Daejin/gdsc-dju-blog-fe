@@ -19,6 +19,9 @@
   src: url('fonts/GoogleSansDisplay-Medium.ttf');
 
   font-weight: 600;
+}@font-face {
+  font-family: 'D2Coding ligature';
+  src: url('fonts/D2Coding-ligature.ttf');
 }
 * {
   font-family: 'Google Sans Display', 'Noto Sans KR', sans-serif;

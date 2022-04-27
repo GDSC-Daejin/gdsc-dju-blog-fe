@@ -1,3 +1,4 @@
+import { Viewer } from '@toast-ui/react-editor';
 import styled, { css } from 'styled-components';
 import { theme } from '../../styles/theme';
 
@@ -12,7 +13,13 @@ export const PostTitle = styled.h1`
   color: ${({ theme }) => theme.color.grey900};
   margin-bottom: 23px;
 `;
-
+export const ContentWrapper = styled.article`
+  margin-bottom: 70px;
+`;
+export const GiscusWrapper = styled.div`
+  margin-bottom: 150px;
+  height: 350px;
+`;
 export const PostAuthorWrapper = styled.h1`
   margin-bottom: 23px;
 `;
