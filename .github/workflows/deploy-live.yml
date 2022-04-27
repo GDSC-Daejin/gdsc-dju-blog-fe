@@ -31,13 +31,13 @@ jobs:
           channelId: live
           projectId: gdsc-dju-blog
         - name: Discord Message Notify
-            uses: appleboy/discord-action@0.0.3
+            uses: appleboy/discord-action@master
             with:
               webhook_id: ${{ secrets.WEBHOOK_ID }}
               webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
               color: "#4285f4"
-              args: |
-                gdsc-blog-fe has been deployed to Live channel
+              message: |
+                > gdsc-blog-fe has been deployed to Live channel
                 
                 `Contributor` ${{github.actor}}
                 `Event Status` ${{github.event_name}}
