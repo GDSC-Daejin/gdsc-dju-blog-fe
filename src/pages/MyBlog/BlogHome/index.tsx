@@ -31,7 +31,11 @@ import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
-import { createSearchParams, useSearchParams } from 'react-router-dom';
+import {
+  createSearchParams,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
@@ -40,27 +44,49 @@ import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { categoryName } = useParams();
 
-  const typeParams = searchParams.get('type');
-  const type = typeParams ? typeParams : 'all';
+  const category = categoryName ? categoryName : 'all';
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
   const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
-  const { userPostData } = useGetUserPostListData(type, page - 1, 6);
+  const { userPostData } = useGetUserPostListData(category, page - 1, 6);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (page || type) {
+    if (page) {
       setSearchParams({
-        type: 'all',
         page: '1',
       });
     }
   }, []);
+
+  const pageHandler = (page: number, limit?: number) => {
+    if (page < 1) {
+      return;
+    }
+    if (page === limit) {
+      return;
+    } else {
+      navigate({
+        pathname: `/${userInfoData?.nickname}/${category}`,
+        search: `?${createSearchParams({
+          page: page.toString(),
+        })}`,
+      });
+    }
+  };
+  const categoryHandler = (category: string) =>
+    navigate({
+      pathname: `/${userInfoData?.nickname}/${category}`,
+      search: `?${createSearchParams({
+        page: page.toString(),
+      })}`,
+    });
 
   return (
     <>
@@ -108,16 +134,8 @@ const BlogHome = () => {
               </ProfileWrapper>
               <TopMenuWrapper>
                 <CategoryMenu
-                  type={type as string}
-                  onClick={(url: string) =>
-                    navigate({
-                      pathname: `/${userInfoData.nickname}`,
-                      search: `?${createSearchParams({
-                        type: url,
-                        page: page.toString(),
-                      })}`,
-                    })
-                  }
+                  type={category as string}
+                  onClick={categoryHandler}
                 />
                 <ButtonWrapper>
                   <GDSCButton
@@ -156,7 +174,8 @@ const BlogHome = () => {
                 page={page}
                 totalPage={userPostData.totalPages}
                 nickname={userInfoData.nickname}
-                type={type}
+                type={category}
+                onClick={pageHandler}
               />
             )}
           </PageBarSection>
