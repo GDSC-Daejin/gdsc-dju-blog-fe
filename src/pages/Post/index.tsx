@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Giscus } from '@giscus/react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useParams } from 'react-router-dom';
@@ -25,6 +25,7 @@ import { dateFilter } from '../../Utils/dateFilter';
 import { hashTageSpreader } from '../../Utils/hashTageSpreader';
 import { HashTageDark } from '../../components/common/HashTage';
 import { positionColor } from '../../store/positionColor';
+import hljs from 'highlight.js';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -48,6 +49,11 @@ const Post = () => {
 };
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
+  useEffect(() => {
+    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+      hljs.highlightElement(el as HTMLElement);
+    });
+  }, [postData]);
 
   return (
     <>

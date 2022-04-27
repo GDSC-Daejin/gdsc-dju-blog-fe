@@ -1,10 +1,17 @@
+@import '~highlight.js/styles/github.css';
+
+
+.hljs, .hljs-template-variable, span > span, pre > span {
+    font-size: 16px;
+    font-family: 'D2Coding ligature', sans-serif;
+}
 .toastui-editor-contents {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     margin: 0;
     color: #24292f;
     background-color: #ffffff;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-family: 'Google Sans Display', 'Noto Sans KR', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     word-wrap: break-word;
@@ -17,6 +24,7 @@
 }
 .toastui-editor-contents p, strong, b, em, i, small, a, li, ol, ul {
     font-size: 16px;
+    line-height: 1.7;
 }
 
 .toastui-editor-contents h1:hover .anchor .octicon-link:before,
@@ -117,7 +125,7 @@
 .toastui-editor-contents kbd,
 .toastui-editor-contents pre,
 .toastui-editor-contents samp {
-    font-family: monospace,monospace;
+    font-family: 'Google Sans Display', 'Noto Sans KR', sans-serif;
     font-size: 1em;
 }
 
@@ -141,7 +149,7 @@
     font: inherit;
     margin: 0;
     overflow: visible;
-    font-family: inherit;
+    font-family: 'Google Sans Display', 'Noto Sans KR', sans-serif;
     font-size: inherit;
     line-height: inherit;
 }
@@ -236,7 +244,8 @@
 .toastui-editor-contents kbd {
     display: inline-block;
     padding: 3px 5px;
-    font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font-family: 'D2Coding ligature', sans-serif;
+    font-size: 14px;
     line-height: 10px;
     color: #24292f;
     vertical-align: middle;
@@ -324,15 +333,15 @@
 
 .toastui-editor-contents tt,
 .toastui-editor-contents code {
-    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
-    font-size: 12px;
+    font-family: 'D2Coding ligature', sans-serif;
+    font-size: 16px;
 }
 
 .toastui-editor-contents pre {
     margin-top: 0;
     margin-bottom: 0;
-    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
-    font-size: 12px;
+    font-family: 'D2Coding ligature', sans-serif;
+    font-size: 14px;
     word-wrap: normal;
 }
 
@@ -480,7 +489,7 @@
 }
 
 .toastui-editor-contents g-emoji {
-    font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: 'Google Sans Display', 'Noto Sans KR', sans-serif;
     font-size: 1em;
     font-style: normal !important;
     font-weight: 400;
@@ -789,7 +798,7 @@
 .toastui-editor-contents tt {
     padding: .2em .4em;
     margin: 0;
-    font-size: 85%;
+    font-size: 95%;
     background-color: rgba(175,184,193,0.2);
     border-radius: 6px;
 }
@@ -829,7 +838,7 @@
 .toastui-editor-contents pre {
     padding: 16px;
     overflow: auto;
-    font-size: 85%;
+    font-size: 95%;
     line-height: 1.45;
     background-color: #f6f8fa;
     border-radius: 6px;
@@ -838,7 +847,6 @@
 .toastui-editor-contents pre code,
 .toastui-editor-contents pre tt {
     display: inline;
-    max-width: auto;
     padding: 0;
     margin: 0;
     overflow: visible;
@@ -906,7 +914,7 @@
 }
 
 .toastui-editor-contents .footnotes .data-footnote-backref g-emoji {
-    font-family: monospace;
+    font-family: 'Google Sans Display', 'Noto Sans KR', sans-serif;
 }
 
 .toastui-editor-contents .task-list-item {
@@ -941,3 +949,7 @@
 .toastui-editor-contents ::-webkit-calendar-picker-indicator {
     filter: invert(50%);
 }
+.toastui-editor-contents p > code{
+     color: #4285f4 !important;
+    font-family: 'Google Sans Display', 'Noto Sans KR', sans-serif!important;
+ }
