@@ -22,7 +22,6 @@ jobs:
         if: github.event.pull_request.merged == 'true'
         env:
           CI: ""
-      # Add additional build steps here
       - uses: FirebaseExtended/action-hosting-deploy@v0
         id: run_firebase_deploy
         with:
