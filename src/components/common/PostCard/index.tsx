@@ -41,7 +41,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
       onMouseLeave={() => setHover(false)}
     >
       <PostCardImageWrapper>
-        <PostCardImage src={memberInfo.member.profileImageUrl} />
+        <PostCardImage src={MockPostImage} />
       </PostCardImageWrapper>
       <PostCardContentWrapper>
         <BookmarkWrapper
