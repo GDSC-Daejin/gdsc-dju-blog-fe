@@ -88,3 +88,23 @@ export const Category = styled.div`
   padding: 4px 0;
   margin-bottom: 20px;
 `;
+export const PostTitleWrapper = styled.div`
+  position: relative;
+`;
+export const PostIconWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+export const BookmarkWrapper = styled.div`
+  display: flex;
+  margin-right: 26px;
+`;
+export const PostTrashIconWrapper = styled.div`
+  display: flex;
+`;
+export const PostEditIconWrapper = styled.div`
+  display: flex;
+  margin-right: 24px;
+`;

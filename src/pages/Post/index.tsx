@@ -18,6 +18,11 @@ import {
   PostAuthorWrapper,
   PostHead,
   PostTitle,
+  PostIconWrapper,
+  BookmarkWrapper,
+  PostTrashIconWrapper,
+  PostEditIconWrapper,
+  PostTitleWrapper,
 } from './styled';
 import { AuthorProps } from '../../types/postData';
 import { dateFilter } from '../../Utils/dateFilter';
@@ -26,6 +31,9 @@ import { HashTageDark } from '../../components/common/HashTage';
 import { positionColor } from '../../store/positionColor';
 import hljs from 'highlight.js';
 import { Viewer } from '@toast-ui/react-editor';
+import PostTrashIcon from '../../assets/PostTrashIcon';
+import PostEditIcon from '../../assets/PostEditIcon';
+import Bookmark from '../../assets/Bookmark';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -72,7 +80,20 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
               />
               <Category>{postData.category.categoryName}</Category>
             </CategoryWrapper>
-            <PostTitle>{postData.title}</PostTitle>
+            <PostTitleWrapper>
+              <PostTitle>{postData.title}</PostTitle>
+              <PostIconWrapper>
+                <BookmarkWrapper>
+                  <Bookmark marked={false} />
+                </BookmarkWrapper>
+                <PostEditIconWrapper>
+                  <PostEditIcon />
+                </PostEditIconWrapper>
+                <PostTrashIconWrapper>
+                  <PostTrashIcon />
+                </PostTrashIconWrapper>
+              </PostIconWrapper>
+            </PostTitleWrapper>
             <PostAuthorWrapper>
               <AuthorBox {...postData.memberInfo} {...postData} />
             </PostAuthorWrapper>
