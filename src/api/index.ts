@@ -67,5 +67,10 @@ export class Api {
       headers: this.Header,
     });
   };
+  deletePostData = (postId: string) => {
+    return axios.delete(`${this.API}/api/member/v2/post/${postId}`, {
+      headers: this.Header,
+    });
+  };
 }
 export default new Api();

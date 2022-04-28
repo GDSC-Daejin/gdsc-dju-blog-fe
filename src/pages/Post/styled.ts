@@ -103,6 +103,7 @@ export const BookmarkWrapper = styled.div`
 `;
 export const PostTrashIconWrapper = styled.div`
   display: flex;
+  cursor: pointer;
 `;
 export const PostEditIconWrapper = styled.div`
   display: flex;

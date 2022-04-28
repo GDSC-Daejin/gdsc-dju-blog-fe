@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { Giscus } from '@giscus/react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import './post.css';
+import API from '../../api';
 import {
   Author,
   AuthorImage,
@@ -62,12 +63,21 @@ const Post = () => {
 
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
       hljs.highlightElement(el as HTMLElement);
     });
   }, [postData]);
+
+  const handleRemove = async () => {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      API.deletePostData(postId);
+      navigate(-1);
+      console.log(postId);
+    }
+  };
 
   return (
     <>
@@ -89,7 +99,7 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
                 <PostEditIconWrapper>
                   <PostEditIcon />
                 </PostEditIconWrapper>
-                <PostTrashIconWrapper>
+                <PostTrashIconWrapper onClick={handleRemove}>
                   <PostTrashIcon />
                 </PostTrashIconWrapper>
               </PostIconWrapper>

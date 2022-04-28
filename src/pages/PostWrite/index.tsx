@@ -38,6 +38,7 @@ import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 export const PostCategoryMenuData = [
   {
@@ -68,6 +69,7 @@ const PostWrite = () => {
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
   const [hashtag, setHashtag] = useState('');
+  const navigate = useNavigate();
   const postData = {
     title: title,
     content: content,
@@ -78,6 +80,7 @@ const PostWrite = () => {
   };
   const handleSubmit = async () => {
     API.postPostData(postData);
+    navigate('/*');
     console.log(content);
   };
   const setEditorValue = () => {
