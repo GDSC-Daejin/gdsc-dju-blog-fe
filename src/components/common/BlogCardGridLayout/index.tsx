@@ -1,10 +1,10 @@
 import React from 'react';
 import { BlogCardWrapper, BlogCardGridLayoutStyle } from './styled';
 import BlogCard from '../BlogCard/index';
-import { detailPostDataType } from '../../../types/postData';
+import { DetailPostDataType } from '../../../types/postData';
 
 interface IBlogCardGridLayout {
-  PostData: detailPostDataType[];
+  PostData: DetailPostDataType[];
 }
 
 const BlogCardGridLayout = (props: IBlogCardGridLayout) => {
@@ -13,7 +13,7 @@ const BlogCardGridLayout = (props: IBlogCardGridLayout) => {
     <BlogCardGridLayoutStyle>
       {PostData.map((data) => (
         <BlogCardWrapper key={data.postId}>
-          <BlogCard CardData={data} />
+          <BlogCard postData={data} />
         </BlogCardWrapper>
       ))}
     </BlogCardGridLayoutStyle>

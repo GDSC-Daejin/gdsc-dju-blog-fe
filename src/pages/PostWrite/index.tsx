@@ -1,19 +1,19 @@
 import React, { useRef, useState } from 'react';
 import {
-  PostInformation,
+  PostBottomButtonCWrapper,
+  PostBottomButtonLWrapper,
+  PostBottomButtonRWrapper,
+  PostBottomButtonWrapper,
   PostContentWrapper,
+  PostGDSCButtonWrapper,
+  PostHashtag,
+  PostInformation,
   PostThumbnailWrapper,
   PostTitle,
-  PostHashtag,
-  PostGDSCButtonWrapper,
-  PostBottomButtonWrapper,
-  PostBottomButtonLWrapper,
-  PostBottomButtonCWrapper,
-  PostBottomButtonRWrapper,
 } from './styled';
 import {
-  LayoutContainer,
   ContainerInner,
+  LayoutContainer,
   NavigationBlock,
 } from '../../styles/layouts';
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -37,7 +37,6 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
-import axios from 'axios';
 import API from '../../api';
 
 export const PostCategoryMenuData = [
@@ -66,37 +65,31 @@ export const PostCategoryMenuData = [
 const PostWrite = () => {
   const editorRef: any = useRef();
   const [title, setTitle] = useState('');
-  const [state, setState] = useState('');
+  const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
+  const [hashtag, setHashtag] = useState('');
+  const postData = {
+    title: title,
+    content: content,
+    category: { categoryName: category },
+    postHashTags: hashtag,
+    fileName: '',
+    base64Thumbnail: '',
+  };
   const handleSubmit = async () => {
-    const content = editorRef.current.getInstance().getHTML();
-    setState(content);
-    console.log(title);
+    API.postPostData(postData);
     console.log(content);
-    axios
-      .post('https://gdsc-dju.com/api/member/v2/post', {
-        base64Thumbnail: 'base64인코딩자료',
-        blocked: false,
-        category: {
-          categoryName: 'string',
-          modifiedAt: '2022-04-11T15:35:34.892Z',
-          uploadDate: '2022-01-06 14:57:42.777000',
-        },
-        content: '내용',
-        fileName: 'base64인코딩해서보낼때 필요한 파일이름',
-        postHashTags: 'HashtagContent',
-        title: '제목',
-      })
-      .then((response) => console.log(response))
-      .catch((error) => {
-        console.log(error.response);
-      });
+  };
+  const setEditorValue = () => {
+    const editorContent = editorRef.current.getInstance().getMarkdown();
+    setContent(editorContent);
   };
   return (
     <>
       <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
-          <PostCategoryMenu />
+          <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
               <PostThumbnail />
@@ -106,8 +99,13 @@ const PostWrite = () => {
                 placeholder="제목을 입력하세요."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-              ></PostTitle>
-              <PostHashtag>#해시태그 ,로 구분하세요</PostHashtag>
+              />
+              <PostHashtag
+                placeholder={'#해시태그 ,로 구분하세요'}
+                onChange={(e) => {
+                  setHashtag(e.target.value);
+                }}
+              />
             </PostContentWrapper>
             <PostGDSCButtonWrapper>
               <GDSCButton text="임시글" />
@@ -117,8 +115,9 @@ const PostWrite = () => {
             previewStyle="vertical"
             height="627px"
             initialEditType="markdown"
-            initialValue="hello"
+            initialValue="helloWorld"
             ref={editorRef}
+            onChange={setEditorValue}
             plugins={[
               colorSyntax,
               [codeSyntaxHighlight, { highlighter: Prism }],
@@ -137,7 +136,7 @@ const PostWrite = () => {
               <GDSCButton
                 text="업로드"
                 onClick={handleSubmit}
-                color="GDSC blue"
+                color={'googleBlue'}
               />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>

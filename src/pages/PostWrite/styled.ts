@@ -12,26 +12,33 @@ export const PostThumbnailWrapper = styled.div`
 export const PostContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   padding-left: 30px;
+  margin-right: 20px;
 `;
 export const PostTitle = styled.input`
   display: flex;
   border: none;
+  width: 100%;
   padding-bottom: 10px;
   font-size: ${(props) => props.theme.fontSize.h4};
   &::placeholder {
     color: ${(props) => props.theme.color.grey400};
   }
 `;
-export const PostHashtag = styled.div`
+export const PostHashtag = styled.input`
   display: flex;
   font-size: ${(props) => props.theme.fontSize.body1};
-  color: ${(props) => props.theme.color.grey400};
+  &::placeholder {
+    color: ${(props) => props.theme.color.grey400};
+  }
+  border: none;
 `;
 export const PostGDSCButtonWrapper = styled.div`
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column-reverse;
 `;
 export const PostBottomButtonWrapper = styled.div`
   display: flex;

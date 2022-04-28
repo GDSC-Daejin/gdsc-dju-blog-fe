@@ -1,6 +1,5 @@
 import useSWR from 'swr';
 import API from '../index';
-import { detailPostDataType } from '../../types/postData';
 import { url } from './postPagination';
 
 async function getPostListData(params: string) {

@@ -57,7 +57,7 @@ export const SideBarGrayBoxAnimation = {
 };
 export const PostCategoryAnimation = {
   isActive: {
-    translateY: -10,
+    translateY: -5,
     color: '#191F28',
     transition: {
       delay: 0.1,
@@ -71,13 +71,48 @@ export const PostCategoryAnimation = {
     borderBottom: '1px solid #fff',
   },
 };
-export const PostcircleAnimation = {
+export const PostCircleAnimation = {
   isActive: {
     opacity: 1,
     y: 0,
   },
   isUnActive: {
     y: -20,
+    opacity: 0,
+  },
+};
+export const listAnimate = {
+  start: {
+    opacity: 0,
+  },
+  end: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+const width =
+  window.innerWidth < 1200
+    ? (window.innerWidth - (window.innerWidth - 20)) / 2
+    : (window.innerWidth - 1200) / 2 + 40;
+export const blogCardAnimate = {
+  start: {
+    opacity: 0,
+    x: '50%',
+  },
+  end: {
+    x: `${width}px`,
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+  exit: {
     opacity: 0,
   },
 };

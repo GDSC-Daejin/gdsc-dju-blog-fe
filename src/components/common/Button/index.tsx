@@ -1,33 +1,27 @@
 import React from 'react';
 import { StyledButton } from './styled';
-const colorStyle = (color?: string) => {
-  switch (color) {
-    case 'GDSC blue':
-      return '#4385F3';
-    case 'toss red':
-      return '#F44336';
-    case 'toss blue 200':
-      return '#90C2FF';
-    default:
-      return '#fff';
-  }
-};
-interface Iprops {
+import { theme } from '../../../styles/theme';
+
+interface ButtonProps {
   text: string;
-  color?: string;
+  color?: keyof typeof theme.color;
   disable?: boolean;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
 }
-const GDSCButtonL = (props: Iprops) => {
-  const { text, color, disable, onClick, type } = props;
-
+const GDSCButtonL: React.FC<ButtonProps> = ({
+  text,
+  color,
+  disable,
+  onClick,
+  type,
+}) => {
   return (
     <StyledButton
-      background={colorStyle(color)}
-      color={color && '#fff'}
+      background={color}
+      color={color ? color : 'white'}
       size={'large'}
-      border={color && '#fff'}
+      border={color ? color : 'white'}
       disable={disable}
       onClick={onClick}
       type={type}
@@ -36,14 +30,18 @@ const GDSCButtonL = (props: Iprops) => {
     </StyledButton>
   );
 };
-const GDSCButton = (props: Iprops) => {
-  const { text, color, disable, onClick, type } = props;
-
+const GDSCButton: React.FC<ButtonProps> = ({
+  text,
+  color,
+  disable,
+  onClick,
+  type,
+}) => {
   return (
     <StyledButton
-      color={color && '#fff'}
-      border={color && '#fff'}
-      background={colorStyle(color)}
+      color={color ? 'white' : 'grey900'}
+      border={color ? color : 'white'}
+      background={color ? color : 'white'}
       disable={disable}
       onClick={onClick}
       type={type}

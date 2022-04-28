@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   CategoryCircle,
   CategoryCircleWrapper,
@@ -52,9 +52,10 @@ const circleMotion = {
 };
 const CategoryMenu = (props: Iprops) => {
   const { onClick, type } = props;
-  const animate = (value: string, categoryValue: string) => {
+
+  const animate = useCallback((value: string, categoryValue: string) => {
     return value === categoryValue ? 'isActive' : 'isUnActive';
-  };
+  }, []);
 
   return (
     <>
@@ -90,4 +91,4 @@ const CategoryMenu = (props: Iprops) => {
     </>
   );
 };
-export default CategoryMenu;
+export default memo(CategoryMenu);
