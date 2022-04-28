@@ -9,6 +9,7 @@ export const HomeContentWrapper = styled.div`
   align-items: flex-start;
   gap: 3.75rem;
   margin-top: 50px;
+  padding: 0 20px;
 `;
 export const HomeLayoutContainer = styled.div`
   position: relative;
@@ -16,7 +17,7 @@ export const HomeLayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1160px;
   margin: 0 auto;
   min-width: 320px;
 `;
@@ -48,7 +49,7 @@ export const BlogCardWrapper = styled(motion.div)`
   width: 248px;
   height: 294px;
   margin: 0 15px;
-  transform: translateX(calc((100vw - 1200px) / 2));
+  transform: translateX(calc((100vw - 1200px) / 2 + 20px));
   :first-child {
     margin-left: 0;
   }
@@ -62,7 +63,7 @@ export const ButtonWrapper = styled.div`
   margin-bottom: 230px;
   display: flex;
   gap: 16px;
-  left: 15px;
+  left: 20px;
   bottom: 0px;
   margin-top: 3px;
 `;

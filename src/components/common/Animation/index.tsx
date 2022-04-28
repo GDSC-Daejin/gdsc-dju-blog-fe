@@ -96,13 +96,17 @@ export const listAnimate = {
     opacity: 0,
   },
 };
+const width =
+  window.innerWidth < 1200
+    ? (window.innerWidth - (window.innerWidth - 20)) / 2
+    : (window.innerWidth - 1200) / 2 + 40;
 export const blogCardAnimate = {
   start: {
     opacity: 0,
     x: '50%',
   },
   end: {
-    x: `calc((100vw - 1200px) / 2)`,
+    x: `${width}px`,
     opacity: 1,
     transition: {
       duration: 0.3,
