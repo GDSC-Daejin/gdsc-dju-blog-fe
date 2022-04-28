@@ -8,11 +8,11 @@ export const SideBarWrapper = styled(motion.div)`
   left: 0px;
   top: 0px;
   width: 400px;
-  height: 100vh;
+  height: 100%;
 `;
 export const SideBarInner = styled(motion.aside)`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${(props) => props.theme.color.white};
   display: flex;
   justify-content: center;
