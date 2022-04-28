@@ -4,6 +4,7 @@ export const ProfileWrapper = styled.section`
   display: flex;
   align-items: center;
   flex-direction: row;
+  margin-top: 110px;
   margin-bottom: 86px;
 `;
 export const ProfileImageWrapper = styled.div`
@@ -77,6 +78,15 @@ export const PostSectionWrapper = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+export const NoPosts = styled.div`
+  height: 600px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${({ theme }) => theme.fontSize.h5};
+  color: ${({ theme }) => theme.color.grey400};
 `;
 export const PostCardWrapper = styled.div`
   display: flex;

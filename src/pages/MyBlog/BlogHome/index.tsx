@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-
 import {
   ContainerInner,
   LayoutContainer,
@@ -14,6 +13,7 @@ import {
   HashTageSection,
   HashTageWrapper,
   IntroduceText,
+  NoPosts,
   PageBarSection,
   PostCardWrapper,
   PostSectionWrapper,
@@ -31,7 +31,11 @@ import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
-import { useSearchParams } from 'react-router-dom';
+import {
+  createSearchParams,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
@@ -40,52 +44,66 @@ import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const typeParams = searchParams.get('type');
-  const type = typeParams ? typeParams : 'all';
+  const categoryName = searchParams.get('type');
+  const category = categoryName ? categoryName : 'all';
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
   const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
-  const { userPostData } = useGetUserPostListData(type, page);
+  const { userPostData } = useGetUserPostListData(category, page - 1, 6);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (page) {
+      setSearchParams({
+        type: category,
+        page: '1',
+      });
+    }
+  }, []);
+
   const pageHandler = (page: number, limit?: number) => {
-    if (page < 0) {
+    if (page < 1) {
       return;
     }
     if (page === limit) {
       return;
     } else {
-      navigate(`/${userInfoData?.nickname}?type=${type}&page=${page}`);
-    }
-  };
-
-  useEffect(() => {
-    if (page || type) {
-      setSearchParams({
-        type: 'all',
-        page: '0',
+      navigate({
+        pathname: `/${userInfoData?.nickname}`,
+        search: `?${createSearchParams({
+          type: category,
+          page: page.toString(),
+        })}`,
       });
     }
-  }, []);
+  };
+  const categoryHandler = (category: string) =>
+    navigate({
+      pathname: `/${userInfoData?.nickname}`,
+      search: `?${createSearchParams({
+        type: category,
+        page: page.toString(),
+      })}`,
+    });
 
   return (
     <>
-      <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
           {userInfoData && (
             <>
               <ProfileWrapper>
                 <ProfileImageWrapper>
-                  <ProfileImage
-                    image={MockProfile}
-                    position={userInfoData.positionType}
-                  />
+                  <Suspense fallback={<div>이미지</div>}>
+                    <ProfileImage
+                      image={userData.profileImageUrl}
+                      position={userInfoData.positionType}
+                    />
+                  </Suspense>
                 </ProfileImageWrapper>
                 <ProfileDetailWrapper>
                   <Role>{userData.role}</Role>
@@ -97,7 +115,11 @@ const BlogHome = () => {
                       &apos;s Blog
                     </BlogNamePosition>
                     <SettingIconWrapper
-                      onClick={() => navigate(`/${userInfoData.nickname}/edit`)}
+                      onClick={() =>
+                        navigate({
+                          pathname: `/${userInfoData.nickname}/edit`,
+                        })
+                      }
                     >
                       <Setting />
                     </SettingIconWrapper>
@@ -112,15 +134,10 @@ const BlogHome = () => {
                   </HashTageSection>
                 </ProfileDetailWrapper>
               </ProfileWrapper>
-
               <TopMenuWrapper>
                 <CategoryMenu
-                  type={type as string}
-                  onClick={(url: string) =>
-                    navigate(
-                      `/${userInfoData.nickname}?type=${url}&page=${page}`,
-                    )
-                  }
+                  type={category as string}
+                  onClick={categoryHandler}
                 />
                 <ButtonWrapper>
                   <GDSCButton
@@ -149,17 +166,18 @@ const BlogHome = () => {
                   </PostCardWrapper>
                 ))
               ) : (
-                <div>작성된 글이 없습니다.</div>
+                <NoPosts>작성된 글이 없습니다.</NoPosts>
               )}
             </PostSectionWrapper>
           )}
           <PageBarSection>
-            {userPostData && userInfoData && (
+            {userPostData && userInfoData && !userPostData.empty && (
               <PageBar
                 page={page}
                 totalPage={userPostData.totalPages}
                 nickname={userInfoData.nickname}
-                type={type}
+                type={category}
+                onClick={pageHandler}
               />
             )}
           </PageBarSection>

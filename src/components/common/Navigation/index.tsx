@@ -17,6 +17,7 @@ import {
   DeskNavigationWrapper,
   BeforeMargin,
 } from './styled';
+/* 아이콘 컬러 전체 변경 기능 */
 import GdscLogo from '../../../assets/GdscLogo';
 import Vector from '../../../assets/Vector';
 import MainLogo from '../MainLogo';
@@ -25,6 +26,7 @@ function Navigation() {
   const navigate = useNavigate();
   return (
     <>
+      {/* 아이콘 컬러 전체 변경 기능 */}
       {/*Desk Navigation */}
       <NavDesign>
         <NavWrapper>
@@ -64,4 +66,4 @@ function Navigation() {
     </>
   );
 }
-export default Navigation;
+export default React.memo(Navigation);
