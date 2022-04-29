@@ -1,10 +1,9 @@
 import React from 'react';
 
-const PostTrashIcon = () => {
+const PostTrashIcon: React.FC<{ height?: string }> = ({ height = 31 }) => {
   return (
     <svg
-      width="26"
-      height="31"
+      height={height}
       viewBox="0 0 26 31"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

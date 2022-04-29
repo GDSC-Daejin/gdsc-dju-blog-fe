@@ -1,10 +1,9 @@
 import React from 'react';
 
-const PostEditIcon = () => {
+const PostEditIcon: React.FC<{ height?: string }> = ({ height = 28 }) => {
   return (
     <svg
-      width="28"
-      height="28"
+      height={height}
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

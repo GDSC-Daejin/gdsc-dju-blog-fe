@@ -94,13 +94,13 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
               <PostTitle>{postData.title}</PostTitle>
               <PostIconWrapper>
                 <BookmarkWrapper>
-                  <Bookmark marked={false} />
+                  <Bookmark marked={false} height={'25'} />
                 </BookmarkWrapper>
                 <PostEditIconWrapper>
-                  <PostEditIcon />
+                  <PostEditIcon height={'25'} />
                 </PostEditIconWrapper>
                 <PostTrashIconWrapper onClick={handleRemove}>
-                  <PostTrashIcon />
+                  <PostTrashIcon height={'25'} />
                 </PostTrashIconWrapper>
               </PostIconWrapper>
             </PostTitleWrapper>
