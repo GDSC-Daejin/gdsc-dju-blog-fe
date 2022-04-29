@@ -20,6 +20,8 @@ import {
   blogCardAnimate,
   listAnimate,
 } from '../../components/common/Animation';
+import { Link } from 'react-router-dom';
+import Plus from '../../assets/Plus';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -56,7 +58,6 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
-  const { postListData } = useGetPostListData(category, 0, 11);
 
   const setPhraseData = useCallback(() => {
     let index = 0;
@@ -69,6 +70,8 @@ function Home() {
   useEffect(() => {
     setPhraseData();
   }, []);
+
+  const { postListData } = useGetPostListData(category, 0, 11);
 
   return (
     <>
@@ -104,6 +107,15 @@ function Home() {
                 <BlogCard postData={postData} />
               </BlogCardWrapper>
             ))}
+            <BlogCardWrapper>
+              <div className="viewmore-item">
+                <Link to={`/category/${category}`}>
+                  <button type="button" className="viewmore-item__button">
+                    <Plus />
+                  </button>
+                </Link>
+              </div>
+            </BlogCardWrapper>
           </CardSection>
         )}
       </CardSectionWrapper>
