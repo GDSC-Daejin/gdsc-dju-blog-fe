@@ -6,7 +6,7 @@ export const CategoryInner = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 80px;
-  margin: 110px 0px;
+  margin: 110px auto;
 `;
 
 export const PageBarWrapper = styled.div`

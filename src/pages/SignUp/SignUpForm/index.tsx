@@ -183,7 +183,7 @@ const SignUpForm = () => {
             trigger={trigger}
             errors={data.errors}*/}
       <GDSCButton
-        color={isValid ? 'GDSC blue' : 'toss blue 200'}
+        color={isValid ? 'googleBlue' : 'tossBlue200'}
         text="가입하기"
         disable={!isValid}
         type="submit"

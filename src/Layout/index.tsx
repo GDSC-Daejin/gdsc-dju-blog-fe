@@ -17,6 +17,7 @@ import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Posts from '../pages/Post';
 import SignUp from '../pages/SignUp';
+import OauthRedirectPage from '../pages/OauthRedirectPage';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -52,6 +53,7 @@ const Layout = () => {
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route path={'/signup'} element={<SignUp />} />
+        <Route path={'/OauthRedirectPage'} element={<OauthRedirectPage />} />
         <Route
           path={'/admin'}
           element={

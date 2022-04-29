@@ -17,6 +17,7 @@ import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
+import axios from 'axios';
 
 export const sideBarMenuData = [
   {
@@ -47,6 +48,15 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  };
+  const API_BASE_URL = 'https://gdsc-dju.com';
+  const OAUTH2_REDIRECT_URI = 'http://localhost:3000/OauthRedirectPage';
+  const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI};`;
+
   return (
     <>
       <SideBarWrapper
@@ -58,6 +68,7 @@ export const SideBar = () => {
           {/* Login version */}
           <SideBarDesign>
             <SideBarLogout />
+            <a href={GOOGLE_AUTH_URL}>123</a>
             {/*<SideBarLogin />*/}
             <SideBarCategory />
           </SideBarDesign>
