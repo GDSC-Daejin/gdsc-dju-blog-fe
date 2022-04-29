@@ -15,7 +15,7 @@ import SearchResult from '../pages/SearchResult';
 import { userState } from '../store/user';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
-import Posts from '../pages/Posts';
+import Posts from '../pages/Post';
 import SignUp from '../pages/SignUp';
 
 const Layout = () => {
@@ -40,7 +40,6 @@ const Layout = () => {
 
   return (
     <>
-<<<<<<< HEAD
       <SideBar />
       <Navigation />
       <AnimatePresence>
@@ -63,14 +62,6 @@ const Layout = () => {
         />
       </Routes>
       <Footer />
-=======
-      <Suspense fallback={<GoogleSpinner />}>
-        <Routes>
-          <Route path={'/*'} element={<Home />} />
-          <Route path={'/login'} element={<Login />} />
-        </Routes>
-      </Suspense>
->>>>>>> feature/OauthLogin
     </>
   );
 };

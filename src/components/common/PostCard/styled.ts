@@ -15,7 +15,7 @@ export const PostCardImage = styled.img`
 export const PostCardImageWrapper = styled.div`
   width: 360px;
   height: 240px;
-  border: solid 0px;
+  border: solid 0;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   overflow: hidden;
@@ -51,6 +51,9 @@ export const PostTitle = styled.h4`
   font-size: ${(props) => props.theme.fontSize.h5};
   color: ${(props) => props.theme.color.grey900};
   margin-bottom: 16px;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const PostHashTageSection = styled.section`
   display: flex;
@@ -62,8 +65,14 @@ export const PostHashTageSection = styled.section`
 export const PostContent = styled(motion.p)<{ hover: boolean }>`
   font-size: ${(props) => props.theme.fontSize.body1};
   color: ${(props) => props.theme.color.grey600};
-  width: 800px;
+  box-sizing: border-box;
+  width: 720px;
   transition: all 0.3s ease;
+  height: 67.2px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   ${(props) =>
     props.hover &&
     css`

@@ -1,50 +1,46 @@
-import { memberDataInfoType } from './userDataType';
+import { MemberDataInfoType } from './userDataType';
 
-export interface detailPostDataType {
-  imagePath: string;
+export interface DetailPostDataType {
+  modifiedAt: string;
+  uploadDate: string;
   example: string;
   category: {
     categoryName: string;
-    modifiedAt: string;
     uploadDate: string;
   };
   content: string;
   postHashTags: string;
   postId: number;
   title: string;
-  memberInfo: memberDataInfoType;
-  uploadDate: string;
-  modifiedAt: string;
+  likes: string[];
+  memberInfo: AuthorProps;
 }
-// {
-//   "memberInfo": {
-//       "member": {
-//           "profileImageUrl": "gel["
-//       },
-//       "nickname": null
-//   },
-//   "postHashTags": "hi,h,h,h,h",
-//   "category": {
-//       "categoryName": "Backend",
-//       "modifiedAt": "2022-04-01T15:45:22.4",
-//       "uploadDate": "2022-04-01T15:45:22.405"
-//   },
-//   "title": "제목9",
-//   "tmpStore": false,
-//   "postId": 9,
-//   "likes": [],
-//   "modifiedAt": "2022-04-01T06:46:13.645+00:00",
-//   "uploadDate": "2022-04-01T06:46:13.646+00:00",
-//   "content": "내용"
-// }
-export interface postPostDataType extends detailPostDataType {
+export interface AuthorProps {
+  member: {
+    profileImageUrl: string;
+  };
+  nickname: string;
+}
+
+export interface RowPostDataType {
+  body: {
+    data: DetailPostDataType;
+  };
+}
+export interface PostPostDataType {
   base64Thumbnail: string;
   fileName: string;
+  title: string;
+  category: {
+    categoryName: string;
+  };
+  content: string;
+  postHashTags: string;
 }
-export interface rowDetailPostDataType {
+export interface RowDetailPostListType {
   body: {
     data: {
-      content: detailPostDataType[];
+      content: DetailPostDataType[];
       totalElements: number;
       totalPages: number;
       empty: boolean;

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 export const BlogCardInner = styled(motion.article)`
   position: relative;
@@ -21,35 +22,32 @@ export const BookMarkWrapper = styled.div`
 `;
 
 export const BlogCardThumbnail = styled.img`
-  width: inherit;
-  height: inherit;
+  width: 248px;
+  height: 294px;
   border-radius: 13px;
 `;
 
 export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
   display: flex;
   position: absolute;
-  bottom: ${(props) => (props.IsHovered ? '260px' : '92px')};
+  bottom: ${(props) => (props.IsHovered ? '254px' : '92px')};
   transition: all 0.3s ease;
-  left: 20px;
-  gap: 8px;
+  left: 9px;
 `;
 export const BlogCardTag = styled.div`
   height: 17px;
   padding: 1px 10px;
   border-radius: 50px;
-  border: 1px solid #ffffff99;
+  border: 1px solid #ffffff;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   span {
-    font-family: Google Sans Display;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
     line-height: 15px;
-    letter-spacing: 0em;
     text-align: left;
     color: #ffffff;
   }
@@ -73,6 +71,9 @@ export const BlogCardTitle = styled(motion.h6)`
   font-size: ${(props) => props.theme.fontSize.h6};
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const BlogCardSubTextWrapper = styled.div`
   display: flex;
@@ -90,13 +91,79 @@ export const BlogCardAuthorImage = styled.img`
   height: 18px;
   width: 18px;
 `;
-export const BlogCardPostText = styled(motion.p)`
+export const BlogCardPostText = styled(motion.article)`
   position: absolute;
   transform: translate(-50%, 0%);
   top: 53px;
   font-size: 12px;
-  width: 224px;
-  min-height: 160px;
+  width: 208px;
+  min-height: 120px;
+  max-height: 120px;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const PostText = styled(ReactMarkdown)`
+  height: 100%;
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend {
+    font-size: ${({ theme }) => theme.fontSize.body3};
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const BlogCardSubText = styled.div<{

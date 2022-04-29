@@ -7,6 +7,7 @@ import {
   CreatorSection,
   CreatorSectionInner,
   CreatorTitle,
+  CreatorTitleWrapper,
   CreatorWrapper,
   FooterInner,
   FooterWrapper,
@@ -46,15 +47,21 @@ const Footer = () => {
             <BlogIcon />
           </BlogIconWrapper>
           <CreatorSection>
-            <CreatorTitle>Designed by</CreatorTitle>
+            <CreatorTitleWrapper>
+              <CreatorTitle>Designed by</CreatorTitle>
+            </CreatorTitleWrapper>
             <ColumnWrapper>
-              <CreatorName>Blaire</CreatorName>
-              <CreatorName>Gunzo</CreatorName>
-              <CreatorName>Cindy</CreatorName>
+              <StyledTr>
+                <CreatorName>Blaire</CreatorName>
+                <CreatorName>Gunzo</CreatorName>
+                <CreatorName>Cindy</CreatorName>
+              </StyledTr>
             </ColumnWrapper>
           </CreatorSection>
           <CreatorSection>
-            <CreatorTitle>Created by</CreatorTitle>
+            <CreatorTitleWrapper>
+              <CreatorTitle>Created by</CreatorTitle>
+            </CreatorTitleWrapper>
             <CreatorSectionInner>
               <StyledTr>
                 <CreatorName>Jason</CreatorName>
@@ -70,7 +77,9 @@ const Footer = () => {
           </CreatorSection>
           <StyledColumn />
           <CreatorSection>
-            <CreatorTitle>Site Map</CreatorTitle>
+            <CreatorTitleWrapper>
+              <CreatorTitle>Site Map</CreatorTitle>
+            </CreatorTitleWrapper>
             <CreatorSectionInner>
               <StyledTr>
                 <CreatorName
@@ -121,31 +130,35 @@ const Footer = () => {
             </CreatorSectionInner>
           </CreatorSection>
           <CreatorSection>
-            <CreatorTitle>Family site</CreatorTitle>
-            <StyledTr>
-              <CreatorName
-                style={{ width: '120px' }}
-                onClick={() => {
-                  navigateFamilyHandler('googleDevelopers');
-                }}
-              >
-                Google Developers
-              </CreatorName>
-              <CreatorName
-                onClick={() => {
-                  navigateFamilyHandler('gdsc');
-                }}
-              >
-                GDSC
-              </CreatorName>
-              <CreatorName
-                onClick={() => {
-                  navigateFamilyHandler('gdscdju');
-                }}
-              >
-                GDSC DJU
-              </CreatorName>
-            </StyledTr>
+            <CreatorTitleWrapper>
+              <CreatorTitle>Family site</CreatorTitle>
+            </CreatorTitleWrapper>
+            <CreatorSectionInner>
+              <StyledTr>
+                <CreatorName
+                  style={{ width: '120px' }}
+                  onClick={() => {
+                    navigateFamilyHandler('googleDevelopers');
+                  }}
+                >
+                  Google Developers
+                </CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateFamilyHandler('gdsc');
+                  }}
+                >
+                  GDSC
+                </CreatorName>
+                <CreatorName
+                  onClick={() => {
+                    navigateFamilyHandler('gdscdju');
+                  }}
+                >
+                  GDSC DJU
+                </CreatorName>
+              </StyledTr>
+            </CreatorSectionInner>
           </CreatorSection>
           <Copyright>Copyright© GDSC Daejin 2021</Copyright>
         </CreatorWrapper>
