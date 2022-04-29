@@ -13,8 +13,7 @@ import {
   BlogCardWrapper,
   ButtonWrapper,
 } from './styled';
-import { useGetPostListData } from '../../api/hooks/useGetPostListData';
-import { detailPostDataType } from '../../types/postData';
+
 import CategoryMenu from '../../components/common/CategoryMenu';
 
 function index() {

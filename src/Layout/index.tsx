@@ -40,6 +40,7 @@ const Layout = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <SideBar />
       <Navigation />
       <AnimatePresence>
@@ -62,6 +63,14 @@ const Layout = () => {
         />
       </Routes>
       <Footer />
+=======
+      <Suspense fallback={<GoogleSpinner />}>
+        <Routes>
+          <Route path={'/*'} element={<Home />} />
+          <Route path={'/login'} element={<Login />} />
+        </Routes>
+      </Suspense>
+>>>>>>> feature/OauthLogin
     </>
   );
 };
