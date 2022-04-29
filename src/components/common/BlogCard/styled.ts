@@ -72,6 +72,8 @@ export const BlogCardTitle = styled(motion.h6)`
   font-weight: 400;
   color: ${(props) => props.theme.color.grey900};
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const BlogCardSubTextWrapper = styled.div`
   display: flex;
@@ -97,8 +99,9 @@ export const BlogCardPostText = styled(motion.article)`
   width: 208px;
   min-height: 120px;
   max-height: 120px;
-  overflow: hidden;
   word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const PostText = styled(ReactMarkdown)`
   height: 100%;
@@ -154,8 +157,13 @@ export const PostText = styled(ReactMarkdown)`
   label,
   legend {
     font-size: ${({ theme }) => theme.fontSize.body3};
-    word-break: break-all;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const BlogCardSubText = styled.div<{
