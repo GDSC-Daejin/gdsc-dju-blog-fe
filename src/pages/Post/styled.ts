@@ -98,7 +98,8 @@ export const PostTitleWrapper = styled.div`
 `;
 export const PostIconWrapper = styled.div`
   display: flex;
-  top: 0;
+  position: relative;
+  top: 12px;
   right: 0;
 `;
 export const BookmarkWrapper = styled.div`
