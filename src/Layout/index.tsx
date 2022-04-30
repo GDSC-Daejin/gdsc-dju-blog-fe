@@ -53,7 +53,7 @@ const Layout = () => {
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route path={'/signup'} element={<SignUp />} />
-        <Route path={'/OauthRedirectPage'} element={<OauthRedirectPage />} />
+        <Route path={'/oauth2/redirect'} element={<OauthRedirectPage />} />
         <Route
           path={'/admin'}
           element={

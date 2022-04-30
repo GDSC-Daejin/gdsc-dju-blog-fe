@@ -42,7 +42,7 @@ const SignUpInput = ({
       const response = await axios.post(
         'https://gdsc-dju.com/api/guest/v1/validation/nickname',
         {
-          categoryName: handleInputValue('nickname'),
+          nickname: handleInputValue('nickname'),
         },
       );
       if (response.data.body.data) {
@@ -53,7 +53,7 @@ const SignUpInput = ({
         trigger && trigger(refName, { shouldFocus: true });
       } else alert('이미 존재하는 닉네임입니다.');
     } catch (err) {
-      console.log('ERROR');
+      alert('ERROR');
     }
   }, [checkNicknameState]);
 

@@ -54,8 +54,8 @@ export const SideBar = () => {
     },
   };
   const API_BASE_URL = 'https://gdsc-dju.com';
-  const OAUTH2_REDIRECT_URI = 'http://localhost:3000/OauthRedirectPage';
-  const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI};`;
+  const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
+  const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
 
   return (
     <>
@@ -67,8 +67,9 @@ export const SideBar = () => {
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>
-            <SideBarLogout />
-            <a href={GOOGLE_AUTH_URL}>123</a>
+            <a href={GOOGLE_AUTH_URL}>
+              <SideBarLogout />
+            </a>
             {/*<SideBarLogin />*/}
             <SideBarCategory />
           </SideBarDesign>

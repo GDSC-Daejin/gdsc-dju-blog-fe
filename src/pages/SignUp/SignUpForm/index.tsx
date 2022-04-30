@@ -159,8 +159,6 @@ const SignUpForm = () => {
     },
   ];
 
-  console.log(isValid);
-
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((data, index) =>
