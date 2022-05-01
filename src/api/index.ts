@@ -63,14 +63,33 @@ export class Api {
     });
   };
   postPostData = (postData: PostPostDataType) => {
-    return axios.post(`${this.API}/api/member/v2/post`, postData, {
-      headers: this.Header,
-    });
+    return axios
+      .post(`${this.API}/api/member/v2/post`, postData, {
+        headers: this.Header,
+      })
+      .then((res) => {
+        alert('성공');
+      })
+      .catch((err) => {
+        alert('실패');
+      });
   };
   deletePostData = (postId: string) => {
     return axios.delete(`${this.API}/api/member/v2/post/${postId}`, {
       headers: this.Header,
     });
+  };
+  updatePostData = (postData: PostPostDataType, postId: string) => {
+    return axios
+      .put(`${this.API}/api/member/v2/post/${postId}`, postData, {
+        headers: this.Header,
+      })
+      .then((res) => {
+        alert('성공');
+      })
+      .catch((err) => {
+        alert('실패');
+      });
   };
 }
 export default new Api();

@@ -30,12 +30,12 @@ export interface RowPostDataType {
 export interface PostPostDataType {
   base64Thumbnail: string;
   fileName: string;
-  title: string;
+  title?: string;
   category: {
-    categoryName: string;
+    categoryName?: string;
   };
-  content: string;
-  postHashTags: string;
+  content?: string;
+  postHashTags?: string;
 }
 export interface RowDetailPostListType {
   body: {

@@ -73,7 +73,7 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
 
   const handleRemove = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      await API.deletePostData(postId);
+      API.deletePostData(postId);
       navigate(-1);
       console.log(postId);
     }
@@ -94,15 +94,15 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
               <PostTitle>{postData.title}</PostTitle>
               <PostIconWrapper>
                 <BookmarkWrapper>
-                  <Bookmark marked={false} />
+                  <Bookmark marked={false} height={'25'} />
                 </BookmarkWrapper>
                 <PostEditIconWrapper
                   onClick={() => navigate(`/post/write/${postId}`)}
                 >
-                  <PostEditIcon />
+                  <PostEditIcon height={'25'} />
                 </PostEditIconWrapper>
                 <PostTrashIconWrapper onClick={handleRemove}>
-                  <PostTrashIcon />
+                  <PostTrashIcon height={'25'} />
                 </PostTrashIconWrapper>
               </PostIconWrapper>
             </PostTitleWrapper>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -11,6 +11,7 @@ import {
   PostThumbnailWrapper,
   PostTitle,
 } from '../PostWrite/styled';
+import { PostEditContentWrapper } from './styled';
 import {
   ContainerInner,
   LayoutContainer,
@@ -40,6 +41,8 @@ import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+import { PostPostDataType } from '../../types/postData';
+import hljs from 'highlight.js';
 
 export const PostCategoryMenuData = [
   {
@@ -66,35 +69,63 @@ export const PostCategoryMenuData = [
 
 const PostEdit = () => {
   const { postId } = useParams<'postId'>();
-  const { postData } = useGetDetailPost(postId);
-  const editorRef: any = useRef();
-  const [title, setTitle] = useState(postData?.title);
-  const [content, setContent] = useState(postData?.content);
-  const [category, setCategory] = useState(postData?.category.categoryName);
-  const [hashtag, setHashtag] = useState(postData?.postHashTags);
-  const navigate = useNavigate();
-  /*const postData = {
-    title: title,
-    content: content,
-    category: { categoryName: category },
-    postHashTags: hashtag,
-    fileName: '',
-    base64Thumbnail: '',
-  };
-  const handleSubmit = async () => {
-    await API.postPostData(postData);
-    navigate('/!*');
-    console.log(content);
-  };*/
-  const setEditorValue = () => {
-    const editorContent = editorRef.current.getInstance().getMarkdown();
-    setContent(editorContent);
-  };
+
   return (
     <>
       <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
+          {postId && <PostEditContent postId={postId} />}
+        </ContainerInner>
+      </LayoutContainer>
+    </>
+  );
+};
+
+const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
+  const { postData } = useGetDetailPost(postId);
+  console.log(postData);
+
+  console.log(postData?.category.categoryName);
+  useEffect(() => {
+    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+      hljs.highlightElement(el as HTMLElement);
+    });
+  }, [postData]);
+
+  const editorRef: any = useRef();
+  const [category, setCategory] = useState(postData?.category.categoryName);
+  const [postDetailData, setPostDetailData] = useState({
+    title: postData?.title,
+    content: postData?.content,
+    hashtag: postData?.postHashTags,
+  });
+
+  const navigate = useNavigate();
+
+  const postEditData: PostPostDataType = {
+    title: postDetailData.title,
+    content: postDetailData.content,
+    category: { categoryName: category },
+    postHashTags: postDetailData.hashtag,
+    fileName: '',
+    base64Thumbnail: '',
+  };
+  const handleSubmit = async () => {
+    await API.updatePostData(postEditData, postId);
+    navigate('/category/all');
+    console.log('제출완료');
+  };
+  const setEditorValue = () => {
+    const editorContent = editorRef.current.getInstance().getMarkdown();
+    setPostDetailData(() => {
+      return { ...postDetailData, content: editorContent };
+    });
+  };
+  return (
+    <>
+      {postData && (
+        <>
           <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
@@ -103,14 +134,20 @@ const PostEdit = () => {
             <PostContentWrapper>
               <PostTitle
                 placeholder="제목을 입력하세요."
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={postDetailData.title}
+                onChange={(e) => {
+                  setPostDetailData(() => {
+                    return { ...postDetailData, title: e.target.value };
+                  });
+                }}
               />
               <PostHashtag
                 placeholder={'#해시태그 ,로 구분하세요'}
-                value={hashtag}
+                value={postDetailData.hashtag}
                 onChange={(e) => {
-                  setHashtag(e.target.value);
+                  setPostDetailData(() => {
+                    return { ...postDetailData, hashtag: e.target.value };
+                  });
                 }}
               />
             </PostContentWrapper>
@@ -122,7 +159,7 @@ const PostEdit = () => {
             previewStyle="vertical"
             height="627px"
             initialEditType="markdown"
-            initialValue={content}
+            initialValue={postDetailData.content}
             ref={editorRef}
             onChange={setEditorValue}
             plugins={[
@@ -140,11 +177,15 @@ const PostEdit = () => {
               <GDSCButton text="임시저장" />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
-              <GDSCButton text="업로드" color={'googleBlue'} />
+              <GDSCButton
+                text="업로드"
+                color={'googleBlue'}
+                onClick={handleSubmit}
+              />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
-        </ContainerInner>
-      </LayoutContainer>
+        </>
+      )}
     </>
   );
 };

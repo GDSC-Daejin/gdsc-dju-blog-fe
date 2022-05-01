@@ -65,27 +65,31 @@ export const PostCategoryMenuData = [
 
 const PostWrite = () => {
   const editorRef: any = useRef();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
-  const [hashtag, setHashtag] = useState('');
+  const [postDetailData, setPostDetailData] = useState({
+    title: '',
+    content: '',
+    hashtag: '',
+  });
   const navigate = useNavigate();
   const postData = {
-    title: title,
-    content: content,
+    title: postDetailData.title,
+    content: postDetailData.content,
     category: { categoryName: category },
-    postHashTags: hashtag,
+    postHashTags: postDetailData.hashtag,
     fileName: '',
     base64Thumbnail: '',
   };
   const handleSubmit = async () => {
     await API.postPostData(postData);
-    navigate('/*');
-    console.log(content);
+    navigate('/category/*');
+    console.log(postData.content);
   };
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
-    setContent(editorContent);
+    setPostDetailData(() => {
+      return { ...postDetailData, content: editorContent };
+    });
   };
   return (
     <>
@@ -100,13 +104,19 @@ const PostWrite = () => {
             <PostContentWrapper>
               <PostTitle
                 placeholder="제목을 입력하세요."
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={postData.title}
+                onChange={(e) => {
+                  setPostDetailData(() => {
+                    return { ...postDetailData, title: e.target.value };
+                  });
+                }}
               />
               <PostHashtag
                 placeholder={'#해시태그 ,로 구분하세요'}
                 onChange={(e) => {
-                  setHashtag(e.target.value);
+                  setPostDetailData(() => {
+                    return { ...postDetailData, hashtag: e.target.value };
+                  });
                 }}
               />
             </PostContentWrapper>
