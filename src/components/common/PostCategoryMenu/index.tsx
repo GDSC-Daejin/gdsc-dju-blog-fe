@@ -12,7 +12,7 @@ import { positionColor } from '../../../store/positionColor';
 
 const PostCategoryMenu: React.FC<{
   onClick: (category: string) => void;
-  category: string;
+  category?: string;
 }> = ({ onClick, category }) => {
   return (
     <>

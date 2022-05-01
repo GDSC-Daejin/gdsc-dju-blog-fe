@@ -10,7 +10,7 @@ import {
   PostInformation,
   PostThumbnailWrapper,
   PostTitle,
-} from './styled';
+} from '../PostWrite/styled';
 import {
   ContainerInner,
   LayoutContainer,
@@ -38,7 +38,8 @@ import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 
 export const PostCategoryMenuData = [
   {
@@ -63,14 +64,16 @@ export const PostCategoryMenuData = [
   },
 ];
 
-const PostWrite = () => {
+const PostEdit = () => {
+  const { postId } = useParams<'postId'>();
+  const { postData } = useGetDetailPost(postId);
   const editorRef: any = useRef();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [category, setCategory] = useState('');
-  const [hashtag, setHashtag] = useState('');
+  const [title, setTitle] = useState(postData?.title);
+  const [content, setContent] = useState(postData?.content);
+  const [category, setCategory] = useState(postData?.category.categoryName);
+  const [hashtag, setHashtag] = useState(postData?.postHashTags);
   const navigate = useNavigate();
-  const postData = {
+  /*const postData = {
     title: title,
     content: content,
     category: { categoryName: category },
@@ -80,9 +83,9 @@ const PostWrite = () => {
   };
   const handleSubmit = async () => {
     await API.postPostData(postData);
-    navigate('/*');
+    navigate('/!*');
     console.log(content);
-  };
+  };*/
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
     setContent(editorContent);
@@ -105,6 +108,7 @@ const PostWrite = () => {
               />
               <PostHashtag
                 placeholder={'#해시태그 ,로 구분하세요'}
+                value={hashtag}
                 onChange={(e) => {
                   setHashtag(e.target.value);
                 }}
@@ -118,7 +122,7 @@ const PostWrite = () => {
             previewStyle="vertical"
             height="627px"
             initialEditType="markdown"
-            initialValue="helloWorld"
+            initialValue={content}
             ref={editorRef}
             onChange={setEditorValue}
             plugins={[
@@ -136,11 +140,7 @@ const PostWrite = () => {
               <GDSCButton text="임시저장" />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
-              <GDSCButton
-                text="업로드"
-                onClick={handleSubmit}
-                color={'googleBlue'}
-              />
+              <GDSCButton text="업로드" color={'googleBlue'} />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
         </ContainerInner>
@@ -149,4 +149,4 @@ const PostWrite = () => {
   );
 };
 
-export default PostWrite;
+export default PostEdit;

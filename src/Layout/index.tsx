@@ -15,6 +15,7 @@ import PostWrite from '../pages/PostWrite';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Post from '../pages/Post';
+import PostEdit from '../pages/PostEdit';
 import ScrollTop from '../Utils/ScrollTop';
 import Modal from '../components/common/modal';
 import Category from '../pages/Category';
@@ -52,6 +53,7 @@ const Layout = () => {
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
         <Route path={'/post/write'} element={<PostWrite />} />
+        <Route path={'/post/write/:postId'} element={<PostEdit />} />
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
