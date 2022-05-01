@@ -35,6 +35,8 @@ import { Viewer } from '@toast-ui/react-editor';
 import PostTrashIcon from '../../assets/PostTrashIcon';
 import PostEditIcon from '../../assets/PostEditIcon';
 import Bookmark from '../../assets/Bookmark';
+import { useLocation } from 'react-router';
+import { useGetUserData } from '../../api/hooks/useGetUserData';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -64,6 +66,12 @@ const Post = () => {
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+  const { userData } = useGetUserData();
+  const userInfoData = userData?.memberInfo;
+  console.log(userInfoData);
+  const isUserEqual = location.pathname.includes(`${userInfoData?.nickname}`);
 
   useEffect(() => {
     document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
@@ -94,15 +102,21 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
               <PostTitle>{postData.title}</PostTitle>
               <PostIconWrapper>
                 <BookmarkWrapper>
-                  <Bookmark marked={false} height={'25'} />
+                  <Bookmark marked={!isUserEqual} height={'25'} />
                 </BookmarkWrapper>
                 <PostEditIconWrapper
-                  onClick={() => navigate(`/post/write/${postId}`)}
+                  onClick={
+                    isUserEqual
+                      ? () => navigate(`/post/write/${postId}`)
+                      : undefined
+                  }
                 >
-                  <PostEditIcon height={'25'} />
+                  <PostEditIcon marked={isUserEqual} height={'25'} />
                 </PostEditIconWrapper>
-                <PostTrashIconWrapper onClick={handleRemove}>
-                  <PostTrashIcon height={'25'} />
+                <PostTrashIconWrapper
+                  onClick={isUserEqual ? handleRemove : undefined}
+                >
+                  <PostTrashIcon marked={isUserEqual} height={'25'} />
                 </PostTrashIconWrapper>
               </PostIconWrapper>
             </PostTitleWrapper>
