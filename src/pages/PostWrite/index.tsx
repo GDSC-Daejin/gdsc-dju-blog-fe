@@ -81,8 +81,13 @@ const PostWrite = () => {
     base64Thumbnail: '',
   };
   const handleSubmit = async () => {
-    await API.postPostData(postData);
-    navigate('/category/*');
+    await API.postPostData(postData)
+      .then((res) => {
+        navigate(`/category/all`);
+      })
+      .catch((err) => {
+        alert('실패');
+      });
     console.log(postData.content);
   };
   const setEditorValue = () => {

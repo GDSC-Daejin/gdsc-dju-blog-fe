@@ -112,8 +112,13 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
     base64Thumbnail: '',
   };
   const handleSubmit = async () => {
-    await API.updatePostData(postEditData, postId);
-    navigate('/category/all');
+    await API.updatePostData(postEditData, postId)
+      .then((res) => {
+        navigate(`/category/all`);
+      })
+      .catch((err) => {
+        alert('실패');
+      });
     console.log('제출완료');
   };
   const setEditorValue = () => {
