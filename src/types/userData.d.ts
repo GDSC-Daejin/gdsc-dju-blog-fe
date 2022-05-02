@@ -14,6 +14,7 @@ export interface IUserDataType {
   name: string;
   email: string;
 }
+
 export interface IRowUserDataType {
   header: string;
   body: {
