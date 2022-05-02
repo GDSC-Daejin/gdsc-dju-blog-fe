@@ -49,8 +49,9 @@ const BlogHome = () => {
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
+  const token = localStorage.getItem('token') ?? '';
 
-  const { userData } = useGetUserData();
+  const { userData } = useGetUserData(token);
   const userInfoData = userData?.memberInfo;
   const { userPostData } = useGetUserPostListData(category, page - 1, 6);
 

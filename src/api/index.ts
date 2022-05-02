@@ -32,9 +32,11 @@ export class Api {
       headers: this.Header,
     });
   };
-  getUserData = () => {
+  getUserData = (token: string) => {
     return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
-      headers: this.Header,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
   };
   getUserPostListData = (params: string) => {

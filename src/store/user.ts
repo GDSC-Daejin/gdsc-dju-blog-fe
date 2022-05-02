@@ -45,14 +45,3 @@ export const userState = atom({
   default: defaultUserState,
   effects_UNSTABLE: [persistAtom],
 });
-
-export const userSelector = selector({
-  key: USER_SELECTOR,
-  get: async () => {
-    const response = await API.getUserData();
-    return response.data.body.data;
-  },
-  set: ({ set }, newValue) => {
-    set(userState, newValue);
-  },
-});

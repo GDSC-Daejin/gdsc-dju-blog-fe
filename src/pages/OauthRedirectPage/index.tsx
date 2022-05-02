@@ -1,33 +1,31 @@
-import axios from 'axios';
 import React, { Suspense, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { useGetUserData } from '../../api/hooks/useGetUserData';
 import GoogleLoader from '../../components/common/GoogleLoader';
-import { userSelector, userState } from '../../store/user';
+import { userState } from '../../store/user';
+import { useGetUserData } from '../../api/hooks/useGetUserData';
+import { UserDataType } from '../../types/userDataType';
 
 const OauthRedirectPage = () => {
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token') ?? '';
+  localStorage.setItem('token', token);
+  const { userData } = useGetUserData(token);
   return (
     <Suspense fallback={GoogleLoader}>
-      <OauthRedirect />
+      {userData && <OauthRedirect {...userData} />}
     </Suspense>
   );
 };
-
-export default OauthRedirectPage;
-
-const OauthRedirect = () => {
+const OauthRedirect = (userData: UserDataType) => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get('token');
-  // Oauth redirecturl
-  localStorage.setItem('token', token ?? '');
-  const [selector, setSelector] = useRecoilState(userSelector);
+  const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
-    token && setSelector(selector);
-    // navigate('/', { replace: true });
-  }, [token]);
-  return <></>;
+    setUser({ ...user, ...userData });
+    navigate('/', { replace: true });
+  }, [userData]);
+  return null;
 };
+export default OauthRedirectPage;
