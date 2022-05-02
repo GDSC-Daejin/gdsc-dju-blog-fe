@@ -64,7 +64,11 @@ export const SideBar = () => {
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>
-            {user ? <SideBarLogin {...user} /> : <SideBarLogout />}
+            {user.username ? (
+              <SideBarLogin {...user} />
+            ) : (
+              <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
+            )}
             {/*<SideBarLogin />*/}
             <SideBarCategory />
           </SideBarDesign>

@@ -12,7 +12,10 @@ import GdscBlogLogo from '../../../../assets/GdscBlogLogo';
 import GoogleLogo from '../../../../assets/GoogleLogo';
 import { GDSCButton } from '../../Button';
 
-const SideBarLogout = () => {
+interface IProps {
+  loginURL: string;
+}
+const SideBarLogout: React.FC<IProps> = ({ loginURL }) => {
   return (
     <>
       <GdscSideLogoWrapper>
@@ -25,7 +28,12 @@ const SideBarLogout = () => {
         <GdscBlogLogo />
       </GdscSideBlogLogoWrapper>
       <GoogleButtonWrapper>
-        <GDSCButton text={' Google로 계속'} />
+        <GDSCButton
+          text={' Google로 계속'}
+          onClick={() => {
+            window.open(loginURL, '_blank');
+          }}
+        />
         <GoogleLogoWrapper>
           <GoogleLogo />
         </GoogleLogoWrapper>
