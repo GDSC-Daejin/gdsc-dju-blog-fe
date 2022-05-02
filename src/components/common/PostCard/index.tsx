@@ -46,11 +46,13 @@ const PostCard: React.FC<DetailPostDataType> = ({
         </BookmarkWrapper>
         <PostDate>{dateFilter(category.uploadDate)}</PostDate>
         <PostTitle>{title}</PostTitle>
-        <PostHashTageSection>
-          {hashTageSpreader(postHashTags).map((data, id) => (
-            <HashTageDark text={data} key={id} />
-          ))}
-        </PostHashTageSection>
+        {postHashTags && (
+          <PostHashTageSection>
+            {hashTageSpreader(postHashTags).map((data, id) => (
+              <HashTageDark text={data} key={id} />
+            ))}
+          </PostHashTageSection>
+        )}
         <PostContent hover={hover}>{content}</PostContent>
       </PostCardContentWrapper>
     </PostCardWrapper>
