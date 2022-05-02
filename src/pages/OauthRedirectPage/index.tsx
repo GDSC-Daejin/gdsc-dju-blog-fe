@@ -20,9 +20,9 @@ export default OauthRedirectPage;
 const OauthRedirect = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get('token');
+  const token = searchParams.get('token') ?? '';
   // Oauth redirecturl
-  localStorage.setItem('token', token ?? '');
+  localStorage.setItem('token', token);
   const [selector, setSelector] = useRecoilState(userSelector);
 
   useEffect(() => {
