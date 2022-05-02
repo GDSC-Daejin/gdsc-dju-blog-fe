@@ -125,13 +125,13 @@ const BlogHome = () => {
                     </SettingIconWrapper>
                   </BlogNameWrapper>
                   <IntroduceText>{userInfoData.introduce}</IntroduceText>
-                  <HashTageSection>
+                  {/* <HashTageSection>
                     {hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
                       <HashTageWrapper key={id}>
                         <HashTageDark text={tag} />
                       </HashTageWrapper>
                     ))}
-                  </HashTageSection>
+                  </HashTageSection> */}
                 </ProfileDetailWrapper>
               </ProfileWrapper>
               <TopMenuWrapper>

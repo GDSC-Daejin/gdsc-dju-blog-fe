@@ -75,13 +75,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
         {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}
-        <BlogCardTagWrapper IsHovered={IsHovered}>
+        {/* <BlogCardTagWrapper IsHovered={IsHovered}>
           {hashTageSpreader(postData.postHashTags)
             .filter((data, index) => index < 2)
             .map((data: string, index: number) => (
               <HashTageLight key={index} text={data} />
             ))}
-        </BlogCardTagWrapper>
+        </BlogCardTagWrapper> */}
         {/* 하단 Content */}
         <BlogCardBottomBox
           isHovered={IsHovered}

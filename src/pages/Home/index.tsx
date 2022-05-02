@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useScroll } from 'react-use';
 import { useSearchParams } from 'react-router-dom';
-import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
 import {
   BlogCardWrapper,
@@ -22,14 +21,15 @@ import {
 } from '../../components/common/Animation';
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
+import BlogCardScrollButton from './BlogCardButton';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { x } = useScroll(scrollRef);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
   const [phrase, setPhrase] = useState(homePhraseData[0]);
+  const { x } = useScroll(scrollRef);
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -67,6 +67,7 @@ function Home() {
       if (index >= homePhraseData.length) index = 0;
     }, 5000);
   }, []);
+
   useEffect(() => {
     setPhraseData();
   }, []);
@@ -121,7 +122,7 @@ function Home() {
       </CardSectionWrapper>
       <HomeLayoutContainer>
         <ButtonWrapper>
-          <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
+          <BlogCardScrollButton scrollX={x} scrollRef={scrollRef} />
         </ButtonWrapper>
       </HomeLayoutContainer>
     </>

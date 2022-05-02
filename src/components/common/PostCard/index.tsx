@@ -47,9 +47,9 @@ const PostCard: React.FC<DetailPostDataType> = ({
         <PostDate>{dateFilter(category.uploadDate)}</PostDate>
         <PostTitle>{title}</PostTitle>
         <PostHashTageSection>
-          {hashTageSpreader(postHashTags).map((data, id) => (
+          {/* {hashTageSpreader(postHashTags).map((data, id) => (
             <HashTageDark text={data} key={id} />
-          ))}
+          ))} */}
         </PostHashTageSection>
         <PostContent hover={hover}>{content}</PostContent>
       </PostCardContentWrapper>

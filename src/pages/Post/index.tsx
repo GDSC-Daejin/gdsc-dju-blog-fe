@@ -104,11 +104,11 @@ const AuthorBox: React.FC<AuthorBoxProps> = ({
         <Author marginRight={10}>{nickname}</Author>
         <Date>{dateFilter(uploadDate)}</Date>
       </AuthorWrapper>
-      <HashTageSection>
+      {/* <HashTageSection>
         {hashTageSpreader(postHashTags).map((tage) => (
           <HashTageDark text={tage} key={tage} size={'L'} />
         ))}
-      </HashTageSection>
+      </HashTageSection> */}
     </>
   );
 };
