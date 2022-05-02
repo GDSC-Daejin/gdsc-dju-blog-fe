@@ -30,7 +30,7 @@ const SideBarLogin = (user: ILoginUserData) => {
         <ProfileImage image={MockProfile} position="frontend" />
       </ProfileImageWrapper>
       <ProfileInformation>
-        <ProfileName>{user.memberInfo.nickname ?? 'null'}</ProfileName>
+        <ProfileName>{user.memberInfo.nickname ?? user.username}</ProfileName>
         <ProfileJobPosition>{user.memberInfo.positionType}</ProfileJobPosition>
         <SettingIconWrapper>
           <SettingIcon />
