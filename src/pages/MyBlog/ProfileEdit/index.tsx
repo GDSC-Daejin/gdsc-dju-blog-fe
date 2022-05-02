@@ -24,7 +24,9 @@ import { MemberDataInfoType } from '../../../types/userDataType';
 import { useNavigate } from 'react-router';
 
 const ProfileEdit = () => {
-  const { userData } = useGetUserData();
+  const token = localStorage.getItem('token') ?? '';
+
+  const { userData } = useGetUserData(token);
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
   useLayoutEffect(() => {
