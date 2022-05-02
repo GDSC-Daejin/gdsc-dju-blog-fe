@@ -16,30 +16,52 @@ import SettingIcon from '../../../../assets/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
 import { userData } from '../../../../api/Mocks/userData';
 
-const SideBarLogin = () => {
+import { ILoginUserData } from '../../../../types/userInfoData';
+import { useNavigate } from 'react-router-dom';
+
+const SideBarLogin = (user: ILoginUserData) => {
+  const navigate = useNavigate();
+  const locationHandler = () => {
+    navigate('/');
+  };
   return (
     <>
       <ProfileImageWrapper>
         <ProfileImage image={MockProfile} position="frontend" />
       </ProfileImageWrapper>
       <ProfileInformation>
-        <ProfileName>{userData.memberInfo.nickname}</ProfileName>
-        <ProfileJobPosition>
-          {userData.memberInfo.positionType}
-        </ProfileJobPosition>
+        <ProfileName>{user.memberInfo.nickname ?? 'null'}</ProfileName>
+        <ProfileJobPosition>{user.memberInfo.positionType}</ProfileJobPosition>
         <SettingIconWrapper>
           <SettingIcon />
         </SettingIconWrapper>
       </ProfileInformation>
       <MyBlogButtonWrapper>
-        <GDSCButtonL text="내 블로그" />
+        <GDSCButtonL
+          text="내 블로그"
+          onClick={() => {
+            navigate(`/${user.memberInfo.nickname}`);
+          }}
+        />
       </MyBlogButtonWrapper>
       <BottomButtonWrapper>
         <WrittingButtonWrapper>
-          <GDSCButton text="글쓰기" />
+          <GDSCButton
+            text="글쓰기"
+            onClick={() => {
+              navigate(`/post/write`);
+            }}
+          />
         </WrittingButtonWrapper>
         <LogoutButtonWrapper>
-          <GDSCButton text="로그아웃" />
+          <GDSCButton
+            text="로그아웃"
+            onClick={() => {
+              localStorage.removeItem('token');
+              localStorage.removeItem('recoil-persist');
+              navigate(`/`);
+            }}
+          />
         </LogoutButtonWrapper>
       </BottomButtonWrapper>
     </>

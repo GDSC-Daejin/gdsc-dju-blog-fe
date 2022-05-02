@@ -18,6 +18,7 @@ import { MENU_KEY, menuState } from '../../../store/menu';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import { userState } from '../../../store/user';
 
 export const sideBarMenuData = [
   {
@@ -48,11 +49,7 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
-  const config = {
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-    },
-  };
+  const [user, setUser] = useRecoilState(userState);
   const API_BASE_URL = 'https://gdsc-dju.com';
   const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
   const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
@@ -67,9 +64,7 @@ export const SideBar = () => {
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>
-            <a href={GOOGLE_AUTH_URL}>
-              <SideBarLogout />
-            </a>
+            {user ? <SideBarLogin {...user} /> : <SideBarLogout />}
             {/*<SideBarLogin />*/}
             <SideBarCategory />
           </SideBarDesign>
