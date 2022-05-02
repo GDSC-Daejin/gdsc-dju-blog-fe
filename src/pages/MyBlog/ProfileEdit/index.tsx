@@ -18,9 +18,13 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../../../store/user';
 
 import API from '../../../api';
-import { MemberUrlsType, UserEditDataType } from '../../../types/userInfoData';
+import {
+  IUserUrlsType,
+  IUserEditDataType,
+  IUserDataInfoType,
+  IUserDataType,
+} from '../../../types/userData';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { MemberDataInfoType } from '../../../types/userDataType';
 import { useNavigate } from 'react-router';
 
 const ProfileEdit = () => {
@@ -56,15 +60,16 @@ const ProfileEdit = () => {
       githubUrl: user.memberPortfolioUrls[0].webUrl,
       blogUrl: user.memberPortfolioUrls[1].webUrl,
       resumeUrl: user.memberPortfolioUrls[2].webUrl,
-    } as UserEditDataType,
-    onSubmit: async (values) => {
+    } as IUserEditDataType,
+
+    onSubmit: async (values: IUserEditDataType) => {
       const { githubUrl, blogUrl, resumeUrl } = values;
-      const memberPortfolioUrls: MemberUrlsType[] = [
+      const memberPortfolioUrls: IUserUrlsType[] = [
         { id: 0, webUrl: githubUrl },
         { id: 1, webUrl: blogUrl },
         { id: 2, webUrl: resumeUrl },
       ];
-      const memberData: MemberDataInfoType = {
+      const memberData: IUserDataInfoType = {
         generation: values.generation,
         gitEmail: values.gitEmail,
         hashTag: values.hashTag,

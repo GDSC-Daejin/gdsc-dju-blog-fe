@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import GoogleLoader from '../../components/common/GoogleLoader';
 import { userState } from '../../store/user';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
-import { UserDataType } from '../../types/userDataType';
+import { IUserDataType } from '../../types/userData';
 
 const OauthRedirectPage = () => {
   const [searchParams] = useSearchParams();
@@ -18,7 +18,7 @@ const OauthRedirectPage = () => {
     </Suspense>
   );
 };
-const OauthRedirect = (userData: UserDataType) => {
+const OauthRedirect = (userData: IUserDataType) => {
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
 

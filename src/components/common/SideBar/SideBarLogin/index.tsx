@@ -16,7 +16,7 @@ import SettingIcon from '../../../../assets/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
 import { userData } from '../../../../api/Mocks/userData';
 
-import { ILoginUserData } from '../../../../types/userInfoData';
+import { ILoginUserData } from '../../../../types/userData';
 import { useNavigate } from 'react-router-dom';
 
 const SideBarLogin = (user: ILoginUserData) => {
