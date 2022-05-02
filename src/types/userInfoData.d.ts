@@ -1,5 +1,19 @@
 import { date } from 'yup';
 
+export interface ILoginUserData {
+  id: number;
+  userId: string;
+  username: string;
+  email: string;
+  emailVerifiedYn: string;
+  profileImageUrl: string;
+  role: 'GUEST' | 'MEMBER' | 'CORE' | 'LEAD';
+  providerType: string;
+  memberInfo: UserDataType;
+  modifiedAt: string;
+  uploadDate: string;
+}
+
 export interface UserDataType {
   generation: number;
   gitEmail: string;

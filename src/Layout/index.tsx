@@ -21,23 +21,6 @@ import OauthRedirectPage from '../pages/OauthRedirectPage';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
-  // const { userData } = useGetUserData();
-  const [user, setUser] = useRecoilState(userState);
-  const forceLogin = async () => {
-    await API.postForceLogin();
-    const res = await API.getUserData();
-    const userData = res.data.body.data;
-    setUser({
-      ...user,
-      ...userData.memberInfo,
-      name: userData.username,
-      email: userData.email,
-    });
-  };
-  useEffect(() => {
-    forceLogin();
-    //로그인 정보 가져오기
-  }, []);
 
   return (
     <>

@@ -1,31 +1,33 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { useSetRecoilState } from 'recoil';
+import React, { Suspense, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
-import { isUserState } from '../../store/user_token';
+import GoogleLoader from '../../components/common/GoogleLoader';
+import { userSelector, userState } from '../../store/user';
 
 const OauthRedirectPage = () => {
-  const navigate = useNavigate();
-  // Oauth redirecturl
-  const [url, token] = window.location.href.split('=');
-  const setIsUserState = useSetRecoilState(isUserState);
-
-  axios
-    .get('https://gdsc-dju.com/api/guest/v1/info')
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  useEffect(() => {
-    setIsUserState(token);
-    // navigate('/', { replace: true });
-  }, []);
-
-  return <>로그인 처리중 ...</>;
+  return (
+    <Suspense fallback={GoogleLoader}>
+      <OauthRedirect />
+    </Suspense>
+  );
 };
 
 export default OauthRedirectPage;
+
+const OauthRedirect = () => {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get('token');
+  // Oauth redirecturl
+  localStorage.setItem('token', token ?? '');
+  const [selector, setSelector] = useRecoilState(userSelector);
+
+  useEffect(() => {
+    token && setSelector(selector);
+    // navigate('/', { replace: true });
+  }, [token]);
+  return <></>;
+};

@@ -22,6 +22,8 @@ import {
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../store/user';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -73,6 +75,9 @@ function Home() {
   }, []);
 
   const { postListData } = useGetPostListData(category, 0, 11);
+  const user = useRecoilValue(userState);
+
+  console.log(user);
 
   return (
     <>
