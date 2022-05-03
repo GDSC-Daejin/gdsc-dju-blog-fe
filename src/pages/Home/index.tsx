@@ -56,6 +56,7 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
+
   return (
     <>
       <HomeLayoutContainer>

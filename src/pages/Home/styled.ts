@@ -34,6 +34,7 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
+  min-width: 1160px;
   height: 100%;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
@@ -49,7 +50,6 @@ export const BlogCardWrapper = styled(motion.div)`
   width: 248px;
   height: 294px;
   margin: 0 15px;
-  transform: translateX(calc((100vw - 1200px) / 2 + 20px));
   :first-child {
     margin-left: 0;
   }
