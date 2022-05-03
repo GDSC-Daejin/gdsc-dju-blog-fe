@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IRowUserDataType, IUserDataInfoType } from '../types/userData';
+import { IRowUserDataType, IUserInfoDataType } from '../types/userData';
 import {
   PostPostDataType,
   RowDetailPostListType,
@@ -27,7 +27,7 @@ export class Api {
         localStorage.setItem('token', res.data.body.token);
       });
   };
-  updateUserData = (userInfoData: IUserDataInfoType) => {
+  updateUserData = (userInfoData: IUserInfoDataType) => {
     return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, {
       headers: this.Header,
     });

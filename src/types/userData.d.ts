@@ -1,4 +1,5 @@
 export interface IUserDataType {
+  id: number;
   generation: number;
   gitEmail: string;
   hashTag: string;
@@ -18,22 +19,10 @@ export interface IUserDataType {
 export interface IRowUserDataType {
   header: string;
   body: {
-    data: IUserDataType;
+    data: ILoginUserData;
   };
 }
-export interface IUserDataType {
-  email: string;
-  emailVerifiedYn: string;
-  memberInfo: IUserDataInfoType;
-  modifiedAt: string;
-  password: string;
-  profileImageUrl: string;
-  providerType: string;
-  role: string;
-  uploadDate: string;
-  userId: string;
-  username: string;
-}
+
 export interface ILoginUserData {
   id: number;
   userId: string;
@@ -43,12 +32,12 @@ export interface ILoginUserData {
   profileImageUrl: string;
   role: 'GUEST' | 'MEMBER' | 'CORE' | 'LEAD';
   providerType: string;
-  memberInfo: IUserDataType;
+  memberInfo: IUserInfoDataType;
   modifiedAt: string;
   uploadDate: string;
 }
 
-export interface IUserDataInfoType {
+export interface IUserInfoDataType {
   generation: number;
   gitEmail: string;
   hashTag: string;
@@ -71,7 +60,21 @@ export interface IUserUrlsType {
   webUrl: string | undefined;
 }
 
-export interface IUserEditDataType extends IUserDataType {
+export interface IUserEditDataType {
+  generation: number;
+  gitEmail: string;
+  hashTag: string;
+  introduce: string;
+  major: string;
+  memberInfoId: number;
+  birthday: string;
+  nickname: string;
+  phoneNumber: string;
+  positionType: string;
+  studentID: string;
+  userID: string;
+  name: string;
+  email: string;
   githubUrl?: string;
   blogUrl?: string;
   resumeUrl?: string;

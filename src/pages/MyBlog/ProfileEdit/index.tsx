@@ -19,10 +19,9 @@ import { userState } from '../../../store/user';
 
 import API from '../../../api';
 import {
-  IUserUrlsType,
   IUserEditDataType,
-  IUserDataInfoType,
-  IUserDataType,
+  IUserInfoDataType,
+  IUserUrlsType,
 } from '../../../types/userData';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { useNavigate } from 'react-router';
@@ -37,30 +36,31 @@ const ProfileEdit = () => {
     if (userData) {
       setUser({
         ...user,
-        ...userData.memberInfo,
-        name: userData.username,
-        email: userData.email,
+        ...userData,
       });
     }
   }, [userData]);
 
   const userEditFormik = useFormik({
     initialValues: {
-      generation: 0,
-      name: user.name,
-      nickname: user.nickname,
-      gitEmail: user.gitEmail,
-      birthday: user.birthday,
-      introduce: user.introduce,
-      hashTag: user.hashTag,
-      memberInfoId: user.memberInfoId,
-      phoneNumber: user.phoneNumber,
-      major: user.major,
-      positionType: user.positionType,
-      githubUrl: user.memberPortfolioUrls[0].webUrl,
-      blogUrl: user.memberPortfolioUrls[1].webUrl,
-      resumeUrl: user.memberPortfolioUrls[2].webUrl,
-    } as IUserEditDataType,
+      name: user.username,
+      email: user.email,
+      generation: user.memberInfo.generation,
+      studentID: user.memberInfo.studentID,
+      userID: user.memberInfo.userID,
+      nickname: user.memberInfo.nickname,
+      gitEmail: user.memberInfo.gitEmail,
+      birthday: user.memberInfo.birthday,
+      introduce: user.memberInfo.introduce,
+      hashTag: user.memberInfo.hashTag,
+      memberInfoId: user.memberInfo.memberInfoId,
+      phoneNumber: user.memberInfo.phoneNumber,
+      major: user.memberInfo.major,
+      positionType: user.memberInfo.positionType,
+      githubUrl: user.memberInfo.memberPortfolioUrls[0].webUrl,
+      blogUrl: user.memberInfo.memberPortfolioUrls[1].webUrl,
+      resumeUrl: user.memberInfo.memberPortfolioUrls[2].webUrl,
+    },
 
     onSubmit: async (values: IUserEditDataType) => {
       const { githubUrl, blogUrl, resumeUrl } = values;
@@ -69,7 +69,7 @@ const ProfileEdit = () => {
         { id: 1, webUrl: blogUrl },
         { id: 2, webUrl: resumeUrl },
       ];
-      const memberData: IUserDataInfoType = {
+      const memberData: IUserInfoDataType = {
         generation: values.generation,
         gitEmail: values.gitEmail,
         hashTag: values.hashTag,

@@ -1,4 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../../../store/user';
+import ProfileImage from '../../ProfileImage';
+import MockProfile from '../../../../assets/MockProfile.png';
+import SettingIcon from '../../../../assets/SettingIcon';
+import { GDSCButton, GDSCButtonL } from '../../Button';
+import { ILoginUserData } from '../../../../types/userData';
 import {
   BottomButtonWrapper,
   LogoutButtonWrapper,
@@ -10,20 +18,10 @@ import {
   SettingIconWrapper,
   WrittingButtonWrapper,
 } from '../styled';
-import ProfileImage from '../../ProfileImage';
-import MockProfile from '../../../../assets/MockProfile.png';
-import SettingIcon from '../../../../assets/SettingIcon';
-import { GDSCButton, GDSCButtonL } from '../../Button';
-import { userData } from '../../../../api/Mocks/userData';
-
-import { ILoginUserData } from '../../../../types/userData';
-import { useNavigate } from 'react-router-dom';
 
 const SideBarLogin = (user: ILoginUserData) => {
   const navigate = useNavigate();
-  const locationHandler = () => {
-    navigate('/');
-  };
+  const [userData, setUserData] = useRecoilState(userState);
   return (
     <>
       <ProfileImageWrapper>
@@ -59,6 +57,7 @@ const SideBarLogin = (user: ILoginUserData) => {
             onClick={() => {
               localStorage.removeItem('token');
               localStorage.removeItem('recoil-persist');
+              setUserData({ ...userData, id: 0 });
               navigate(`/`);
             }}
           />

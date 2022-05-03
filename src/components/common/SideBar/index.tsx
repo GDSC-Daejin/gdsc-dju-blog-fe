@@ -53,7 +53,6 @@ export const SideBar = () => {
   const API_BASE_URL = 'https://gdsc-dju.com';
   const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
   const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
-
   return (
     <>
       <SideBarWrapper
@@ -63,8 +62,9 @@ export const SideBar = () => {
       >
         <SideBarInner>
           {/* Login version */}
+
           <SideBarDesign>
-            {user.username ? (
+            {user && user ? (
               <SideBarLogin {...user} />
             ) : (
               <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
