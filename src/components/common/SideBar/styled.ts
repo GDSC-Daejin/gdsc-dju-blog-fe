@@ -24,7 +24,7 @@ export const SideBarBtnInner = styled.div`
     left: 20px;
 `;
 export const SideBarBtnWrapper = styled.div`
-  position: sticky;
+  position: fixed;
   top: 24px;
   z-index: 1002;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
