@@ -31,7 +31,7 @@ const SideBarLogout: React.FC<IProps> = ({ loginURL }) => {
         <GDSCButton
           text={' Google로 계속'}
           onClick={() => {
-            window.open(loginURL, '_blank');
+            window.open(loginURL);
           }}
         />
         <GoogleLogoWrapper>

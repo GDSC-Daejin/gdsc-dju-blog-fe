@@ -57,7 +57,7 @@ const SideBarLogin = (user: ILoginUserData) => {
             onClick={() => {
               localStorage.removeItem('token');
               localStorage.removeItem('recoil-persist');
-              setUserData({ ...userData, id: 0 });
+              setUserData(null);
               navigate(`/`);
             }}
           />

@@ -39,7 +39,7 @@ const UserState: ILoginUserData = {
   uploadDate: '',
 };
 
-export const userState = atom<ILoginUserData>({
+export const userState = atom<ILoginUserData | null>({
   key: USER,
-  default: UserState,
+  default: null,
 });

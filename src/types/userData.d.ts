@@ -57,7 +57,7 @@ export interface IUserInfoDataType {
 
 export interface IUserUrlsType {
   id: number;
-  webUrl: string | undefined;
+  webUrl: string;
 }
 
 export interface IUserEditDataType {
@@ -75,7 +75,7 @@ export interface IUserEditDataType {
   userID: string;
   name: string;
   email: string;
-  githubUrl?: string;
-  blogUrl?: string;
-  resumeUrl?: string;
+  githubUrl: string;
+  blogUrl: string;
+  resumeUrl: string;
 }

@@ -19,6 +19,7 @@ import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { userState } from '../../../store/user';
+import { ILoginUserData } from '../../../types/userData';
 
 export const sideBarMenuData = [
   {
@@ -62,10 +63,9 @@ export const SideBar = () => {
       >
         <SideBarInner>
           {/* Login version */}
-
           <SideBarDesign>
             {user && user ? (
-              <SideBarLogin {...user} />
+              <SideBarLogin {...(user as ILoginUserData)} />
             ) : (
               <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
             )}
