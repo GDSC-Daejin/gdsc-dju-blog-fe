@@ -10,6 +10,7 @@ export const HomeContentWrapper = styled.div`
   gap: 3.75rem;
   margin-top: 50px;
   padding: 0 20px;
+  min-width: 1160px;
 `;
 export const HomeLayoutContainer = styled.div`
   position: relative;
