@@ -83,7 +83,6 @@ const ProfileEditBox = (userData: ILoginUserData) => {
     validationSchema: profileEditSchema,
   });
   const onSubmit = async (values: IUserEditDataType) => {
-    console.log(1);
     const { githubUrl, blogUrl, resumeUrl } = values;
     const memberPortfolioUrls: IUserUrlsType[] = [
       { id: 0, webUrl: githubUrl },
@@ -91,13 +90,13 @@ const ProfileEditBox = (userData: ILoginUserData) => {
       { id: 2, webUrl: resumeUrl },
     ];
     const memberData: IUserInfoDataType = {
-      generation: values.generation ?? 0,
+      generation: values.generation,
       gitEmail: values.gitEmail,
       hashTag: values.hashTag,
       introduce: values.introduce,
       major: values.major,
       memberInfoId: values.memberInfoId,
-      birthday: values.birthday ?? '2000-09-09 00:00:00.000000',
+      birthday: values.birthday,
       phoneNumber: values.phoneNumber,
       nickname: values.nickname,
       studentID: values.studentID,
