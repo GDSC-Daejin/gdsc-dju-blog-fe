@@ -152,7 +152,6 @@ const PostWrite = () => {
                 color={'googleBlue'}
               />
             </PostBottomButtonRWrapper>
-            <div>sfsa</div>
           </PostBottomButtonWrapper>
         </ContainerInner>
       </LayoutContainer>
