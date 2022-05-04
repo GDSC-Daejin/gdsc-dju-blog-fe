@@ -51,6 +51,9 @@ export const PostTitle = styled.h4`
   font-size: ${(props) => props.theme.fontSize.h5};
   color: ${(props) => props.theme.color.grey900};
   margin-bottom: 16px;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const PostHashTageSection = styled.section`
   display: flex;
@@ -65,6 +68,11 @@ export const PostContent = styled(motion.p)<{ hover: boolean }>`
   box-sizing: border-box;
   width: 720px;
   transition: all 0.3s ease;
+  height: 67.2px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   ${(props) =>
     props.hover &&
     css`

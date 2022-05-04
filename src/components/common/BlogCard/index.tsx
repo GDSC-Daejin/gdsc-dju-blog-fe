@@ -60,22 +60,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
       navigate('/', { replace: false });
     }
   };
-  const sliceTitle = useCallback(() => {
-    const korean = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
-    if (korean.test(postData.title)) {
-      if (postData.title.length > 12) {
-        return postData.title.slice(0, 12) + '...';
-      } else {
-        return postData.title;
-      }
-    } else {
-      if (postData.title.length > 15) {
-        return postData.title.slice(0, 15) + '...';
-      } else {
-        return postData.title;
-      }
-    }
-  }, []);
+
   const removeImageInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
     .replace(/\(.*\)/gi, ''); // ( ) 제거
@@ -90,20 +75,22 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
         {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}
-        <BlogCardTagWrapper IsHovered={IsHovered}>
-          {hashTageSpreader(postData.postHashTags)
-            .filter((data, index) => index < 2)
-            .map((data: string, index: number) => (
-              <HashTageLight key={index} text={data} />
-            ))}
-        </BlogCardTagWrapper>
+        {postData.postHashTags && (
+          <BlogCardTagWrapper IsHovered={IsHovered}>
+            {hashTageSpreader(postData.postHashTags)
+              .filter((data, index) => index < 2)
+              .map((data: string, index: number) => (
+                <HashTageLight key={index} text={data} />
+              ))}
+          </BlogCardTagWrapper>
+        )}
         {/* 하단 Content */}
         <BlogCardBottomBox
           isHovered={IsHovered}
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
         >
-          <BlogCardTitle>{sliceTitle()}</BlogCardTitle>
+          <BlogCardTitle>{postData.title}</BlogCardTitle>
           <AnimatePresence>
             {IsHovered && (
               <BlogCardPostText
@@ -111,7 +98,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
                 initial={'initial'}
                 animate={'visible'}
               >
-                <PostText children={removeImageInContent.slice(0, 160)} />
+                <PostText children={removeImageInContent} />
               </BlogCardPostText>
             )}
           </AnimatePresence>

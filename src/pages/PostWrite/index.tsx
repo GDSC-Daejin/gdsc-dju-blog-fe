@@ -42,24 +42,19 @@ import { useNavigate } from 'react-router-dom';
 
 export const PostCategoryMenuData = [
   {
-    title: 'Frontend',
-    subtitle: 'frontend',
+    title: 'Frontend'.toLowerCase(),
   },
   {
-    title: 'Backend',
-    subtitle: 'backend',
+    title: 'Backend'.toLowerCase(),
   },
   {
-    title: 'Android',
-    subtitle: 'android',
+    title: 'Android'.toLowerCase(),
   },
   {
-    title: 'Design',
-    subtitle: 'design',
+    title: 'Design'.toLowerCase(),
   },
   {
-    title: 'Common',
-    subtitle: 'beginner',
+    title: 'Common'.toLowerCase(),
   },
 ];
 
@@ -157,6 +152,7 @@ const PostWrite = () => {
                 color={'googleBlue'}
               />
             </PostBottomButtonRWrapper>
+            <div>sfsa</div>
           </PostBottomButtonWrapper>
         </ContainerInner>
       </LayoutContainer>

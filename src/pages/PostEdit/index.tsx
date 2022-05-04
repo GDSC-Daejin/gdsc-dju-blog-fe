@@ -46,24 +46,19 @@ import hljs from 'highlight.js';
 
 export const PostCategoryMenuData = [
   {
-    title: 'Frontend',
-    subtitle: 'frontend',
+    title: 'Frontend'.toLowerCase(),
   },
   {
-    title: 'Backend',
-    subtitle: 'backend',
+    title: 'Backend'.toLowerCase(),
   },
   {
-    title: 'Android',
-    subtitle: 'android',
+    title: 'Android'.toLowerCase(),
   },
   {
-    title: 'Design',
-    subtitle: 'design',
+    title: 'Design'.toLowerCase(),
   },
   {
-    title: 'Common',
-    subtitle: 'beginner',
+    title: 'Common'.toLowerCase(),
   },
 ];
 

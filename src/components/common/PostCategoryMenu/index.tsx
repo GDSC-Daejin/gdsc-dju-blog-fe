@@ -26,7 +26,7 @@ const PostCategoryMenu: React.FC<{
             animate={data.title === category ? 'isActive' : 'unActive'}
           >
             <PostCategoryCircleWrapper variants={PostCircleAnimation}>
-              <PostCategoryCircle color={positionColor(data.subtitle)} />
+              <PostCategoryCircle color={positionColor(data.title)} />
             </PostCategoryCircleWrapper>
             <PostCategoryText>{data.title}</PostCategoryText>
           </PostCategoryTextWrapper>

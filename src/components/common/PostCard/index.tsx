@@ -28,13 +28,6 @@ const PostCard: React.FC<DetailPostDataType> = ({
 }) => {
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
-  const contentFilter = useCallback(() => {
-    let result;
-    hover
-      ? (result = `${content.slice(0, 260)}...`)
-      : (result = `${content.slice(0, 170)}...`);
-    return result;
-  }, []);
   return (
     <PostCardWrapper
       onMouseOver={() => setHover(true)}
@@ -53,12 +46,14 @@ const PostCard: React.FC<DetailPostDataType> = ({
         </BookmarkWrapper>
         <PostDate>{dateFilter(category.uploadDate)}</PostDate>
         <PostTitle>{title}</PostTitle>
-        <PostHashTageSection>
-          {hashTageSpreader(postHashTags).map((data, id) => (
-            <HashTageDark text={data} key={id} />
-          ))}
-        </PostHashTageSection>
-        <PostContent hover={hover}>{contentFilter()}</PostContent>
+        {postHashTags && (
+          <PostHashTageSection>
+            {hashTageSpreader(postHashTags).map((data, id) => (
+              <HashTageDark text={data} key={id} />
+            ))}
+          </PostHashTageSection>
+        )}
+        <PostContent hover={hover}>{content}</PostContent>
       </PostCardContentWrapper>
     </PostCardWrapper>
   );
