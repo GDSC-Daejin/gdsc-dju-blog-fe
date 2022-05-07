@@ -74,16 +74,30 @@ const PostWrite = () => {
     postHashTags: postDetailData.hashtag,
     fileName: '',
     base64Thumbnail: '',
+    tmpStore: 'false',
+  };
+  const isUploadBlock = () => {
+    if (postData.category.categoryName == '' || postData.title == '') {
+      return true;
+    } else return false;
+  };
+  const isContentBlock = () => {
+    if (postData.content.length < 10) {
+      return true;
+    } else return false;
   };
   const handleSubmit = async () => {
-    await API.postPostData(postData)
-      .then((res) => {
-        navigate(`/category/all`);
-      })
-      .catch((err) => {
-        alert('실패');
-      });
-    console.log(postData.content);
+    if (!isUploadBlock()) {
+      await API.postPostData(postData)
+        .then((res) => {
+          navigate(`/category/all`);
+        })
+        .catch((err) => {
+          alert('실패');
+        });
+    } else {
+      alert('카테고리와 제목을 입력해주세요');
+    }
   };
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
@@ -119,7 +133,6 @@ const PostWrite = () => {
                   });
                 }}
               />
-              <div>adsfasfa</div>
             </PostContentWrapper>
             <PostGDSCButtonWrapper>
               <GDSCButton text="임시글" />
@@ -144,13 +157,14 @@ const PostWrite = () => {
               <GDSCButton text="작성취소" />
             </PostBottomButtonLWrapper>
             <PostBottomButtonCWrapper>
-              <GDSCButton text="임시저장" />
+              <GDSCButton text="임시저장" disable={isContentBlock()} />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
               <GDSCButton
                 text="업로드"
                 onClick={handleSubmit}
                 color={'googleBlue'}
+                disable={isUploadBlock()}
               />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
