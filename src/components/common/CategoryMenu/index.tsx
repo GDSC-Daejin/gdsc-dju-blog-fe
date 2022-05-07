@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   CategoryCircle,
   CategoryCircleWrapper,
@@ -14,51 +14,49 @@ type Iprops = {
   onClick?: (url: string) => void;
   type: string;
 };
+
+const categoryName = [
+  'all',
+  'frontend',
+  'backend',
+  'android',
+  'design',
+  'common',
+];
+const category = ['ALL', 'Frontend', 'Backend', 'Android', 'Design', 'Common'];
+const hoverMotion = {
+  isActive: {
+    translateY: -10,
+    color: '#191F28',
+    transition: {
+      delay: 0.1,
+      duration: 0.3,
+    },
+    borderBottom: '1px solid #000',
+  },
+  isUnActive: {
+    translateY: 0,
+    color: '#D1D6DB',
+    borderBottom: '1px solid #fff',
+  },
+};
+const circleMotion = {
+  isActive: {
+    opacity: 1,
+    y: 0,
+  },
+  isUnActive: {
+    y: -20,
+    opacity: 0,
+  },
+};
 const CategoryMenu = (props: Iprops) => {
   const { onClick, type } = props;
 
-  const categoryName = [
-    'all',
-    'frontend',
-    'backend',
-    'android',
-    'design',
-    'common',
-  ];
-  const category = [
-    'ALL',
-    'Frontend',
-    'Backend',
-    'Android',
-    'Design',
-    'Common',
-  ];
-  const hoverMotion = {
-    isActive: {
-      translateY: -10,
-      color: '#191F28',
-      transition: {
-        delay: 0.1,
-        duration: 0.3,
-      },
-      borderBottom: '1px solid #000',
-    },
-    isUnActive: {
-      translateY: 0,
-      color: '#D1D6DB',
-      borderBottom: '1px solid #fff',
-    },
-  };
-  const circleMotion = {
-    isActive: {
-      opacity: 1,
-      y: 0,
-    },
-    isUnActive: {
-      y: -20,
-      opacity: 0,
-    },
-  };
+  const animate = useCallback((value: string, categoryValue: string) => {
+    return value === categoryValue ? 'isActive' : 'isUnActive';
+  }, []);
+
   return (
     <>
       <CategoryMenuWrapper>
@@ -71,12 +69,12 @@ const CategoryMenu = (props: Iprops) => {
             }}
             variants={hoverMotion}
             whileHover={'isActive'}
-            animate={type == categoryName[id] ? 'isActive' : 'isUnActive'}
+            animate={animate(type, categoryName[id])}
             key={id}
           >
             <CategoryCircleWrapper
               variants={circleMotion}
-              animate={type == categoryName[id] ? 'isActive' : 'isUnActive'}
+              animate={animate(type, categoryName[id])}
             >
               {categoryName[id] === 'all' ? (
                 <GDSCLogoWrapper>
@@ -93,4 +91,4 @@ const CategoryMenu = (props: Iprops) => {
     </>
   );
 };
-export default CategoryMenu;
+export default memo(CategoryMenu);

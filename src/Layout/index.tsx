@@ -1,6 +1,7 @@
 import React, { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Navigation from '../components/common/Navigation';
+import DeskNavigation from '../components/common/Navigation/DeskNavigation';
+import MobileMenu from '../components/common/Navigation/MobileMenu';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
@@ -8,14 +9,16 @@ import { AnimatePresence } from 'framer-motion';
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
 import SideBar from '../components/common/SideBar';
-
 import API from '../api';
-import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
 import { userState } from '../store/user';
+import PostWrite from '../pages/PostWrite';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
-import Posts from '../pages/Posts';
+import Post from '../pages/Post';
+import ScrollTop from '../Utils/ScrollTop';
+import Modal from '../components/common/modal';
+import Category from '../pages/Category';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -39,22 +42,26 @@ const Layout = () => {
 
   return (
     <>
+      <Modal />
       <SideBar />
-      <Navigation />
+      <DeskNavigation />
+      <MobileMenu />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
       </AnimatePresence>
+
       <Routes>
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
-        <Route path={'/post'} element={<Posts />} />
+        <Route path={'/post/write'} element={<PostWrite />} />
+        <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route
           path={'/admin'}
           element={
             <PrivateRoute>
-              <Posts />
+              <Post />
             </PrivateRoute>
           }
         />

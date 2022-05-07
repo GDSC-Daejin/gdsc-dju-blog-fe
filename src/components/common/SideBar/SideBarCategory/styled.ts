@@ -42,8 +42,8 @@ export const SideCategoryCircle = styled.div<{ color: string }>`
 `;
 export const SideBarGDSCLogoWrapper = styled(motion.div)`
   position: absolute;
-  left: -10px;
-  top: -5px;
+  left: -6px;
+  top: -1px;
   & svg {
     width: 19px;
   }
