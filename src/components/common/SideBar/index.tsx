@@ -93,6 +93,7 @@ export const SideBar = () => {
           />
         )}
       </AnimatePresence>
+      <div>sfsfa</div>
     </>
   );
 };
