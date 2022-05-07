@@ -119,6 +119,7 @@ const PostWrite = () => {
                   });
                 }}
               />
+              <div>adsfasfa</div>
             </PostContentWrapper>
             <PostGDSCButtonWrapper>
               <GDSCButton text="임시글" />
