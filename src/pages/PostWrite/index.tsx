@@ -135,7 +135,6 @@ const PostWrite = () => {
               />
             </PostContentWrapper>
             <PostGDSCButtonWrapper>
-              <div>fsadfs</div>
               <GDSCButton text="임시글" />
             </PostGDSCButtonWrapper>
           </PostInformation>
