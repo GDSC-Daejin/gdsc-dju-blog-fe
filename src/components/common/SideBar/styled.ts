@@ -17,7 +17,22 @@ export const SideBarInner = styled(motion.aside)`
   display: flex;
   justify-content: center;
 `;
-export const SideBarBtnInner = styled.div`
+export const MenuToggleIconWrapper = styled.div`
+  display: flex;
+  border: none;
+  position: absolute;
+  top: 24px;
+  left: 55px;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    top: 17px;
+    left: 20px;
+    & svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+`;
+/*export const SideBarBtnInner = styled.div`
   position: absolute;
   left: 55px;
   @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
@@ -29,7 +44,7 @@ export const SideBarBtnWrapper = styled.div`
   z-index: 1002;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     top: 17px;
-`;
+`;*/
 export const SideBarText = styled(motion.a)`
   display: block;
   margin: 20px;
@@ -38,7 +53,7 @@ export const SideBarText = styled(motion.a)`
   font-size: ${(props) => props.theme.fontSize.h7};
   font-weight: 600;
 `;
-export const SideBarBtnIconWrapper = styled.div`
+/*export const SideBarBtnIconWrapper = styled.div`
   border: none;
   color: ${(props) => props.theme.color.white};
   cursor: pointer;
@@ -48,7 +63,7 @@ export const SideBarBtnIconWrapper = styled.div`
       width: 20px;
       height: 20px;
   }
-`;
+`;*/
 export const GrayBox = styled(motion.div)`
   display: flex;
   position: fixed;

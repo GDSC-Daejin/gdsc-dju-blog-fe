@@ -1,11 +1,9 @@
 import {
-  SideBarBtnWrapper,
   SideBarWrapper,
   SideBarInner,
-  SideBarBtnInner,
-  SideBarBtnIconWrapper,
   GrayBox,
   SideBarDesign,
+  MenuToggleIconWrapper,
   MobileMenuIconWrapper,
 } from './styled';
 import React from 'react';
@@ -66,13 +64,9 @@ export const SideBar = () => {
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
-      <SideBarBtnWrapper>
-        <SideBarBtnInner>
-          <SideBarBtnIconWrapper>
-            <MenuToggleIcon active="closed" />
-          </SideBarBtnIconWrapper>
-        </SideBarBtnInner>
-      </SideBarBtnWrapper>
+      <MenuToggleIconWrapper>
+        <MenuToggleIcon active="closed" />
+      </MenuToggleIconWrapper>
       <AnimatePresence>
         {menu.appMenu && (
           <GrayBox

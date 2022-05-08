@@ -5,8 +5,6 @@ export const MobileNavigationDesign = styled.nav`
   height: 60px;
   width: 100%;
   display: none;
-  position: sticky;
-  top: 0;
   @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     display: flex;
   }

@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 export const NavDesign = styled.nav`
   background-color: ${(props) => props.theme.color.white};
-  position: sticky;
-  top: 0;
   z-index: 990;
   height: 70px;
   width: 100%;

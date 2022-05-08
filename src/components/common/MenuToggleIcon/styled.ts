@@ -14,7 +14,7 @@ export const StyledMenuButton = styled(motion.button)`
   background: transparent;
   z-index: 1000;
   padding: 0px;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     margin-left: 0px;
     margin-right: 0px;
     padding: 0;
