@@ -4,12 +4,10 @@ export const MobileNavigationWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  display: none;
+  height: 100%;
+  padding: 0 20px;
   position: sticky;
   top: 0;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    display: flex;
-  }
 `;
 
 export const GdscLogoWrapper = styled.div`
@@ -28,5 +26,15 @@ export const MobileVectorWrapper = styled.div`
   }
   & svg path {
     fill: ${(props) => props.theme.color.grey300};
+  }
+`;
+export const MobileNavigationDesign = styled.nav`
+  display: none;
+  height: 60px;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    display: flex;
   }
 `;

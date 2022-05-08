@@ -4,6 +4,7 @@ import {
   MobileNavigationWrapper,
   GdscLogoWrapper,
   MobileVectorWrapper,
+  MobileNavigationDesign,
 } from './styled';
 import GdscLogo from '../../../../assets/GdscLogo';
 import Vector from '../../../../assets/Vector';
@@ -13,16 +14,18 @@ const MobileMenu = () => {
   const navigate = useNavigate();
 
   return (
-    <MobileNavigationWrapper>
-      <LogoWrapper onClick={() => navigate('/*')}>
-        <GdscLogoWrapper>
-          <GdscLogo />
-        </GdscLogoWrapper>
-      </LogoWrapper>
-      <MobileVectorWrapper>
-        <Vector />
-      </MobileVectorWrapper>
-    </MobileNavigationWrapper>
+    <MobileNavigationDesign>
+      <MobileNavigationWrapper>
+        <LogoWrapper onClick={() => navigate('/*')}>
+          <GdscLogoWrapper>
+            <GdscLogo />
+          </GdscLogoWrapper>
+        </LogoWrapper>
+        <MobileVectorWrapper>
+          <Vector />
+        </MobileVectorWrapper>
+      </MobileNavigationWrapper>
+    </MobileNavigationDesign>
   );
 };
 

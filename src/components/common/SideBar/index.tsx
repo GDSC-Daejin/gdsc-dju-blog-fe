@@ -59,7 +59,6 @@ export const SideBar = () => {
           <MenuToggleIcon active="open" />
         </MobileMenuIconWrapper>
         <SideBarInner>
-          {/* Login version */}
           <SideBarDesign>
             <SideBarLogout />
             {/*<SideBarLogin />*/}

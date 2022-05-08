@@ -44,7 +44,7 @@ export const SideBarBtnIconWrapper = styled.div`
   cursor: pointer;
   & svg {
     @media screen and (max-width: ${(props) =>
-      props.theme.windowSize.mobile}px) {
+      props.theme.windowSize.tablet}px) {
       width: 20px;
       height: 20px;
   }

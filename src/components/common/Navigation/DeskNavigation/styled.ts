@@ -7,17 +7,18 @@ export const NavDesign = styled.nav`
   z-index: 990;
   height: 70px;
   width: 100%;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    display: none;
-  }
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     height: 60px;
+  }
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    display: none;
   }
 `;
 export const NavWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  position: relative;
+  position: absolute;
+  top: 0;
   width: 100%;
   margin: auto;
   height: 100%;
@@ -44,6 +45,8 @@ export const DeskNavigationWrapper = styled.div`
   height: 100%;
   align-items: center;
   display: flex;
+  position: absolute;
+  top: 0;
   @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     display: none;
   }
@@ -97,5 +100,15 @@ export const Search = styled.input`
   }
   &::placeholder {
     color: ${(props) => props.theme.color.grey300};
+  }
+`;
+export const ShortNavigation = styled.nav`
+  position: sticky;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  @media (min-width: ${(props) => props.theme.windowSize.tablet}px) {
+    display: none;
   }
 `;
