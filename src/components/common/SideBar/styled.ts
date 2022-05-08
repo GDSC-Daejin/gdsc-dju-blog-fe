@@ -9,6 +9,9 @@ export const SideBarWrapper = styled(motion.div)`
   top: 0px;
   width: 400px;
   height: 100vh;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+    width: 100vw;
+  }
 `;
 export const SideBarInner = styled(motion.aside)`
   width: 100%;
@@ -132,6 +135,10 @@ export const GdscSideLogoWrapper = styled.div`
   & svg {
     width: 95px;
     height: 45px;
+    @media screen and (max-width: 500px) {
+      width: 80px;
+      height: 40px;
+    }
   }
 `;
 export const GdscSideUnivWrapper = styled.div`
@@ -141,6 +148,10 @@ export const GdscSideUnivWrapper = styled.div`
   padding-bottom: 10px;
   & svg {
     height: 18px;
+    @media screen and (max-width: 500px) {
+      width: 85px;
+      height: 16px;
+    }
   }
 `;
 export const GdscSideBlogLogoWrapper = styled.div`
@@ -149,6 +160,10 @@ export const GdscSideBlogLogoWrapper = styled.div`
   & svg {
     width: 216px;
     height: 40px;
+    @media screen and (max-width: 500px) {
+      width: 182px;
+      height: 35px;
+    }
   }
 `;
 export const GoogleLogoWrapper = styled.div`
@@ -167,7 +182,10 @@ export const GoogleLogoWrapper = styled.div`
 export const GoogleButtonWrapper = styled.div`
   display: flex;
   position: relative;
-  padding-bottom: 22px;
+  padding-bottom: 60px;
+  @media screen and (max-width: 500px) {
+    padding-bottom: 22px;
+  }
   & button {
     padding: 5px 25px 8px 50px;
   }
