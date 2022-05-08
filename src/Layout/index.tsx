@@ -1,7 +1,6 @@
 import React, { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import DeskNavigation from '../components/common/Navigation/DeskNavigation';
-import MobileMenu from '../components/common/Navigation/MobileMenu';
+import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
@@ -44,8 +43,7 @@ const Layout = () => {
     <>
       <Modal />
       <SideBar />
-      <DeskNavigation />
-      <MobileMenu />
+      <Navigation />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
       </AnimatePresence>

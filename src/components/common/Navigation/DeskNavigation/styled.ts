@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NavDesign = styled.nav`
+export const NavigationDesign = styled.nav`
   background-color: ${(props) => props.theme.color.white};
   z-index: 990;
   height: 70px;
@@ -12,14 +12,14 @@ export const NavDesign = styled.nav`
     display: none;
   }
 `;
-export const NavWrapper = styled.div`
+export const NavigationWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
   margin: auto;
   height: 100%;
 `;
-export const NavInner = styled.div`
+export const NavigationInner = styled.div`
   padding: 0 20px;
   width: 100%;
   margin: 0 auto;
@@ -50,7 +50,7 @@ export const BeforeMargin = styled.div`
   width: 110px;
   height: 100%;
 `;
-export const NavMargin = styled.div`
+export const NavigationMargin = styled.div`
   flex-grow: 1;
   min-width: 20px;
 `;

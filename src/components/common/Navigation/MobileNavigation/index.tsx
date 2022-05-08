@@ -10,7 +10,7 @@ import GdscLogo from '../../../../assets/GdscLogo';
 import Vector from '../../../../assets/Vector';
 import { useNavigate } from 'react-router';
 
-const MobileMenu = () => {
+const MobileNavigation = () => {
   const navigate = useNavigate();
 
   return (
@@ -29,4 +29,4 @@ const MobileMenu = () => {
   );
 };
 
-export default MobileMenu;
+export default MobileNavigation;
