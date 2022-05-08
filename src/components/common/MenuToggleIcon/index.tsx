@@ -20,7 +20,7 @@ const MenuToggleIcon = (props: Iprops) => {
         <motion.path
           fill="red"
           strokeWidth="3"
-          stroke="hsl(0, 0%, 18%)"
+          stroke={active === 'open' ? '#8B95A1' : 'hsl(0, 0%, 18%)'}
           strokeLinecap="round"
           variants={{
             closed: { d: 'M 2 2.5 L 20 2.5' },
@@ -42,7 +42,7 @@ const MenuToggleIcon = (props: Iprops) => {
         <motion.path
           fill="transparent"
           strokeWidth="3"
-          stroke="hsl(0, 0%, 18%)"
+          stroke={active === 'open' ? '#8B95A1' : 'hsl(0, 0%, 18%)'}
           strokeLinecap="round"
           variants={{
             closed: { d: 'M 2 16.346 L 20 16.346' },

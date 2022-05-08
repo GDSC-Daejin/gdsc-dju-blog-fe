@@ -134,16 +134,10 @@ export const SettingIconWrapper = styled.div`
 export const MyBlogButtonWrapper = styled.div`
   display: flex;
   margin-bottom: 12px;
-  @media screen and (max-width: 500px) {
-    margin-bottom: 12px;
-  }
 `;
 export const BottomButtonWrapper = styled.div`
   display: flex;
-  margin-bottom: 30px;
-  @media screen and (max-width: 500px) {
-    margin-bottom: 20px;
-  }
+  margin-bottom: 40px;
 `;
 export const WrittingButtonWrapper = styled.div`
   display: flex;

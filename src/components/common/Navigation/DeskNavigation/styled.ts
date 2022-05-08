@@ -75,7 +75,7 @@ export const VectorWrapper = styled.div`
 `;
 export const SearchWrapper = styled.label`
   display: flex;
-  margin-right: 60px;
+  margin-right: 40px;
   position: relative;
 `;
 export const Search = styled.input`
@@ -94,15 +94,5 @@ export const Search = styled.input`
   }
   &::placeholder {
     color: ${(props) => props.theme.color.grey300};
-  }
-`;
-export const ShortNavigation = styled.nav`
-  position: sticky;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  @media (min-width: ${(props) => props.theme.windowSize.tablet}px) {
-    display: none;
   }
 `;

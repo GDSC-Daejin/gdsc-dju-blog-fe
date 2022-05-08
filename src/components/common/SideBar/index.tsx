@@ -58,7 +58,7 @@ export const SideBar = () => {
         </MobileMenuIconWrapper>
         <SideBarInner>
           <SideBarDesign>
-            {/*<SideBarLogout />*/}
+            {/* <SideBarLogout />*/}
             <SideBarLogin />
             <SideBarCategory />
           </SideBarDesign>
