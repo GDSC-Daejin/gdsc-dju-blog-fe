@@ -10,7 +10,7 @@ export const SideCategoryText = styled(motion.div)<{ active?: boolean }>`
     css`
       color: ${(props) => props.theme.color.grey900};
     `}
-  padding-bottom: 8px;
+  margin-bottom: 8px;
   border-bottom: 1px solid ${(props) => props.theme.color.white};
 `;
 export const SideCategoryTextWrapper = styled(motion.div)`
@@ -19,6 +19,9 @@ export const SideCategoryTextWrapper = styled(motion.div)`
   position: relative;
   display: flex;
   margin-bottom: 24px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 export const SideCategoryMenuWrapper = styled(motion.div)`
   display: flex;

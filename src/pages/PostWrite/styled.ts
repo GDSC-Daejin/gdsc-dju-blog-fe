@@ -8,13 +8,23 @@ export const PostInformation = styled.div`
 `;
 export const PostThumbnailWrapper = styled.div`
   display: flex;
+  /*@media screen and (max-width: 630px) {
+    & svg {
+      width: 100px;
+      height: 58px;
+    }
+  }*/
 `;
 export const PostContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  min-width: 250px;
+  flex-grow: 1;
   padding-left: 30px;
   margin-right: 20px;
+  /*@media screen and (max-width: 630px) {
+    padding-left: 8px;
+  }*/
 `;
 export const PostTitle = styled.input`
   display: flex;
@@ -25,6 +35,9 @@ export const PostTitle = styled.input`
   &::placeholder {
     color: ${(props) => props.theme.color.grey400};
   }
+  /*@media screen and (max-width: 630px) {
+    font-size: ${(props) => props.theme.fontSize.h6};
+  }*/
 `;
 export const PostHashtag = styled.input`
   display: flex;
@@ -48,6 +61,8 @@ export const PostBottomButtonWrapper = styled.div`
 export const PostBottomButtonLWrapper = styled.div`
   display: flex;
   padding-right: 12px;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    display: none;
 `;
 export const PostBottomButtonCWrapper = styled.div`
   display: flex;

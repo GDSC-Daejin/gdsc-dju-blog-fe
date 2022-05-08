@@ -9,7 +9,7 @@ export const SideBarWrapper = styled(motion.div)`
   top: 0px;
   width: 400px;
   height: 100vh;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
+  @media screen and (max-width: 500px) {
     width: 100vw;
   }
 `;
@@ -19,6 +19,7 @@ export const SideBarInner = styled(motion.aside)`
   background-color: ${(props) => props.theme.color.white};
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 export const MenuToggleIconWrapper = styled.div`
   display: flex;
@@ -85,21 +86,19 @@ export const SideBarDesign = styled.div`
 `;
 export const ProfileImageWrapper = styled.div`
   display: flex;
-  margin-top: 60px;
   margin-left: 20px;
-  padding-bottom: 24px;
+  margin-bottom: 24px;
   @media screen and (max-width: 500px) {
     margin-left: 0;
-    margin-top: 84px;
-    padding-bottom: 14px;
+    margin-bottom: 14px;
   }
 `;
 export const ProfileInformation = styled.div`
   display: flex;
   align-items: end;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
   @media screen and (max-width: 500px) {
-    padding-bottom: 12px;
+    margin-bottom: 12px;
   }
 `;
 export const ProfileName = styled.div`
@@ -123,7 +122,7 @@ export const ProfileJobPosition = styled.div`
 `;
 export const SettingIconWrapper = styled.div`
   display: flex;
-  padding-bottom: 7px;
+  margin-bottom: 7px;
   cursor: pointer;
   & svg {
     @media screen and (max-width: 500px) {
@@ -134,9 +133,9 @@ export const SettingIconWrapper = styled.div`
 `;
 export const MyBlogButtonWrapper = styled.div`
   display: flex;
-  padding-bottom: 12px;
+  margin-bottom: 12px;
   @media screen and (max-width: 500px) {
-    padding: 4px;
+    margin-bottom: 12px;
   }
 `;
 export const BottomButtonWrapper = styled.div`
@@ -148,7 +147,7 @@ export const BottomButtonWrapper = styled.div`
 `;
 export const WrittingButtonWrapper = styled.div`
   display: flex;
-  padding-right: 16px;
+  margin-right: 16px;
 `;
 export const LogoutButtonWrapper = styled.div`
   display: flex;
@@ -156,8 +155,8 @@ export const LogoutButtonWrapper = styled.div`
 export const GdscSideLogoWrapper = styled.div`
   display: flex;
   margin-top: 150px;
-  padding-left: 10px;
-  padding-bottom: 25px;
+  margin-left: 10px;
+  margin-bottom: 25px;
   & svg {
     width: 95px;
     height: 45px;
@@ -170,8 +169,8 @@ export const GdscSideLogoWrapper = styled.div`
 export const GdscSideUnivWrapper = styled.div`
   display: flex;
   width: 100px;
-  padding-left: 7px;
-  padding-bottom: 10px;
+  margin-left: 7px;
+  margin-bottom: 10px;
   & svg {
     height: 18px;
     @media screen and (max-width: 500px) {
@@ -182,7 +181,7 @@ export const GdscSideUnivWrapper = styled.div`
 `;
 export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
-  padding-bottom: 19px;
+  margin-bottom: 19px;
   & svg {
     width: 216px;
     height: 40px;
