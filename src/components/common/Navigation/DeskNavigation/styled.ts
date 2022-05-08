@@ -17,8 +17,6 @@ export const NavDesign = styled.nav`
 export const NavWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  position: absolute;
-  top: 0;
   width: 100%;
   margin: auto;
   height: 100%;
@@ -45,8 +43,6 @@ export const DeskNavigationWrapper = styled.div`
   height: 100%;
   align-items: center;
   display: flex;
-  position: absolute;
-  top: 0;
   @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     display: none;
   }
