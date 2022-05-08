@@ -11,7 +11,6 @@ import {
   PostThumbnailWrapper,
   PostTitle,
 } from '../PostWrite/styled';
-import { PostEditContentWrapper } from './styled';
 import {
   ContainerInner,
   LayoutContainer,

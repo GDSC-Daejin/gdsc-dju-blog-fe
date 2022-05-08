@@ -19,6 +19,7 @@ import PostEdit from '../pages/PostEdit';
 import ScrollTop from '../Utils/ScrollTop';
 import Modal from '../components/common/modal';
 import Category from '../pages/Category';
+import PostSaves from '../pages/PostSaves';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -57,6 +58,7 @@ const Layout = () => {
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
+        <Route path={'/post/saves'} element={<PostSaves />} />
         <Route
           path={'/admin'}
           element={
