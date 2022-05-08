@@ -33,7 +33,7 @@ const SideBarCategory = () => {
           <SideCategoryTextWrapper
             key={id}
             onClick={() => {
-              navigate(`/category/${data.title}`);
+              navigate(`/category/${data.subtitle}`);
               setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
             }}
           >

@@ -88,17 +88,28 @@ export const ProfileImageWrapper = styled.div`
   margin-top: 60px;
   margin-left: 20px;
   padding-bottom: 24px;
+  @media screen and (max-width: 500px) {
+    margin-left: 0;
+    margin-top: 84px;
+    padding-bottom: 14px;
+  }
 `;
 export const ProfileInformation = styled.div`
   display: flex;
   align-items: end;
   padding-bottom: 20px;
+  @media screen and (max-width: 500px) {
+    padding-bottom: 12px;
+  }
 `;
 export const ProfileName = styled.div`
   display: flex;
   padding-right: 10px;
   font-size: ${(props) => props.theme.fontSize.h4};
   font-weight: bold;
+  @media screen and (max-width: 500px) {
+    font-size: ${(props) => props.theme.fontSize.h5};
+  }
 `;
 export const ProfileJobPosition = styled.div`
   display: flex;
@@ -106,19 +117,34 @@ export const ProfileJobPosition = styled.div`
   padding-bottom: 5px;
   font-size: ${(props) => props.theme.fontSize.body1};
   color: ${(props) => props.theme.color.grey600};
+  @media screen and (max-width: 500px) {
+    font-size: ${(props) => props.theme.fontSize.body3};
+  }
 `;
 export const SettingIconWrapper = styled.div`
   display: flex;
   padding-bottom: 7px;
   cursor: pointer;
+  & svg {
+    @media screen and (max-width: 500px) {
+      width: 12px;
+      height: 12px;
+    }
+  }
 `;
 export const MyBlogButtonWrapper = styled.div`
   display: flex;
   padding-bottom: 12px;
+  @media screen and (max-width: 500px) {
+    padding: 4px;
+  }
 `;
 export const BottomButtonWrapper = styled.div`
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  @media screen and (max-width: 500px) {
+    margin-bottom: 20px;
+  }
 `;
 export const WrittingButtonWrapper = styled.div`
   display: flex;
@@ -194,4 +220,8 @@ export const MobileMenuIconWrapper = styled.div`
   position: absolute;
   top: 54px;
   right: 31px;
+  display: none;
+  @media screen and (max-width: 500px) {
+    display: flex;
+  }
 `;
