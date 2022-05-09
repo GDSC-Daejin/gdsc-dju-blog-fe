@@ -94,6 +94,8 @@ const PostWrite = () => {
         })
         .catch((err) => {
           alert('실패');
+          console.log(err);
+          console.log(postData);
         });
     } else {
       alert('카테고리와 제목을 입력해주세요');
