@@ -19,7 +19,9 @@ export const SideBarInner = styled(motion.aside)`
   background-color: ${(props) => props.theme.color.white};
   display: flex;
   justify-content: center;
-  align-items: center;
+  @media screen and (max-width: 500px) {
+    align-items: center;
+  }
 `;
 export const MenuToggleIconWrapper = styled.div`
   display: flex;
@@ -86,6 +88,7 @@ export const SideBarDesign = styled.div`
 `;
 export const ProfileImageWrapper = styled.div`
   display: flex;
+  margin-top: 60px;
   margin-left: 20px;
   margin-bottom: 24px;
   @media screen and (max-width: 500px) {
@@ -175,7 +178,7 @@ export const GdscSideUnivWrapper = styled.div`
 `;
 export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
-  margin-bottom: 19px;
+  margin-bottom: 8px;
   & svg {
     width: 216px;
     height: 40px;

@@ -15,8 +15,16 @@ import MockProfile from '../../../../assets/MockProfile.png';
 import SettingIcon from '../../../../assets/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
 import { userData } from '../../../../api/Mocks/userData';
+import { useNavigate } from 'react-router';
 
 const SideBarLogin = () => {
+  const navigate = useNavigate();
+  const buttonMyBlog = () => {
+    navigate(`/:user_name/*`);
+  };
+  const buttonSubmit = () => {
+    navigate(`/post/write`);
+  };
   return (
     <>
       <ProfileImageWrapper>
@@ -32,11 +40,11 @@ const SideBarLogin = () => {
         </SettingIconWrapper>
       </ProfileInformation>
       <MyBlogButtonWrapper>
-        <GDSCButtonL text="내 블로그" />
+        <GDSCButtonL text="내 블로그" onClick={buttonMyBlog} />
       </MyBlogButtonWrapper>
       <BottomButtonWrapper>
         <WrittingButtonWrapper>
-          <GDSCButton text="글쓰기" />
+          <GDSCButton text="글쓰기" onClick={buttonSubmit} />
         </WrittingButtonWrapper>
         <LogoutButtonWrapper>
           <GDSCButton text="로그아웃" />
