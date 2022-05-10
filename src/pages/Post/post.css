@@ -962,6 +962,9 @@
 pre > span, span > span {
     font-size: 14px !important;
 }
+.toastui-editor-contents pre{
+    margin-bottom: 25px !important;
+}
 .hljs{
     background: #fff !important;
 }
