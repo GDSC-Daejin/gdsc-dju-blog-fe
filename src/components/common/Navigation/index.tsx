@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -24,6 +24,17 @@ import MainLogo from '../MainLogo';
 
 function Navigation() {
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // setSearchText(e.);
+    setSearchText(e.target.value);
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/search?title=${searchText}`);
+  };
+
   return (
     <>
       {/* 아이콘 컬러 전체 변경 기능 */}
@@ -40,10 +51,14 @@ function Navigation() {
               </BlogWrapper>
               <NavMargin />
               <SearchWrapper>
-                <Search
-                  type="text"
-                  placeholder="궁금한 정보나 계정을 입력해주세요"
-                />
+                <form onSubmit={handleSubmit}>
+                  <Search
+                    name="search"
+                    type="text"
+                    onChange={handleSearchText}
+                    placeholder="궁금한 정보나 계정을 입력해주세요"
+                  />
+                </form>
                 <VectorWrapper>
                   <Vector />
                 </VectorWrapper>

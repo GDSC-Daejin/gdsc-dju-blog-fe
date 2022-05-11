@@ -64,8 +64,7 @@ export const SideBar = () => {
         <SideBarInner>
           {/* Login version */}
           <SideBarDesign>
-            {user ? <SideBarLogin {...user} /> : <SideBarLogout />}
-            {/*<SideBarLogin />*/}
+            {/* {user ? <SideBarLogin {...user} /> : <SideBarLogout />} */}
             <SideBarCategory />
           </SideBarDesign>
         </SideBarInner>

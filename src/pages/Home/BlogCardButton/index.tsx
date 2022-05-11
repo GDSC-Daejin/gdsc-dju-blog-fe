@@ -12,7 +12,7 @@ export const BlogCardScrollButton = ({
 }: IBlogCardButton) => {
   const [buttonDisabled, setButtonDisabled] = useState(-1);
   const ButtonNumber: number[] = [0, 1, 2];
-  const SectionScrollWidth = 1497;
+  const SectionScrollWidth = 1907;
   const scrollMove = (buttonNumber: number) => {
     setButtonDisabled(buttonNumber);
     scrollRef.current?.scrollTo({
