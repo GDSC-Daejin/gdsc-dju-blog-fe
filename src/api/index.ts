@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MemberDataInfoType, RowMemberDataType } from '../types/userDataType';
+import { IRowUserDataType, IUserInfoDataType } from '../types/userData';
 import {
   PostPostDataType,
   RowDetailPostListType,
@@ -27,13 +27,13 @@ export class Api {
         localStorage.setItem('token', res.data.body.token);
       });
   };
-  updateUserData = (userInfoData: MemberDataInfoType) => {
+  updateUserData = (userInfoData: IUserInfoDataType) => {
     return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, {
       headers: this.Header,
     });
   };
   getUserData = (token: string) => {
-    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
+    return axios.get<IRowUserDataType>(`${this.API}/api/guest/v1/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

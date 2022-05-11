@@ -1,4 +1,4 @@
-import React, { lazy, useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
@@ -8,11 +8,8 @@ import { AnimatePresence } from 'framer-motion';
 import PrivateRoute from '../components/PrivateRoute';
 import Footer from '../components/Footer';
 import SideBar from '../components/common/SideBar';
-
-import API from '../api';
 import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
-import { userState } from '../store/user';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Posts from '../pages/Post';

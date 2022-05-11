@@ -1,12 +1,11 @@
-import { atom, selector } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
-import API from '../api/index';
+import { atom } from 'recoil';
+import { ILoginUserData, IUserInfoDataType } from '../types/userData';
 
-const { persistAtom } = recoilPersist();
 const USER = 'user';
-const USER_SELECTOR = 'userSelector';
 
-export const UserState = {
+const MemberInfoState: IUserInfoDataType = {
+  generation: 0,
+  userID: '',
   name: '',
   nickname: '',
   introduce: '',
@@ -18,7 +17,7 @@ export const UserState = {
   positionType: '',
   gitEmail: '',
   birthday: '',
-  userInfoId: 0,
+  memberInfoId: 0,
   memberPortfolioUrls: [
     { id: 0, webUrl: '' },
     { id: 0, webUrl: '' },
@@ -26,22 +25,21 @@ export const UserState = {
   ],
 };
 
-export const defaultUserState = {
-  id: null,
+const UserState: ILoginUserData = {
+  id: 0,
   userId: '',
   username: '',
   email: '',
   emailVerifiedYn: '',
   profileImageUrl: '',
-  role: '',
+  role: 'GUEST' as const,
   providerType: '',
-  memberInfo: UserState,
+  memberInfo: MemberInfoState,
   modifiedAt: '',
   uploadDate: '',
 };
 
-export const userState = atom({
+export const userState = atom<ILoginUserData | null>({
   key: USER,
-  default: defaultUserState,
-  effects_UNSTABLE: [persistAtom],
+  default: null,
 });

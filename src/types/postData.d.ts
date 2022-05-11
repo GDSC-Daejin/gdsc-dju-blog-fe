@@ -1,4 +1,4 @@
-import { MemberDataInfoType } from './userDataType';
+import { MemberDataInfoType } from './userData';
 
 export interface DetailPostDataType {
   modifiedAt: string;
