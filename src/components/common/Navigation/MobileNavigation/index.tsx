@@ -16,7 +16,7 @@ const MobileNavigation = () => {
   return (
     <MobileNavigationDesign>
       <MobileNavigationWrapper>
-        <LogoWrapper onClick={() => navigate('/*')}>
+        <LogoWrapper onClick={() => navigate('/')}>
           <GdscLogoWrapper>
             <GdscLogo />
           </GdscLogoWrapper>

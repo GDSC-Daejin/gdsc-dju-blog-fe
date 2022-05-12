@@ -46,4 +46,4 @@ function DeskNavigation() {
     </NavigationDesign>
   );
 }
-export default React.memo(DeskNavigation);
+export default DeskNavigation;

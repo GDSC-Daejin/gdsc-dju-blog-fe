@@ -4,12 +4,14 @@ import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { StyledMenuButton } from './styled';
 
-interface Iprops {
+interface IMenuToggleIconProps {
   active: string;
 }
-const MenuToggleIcon = (props: Iprops) => {
+
+const MenuToggleIcon = (props: IMenuToggleIconProps) => {
   const { active } = props;
   const [menu, setMenu] = useRecoilState(menuState);
+  const MenuToggleIconColor = active === 'open' ? '#8B95A1' : 'hsl(0, 0%, 18%)';
   return (
     <StyledMenuButton
       initial={false}
@@ -20,7 +22,7 @@ const MenuToggleIcon = (props: Iprops) => {
         <motion.path
           fill="red"
           strokeWidth="3"
-          stroke={active === 'open' ? '#8B95A1' : 'hsl(0, 0%, 18%)'}
+          stroke={MenuToggleIconColor}
           strokeLinecap="round"
           variants={{
             closed: { d: 'M 2 2.5 L 20 2.5' },
@@ -42,7 +44,7 @@ const MenuToggleIcon = (props: Iprops) => {
         <motion.path
           fill="transparent"
           strokeWidth="3"
-          stroke={active === 'open' ? '#8B95A1' : 'hsl(0, 0%, 18%)'}
+          stroke={MenuToggleIconColor}
           strokeLinecap="round"
           variants={{
             closed: { d: 'M 2 16.346 L 20 16.346' },
