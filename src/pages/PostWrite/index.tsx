@@ -61,7 +61,7 @@ export const PostCategoryMenuData = [
 ];
 
 const PostWrite = () => {
-  if (window.history && history.pushState) {
+  /*if (window.history && history.pushState) {
     addEventListener('load', function () {
       history.pushState(null, '', null);
 
@@ -75,7 +75,7 @@ const PostWrite = () => {
         }
       });
     });
-  }
+  }*/
   const [file, setFile] = useState(null);
   const [fileImage, setFileImage] = useState('');
   const input = useRef<HTMLInputElement>(null);
@@ -86,15 +86,16 @@ const PostWrite = () => {
     content: '',
     hashtag: '',
     base64Thumbnail: '',
+    fileName: '',
   });
   const navigate = useNavigate();
   const postData = {
+    base64Thumbnail: postDetailData.base64Thumbnail,
     title: postDetailData.title,
     content: postDetailData.content,
     category: { categoryName: category },
     postHashTags: postDetailData.hashtag,
-    fileName: '',
-    base64Thumbnail: '',
+    fileName: postDetailData.fileName,
     tmpStore: 'false',
   };
   const isUploadBlock = () => {
@@ -128,9 +129,8 @@ const PostWrite = () => {
       return { ...postDetailData, content: editorContent };
     });
   };
-  const handleChangeFile = (event: any) => {
+  const handleChangeFile = (e: any) => {
     const reader = new FileReader();
-
     reader.onloadend = () => {
       const base64 = reader.result;
       if (base64) {
@@ -139,13 +139,26 @@ const PostWrite = () => {
         });
       }
     };
-    if (event.target.files[0]) {
-      setFileImage(URL.createObjectURL(event.target.files[0]));
-      reader.readAsDataURL(event.target.files[0]);
-      setFile(event.target.files[0]);
+    if (input?.current?.files) {
+      const selectFile = input.current.files[0];
+      if (selectFile) {
+        setFileImage(URL.createObjectURL(selectFile));
+        setPostDetailData(() => {
+          return {
+            ...postDetailData,
+            fileName: selectFile.name,
+          };
+        });
+        console.log(selectFile.name);
+        reader.readAsDataURL(selectFile);
+        setFile(e.target.files[0]);
+      }
     }
   };
-  console.log(postDetailData.base64Thumbnail);
+  console.log(postDetailData.fileName);
+  console.log(postDetailData);
+  console.log(postData.base64Thumbnail);
+
   return (
     <>
       <NavigationBlock />
