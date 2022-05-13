@@ -56,3 +56,11 @@ export const PostBottomButtonCWrapper = styled.div`
 export const PostBottomButtonRWrapper = styled.div`
   display: flex;
 `;
+export const PostThumbnailInner = styled.div`
+  cursor: pointer;
+`;
+export const PostFileImage = styled.img`
+  width: 170px;
+  height: 100px;
+  border-radius: 10px;
+`;

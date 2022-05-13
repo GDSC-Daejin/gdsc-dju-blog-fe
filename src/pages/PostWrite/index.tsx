@@ -10,6 +10,8 @@ import {
   PostInformation,
   PostThumbnailWrapper,
   PostTitle,
+  PostThumbnailInner,
+  PostFileImage,
 } from './styled';
 import {
   ContainerInner,
@@ -74,12 +76,16 @@ const PostWrite = () => {
       });
     });
   }
+  const [file, setFile] = useState(null);
+  const [fileImage, setFileImage] = useState('');
+  const input = useRef<HTMLInputElement>(null);
   const editorRef: any = useRef();
   const [category, setCategory] = useState('');
   const [postDetailData, setPostDetailData] = useState({
     title: '',
     content: '',
     hashtag: '',
+    base64Thumbnail: '',
   });
   const navigate = useNavigate();
   const postData = {
@@ -122,27 +128,24 @@ const PostWrite = () => {
       return { ...postDetailData, content: editorContent };
     });
   };
-  const [imgBase64, setImgBase64] = useState(''); // 파일 base64
-  const [imgFile, setImgFile] = useState(null); //파일
-  const [fileImage, setFileImage] = useState('');
-
   const handleChangeFile = (event: any) => {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      // 2. 읽기가 완료되면 아래코드가 실행됩니다.
       const base64 = reader.result;
       if (base64) {
-        setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
+        setPostDetailData(() => {
+          return { ...postDetailData, base64Thumbnail: base64.toString() };
+        });
       }
     };
     if (event.target.files[0]) {
       setFileImage(URL.createObjectURL(event.target.files[0]));
-      reader.readAsDataURL(event.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
-      setImgFile(event.target.files[0]); // 파일 상태 업데이트
+      reader.readAsDataURL(event.target.files[0]);
+      setFile(event.target.files[0]);
     }
   };
-  console.log(imgBase64);
+  console.log(postDetailData.base64Thumbnail);
   return (
     <>
       <NavigationBlock />
@@ -151,7 +154,21 @@ const PostWrite = () => {
           <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
-              <PostThumbnail />
+              <PostThumbnailInner onClick={() => input.current?.click()}>
+                {fileImage === '' ? (
+                  <PostThumbnail />
+                ) : (
+                  <PostFileImage src={fileImage} />
+                )}
+              </PostThumbnailInner>
+              <input
+                ref={input}
+                style={{ display: 'none' }}
+                type="file"
+                name="imgFile"
+                id="imgFile"
+                onChange={handleChangeFile}
+              />
             </PostThumbnailWrapper>
             <PostContentWrapper>
               <PostTitle
@@ -208,25 +225,6 @@ const PostWrite = () => {
           </PostBottomButtonWrapper>
         </ContainerInner>
       </LayoutContainer>
-      <div className="App">
-        <div
-          style={{
-            backgroundColor: '#efefef',
-            width: '150px',
-            height: '150px',
-          }}
-        ></div>
-        <div>
-          {/* onChange 추가 */}
-          <input
-            type="file"
-            name="imgFile"
-            id="imgFile"
-            onChange={handleChangeFile}
-          />
-        </div>
-        <img src={fileImage} />
-      </div>
     </>
   );
 };
