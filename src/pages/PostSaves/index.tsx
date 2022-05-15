@@ -1,10 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import {
-  ContainerInner,
-  LayoutContainer,
-  NavigationBlock,
-} from '../../styles/layouts';
+import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import {
   NoPosts,
   PageBarSection,
@@ -12,15 +8,11 @@ import {
   PostSectionWrapper,
   TopMenuWrapper,
 } from '../MyBlog/BlogHome/styled';
-import { ButtonWrapper } from '../PostSaves/styled';
+import { ButtonWrapper, PostSavesTitle } from '../PostSaves/styled';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import { GDSCButton } from '../../components/common/Button';
 import PostCard from '../../components/common/PostCard';
-import {
-  createSearchParams,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 import PageBar from '../../components/common/PageBar';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
 import { useGetUserPostListTempData } from '../../api/hooks/useGetUserPostListTempData';
@@ -60,7 +52,7 @@ const PostSaves = () => {
       return;
     } else {
       navigate({
-        pathname: `/${userInfoData?.nickname}`,
+        pathname: `/post/saves`,
         search: `?${createSearchParams({
           type: category,
           page: page.toString(),
@@ -81,23 +73,17 @@ const PostSaves = () => {
     <>
       <LayoutContainer>
         <ContainerInner>
-          {userInfoData && (
-            <>
-              <TopMenuWrapper>
-                <CategoryMenu
-                  type={category as string}
-                  onClick={categoryHandler}
-                />
-                <ButtonWrapper>
-                  <GDSCButton
-                    text={'새로작성'}
-                    color={'googleBlue'}
-                    onClick={() => navigate('/post/write')}
-                  />
-                </ButtonWrapper>
-              </TopMenuWrapper>
-            </>
-          )}
+          <PostSavesTitle>임시 저장된 글</PostSavesTitle>
+          <TopMenuWrapper>
+            <CategoryMenu type={category as string} onClick={categoryHandler} />
+            <ButtonWrapper>
+              <GDSCButton
+                text={'새로작성'}
+                color={'googleBlue'}
+                onClick={() => navigate('/post/write')}
+              />
+            </ButtonWrapper>
+          </TopMenuWrapper>
           {userPostTempData && (
             <PostSectionWrapper>
               {!userPostTempData.empty ? (

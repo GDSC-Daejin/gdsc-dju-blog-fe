@@ -128,10 +128,10 @@ const PostWrite = () => {
     setPostDetailData(() => {
       return { ...postDetailData, content: editorContent };
     });
-    const uploadFileName: any = input.current?.value.split('\\').slice(-1)[0];
+    /*const uploadFileName: any = input.current?.value.split('\\').slice(-1)[0];
     setPostDetailData(() => {
       return { ...postDetailData, fileName: uploadFileName };
-    });
+    });*/ //오류때매 주석처리
   };
   const handleChangeFile = (e: any) => {
     const reader = new FileReader();
