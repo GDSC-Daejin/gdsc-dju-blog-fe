@@ -2,9 +2,8 @@ import styled, { css } from 'styled-components';
 
 export const PostInformation = styled.div`
   display: flex;
-  position: relative;
   align-items: center;
-  margin: 50px 0px 40px 0px;
+  margin: 50px 0px 12px 0px;
 `;
 export const PostThumbnailWrapper = styled.div`
   display: flex;
@@ -13,8 +12,10 @@ export const PostContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 30px;
-  margin-right: 20px;
+  margin-left: 30px;
+  @media screen and (max-width: 530px) {
+    margin-left: 8px;
+  }
 `;
 export const PostTitle = styled.input`
   display: flex;
@@ -25,6 +26,9 @@ export const PostTitle = styled.input`
   &::placeholder {
     color: ${(props) => props.theme.color.grey400};
   }
+  @media screen and (max-width: 530px) {
+    font-size: ${(props) => props.theme.fontSize.h6};
+    padding-bottom: 4px;
 `;
 export const PostHashtag = styled.input`
   display: flex;
@@ -33,12 +37,14 @@ export const PostHashtag = styled.input`
     color: ${(props) => props.theme.color.grey400};
   }
   border: none;
+  @media screen and (max-width: 530px) {
+    font-size: ${(props) => props.theme.fontSize.body3};
 `;
 export const PostGDSCButtonWrapper = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 100%;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row-reverse;
+  margin-bottom: 20px;
 `;
 export const PostBottomButtonWrapper = styled.div`
   display: flex;
@@ -48,6 +54,9 @@ export const PostBottomButtonWrapper = styled.div`
 export const PostBottomButtonLWrapper = styled.div`
   display: flex;
   padding-right: 12px;
+  @media screen and (max-width: 530px) {
+    display: none;
+  }
 `;
 export const PostBottomButtonCWrapper = styled.div`
   display: flex;
@@ -58,9 +67,19 @@ export const PostBottomButtonRWrapper = styled.div`
 `;
 export const PostThumbnailInner = styled.div`
   cursor: pointer;
+  @media screen and (max-width: 530px) {
+    & svg {
+      width: 100px;
+      height: 58px;
+    }
+  }
 `;
 export const PostFileImage = styled.img`
   width: 170px;
   height: 100px;
   border-radius: 10px;
+  @media screen and (max-width: 530px) {
+    width: 100px;
+    height: 58px;
+  }
 `;

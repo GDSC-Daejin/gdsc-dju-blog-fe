@@ -143,7 +143,6 @@ const PostWrite = () => {
         });
       }
     };
-
     if (input?.current?.files) {
       const selectFile = input.current.files[0];
       if (selectFile) {
@@ -207,10 +206,10 @@ const PostWrite = () => {
                 }}
               />
             </PostContentWrapper>
-            <PostGDSCButtonWrapper>
-              <GDSCButton text="임시글" />
-            </PostGDSCButtonWrapper>
           </PostInformation>
+          <PostGDSCButtonWrapper>
+            <GDSCButton text="임시글" />
+          </PostGDSCButtonWrapper>
           <Editor
             previewStyle="vertical"
             height="627px"
