@@ -5,6 +5,9 @@ import {
   RowDetailPostListType,
   RowPostDataType,
 } from '../types/postData';
+import useSWR from 'swr';
+import { url } from './hooks/postPagination';
+import { useGetUserPostListData } from './hooks/useGetUserPostListData';
 
 export class Api {
   private API: string;
@@ -76,6 +79,14 @@ export class Api {
     return axios.put(`${this.API}/api/member/v2/post/${postId}`, postData, {
       headers: this.Header,
     });
+  };
+  getUserPostListTempData = (params: string) => {
+    return axios.get<RowDetailPostListType>(
+      `${this.API}/api/member/v1/${params}`,
+      {
+        headers: this.Header,
+      },
+    );
   };
 }
 export default new Api();

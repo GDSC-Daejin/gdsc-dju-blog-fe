@@ -96,7 +96,7 @@ const PostWrite = () => {
     category: { categoryName: category },
     postHashTags: postDetailData.hashtag,
     fileName: postDetailData.fileName,
-    tmpStore: 'false',
+    tmpStore: false,
   };
   const isUploadBlock = () => {
     if (postData.category.categoryName == '' || postData.title == '') {
@@ -208,7 +208,12 @@ const PostWrite = () => {
             </PostContentWrapper>
           </PostInformation>
           <PostGDSCButtonWrapper>
-            <GDSCButton text="임시글" />
+            <GDSCButton
+              text="임시글"
+              onClick={() => {
+                navigate(`/post/saves`);
+              }}
+            />
           </PostGDSCButtonWrapper>
           <Editor
             previewStyle="vertical"
