@@ -128,17 +128,22 @@ const PostWrite = () => {
     setPostDetailData(() => {
       return { ...postDetailData, content: editorContent };
     });
+    const uploadFileName: any = input.current?.value.split('\\').slice(-1)[0];
+    setPostDetailData(() => {
+      return { ...postDetailData, fileName: uploadFileName };
+    });
   };
   const handleChangeFile = (e: any) => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64 = reader.result;
+      const base64 = reader.result?.toString();
       if (base64) {
         setPostDetailData(() => {
-          return { ...postDetailData, base64Thumbnail: base64.toString() };
+          return { ...postDetailData, base64Thumbnail: base64.split(',')[1] };
         });
       }
     };
+
     if (input?.current?.files) {
       const selectFile = input.current.files[0];
       if (selectFile) {
