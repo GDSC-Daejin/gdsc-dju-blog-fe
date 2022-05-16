@@ -88,6 +88,7 @@ const PostWrite = () => {
     base64Thumbnail: '',
     fileName: '',
   });
+  const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const postData = {
     base64Thumbnail: postDetailData.base64Thumbnail,
@@ -128,18 +129,14 @@ const PostWrite = () => {
     setPostDetailData(() => {
       return { ...postDetailData, content: editorContent };
     });
-    /*const uploadFileName: any = input.current?.value.split('\\').slice(-1)[0];
-    setPostDetailData(() => {
-      return { ...postDetailData, fileName: uploadFileName };
-    });*/ //오류때매 주석처리
   };
   const handleChangeFile = (e: any) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result?.toString();
       if (base64) {
-        setPostDetailData(() => {
-          return { ...postDetailData, base64Thumbnail: base64.split(',')[1] };
+        setPostDetailData((prev) => {
+          return { ...prev, base64Thumbnail: base64.split(',')[1] };
         });
       }
     };
@@ -147,22 +144,18 @@ const PostWrite = () => {
       const selectFile = input.current.files[0];
       if (selectFile) {
         setFileImage(URL.createObjectURL(selectFile));
-        setPostDetailData(() => {
+        setPostDetailData((prev) => {
           return {
-            ...postDetailData,
+            ...prev,
             fileName: selectFile.name,
           };
         });
-        console.log(selectFile.name);
         reader.readAsDataURL(selectFile);
         setFile(e.target.files[0]);
       }
     }
   };
-  console.log(postDetailData.fileName);
   console.log(postDetailData);
-  console.log(postData.base64Thumbnail);
-
   return (
     <>
       <NavigationBlock />
