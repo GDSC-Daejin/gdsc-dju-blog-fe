@@ -13,7 +13,7 @@ export function useGetUserPostListTempData(
   size: number,
 ) {
   const { data: userPostTempData } = useSWR(
-    [`myPost/temp${url(category, page, size)}`],
+    [`myPost/temp/categoryName${url(category, page, size)}`],
     getUserPostListTempData,
   );
   return { userPostTempData: userPostTempData && userPostTempData };
