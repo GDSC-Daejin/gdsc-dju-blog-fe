@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
+  AlertIcon,
   AlertInner,
   AlertInnerWrapper,
   AlertText,
   AlertWrapper,
 } from './styled';
 import { alertState } from '../../../store/alert';
+import SuccessCircle from '../../../assets/SuccessCircle.svg';
+import ErrorCircle from '../../../assets/ErrorCircle.svg';
 import { AnimatePresence } from 'framer-motion';
 
 const variants = {
@@ -37,7 +40,12 @@ const Alert = () => {
     error: '#f44336',
     warning: '#ffa50e',
   };
-
+  const alertIcon = {
+    success: SuccessCircle,
+    error: ErrorCircle,
+    warning: ErrorCircle,
+  };
+  const data = true;
   return (
     <AnimatePresence>
       <AlertWrapper>
@@ -50,6 +58,7 @@ const Alert = () => {
             transition={{ duration: 0.5 }}
           >
             <AlertInnerWrapper alertColor={alertStatusColor[alert.alertStatus]}>
+              <AlertIcon src={alertIcon[alert.alertStatus]} alt={'alertIcon'} />
               <AlertText>{alert.alertMessage}</AlertText>
             </AlertInnerWrapper>
           </AlertInner>

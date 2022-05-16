@@ -5,7 +5,7 @@ export const ALERT = 'alert';
 
 export const AlertState = {
   alertHandle: false,
-  alertMessage: '',
+  alertMessage: '기본값 세팅입니다.',
   alertStatus: 'warning' as const,
 };
 

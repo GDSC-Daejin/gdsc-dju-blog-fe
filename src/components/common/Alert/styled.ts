@@ -5,30 +5,26 @@ export const AlertInnerWrapper = styled.div<{ alertColor: string }>`
   display: flex;
   align-items: center;
   flex-direction: row;
-  padding: 15px 0;
   justify-content: center;
   text-align: center;
   width: 100%;
-  opacity: 80%;
   z-index: 3;
-  ${({ alertColor }) =>
-    alertColor &&
-    css`
-      background: ${alertColor};
-    `}
+`;
+export const AlertIcon = styled.img`
+  margin-right: 3px;
 `;
 export const AlertText = styled.div`
-  font-size: ${(props) => props.theme.fontSize.h7};
+  font-size: ${(props) => props.theme.fontSize.body1};
   opacity: 100%;
   margin-left: 5px;
   display: flex;
   align-items: center;
   color: ${(props) => props.theme.color.grey800};
   @media (max-width: 500px) {
-    font-size: 17px;
+    font-size: ${(props) => props.theme.fontSize.body1};
   }
   @media (max-width: 320px) {
-    font-size: 15px;
+    font-size: ${(props) => props.theme.fontSize.body2};
   }
 `;
 export const AlertInner = styled(motion.div)`
@@ -39,6 +35,7 @@ export const AlertInner = styled(motion.div)`
   box-shadow: inset 0 0 0 1px ${(props) => props.theme.color.grey300};
   padding: 7px 30px;
   top: 100px;
+  right: 7%;
   flex: 1;
   display: flex;
   justify-content: flex-end;
