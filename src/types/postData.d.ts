@@ -13,6 +13,7 @@ export interface DetailPostDataType {
   postId: number;
   title: string;
   likes: string[];
+  imagePath: string;
   memberInfo: AuthorProps;
 }
 export interface AuthorProps {
@@ -36,6 +37,7 @@ export interface PostPostDataType {
   };
   content?: string;
   postHashTags?: string;
+  tmpStore: boolean;
 }
 export interface RowDetailPostListType {
   body: {

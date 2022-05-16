@@ -16,12 +16,12 @@ import { createSearchParams, useSearchParams } from 'react-router-dom';
 import PageBar from '../../components/common/PageBar';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
 import { useGetUserPostListTempData } from '../../api/hooks/useGetUserPostListTempData';
+import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 
 const PostSaves = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryName = searchParams.get('type');
   const category = categoryName ? categoryName : 'all';
-
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 

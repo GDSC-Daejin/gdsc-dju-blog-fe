@@ -88,7 +88,6 @@ const PostWrite = () => {
     base64Thumbnail: '',
     fileName: '',
   });
-  const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const postData = {
     base64Thumbnail: postDetailData.base64Thumbnail,

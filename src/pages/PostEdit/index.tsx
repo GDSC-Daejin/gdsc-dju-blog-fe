@@ -5,9 +5,11 @@ import {
   PostBottomButtonRWrapper,
   PostBottomButtonWrapper,
   PostContentWrapper,
+  PostFileImage,
   PostGDSCButtonWrapper,
   PostHashtag,
   PostInformation,
+  PostThumbnailInner,
   PostThumbnailWrapper,
   PostTitle,
 } from '../PostWrite/styled';
@@ -88,11 +90,18 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   }, [postData]);
 
   const editorRef: any = useRef();
-  const [category, setCategory] = useState(postData?.category.categoryName);
+  const [file, setFile] = useState(null);
+  const [fileImage, setFileImage] = useState(`${postData?.imagePath}`);
+  const input = useRef<HTMLInputElement>(null);
+  const [category, setCategory] = useState(
+    postData?.category.categoryName.toLowerCase(),
+  );
   const [postDetailData, setPostDetailData] = useState({
     title: postData?.title,
     content: postData?.content,
     hashtag: postData?.postHashTags,
+    fileName: '',
+    base64Thumbnail: '',
   });
 
   const navigate = useNavigate();
@@ -102,8 +111,9 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
     content: postDetailData.content,
     category: { categoryName: category },
     postHashTags: postDetailData.hashtag,
-    fileName: '',
-    base64Thumbnail: '',
+    fileName: postDetailData.fileName,
+    base64Thumbnail: postDetailData.base64Thumbnail,
+    tmpStore: false,
   };
   const handleSubmit = async () => {
     await API.updatePostData(postEditData, postId)
@@ -121,6 +131,31 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
       return { ...postDetailData, content: editorContent };
     });
   };
+  const handleChangeFile = (e: any) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result?.toString();
+      if (base64) {
+        setPostDetailData((prev) => {
+          return { ...prev, base64Thumbnail: base64.split(',')[1] };
+        });
+      }
+    };
+    if (input?.current?.files) {
+      const selectFile = input.current.files[0];
+      if (selectFile) {
+        setFileImage(URL.createObjectURL(selectFile));
+        setPostDetailData((prev) => {
+          return {
+            ...prev,
+            fileName: selectFile.name,
+          };
+        });
+        reader.readAsDataURL(selectFile);
+        setFile(e.target.files[0]);
+      }
+    }
+  };
   return (
     <>
       {postData && (
@@ -128,7 +163,21 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
           <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
-              <PostThumbnail />
+              <PostThumbnailInner onClick={() => input.current?.click()}>
+                {fileImage === '' ? (
+                  <PostThumbnail />
+                ) : (
+                  <PostFileImage src={fileImage} />
+                )}
+              </PostThumbnailInner>
+              <input
+                ref={input}
+                style={{ display: 'none' }}
+                type="file"
+                name="imgFile"
+                id="imgFile"
+                onChange={handleChangeFile}
+              />
             </PostThumbnailWrapper>
             <PostContentWrapper>
               <PostTitle

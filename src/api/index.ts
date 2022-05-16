@@ -88,5 +88,10 @@ export class Api {
       },
     );
   };
+  getPostTempData = (postId: string) => {
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/member/v1/myPost/temp/${postId}`,
+    );
+  };
 }
 export default new Api();

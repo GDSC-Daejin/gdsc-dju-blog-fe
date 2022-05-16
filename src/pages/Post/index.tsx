@@ -67,6 +67,7 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(postData);
   console.log(location);
   const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
