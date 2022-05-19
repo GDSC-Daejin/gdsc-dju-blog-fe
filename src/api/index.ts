@@ -11,7 +11,11 @@ export class Api {
   private Header: { Authorization: string };
 
   constructor() {
-    this.API = 'https://gdsc-dju.com';
+    if (process.env.NODE_ENV === 'development') {
+      this.API = 'https://gdsc-dju.kro.kr';
+    } else {
+      this.API = 'https://gdsc-dju.com';
+    }
     this.Header = {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
