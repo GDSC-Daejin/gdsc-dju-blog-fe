@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NavDesign = styled.nav`
+export const NavigationDesign = styled.nav`
   background-color: ${(props) => props.theme.color.white};
   position: fixed;
   top: 0;
@@ -9,16 +9,19 @@ export const NavDesign = styled.nav`
   width: 100%;
   @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
     height: 60px;
+  }
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    display: none;
+  }
 `;
-export const NavWrapper = styled.div`
+export const NavigationWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  position: relative;
   width: 100%;
   margin: auto;
   height: 100%;
 `;
-export const NavInner = styled.div`
+export const NavigationInner = styled.div`
   padding: 0 20px;
   width: 100%;
   margin: 0 auto;
@@ -49,7 +52,7 @@ export const BeforeMargin = styled.div`
   width: 110px;
   height: 100%;
 `;
-export const NavMargin = styled.div`
+export const NavigationMargin = styled.div`
   flex-grow: 1;
   min-width: 20px;
 `;
@@ -74,7 +77,7 @@ export const VectorWrapper = styled.div`
 `;
 export const SearchWrapper = styled.label`
   display: flex;
-  margin-right: 60px;
+  margin-right: 40px;
   position: relative;
 `;
 export const Search = styled.input`
@@ -93,33 +96,5 @@ export const Search = styled.input`
   }
   &::placeholder {
     color: ${(props) => props.theme.color.grey300};
-  }
-`;
-export const MobileNavigationWrapper = styled.div`
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  display: none;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    display: flex;
-  }
-`;
-
-export const GdscLogoWrapper = styled.div`
-  display: flex;
-  position: absolute;
-  left: 43%;
-  & svg {
-    width: 40px;
-    height: 20px;
-`;
-export const MobileVectorWrapper = styled.div`
-  display: flex;
-  width: 20px;
-  & svg {
-    cursor: pointer;
-  }
-  & svg path {
-    fill: ${(props) => props.theme.color.grey300};
   }
 `;
