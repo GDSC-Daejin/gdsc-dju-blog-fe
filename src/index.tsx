@@ -1,11 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <SWRConfig>
@@ -15,5 +18,4 @@ ReactDOM.render(
       </SWRConfig>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
