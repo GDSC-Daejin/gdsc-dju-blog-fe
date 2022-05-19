@@ -10,7 +10,8 @@ export const SideCategoryText = styled(motion.div)<{ active?: boolean }>`
     css`
       color: ${(props) => props.theme.color.grey900};
     `}
-  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid ${(props) => props.theme.color.white};
 `;
 export const SideCategoryTextWrapper = styled(motion.div)`
   cursor: pointer;
@@ -18,6 +19,9 @@ export const SideCategoryTextWrapper = styled(motion.div)`
   position: relative;
   display: flex;
   margin-bottom: 24px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 export const SideCategoryMenuWrapper = styled(motion.div)`
   display: flex;
@@ -41,8 +45,8 @@ export const SideCategoryCircle = styled.div<{ color: string }>`
 `;
 export const SideBarGDSCLogoWrapper = styled(motion.div)`
   position: absolute;
-  left: -10px;
-  top: -5px;
+  left: -6px;
+  top: -1px;
   & svg {
     width: 19px;
   }
