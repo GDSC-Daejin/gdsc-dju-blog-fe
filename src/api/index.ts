@@ -8,7 +8,15 @@ import {
 
 export class Api {
   private API: string;
-  private Header: { Authorization: string };
+
+  private Header: {
+    headers: {
+      'Access-Control-Allow-Origin': string;
+      Authorization: string;
+    };
+    baseURL: string;
+    withCredentials: boolean;
+  };
 
   constructor() {
     if (process.env.NODE_ENV === 'development') {
@@ -17,7 +25,12 @@ export class Api {
       this.API = 'https://gdsc-dju.com';
     }
     this.Header = {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      headers: {
+        'Access-Control-Allow-Origin': this.API,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      withCredentials: true,
+      baseURL: this.API,
     };
   }
 
@@ -32,21 +45,18 @@ export class Api {
       });
   };
   updateUserData = (userInfoData: MemberDataInfoType) => {
-    return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, {
-      headers: this.Header,
-    });
+    return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, this.Header);
   };
   getUserData = () => {
-    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
-      headers: this.Header,
-    });
+    return axios.get<RowMemberDataType>(
+      `${this.API}/api/guest/v1/me`,
+      this.Header,
+    );
   };
   getUserPostListData = (params: string) => {
     return axios.get<RowDetailPostListType>(
       `${this.API}/api/member/v1/${params}`,
-      {
-        headers: this.Header,
-      },
+      this.Header,
     );
   };
   getPostListData = (params: string) => {
@@ -57,19 +67,16 @@ export class Api {
   };
 
   getUserScrapData = () => {
-    return axios.get(`${this.API}/api/member/v1/myScrap`, {
-      headers: this.Header,
-    });
+    return axios.get(`${this.API}/api/member/v1/myScrap`, this.Header);
   };
   updateUserScrapData = (postId: string) => {
-    return axios.post(`${this.API}/api/member/v1/myScrap${postId}`, {
-      headers: this.Header,
-    });
+    return axios.post(
+      `${this.API}/api/member/v1/myScrap${postId}`,
+      this.Header,
+    );
   };
   postPostData = (postData: PostPostDataType) => {
-    return axios.post(`${this.API}/api/member/v2/post`, postData, {
-      headers: this.Header,
-    });
+    return axios.post(`${this.API}/api/member/v2/post`, postData, this.Header);
   };
 }
 export default new Api();
