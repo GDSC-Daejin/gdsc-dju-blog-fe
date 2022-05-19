@@ -1,0 +1,71 @@
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import {
+  AlertIcon,
+  AlertInner,
+  AlertInnerWrapper,
+  AlertText,
+  AlertWrapper,
+} from './styled';
+import { alertState } from '../../../store/alert';
+import SuccessCircle from '../../../assets/SuccessCircle.svg';
+import ErrorCircle from '../../../assets/ErrorCircle.svg';
+import { AnimatePresence } from 'framer-motion';
+
+const variants = {
+  active: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+  },
+  unActive: {
+    opacity: 0,
+    scale: 0,
+  },
+};
+const Alert = () => {
+  const [alert, setAlert] = useRecoilState(alertState);
+
+  useEffect(() => {
+    const alertTimer = setTimeout(() => {
+      setAlert({
+        ...alert,
+        alertHandle: false,
+      });
+      clearTimeout(alertTimer);
+    }, 4000);
+  }, []);
+  const alertStatusColor = {
+    success: '#55af7a',
+    error: '#f44336',
+    warning: '#ffa50e',
+  };
+  const alertIcon = {
+    success: SuccessCircle,
+    error: ErrorCircle,
+    warning: ErrorCircle,
+  };
+  const data = true;
+  return (
+    <AnimatePresence>
+      <AlertWrapper>
+        {alert.alertHandle && (
+          <AlertInner
+            variants={variants}
+            exit={'unActive'}
+            animate={'active'}
+            initial={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <AlertInnerWrapper alertColor={alertStatusColor[alert.alertStatus]}>
+              <AlertIcon src={alertIcon[alert.alertStatus]} alt={'alertIcon'} />
+              <AlertText>{alert.alertMessage}</AlertText>
+            </AlertInnerWrapper>
+          </AlertInner>
+        )}
+      </AlertWrapper>
+    </AnimatePresence>
+  );
+};
+
+export default Alert;
