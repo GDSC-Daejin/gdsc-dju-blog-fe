@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
@@ -12,7 +12,9 @@ import Category from '../pages/Category';
 import SearchResult from '../pages/SearchResult';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
-import Posts from '../pages/Post';
+import Post from '../pages/Post';
+import Modal from '../components/common/modal';
+import Alert from '../components/common/Alert';
 import SignUp from '../pages/SignUp';
 import OauthRedirectPage from '../pages/OauthRedirectPage';
 
@@ -21,6 +23,8 @@ const Layout = () => {
 
   return (
     <>
+      <Alert />
+      <Modal />
       <SideBar />
       <Navigation />
       <AnimatePresence>
@@ -29,7 +33,7 @@ const Layout = () => {
       <Routes>
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
-        <Route path={'/post'} element={<Posts />} />
+        <Route path={'/post'} element={<Post />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route path={'/signup'} element={<SignUp />} />
@@ -39,7 +43,7 @@ const Layout = () => {
           path={'/admin'}
           element={
             <PrivateRoute>
-              <Posts />
+              <Post />
             </PrivateRoute>
           }
         />

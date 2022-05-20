@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-  useEffect,
-} from 'react';
+import React, { useRef, useState } from 'react';
 import { useScroll } from 'react-use';
 import BlogCard from '../../components/common/BlogCard';
 import {
@@ -19,16 +13,10 @@ import {
 import CategoryMenu from '../../components/common/CategoryMenu';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import HomePhrase from '../../components/common/HomePhrase';
-import { homePhraseData } from '../../api/Mocks/homePhraseData';
-import {
-  blogCardAnimate,
-  listAnimate,
-} from '../../components/common/Animation';
+
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../store/user';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -36,8 +24,8 @@ function Home() {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
-  const [phrase, setPhrase] = useState(homePhraseData[0]);
 
+  const { postListData } = useGetPostListData(category, 0, 11);
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsDrag(true);
@@ -66,34 +54,12 @@ function Home() {
     setCategory(category);
   };
 
-  const setPhraseData = useCallback(() => {
-    let index = 0;
-    setInterval(() => {
-      setPhrase(homePhraseData[index]);
-      index++;
-      if (index >= homePhraseData.length) index = 0;
-    }, 5000);
-  }, []);
-
-  const { postListData } = useGetPostListData(category, 0, 11);
-  const user = useRecoilValue(userState);
-
-  useLayoutEffect(() => {
-    setPhraseData();
-  }, []);
-
   return (
     <>
       <HomeLayoutContainer>
         <HomeContentWrapper>
-          <HomePhraseWrapper
-            key={phrase.phrase}
-            animate={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 20 }}
-            exit={{ opacity: 1, y: -20 }}
-            transition={{ duration: 0.6 }}
-          >
-            <HomePhrase phraseData={phrase} />
+          <HomePhraseWrapper>
+            <HomePhrase />
           </HomePhraseWrapper>
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>

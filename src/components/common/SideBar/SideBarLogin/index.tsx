@@ -1,11 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { userState } from '../../../../store/user';
-import ProfileImage from '../../ProfileImage';
-import MockProfile from '../../../../assets/MockProfile.png';
-import SettingIcon from '../../../../assets/SettingIcon';
-import { GDSCButton, GDSCButtonL } from '../../Button';
 import { ILoginUserData } from '../../../../types/userData';
 import {
   BottomButtonWrapper,
@@ -18,18 +11,29 @@ import {
   SettingIconWrapper,
   WrittingButtonWrapper,
 } from '../styled';
+import ProfileImage from '../../ProfileImage';
+import MockProfile from '../../../../assets/MockProfile.png';
+import SettingIcon from '../../../../assets/SettingIcon';
+import { GDSCButton, GDSCButtonL } from '../../Button';
+import { userData } from '../../../../api/Mocks/userData';
+import { useNavigate } from 'react-router';
+import { useRecoilState } from 'recoil';
+import { MENU_KEY, menuState } from '../../../../store/menu';
 
-const SideBarLogin = (user: ILoginUserData) => {
+const SideBarLogin = () => {
   const navigate = useNavigate();
-  const [userData, setUserData] = useRecoilState(userState);
+  const [menu, setMenu] = useRecoilState(menuState);
+
   return (
     <>
       <ProfileImageWrapper>
         <ProfileImage image={MockProfile} position="frontend" />
       </ProfileImageWrapper>
       <ProfileInformation>
-        <ProfileName>{user.memberInfo.nickname ?? user.username}</ProfileName>
-        <ProfileJobPosition>{user.memberInfo.positionType}</ProfileJobPosition>
+        <ProfileName></ProfileName>
+        {/* {user.memberInfo.nickname ?? user.username} */}
+        <ProfileJobPosition></ProfileJobPosition>
+        {/* {user.memberInfo.positionType} */}
         <SettingIconWrapper>
           <SettingIcon />
         </SettingIconWrapper>
@@ -38,7 +42,7 @@ const SideBarLogin = (user: ILoginUserData) => {
         <GDSCButtonL
           text="내 블로그"
           onClick={() => {
-            navigate(`/${user.memberInfo.nickname}`);
+            setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
           }}
         />
       </MyBlogButtonWrapper>
@@ -48,6 +52,7 @@ const SideBarLogin = (user: ILoginUserData) => {
             text="글쓰기"
             onClick={() => {
               navigate(`/post/write`);
+              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
             }}
           />
         </WrittingButtonWrapper>
@@ -55,9 +60,6 @@ const SideBarLogin = (user: ILoginUserData) => {
           <GDSCButton
             text="로그아웃"
             onClick={() => {
-              localStorage.removeItem('token');
-              localStorage.removeItem('recoil-persist');
-              setUserData(null);
               navigate(`/`);
             }}
           />

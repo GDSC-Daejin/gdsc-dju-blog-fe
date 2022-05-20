@@ -1,25 +1,20 @@
+import React from 'react';
 import {
-  SideBarBtnWrapper,
   SideBarWrapper,
   SideBarInner,
-  SideBarBtnInner,
-  SideBarBtnIconWrapper,
   GrayBox,
   SideBarDesign,
+  MenuToggleIconWrapper,
+  MobileMenuIconWrapper,
 } from './styled';
-import React from 'react';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
-import SideBarLogout from './SideBarLogout';
-import { useLocation } from 'react-router';
 import SideBarCategory from './SideBarCategory';
 import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
-import axios from 'axios';
 import { userState } from '../../../store/user';
-import { ILoginUserData } from '../../../types/userData';
 
 export const sideBarMenuData = [
   {
@@ -61,26 +56,20 @@ export const SideBar = () => {
         variants={SideBarAnimation}
         animate={menu.appMenu ? 'isActive' : 'isUnActive'}
       >
+        <MobileMenuIconWrapper>
+          <MenuToggleIcon active="open" />
+        </MobileMenuIconWrapper>
         <SideBarInner>
-          {/* Login version */}
           <SideBarDesign>
-            {user && user ? (
-              <SideBarLogin {...(user as ILoginUserData)} />
-            ) : (
-              <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
-            )}
-            {/*<SideBarLogin />*/}
+            {/*<SideBarLogout />*/}
+            <SideBarLogin />
             <SideBarCategory />
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
-      <SideBarBtnWrapper>
-        <SideBarBtnInner>
-          <SideBarBtnIconWrapper>
-            <MenuToggleIcon />
-          </SideBarBtnIconWrapper>
-        </SideBarBtnInner>
-      </SideBarBtnWrapper>
+      <MenuToggleIconWrapper>
+        <MenuToggleIcon active="closed" />
+      </MenuToggleIconWrapper>
       <AnimatePresence>
         {menu.appMenu && (
           <GrayBox

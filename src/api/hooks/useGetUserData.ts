@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import API from '../../api';
 
 const getUserData = async (token: string) => {
-  const response = await API.getUserData(token);
+  const response = await API.getUserData();
   return response.data.body.data;
 };
 export const useGetUserData = (token: string) => {
