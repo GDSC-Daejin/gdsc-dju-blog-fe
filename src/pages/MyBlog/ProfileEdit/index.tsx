@@ -33,20 +33,20 @@ const ProfileEdit = () => {
   const { userData } = useGetUserData(token);
   console.log(userData);
   const [user, setUser] = useRecoilState(userState);
-  useLayoutEffect(() => {
-    if (userData) {
-      setUser({
-        ...user,
-        ...userData,
-      });
-    }
-  }, [userData]);
+  // useLayoutEffect(() => {
+  //   if (userData) {
+  //     setUser({
+  //       ...user,
+  //       ...userData,
+  //     });
+  //   }
+  // }, [userData]);
 
   return (
     <LayoutContainer>
       <ContainerInner>
         <Suspense fallback={<div>Loading...</div>}>
-          {userData && <ProfileEditBox {...userData} />}
+          {/* {userData && <ProfileEditBox {...userData} />} */}
         </Suspense>
       </ContainerInner>
     </LayoutContainer>

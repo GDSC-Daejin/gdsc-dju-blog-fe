@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IRowUserDataType, IUserInfoDataType } from '../types/userData';
+import { MemberDataInfoType, RowMemberDataType } from '../types/userDataType';
 import {
   PostPostDataType,
   RowDetailPostListType,

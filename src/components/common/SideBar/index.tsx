@@ -9,6 +9,7 @@ import {
 } from './styled';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
+import SideBarLogout from './SideBarLogout';
 import SideBarCategory from './SideBarCategory';
 import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import { MENU_KEY, menuState } from '../../../store/menu';
@@ -46,6 +47,7 @@ export const sideBarMenuData = [
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
   const [user, setUser] = useRecoilState(userState);
+  // const API_BASE_URL = 'https://gdsc-dju.kro.kr/';
   const API_BASE_URL = 'https://gdsc-dju.com';
   const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
   const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
@@ -61,8 +63,8 @@ export const SideBar = () => {
         </MobileMenuIconWrapper>
         <SideBarInner>
           <SideBarDesign>
-            {/*<SideBarLogout />*/}
-            <SideBarLogin />
+            <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
+            {/* <SideBarLogin /> */}
             <SideBarCategory />
           </SideBarDesign>
         </SideBarInner>
