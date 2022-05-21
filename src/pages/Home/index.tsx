@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useScroll } from 'react-use';
+import { useCookie, useScroll } from 'react-use';
 import BlogCard from '../../components/common/BlogCard';
 import {
   BlogCardWrapper,
@@ -17,7 +17,6 @@ import HomePhrase from '../../components/common/HomePhrase';
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
-import useCookie from '../../Utils/useCookie';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -25,6 +24,7 @@ function Home() {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
+  const [value, updateCookie, deleteCookie] = useCookie('user');
 
   const { postListData } = useGetPostListData(category, 0, 11);
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {

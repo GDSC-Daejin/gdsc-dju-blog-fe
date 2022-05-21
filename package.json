@@ -35,6 +35,7 @@
     "lottie-web": "^5.8.1",
     "react": "^18.0.0",
     "react-app-rewired": "^2.1.8",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.0.0",
     "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.28.1",
@@ -50,7 +51,6 @@
     "styled-reset": "^4.3.4",
     "swr": "^1.0.1",
     "typescript": "^4.4.3",
-    "universal-cookie": "^4.0.4",
     "yup": "^0.32.11"
   },
   "scripts": {
