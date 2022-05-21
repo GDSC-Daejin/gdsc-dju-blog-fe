@@ -7,11 +7,10 @@ on:
 
   pull_request:
     branches:
-      - main
+      - master
     types: [ closed ]
 jobs:
   Deploy_Live_channel:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment:
       name: Production
