@@ -1,0 +1,35 @@
+import styled, { css } from 'styled-components';
+
+export const HashTageWrapper = styled.div<{ light: boolean; size?: 'S' | 'L' }>`
+  padding: 1px 10px;
+  border: 1px solid ${({ theme }) => theme.color.grey600};
+  border-radius: 50px;
+  margin-right: 6px;
+  opacity: 0.6;
+  box-sizing: border-box;
+  font-family: 'Google Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  ${({ light }) =>
+    light &&
+    css`
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      color: ${({ theme }) => theme.color.white};
+      opacity: 1;
+    `};
+  ${({ size }) =>
+    size === 'L' &&
+    css`
+      font-size: ${({ theme }) => theme.fontSize.body2};
+    `};
+  ${({ size }) =>
+    size === 'S' &&
+    css`
+      height: 17px;
+      padding: 1px 10px;
+      border: 1px solid ${(props) => props.theme.color.grey600};
+      border-radius: 50px;
+      margin-right: 6px;
+    `};
+`;

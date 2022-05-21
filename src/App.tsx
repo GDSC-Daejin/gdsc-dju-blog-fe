@@ -1,22 +1,22 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
-import { darkTheme, lightTheme } from './styles/theme';
 import Layout from './Layout';
-import { useTheme } from './hooks/useTheme';
-import { GlobalStyle } from './styles/globalStyle';
+import { theme } from './styles/theme';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './pages/ErrorFallback';
+import ScrollTop from './Utils/ScrollTop';
 
 function App() {
-  const [themeMode, setTheme] = useTheme();
-
-  const theme = themeMode === 'light' ? lightTheme : darkTheme;
-  console.log(themeMode);
   return (
-    <ThemeProvider theme={theme}>
-      <button onClick={setTheme as () => void}>toggle</button>
-      <Layout />
-      <GlobalStyle />
-    </ThemeProvider>
+    <>
+      <ScrollTop />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ThemeProvider theme={theme}>
+          <Layout />
+        </ThemeProvider>
+      </ErrorBoundary>
+    </>
   );
 }
 
