@@ -17,6 +17,7 @@ import HomePhrase from '../../components/common/HomePhrase';
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
+import useCookie from '../../Utils/useCookie';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);

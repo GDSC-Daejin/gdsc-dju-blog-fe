@@ -50,6 +50,7 @@
     "styled-reset": "^4.3.4",
     "swr": "^1.0.1",
     "typescript": "^4.4.3",
+    "universal-cookie": "^4.0.4",
     "yup": "^0.32.11"
   },
   "scripts": {

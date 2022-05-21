@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SideBarWrapper,
   SideBarInner,
@@ -15,7 +15,7 @@ import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
-import { userState } from '../../../store/user';
+import useCookie from '../../../Utils/useCookie';
 
 export const sideBarMenuData = [
   {
@@ -46,11 +46,11 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
-  const [user, setUser] = useRecoilState(userState);
   // const API_BASE_URL = 'https://gdsc-dju.kro.kr/';
   const API_BASE_URL = 'https://gdsc-dju.com';
   const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
   const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
+  const [value] = useCookie('user');
   return (
     <>
       <SideBarWrapper
@@ -63,8 +63,11 @@ export const SideBar = () => {
         </MobileMenuIconWrapper>
         <SideBarInner>
           <SideBarDesign>
-            <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
-            {/* <SideBarLogin /> */}
+            {value ? (
+              <SideBarLogin />
+            ) : (
+              <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
+            )}
             <SideBarCategory />
           </SideBarDesign>
         </SideBarInner>
