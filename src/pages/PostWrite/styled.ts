@@ -16,6 +16,10 @@ export const PostContentWrapper = styled.div`
   @media screen and (max-width: 530px) {
     margin-left: 8px;
   }
+  min-width: 250px;
+  flex-grow: 1;
+  padding-left: 30px;
+  margin-right: 20px;
 `;
 export const PostTitle = styled.input`
   display: flex;
@@ -57,6 +61,8 @@ export const PostBottomButtonLWrapper = styled.div`
   @media screen and (max-width: 530px) {
     display: none;
   }
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    display: none;
 `;
 export const PostBottomButtonCWrapper = styled.div`
   display: flex;

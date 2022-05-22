@@ -1,13 +1,8 @@
-import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { homePhraseData } from '../../../api/Mocks/homePhraseData';
 
-interface HomePhraseProps {
-  phraseData: {
-    from: string;
-    by: string;
-    phrase: string;
-  };
-}
 const From = styled.div`
   font-size: ${({ theme }) => theme.fontSize.h7};
   margin-bottom: 5px;
@@ -24,22 +19,42 @@ const By = styled.div`
   font-size: ${({ theme }) => theme.fontSize.body1};
   color: ${({ theme }) => theme.color.grey900};
 `;
-const HomePhrase: React.FC<HomePhraseProps> = ({ phraseData }) => {
-  const phrases = phraseData.phrase.split('\n');
+const HomePhrase: React.FC = () => {
+  const [phrase, setPhrase] = useState(homePhraseData[0]);
+  const phrases = phrase.phrase.split('\n');
+  const setPhraseData = useCallback(() => {
+    let index = 0;
+    setInterval(() => {
+      setPhrase(homePhraseData[index]);
+      index++;
+      if (index >= homePhraseData.length) index = 0;
+    }, 5000);
+  }, []);
+  useEffect(() => {
+    setPhraseData();
+  }, []);
   return (
-    <div>
-      <From>From {phraseData.from}</From>
-      <Phrase>
-        {phrases.map((text, id) => (
-          <>
-            {text}
-            <br />
-          </>
-        ))}
-      </Phrase>
-      <By>By {phraseData.by}</By>
-    </div>
+    <AnimatePresence>
+      <motion.div
+        key={phrase.phrase}
+        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 30 }}
+        exit={{ opacity: 0, y: -30, position: 'absolute' }}
+        transition={{ duration: 0.6 }}
+      >
+        <From>From {phrase.from}</From>
+        <Phrase>
+          {phrases.map((text, id) => (
+            <>
+              {text}
+              <br />
+            </>
+          ))}
+        </Phrase>
+        <By>By {phrase.by}</By>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
-export default HomePhrase;
+export default memo(HomePhrase);
