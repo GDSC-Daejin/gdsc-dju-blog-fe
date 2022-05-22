@@ -49,7 +49,6 @@ const SideBarCategory = () => {
                 <SideCategoryCircle color={positionColor(data.subtitle)} />
               )}
             </SideCategoryCircleWrapper>
-            <div>fsdfs</div>
             <SideCategoryText
               variants={SideBarCategoryAnimation}
               whileHover={'isActive'}
