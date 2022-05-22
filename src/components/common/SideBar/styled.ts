@@ -8,9 +8,10 @@ export const SideBarWrapper = styled(motion.div)`
   left: 0px;
   top: 0px;
   width: 400px;
-  height: 100vh;
+  height: 100%;
   @media screen and (max-width: 500px) {
     width: 100vw;
+    height: 100vh;
   }
 `;
 export const SideBarInner = styled(motion.aside)`
