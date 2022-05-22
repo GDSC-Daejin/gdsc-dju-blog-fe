@@ -87,6 +87,7 @@ const PostWrite = () => {
     hashtag: '',
     base64Thumbnail: '',
     fileName: '',
+    tmpStore: false,
   });
   const navigate = useNavigate();
   const postData = {
@@ -96,20 +97,22 @@ const PostWrite = () => {
     category: { categoryName: category },
     postHashTags: postDetailData.hashtag,
     fileName: postDetailData.fileName,
-    tmpStore: true,
+    tmpStore: postDetailData.tmpStore,
   };
-  const isUploadBlock = () => {
-    if (postData.category.categoryName == '' || postData.title == '') {
+  const isButtonBlock = () => {
+    if (
+      postData.category.categoryName == '' ||
+      postData.title == '' ||
+      postData.content.length < 10
+    ) {
       return true;
     } else return false;
   };
-  const isContentBlock = () => {
-    if (postData.content.length < 10) {
-      return true;
-    } else return false;
-  };
-  const handleSubmit = async () => {
-    if (!isUploadBlock()) {
+  const handleSubmit = async (isTmpStore: boolean) => {
+    setPostDetailData(() => {
+      return { ...postDetailData, tmpStore: isTmpStore };
+    });
+    if (!isButtonBlock()) {
       await API.postPostData(postData)
         .then((res) => {
           navigate(`/category/all`);
@@ -226,14 +229,22 @@ const PostWrite = () => {
               <GDSCButton text="작성취소" />
             </PostBottomButtonLWrapper>
             <PostBottomButtonCWrapper>
-              <GDSCButton text="임시저장" disable={isContentBlock()} />
+              <GDSCButton
+                text="임시저장"
+                disable={isButtonBlock()}
+                onClick={() => {
+                  handleSubmit(true);
+                }}
+              />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
               <GDSCButton
                 text="업로드"
-                onClick={handleSubmit}
+                onClick={() => {
+                  handleSubmit(false);
+                }}
                 color={'googleBlue'}
-                disable={isUploadBlock()}
+                disable={isButtonBlock()}
               />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
