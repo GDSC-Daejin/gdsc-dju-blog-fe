@@ -5,9 +5,6 @@ import {
   RowDetailPostListType,
   RowPostDataType,
 } from '../types/postData';
-import useSWR from 'swr';
-import { url } from './hooks/postPagination';
-import { useGetUserPostListData } from './hooks/useGetUserPostListData';
 
 export class Api {
   private API: string;
@@ -82,26 +79,27 @@ export class Api {
     return axios.post(`${this.API}/api/member/v2/post`, postData, this.Header);
   };
   deletePostData = (postId: string) => {
-    return axios.delete(`${this.API}/api/member/v2/post/${postId}`, {
-      headers: this.Header,
-    });
+    return axios.delete(
+      `${this.API}/api/member/v2/post/${postId}`,
+      this.Header,
+    );
   };
   updatePostData = (postData: PostPostDataType, postId: string) => {
-    return axios.put(`${this.API}/api/member/v2/post/${postId}`, postData, {
-      headers: this.Header,
-    });
+    return axios.put(
+      `${this.API}/api/member/v2/post/${postId}`,
+      postData,
+      this.Header,
+    );
   };
   getUserPostListTempData = (params: string) => {
     return axios.get<RowDetailPostListType>(
       `${this.API}/api/member/v1/${params}`,
-      {
-        headers: this.Header,
-      },
+      this.Header,
     );
   };
   getPostTempData = (postId: string) => {
     return axios.get<RowPostDataType>(
-      `${this.API}/api/member/v1/myPost/temp/${postId}`,
+      `${this.API}/api/member/v1/myPost/temp/post/${postId}`,
     );
   };
 }

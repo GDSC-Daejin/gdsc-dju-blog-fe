@@ -125,7 +125,6 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
               <AuthorBox {...postData.memberInfo} {...postData} />
             </PostAuthorWrapper>
           </PostHead>
-          <div>fsfsa</div>
           <Viewer initialValue={postData.content} />
         </>
       )}

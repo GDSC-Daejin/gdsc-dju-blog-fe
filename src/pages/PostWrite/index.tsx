@@ -96,7 +96,7 @@ const PostWrite = () => {
     category: { categoryName: category },
     postHashTags: postDetailData.hashtag,
     fileName: postDetailData.fileName,
-    tmpStore: false,
+    tmpStore: true,
   };
   const isUploadBlock = () => {
     if (postData.category.categoryName == '' || postData.title == '') {
