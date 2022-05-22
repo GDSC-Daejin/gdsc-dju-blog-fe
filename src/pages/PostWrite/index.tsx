@@ -228,6 +228,7 @@ const PostWrite = () => {
             <PostBottomButtonCWrapper>
               <GDSCButton text="임시저장" disable={isContentBlock()} />
             </PostBottomButtonCWrapper>
+            <div>sdfsf</div>
             <PostBottomButtonRWrapper>
               <GDSCButton
                 text="업로드"
