@@ -17,6 +17,7 @@ import Modal from '../components/common/modal';
 import Alert from '../components/common/Alert';
 import SignUp from '../pages/SignUp';
 import OauthRedirectPage from '../pages/OauthRedirectPage';
+import DeskNavigation from '../components/common/Navigation/DeskNavigation';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);

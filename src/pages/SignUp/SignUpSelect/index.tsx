@@ -37,7 +37,7 @@ const SignUpSelect = ({
       return !prev;
     });
     setValue &&
-      setValue('position', data, {
+      setValue('positionType', data, {
         shouldTouch: true,
         shouldValidate: true,
       });
@@ -59,9 +59,9 @@ const SignUpSelect = ({
             onClick={() => setSelectOpen(!selectOpen)}
             selected={false}
           >
-            {watch && watch('position', '') === ''
+            {watch && watch('positionType', '') === ''
               ? '선택'
-              : watch && watch('position')}
+              : watch && watch('positionType')}
             <ArrowWrapper BoxOpen={selectOpen}>
               <BottomArrow />
             </ArrowWrapper>
@@ -70,7 +70,7 @@ const SignUpSelect = ({
             <SignUpSelectOption
               key={index}
               onClick={() => OptionOnClick(data)}
-              selected={watch && watch('position') === data ? true : false}
+              selected={watch && watch('positionType') === data ? true : false}
             >
               <SignUpColorCircle color={data} />
               {data}

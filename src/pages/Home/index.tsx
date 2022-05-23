@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useCookie, useScroll } from 'react-use';
 import BlogCard from '../../components/common/BlogCard';
 import {
@@ -17,6 +17,8 @@ import HomePhrase from '../../components/common/HomePhrase';
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -54,6 +56,18 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await axios.get('https://gdsc-dju.com/api/guest/v1/me', {
+  //       headers: {
+  //         Authorization: `Bearer ${Cookies.get('token')}`,
+  //       },
+  //     });
+  //     console.log(result);
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <>

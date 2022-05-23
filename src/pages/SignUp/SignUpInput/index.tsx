@@ -25,38 +25,9 @@ const SignUpInput = ({
   placeholder,
   condition,
   errors,
-  trigger,
   watch,
   checkNicknameState,
-  setCheckNickname,
 }: IFormStructure) => {
-  const handleInputValue = (refName: string) => {
-    return watch && watch(refName);
-  };
-  const handleNicknameCheck = useCallback(async () => {
-    if (handleInputValue('nickname') === '') {
-      alert('닉네임을 입력하세요');
-      return;
-    }
-    try {
-      const response = await axios.post(
-        'https://gdsc-dju.com/api/guest/v1/validation/nickname',
-        {
-          nickname: handleInputValue('nickname'),
-        },
-      );
-      if (response.data.body.data) {
-        setCheckNickname &&
-          setCheckNickname((prev) => {
-            return true;
-          });
-        trigger && trigger(refName, { shouldFocus: true });
-      } else alert('이미 존재하는 닉네임입니다.');
-    } catch (err) {
-      alert('ERROR');
-    }
-  }, [checkNicknameState]);
-
   return (
     <SignUpInputWrapper>
       <SignUpInputLabel>
@@ -77,11 +48,9 @@ const SignUpInput = ({
           errorCheck={errorCheck(errors?.message)}
           {...register(refName, condition)}
         />
-        {nickNameCheck && (
-          <NickNameCheckButton onClick={handleNicknameCheck} type="button">
-            중복확인
-          </NickNameCheckButton>
-        )}
+        {/* {nickNameCheck && (
+          <NickNameCheckButton type="button">중복확인</NickNameCheckButton>
+        )} */}
       </SignUpInputBoxWrapper>
       {errors && (
         <SignUpErrorMessage>
@@ -94,3 +63,29 @@ const SignUpInput = ({
 };
 
 export default React.memo(SignUpInput);
+
+// const handleNicknameCheck = useCallback(async () => {
+//   if (handleInputValue('nickname') === '') {
+//     alert('닉네임을 입력하세요');
+//     return;
+//   }
+//   try {
+//     const response = await axios.post(
+//       'https://gdsc-dju.com/api/guest/v1/validation/nickname',
+//       {
+//         nickname: handleInputValue('nickname'),
+//       },
+//     );
+//     console.log(response.data.body.data);
+//     if (response.data.body.data) {
+//       setCheckNickname &&
+//         setCheckNickname((prev) => {
+//           return true;
+//         });
+//       trigger && trigger(refName, { shouldFocus: true });
+//       alert('사용가능한 닉네임입니다!');
+//     } else alert('이미 존재하는 닉네임입니다.');
+//   } catch (err) {
+//     alert('ERROR');
+//   }
+// }, [checkNicknameState]);

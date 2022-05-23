@@ -6,7 +6,7 @@ const Navigation = () => {
   return (
     <>
       <DeskNavigation />
-      <MobileNavigation />
+      {/* <MobileNavigation /> */}
     </>
   );
 };

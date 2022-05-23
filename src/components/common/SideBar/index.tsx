@@ -47,7 +47,6 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
-
   const [cookies] = useCookies(['user']);
 
   return (

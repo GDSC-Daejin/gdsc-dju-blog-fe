@@ -6,6 +6,10 @@ import SignUpInput from '../SignUpInput';
 import SignUpSelect from '../SignUpSelect';
 import { IFormStructure } from './FormStructureInfo';
 import { GDSCButton } from '../../../components/common/Button';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router';
+import { replace } from 'formik';
 
 const SignUpForm = () => {
   const {
@@ -17,8 +21,25 @@ const SignUpForm = () => {
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
-  const onSubmit = (values: any) => console.log(values);
-  const [checkNickname, setCheckNickname] = useState(false);
+  const navigate = useNavigate();
+  const token = Cookies.get('token');
+  const onSubmit = async (values: any) => {
+    const result = await axios.put(
+      'https://gdsc-dju.com/api/guest/v1/me',
+      {
+        ...values,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    if (result.data.body.message === 'SUCCESS')
+      navigate('/', { replace: true });
+    else alert('에러가 발생했습니다');
+  };
+
   const formData: IFormStructure[] = [
     {
       refName: 'name',
@@ -29,8 +50,6 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
-      watch: watch,
-      setValue: setValue,
       errors: errors.name,
     },
     {
@@ -41,17 +60,8 @@ const SignUpForm = () => {
       nickNameCheck: true,
       condition: {
         required: '필수 입력란입니다',
-        validate: {
-          checkName: () => checkNickname || '닉네임 설정에 실패했습니다.',
-        },
-        onChange: (e) => setCheckNickname(false),
       },
-      checkNicknameState: checkNickname,
-      setCheckNickname: setCheckNickname,
       register: register,
-      watch: watch,
-      setValue: setValue,
-      trigger: trigger,
       errors: errors.nickname,
     },
     {
@@ -67,9 +77,7 @@ const SignUpForm = () => {
         },
       },
       register: register,
-      watch: watch,
-      setValue: setValue,
-      errors: errors.phone,
+      errors: errors.phoneNumber,
     },
     {
       refName: 'gmail',
@@ -84,8 +92,6 @@ const SignUpForm = () => {
         },
       },
       register: register,
-      watch: watch,
-      setValue: setValue,
       errors: errors.gmail,
     },
     {
@@ -97,9 +103,7 @@ const SignUpForm = () => {
         required: '필수 입력란입니다',
       },
       register: register,
-      watch: watch,
-      setValue: setValue,
-      errors: errors.department,
+      errors: errors.major,
     },
     {
       refName: 'studentNum',
@@ -114,8 +118,6 @@ const SignUpForm = () => {
         },
       },
       register: register,
-      watch: watch,
-      setValue: setValue,
       errors: errors.studentNum,
     },
     {
@@ -123,13 +125,13 @@ const SignUpForm = () => {
       type: 'text',
       title: '포지션',
       select: true,
+      setValue,
+      watch,
       condition: {
         required: '필수 입력란입니다',
       },
       register: register,
-      watch: watch,
-      setValue: setValue,
-      errors: errors.position,
+      errors: errors.positionType,
     },
     {
       refName: 'gitHubUrl',
@@ -143,8 +145,6 @@ const SignUpForm = () => {
         },
       },
       register: register,
-      watch: watch,
-      setValue: setValue,
       errors: errors.github,
     },
     {
@@ -153,8 +153,6 @@ const SignUpForm = () => {
       title: '소개글',
       placeholder: '자신을 소개하는 글을 작성하세요',
       register: register,
-      watch: watch,
-      setValue: setValue,
       errors: errors.intro,
     },
   ];
