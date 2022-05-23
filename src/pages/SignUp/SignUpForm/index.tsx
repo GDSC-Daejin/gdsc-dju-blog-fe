@@ -55,7 +55,7 @@ const SignUpForm = () => {
       errors: errors.nickname,
     },
     {
-      refName: 'phone',
+      refName: 'phoneNumber',
       type: 'tel',
       placeholder: '01012345678',
       title: '전화번호',
@@ -89,7 +89,7 @@ const SignUpForm = () => {
       errors: errors.gmail,
     },
     {
-      refName: 'department',
+      refName: 'major',
       type: 'text',
       title: '학과',
       placeholder: '소속 되어있는 학과를 입력하세요.',
@@ -119,7 +119,7 @@ const SignUpForm = () => {
       errors: errors.studentNum,
     },
     {
-      refName: 'position',
+      refName: 'positionType',
       type: 'text',
       title: '포지션',
       select: true,
@@ -132,7 +132,7 @@ const SignUpForm = () => {
       errors: errors.position,
     },
     {
-      refName: 'github',
+      refName: 'gitHubUrl',
       type: 'text',
       title: '깃허브',
       placeholder: '깃허브 주소를 입력하세요',
@@ -148,7 +148,7 @@ const SignUpForm = () => {
       errors: errors.github,
     },
     {
-      refName: 'intro',
+      refName: 'introduce',
       type: 'text',
       title: '소개글',
       placeholder: '자신을 소개하는 글을 작성하세요',

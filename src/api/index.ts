@@ -5,10 +5,10 @@ import {
   RowDetailPostListType,
   RowPostDataType,
 } from '../types/postData';
+import Cookies from 'js-cookie';
 
 export class Api {
   private API: string;
-
   private Header: {
     headers: {
       'Access-Control-Allow-Origin': string;
@@ -27,7 +27,7 @@ export class Api {
     this.Header = {
       headers: {
         'Access-Control-Allow-Origin': this.API,
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
       withCredentials: true,
       baseURL: this.API,
@@ -78,5 +78,11 @@ export class Api {
   postPostData = (postData: PostPostDataType) => {
     return axios.post(`${this.API}/api/member/v2/post`, postData, this.Header);
   };
+  getRedirectURL() {
+    const API_BASE_URL = 'https://gdsc-dju.com';
+    // const API_BASE_URL = 'https://gdsc-dju.kro.kr';
+    const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
+    return `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
+  }
 }
 export default new Api();

@@ -4,12 +4,13 @@ import { useSearchParams } from 'react-router-dom';
 import GoogleLoader from '../../components/common/GoogleLoader';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const token = searchParams.get('token') ?? '';
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [cookies, setCookie] = useCookies(['user']);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,6 +18,9 @@ export default function OauthRedirectPage() {
         headers: {
           Authorization: 'Bearer ' + token,
         },
+      });
+      Cookies.set('token', token, {
+        path: '/',
       });
       setCookie('user', result.data.body.data, {
         path: '/',

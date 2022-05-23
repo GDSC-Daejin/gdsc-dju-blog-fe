@@ -20,11 +20,20 @@ import { useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../../store/menu';
 import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 const SideBarLogin = () => {
   const navigate = useNavigate();
   const [menu, setMenu] = useRecoilState(menuState);
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const handleLogout = () => {
+    removeCookie('user', {
+      path: '/',
+    });
+    Cookies.remove('token', {
+      path: '/',
+    });
+  };
 
   return (
     <>
@@ -59,14 +68,7 @@ const SideBarLogin = () => {
           />
         </WrittingButtonWrapper>
         <LogoutButtonWrapper>
-          <GDSCButton
-            text="로그아웃"
-            onClick={() => {
-              removeCookie('user', {
-                path: '/',
-              });
-            }}
-          />
+          <GDSCButton text="로그아웃" onClick={handleLogout} />
         </LogoutButtonWrapper>
       </BottomButtonWrapper>
     </>

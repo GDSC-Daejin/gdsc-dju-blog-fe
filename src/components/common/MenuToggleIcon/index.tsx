@@ -12,6 +12,7 @@ const MenuToggleIcon = (props: IMenuToggleIconProps) => {
   const { active } = props;
   const [menu, setMenu] = useRecoilState(menuState);
   const MenuToggleIconColor = active === 'open' ? '#8B95A1' : 'hsl(0, 0%, 18%)';
+
   return (
     <StyledMenuButton
       initial={false}

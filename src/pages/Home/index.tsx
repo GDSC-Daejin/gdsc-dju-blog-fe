@@ -77,7 +77,7 @@ function Home() {
             // variants={listAnimate}
             // initial={'start'}
             // animate={'end'}
-            //  variants={blogCardAnimate}
+            // variants={blogCardAnimate}
           >
             {postListData.content.map((postData) => (
               <BlogCardWrapper key={postData.postId}>

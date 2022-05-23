@@ -16,6 +16,7 @@ import { MENU_KEY, menuState } from '../../../store/menu';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
 import { useCookies } from 'react-cookie';
+import api from '../../../api';
 
 export const sideBarMenuData = [
   {
@@ -46,10 +47,7 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
-  // const API_BASE_URL = 'https://gdsc-dju.kro.kr/';
-  const API_BASE_URL = 'https://gdsc-dju.com';
-  const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
-  const GOOGLE_AUTH_URL = `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
+
   const [cookies] = useCookies(['user']);
 
   return (
@@ -67,7 +65,7 @@ export const SideBar = () => {
             {cookies.user ? (
               <SideBarLogin />
             ) : (
-              <SideBarLogout loginURL={GOOGLE_AUTH_URL} />
+              <SideBarLogout loginURL={api.getRedirectURL()} />
             )}
             <SideBarCategory />
           </SideBarDesign>
