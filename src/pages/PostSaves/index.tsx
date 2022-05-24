@@ -32,7 +32,7 @@ const PostSaves = () => {
     page - 1,
     6,
   );
-
+  console.log(userPostTempData);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -90,9 +90,7 @@ const PostSaves = () => {
                 userPostTempData.content.map((data) => (
                   <PostCardWrapper
                     key={data.postId}
-                    onClick={() =>
-                      navigate(`/${data.memberInfo.nickname}/${data.postId}`)
-                    }
+                    onClick={() => navigate(`/post/temp/write/${data.postId}`)}
                   >
                     <PostCard {...data} />
                   </PostCardWrapper>

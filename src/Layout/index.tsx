@@ -21,6 +21,7 @@ import Modal from '../components/common/modal';
 import Category from '../pages/Category';
 import PostSaves from '../pages/PostSaves';
 import Alert from '../components/common/Alert';
+import PostSavesEdit from '../pages/PostSavesEdit';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -56,6 +57,7 @@ const Layout = () => {
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
         <Route path={'/post/write'} element={<PostWrite />} />
+        <Route path={'/post/temp/write/:postId'} element={<PostSavesEdit />} />
         <Route path={'/post/write/:postId'} element={<PostEdit />} />
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />

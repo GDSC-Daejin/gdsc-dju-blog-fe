@@ -1,18 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
   PostBottomButtonRWrapper,
   PostBottomButtonWrapper,
   PostContentWrapper,
+  PostFileImage,
   PostGDSCButtonWrapper,
   PostHashtag,
   PostInformation,
+  PostThumbnailInner,
   PostThumbnailWrapper,
   PostTitle,
-  PostThumbnailInner,
-  PostFileImage,
-} from './styled';
+} from '../PostWrite/styled';
 import {
   ContainerInner,
   LayoutContainer,
@@ -40,7 +40,11 @@ import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+import { PostPostDataType } from '../../types/postData';
+import hljs from 'highlight.js';
+import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
 
 export const PostCategoryMenuData = [
   {
@@ -60,71 +64,72 @@ export const PostCategoryMenuData = [
   },
 ];
 
-const PostWrite = () => {
-  /*if (window.history && history.pushState) {
-    addEventListener('load', function () {
-      history.pushState(null, '', null);
+const PostSavesEdit = () => {
+  const { postId } = useParams<'postId'>();
 
-      addEventListener('popstate', function () {
-        const stayOnPage = confirm('페이지를 벗어나시겠습니까?');
+  return (
+    <>
+      <NavigationBlock />
+      <LayoutContainer>
+        <ContainerInner>
+          {postId && <PostEditContent postId={postId} />}
+        </ContainerInner>
+      </LayoutContainer>
+    </>
+  );
+};
 
-        if (!stayOnPage) {
-          history.pushState(null, '', null);
-        } else {
-          history.back();
-        }
-      });
+const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
+  const { postTempData } = useGetDetailPostTemp(postId);
+  console.log(postTempData);
+  /*const [postData, setPostData] = useState<DetailPostDataType>();
+  postTempData !== undefined
+    ? setPostData(postTempData)
+    : console.log('로딩중');
+  console.log(postData);*/
+
+  console.log(postTempData?.category.categoryName);
+  useEffect(() => {
+    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+      hljs.highlightElement(el as HTMLElement);
     });
-  }*/
-  const [file, setFile] = useState(null);
-  const [fileImage, setFileImage] = useState('');
-  const input = useRef<HTMLInputElement>(null);
+  }, [postTempData]);
+
   const editorRef: any = useRef();
-  const [category, setCategory] = useState('');
+  const [file, setFile] = useState(null);
+  const [fileImage, setFileImage] = useState(`${postTempData?.imagePath}`);
+  const input = useRef<HTMLInputElement>(null);
+  const [category, setCategory] = useState(
+    postTempData?.category.categoryName.toLowerCase(),
+  );
   const [postDetailData, setPostDetailData] = useState({
-    title: '',
-    content: '',
-    hashtag: '',
-    base64Thumbnail: '',
+    title: postTempData?.title,
+    content: postTempData?.content,
+    hashtag: postTempData?.postHashTags,
     fileName: '',
-    tmpStore: true,
+    base64Thumbnail: '',
   });
+
   const navigate = useNavigate();
-  const postData = {
-    base64Thumbnail: postDetailData.base64Thumbnail,
+
+  const postEditData: PostPostDataType = {
     title: postDetailData.title,
     content: postDetailData.content,
     category: { categoryName: category },
     postHashTags: postDetailData.hashtag,
     fileName: postDetailData.fileName,
-    tmpStore: postDetailData.tmpStore,
+    base64Thumbnail: postDetailData.base64Thumbnail,
+    tmpStore: false,
   };
-  const isButtonBlock = () => {
-    if (
-      postData.category.categoryName == '' ||
-      postData.title == '' ||
-      postData.content.length < 10
-    ) {
-      return true;
-    } else return false;
-  };
-  const handleSubmit = async (isTmpStore: boolean) => {
-    setPostDetailData(() => {
-      return { ...postDetailData, tmpStore: isTmpStore };
-    });
-    if (!isButtonBlock()) {
-      await API.postPostData(postData)
-        .then((res) => {
-          navigate(`/category/all`);
-        })
-        .catch((err) => {
-          alert('실패');
-          console.log(err);
-          console.log(postData);
-        });
-    } else {
-      alert('카테고리와 제목을 입력해주세요');
-    }
+  const handleSubmit = async () => {
+    await API.updatePostData(postEditData, postId)
+      .then((res) => {
+        navigate(`/category/all`);
+      })
+      .catch((err) => {
+        alert('실패');
+      });
+    console.log('제출완료');
   };
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
@@ -157,12 +162,10 @@ const PostWrite = () => {
       }
     }
   };
-  console.log(postDetailData);
   return (
     <>
-      <NavigationBlock />
-      <LayoutContainer>
-        <ContainerInner>
+      {postTempData && (
+        <>
           <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
@@ -185,7 +188,7 @@ const PostWrite = () => {
             <PostContentWrapper>
               <PostTitle
                 placeholder="제목을 입력하세요."
-                value={postData.title}
+                value={postDetailData.title}
                 onChange={(e) => {
                   setPostDetailData(() => {
                     return { ...postDetailData, title: e.target.value };
@@ -194,6 +197,7 @@ const PostWrite = () => {
               />
               <PostHashtag
                 placeholder={'#해시태그 ,로 구분하세요'}
+                value={postDetailData.hashtag}
                 onChange={(e) => {
                   setPostDetailData(() => {
                     return { ...postDetailData, hashtag: e.target.value };
@@ -201,20 +205,15 @@ const PostWrite = () => {
                 }}
               />
             </PostContentWrapper>
+            <PostGDSCButtonWrapper>
+              <GDSCButton text="임시글" />
+            </PostGDSCButtonWrapper>
           </PostInformation>
-          <PostGDSCButtonWrapper>
-            <GDSCButton
-              text="임시글"
-              onClick={() => {
-                navigate(`/post/saves`);
-              }}
-            />
-          </PostGDSCButtonWrapper>
           <Editor
             previewStyle="vertical"
             height="627px"
             initialEditType="markdown"
-            initialValue="helloWorld"
+            initialValue={postDetailData.content}
             ref={editorRef}
             onChange={setEditorValue}
             plugins={[
@@ -229,29 +228,20 @@ const PostWrite = () => {
               <GDSCButton text="작성취소" />
             </PostBottomButtonLWrapper>
             <PostBottomButtonCWrapper>
-              <GDSCButton
-                text="임시저장"
-                disable={isButtonBlock()}
-                onClick={() => {
-                  handleSubmit(true);
-                }}
-              />
+              <GDSCButton text="임시저장" />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
               <GDSCButton
                 text="업로드"
-                onClick={() => {
-                  handleSubmit(false);
-                }}
                 color={'googleBlue'}
-                disable={isButtonBlock()}
+                onClick={handleSubmit}
               />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
-        </ContainerInner>
-      </LayoutContainer>
+        </>
+      )}
     </>
   );
 };
 
-export default PostWrite;
+export default PostSavesEdit;
