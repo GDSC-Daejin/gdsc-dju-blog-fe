@@ -79,10 +79,10 @@ export class Api {
     return axios.post(`${this.API}/api/member/v2/post`, postData, this.Header);
   };
   getRedirectURL() {
-    const API_BASE_URL = 'https://gdsc-dju.com';
-    // const API_BASE_URL = 'https://gdsc-dju.kro.kr';
+    // const API_BASE_URL = 'https://gdsc-dju.com';
+    const API_BASE_URL = 'https://gdsc-dju.kro.kr';
     const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
-    return `${API_BASE_URL}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
+    return `${this.API}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
   }
 }
 export default new Api();

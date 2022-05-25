@@ -14,11 +14,14 @@ export default function OauthRedirectPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.get('https://gdsc-dju.com/api/guest/v1/me', {
-        headers: {
-          Authorization: 'Bearer ' + token,
+      const result = await axios.get(
+        'https://gdsc-dju.kro.kr/api/guest/v1/me',
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
         },
-      });
+      );
       Cookies.set('token', token, {
         path: '/',
       });

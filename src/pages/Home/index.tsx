@@ -26,7 +26,7 @@ function Home() {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
-  const [value, updateCookie, deleteCookie] = useCookie('user');
+  // const [value, updateCookie, deleteCookie] = useCookie('user');
 
   const { postListData } = useGetPostListData(category, 0, 11);
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
