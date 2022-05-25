@@ -7,9 +7,9 @@ import SignUpSelect from '../SignUpSelect';
 import { IFormStructure } from './FormStructureInfo';
 import { GDSCButton } from '../../../components/common/Button';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
-import { replace } from 'formik';
+import { useCookies } from 'react-cookie';
+import api from '../../../api';
 
 const SignUpForm = () => {
   const {
@@ -21,21 +21,11 @@ const SignUpForm = () => {
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
+  const [tokenCookie] = useCookies(['token']);
   const navigate = useNavigate();
-  const token = Cookies.get('token');
   const onSubmit = async (values: any) => {
-    const result = await axios.put(
-      'https://gdsc-dju.com/api/guest/v1/me',
-      {
-        ...values,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    if (result.data.body.message === 'SUCCESS')
+    const response = await api.updateUserData({ ...values }, tokenCookie.token);
+    if (response.data.body.message === 'SUCCESS')
       navigate('/', { replace: true });
     else alert('에러가 발생했습니다');
   };

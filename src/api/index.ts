@@ -44,14 +44,30 @@ export class Api {
         localStorage.setItem('token', res.data.body.token);
       });
   };
-  updateUserData = (userInfoData: MemberDataInfoType) => {
-    return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, this.Header);
-  };
-  getUserData = (token?: string) => {
-    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
+  updateUserData = (userInfoData: MemberDataInfoType, token?: any) => {
+    const Header = {
       headers: {
+        'Access-Control-Allow-Origin': this.API,
         Authorization: `Bearer ${token}`,
       },
+      withCredentials: true,
+      baseURL: this.API,
+    };
+    return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, {
+      ...Header,
+    });
+  };
+  getUserData = (token?: string) => {
+    const Header = {
+      headers: {
+        'Access-Control-Allow-Origin': this.API,
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+      baseURL: this.API,
+    };
+    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
+      ...Header,
     });
   };
   getUserPostListData = (params: string) => {
