@@ -47,11 +47,12 @@ export class Api {
   updateUserData = (userInfoData: MemberDataInfoType) => {
     return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, this.Header);
   };
-  getUserData = () => {
-    return axios.get<RowMemberDataType>(
-      `${this.API}/api/guest/v1/me`,
-      this.Header,
-    );
+  getUserData = (token?: string) => {
+    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
   getUserPostListData = (params: string) => {
     return axios.get<RowDetailPostListType>(
@@ -79,8 +80,6 @@ export class Api {
     return axios.post(`${this.API}/api/member/v2/post`, postData, this.Header);
   };
   getRedirectURL() {
-    // const API_BASE_URL = 'https://gdsc-dju.com';
-    const API_BASE_URL = 'https://gdsc-dju.kro.kr';
     const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
     return `${this.API}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
   }

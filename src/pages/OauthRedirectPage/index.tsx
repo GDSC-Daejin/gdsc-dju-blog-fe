@@ -5,6 +5,7 @@ import GoogleLoader from '../../components/common/GoogleLoader';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Cookies from 'js-cookie';
+import api from '../../api';
 
 export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
@@ -13,23 +14,25 @@ export default function OauthRedirectPage() {
   const [cookies, setCookie] = useCookies(['user']);
 
   useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get(
-        'https://gdsc-dju.kro.kr/api/guest/v1/me',
-        {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        },
-      );
+    (async function () {
+      const result = await api.getUserData(token);
+      const user = {
+        role: result.data.body.data.role,
+        nickname: result.data.body.data.memberInfo.nickname,
+        userID: result.data.body.data.memberInfo.userID,
+      };
+
       Cookies.set('token', token, {
         path: '/',
       });
-      setCookie('user', result.data.body.data, {
-        path: '/',
-      });
-    }
-    fetchData();
+      Cookies.set(
+        'user',
+        { ...user },
+        {
+          path: '/',
+        },
+      );
+    })();
     navigate('/', { replace: true });
   }, []);
 

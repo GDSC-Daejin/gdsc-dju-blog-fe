@@ -33,10 +33,6 @@ export const BlogCardScrollButton = ({
     else return false;
   };
 
-  useEffect(() => {
-    console.log(scrollX);
-  }, [scrollX]);
-
   return (
     <>
       {ButtonNumber.map((BtnNumber: number, index: number) => (
