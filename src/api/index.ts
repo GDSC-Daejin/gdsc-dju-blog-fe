@@ -97,6 +97,9 @@ export class Api {
   };
   getRedirectURL() {
     const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
+    if (process.env.NODE_ENV !== 'development') {
+      //리다이렉트 url 변경
+    }
     return `${this.API}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
   }
 }
