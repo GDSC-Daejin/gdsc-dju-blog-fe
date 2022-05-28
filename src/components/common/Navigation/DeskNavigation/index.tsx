@@ -16,9 +16,13 @@ import {
 } from './styled';
 import Vector from '../../../../assets/Vector';
 import MainLogo from '../../MainLogo';
+import { useRecoilState } from 'recoil';
+import { MENU_KEY, menuState } from '../../../../store/menu';
+import { alertState } from '../../../../store/alert';
 
 function DeskNavigation() {
   const navigate = useNavigate();
+
   return (
     <NavigationDesign>
       <NavigationWrapper>
