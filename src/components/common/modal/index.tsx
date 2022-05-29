@@ -13,6 +13,9 @@ import {
 } from './styled';
 import OutsideClickHandler from '../../../Utils/OutsideClickHandler';
 
+interface ModalProps {
+  onClick?: () => void;
+}
 const modalAnimate = {
   active: {
     opacity: 1,
@@ -36,8 +39,13 @@ const modalType = {
     leftButton: '임시저장',
     rightButton: '삭제하기',
   },
+  uploadPost: {
+    description: '작성하신 글을 업로드 할까요?',
+    leftButton: '임시저장',
+    rightButton: '업로드',
+  },
 };
-const Modal: React.FC = () => {
+const Modal: React.FC<ModalProps> = ({ onClick }) => {
   const [modal, setModal] = useRecoilState(modalState);
   return (
     <AnimatePresence>
@@ -75,6 +83,7 @@ const Modal: React.FC = () => {
                         .rightButton
                     }
                     color={'tossRed'}
+                    onClick={() => (onClick ? onClick() : undefined)}
                   />
                 </ModalButtonWrapper>
               </ModalContentWrapper>

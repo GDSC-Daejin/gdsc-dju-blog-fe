@@ -43,6 +43,7 @@ import API from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { MODAL_KEY, modalState } from '../../store/modal';
+import Modal from '../../components/common/modal';
 
 export const PostCategoryMenuData = [
   {
@@ -89,7 +90,7 @@ const PostWrite = () => {
     hashtag: '',
     base64Thumbnail: '',
     fileName: '',
-    tmpStore: true,
+    tmpStore: false,
   });
   const navigate = useNavigate();
   const postData = {
@@ -110,10 +111,10 @@ const PostWrite = () => {
       return true;
     } else return false;
   };
-  const handleSubmit = async (isTmpStore: boolean) => {
-    setPostDetailData(() => {
+  const handleSubmit = async () => {
+    /*setPostDetailData(() => {
       return { ...postDetailData, tmpStore: isTmpStore };
-    });
+    });*/
     if (!isButtonBlock()) {
       await API.postPostData(postData)
         .then((res) => {
@@ -129,13 +130,14 @@ const PostWrite = () => {
     }
   };
   const [modal, setModal] = useRecoilState(modalState);
-  const modalHandler = () => {
-    setModal({ ...modal, [MODAL_KEY.SHOW]: true });
+  const modalHandler = (modalType: string) => {
+    setModal({
+      ...modal,
+      [MODAL_KEY.SHOW]: true,
+      [MODAL_KEY.TYPE]: modalType,
+    });
     console.log(modal);
   };
-  // useEffect(() => {
-  //   modalHandler();
-  // }, []);
 
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
@@ -168,9 +170,9 @@ const PostWrite = () => {
       }
     }
   };
-
   return (
     <>
+      <Modal onClick={handleSubmit} />
       <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
@@ -237,21 +239,20 @@ const PostWrite = () => {
           />
           <PostBottomButtonWrapper>
             <PostBottomButtonLWrapper>
-              <GDSCButton text="작성취소" />
-            </PostBottomButtonLWrapper>
-            <PostBottomButtonCWrapper>
               <GDSCButton
-                text="임시저장"
-                disable={isButtonBlock()}
+                text="작성취소"
                 onClick={() => {
-                  handleSubmit(true);
+                  modalHandler('savePost');
                 }}
               />
+            </PostBottomButtonLWrapper>
+            <PostBottomButtonCWrapper>
+              <GDSCButton text="임시저장" disable={isButtonBlock()} />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
               <GDSCButton
                 text="업로드"
-                onClick={modalHandler}
+                onClick={() => modalHandler('uploadPost')}
                 color={'googleBlue'}
                 disable={false}
               />
