@@ -81,6 +81,13 @@ const PostSavesEdit = () => {
 
 const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postTempData } = useGetDetailPostTemp(postId);
+  const [postDetailData, setPostDetailData] = useState({
+    title: postTempData?.title,
+    content: postTempData?.content,
+    hashtag: postTempData?.postHashTags,
+    fileName: '',
+    base64Thumbnail: '',
+  });
   console.log(postTempData);
   /*const [postData, setPostData] = useState<DetailPostDataType>();
   postTempData !== undefined
@@ -90,6 +97,16 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
 
   console.log(postTempData?.category.categoryName);
   useEffect(() => {
+    setPostDetailData(() => {
+      return {
+        ...postDetailData,
+        title: postTempData?.title,
+        content: postTempData?.content,
+        hashtag: postTempData?.postHashTags,
+        fileName: '',
+        base64Thumbnail: '',
+      };
+    });
     document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
       hljs.highlightElement(el as HTMLElement);
     });
@@ -102,13 +119,13 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const [category, setCategory] = useState(
     postTempData?.category.categoryName.toLowerCase(),
   );
-  const [postDetailData, setPostDetailData] = useState({
+  /* const [postDetailData, setPostDetailData] = useState({
     title: postTempData?.title,
     content: postTempData?.content,
     hashtag: postTempData?.postHashTags,
     fileName: '',
     base64Thumbnail: '',
-  });
+  });*/
 
   const navigate = useNavigate();
 
