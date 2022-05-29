@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { MENU_KEY, menuState } from '../../../store/menu';
 import { StyledMenuButton } from './styled';
 
 interface IMenuToggleIconProps {
@@ -10,15 +8,9 @@ interface IMenuToggleIconProps {
 
 const MenuToggleIcon = (props: IMenuToggleIconProps) => {
   const { active } = props;
-  const [menu, setMenu] = useRecoilState(menuState);
   const MenuToggleIconColor = active === 'open' ? '#8B95A1' : 'hsl(0, 0%, 18%)';
-  console.log(menu.appMenu);
   return (
-    <StyledMenuButton
-      initial={false}
-      animate={active}
-      onClick={() => setMenu({ ...menu, [MENU_KEY.APPMENU]: !menu.appMenu })}
-    >
+    <StyledMenuButton initial={false} animate={active}>
       <svg width="23" height="23" viewBox="0 0 23 23">
         <motion.path
           fill="red"

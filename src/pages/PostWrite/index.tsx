@@ -173,7 +173,6 @@ const PostWrite = () => {
                   <PostFileImage src={fileImage} />
                 )}
               </PostThumbnailInner>
-              <div>sdfsfs</div>
               <input
                 ref={input}
                 style={{ display: 'none' }}

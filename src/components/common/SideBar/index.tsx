@@ -6,7 +6,7 @@ import {
   MenuToggleIconWrapper,
   MobileMenuIconWrapper,
 } from './styled';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
 import SideBarLogout from './SideBarLogout';
@@ -46,6 +46,12 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
+  const menuHandler = () => {
+    const menuState = menu.appMenu;
+    setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
+    console.log(menu);
+  };
+
   return (
     <>
       <SideBarWrapper
@@ -53,7 +59,7 @@ export const SideBar = () => {
         variants={SideBarAnimation}
         animate={menu.appMenu ? 'isActive' : 'isUnActive'}
       >
-        <MobileMenuIconWrapper>
+        <MobileMenuIconWrapper onClick={() => menuHandler()}>
           <MenuToggleIcon active="open" />
         </MobileMenuIconWrapper>
         <SideBarInner>
@@ -64,7 +70,7 @@ export const SideBar = () => {
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
-      <MenuToggleIconWrapper>
+      <MenuToggleIconWrapper onClick={() => menuHandler()}>
         <MenuToggleIcon active="closed" />
       </MenuToggleIconWrapper>
       <AnimatePresence>
@@ -74,7 +80,7 @@ export const SideBar = () => {
             animate={'isActive'}
             exit={'isUnActive'}
             onClick={() => {
-              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
+              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
             }}
           />
         )}
