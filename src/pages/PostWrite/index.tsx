@@ -41,6 +41,8 @@ import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { MODAL_KEY, modalState } from '../../store/modal';
 
 export const PostCategoryMenuData = [
   {
@@ -126,6 +128,15 @@ const PostWrite = () => {
       alert('카테고리와 제목을 입력해주세요');
     }
   };
+  const [modal, setModal] = useRecoilState(modalState);
+  const modalHandler = () => {
+    const modalState = modal.show;
+    setModal((prev) => {
+      return { ...prev, [MODAL_KEY.SHOW]: true };
+    });
+  };
+  console.log(modal);
+
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
     setPostDetailData(() => {
@@ -240,9 +251,7 @@ const PostWrite = () => {
             <PostBottomButtonRWrapper>
               <GDSCButton
                 text="업로드"
-                onClick={() => {
-                  handleSubmit(false);
-                }}
+                onClick={() => modalHandler()}
                 color={'googleBlue'}
                 disable={isButtonBlock()}
               />
