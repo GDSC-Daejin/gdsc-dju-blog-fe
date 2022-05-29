@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SideBarWrapper,
   SideBarInner,
@@ -48,6 +48,10 @@ export const sideBarMenuData = [
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
   const [cookies] = useCookies(['user']);
+  const menuHandler = () => {
+    const menuState = menu.appMenu;
+    setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
+  };
 
   return (
     <>
@@ -56,9 +60,10 @@ export const SideBar = () => {
         variants={SideBarAnimation}
         animate={menu.appMenu ? 'isActive' : 'isUnActive'}
       >
-        <MobileMenuIconWrapper>
+        <MobileMenuIconWrapper onClick={() => menuHandler()}>
           <MenuToggleIcon active="open" />
         </MobileMenuIconWrapper>
+
         <SideBarInner>
           <SideBarDesign>
             {cookies.user ? (
@@ -70,7 +75,7 @@ export const SideBar = () => {
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
-      <MenuToggleIconWrapper>
+      <MenuToggleIconWrapper onClick={() => menuHandler()}>
         <MenuToggleIcon active="closed" />
       </MenuToggleIconWrapper>
       <AnimatePresence>
@@ -80,7 +85,7 @@ export const SideBar = () => {
             animate={'isActive'}
             exit={'isUnActive'}
             onClick={() => {
-              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
+              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
             }}
           />
         )}

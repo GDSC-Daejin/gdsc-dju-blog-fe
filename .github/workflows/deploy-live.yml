@@ -19,7 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: 'yarn && yarn build'
-        if: github.event.pull_request.merged == 'true'
         env:
           CI: ""
       - uses: FirebaseExtended/action-hosting-deploy@v0
