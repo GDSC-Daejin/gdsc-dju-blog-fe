@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { loaderState } from '../store/loader';
 import { AnimatePresence } from 'framer-motion';
 import PrivateRoute from '../components/PrivateRoute';
@@ -22,9 +22,11 @@ import Category from '../pages/Category';
 import PostSaves from '../pages/PostSaves';
 import Alert from '../components/common/Alert';
 import PostSavesEdit from '../pages/PostSavesEdit';
+import { modalState } from '../store/modal';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
+  const modal = useRecoilValue(modalState);
   // const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
   const forceLogin = async () => {

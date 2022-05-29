@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -130,12 +130,12 @@ const PostWrite = () => {
   };
   const [modal, setModal] = useRecoilState(modalState);
   const modalHandler = () => {
-    const modalState = modal.show;
-    setModal((prev) => {
-      return { ...prev, [MODAL_KEY.SHOW]: true };
-    });
+    setModal({ ...modal, [MODAL_KEY.SHOW]: true });
+    console.log(modal);
   };
-  console.log(modal);
+  // useEffect(() => {
+  //   modalHandler();
+  // }, []);
 
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
@@ -168,7 +168,7 @@ const PostWrite = () => {
       }
     }
   };
-  console.log(postDetailData);
+
   return (
     <>
       <NavigationBlock />
@@ -251,9 +251,9 @@ const PostWrite = () => {
             <PostBottomButtonRWrapper>
               <GDSCButton
                 text="업로드"
-                onClick={() => modalHandler()}
+                onClick={modalHandler}
                 color={'googleBlue'}
-                disable={isButtonBlock()}
+                disable={false}
               />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>

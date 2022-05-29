@@ -43,5 +43,5 @@ export const ModalBackground = styled(motion.div)`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  z-index: 998;
+  z-index: 1000;
 `;
