@@ -25,12 +25,16 @@ import { alertState } from '../../../../store/alert';
 const SideBarLogin = () => {
   const navigate = useNavigate();
   const [menu, setMenu] = useRecoilState(menuState);
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [UserCookies, setUserCookie, removeUserCookie] = useCookies(['user']);
+  const [TokenCookies, setTokenCookie, removeTokenCookie] = useCookies([
+    'token',
+  ]);
+
   const handleLogout = () => {
-    removeCookie('user', {
+    removeUserCookie('user', {
       path: '/',
     });
-    Cookies.remove('token', {
+    removeTokenCookie('token', {
       path: '/',
     });
   };
