@@ -6,7 +6,7 @@ export const MENU_KEY = {
   NAV: 'sidebar',
 };
 export const MenuState = {
-  [MENU_KEY.APPMENU]: true,
+  [MENU_KEY.APPMENU]: false,
   [MENU_KEY.NAV]: true,
 };
 export const menuState = atom<typeof MenuState>({
