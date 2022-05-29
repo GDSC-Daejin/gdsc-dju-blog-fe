@@ -72,7 +72,7 @@ const SignUpSelect = ({
               onClick={() => OptionOnClick(data)}
               selected={watch && watch('positionType') === data ? true : false}
             >
-              <SignUpColorCircle color={data} />
+              <SignUpColorCircle position={data} />
               {data}
             </SignUpSelectOption>
           ))}

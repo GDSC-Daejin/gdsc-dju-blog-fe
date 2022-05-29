@@ -36,7 +36,7 @@ export const SignUpErrorMessage = styled.div`
   span {
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.fontSize.body3};
   }
 `;
 
@@ -48,7 +48,7 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-size: 18px;
+  font-size: ${(props) => props.theme.fontSize.h7};
   font-style: normal;
   font-weight: 500;
   color: ${(props) => props.theme.color.grey900};
@@ -97,7 +97,7 @@ export const SignUpButton = styled.button<{ isValid: boolean }>`
   border-radius: 18px;
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: ${(props) => props.theme.fontSize.body2};
   text-align: center;
   align-self: flex-end;
   cursor: ${(props) => (props.isValid ? 'pointer' : 'not-allowed')};

@@ -65,8 +65,8 @@ export const SignUpSelectOption = styled.li<{ selected: boolean }>`
   }
 `;
 
-const handleColorType = (color: string) => {
-  switch (color) {
+const handleColorType = (position: string) => {
+  switch (position) {
     case 'Frontend':
       return assetColors.GDSC_Red;
     case 'Backend':
@@ -80,10 +80,10 @@ const handleColorType = (color: string) => {
   }
 };
 
-export const SignUpColorCircle = styled.div<{ color: string }>`
+export const SignUpColorCircle = styled.div<{ position: string }>`
   width: 8px;
   height: 8px;
-  background-color: ${(props) => handleColorType(props.color)};
+  background-color: ${(props) => handleColorType(props.position)};
   border-radius: 50%;
 `;
 
