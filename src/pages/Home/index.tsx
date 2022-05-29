@@ -26,6 +26,7 @@ function Home() {
   const [category, setCategory] = useState('all');
 
   const { postListData } = useGetPostListData(category, 0, 11);
+
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsDrag(true);

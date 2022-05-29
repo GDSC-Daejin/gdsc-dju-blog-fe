@@ -5,7 +5,12 @@ import GoogleLoader from '../../components/common/GoogleLoader';
 import Cookies from 'js-cookie';
 import api from '../../api';
 import { useCookies } from 'react-cookie';
+import { UserDataType } from '../../types/userDataType';
 
+type SelectedUserType = Pick<
+  UserDataType,
+  'role' | 'username' | 'userId' | 'memberInfo'
+>;
 export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -13,24 +18,28 @@ export default function OauthRedirectPage() {
   const [userCookies, setUserCookies] = useCookies(['user']);
   const [tokenCookies, setTokenCookies] = useCookies(['token']);
 
+  const setCookieData = (user: SelectedUserType) => {
+    setUserCookies(
+      'user',
+      { ...user },
+      {
+        path: '/',
+      },
+    );
+    setTokenCookies('token', token, {
+      path: '/',
+    });
+  };
+
   useEffect(() => {
     (async function () {
       const result = await api.getUserData(token);
-      const user = {
-        role: result.data.body.data.role,
-        email: result.data.body.data.email,
-        nickname: result.data.body.data.memberInfo.nickname,
-        userID: result.data.body.data.memberInfo.userID,
-      };
-      setUserCookies(
-        'user',
-        { ...user },
-        {
-          path: '/',
-        },
-      );
-      setTokenCookies('token', token, {
-        path: '/',
+      const data = result.data.body.data;
+      setCookieData({
+        role: data.role,
+        username: data.username,
+        userId: data.userId,
+        memberInfo: data.memberInfo,
       });
     })();
     navigate('/', { replace: true });
