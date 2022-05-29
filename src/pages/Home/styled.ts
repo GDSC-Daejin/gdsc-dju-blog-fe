@@ -10,6 +10,7 @@ export const HomeContentWrapper = styled.div`
   gap: 3.75rem;
   margin-top: 50px;
   padding: 0 20px;
+  min-width: 1160px;
 `;
 export const HomeLayoutContainer = styled.div`
   position: relative;
@@ -34,6 +35,7 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
+  min-width: 1160px;
   height: 100%;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
@@ -49,7 +51,6 @@ export const BlogCardWrapper = styled(motion.div)`
   width: 248px;
   height: 294px;
   margin: 0 15px;
-  transform: translateX(calc((100vw - 1200px) / 2 + 20px));
   :first-child {
     margin-left: 0;
   }

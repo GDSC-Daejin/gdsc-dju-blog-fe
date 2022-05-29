@@ -10,7 +10,6 @@ import React from 'react';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
 import SideBarLogout from './SideBarLogout';
-import { useLocation } from 'react-router';
 import SideBarCategory from './SideBarCategory';
 import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import { MENU_KEY, menuState } from '../../../store/menu';
@@ -46,6 +45,23 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
+  if (menu.appMenu) {
+    document.body.style.cssText = `
+    position: fixed; 
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`;
+  } else {
+    const scrollY = document.body.style.top;
+    document.body.style.cssText = '';
+    window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+  }
+  const menuHandler = () => {
+    const menuState = menu.appMenu;
+    setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
+    console.log(menu);
+  };
+
   return (
     <>
       <SideBarWrapper
@@ -53,7 +69,7 @@ export const SideBar = () => {
         variants={SideBarAnimation}
         animate={menu.appMenu ? 'isActive' : 'isUnActive'}
       >
-        <MobileMenuIconWrapper>
+        <MobileMenuIconWrapper onClick={() => menuHandler()}>
           <MenuToggleIcon active="open" />
         </MobileMenuIconWrapper>
         <SideBarInner>
@@ -64,7 +80,7 @@ export const SideBar = () => {
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
-      <MenuToggleIconWrapper>
+      <MenuToggleIconWrapper onClick={() => menuHandler()}>
         <MenuToggleIcon active="closed" />
       </MenuToggleIconWrapper>
       <AnimatePresence>
@@ -74,7 +90,7 @@ export const SideBar = () => {
             animate={'isActive'}
             exit={'isUnActive'}
             onClick={() => {
-              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
+              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
             }}
           />
         )}

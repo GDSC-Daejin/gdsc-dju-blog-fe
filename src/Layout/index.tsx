@@ -1,4 +1,4 @@
-import React, { lazy, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
@@ -15,9 +15,9 @@ import PostWrite from '../pages/PostWrite';
 import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Post from '../pages/Post';
-import ScrollTop from '../Utils/ScrollTop';
 import Modal from '../components/common/modal';
 import Category from '../pages/Category';
+import Alert from '../components/common/Alert';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -41,6 +41,7 @@ const Layout = () => {
 
   return (
     <>
+      <Alert />
       <Modal />
       <SideBar />
       <Navigation />

@@ -18,6 +18,7 @@ import { userData } from '../../../../api/Mocks/userData';
 import { useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../../store/menu';
+import { alertState } from '../../../../store/alert';
 
 const SideBarLogin = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const SideBarLogin = () => {
           text="내 블로그"
           onClick={() => {
             navigate(`/:user_name`);
-            setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
+            setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
           }}
         />
       </MyBlogButtonWrapper>
@@ -52,7 +53,7 @@ const SideBarLogin = () => {
             text="글쓰기"
             onClick={() => {
               navigate(`/post/write`);
-              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
+              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
             }}
           />
         </WrittingButtonWrapper>
