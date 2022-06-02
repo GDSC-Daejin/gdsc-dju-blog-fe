@@ -71,6 +71,7 @@ const PostSavesEdit = () => {
     <>
       <NavigationBlock />
       <LayoutContainer>
+        <div>dfdsfsd</div>
         <ContainerInner>
           {postId && <PostEditContent postId={postId} />}
         </ContainerInner>
