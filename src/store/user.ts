@@ -17,11 +17,9 @@ export const UserState = {
   gitEmail: '',
   birthday: '',
   userInfoId: 0,
-  memberPortfolioUrls: [
-    { id: 0, webUrl: '' },
-    { id: 0, webUrl: '' },
-    { id: 0, webUrl: '' },
-  ],
+  githubUrl: '',
+  blogUrl: '',
+  etcUrl: '',
 };
 export const userState = atom({
   key: USER,

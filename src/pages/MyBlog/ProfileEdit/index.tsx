@@ -18,10 +18,10 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../../../store/user';
 
 import API from '../../../api';
-import { MemberUrlsType, UserEditDataType } from '../../../types/userInfoData';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { MemberDataInfoType } from '../../../types/userDataType';
 import { useNavigate } from 'react-router';
+import { IUserInfoDataType } from '../../../types/userInfoData';
 
 const ProfileEdit = () => {
   const { userData } = useGetUserData();
@@ -51,36 +51,13 @@ const ProfileEdit = () => {
       phoneNumber: user.phoneNumber,
       major: user.major,
       positionType: user.positionType,
-      githubUrl: user.memberPortfolioUrls[0].webUrl,
-      blogUrl: user.memberPortfolioUrls[1].webUrl,
-      resumeUrl: user.memberPortfolioUrls[2].webUrl,
-    } as UserEditDataType,
+      githubUrl: user.githubUrl,
+      blogUrl: user.blogUrl,
+      etcUrl: user.etcUrl,
+    } as IUserInfoDataType,
     onSubmit: async (values) => {
-      const { githubUrl, blogUrl, resumeUrl } = values;
-      const memberPortfolioUrls: MemberUrlsType[] = [
-        { id: 0, webUrl: githubUrl },
-        { id: 1, webUrl: blogUrl },
-        { id: 2, webUrl: resumeUrl },
-      ];
-      const memberData: MemberDataInfoType = {
-        generation: values.generation,
-        gitEmail: values.gitEmail,
-        hashTag: values.hashTag,
-        introduce: values.introduce,
-        major: values.major,
-        memberInfoId: values.memberInfoId,
-        birthday: values.birthday,
-        phoneNumber: values.phoneNumber,
-        nickname: values.nickname,
-        studentID: values.studentID,
-        positionType: values.positionType,
-        userID: values.userID,
-        name: values.name,
-        email: values.email,
-        memberPortfolioUrls: memberPortfolioUrls,
-      };
       try {
-        await API.updateUserData(memberData).then(() => {
+        await API.updateUserData(values).then(() => {
           setUser({
             ...user,
             ...values,
@@ -223,7 +200,7 @@ const ProfileEdit = () => {
                   />
                 </FormElementWrapper>
                 <FormElementWrapper>
-                  <FormLabel>블로그 주소</FormLabel>:Qw
+                  <FormLabel>블로그 주소</FormLabel>
                   <TextInput
                     placeholder={'https://'}
                     name={'blogUrl'}
@@ -237,9 +214,9 @@ const ProfileEdit = () => {
                   <TextInput
                     placeholder={'https://'}
                     name={'resumeUrl'}
-                    value={userEditFormik.values.resumeUrl}
+                    value={userEditFormik.values.etcUrl}
                     onChange={userEditFormik.handleChange}
-                    error={userEditFormik.errors.resumeUrl}
+                    error={userEditFormik.errors.etcUrl}
                   />
                 </FormElementWrapper>
                 <FormButtonWrapper>
