@@ -79,7 +79,15 @@ const PostSavesEdit = () => {
 };
 
 const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
+  const editorRef: any = useRef(null);
+  const input = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
   const { postTempData } = useGetDetailPostTemp(postId);
+  const [fileImage, setFileImage] = useState(`${postTempData?.imagePath}`);
+  const [category, setCategory] = useState(
+    postTempData?.category.categoryName.toLowerCase(),
+  );
+  const [file, setFile] = useState(null);
   const [postDetailData, setPostDetailData] = useState<PostPostDataType>({
     base64Thumbnail: '',
     fileName: '',
@@ -92,14 +100,6 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   });
   console.log(postTempData);
   console.log(`postId ${postId}`);
-
-  // 기본값 변수로 넣지 마세요
-  const [fileImage, setFileImage] = useState(`${postTempData?.imagePath}`);
-  // 기본값 변수로 넣지 마세요
-  const [category, setCategory] = useState(
-    postTempData?.category.categoryName.toLowerCase(),
-  );
-  const [file, setFile] = useState(null);
 
   useLayoutEffect(() => {
     postTempData &&
@@ -114,10 +114,6 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
       hljs.highlightElement(el as HTMLElement);
     });
   }, [postId]);
-
-  const editorRef: any = useRef(null);
-  const input = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const postEditData: PostPostDataType = {
     title: postDetailData.title,
@@ -172,7 +168,10 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
     <>
       {postTempData && (
         <>
-          <PostCategoryMenu onClick={setCategory} category={category} />
+          <PostCategoryMenu
+            onClick={setCategory}
+            category={postTempData.category.categoryName.toLowerCase()}
+          />
           <PostInformation>
             <PostThumbnailWrapper>
               <PostThumbnailInner onClick={() => input.current?.click()}>

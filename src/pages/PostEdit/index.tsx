@@ -167,7 +167,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
                 {fileImage === '' ? (
                   <PostThumbnail />
                 ) : (
-                  <PostFileImage src={fileImage} />
+                  <PostFileImage src={postData.imagePath} />
                 )}
               </PostThumbnailInner>
               <input
