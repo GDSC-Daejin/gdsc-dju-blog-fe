@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useLayoutEffect,
-  ChangeEvent,
-} from 'react';
+import React, { ChangeEvent, useLayoutEffect, useRef, useState } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -47,9 +41,12 @@ import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import { DetailPostDataType, PostPostDataType } from '../../types/postData';
 import hljs from 'highlight.js';
+import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
+import { useRecoilState } from 'recoil';
+import { postState } from '../../store/postEdit';
+import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 
 export const PostCategoryMenuData = [
   {
@@ -68,7 +65,6 @@ export const PostCategoryMenuData = [
     title: 'Common'.toLowerCase(),
   },
 ];
-
 const PostEdit = () => {
   const { postId } = useParams<'postId'>();
 
@@ -85,7 +81,18 @@ const PostEdit = () => {
 };
 
 const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
-  const { postData } = useGetDetailPost(postId);
+  const [post, setPost] = useRecoilState(postState);
+  const { postData }: any = post.postTmpStore
+    ? useGetDetailPostTemp(postId)
+    : useGetDetailPost(postId);
+  console.log(post.postTmpStore);
+  /*
+  if (post.postTmpStore) {
+    const { postTempData } = useGetDetailPostTemp(postId);
+    return postTempData;
+  }
+  const postTempData: DetailPostDataType = postTempData;
+*/
 
   return (
     <>{postData && <PostDetailBox postId={postId} postData={postData} />}</>
@@ -135,7 +142,7 @@ const PostDetailBox = ({
     });
   }, [postData]);
 
-  const editorRef: any = useRef();
+  const editorRef: any = useRef(null);
   const input = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -157,8 +164,10 @@ const PostDetailBox = ({
         alert('실패');
       });
   };
+  console.log(postId);
   const setEditorValue = () => {
-    const editorContent = editorRef.current.getInstance().getMarkdown();
+    const editorContent = editorRef.current?.getInstance().getMarkdown();
+    console.log(editorContent);
     setPostDetailData(() => {
       return { ...postDetailData, content: editorContent };
     });
@@ -197,81 +206,77 @@ const PostDetailBox = ({
   console.log(postDetailData);
   return (
     <>
-      {postData && (
-        <>
-          <PostCategoryMenu
-            onClick={categoryHandler}
-            category={postDetailData.category.categoryName.toLowerCase()}
+      <PostCategoryMenu
+        onClick={categoryHandler}
+        category={postDetailData.category.categoryName.toLowerCase()}
+      />
+      <PostInformation>
+        <PostThumbnailWrapper>
+          <PostThumbnailInner onClick={() => input.current?.click()}>
+            {fileImage === '' ? (
+              <PostThumbnail />
+            ) : (
+              <PostFileImage src={fileImage} />
+            )}
+          </PostThumbnailInner>
+          <input
+            ref={input}
+            style={{ display: 'none' }}
+            type="file"
+            name="imgFile"
+            id="imgFile"
+            onChange={handleChangeFile}
           />
-          <PostInformation>
-            <PostThumbnailWrapper>
-              <PostThumbnailInner onClick={() => input.current?.click()}>
-                {fileImage === '' ? (
-                  <PostThumbnail />
-                ) : (
-                  <PostFileImage src={fileImage} />
-                )}
-              </PostThumbnailInner>
-              <input
-                ref={input}
-                style={{ display: 'none' }}
-                type="file"
-                name="imgFile"
-                id="imgFile"
-                onChange={handleChangeFile}
-              />
-            </PostThumbnailWrapper>
-            <PostContentWrapper>
-              <PostTitle
-                placeholder="제목을 입력하세요."
-                value={postDetailData.title}
-                name={'title'}
-                onChange={onChangeValue}
-              />
-              <PostHashtag
-                placeholder={'#해시태그 ,로 구분하세요'}
-                value={postDetailData.postHashTags}
-                name={'postHashTags'}
-                onChange={onChangeValue}
-              />
-            </PostContentWrapper>
-            <PostGDSCButtonWrapper>
-              <GDSCButton text="임시글" />
-            </PostGDSCButtonWrapper>
-          </PostInformation>
-          {postDetailData.content.length > 0 && (
-            <Editor
-              previewStyle="vertical"
-              height="627px"
-              initialEditType="markdown"
-              initialValue={postDetailData.content}
-              ref={editorRef}
-              onChange={setEditorValue}
-              plugins={[
-                colorSyntax,
-                [codeSyntaxHighlight, { highlighter: Prism }],
-                chart,
-                tableMergedCell,
-              ]}
-            />
-          )}
-          <PostBottomButtonWrapper>
-            <PostBottomButtonLWrapper>
-              <GDSCButton text="작성취소" />
-            </PostBottomButtonLWrapper>
-            <PostBottomButtonCWrapper>
-              <GDSCButton text="임시저장" />
-            </PostBottomButtonCWrapper>
-            <PostBottomButtonRWrapper>
-              <GDSCButton
-                text="업로드"
-                color={'googleBlue'}
-                onClick={handleSubmit}
-              />
-            </PostBottomButtonRWrapper>
-          </PostBottomButtonWrapper>
-        </>
+        </PostThumbnailWrapper>
+        <PostContentWrapper>
+          <PostTitle
+            placeholder="제목을 입력하세요."
+            value={postDetailData.title}
+            name={'title'}
+            onChange={onChangeValue}
+          />
+          <PostHashtag
+            placeholder={'#해시태그 ,로 구분하세요'}
+            value={postDetailData.postHashTags}
+            name={'postHashTags'}
+            onChange={onChangeValue}
+          />
+        </PostContentWrapper>
+        <PostGDSCButtonWrapper>
+          <GDSCButton text="임시글" />
+        </PostGDSCButtonWrapper>
+      </PostInformation>
+      {postDetailData.content.length > 0 && (
+        <Editor
+          previewStyle="vertical"
+          height="627px"
+          initialEditType="markdown"
+          initialValue={postDetailData.content}
+          ref={editorRef}
+          onChange={setEditorValue}
+          plugins={[
+            colorSyntax,
+            [codeSyntaxHighlight, { highlighter: Prism }],
+            chart,
+            tableMergedCell,
+          ]}
+        />
       )}
+      <PostBottomButtonWrapper>
+        <PostBottomButtonLWrapper>
+          <GDSCButton text="작성취소" />
+        </PostBottomButtonLWrapper>
+        <PostBottomButtonCWrapper>
+          <GDSCButton text="임시저장" />
+        </PostBottomButtonCWrapper>
+        <PostBottomButtonRWrapper>
+          <GDSCButton
+            text="업로드"
+            color={'googleBlue'}
+            onClick={handleSubmit}
+          />
+        </PostBottomButtonRWrapper>
+      </PostBottomButtonWrapper>
     </>
   );
 };

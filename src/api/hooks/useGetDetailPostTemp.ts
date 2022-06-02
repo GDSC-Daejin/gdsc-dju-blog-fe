@@ -6,8 +6,8 @@ async function getDetailPostTemp(postId: string) {
 }
 
 export function useGetDetailPostTemp(postId: string) {
-  const { data: postTempData } = useSWR(`${postId}`, getDetailPostTemp);
+  const { data: postData } = useSWR(`${postId}`, getDetailPostTemp);
   return {
-    postTempData: postTempData && postTempData.body.data,
+    postData: postData && postData.body.data,
   };
 }

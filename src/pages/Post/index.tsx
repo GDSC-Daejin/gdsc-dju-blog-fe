@@ -37,6 +37,8 @@ import PostEditIcon from '../../assets/PostEditIcon';
 import Bookmark from '../../assets/Bookmark';
 import { useLocation } from 'react-router';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
+import { useRecoilState } from 'recoil';
+import { POST_KEY, postState } from '../../store/postEdit';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -87,7 +89,7 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
       console.log(postId);
     }
   };
-
+  const [post, setPost] = useRecoilState(postState);
   return (
     <>
       {postData && (
@@ -106,11 +108,15 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
                   <Bookmark marked={!isUserEqual} height={'25'} />
                 </BookmarkWrapper>
                 <PostEditIconWrapper
-                  onClick={
+                  /*onClick={
                     isUserEqual
                       ? () => navigate(`/post/write/${postId}`)
                       : undefined
-                  }
+                  }*/
+                  onClick={() => {
+                    setPost({ ...post, [POST_KEY.POST_TMPSTORE]: false });
+                    navigate(`/post/write/${postId}`);
+                  }}
                 >
                   <PostEditIcon marked={isUserEqual} height={'25'} />
                 </PostEditIconWrapper>

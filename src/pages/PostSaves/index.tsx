@@ -17,6 +17,8 @@ import PageBar from '../../components/common/PageBar';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
 import { useGetUserPostListTempData } from '../../api/hooks/useGetUserPostListTempData';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+import { POST_KEY, postState } from '../../store/postEdit';
+import { useRecoilState } from 'recoil';
 
 const PostSaves = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,7 +70,7 @@ const PostSaves = () => {
         page: page.toString(),
       })}`,
     });
-
+  const [post, setPost] = useRecoilState(postState);
   return (
     <>
       <LayoutContainer>
@@ -90,7 +92,10 @@ const PostSaves = () => {
                 userPostTempData.content.map((data) => (
                   <PostCardWrapper
                     key={data.postId}
-                    onClick={() => navigate(`/post/temp/write/${data.postId}`)}
+                    onClick={() => {
+                      setPost({ ...post, [POST_KEY.POST_TMPSTORE]: true });
+                      navigate(`/post/write/${data.postId}`);
+                    }}
                   >
                     <PostCard {...data} />
                   </PostCardWrapper>
