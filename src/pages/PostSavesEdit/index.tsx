@@ -62,7 +62,6 @@ export const PostCategoryMenuData = [
     title: 'Common'.toLowerCase(),
   },
 ];
-
 const PostSavesEdit = () => {
   const { postId } = useParams<'postId'>();
 
@@ -106,6 +105,7 @@ const PostDetailBox = ({
     content: '',
     postHashTags: '',
   });
+
   const [fileImage, setFileImage] = useState<string>();
   const [file, setFile] = useState(null);
   const categoryHandler = (category: string) => {
@@ -139,7 +139,7 @@ const PostDetailBox = ({
   const postEditData = {
     title: postDetailData.title,
     content: postDetailData.content,
-    category: { categoryName: postDetailData.postHashTags },
+    category: { categoryName: postDetailData.category.categoryName },
     postHashTags: postDetailData.postHashTags,
     fileName: postDetailData.fileName,
     base64Thumbnail: postDetailData.base64Thumbnail,
@@ -153,8 +153,8 @@ const PostDetailBox = ({
       .catch((err) => {
         alert('실패');
       });
-    console.log('제출완료');
   };
+  console.log(postId);
   const setEditorValue = () => {
     const editorContent = editorRef.current?.getInstance().getMarkdown();
     console.log(editorContent);
@@ -193,6 +193,7 @@ const PostDetailBox = ({
       [e.target.name]: e.target.value,
     });
   };
+  console.log(postDetailData);
   return (
     <>
       <PostCategoryMenu

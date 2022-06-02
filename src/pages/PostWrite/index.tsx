@@ -90,7 +90,7 @@ const PostWrite = () => {
     hashtag: '',
     base64Thumbnail: '',
     fileName: '',
-    tmpStore: true,
+    tmpStore: false,
   });
   const navigate = useNavigate();
   const postData = {
