@@ -65,7 +65,7 @@ export const PostCategoryMenuData = [
 
 const PostEdit = () => {
   const { postId } = useParams<'postId'>();
-
+  console.log(`postId ${postId}`);
   return (
     <>
       <NavigationBlock />
@@ -80,9 +80,7 @@ const PostEdit = () => {
 
 const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
-  console.log(postData);
 
-  console.log(postData?.category.categoryName);
   useEffect(() => {
     document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
       hljs.highlightElement(el as HTMLElement);
@@ -96,11 +94,14 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const [category, setCategory] = useState(
     postData?.category.categoryName.toLowerCase(),
   );
-  const [postDetailData, setPostDetailData] = useState({
-    title: postData?.title,
-    content: postData?.content,
-    hashtag: postData?.postHashTags,
+  const [postDetailData, setPostDetailData] = useState<PostPostDataType>({
+    title: '',
+    content: '',
+    postHashTags: '',
     fileName: '',
+    category: {
+      categoryName: '',
+    },
     base64Thumbnail: '',
   });
 
@@ -109,11 +110,10 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const postEditData: PostPostDataType = {
     title: postDetailData.title,
     content: postDetailData.content,
-    category: { categoryName: category },
-    postHashTags: postDetailData.hashtag,
+    category: { categoryName: postDetailData.category.categoryName },
+    postHashTags: postDetailData.postHashTags,
     fileName: postDetailData.fileName,
     base64Thumbnail: postDetailData.base64Thumbnail,
-    tmpStore: false,
   };
   const handleSubmit = async () => {
     await API.updatePostData(postEditData, postId)
@@ -191,7 +191,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
               />
               <PostHashtag
                 placeholder={'#해시태그 ,로 구분하세요'}
-                value={postDetailData.hashtag}
+                value={postDetailData.postHashTags}
                 onChange={(e) => {
                   setPostDetailData(() => {
                     return { ...postDetailData, hashtag: e.target.value };
