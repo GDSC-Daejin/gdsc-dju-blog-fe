@@ -71,7 +71,6 @@ const PostSavesEdit = () => {
     <>
       <NavigationBlock />
       <LayoutContainer>
-        <div>dfdsfsd</div>
         <ContainerInner>
           {postId && <PostEditContent postId={postId} />}
         </ContainerInner>
@@ -187,6 +186,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
           <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
+              <div>fdsfs</div>
               <PostThumbnailInner onClick={() => input.current?.click()}>
                 {fileImage === '' ? (
                   <PostThumbnail />
