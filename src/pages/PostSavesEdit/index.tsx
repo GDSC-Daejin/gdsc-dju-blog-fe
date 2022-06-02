@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useLayoutEffect, useRef, useState } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -41,7 +41,7 @@ import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PostPostDataType } from '../../types/postData';
+import { DetailPostDataType, PostPostDataType } from '../../types/postData';
 import hljs from 'highlight.js';
 import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
 
@@ -80,6 +80,22 @@ const PostSavesEdit = () => {
 
 const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postTempData } = useGetDetailPostTemp(postId);
+
+  return (
+    <>
+      {postTempData && (
+        <PostDetailBox postId={postId} postTempData={postTempData} />
+      )}
+    </>
+  );
+};
+const PostDetailBox = ({
+  postTempData,
+  postId,
+}: {
+  postTempData: DetailPostDataType;
+  postId: string;
+}) => {
   const [postDetailData, setPostDetailData] = useState<PostPostDataType>({
     base64Thumbnail: '',
     fileName: '',
@@ -90,16 +106,15 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
     content: '',
     postHashTags: '',
   });
-  console.log(postTempData);
-  console.log(`postId ${postId}`);
 
-  // 기본값 변수로 넣지 마세요
-  const [fileImage, setFileImage] = useState(`${postTempData?.imagePath}`);
-  // 기본값 변수로 넣지 마세요
-  const [category, setCategory] = useState(
-    postTempData?.category.categoryName.toLowerCase(),
-  );
+  const [fileImage, setFileImage] = useState<string>();
   const [file, setFile] = useState(null);
+  const categoryHandler = (category: string) => {
+    setPostDetailData({
+      ...postDetailData,
+      category: { categoryName: category },
+    });
+  };
 
   useLayoutEffect(() => {
     postTempData &&
@@ -108,12 +123,12 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
         title: postTempData.title,
         content: postTempData.content,
         postHashTags: postTempData.postHashTags,
-        base64Thumbnail: '',
       });
+    postTempData && setFileImage(postTempData.imagePath);
     document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
       hljs.highlightElement(el as HTMLElement);
     });
-  }, [postId]);
+  }, [postTempData]);
 
   const editorRef: any = useRef(null);
   const input = useRef<HTMLInputElement>(null);
@@ -139,6 +154,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   };
   const setEditorValue = () => {
     const editorContent = editorRef.current?.getInstance().getMarkdown();
+    console.log(editorContent);
     setPostDetailData(() => {
       return { ...postDetailData, content: editorContent };
     });
@@ -168,84 +184,85 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
       }
     }
   };
+  const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setPostDetailData({
+      ...postDetailData,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <>
-      {postTempData && (
-        <>
-          <PostCategoryMenu onClick={setCategory} category={category} />
-          <PostInformation>
-            <PostThumbnailWrapper>
-              <PostThumbnailInner onClick={() => input.current?.click()}>
-                {fileImage === '' ? (
-                  <PostThumbnail />
-                ) : (
-                  <PostFileImage src={postTempData.imagePath} />
-                )}
-              </PostThumbnailInner>
-              <input
-                ref={input}
-                style={{ display: 'none' }}
-                type="file"
-                name="imgFile"
-                id="imgFile"
-                onChange={handleChangeFile}
-              />
-            </PostThumbnailWrapper>
-            <PostContentWrapper>
-              <PostTitle
-                placeholder="제목을 입력하세요."
-                value={postTempData.title}
-                onChange={(e) => {
-                  setPostDetailData(() => {
-                    return { ...postDetailData, title: e.target.value };
-                  });
-                }}
-              />
-              <PostHashtag
-                placeholder={'#해시태그 ,로 구분하세요'}
-                value={postTempData.postHashTags}
-                onChange={(e) => {
-                  setPostDetailData(() => {
-                    return { ...postDetailData, hashtag: e.target.value };
-                  });
-                }}
-              />
-            </PostContentWrapper>
-            <PostGDSCButtonWrapper>
-              <GDSCButton text="임시글" />
-            </PostGDSCButtonWrapper>
-          </PostInformation>
-          <Editor
-            previewStyle="vertical"
-            height="627px"
-            initialEditType="markdown"
-            initialValue={postTempData.content}
-            ref={editorRef}
-            onChange={setEditorValue}
-            plugins={[
-              colorSyntax,
-              [codeSyntaxHighlight, { highlighter: Prism }],
-              chart,
-              tableMergedCell,
-            ]}
+      <PostCategoryMenu
+        onClick={categoryHandler}
+        category={postDetailData.category.categoryName}
+      />
+      <PostInformation>
+        <PostThumbnailWrapper>
+          <PostThumbnailInner onClick={() => input.current?.click()}>
+            {fileImage === '' ? (
+              <PostThumbnail />
+            ) : (
+              <PostFileImage src={postTempData.imagePath} />
+            )}
+          </PostThumbnailInner>
+          <input
+            ref={input}
+            style={{ display: 'none' }}
+            type="file"
+            name="imgFile"
+            id="imgFile"
+            onChange={handleChangeFile}
           />
-          <PostBottomButtonWrapper>
-            <PostBottomButtonLWrapper>
-              <GDSCButton text="작성취소" />
-            </PostBottomButtonLWrapper>
-            <PostBottomButtonCWrapper>
-              <GDSCButton text="임시저장" />
-            </PostBottomButtonCWrapper>
-            <PostBottomButtonRWrapper>
-              <GDSCButton
-                text="업로드"
-                color={'googleBlue'}
-                onClick={handleSubmit}
-              />
-            </PostBottomButtonRWrapper>
-          </PostBottomButtonWrapper>
-        </>
+        </PostThumbnailWrapper>
+        <PostContentWrapper>
+          <PostTitle
+            placeholder="제목을 입력하세요."
+            value={postDetailData.title}
+            name={'title'}
+            onChange={onChangeValue}
+          />
+          <PostHashtag
+            placeholder={'#해시태그 ,로 구분하세요'}
+            value={postDetailData.postHashTags}
+            name={'postHashTags'}
+            onChange={onChangeValue}
+          />
+        </PostContentWrapper>
+        <PostGDSCButtonWrapper>
+          <GDSCButton text="임시글" />
+        </PostGDSCButtonWrapper>
+      </PostInformation>
+      {postDetailData.content.length > 0 && (
+        <Editor
+          previewStyle="vertical"
+          height="627px"
+          initialEditType="markdown"
+          initialValue={postDetailData.content}
+          ref={editorRef}
+          onChange={setEditorValue}
+          plugins={[
+            colorSyntax,
+            [codeSyntaxHighlight, { highlighter: Prism }],
+            chart,
+            tableMergedCell,
+          ]}
+        />
       )}
+      <PostBottomButtonWrapper>
+        <PostBottomButtonLWrapper>
+          <GDSCButton text="작성취소" />
+        </PostBottomButtonLWrapper>
+        <PostBottomButtonCWrapper>
+          <GDSCButton text="임시저장" />
+        </PostBottomButtonCWrapper>
+        <PostBottomButtonRWrapper>
+          <GDSCButton
+            text="업로드"
+            color={'googleBlue'}
+            onClick={handleSubmit}
+          />
+        </PostBottomButtonRWrapper>
+      </PostBottomButtonWrapper>
     </>
   );
 };

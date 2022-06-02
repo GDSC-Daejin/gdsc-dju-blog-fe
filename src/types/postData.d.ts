@@ -16,6 +16,7 @@ export interface DetailPostDataType {
   imagePath: string;
   memberInfo: AuthorProps;
 }
+
 export interface AuthorProps {
   member: {
     profileImageUrl: string;

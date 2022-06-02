@@ -1,6 +1,4 @@
-import { date } from 'yup';
-
-export interface UserDataType {
+export interface IUserInfoDataType {
   generation: number;
   gitEmail: string;
   hashTag: string;
@@ -15,17 +13,7 @@ export interface UserDataType {
   userID: string;
   name: string;
   email: string;
-}
-export interface MemberUrlsType {
-  id: number;
-  webUrl: string | undefined;
-}
-export interface UserDataExtendUrlType extends UserDataType {
-  memberPortfolioUrls: memberUrlsType[];
-}
-
-export interface UserEditDataType extends UserDataType {
-  githubUrl?: string;
-  blogUrl?: string;
-  resumeUrl?: string;
+  githubUrl: string;
+  blogUrl: string;
+  etcUrl: string;
 }
