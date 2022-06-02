@@ -174,7 +174,6 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
           />
           <PostInformation>
             <PostThumbnailWrapper>
-              <div>fsdfdsaf</div>
               <PostThumbnailInner onClick={() => input.current?.click()}>
                 {fileImage === '' ? (
                   <PostThumbnail />
@@ -182,6 +181,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
                   <PostFileImage src={postTempData.imagePath} />
                 )}
               </PostThumbnailInner>
+              <div>fsdfsdfsdfsfsdfsfsfs</div>
               <input
                 ref={input}
                 style={{ display: 'none' }}
