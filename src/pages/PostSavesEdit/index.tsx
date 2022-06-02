@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -41,7 +41,6 @@ import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import { PostPostDataType } from '../../types/postData';
 import hljs from 'highlight.js';
 import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
@@ -81,62 +80,52 @@ const PostSavesEdit = () => {
 
 const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postTempData } = useGetDetailPostTemp(postId);
-  const [postDetailData, setPostDetailData] = useState({
-    title: postTempData?.title,
-    content: postTempData?.content,
-    hashtag: postTempData?.postHashTags,
-    fileName: '',
+  const [postDetailData, setPostDetailData] = useState<PostPostDataType>({
     base64Thumbnail: '',
+    fileName: '',
+    title: '',
+    category: {
+      categoryName: '',
+    },
+    content: '',
+    postHashTags: '',
   });
   console.log(postTempData);
-  /*const [postData, setPostData] = useState<DetailPostDataType>();
-  postTempData !== undefined
-    ? setPostData(postTempData)
-    : console.log('로딩중');
-  console.log(postData);*/
+  console.log(`postId ${postId}`);
 
-  console.log(postTempData?.category.categoryName);
-  useEffect(() => {
-    setPostDetailData(() => {
-      return {
-        ...postDetailData,
-        title: postTempData?.title,
-        content: postTempData?.content,
-        hashtag: postTempData?.postHashTags,
-        fileName: '',
-        base64Thumbnail: '',
-      };
-    });
-    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
-      hljs.highlightElement(el as HTMLElement);
-    });
-  }, [postTempData]);
-
-  const editorRef: any = useRef();
-  const [file, setFile] = useState(null);
+  // 기본값 변수로 넣지 마세요
   const [fileImage, setFileImage] = useState(`${postTempData?.imagePath}`);
-  const input = useRef<HTMLInputElement>(null);
+  // 기본값 변수로 넣지 마세요
   const [category, setCategory] = useState(
     postTempData?.category.categoryName.toLowerCase(),
   );
-  /* const [postDetailData, setPostDetailData] = useState({
-    title: postTempData?.title,
-    content: postTempData?.content,
-    hashtag: postTempData?.postHashTags,
-    fileName: '',
-    base64Thumbnail: '',
-  });*/
+  const [file, setFile] = useState(null);
 
+  useLayoutEffect(() => {
+    postTempData &&
+      setPostDetailData({
+        ...postDetailData,
+        title: postTempData.title,
+        content: postTempData.content,
+        postHashTags: postTempData.postHashTags,
+        base64Thumbnail: '',
+      });
+    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+      hljs.highlightElement(el as HTMLElement);
+    });
+  }, [postId]);
+
+  const editorRef: any = useRef(null);
+  const input = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   const postEditData: PostPostDataType = {
     title: postDetailData.title,
     content: postDetailData.content,
-    category: { categoryName: category },
-    postHashTags: postDetailData.hashtag,
+    category: { categoryName: postDetailData.postHashTags },
+    postHashTags: postDetailData.postHashTags,
     fileName: postDetailData.fileName,
     base64Thumbnail: postDetailData.base64Thumbnail,
-    tmpStore: false,
   };
   const handleSubmit = async () => {
     await API.updatePostData(postEditData, postId)
@@ -149,7 +138,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
     console.log('제출완료');
   };
   const setEditorValue = () => {
-    const editorContent = editorRef.current.getInstance().getMarkdown();
+    const editorContent = editorRef.current?.getInstance().getMarkdown();
     setPostDetailData(() => {
       return { ...postDetailData, content: editorContent };
     });
@@ -186,12 +175,11 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
           <PostCategoryMenu onClick={setCategory} category={category} />
           <PostInformation>
             <PostThumbnailWrapper>
-              <div>fdsfs</div>
               <PostThumbnailInner onClick={() => input.current?.click()}>
                 {fileImage === '' ? (
                   <PostThumbnail />
                 ) : (
-                  <PostFileImage src={fileImage} />
+                  <PostFileImage src={postTempData.imagePath} />
                 )}
               </PostThumbnailInner>
               <input
@@ -206,7 +194,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
             <PostContentWrapper>
               <PostTitle
                 placeholder="제목을 입력하세요."
-                value={postDetailData.title}
+                value={postTempData.title}
                 onChange={(e) => {
                   setPostDetailData(() => {
                     return { ...postDetailData, title: e.target.value };
@@ -215,7 +203,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
               />
               <PostHashtag
                 placeholder={'#해시태그 ,로 구분하세요'}
-                value={postDetailData.hashtag}
+                value={postTempData.postHashTags}
                 onChange={(e) => {
                   setPostDetailData(() => {
                     return { ...postDetailData, hashtag: e.target.value };
@@ -231,7 +219,7 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
             previewStyle="vertical"
             height="627px"
             initialEditType="markdown"
-            initialValue={postDetailData.content}
+            initialValue={postTempData.content}
             ref={editorRef}
             onChange={setEditorValue}
             plugins={[
