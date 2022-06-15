@@ -15,7 +15,7 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-size: 18px;
+  font-size: ${(props) => props.theme.fontSize.body4};
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0em;
@@ -78,7 +78,7 @@ export const NickNameCheckButton = styled.button`
   top: 7px;
   width: 90px;
   height: 34px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize.body4};
   background-color: ${(props) => props.theme.color.grey500};
   border-radius: 17px;
   color: ${(props) => props.theme.color.grey50};
@@ -95,7 +95,7 @@ export const SignUpErrorMessage = styled.div`
   span {
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.fontSize.body5};
     line-height: 17px;
     letter-spacing: -0.03em;
   }

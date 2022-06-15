@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import axios from 'axios';
 
-import { IFormStructure, errorCheck } from '../SignUpForm/FormStructureInfo';
+import { IFormStructure, errorCheck } from '../../../types/SignUpFormType';
 import {
   SignUpInputWrapper,
   SignUpInputLabel,

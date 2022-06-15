@@ -15,10 +15,9 @@ const SearchResult = () => {
     const response = await axios.get(
       `https://gdsc-dju.com/api/v1/post/search/${params}`,
     );
+    const SearchResultPost = response.data.body.data;
     setPostData((prev) => {
-      return response.data.body.data.content
-        ? response.data.body.data.content
-        : [];
+      return SearchResultPost.content ?? [];
     });
   };
 

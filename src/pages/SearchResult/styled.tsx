@@ -6,10 +6,10 @@ export const SearchResultTitle = styled.div`
   align-items: end;
   margin: 6.25rem 0px 6.25rem;
   h2 {
-    font-size: 1.5rem;
+    font-size: ${(props) => props.theme.fontSize.body1};
   }
   h3 {
-    font-size: 1.25rem;
+    font-size: ${(props) => props.theme.fontSize.body3};
   }
 `;
 
@@ -28,7 +28,7 @@ export const NoResult = styled.div`
   width: 1200px;
   height: 400px;
   span {
-    font-size: 1.5rem;
+    font-size: ${(props) => props.theme.fontSize.body1};
     color: ${(props) => props.theme.color.grey400};
   }
 `;

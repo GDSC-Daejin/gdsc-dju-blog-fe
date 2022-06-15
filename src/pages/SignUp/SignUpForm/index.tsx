@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { SignUpFormStyle } from './styled';
 import SignUpInput from '../SignUpInput';
 import SignUpSelect from '../SignUpSelect';
-import { IFormStructure } from './FormStructureInfo';
+import { IFormStructure } from '../../../types/SignUpFormType';
 import { GDSCButton } from '../../../components/common/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router';

@@ -12,7 +12,7 @@ export const SignUpSelectBoxInner = styled.div`
   position: relative;
   width: 512px;
   height: 48px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.color.white};
 `;
 
 export const SignUpDefaultSelectBox = styled.input`
@@ -25,14 +25,13 @@ export const SignUpSelectBox = styled.ul<{
 }>`
   position: relative;
   width: 512px;
-  /* height: 48px; 288px; */
   height: ${(props) => (props.BoxOpen ? '288px' : '48px')};
+  box-sizing: border-box;
   z-index: 30;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.color.white};
   list-style-type: none;
   overflow: hidden;
   border: 1px solid ${(props) => props.theme.color.grey400};
-  box-sizing: border-box;
   border-radius: 10px;
   border: 1px solid
     ${(props) =>
@@ -57,7 +56,7 @@ export const SignUpSelectOption = styled.li<{ selected: boolean }>`
   color: ${(props) => props.theme.color.grey400};
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize.body4};
   line-height: 26px;
   background-color: ${(props) => props.selected && props.theme.color.grey100};
   &:hover {
@@ -103,7 +102,7 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize.body4};
   font-style: normal;
   font-weight: 500;
   line-height: 26px;
