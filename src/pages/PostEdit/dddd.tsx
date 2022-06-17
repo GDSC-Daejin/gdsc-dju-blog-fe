@@ -67,7 +67,6 @@ export const PostCategoryMenuData = [
     title: 'Common'.toLowerCase(),
   },
 ];
-
 const PostEdit = () => {
   const { postId } = useParams<'postId'>();
 
@@ -88,6 +87,15 @@ const PostEditContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData }: any = post.postTmpStore
     ? useGetDetailPostTemp(postId)
     : useGetDetailPost(postId);
+  console.log(post.postTmpStore);
+  /*
+  if (post.postTmpStore) {
+    const { postTempData } = useGetDetailPostTemp(postId);
+    return postTempData;
+  }
+  const postTempData: DetailPostDataType = postTempData;
+*/
+
   return (
     <>{postData && <PostDetailBox postId={postId} postData={postData} />}</>
   );
@@ -141,16 +149,6 @@ const PostDetailBox = ({
   const input = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  const isButtonBlock = () => {
-    if (
-      postData.category.categoryName == '' ||
-      postData.title == '' ||
-      postData.content.length < 10
-    ) {
-      return true;
-    } else return false;
-  };
-
   const postEditData = {
     title: postDetailData.title,
     content: postDetailData.content,
@@ -159,6 +157,15 @@ const PostDetailBox = ({
     fileName: postDetailData.fileName,
     base64Thumbnail: postDetailData.base64Thumbnail,
     tmpStore: postDetailData.tmpStore,
+  };
+  const isButtonBlock = () => {
+    if (
+      postData.category.categoryName == '' ||
+      postData.title == '' ||
+      postData.content.length < 10
+    ) {
+      return true;
+    } else return false;
   };
   const handleSubmit = async () => {
     if (!isButtonBlock()) {
@@ -173,7 +180,6 @@ const PostDetailBox = ({
       alert('카테고리와 제목을 입력해주세요');
     }
   };
-
   const [modal, setModal] = useRecoilState(modalState);
   const modalHandler = (modalType: string) => {
     if (modalType === 'uploadPost') {
@@ -186,9 +192,7 @@ const PostDetailBox = ({
       [MODAL_KEY.SHOW]: true,
       [MODAL_KEY.TYPE]: modalType,
     });
-    console.log(modal);
   };
-
   const setEditorValue = () => {
     const editorContent = editorRef.current?.getInstance().getMarkdown();
     console.log(editorContent);
@@ -196,7 +200,7 @@ const PostDetailBox = ({
       return { ...postDetailData, content: editorContent };
     });
   };
-  const handleChangeFile = (e: any) => {
+  const fileHandler = (e: any) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result?.toString();
@@ -227,7 +231,7 @@ const PostDetailBox = ({
       [e.target.name]: e.target.value,
     });
   };
-  console.log(postEditData);
+  console.log(postDetailData);
   return (
     <>
       <Modal onClick={handleSubmit} />
@@ -250,7 +254,7 @@ const PostDetailBox = ({
             type="file"
             name="imgFile"
             id="imgFile"
-            onChange={handleChangeFile}
+            onChange={fileHandler}
           />
         </PostThumbnailWrapper>
         <PostContentWrapper>
@@ -268,7 +272,12 @@ const PostDetailBox = ({
           />
         </PostContentWrapper>
         <PostGDSCButtonWrapper>
-          <GDSCButton text="임시글" />
+          <GDSCButton
+            text="임시글"
+            onClick={() => {
+              navigate(`/post/saves`);
+            }}
+          />
         </PostGDSCButtonWrapper>
       </PostInformation>
       {postDetailData.content.length > 0 && (

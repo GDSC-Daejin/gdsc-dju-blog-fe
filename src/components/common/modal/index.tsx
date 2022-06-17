@@ -47,6 +47,7 @@ const modalType = {
 };
 const Modal: React.FC<ModalProps> = ({ onClick }) => {
   const [modal, setModal] = useRecoilState(modalState);
+  console.log(onClick);
   return (
     <AnimatePresence>
       {modal.show && (

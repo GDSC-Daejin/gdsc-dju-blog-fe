@@ -38,6 +38,7 @@ export interface PostPostDataType {
   };
   content: string;
   postHashTags: string;
+  tmpStore: boolean;
 }
 export interface RowDetailPostListType {
   body: {
