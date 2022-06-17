@@ -47,6 +47,8 @@ import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
 import { useRecoilState } from 'recoil';
 import { postState } from '../../store/postEdit';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+import { MODAL_KEY, modalState } from '../../store/modal';
+import Modal from '../../components/common/modal';
 
 export const PostCategoryMenuData = [
   {
@@ -153,18 +155,43 @@ const PostDetailBox = ({
     postHashTags: postDetailData.postHashTags,
     fileName: postDetailData.fileName,
     base64Thumbnail: postDetailData.base64Thumbnail,
-    tmpStore: false,
+    tmpStore: true,
+  };
+  const isButtonBlock = () => {
+    if (
+      postData.category.categoryName == '' ||
+      postData.title == '' ||
+      postData.content.length < 10
+    ) {
+      return true;
+    } else return false;
   };
   const handleSubmit = async () => {
-    await API.updatePostData(postEditData, postId)
-      .then((res) => {
-        navigate(`/category/all`);
-      })
-      .catch((err) => {
-        alert('실패');
-      });
+    if (!isButtonBlock()) {
+      await API.postPostData(postEditData)
+        .then((res) => {
+          navigate(`/category/all`);
+        })
+        .catch((err) => {
+          alert('실패');
+        });
+    } else {
+      alert('카테고리와 제목을 입력해주세요');
+    }
   };
-  console.log(postId);
+  const [modal, setModal] = useRecoilState(modalState);
+  const modalHandler = (modalType: string) => {
+    if (modalType === 'uploadPost') {
+      setPostDetailData(() => {
+        return { ...postDetailData, tmpStore: false };
+      });
+    }
+    setModal({
+      ...modal,
+      [MODAL_KEY.SHOW]: true,
+      [MODAL_KEY.TYPE]: modalType,
+    });
+  };
   const setEditorValue = () => {
     const editorContent = editorRef.current?.getInstance().getMarkdown();
     console.log(editorContent);
@@ -206,6 +233,7 @@ const PostDetailBox = ({
   console.log(postDetailData);
   return (
     <>
+      <Modal onClick={handleSubmit} />
       <PostCategoryMenu
         onClick={categoryHandler}
         category={postDetailData.category.categoryName.toLowerCase()}
@@ -243,7 +271,12 @@ const PostDetailBox = ({
           />
         </PostContentWrapper>
         <PostGDSCButtonWrapper>
-          <GDSCButton text="임시글" />
+          <GDSCButton
+            text="임시글"
+            onClick={() => {
+              navigate(`/post/saves`);
+            }}
+          />
         </PostGDSCButtonWrapper>
       </PostInformation>
       {postDetailData.content.length > 0 && (
@@ -264,16 +297,29 @@ const PostDetailBox = ({
       )}
       <PostBottomButtonWrapper>
         <PostBottomButtonLWrapper>
-          <GDSCButton text="작성취소" />
+          <GDSCButton
+            text="작성취소"
+            onClick={() => {
+              modalHandler('savePost');
+            }}
+          />
         </PostBottomButtonLWrapper>
         <PostBottomButtonCWrapper>
-          <GDSCButton text="임시저장" />
+          <GDSCButton
+            text="임시저장"
+            onClick={() => {
+              handleSubmit();
+              alert('임시저장 되었습니다.');
+            }}
+            disable={isButtonBlock()}
+          />
         </PostBottomButtonCWrapper>
         <PostBottomButtonRWrapper>
           <GDSCButton
             text="업로드"
+            onClick={() => modalHandler('uploadPost')}
             color={'googleBlue'}
-            onClick={handleSubmit}
+            disable={isButtonBlock()}
           />
         </PostBottomButtonRWrapper>
       </PostBottomButtonWrapper>

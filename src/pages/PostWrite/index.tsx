@@ -119,8 +119,6 @@ const PostWrite = () => {
         })
         .catch((err) => {
           alert('실패');
-          console.log(err);
-          console.log(postData);
         });
     } else {
       alert('카테고리와 제목을 입력해주세요');
@@ -128,21 +126,24 @@ const PostWrite = () => {
   };
   const [modal, setModal] = useRecoilState(modalState);
   const modalHandler = (modalType: string) => {
+    if (modalType === 'uploadPost') {
+      setPostDetailData(() => {
+        return { ...postDetailData, tmpStore: false };
+      });
+    }
     setModal({
       ...modal,
       [MODAL_KEY.SHOW]: true,
       [MODAL_KEY.TYPE]: modalType,
     });
-    console.log(modal);
   };
-
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
     setPostDetailData(() => {
       return { ...postDetailData, content: editorContent };
     });
   };
-  const handleChangeFile = (e: any) => {
+  const fileHandler = (e: any) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result?.toString();
@@ -189,7 +190,7 @@ const PostWrite = () => {
                 type="file"
                 name="imgFile"
                 id="imgFile"
-                onChange={handleChangeFile}
+                onChange={fileHandler}
               />
             </PostThumbnailWrapper>
             <PostContentWrapper>
@@ -258,7 +259,7 @@ const PostWrite = () => {
                 text="업로드"
                 onClick={() => modalHandler('uploadPost')}
                 color={'googleBlue'}
-                disable={false}
+                disable={isButtonBlock()}
               />
             </PostBottomButtonRWrapper>
           </PostBottomButtonWrapper>
