@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 const POST = 'post';
 
 export const POST_KEY = {
@@ -10,4 +13,5 @@ export const PostState = {
 export const postState = atom<typeof PostState>({
   key: POST,
   default: PostState,
+  effects_UNSTABLE: [persistAtom],
 });

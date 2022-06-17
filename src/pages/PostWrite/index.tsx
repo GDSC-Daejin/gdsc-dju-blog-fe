@@ -90,7 +90,7 @@ const PostWrite = () => {
     hashtag: '',
     base64Thumbnail: '',
     fileName: '',
-    tmpStore: false,
+    tmpStore: true,
   });
   const navigate = useNavigate();
   const postData = {
@@ -112,9 +112,6 @@ const PostWrite = () => {
     } else return false;
   };
   const handleSubmit = async () => {
-    /*setPostDetailData(() => {
-      return { ...postDetailData, tmpStore: isTmpStore };
-    });*/
     if (!isButtonBlock()) {
       await API.postPostData(postData)
         .then((res) => {
@@ -247,7 +244,14 @@ const PostWrite = () => {
               />
             </PostBottomButtonLWrapper>
             <PostBottomButtonCWrapper>
-              <GDSCButton text="임시저장" disable={isButtonBlock()} />
+              <GDSCButton
+                text="임시저장"
+                onClick={() => {
+                  handleSubmit();
+                  alert('임시저장 되었습니다.');
+                }}
+                disable={isButtonBlock()}
+              />
             </PostBottomButtonCWrapper>
             <PostBottomButtonRWrapper>
               <GDSCButton

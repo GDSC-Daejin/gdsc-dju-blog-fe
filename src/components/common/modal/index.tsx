@@ -36,12 +36,12 @@ const modalType = {
   },
   savePost: {
     description: '정말 이대로 나가시겠어요? 작성해둔 글이 사라져요!',
-    leftButton: '임시저장',
+    leftButton: '아니요',
     rightButton: '삭제하기',
   },
   uploadPost: {
     description: '작성하신 글을 업로드 할까요?',
-    leftButton: '임시저장',
+    leftButton: '뒤로가기',
     rightButton: '업로드',
   },
 };

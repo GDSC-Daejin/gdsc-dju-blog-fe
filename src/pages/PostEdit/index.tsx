@@ -172,7 +172,7 @@ const PostDetailBox = ({
       return { ...postDetailData, content: editorContent };
     });
   };
-  const handleChangeFile = (e: any) => {
+  const fileHandler = (e: any) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result?.toString();
@@ -225,7 +225,7 @@ const PostDetailBox = ({
             type="file"
             name="imgFile"
             id="imgFile"
-            onChange={handleChangeFile}
+            onChange={fileHandler}
           />
         </PostThumbnailWrapper>
         <PostContentWrapper>
