@@ -6,13 +6,17 @@ export const MODAL_KEY = {
   TYPE: 'type',
 };
 export const ModalState = {
-  [MODAL_KEY.SHOW]: true,
+  [MODAL_KEY.SHOW]: false,
   [MODAL_KEY.TYPE]: 'login',
-  onClick: () => {
-    return 0;
-  },
+  onClick: null,
 };
-export const modalState = atom<typeof ModalState>({
+
+interface IModalState {
+  [p: string]: string | boolean | (() => void) | null;
+  onClick: (() => void) | null;
+}
+
+export const modalState = atom<IModalState>({
   key: MODAL,
   default: ModalState,
 });

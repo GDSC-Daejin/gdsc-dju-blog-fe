@@ -120,6 +120,7 @@ const PostWrite = () => {
       ...modal,
       [MODAL_KEY.SHOW]: true,
       [MODAL_KEY.TYPE]: modalType,
+      onClick: handleSubmit,
     });
   };
   const setEditorValue = () => {
@@ -155,7 +156,6 @@ const PostWrite = () => {
   };
   return (
     <>
-      <Modal onClick={handleSubmit} />
       <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
