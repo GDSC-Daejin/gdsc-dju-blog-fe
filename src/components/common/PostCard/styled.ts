@@ -12,22 +12,21 @@ export const PostCardWrapper = styled(motion.div)`
   box-shadow: 0 2px 12px rgba(25, 31, 40, 0.08);
   box-sizing: border-box;
 `;
-export const PostCardImage = styled.div<{ backgroundImage: string }>`
+export const PostCardImage = styled.img`
   //background: black;
-  width: 500px;
-  background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
-  background-size: cover;
-  background-position: left;
+  height: 150%;
+  position: relative;
 `;
 export const PostCardImageWrapper = styled.div`
   height: 100%;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  width: 50%;
   overflow: hidden;
   display: flex;
   position: absolute;
-  transition: all 0.3s ease-in-out;
+  align-items: center;
   justify-content: flex-start;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
 `;
 
 export const PostCardContentWrapper = styled(motion.div)<{ hover: boolean }>`
@@ -57,9 +56,10 @@ export const PostDate = styled.p`
 `;
 export const BookmarkWrapper = styled.div`
   position: absolute;
-  top: -3px;
-  right: 39px;
+  top: -4px;
+  right: 40px;
   transition: all 0.3s ease;
+  z-index: 3;
 `;
 export const PostTitle = styled.h4`
   font-size: ${(props) => props.theme.fontSize.h5};
