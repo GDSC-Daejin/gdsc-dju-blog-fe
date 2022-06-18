@@ -34,9 +34,9 @@ const PostCard: React.FC<DetailPostDataType> = ({
       onMouseLeave={() => setHover(false)}
     >
       <PostCardImageWrapper>
-        <PostCardImage src={MockPostImage} />
+        <PostCardImage backgroundImage={MockPostImage} />
       </PostCardImageWrapper>
-      <PostCardContentWrapper>
+      <PostCardContentWrapper hover={hover}>
         <BookmarkWrapper
           onClick={() => {
             setMarked(!marked);
@@ -53,7 +53,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
             ))}
           </PostHashTageSection>
         )}
-        <PostContent hover={hover}>{content}</PostContent>
+        <PostContent>{content}</PostContent>
       </PostCardContentWrapper>
     </PostCardWrapper>
   );
