@@ -97,7 +97,9 @@ const Modal: React.FC<ModalProps> = ({ onClick }) => {
                         .rightButton
                     }
                     color={'tossRed'}
-                    onClick={() => (onClick ? onClick() : undefined)}
+                    onClick={() =>
+                      modal.onClick ? modal.onClick() : undefined
+                    }
                   />
                 </ModalButtonWrapper>
               </ModalContentWrapper>

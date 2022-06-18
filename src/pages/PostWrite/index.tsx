@@ -66,8 +66,7 @@ export const PostCategoryMenuData = [
 const PostWrite = () => {
   const [file, setFile] = useState(null);
   const [fileImage, setFileImage] = useState('');
-  const input = useRef<HTMLInputElement>(null);
-  const editorRef: any = useRef();
+  const [modal, setModal] = useRecoilState(modalState);
   const [category, setCategory] = useState('');
   const [postDetailData, setPostDetailData] = useState({
     title: '',
@@ -77,6 +76,8 @@ const PostWrite = () => {
     fileName: '',
     tmpStore: true,
   });
+  const input = useRef<HTMLInputElement>(null);
+  const editorRef: any = useRef();
   const navigate = useNavigate();
   const postData = {
     base64Thumbnail: postDetailData.base64Thumbnail,
@@ -97,6 +98,7 @@ const PostWrite = () => {
     } else return false;
   };
   const handleSubmit = async () => {
+    console.log(postData);
     if (!isButtonBlock()) {
       await API.postPostData(postData)
         .then((res) => {
@@ -109,7 +111,7 @@ const PostWrite = () => {
       alert('카테고리와 제목을 입력해주세요');
     }
   };
-  const [modal, setModal] = useRecoilState(modalState);
+
   const modalHandler = (modalType: string) => {
     if (modalType === 'uploadPost') {
       setPostDetailData(() => {
