@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
   PostBottomButtonRWrapper,
   PostBottomButtonWrapper,
   PostContentWrapper,
+  PostFileImage,
   PostGDSCButtonWrapper,
   PostHashtag,
   PostInformation,
+  PostThumbnailInner,
   PostThumbnailWrapper,
   PostTitle,
-  PostThumbnailInner,
-  PostFileImage,
 } from './styled';
 import {
   ContainerInner,
@@ -42,8 +42,7 @@ import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { MODAL_KEY, modalState } from '../../store/modal';
-import Modal from '../../components/common/modal';
+import { modalState, ModalType } from '../../store/modal';
 
 export const PostCategoryMenuData = [
   {
@@ -120,8 +119,8 @@ const PostWrite = () => {
     }
     setModal({
       ...modal,
-      [MODAL_KEY.SHOW]: true,
-      [MODAL_KEY.TYPE]: modalType,
+      isOpen: true,
+      type: modalType as ModalType,
       onClick: handleSubmit,
     });
   };
