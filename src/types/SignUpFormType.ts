@@ -27,5 +27,5 @@ export interface IFormStructure {
 }
 
 export const errorCheck = (error: string | undefined) => {
-  return error !== undefined ? true : false;
+  return error !== undefined;
 };
