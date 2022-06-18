@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { GDSCButton } from '../Button';
 import { useRecoilState } from 'recoil';
@@ -47,6 +47,19 @@ const modalType = {
 };
 const Modal: React.FC<ModalProps> = ({ onClick }) => {
   const [modal, setModal] = useRecoilState(modalState);
+  useEffect(() => {
+    document.body.style.cssText = `
+    position: fixed; 
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`;
+
+    if (modal.show === false) {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    }
+  }, [modal]);
   console.log(onClick);
   return (
     <AnimatePresence>
