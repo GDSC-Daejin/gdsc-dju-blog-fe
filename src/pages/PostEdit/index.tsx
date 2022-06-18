@@ -186,7 +186,6 @@ const PostDetailBox = ({
       [MODAL_KEY.SHOW]: true,
       [MODAL_KEY.TYPE]: modalType,
     });
-    console.log(modal);
   };
 
   const setEditorValue = () => {
@@ -227,7 +226,6 @@ const PostDetailBox = ({
       [e.target.name]: e.target.value,
     });
   };
-  console.log(postEditData);
   return (
     <>
       <Modal onClick={handleSubmit} />

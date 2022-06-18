@@ -64,21 +64,6 @@ export const PostCategoryMenuData = [
 ];
 
 const PostWrite = () => {
-  /*if (window.history && history.pushState) {
-    addEventListener('load', function () {
-      history.pushState(null, '', null);
-
-      addEventListener('popstate', function () {
-        const stayOnPage = confirm('페이지를 벗어나시겠습니까?');
-
-        if (!stayOnPage) {
-          history.pushState(null, '', null);
-        } else {
-          history.back();
-        }
-      });
-    });
-  }*/
   const [file, setFile] = useState(null);
   const [fileImage, setFileImage] = useState('');
   const input = useRef<HTMLInputElement>(null);

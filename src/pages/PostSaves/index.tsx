@@ -34,7 +34,6 @@ const PostSaves = () => {
     page - 1,
     6,
   );
-  console.log(userPostTempData);
   const navigate = useNavigate();
 
   useEffect(() => {
