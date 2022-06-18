@@ -6,7 +6,7 @@ export const MODAL_KEY = {
   TYPE: 'type',
 };
 export const ModalState = {
-  [MODAL_KEY.SHOW]: false,
+  [MODAL_KEY.SHOW]: true,
   [MODAL_KEY.TYPE]: 'login',
   onClick: () => {
     return 0;
