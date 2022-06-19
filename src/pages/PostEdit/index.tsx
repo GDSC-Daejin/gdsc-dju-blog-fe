@@ -47,7 +47,7 @@ import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
 import { useRecoilState } from 'recoil';
 import { postState } from '../../store/postEdit';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-import { MODAL_KEY, modalState } from '../../store/modal';
+import { modalState, ModalType } from '../../store/modal';
 import Modal from '../../components/common/modal';
 
 export const PostCategoryMenuData = [
@@ -183,8 +183,8 @@ const PostDetailBox = ({
     }
     setModal({
       ...modal,
-      [MODAL_KEY.SHOW]: true,
-      [MODAL_KEY.TYPE]: modalType,
+      isOpen: true,
+      type: modalType as ModalType,
     });
   };
 
