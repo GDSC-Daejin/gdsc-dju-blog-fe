@@ -34,7 +34,7 @@ const Alert = () => {
       });
       clearTimeout(alertTimer);
     }, 4000);
-  }, []);
+  }, [alert.alertHandle]);
   const alertStatusColor = {
     success: '#55af7a',
     error: '#f44336',
@@ -45,7 +45,6 @@ const Alert = () => {
     error: ErrorCircle,
     warning: ErrorCircle,
   };
-  const data = true;
   return (
     <AnimatePresence>
       <AlertWrapper>

@@ -33,7 +33,7 @@ export const AlertInner = styled(motion.div)`
   border-radius: 10px;
   border: 1px solid ${(props) => props.theme.color.grey300};
   box-shadow: inset 0 0 0 1px ${(props) => props.theme.color.grey300};
-  padding: 7px 30px;
+  padding: 7px 20px;
   top: 100px;
   right: 7%;
   flex: 1;

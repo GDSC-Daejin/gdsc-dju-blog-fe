@@ -123,6 +123,16 @@ const PostWrite = () => {
       });
       await API.postPostData(detailPostData);
       await navigate(`/category/all`);
+      setModal({
+        ...modal,
+        isOpen: false,
+      });
+      await setAlert({
+        ...alert,
+        alertStatus: 'success',
+        alertHandle: true,
+        alertMessage: '업로드에 성공했어요',
+      });
     } catch (error) {
       setAlert({
         ...alert,
@@ -338,7 +348,6 @@ const PostWrite = () => {
               />
             </>
           )}
-
           <BottomPostButtonBox
             postCancel={() => submitHandler('backBlock')}
             postSubmit={() => submitHandler('uploadPost')}
