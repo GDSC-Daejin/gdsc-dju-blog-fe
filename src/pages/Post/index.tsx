@@ -69,11 +69,8 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(postData);
-  console.log(location);
   const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
-  console.log(userInfoData);
   const isUserEqual = location.pathname.includes(`${userInfoData?.nickname}`);
 
   useEffect(() => {
@@ -86,7 +83,6 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       API.deletePostData(postId);
       navigate(-1);
-      console.log(postId);
     }
   };
   const [post, setPost] = useRecoilState(postState);

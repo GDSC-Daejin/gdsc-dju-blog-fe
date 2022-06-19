@@ -87,6 +87,7 @@ const PostWrite = () => {
   const editorRef: any = useRef();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const { postData } = useGetDetailPost(id);
 
   const isButtonBlock =
     !detailPostData.category.categoryName ||
@@ -182,7 +183,7 @@ const PostWrite = () => {
       }
     }
   };
-  const { postData } = useGetDetailPost(id);
+
   useLayoutEffect(() => {
     id &&
       postData &&
