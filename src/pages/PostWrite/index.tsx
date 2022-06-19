@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -155,6 +155,28 @@ const PostWrite = () => {
       }
     }
   };
+  useEffect(() => {
+    const preventGoBack = () => {
+      // change start
+      history.pushState(null, '', location.href);
+      // change end
+      console.log('prevent go back!');
+      setModal({
+        ...modal,
+        isOpen: true,
+        type: 'savePost',
+        onClick: () => {
+          navigate(`/category/all`);
+          setModal({ ...modal, isOpen: false });
+        },
+      });
+    };
+
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', preventGoBack);
+
+    return () => window.removeEventListener('popstate', preventGoBack);
+  }, []);
   return (
     <>
       <NavigationBlock />
