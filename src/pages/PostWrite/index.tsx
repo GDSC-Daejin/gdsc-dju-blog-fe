@@ -12,6 +12,7 @@ import {
   PostThumbnailInner,
   PostThumbnailWrapper,
   PostTitle,
+  ThumbnailText,
 } from './styled';
 import {
   ContainerInner,
@@ -43,6 +44,7 @@ import API from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { modalState, ModalType } from '../../store/modal';
+import Thumbnail from '../../components/common/Thumbnail';
 
 export const PostCategoryMenuData = [
   {
@@ -64,7 +66,7 @@ export const PostCategoryMenuData = [
 
 const PostWrite = () => {
   const [file, setFile] = useState(null);
-  const [fileImage, setFileImage] = useState('');
+  const [fileImage, setFileImage] = useState<string | null>(null);
   const [modal, setModal] = useRecoilState(modalState);
   const [category, setCategory] = useState('');
   const [postDetailData, setPostDetailData] = useState({
@@ -182,10 +184,18 @@ const PostWrite = () => {
           <PostInformation>
             <PostThumbnailWrapper>
               <PostThumbnailInner onClick={() => input.current?.click()}>
-                {fileImage === '' ? (
-                  <PostThumbnail />
+                <ThumbnailText>
+                  {fileImage
+                    ? '썸네일을 수정하려면 다시 눌러주세요!'
+                    : '썸네일은 4:3비율이 가장 어울려요!'}
+                </ThumbnailText>
+                {fileImage ? (
+                  <>
+                    <PostThumbnail />
+                    <PostFileImage src={fileImage} />
+                  </>
                 ) : (
-                  <PostFileImage src={fileImage} />
+                  <PostThumbnail />
                 )}
               </PostThumbnailInner>
               <input

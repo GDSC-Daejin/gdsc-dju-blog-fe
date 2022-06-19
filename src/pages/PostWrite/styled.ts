@@ -73,6 +73,14 @@ export const PostBottomButtonRWrapper = styled.div`
 `;
 export const PostThumbnailInner = styled.div`
   cursor: pointer;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  height: 100px;
   @media screen and (max-width: 530px) {
     & svg {
       width: 100px;
@@ -84,8 +92,16 @@ export const PostFileImage = styled.img`
   width: 170px;
   height: 100px;
   border-radius: 10px;
+  z-index: -1;
   @media screen and (max-width: 530px) {
     width: 100px;
     height: 58px;
   }
+`;
+export const ThumbnailText = styled.div`
+  text-align: center;
+  position: absolute;
+  top: 50px;
+  font-size: ${({ theme }) => theme.fontSize.body3};
+  color: ${({ theme }) => theme.color.white};
 `;
