@@ -49,7 +49,6 @@ export const SideBar = () => {
   const menuHandler = () => {
     const menuState = menu.appMenu;
     setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
-    console.log(menu);
   };
 
   return (
@@ -70,9 +69,6 @@ export const SideBar = () => {
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
-      <MenuToggleIconWrapper onClick={() => menuHandler()}>
-        <MenuToggleIcon active="closed" />
-      </MenuToggleIconWrapper>
       <AnimatePresence>
         {menu.appMenu && (
           <GrayBox

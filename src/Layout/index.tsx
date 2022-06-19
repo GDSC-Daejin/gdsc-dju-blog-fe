@@ -16,7 +16,6 @@ import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Post from '../pages/Post';
 import PostEdit from '../pages/PostEdit';
-import ScrollTop from '../Utils/ScrollTop';
 import Modal from '../components/common/modal';
 import Category from '../pages/Category';
 import PostSaves from '../pages/PostSaves';

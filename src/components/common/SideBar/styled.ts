@@ -27,16 +27,7 @@ export const SideBarInner = styled(motion.aside)`
 export const MenuToggleIconWrapper = styled.div`
   display: flex;
   border: none;
-  position: absolute;
-  top: 24px;
-  left: 55px;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    top: 17px;
-    left: 20px;
-    & svg {
-      width: 20px;
-      height: 20px;
-    }
+  @media (max-width: ${({ theme }) => theme.windowSize.tablet}px) {
   }
 `;
 /*export const SideBarBtnInner = styled.div`
