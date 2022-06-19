@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -41,10 +41,14 @@ import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
 import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { modalState, ModalType } from '../../store/modal';
-import Thumbnail from '../../components/common/Thumbnail';
+import { PostPostDataType } from '../../types/postData';
+import { alertState } from '../../store/alert';
+import { postState } from '../../store/postEdit';
+import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
 
 export const PostCategoryMenuData = [
   {
@@ -68,11 +72,13 @@ const PostWrite = () => {
   const [file, setFile] = useState(null);
   const [fileImage, setFileImage] = useState<string | null>(null);
   const [modal, setModal] = useRecoilState(modalState);
-  const [category, setCategory] = useState('');
-  const [postDetailData, setPostDetailData] = useState({
+  const [alert, setAlert] = useRecoilState(alertState);
+  const [post, setPost] = useRecoilState(postState);
+  const [detailPostData, setDetailPostData] = useState<PostPostDataType>({
     title: '',
     content: '',
-    hashtag: '',
+    category: { categoryName: '' },
+    postHashTags: '',
     base64Thumbnail: '',
     fileName: '',
     tmpStore: true,
@@ -80,52 +86,75 @@ const PostWrite = () => {
   const input = useRef<HTMLInputElement>(null);
   const editorRef: any = useRef();
   const navigate = useNavigate();
-  const postData = {
-    base64Thumbnail: postDetailData.base64Thumbnail,
-    title: postDetailData.title,
-    content: postDetailData.content,
-    category: { categoryName: category },
-    postHashTags: postDetailData.hashtag,
-    fileName: postDetailData.fileName,
-    tmpStore: postDetailData.tmpStore,
-  };
+  const { id } = useParams<{ id: string }>();
+
   const isButtonBlock =
-    postData.category.categoryName == '' ||
-    postData.title == '' ||
-    postData.content.length < 10;
+    !detailPostData.category.categoryName ||
+    !detailPostData.title ||
+    detailPostData.content.length < 10;
+
+  const handleDraft = async () => {
+    try {
+      setDetailPostData(() => {
+        return { ...detailPostData, tmpStore: true };
+      });
+      await API.postPostData(detailPostData);
+      await navigate(`/category/all`);
+    } catch (e) {
+      setAlert({
+        ...alert,
+        alertHandle: true,
+        alertMessage: '임시 저장에 실패했어요',
+      });
+    }
+  };
 
   const handleSubmit = async () => {
-    console.log(postData);
-    if (!isButtonBlock) {
-      await API.postPostData(postData)
-        .then((res) => {
-          navigate(`/category/all`);
-        })
-        .catch((err) => {
-          alert('실패');
-        });
-    } else {
-      alert('카테고리와 제목을 입력해주세요');
+    try {
+      setDetailPostData(() => {
+        return { ...detailPostData, tmpStore: false };
+      });
+      await API.postPostData(detailPostData);
+      await navigate(`/category/all`);
+    } catch (error) {
+      setAlert({
+        ...alert,
+        alertHandle: true,
+        alertMessage: '포스트 업로드에 실패했어요.',
+      });
     }
   };
 
   const modalHandler = (modalType: string) => {
     if (modalType === 'uploadPost') {
-      setPostDetailData(() => {
-        return { ...postDetailData, tmpStore: false };
+      setDetailPostData(() => {
+        return { ...detailPostData, tmpStore: false };
+      });
+      setModal({
+        ...modal,
+        isOpen: true,
+        type: modalType as ModalType,
+        onClick: handleSubmit,
+      });
+    } else {
+      setModal({
+        ...modal,
+        isOpen: true,
+        type: modalType as ModalType,
+        onClick: handleDraft,
       });
     }
-    setModal({
-      ...modal,
-      isOpen: true,
-      type: modalType as ModalType,
-      onClick: handleSubmit,
+  };
+  const setCategory = (category: string) => {
+    setDetailPostData(() => {
+      return { ...detailPostData, category: { categoryName: category } };
     });
   };
+
   const setEditorValue = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
-    setPostDetailData(() => {
-      return { ...postDetailData, content: editorContent };
+    setDetailPostData(() => {
+      return { ...detailPostData, content: editorContent };
     });
   };
   const fileHandler = (e: any) => {
@@ -133,7 +162,7 @@ const PostWrite = () => {
     reader.onloadend = () => {
       const base64 = reader.result?.toString();
       if (base64) {
-        setPostDetailData((prev) => {
+        setDetailPostData((prev) => {
           return { ...prev, base64Thumbnail: base64.split(',')[1] };
         });
       }
@@ -142,7 +171,7 @@ const PostWrite = () => {
       const selectFile = input.current.files[0];
       if (selectFile) {
         setFileImage(URL.createObjectURL(selectFile));
-        setPostDetailData((prev) => {
+        setDetailPostData((prev) => {
           return {
             ...prev,
             fileName: selectFile.name,
@@ -153,12 +182,27 @@ const PostWrite = () => {
       }
     }
   };
+  const { postData } = useGetDetailPost(id);
+  useLayoutEffect(() => {
+    id &&
+      postData &&
+      setDetailPostData({
+        ...detailPostData,
+        title: postData.title,
+        category: {
+          categoryName: postData.category.categoryName.toLowerCase(),
+        },
+        content: postData.content,
+        postHashTags: postData.postHashTags,
+      });
+    postData && setFileImage(postData.imagePath);
+  }, [postData, id]);
+
   useEffect(() => {
     const preventGoBack = () => {
       // change start
       history.pushState(null, '', location.href);
       // change end
-      console.log('prevent go back!');
       setModal({
         ...modal,
         isOpen: true,
@@ -180,7 +224,10 @@ const PostWrite = () => {
       <NavigationBlock />
       <LayoutContainer>
         <ContainerInner>
-          <PostCategoryMenu onClick={setCategory} category={category} />
+          <PostCategoryMenu
+            onClick={setCategory}
+            category={detailPostData.category.categoryName}
+          />
           <PostInformation>
             <PostThumbnailWrapper>
               <PostThumbnailInner onClick={() => input.current?.click()}>
@@ -207,21 +254,23 @@ const PostWrite = () => {
                 onChange={fileHandler}
               />
             </PostThumbnailWrapper>
+
             <PostContentWrapper>
               <PostTitle
                 placeholder="제목을 입력하세요."
-                value={postData.title}
+                value={detailPostData.title}
                 onChange={(e) => {
-                  setPostDetailData(() => {
-                    return { ...postDetailData, title: e.target.value };
+                  setDetailPostData(() => {
+                    return { ...detailPostData, title: e.target.value };
                   });
                 }}
               />
               <PostHashtag
                 placeholder={'#해시태그 ,로 구분하세요'}
+                value={detailPostData.postHashTags}
                 onChange={(e) => {
-                  setPostDetailData(() => {
-                    return { ...postDetailData, hashtag: e.target.value };
+                  setDetailPostData(() => {
+                    return { ...detailPostData, hashtag: e.target.value };
                   });
                 }}
               />
@@ -235,20 +284,44 @@ const PostWrite = () => {
               }}
             />
           </PostGDSCButtonWrapper>
-          <Editor
-            previewStyle="vertical"
-            height="627px"
-            initialEditType="markdown"
-            initialValue="helloWorld"
-            ref={editorRef}
-            onChange={setEditorValue}
-            plugins={[
-              colorSyntax,
-              [codeSyntaxHighlight, { highlighter: Prism }],
-              chart,
-              tableMergedCell,
-            ]}
-          />
+          {id ? (
+            <>
+              {detailPostData.content.length > 0 && (
+                <Editor
+                  previewStyle="vertical"
+                  height="627px"
+                  initialEditType="markdown"
+                  initialValue={detailPostData.content}
+                  ref={editorRef}
+                  onChange={setEditorValue}
+                  plugins={[
+                    colorSyntax,
+                    [codeSyntaxHighlight, { highlighter: Prism }],
+                    chart,
+                    tableMergedCell,
+                  ]}
+                />
+              )}
+            </>
+          ) : (
+            <>
+              <Editor
+                previewStyle="vertical"
+                height="627px"
+                initialEditType="markdown"
+                initialValue={detailPostData.content}
+                ref={editorRef}
+                onChange={setEditorValue}
+                plugins={[
+                  colorSyntax,
+                  [codeSyntaxHighlight, { highlighter: Prism }],
+                  chart,
+                  tableMergedCell,
+                ]}
+              />
+            </>
+          )}
+
           <BottomPostButtonBox
             postCancel={() => modalHandler('savePost')}
             postSubmit={() => modalHandler('uploadPost')}

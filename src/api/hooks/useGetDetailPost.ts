@@ -5,8 +5,11 @@ async function getDetailPost(postId: string) {
   return res.data;
 }
 
-export function useGetDetailPost(postId: string) {
-  const { data: postData } = useSWR([postId, `/post/${postId}`], getDetailPost);
+export function useGetDetailPost(postId: string | undefined) {
+  const { data: postData } = useSWR(
+    postId && [postId, `/post/${postId}`],
+    getDetailPost,
+  );
   return {
     postData: postData && postData.body.data,
   };
