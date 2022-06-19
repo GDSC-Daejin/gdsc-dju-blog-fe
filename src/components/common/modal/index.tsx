@@ -36,7 +36,7 @@ const modalType: IModalType = {
     rightButton: '로그인',
     rightColor: 'googleBlue',
   },
-  savePost: {
+  backBlock: {
     description: '정말 이대로 나가시겠어요? 작성해둔 글이 사라져요!',
     leftButton: '아니요',
     rightButton: '삭제하기',
@@ -64,7 +64,6 @@ const Modal: React.FC<ModalProps> = ({ onClick }) => {
       window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     }
   }, [modal]);
-  console.log(onClick);
   return (
     <AnimatePresence>
       {modal.isOpen && (

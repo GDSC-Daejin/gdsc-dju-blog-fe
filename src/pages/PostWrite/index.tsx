@@ -48,7 +48,7 @@ import { PostPostDataType } from '../../types/postData';
 import { alertState } from '../../store/alert';
 import { postState } from '../../store/postEdit';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-import { useGetDetailPostTemp } from '../../api/hooks/useGetDetailPostTemp';
+import hljs from 'highlight.js';
 
 export const PostCategoryMenuData = [
   {
@@ -73,7 +73,6 @@ const PostWrite = () => {
   const [fileImage, setFileImage] = useState<string | null>(null);
   const [modal, setModal] = useRecoilState(modalState);
   const [alert, setAlert] = useRecoilState(alertState);
-  const [post, setPost] = useRecoilState(postState);
   const [detailPostData, setDetailPostData] = useState<PostPostDataType>({
     title: '',
     content: '',
@@ -100,10 +99,17 @@ const PostWrite = () => {
         return { ...detailPostData, tmpStore: true };
       });
       await API.postPostData(detailPostData);
+      await setAlert({
+        ...alert,
+        alertStatus: 'success',
+        alertHandle: true,
+        alertMessage: '임시 저장에 성공했어요',
+      });
       await navigate(`/category/all`);
     } catch (e) {
       setAlert({
         ...alert,
+        alertStatus: 'error',
         alertHandle: true,
         alertMessage: '임시 저장에 실패했어요',
       });
@@ -126,23 +132,30 @@ const PostWrite = () => {
     }
   };
 
-  const modalHandler = (modalType: string) => {
-    if (modalType === 'uploadPost') {
+  const submitHandler = (type: string) => {
+    //포스트 하는거
+    if (type === 'uploadPost') {
+      console.log(111);
       setDetailPostData(() => {
         return { ...detailPostData, tmpStore: false };
       });
       setModal({
         ...modal,
         isOpen: true,
-        type: modalType as ModalType,
+        type: type as ModalType,
         onClick: handleSubmit,
       });
-    } else {
+    }
+    // 임시저장
+    if (type === 'draft') {
+      handleDraft();
+    }
+    if (type === 'backBlock') {
       setModal({
         ...modal,
         isOpen: true,
-        type: modalType as ModalType,
-        onClick: handleDraft,
+        type: type as ModalType,
+        onClick: () => navigate(`/category/all`),
       });
     }
   };
@@ -207,19 +220,22 @@ const PostWrite = () => {
       setModal({
         ...modal,
         isOpen: true,
-        type: 'savePost',
+        type: 'backBlock',
         onClick: () => {
           navigate(`/category/all`);
           setModal({ ...modal, isOpen: false });
         },
       });
     };
-
     history.pushState(null, '', location.href);
     window.addEventListener('popstate', preventGoBack);
-
     return () => window.removeEventListener('popstate', preventGoBack);
   }, []);
+  useEffect(() => {
+    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+      hljs.highlightElement(el as HTMLElement);
+    });
+  }, [detailPostData]);
   return (
     <>
       <NavigationBlock />
@@ -271,7 +287,7 @@ const PostWrite = () => {
                 value={detailPostData.postHashTags}
                 onChange={(e) => {
                   setDetailPostData(() => {
-                    return { ...detailPostData, hashtag: e.target.value };
+                    return { ...detailPostData, postHashTags: e.target.value };
                   });
                 }}
               />
@@ -324,10 +340,10 @@ const PostWrite = () => {
           )}
 
           <BottomPostButtonBox
-            postCancel={() => modalHandler('savePost')}
-            postSubmit={() => modalHandler('uploadPost')}
+            postCancel={() => submitHandler('backBlock')}
+            postSubmit={() => submitHandler('uploadPost')}
             disable={isButtonBlock}
-            draft={handleSubmit}
+            draft={() => submitHandler('draft')}
           />
         </ContainerInner>
       </LayoutContainer>
@@ -351,7 +367,7 @@ const BottomPostButtonBox: React.FC<{
       <PostBottomButtonRWrapper>
         <GDSCButton
           text="업로드"
-          onClick={() => !disable && postSubmit}
+          onClick={() => !disable && postSubmit()}
           color={'googleBlue'}
           disable={disable}
         />

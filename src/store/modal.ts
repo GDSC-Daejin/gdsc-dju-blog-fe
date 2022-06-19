@@ -8,7 +8,7 @@ export const ModalState: IModalState = {
   onClick: null,
 };
 
-export type ModalType = 'login' | 'savePost' | 'uploadPost';
+export type ModalType = 'login' | 'backBlock' | 'uploadPost';
 
 export type IModalState = {
   onClick: null | (() => void);

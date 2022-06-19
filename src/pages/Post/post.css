@@ -246,7 +246,7 @@
     display: inline-block;
     padding: 3px 5px;
     font-family: 'D2Coding ligature', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 10px;
     color: #24292f;
     vertical-align: middle;
@@ -342,7 +342,7 @@
     margin-top: 0;
     margin-bottom: 0;
     font-family: 'D2Coding ligature', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     word-wrap: normal;
 }
 
@@ -842,7 +842,6 @@
     overflow: auto;
     font-size: 95%;
     line-height: 1.45;
-    background-color: #f6f8fa;
     border-radius: 6px;
 }
 
@@ -966,4 +965,39 @@ code[class*="language-"], pre[class*="language-"]{
 }
 .toastui-editor-contents .highlight pre, .toastui-editor-contents pre{
     border-radius: 15px;
+}
+.toastui-editor-md-heading1 > span {
+    font-size: 24px;
+}
+.toastui-editor-md-heading2 > span {
+    font-size: 22px;
+}.toastui-editor-md-heading3 > span {
+    font-size: 20px;
+}
+
+.toastui-editor-md-marked-text, .toastui-editor-md-code, .toastui-editor-md-code-block {
+    font-size: 16px
+}
+.toastui-editor-md-list-item{
+    font-size: 16px
+}
+.toastui-editor-md-table{
+    font-size: 16px
+}
+thead > tr > th{
+    font-size: 14px
+}tbody > tr > td{
+    font-size: 14px
+}
+ .toastui-editor-md-strong, .toastui-editor-md-delimiter{
+    font-size: 16px
+ }
+ .toastui-editor-contents ul > li::before{
+     margin-top: 12px;
+ }
+.toastui-editor-md-block-quote{
+    font-size: 16px
+}
+.ProseMirror > div {
+    font-size: 16px
 }

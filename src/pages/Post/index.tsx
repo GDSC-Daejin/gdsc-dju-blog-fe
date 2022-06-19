@@ -9,6 +9,7 @@ import {
   Author,
   AuthorImage,
   AuthorWrapper,
+  BookmarkWrapper,
   Category,
   CategoryWrapper,
   ContentWrapper,
@@ -17,13 +18,12 @@ import {
   HashTageSection,
   PositionCircle,
   PostAuthorWrapper,
-  PostHead,
-  PostTitle,
-  PostIconWrapper,
-  BookmarkWrapper,
-  PostTrashIconWrapper,
   PostEditIconWrapper,
+  PostHead,
+  PostIconWrapper,
+  PostTitle,
   PostTitleWrapper,
+  PostTrashIconWrapper,
 } from './styled';
 import { AuthorProps } from '../../types/postData';
 import { dateFilter } from '../../Utils/dateFilter';
@@ -37,8 +37,6 @@ import PostEditIcon from '../../assets/PostEditIcon';
 import Bookmark from '../../assets/Bookmark';
 import { useLocation } from 'react-router';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
-import { useRecoilState } from 'recoil';
-import { POST_KEY, postState } from '../../store/postEdit';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -85,7 +83,7 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
       navigate(-1);
     }
   };
-  const [post, setPost] = useRecoilState(postState);
+
   return (
     <>
       {postData && (
@@ -110,7 +108,6 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
                       : undefined
                   }*/
                   onClick={() => {
-                    setPost({ ...post, [POST_KEY.POST_TMPSTORE]: false });
                     navigate(`/post/write/${postId}`);
                   }}
                 >
