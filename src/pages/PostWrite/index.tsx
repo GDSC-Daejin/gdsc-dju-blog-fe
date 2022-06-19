@@ -87,18 +87,14 @@ const PostWrite = () => {
     fileName: postDetailData.fileName,
     tmpStore: postDetailData.tmpStore,
   };
-  const isButtonBlock = () => {
-    if (
-      postData.category.categoryName == '' ||
-      postData.title == '' ||
-      postData.content.length < 10
-    ) {
-      return true;
-    } else return false;
-  };
+  const isButtonBlock =
+    postData.category.categoryName == '' ||
+    postData.title == '' ||
+    postData.content.length < 10;
+
   const handleSubmit = async () => {
     console.log(postData);
-    if (!isButtonBlock()) {
+    if (!isButtonBlock) {
       await API.postPostData(postData)
         .then((res) => {
           navigate(`/category/all`);
@@ -243,37 +239,40 @@ const PostWrite = () => {
               tableMergedCell,
             ]}
           />
-          <PostBottomButtonWrapper>
-            <PostBottomButtonLWrapper>
-              <GDSCButton
-                text="작성취소"
-                onClick={() => {
-                  modalHandler('savePost');
-                }}
-              />
-            </PostBottomButtonLWrapper>
-            <PostBottomButtonCWrapper>
-              <GDSCButton
-                text="임시저장"
-                onClick={() => {
-                  handleSubmit();
-                  alert('임시저장 되었습니다.');
-                }}
-                disable={isButtonBlock()}
-              />
-            </PostBottomButtonCWrapper>
-            <PostBottomButtonRWrapper>
-              <GDSCButton
-                text="업로드"
-                onClick={() => modalHandler('uploadPost')}
-                color={'googleBlue'}
-                disable={isButtonBlock()}
-              />
-            </PostBottomButtonRWrapper>
-          </PostBottomButtonWrapper>
+          <BottomPostButtonBox
+            postCancel={() => modalHandler('savePost')}
+            postSubmit={() => modalHandler('uploadPost')}
+            disable={isButtonBlock}
+            draft={handleSubmit}
+          />
         </ContainerInner>
       </LayoutContainer>
     </>
+  );
+};
+const BottomPostButtonBox: React.FC<{
+  postCancel: () => void;
+  postSubmit: () => void;
+  draft: () => void;
+  disable: boolean;
+}> = ({ postCancel, postSubmit, draft, disable }) => {
+  return (
+    <PostBottomButtonWrapper>
+      <PostBottomButtonLWrapper>
+        <GDSCButton text="작성취소" onClick={postCancel} />
+      </PostBottomButtonLWrapper>
+      <PostBottomButtonCWrapper>
+        <GDSCButton text="임시저장" onClick={draft} disable={disable} />
+      </PostBottomButtonCWrapper>
+      <PostBottomButtonRWrapper>
+        <GDSCButton
+          text="업로드"
+          onClick={() => !disable && postSubmit}
+          color={'googleBlue'}
+          disable={disable}
+        />
+      </PostBottomButtonRWrapper>
+    </PostBottomButtonWrapper>
   );
 };
 
