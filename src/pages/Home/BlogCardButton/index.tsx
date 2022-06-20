@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BlogCardButton } from './styled';
 
 interface IBlogCardButton {
@@ -12,7 +12,7 @@ export const BlogCardScrollButton = ({
 }: IBlogCardButton) => {
   const [buttonDisabled, setButtonDisabled] = useState(-1);
   const ButtonNumber: number[] = [0, 1, 2];
-  const SectionScrollWidth = 1497;
+  const SectionScrollWidth = 1907;
   const scrollMove = (buttonNumber: number) => {
     setButtonDisabled(buttonNumber);
     scrollRef.current?.scrollTo({
@@ -26,10 +26,10 @@ export const BlogCardScrollButton = ({
   };
   const ScrollBtnActive = (BtnActiveNumber: number) => {
     if (BtnActiveNumber === 0) {
-      return scrollX >= 0 && scrollX < 498 ? true : false;
+      return scrollX >= 0 && scrollX < 634 ? true : false;
     } else if (BtnActiveNumber === 1) {
-      return scrollX >= 499 && scrollX < 997 ? true : false;
-    } else if (BtnActiveNumber === 2) return scrollX >= 998 && true;
+      return scrollX >= 634 && scrollX < 1268 ? true : false;
+    } else if (BtnActiveNumber === 2) return scrollX >= 1268 && true;
     else return false;
   };
 
