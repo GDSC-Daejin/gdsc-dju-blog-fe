@@ -96,11 +96,14 @@ export class Api {
     return axios.post(`${this.API}/api/member/v2/post`, postData, this.Header);
   };
   getRedirectURL() {
-    const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
-    if (process.env.NODE_ENV !== 'development') {
-      //리다이렉트 url 변경
-    }
-    return `${this.API}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
+    const OAUTH2_REDIRECT_URI_Dev = 'http://localhost:3000/oauth2/redirect';
+    const OAUTH2_REDIRECT_URI = 'https://gdsc-dju-blog.web.app/';
+
+    return `${this.API}/oauth2/authorization/google?redirect_uri=${
+      process.env.NODE_ENV === 'development'
+        ? OAUTH2_REDIRECT_URI_Dev
+        : OAUTH2_REDIRECT_URI
+    }`;
   }
 }
 export default new Api();

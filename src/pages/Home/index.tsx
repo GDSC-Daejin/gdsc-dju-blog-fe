@@ -55,18 +55,6 @@ function Home() {
     setCategory(category);
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await axios.get('https://gdsc-dju.com/api/guest/v1/me', {
-  //       headers: {
-  //         Authorization: `Bearer ${Cookies.get('token')}`,
-  //       },
-  //     });
-  //     console.log(result);
-  //   };
-  //   fetchData();
-  // }, []);
-
   return (
     <>
       <HomeLayoutContainer>
