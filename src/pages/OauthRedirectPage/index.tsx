@@ -5,10 +5,10 @@ import GoogleLoader from '../../components/common/GoogleLoader';
 import Cookies from 'js-cookie';
 import api from '../../api';
 import { useCookies } from 'react-cookie';
-import { UserDataType } from '../../types/userDataType';
+import { IUserDataType } from '../../types/userDataType';
 
 type SelectedUserType = Pick<
-  UserDataType,
+  IUserDataType,
   'role' | 'username' | 'userId' | 'memberInfo'
 >;
 export default function OauthRedirectPage() {

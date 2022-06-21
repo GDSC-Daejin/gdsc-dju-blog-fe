@@ -81,7 +81,7 @@ export const PostContent = styled(motion.p)`
   color: ${(props) => props.theme.color.grey600};
   box-sizing: border-box;
   transition: all 0.3s ease;
-  height: 67.2px;
+  height: 68px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;

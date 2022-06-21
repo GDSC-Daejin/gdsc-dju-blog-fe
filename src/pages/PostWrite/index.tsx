@@ -46,9 +46,9 @@ import { useRecoilState } from 'recoil';
 import { modalState, ModalType } from '../../store/modal';
 import { PostPostDataType } from '../../types/postData';
 import { alertState } from '../../store/alert';
-import { postState } from '../../store/postEdit';
-import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import hljs from 'highlight.js';
+import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
+import { mutate, useSWRConfig } from 'swr';
 
 export const PostCategoryMenuData = [
   {
@@ -73,6 +73,7 @@ const PostWrite = () => {
   const [fileImage, setFileImage] = useState<string | null>(null);
   const [modal, setModal] = useRecoilState(modalState);
   const [alert, setAlert] = useRecoilState(alertState);
+  const { mutate } = useSWRConfig();
   const [detailPostData, setDetailPostData] = useState<PostPostDataType>({
     title: '',
     content: '',
@@ -86,7 +87,7 @@ const PostWrite = () => {
   const editorRef: any = useRef();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { postData } = useGetDetailPost(id);
+  const { postData } = useGetMyPostData(id);
 
   const isButtonBlock =
     !detailPostData.category.categoryName ||
@@ -145,7 +146,6 @@ const PostWrite = () => {
   const submitHandler = (type: string) => {
     //포스트 하는거
     if (type === 'uploadPost') {
-      console.log(111);
       setDetailPostData(() => {
         return { ...detailPostData, tmpStore: false };
       });
@@ -376,7 +376,9 @@ const BottomPostButtonBox: React.FC<{
       <PostBottomButtonRWrapper>
         <GDSCButton
           text="업로드"
-          onClick={() => !disable && postSubmit()}
+          onClick={() => {
+            !disable && postSubmit();
+          }}
           color={'googleBlue'}
           disable={disable}
         />

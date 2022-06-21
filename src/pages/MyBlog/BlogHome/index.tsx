@@ -90,7 +90,7 @@ const BlogHome = () => {
         page: page.toString(),
       })}`,
     });
-
+  console.log(userInfoData);
   return (
     <>
       <LayoutContainer>

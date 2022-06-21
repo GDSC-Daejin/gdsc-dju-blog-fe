@@ -1,25 +1,24 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Navigation from "../components/common/Navigation";
-import GoogleLoader from "../components/common/GoogleLoader";
-import { useRecoilState } from "recoil";
-import { loaderState } from "../store/loader";
-import { AnimatePresence } from "framer-motion";
-import PrivateRoute from "../components/PrivateRoute";
-import Footer from "../components/Footer";
-import SideBar from "../components/common/SideBar";
-import Category from "../pages/Category";
-import SearchResult from "../pages/SearchResult";
-import MyBlog from "../pages/MyBlog";
-import Home from "../pages/Home";
-import Post from "../pages/Post";
-import Modal from "../components/common/modal";
-import PostSaves from "../pages/PostSaves";
-import Alert from "../components/common/Alert";
-import SignUp from "../pages/SignUp";
-import OauthRedirectPage from "../pages/OauthRedirectPage";
-import PostWrite from "../pages/PostWrite";
-
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Navigation from '../components/common/Navigation';
+import GoogleLoader from '../components/common/GoogleLoader';
+import { useRecoilState } from 'recoil';
+import { loaderState } from '../store/loader';
+import { AnimatePresence } from 'framer-motion';
+import PrivateRoute from '../components/PrivateRoute';
+import Footer from '../components/Footer';
+import SideBar from '../components/common/SideBar';
+import Category from '../pages/Category';
+import SearchResult from '../pages/SearchResult';
+import MyBlog from '../pages/MyBlog';
+import Home from '../pages/Home';
+import Post from '../pages/Post';
+import Modal from '../components/common/modal';
+import PostSaves from '../pages/PostSaves';
+import Alert from '../components/common/Alert';
+import SignUp from '../pages/SignUp';
+import OauthRedirectPage from '../pages/OauthRedirectPage';
+import PostWrite from '../pages/PostWrite';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);

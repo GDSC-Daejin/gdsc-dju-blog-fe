@@ -43,7 +43,7 @@ export interface IUserInfoDataType {
   hashTag: string;
   introduce: string;
   major: string;
-  memberInfoId: number;
+  userInfoId: number;
   birthday: string;
   nickname: string;
   phoneNumber: string;
@@ -52,7 +52,9 @@ export interface IUserInfoDataType {
   userID: string;
   name: string;
   email: string;
-  memberPortfolioUrls: IUserUrlsType[];
+  githubUrl: string;
+  blogUrl: string;
+  etcUrl: string;
 }
 
 export interface IUserUrlsType {

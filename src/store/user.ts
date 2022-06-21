@@ -1,9 +1,10 @@
 import { atom } from 'recoil';
-import { ILoginUserData, IUserInfoDataType } from '../types/userData';
+import { recoilPersist } from 'recoil-persist';
 
+const { persistAtom } = recoilPersist();
 const USER = 'user';
 
-export const MemberInfoState = {
+export const UserState = {
   name: '',
   nickname: '',
   introduce: '',
@@ -20,22 +21,8 @@ export const MemberInfoState = {
   blogUrl: '',
   etcUrl: '',
 };
-
-const UserState: ILoginUserData = {
-  id: 0,
-  userId: '',
-  username: '',
-  email: '',
-  emailVerifiedYn: '',
-  profileImageUrl: '',
-  role: 'GUEST' as const,
-  providerType: '',
-  memberInfo: MemberInfoState,
-  modifiedAt: '',
-  uploadDate: '',
-};
-
-export const userState = atom<ILoginUserData | null>({
+export const userState = atom({
   key: USER,
-  default: null,
+  default: UserState,
+  effects_UNSTABLE: [persistAtom],
 });

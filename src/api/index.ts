@@ -80,7 +80,16 @@ export class Api {
     return axios.get<RowDetailPostListType>(`${this.API}/api/v1/${params}`);
   };
   getPostData = (postId: string) => {
-    return axios.get<RowPostDataType>(`${this.API}/api/v1/post/${postId}`);
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/v1/post/${postId}`,
+      this.Header,
+    );
+  };
+  getMyPostData = (postId: string) => {
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/member/v1/myPost/${postId}`,
+      this.Header,
+    );
   };
 
   getUserScrapData = () => {
