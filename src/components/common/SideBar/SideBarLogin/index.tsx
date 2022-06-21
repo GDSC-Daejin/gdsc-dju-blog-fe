@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ILoginUserData } from '../../../../types/userData';
 import {
   BottomButtonWrapper,
   LogoutButtonWrapper,
@@ -18,11 +19,25 @@ import { userData } from '../../../../api/Mocks/userData';
 import { useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../../store/menu';
+import { useCookies } from 'react-cookie';
 import { alertState } from '../../../../store/alert';
 
 const SideBarLogin = () => {
   const navigate = useNavigate();
   const [menu, setMenu] = useRecoilState(menuState);
+  const [UserCookies, setUserCookie, removeUserCookie] = useCookies(['user']);
+  const [TokenCookies, setTokenCookie, removeTokenCookie] = useCookies([
+    'token',
+  ]);
+
+  const handleLogout = () => {
+    removeUserCookie('user', {
+      path: '/',
+    });
+    removeTokenCookie('token', {
+      path: '/',
+    });
+  };
 
   return (
     <>
@@ -30,10 +45,10 @@ const SideBarLogin = () => {
         <ProfileImage image={MockProfile} position="frontend" />
       </ProfileImageWrapper>
       <ProfileInformation>
-        <ProfileName>{userData.memberInfo.nickname}</ProfileName>
-        <ProfileJobPosition>
-          {userData.memberInfo.positionType}
-        </ProfileJobPosition>
+        <ProfileName></ProfileName>
+        {/* {user.memberInfo.nickname ?? user.username} */}
+        <ProfileJobPosition></ProfileJobPosition>
+        {/* {user.memberInfo.positionType} */}
         <SettingIconWrapper>
           <SettingIcon />
         </SettingIconWrapper>
@@ -58,7 +73,7 @@ const SideBarLogin = () => {
           />
         </WrittingButtonWrapper>
         <LogoutButtonWrapper>
-          <GDSCButton text="로그아웃" />
+          <GDSCButton text="로그아웃" onClick={handleLogout} />
         </LogoutButtonWrapper>
       </BottomButtonWrapper>
     </>

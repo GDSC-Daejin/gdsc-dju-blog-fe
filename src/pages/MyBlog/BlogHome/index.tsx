@@ -49,8 +49,9 @@ const BlogHome = () => {
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
+  const token = localStorage.getItem('token') ?? '';
 
-  const { userData } = useGetUserData();
+  const { userData } = useGetUserData(token);
   const userInfoData = userData?.memberInfo;
   const { userPostData } = useGetUserPostListData(category, page - 1, 6);
 
@@ -125,15 +126,13 @@ const BlogHome = () => {
                     </SettingIconWrapper>
                   </BlogNameWrapper>
                   <IntroduceText>{userInfoData.introduce}</IntroduceText>
-                  {userData.hashTag && (
-                    <HashTageSection>
-                      {hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
-                        <HashTageWrapper key={id}>
-                          <HashTageDark text={tag} />
-                        </HashTageWrapper>
-                      ))}
-                    </HashTageSection>
-                  )}
+                  {/* <HashTageSection>
+                    {hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
+                      <HashTageWrapper key={id}>
+                        <HashTageDark text={tag} />
+                      </HashTageWrapper>
+                    ))}
+                  </HashTageSection> */}
                 </ProfileDetailWrapper>
               </ProfileWrapper>
               <TopMenuWrapper>

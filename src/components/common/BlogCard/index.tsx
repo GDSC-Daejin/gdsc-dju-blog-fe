@@ -50,16 +50,16 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
   }, [postData]);
 
-  const setBookmarkClip = () => {
-    if (nowLogin)
-      setMarked((prev) => {
-        return !prev;
-      });
-    else {
-      alert('로그인 후 이용가능합니다');
-      navigate('/', { replace: false });
-    }
-  };
+  // const setBookmarkClip = () => {
+  //   if (nowLogin)
+  //     setMarked((prev) => {
+  //       return !prev;
+  //     });
+  //   else {
+  //     alert('로그인 후 이용가능합니다');
+  //     navigate('/', { replace: false });
+  //   }
+  // };
 
   const removeImageInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
@@ -69,9 +69,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     <AnimateSharedLayout>
       <BlogCardInner onClick={linkToPost}>
         {/* 북마크 */}
-        <BookMarkWrapper onClick={setBookmarkClip}>
+        {/* <BookMarkWrapper onClick={setBookmarkClip}>
           <Bookmark marked={marked} />
-        </BookMarkWrapper>
+        </BookMarkWrapper> */}
         {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}
