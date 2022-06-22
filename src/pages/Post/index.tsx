@@ -71,19 +71,17 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const userInfoData = userData?.memberInfo;
   const isUserEqual = location.pathname.includes(`${userInfoData?.nickname}`);
 
-  useEffect(() => {
-    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
-      hljs.highlightElement(el as HTMLElement);
-    });
-  }, [postData]);
-
   const handleRemove = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       API.deletePostData(postId);
       navigate(-1);
     }
   };
-
+  useEffect(() => {
+    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+      hljs.highlightElement(el as HTMLElement);
+    });
+  }, [postData]);
   return (
     <>
       {postData && (
