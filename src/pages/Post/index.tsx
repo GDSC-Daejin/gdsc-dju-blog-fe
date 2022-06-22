@@ -71,6 +71,10 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const userInfoData = userData?.memberInfo;
   const isUserEqual = location.pathname.includes(`${userInfoData?.nickname}`);
 
+  document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+    hljs.highlightElement(el as HTMLElement);
+  });
+
   const handleRemove = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       API.deletePostData(postId);
@@ -149,11 +153,11 @@ const AuthorBox: React.FC<AuthorBoxProps> = ({
         <Author marginRight={10}>{nickname}</Author>
         <Date>{dateFilter(uploadDate)}</Date>
       </AuthorWrapper>
-      {/* <HashTageSection>
+      <HashTageSection>
         {hashTageSpreader(postHashTags).map((tage) => (
           <HashTageDark text={tage} key={tage} size={'L'} />
         ))}
-      </HashTageSection> */}
+      </HashTageSection>
     </>
   );
 };
