@@ -34,7 +34,7 @@ const SideBarCategory = () => {
             key={id}
             onClick={() => {
               navigate(`/category/${data.subtitle}`);
-              setMenu({ ...menu, [MENU_KEY.APPMENU]: false });
+              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
             }}
           >
             <SideCategoryCircleWrapper

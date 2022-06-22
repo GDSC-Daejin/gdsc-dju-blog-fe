@@ -55,11 +55,9 @@ const Post = () => {
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
 
-  useEffect(() => {
-    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
-      hljs.highlightElement(el as HTMLElement);
-    });
-  }, [postData]);
+  document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
+    hljs.highlightElement(el as HTMLElement);
+  });
 
   return (
     <>

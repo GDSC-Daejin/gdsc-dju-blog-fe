@@ -12,7 +12,8 @@ export const PostThumbnailWrapper = styled.div`
 export const PostContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  min-width: 250px;
+  flex-grow: 1;
   padding-left: 30px;
   margin-right: 20px;
 `;
@@ -48,6 +49,8 @@ export const PostBottomButtonWrapper = styled.div`
 export const PostBottomButtonLWrapper = styled.div`
   display: flex;
   padding-right: 12px;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    display: none;
 `;
 export const PostBottomButtonCWrapper = styled.div`
   display: flex;

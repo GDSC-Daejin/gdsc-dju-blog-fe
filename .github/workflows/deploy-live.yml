@@ -7,11 +7,10 @@ on:
 
   pull_request:
     branches:
-      - main
+      - master
     types: [ closed ]
 jobs:
   Deploy_Live_channel:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment:
       name: Production
@@ -19,7 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: 'yarn && yarn build'
-        if: github.event.pull_request.merged == 'true'
         env:
           CI: ""
       - uses: FirebaseExtended/action-hosting-deploy@v0
