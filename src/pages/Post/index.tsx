@@ -81,11 +81,6 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
       navigate(-1);
     }
   };
-  useEffect(() => {
-    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
-      hljs.highlightElement(el as HTMLElement);
-    });
-  }, [postData]);
   return (
     <>
       {postData && (
