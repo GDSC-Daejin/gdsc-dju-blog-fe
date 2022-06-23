@@ -24,7 +24,7 @@ export const HomeLayoutContainer = styled.div`
 `;
 export const HomePhraseWrapper = styled(motion.div)`
   height: 180px;
-  margin-top: 50px;
+  margin-top: 120px;
   margin-bottom: 30px;
 `;
 export const CardSectionWrapper = styled.div`

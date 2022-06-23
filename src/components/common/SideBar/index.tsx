@@ -17,6 +17,7 @@ import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
 import { useCookies } from 'react-cookie';
 import api from '../../../api';
+import { useGetUserData } from '../../../api/hooks/useGetUserData';
 
 export const sideBarMenuData = [
   {
@@ -48,11 +49,12 @@ export const sideBarMenuData = [
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
   const [cookies] = useCookies(['user']);
+  const [token, setTokenCookie, removeTokenCookie] = useCookies(['token']);
   const menuHandler = () => {
     const menuState = menu.appMenu;
     setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
   };
-
+  const { userData } = useGetUserData(token.token);
   return (
     <>
       <SideBarWrapper
@@ -66,7 +68,7 @@ export const SideBar = () => {
         <SideBarInner>
           <SideBarDesign>
             {cookies.user ? (
-              <SideBarLogin />
+              <SideBarLogin userData={userData} />
             ) : (
               <SideBarLogout loginURL={api.getRedirectURL()} />
             )}

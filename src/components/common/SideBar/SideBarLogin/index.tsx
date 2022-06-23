@@ -22,16 +22,18 @@ import { MENU_KEY, menuState } from '../../../../store/menu';
 import { useCookies } from 'react-cookie';
 import { alertState } from '../../../../store/alert';
 import { useGetUserData } from '../../../../api/hooks/useGetUserData';
+import { IUserDataType } from '../../../../types/userDataType';
 
-const SideBarLogin = () => {
+const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
+  userData,
+}) => {
   const navigate = useNavigate();
   const [menu, setMenu] = useRecoilState(menuState);
   const [UserCookies, setUserCookie, removeUserCookie] = useCookies(['user']);
   const [TokenCookies, setTokenCookie, removeTokenCookie] = useCookies([
     'token',
   ]);
-
-  const { userData } = useGetUserData(TokenCookies.token);
+  const postBlock = userData?.role === 'GUEST';
 
   const handleLogout = () => {
     removeUserCookie('user', {
@@ -40,12 +42,13 @@ const SideBarLogin = () => {
     removeTokenCookie('token', {
       path: '/',
     });
+    window.location.href = 'https://gdsc-dju-blog.web.app/';
   };
-  console.log(userData?.memberInfo);
+  console.log(userData);
 
   return (
     <>
-      {userData && userData.memberInfo && (
+      {userData && (
         <>
           <ProfileImageWrapper>
             <ProfileImage
@@ -80,9 +83,11 @@ const SideBarLogin = () => {
             <WrittingButtonWrapper>
               <GDSCButton
                 text="글쓰기"
+                disable={postBlock}
                 onClick={() => {
-                  navigate(`/post/write`);
-                  setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+                  !postBlock && navigate(`/post/write`);
+                  !postBlock &&
+                    setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
                 }}
               />
             </WrittingButtonWrapper>
