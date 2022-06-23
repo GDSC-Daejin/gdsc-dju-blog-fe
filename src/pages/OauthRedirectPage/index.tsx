@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 import GoogleLoader from '../../components/common/GoogleLoader';
-import Cookies from 'js-cookie';
 import api from '../../api';
 import { useCookies } from 'react-cookie';
 import { IUserDataType } from '../../types/userDataType';
@@ -41,6 +40,7 @@ export default function OauthRedirectPage() {
         userId: data.userId,
         memberInfo: data.memberInfo,
       });
+      api.setToken(token);
     })();
     navigate('/', { replace: true });
   }, []);

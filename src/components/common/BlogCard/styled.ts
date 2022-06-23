@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 
@@ -91,7 +91,7 @@ export const BlogCardAuthorImage = styled.img`
   height: 18px;
   width: 18px;
 `;
-export const BlogCardPostText = styled(motion.article)`
+export const BlogCardPostText = styled(motion.div)`
   position: absolute;
   transform: translate(-50%, 0%);
   top: 53px;

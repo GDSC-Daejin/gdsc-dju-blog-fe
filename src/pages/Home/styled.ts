@@ -48,6 +48,7 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   height: 100%;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
+  overflow-y: hidden;
   div:last-child {
     margin-right: 0;
   }

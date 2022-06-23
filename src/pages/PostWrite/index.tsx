@@ -88,7 +88,6 @@ const PostWrite = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { postData } = useGetMyPostData(id);
-  console.log(postData);
   const isButtonBlock =
     !detailPostData.category.categoryName ||
     !detailPostData.title ||
@@ -137,6 +136,7 @@ const PostWrite = () => {
         alertMessage: '포스트 업로드에 실패했어요.',
       });
     }
+    console.log(detailPostData);
   };
 
   const submitHandler = (type: string) => {
