@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from '../components/common/Navigation';
 import GoogleLoader from '../components/common/GoogleLoader';
@@ -14,10 +14,11 @@ import MyBlog from '../pages/MyBlog';
 import Home from '../pages/Home';
 import Post from '../pages/Post';
 import Modal from '../components/common/modal';
+import PostSaves from '../pages/PostSaves';
 import Alert from '../components/common/Alert';
 import SignUp from '../pages/SignUp';
 import OauthRedirectPage from '../pages/OauthRedirectPage';
-import DeskNavigation from '../components/common/Navigation/DeskNavigation';
+import PostWrite from '../pages/PostWrite';
 
 const Layout = () => {
   const [loader] = useRecoilState(loaderState);
@@ -35,11 +36,15 @@ const Layout = () => {
         <Route path={'/*'} element={<Home />} />
         <Route path={'/:user_name/*'} element={<MyBlog />} />
         <Route path={'/post'} element={<Post />} />
+        <Route path={'/post/write'} element={<PostWrite />} />
+        <Route path={'/post/edit/:id'} element={<PostWrite />} />
+        <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />
         <Route path={'/signup'} element={<SignUp />} />
         <Route path={'/oauth2/redirect'} element={<OauthRedirectPage />} />
         <Route path={'/search'} element={<SearchResult />} />
+        <Route path={'/post/saves'} element={<PostSaves />} />
         <Route
           path={'/admin'}
           element={

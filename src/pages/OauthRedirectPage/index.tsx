@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 import GoogleLoader from '../../components/common/GoogleLoader';
-import Cookies from 'js-cookie';
 import api from '../../api';
 import { useCookies } from 'react-cookie';
-import { UserDataType } from '../../types/userDataType';
+import { IUserDataType } from '../../types/userDataType';
 
 type SelectedUserType = Pick<
-  UserDataType,
+  IUserDataType,
   'role' | 'username' | 'userId' | 'memberInfo'
 >;
 export default function OauthRedirectPage() {
@@ -41,8 +40,12 @@ export default function OauthRedirectPage() {
         userId: data.userId,
         memberInfo: data.memberInfo,
       });
+      api.setToken(token);
     })();
-    navigate('/', { replace: true });
+
+    process.env.NODE_ENV === 'development'
+      ? (window.location.href = 'http://localhost:3000/')
+      : (window.location.href = 'https://gdsc-dju-blog.web.app/');
   }, []);
 
   return <GoogleLoader />;

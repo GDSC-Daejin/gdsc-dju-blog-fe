@@ -17,6 +17,7 @@ import HomePhrase from '../../components/common/HomePhrase';
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
+import api from '../../api';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -54,6 +55,7 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
+  console.log(api.getToken());
 
   return (
     <>
@@ -65,8 +67,9 @@ function Home() {
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
-      {postListData && (
-        <CardSectionWrapper>
+
+      <CardSectionWrapper>
+        {postListData && (
           <CardSection
             isDrag={isDrag}
             ref={scrollRef}
@@ -74,10 +77,6 @@ function Home() {
             onMouseMove={isDrag ? onDragMove : undefined}
             onMouseUp={onDragEnd}
             onMouseLeave={onDragEnd}
-            // variants={listAnimate}
-            // initial={'start'}
-            // animate={'end'}
-            // variants={blogCardAnimate}
           >
             {postListData.content.map((postData) => (
               <BlogCardWrapper key={postData.postId}>
@@ -94,8 +93,8 @@ function Home() {
               </div>
             </BlogCardWrapper>
           </CardSection>
-        </CardSectionWrapper>
-      )}
+        )}
+      </CardSectionWrapper>
       <HomeLayoutContainer>
         <ButtonWrapper>
           <BlogCardScrollButton scrollX={x} scrollRef={scrollRef} />

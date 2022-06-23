@@ -12,6 +12,8 @@ export const PostCategoryText = styled(motion.div)<{ active?: boolean }>`
       color: ${(props) => props.theme.color.grey900};
     `}
   padding: 2px 0;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+   font-size: ${(props) => props.theme.fontSize.body2};
 `;
 export const PostCategoryTextWrapper = styled(motion.div)`
   cursor: pointer;
@@ -27,6 +29,8 @@ export const PostCategoryMenuWrapper = styled(motion.div)`
   flex-direction: row;
   width: 378px;
   justify-content: space-between;
+  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+    width: 320px;
 `;
 export const PostCategoryCircleWrapper = styled(motion.div)`
   position: absolute;
@@ -42,11 +46,4 @@ export const PostCategoryCircle = styled.div<{ color: string }>`
   height: 8px;
   border-radius: 50%;
   background: ${(props) => props.color};
-`;
-export const PostGDSCLogoWrapper = styled.div`
-  position: absolute;
-  left: -10px;
-  & svg {
-    width: 19px;
-  }
 `;

@@ -24,7 +24,7 @@ export const HomeLayoutContainer = styled.div`
 `;
 export const HomePhraseWrapper = styled(motion.div)`
   height: 180px;
-  margin-top: 50px;
+  margin-top: 120px;
   margin-bottom: 30px;
 `;
 export const CardSectionWrapper = styled.div`
@@ -48,6 +48,7 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   height: 100%;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
+  overflow-y: hidden;
   div:last-child {
     margin-right: 0;
   }
@@ -60,6 +61,7 @@ export const BlogCardWrapper = styled(motion.div)`
   width: 248px;
   height: 294px;
   margin: 0 15px;
+  transform: translateX(calc((100vw - 1200px) / 2 + 20px));
   :first-child {
     margin-left: 0;
   }

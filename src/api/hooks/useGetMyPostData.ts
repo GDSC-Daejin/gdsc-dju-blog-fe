@@ -1,14 +1,14 @@
 import useSWR from 'swr';
 import API from '../index';
-async function getDetailPost(postId: string) {
-  const res = await API.getPostData(postId);
+async function getMyPostData(postId: string) {
+  const res = await API.getMyPostData(postId);
   return res.data;
 }
 
-export function useGetDetailPost(postId: string | undefined) {
+export function useGetMyPostData(postId: string | undefined) {
   const { data: postData } = useSWR(
     postId && [postId, `/post/${postId}`],
-    getDetailPost,
+    getMyPostData,
   );
   return {
     postData: postData && postData.body.data,

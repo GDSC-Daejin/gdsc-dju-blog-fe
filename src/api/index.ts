@@ -70,7 +70,7 @@ export class Api {
       ...Header,
     });
   };
-  getUserPostListData = (params: string) => {
+  getMyPostsData = (params: string) => {
     return axios.get<RowDetailPostListType>(
       `${this.API}/api/member/v1/${params}`,
       this.Header,
@@ -80,7 +80,16 @@ export class Api {
     return axios.get<RowDetailPostListType>(`${this.API}/api/v1/${params}`);
   };
   getPostData = (postId: string) => {
-    return axios.get<RowPostDataType>(`${this.API}/api/v1/post/${postId}`);
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/v1/post/${postId}`,
+      this.Header,
+    );
+  };
+  getMyPostData = (postId: string) => {
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/member/v1/myPost/${postId}`,
+      this.Header,
+    );
   };
 
   getUserScrapData = () => {
@@ -105,5 +114,41 @@ export class Api {
         : OAUTH2_REDIRECT_URI
     }`;
   }
+  deletePostData = (postId: string) => {
+    return axios.delete(
+      `${this.API}/api/member/v2/post/${postId}`,
+      this.Header,
+    );
+  };
+  updatePostData = (postData: PostPostDataType, postId: string) => {
+    return axios.put(
+      `${this.API}/api/member/v2/post/${postId}`,
+      postData,
+      this.Header,
+    );
+  };
+  getUserPostListTempData = (params: string) => {
+    return axios.get<RowDetailPostListType>(
+      `${this.API}/api/member/v1/${params}`,
+      this.Header,
+    );
+  };
+
+  getPostTempData = (postId: string) => {
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/member/v1/myPost/temp/post/${postId}`,
+      this.Header,
+    );
+  };
+  setToken = (token: string) => {
+    this.Header.headers.Authorization = token;
+  };
+  getToken = (): string => {
+    return this.Header.headers.Authorization;
+  };
+  getAPI = (): string => {
+    return this.API;
+  };
 }
+
 export default new Api();

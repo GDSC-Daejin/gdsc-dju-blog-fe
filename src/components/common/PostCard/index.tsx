@@ -10,7 +10,7 @@ import {
   PostHashTageSection,
   PostTitle,
 } from './styled';
-import MockPostImage from '../../../assets/MockPostImage.png';
+import MockPostImage from '../../../assets/MockPostImage.jpg';
 import { HashTageDark } from '../HashTage';
 import Bookmark from '../../../assets/Bookmark';
 
@@ -33,17 +33,17 @@ const PostCard: React.FC<DetailPostDataType> = ({
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
+      <BookmarkWrapper
+        onClick={() => {
+          setMarked(!marked);
+        }}
+      >
+        <Bookmark marked={marked} />
+      </BookmarkWrapper>
       <PostCardImageWrapper>
         <PostCardImage src={MockPostImage} />
       </PostCardImageWrapper>
-      <PostCardContentWrapper>
-        <BookmarkWrapper
-          onClick={() => {
-            setMarked(!marked);
-          }}
-        >
-          <Bookmark marked={marked} />
-        </BookmarkWrapper>
+      <PostCardContentWrapper hover={hover}>
         <PostDate>{dateFilter(category.uploadDate)}</PostDate>
         <PostTitle>{title}</PostTitle>
         {postHashTags && (
@@ -53,7 +53,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
             ))}
           </PostHashTageSection>
         )}
-        <PostContent hover={hover}>{content}</PostContent>
+        <PostContent>{content}</PostContent>
       </PostCardContentWrapper>
     </PostCardWrapper>
   );

@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Vector = () => {
+const Vector: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   return (
     <svg
+      onClick={onClick}
       width="15"
       height="16"
       viewBox="0 0 15 16"
