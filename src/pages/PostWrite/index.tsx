@@ -46,9 +46,7 @@ import { useRecoilState } from 'recoil';
 import { modalState, ModalType } from '../../store/modal';
 import { PostPostDataType } from '../../types/postData';
 import { alertState } from '../../store/alert';
-import hljs from 'highlight.js';
 import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
-import { mutate, useSWRConfig } from 'swr';
 
 export const PostCategoryMenuData = [
   {
@@ -72,8 +70,8 @@ const PostWrite = () => {
   const [file, setFile] = useState(null);
   const [fileImage, setFileImage] = useState<string | null>(null);
   const [modal, setModal] = useRecoilState(modalState);
+  const [temp, setTemp] = useState<undefined | boolean>(undefined);
   const [alert, setAlert] = useRecoilState(alertState);
-  const { mutate } = useSWRConfig();
   const [detailPostData, setDetailPostData] = useState<PostPostDataType>({
     base64Thumbnail: '',
     fileName: '',
@@ -94,53 +92,49 @@ const PostWrite = () => {
     !detailPostData.category.categoryName ||
     !detailPostData.title ||
     detailPostData.content.length < 10;
-  const handleDraft = async () => {
-    if (detailPostData.tmpStore != undefined) {
-      try {
-        await API.postPostData(detailPostData);
-        await setAlert({
-          ...alert,
-          alertStatus: 'success',
-          alertHandle: true,
-          alertMessage: '임시 저장에 성공했어요',
-        });
-        await navigate(`/category/all`);
-      } catch (e) {
-        setAlert({
-          ...alert,
-          alertStatus: 'error',
-          alertHandle: true,
-          alertMessage: '임시 저장에 실패했어요',
-        });
-      }
+  const handleDraft = async (temp: boolean) => {
+    const postData = { ...detailPostData, tmpStore: temp };
+    try {
+      await API.postPostData(postData);
+      await setAlert({
+        ...alert,
+        alertStatus: 'success',
+        alertHandle: true,
+        alertMessage: '임시 저장에 성공했어요',
+      });
+      await navigate(`/category/all`);
+    } catch (e) {
+      setAlert({
+        ...alert,
+        alertStatus: 'error',
+        alertHandle: true,
+        alertMessage: '임시 저장에 실패했어요',
+      });
     }
   };
 
-  const handleSubmit = async () => {
-    setDetailPostData((prevState) => {
-      return { ...prevState, tmpStore: false };
-    });
-    if (detailPostData.tmpStore !== undefined) {
-      try {
-        await API.postPostData(detailPostData);
-        navigate(`/category/all`);
-        setModal({
-          ...modal,
-          isOpen: false,
-        });
-        setAlert({
-          ...alert,
-          alertStatus: 'success',
-          alertHandle: true,
-          alertMessage: '업로드에 성공했어요',
-        });
-      } catch (error) {
-        setAlert({
-          ...alert,
-          alertHandle: true,
-          alertMessage: '포스트 업로드에 실패했어요.',
-        });
-      }
+  const handleSubmit = async (temp: boolean) => {
+    const postData = { ...detailPostData, tmpStore: temp };
+    console.log(postData);
+    try {
+      await API.postPostData(postData);
+      await navigate(`/category/all`);
+      setModal({
+        ...modal,
+        isOpen: false,
+      });
+      await setAlert({
+        ...alert,
+        alertStatus: 'success',
+        alertHandle: true,
+        alertMessage: '업로드에 성공했어요',
+      });
+    } catch (error) {
+      setAlert({
+        ...alert,
+        alertHandle: true,
+        alertMessage: '포스트 업로드에 실패했어요.',
+      });
     }
     console.log(detailPostData);
   };
@@ -152,15 +146,12 @@ const PostWrite = () => {
         ...modal,
         isOpen: true,
         type: type as ModalType,
-        onClick: handleSubmit,
+        onClick: () => handleSubmit(false),
       });
     }
     // 임시저장
     if (type === 'draft') {
-      setDetailPostData((prevState) => {
-        return { ...prevState, tmpStore: true };
-      });
-      handleDraft();
+      handleDraft(true);
     }
     if (type === 'backBlock') {
       setModal({
@@ -348,10 +339,12 @@ const PostWrite = () => {
           <BottomPostButtonBox
             postCancel={() => submitHandler('backBlock')}
             postSubmit={() => {
+              setTemp(false);
               submitHandler('uploadPost');
             }}
             disable={isButtonBlock}
             draft={() => {
+              setTemp(true);
               submitHandler('draft');
             }}
           />

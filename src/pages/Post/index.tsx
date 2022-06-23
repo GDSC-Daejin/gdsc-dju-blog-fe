@@ -24,7 +24,7 @@ import {
   PostTitleWrapper,
   PostTrashIconWrapper,
 } from './styled';
-import { AuthorProps } from '../../types/postData';
+import { AuthorProps, DetailPostDataType } from '../../types/postData';
 import { dateFilter } from '../../Utils/dateFilter';
 import { hashTageSpreader } from '../../Utils/hashTageSpreader';
 import { HashTageDark } from '../../components/common/HashTage';
@@ -37,7 +37,20 @@ import Bookmark from '../../assets/Bookmark';
 import { useLocation } from 'react-router';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
 import './post.css';
-
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../store/modal';
+import { IUserInfoDataType } from '../../types/userInfoData';
+import { useCookies } from 'react-cookie';
+import { alertState } from '../../store/alert';
+interface PostIconBoxProps {
+  userInfoData: IUserInfoDataType;
+  postData: DetailPostDataType;
+  postId: string;
+}
+interface AuthorBoxProps extends AuthorProps {
+  uploadDate: string;
+  postHashTags: string;
+}
 const Post = () => {
   const { postId } = useParams<'postId'>();
 
@@ -64,23 +77,16 @@ const Post = () => {
 };
 
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
+  const [token, setToken] = useCookies(['token']);
   const { postData } = useGetDetailPost(postId);
-  const navigate = useNavigate();
   const location = useLocation();
-  const { userData } = useGetUserData();
+  const { userData } = useGetUserData(token.token);
   const userInfoData = userData?.memberInfo;
-  const isUserEqual = location.pathname.includes(`${userInfoData?.nickname}`);
 
   document.querySelectorAll('pre').forEach((el) => {
     hljs.highlightElement(el as HTMLPreElement);
   });
 
-  const handleRemove = async () => {
-    if (window.confirm('정말 삭제하시겠습니까?')) {
-      API.deletePostData(postId);
-      navigate(-1);
-    }
-  };
   return (
     <>
       {postData && (
@@ -92,41 +98,92 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
               />
               <Category>{postData.category.categoryName}</Category>
             </CategoryWrapper>
+
             <PostTitleWrapper>
               <PostTitle>{postData.title}</PostTitle>
-              <PostIconWrapper>
-                <BookmarkWrapper>
-                  <Bookmark marked={!isUserEqual} height={'25'} />
-                </BookmarkWrapper>
-                <PostEditIconWrapper
-                  onClick={() => {
-                    navigate(`/post/write/${postId}`);
-                  }}
-                >
-                  <PostEditIcon marked={isUserEqual} height={'25'} />
-                </PostEditIconWrapper>
-                <PostTrashIconWrapper
-                  onClick={isUserEqual ? handleRemove : undefined}
-                >
-                  <PostTrashIcon marked={isUserEqual} height={'25'} />
-                </PostTrashIconWrapper>
-              </PostIconWrapper>
+              {userInfoData && postData && (
+                <PostIconBlock
+                  postData={postData}
+                  userInfoData={userInfoData}
+                  postId={postId}
+                />
+              )}
             </PostTitleWrapper>
+
             <PostAuthorWrapper>
               <AuthorBox {...postData.memberInfo} {...postData} />
             </PostAuthorWrapper>
           </PostHead>
+
           <Viewer initialValue={postData.content} />
         </>
       )}
     </>
   );
 };
+const PostIconBlock: React.FC<PostIconBoxProps> = ({
+  postData,
+  userInfoData,
+  postId,
+}) => {
+  const navigate = useNavigate();
 
-interface AuthorBoxProps extends AuthorProps {
-  uploadDate: string;
-  postHashTags: string;
-}
+  const [modal, setModal] = useRecoilState(modalState);
+  const [alert, setAlert] = useRecoilState(alertState);
+  const deleteHandler = async () => {
+    setModal({ ...modal, isOpen: false });
+    try {
+      await API.deletePostData(postId);
+      await setAlert({
+        ...alert,
+        alertStatus: 'success',
+        alertHandle: true,
+        alertMessage: '글이 삭제되었어요.',
+      });
+      await navigate(-1);
+    } catch (e) {
+      setAlert({
+        ...alert,
+        alertStatus: 'error',
+        alertHandle: true,
+        alertMessage: '글 삭제에 실패했어요.',
+      });
+    }
+  };
+  const handleRemove = () => {
+    setModal({
+      ...modal,
+      isOpen: true,
+      type: 'deleteCheck',
+      onClick: deleteHandler,
+    });
+  };
+  const isUserEqual = userInfoData.nickname == postData.memberInfo.nickname;
+  return (
+    <PostIconWrapper>
+      <BookmarkWrapper>
+        <Bookmark marked={!isUserEqual} height={'25'} />
+      </BookmarkWrapper>
+      {isUserEqual && (
+        <>
+          <PostEditIconWrapper
+            onClick={() => {
+              navigate(`/post/edit/${postId}`);
+            }}
+          >
+            <PostEditIcon marked={isUserEqual} height={'25'} />
+          </PostEditIconWrapper>
+          <PostTrashIconWrapper
+            onClick={isUserEqual ? handleRemove : undefined}
+          >
+            <PostTrashIcon marked={isUserEqual} height={'25'} />
+          </PostTrashIconWrapper>
+        </>
+      )}
+    </PostIconWrapper>
+  );
+};
+
 const AuthorBox: React.FC<AuthorBoxProps> = ({
   member,
   nickname,

@@ -48,6 +48,12 @@ const modalType: IModalType = {
     rightButton: '업로드',
     rightColor: 'googleBlue',
   },
+  deleteCheck: {
+    description: '정말로 삭제하시겠어요?',
+    leftButton: '뒤로가기',
+    rightButton: '삭제하기',
+    rightColor: 'googleRed',
+  },
 };
 const Modal: React.FC<ModalProps> = ({ onClick }) => {
   const [modal, setModal] = useRecoilState(modalState);
