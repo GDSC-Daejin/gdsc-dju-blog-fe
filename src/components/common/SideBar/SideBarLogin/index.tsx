@@ -21,6 +21,7 @@ import { useRecoilState } from 'recoil';
 import { MENU_KEY, menuState } from '../../../../store/menu';
 import { useCookies } from 'react-cookie';
 import { alertState } from '../../../../store/alert';
+import { useGetUserData } from '../../../../api/hooks/useGetUserData';
 
 const SideBarLogin = () => {
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ const SideBarLogin = () => {
     'token',
   ]);
 
+  const { userData } = useGetUserData(TokenCookies.token);
+
   const handleLogout = () => {
     removeUserCookie('user', {
       path: '/',
@@ -38,44 +41,57 @@ const SideBarLogin = () => {
       path: '/',
     });
   };
+  console.log(userData?.memberInfo);
 
   return (
     <>
-      <ProfileImageWrapper>
-        <ProfileImage image={MockProfile} position="frontend" />
-      </ProfileImageWrapper>
-      <ProfileInformation>
-        <ProfileName></ProfileName>
-        {/* {user.memberInfo.nickname ?? user.username} */}
-        <ProfileJobPosition></ProfileJobPosition>
-        {/* {user.memberInfo.positionType} */}
-        <SettingIconWrapper>
-          <SettingIcon />
-        </SettingIconWrapper>
-      </ProfileInformation>
-      <MyBlogButtonWrapper>
-        <GDSCButtonL
-          text="내 블로그"
-          onClick={() => {
-            navigate(`/:user_name`);
-            setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
-          }}
-        />
-      </MyBlogButtonWrapper>
-      <BottomButtonWrapper>
-        <WrittingButtonWrapper>
-          <GDSCButton
-            text="글쓰기"
-            onClick={() => {
-              navigate(`/post/write`);
-              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
-            }}
-          />
-        </WrittingButtonWrapper>
-        <LogoutButtonWrapper>
-          <GDSCButton text="로그아웃" onClick={handleLogout} />
-        </LogoutButtonWrapper>
-      </BottomButtonWrapper>
+      {userData && userData.memberInfo && (
+        <>
+          <ProfileImageWrapper>
+            <ProfileImage
+              image={userData.profileImageUrl}
+              position={userData.memberInfo.positionType}
+            />
+          </ProfileImageWrapper>
+          <ProfileInformation>
+            <ProfileName>{userData.memberInfo.nickname}</ProfileName>
+            <ProfileJobPosition>
+              {userData.memberInfo.positionType}
+            </ProfileJobPosition>
+            <SettingIconWrapper
+              onClick={() => {
+                navigate(`/${userData.memberInfo.nickname}/edit`);
+                setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+              }}
+            >
+              <SettingIcon />
+            </SettingIconWrapper>
+          </ProfileInformation>
+          <MyBlogButtonWrapper>
+            <GDSCButtonL
+              text="내 블로그"
+              onClick={() => {
+                navigate(`/${userData.memberInfo.nickname}`);
+                setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+              }}
+            />
+          </MyBlogButtonWrapper>
+          <BottomButtonWrapper>
+            <WrittingButtonWrapper>
+              <GDSCButton
+                text="글쓰기"
+                onClick={() => {
+                  navigate(`/post/write`);
+                  setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+                }}
+              />
+            </WrittingButtonWrapper>
+            <LogoutButtonWrapper>
+              <GDSCButton text="로그아웃" onClick={handleLogout} />
+            </LogoutButtonWrapper>
+          </BottomButtonWrapper>
+        </>
+      )}
     </>
   );
 };

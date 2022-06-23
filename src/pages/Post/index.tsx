@@ -77,10 +77,10 @@ const Post = () => {
 };
 
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
-  const [token, setToken] = useCookies(['token']);
+  const [cookie, setCookie] = useCookies(['token']);
   const { postData } = useGetDetailPost(postId);
   const location = useLocation();
-  const { userData } = useGetUserData(token.token);
+  const { userData } = useGetUserData(cookie.token);
   const userInfoData = userData?.memberInfo;
 
   document.querySelectorAll('pre').forEach((el) => {
