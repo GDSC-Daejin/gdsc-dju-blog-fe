@@ -4,7 +4,7 @@ export const ProfileWrapper = styled.section`
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-top: 110px;
+  margin-top: 180px;
   margin-bottom: 86px;
 `;
 export const ProfileImageWrapper = styled.div`

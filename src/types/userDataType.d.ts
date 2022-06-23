@@ -16,7 +16,7 @@ export interface IUserDataType {
 export interface RowMemberDataType {
   header: string;
   body: {
-    data: UserDataType;
+    data: IUserDataType;
   };
 }
 export interface MemberDataInfoType {
