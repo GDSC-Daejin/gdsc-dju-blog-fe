@@ -133,11 +133,19 @@ export class Api {
       this.Header,
     );
   };
+
   getPostTempData = (postId: string) => {
     return axios.get<RowPostDataType>(
       `${this.API}/api/member/v1/myPost/temp/post/${postId}`,
       this.Header,
     );
   };
+  setToken = (token: string) => {
+    this.Header.headers.Authorization = token;
+  };
+  getToken = (): string => {
+    return this.Header.headers.Authorization;
+  };
 }
+
 export default new Api();

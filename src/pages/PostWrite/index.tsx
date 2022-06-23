@@ -90,7 +90,6 @@ const PostWrite = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { postData } = useGetMyPostData(id);
-  console.log(postData);
   const isButtonBlock =
     !detailPostData.category.categoryName ||
     !detailPostData.title ||
@@ -121,15 +120,15 @@ const PostWrite = () => {
     setDetailPostData((prevState) => {
       return { ...prevState, tmpStore: false };
     });
-    if (detailPostData.tmpStore != undefined) {
+    if (detailPostData.tmpStore !== undefined) {
       try {
         await API.postPostData(detailPostData);
-        await navigate(`/category/all`);
+        navigate(`/category/all`);
         setModal({
           ...modal,
           isOpen: false,
         });
-        await setAlert({
+        setAlert({
           ...alert,
           alertStatus: 'success',
           alertHandle: true,
@@ -143,12 +142,12 @@ const PostWrite = () => {
         });
       }
     }
+    console.log(detailPostData);
   };
 
   const submitHandler = (type: string) => {
     //포스트
     if (type === 'uploadPost') {
-      console.log(detailPostData);
       setModal({
         ...modal,
         isOpen: true,

@@ -17,6 +17,7 @@ import HomePhrase from '../../components/common/HomePhrase';
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
+import api from '../../api';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -54,6 +55,7 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
+  console.log(api.getToken());
 
   return (
     <>
