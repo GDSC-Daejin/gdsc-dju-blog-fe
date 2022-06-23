@@ -67,8 +67,9 @@ function Home() {
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
-      {postListData && (
-        <CardSectionWrapper>
+
+      <CardSectionWrapper>
+        {postListData && (
           <CardSection
             isDrag={isDrag}
             ref={scrollRef}
@@ -76,10 +77,6 @@ function Home() {
             onMouseMove={isDrag ? onDragMove : undefined}
             onMouseUp={onDragEnd}
             onMouseLeave={onDragEnd}
-            // variants={listAnimate}
-            // initial={'start'}
-            // animate={'end'}
-            // variants={blogCardAnimate}
           >
             {postListData.content.map((postData) => (
               <BlogCardWrapper key={postData.postId}>
@@ -96,8 +93,8 @@ function Home() {
               </div>
             </BlogCardWrapper>
           </CardSection>
-        </CardSectionWrapper>
-      )}
+        )}
+      </CardSectionWrapper>
       <HomeLayoutContainer>
         <ButtonWrapper>
           <BlogCardScrollButton scrollX={x} scrollRef={scrollRef} />

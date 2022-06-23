@@ -53,42 +53,40 @@ const circleMotion = {
 const CategoryMenu = (props: Iprops) => {
   const { onClick, type } = props;
 
-  const animate = useCallback((value: string, categoryValue: string) => {
+  const animate = (value: string, categoryValue: string) => {
     return value === categoryValue ? 'isActive' : 'isUnActive';
-  }, []);
+  };
 
   return (
-    <>
-      <CategoryMenuWrapper>
-        {category.map((item, id) => (
-          <CategoryTextWrapper
-            onClick={() => {
-              {
-                onClick && onClick(categoryName[id]);
-              }
-            }}
-            variants={hoverMotion}
-            whileHover={'isActive'}
+    <CategoryMenuWrapper>
+      {category.map((item, id) => (
+        <CategoryTextWrapper
+          onClick={() => {
+            {
+              onClick && onClick(categoryName[id]);
+            }
+          }}
+          variants={hoverMotion}
+          whileHover={'isActive'}
+          animate={animate(type, categoryName[id])}
+          key={id}
+        >
+          <CategoryCircleWrapper
+            variants={circleMotion}
             animate={animate(type, categoryName[id])}
-            key={id}
           >
-            <CategoryCircleWrapper
-              variants={circleMotion}
-              animate={animate(type, categoryName[id])}
-            >
-              {categoryName[id] === 'all' ? (
-                <GDSCLogoWrapper>
-                  <GdscLogo />
-                </GDSCLogoWrapper>
-              ) : (
-                <CategoryCircle color={positionColor(categoryName[id])} />
-              )}
-            </CategoryCircleWrapper>
-            <CategoryText>{item}</CategoryText>
-          </CategoryTextWrapper>
-        ))}
-      </CategoryMenuWrapper>
-    </>
+            {categoryName[id] === 'all' ? (
+              <GDSCLogoWrapper>
+                <GdscLogo />
+              </GDSCLogoWrapper>
+            ) : (
+              <CategoryCircle color={positionColor(categoryName[id])} />
+            )}
+          </CategoryCircleWrapper>
+          <CategoryText>{item}</CategoryText>
+        </CategoryTextWrapper>
+      ))}
+    </CategoryMenuWrapper>
   );
 };
-export default memo(CategoryMenu);
+export default CategoryMenu;
