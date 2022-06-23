@@ -42,7 +42,10 @@ export default function OauthRedirectPage() {
       });
       api.setToken(token);
     })();
-    window.location.href = 'http://localhost:3000/';
+
+    process.env.NODE_ENV === 'development'
+      ? (window.location.href = 'http://localhost:3000/')
+      : (window.location.href = 'https://gdsc-dju-blog.web.app/');
   }, []);
 
   return <GoogleLoader />;
