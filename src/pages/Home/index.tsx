@@ -17,7 +17,6 @@ import HomePhrase from '../../components/common/HomePhrase';
 import { Link } from 'react-router-dom';
 import Plus from '../../assets/Plus';
 import BlogCardScrollButton from './BlogCardButton';
-import api from '../../api';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -25,7 +24,6 @@ function Home() {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
-
   const { postListData } = useGetPostListData(category, 0, 11);
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -55,7 +53,6 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
-  console.log(api.getToken());
 
   return (
     <>
@@ -67,7 +64,6 @@ function Home() {
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
-
       <CardSectionWrapper>
         {postListData && (
           <CardSection

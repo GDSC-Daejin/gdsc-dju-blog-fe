@@ -106,7 +106,7 @@ export class Api {
   };
   getRedirectURL() {
     const OAUTH2_REDIRECT_URI_Dev = 'http://localhost:3000/oauth2/redirect';
-    const OAUTH2_REDIRECT_URI = 'https://gdsc-dju-blog.web.app/';
+    const OAUTH2_REDIRECT_URI = 'https://gdsc-dju-blog.web.app/oauth2/redirect';
 
     return `${this.API}/oauth2/authorization/google?redirect_uri=${
       process.env.NODE_ENV === 'development'
