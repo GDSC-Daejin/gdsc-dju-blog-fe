@@ -40,11 +40,12 @@ export default function OauthRedirectPage() {
         memberInfo: data.memberInfo,
       });
     })();
-
-    process.env.NODE_ENV === 'development'
-      ? (window.location.href = 'http://localhost:3000/')
-      : (window.location.href = 'https://gdsc-dju-blog.web.app/');
-  }, []);
+    if (userCookies.user && tokenCookies.token) {
+      process.env.NODE_ENV === 'development'
+        ? (window.location.href = 'http://localhost:3000/')
+        : (window.location.href = 'https://gdsc-dju-blog.web.app/');
+    }
+  }, [userCookies, tokenCookies]);
 
   return <GoogleLoader />;
 }
