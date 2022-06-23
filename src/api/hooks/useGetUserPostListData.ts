@@ -1,6 +1,7 @@
 import API from '../index';
 import useSWR from 'swr';
 import { userPostUrlFilter } from './postPagination';
+import Cookies from 'js-cookie';
 
 async function getMyPostsData(params: string) {
   const res = await API.getMyPostsData(params);
@@ -8,8 +9,9 @@ async function getMyPostsData(params: string) {
 }
 
 export function useGetMyPostsData(category: string, page = 0, size: number) {
+  const isLogin = !!Cookies.get('token');
   const { data: userPostData } = useSWR(
-    [`myPost/${userPostUrlFilter(category, page, size)}`],
+    isLogin && [`myPost/${userPostUrlFilter(category, page, size)}`],
     getMyPostsData,
   );
   return { userPostData: userPostData && userPostData };
