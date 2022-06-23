@@ -48,12 +48,12 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
 
   return (
     <>
-      {userData && (
+      {userData && userData.memberInfo && (
         <>
           <ProfileImageWrapper>
             <ProfileImage
               image={userData.profileImageUrl}
-              position={userData.memberInfo.positionType}
+              position={userData.memberInfo.positionType ?? ''}
             />
           </ProfileImageWrapper>
           <ProfileInformation>
