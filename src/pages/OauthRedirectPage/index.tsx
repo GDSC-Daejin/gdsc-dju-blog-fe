@@ -42,7 +42,7 @@ export default function OauthRedirectPage() {
       });
       api.setToken(token);
     })();
-    navigate('/', { replace: true });
+    window.location.href = 'http://localhost:3000/';
   }, []);
 
   return <GoogleLoader />;
