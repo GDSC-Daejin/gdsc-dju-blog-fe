@@ -12,7 +12,6 @@ type SelectedUserType = Pick<
 >;
 export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const token = searchParams.get('token') ?? '';
   const [userCookies, setUserCookies] = useCookies(['user']);
   const [tokenCookies, setTokenCookies] = useCookies(['token']);
@@ -40,7 +39,6 @@ export default function OauthRedirectPage() {
         userId: data.userId,
         memberInfo: data.memberInfo,
       });
-      api.setToken(token);
     })();
 
     process.env.NODE_ENV === 'development'
