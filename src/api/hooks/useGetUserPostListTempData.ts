@@ -1,6 +1,6 @@
 import API from '../index';
 import useSWR from 'swr';
-import { url } from './postPagination';
+import { userPostUrlFilter } from './postPagination';
 
 async function getUserPostListTempData(params: string) {
   const res = await API.getUserPostListTempData(params);
@@ -12,7 +12,7 @@ export function useGetUserPostListTempData(
   size: number,
 ) {
   const { data: userPostTempData } = useSWR(
-    [`myPost/temp${url(category, page, size)}`],
+    [`myPost/temp${userPostUrlFilter(category, page, size)}`],
     getUserPostListTempData,
   );
   return { userPostTempData: userPostTempData && userPostTempData };

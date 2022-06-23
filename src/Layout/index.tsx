@@ -37,7 +37,7 @@ const Layout = () => {
         <Route path={'/:user_name/*'} element={<MyBlog />} />
         <Route path={'/post'} element={<Post />} />
         <Route path={'/post/write'} element={<PostWrite />} />
-        <Route path={'/post/write/:id'} element={<PostWrite />} />
+        <Route path={'/post/edit/:id'} element={<PostWrite />} />
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/search'} element={<SearchResult />} />

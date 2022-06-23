@@ -70,7 +70,7 @@ export class Api {
       ...Header,
     });
   };
-  getUserPostListData = (params: string) => {
+  getMyPostsData = (params: string) => {
     return axios.get<RowDetailPostListType>(
       `${this.API}/api/member/v1/${params}`,
       this.Header,

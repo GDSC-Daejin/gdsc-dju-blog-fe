@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Giscus } from '@giscus/react';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-import './post.css';
 import API from '../../api';
 import {
   Author,
@@ -37,6 +36,7 @@ import PostEditIcon from '../../assets/PostEditIcon';
 import Bookmark from '../../assets/Bookmark';
 import { useLocation } from 'react-router';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
+import './post.css';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
@@ -71,8 +71,8 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const userInfoData = userData?.memberInfo;
   const isUserEqual = location.pathname.includes(`${userInfoData?.nickname}`);
 
-  document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
-    hljs.highlightElement(el as HTMLElement);
+  document.querySelectorAll('pre').forEach((el) => {
+    hljs.highlightElement(el as HTMLPreElement);
   });
 
   const handleRemove = async () => {
@@ -99,11 +99,6 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
                   <Bookmark marked={!isUserEqual} height={'25'} />
                 </BookmarkWrapper>
                 <PostEditIconWrapper
-                  /*onClick={
-                    isUserEqual
-                      ? () => navigate(`/post/write/${postId}`)
-                      : undefined
-                  }*/
                   onClick={() => {
                     navigate(`/post/write/${postId}`);
                   }}

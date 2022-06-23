@@ -1,17 +1,11 @@
 import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import {
-  ContainerInner,
-  LayoutContainer,
-  NavigationBlock,
-} from '../../../styles/layouts';
+import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
 import {
   BlogName,
   BlogNamePosition,
   BlogNameWrapper,
   ButtonWrapper,
-  HashTageSection,
-  HashTageWrapper,
   IntroduceText,
   NoPosts,
   PageBarSection,
@@ -24,37 +18,31 @@ import {
   SettingIconWrapper,
   TopMenuWrapper,
 } from './styled';
-import MockProfile from '../../../assets/MockProfile.png';
 import ProfileImage from '../../../components/common/ProfileImage';
 import { positionColor } from '../../../store/positionColor';
-import { HashTageDark } from '../../../components/common/HashTage';
 import CategoryMenu from '../../../components/common/CategoryMenu';
 import { GDSCButton } from '../../../components/common/Button';
 import PostCard from '../../../components/common/PostCard';
-import {
-  createSearchParams,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 import Setting from '../../../assets/Setting';
 import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { useGetUserPostListData } from '../../../api/hooks/useGetUserPostListData';
-import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import { useGetMyPostsData } from '../../../api/hooks/useGetUserPostListData';
+import { useCookies } from 'react-cookie';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [tokenCookies, setTokenCookies] = useCookies(['token']);
+  const token = tokenCookies.token;
   const categoryName = searchParams.get('type');
   const category = categoryName ? categoryName : 'all';
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
-  const token = localStorage.getItem('token') ?? '';
 
   const { userData } = useGetUserData(token);
   const userInfoData = userData?.memberInfo;
-  const { userPostData } = useGetUserPostListData(category, page - 1, 6);
-
+  const { userPostData } = useGetMyPostsData(category, page - 1, 6);
   const navigate = useNavigate();
 
   useEffect(() => {

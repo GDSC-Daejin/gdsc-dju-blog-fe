@@ -22,10 +22,14 @@ import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { MemberDataInfoType } from '../../../types/userDataType';
 import { useNavigate } from 'react-router';
 import { IUserInfoDataType } from '../../../types/userInfoData';
+import { useCookies } from 'react-cookie';
 
 const ProfileEdit = () => {
-  const { userData } = useGetUserData();
   const [user, setUser] = useRecoilState(userState);
+  const [tokenCookies, setTokenCookies] = useCookies(['token']);
+  const token = tokenCookies.token;
+  const { userData } = useGetUserData(token);
+
   useLayoutEffect(() => {
     if (userData) {
       setUser({

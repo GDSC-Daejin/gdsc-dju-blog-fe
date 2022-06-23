@@ -75,80 +75,80 @@ const PostWrite = () => {
   const [alert, setAlert] = useRecoilState(alertState);
   const { mutate } = useSWRConfig();
   const [detailPostData, setDetailPostData] = useState<PostPostDataType>({
-    title: '',
-    content: '',
-    category: { categoryName: '' },
-    postHashTags: '',
     base64Thumbnail: '',
     fileName: '',
-    tmpStore: true,
+    title: '',
+    category: {
+      categoryName: '',
+    },
+    content: '',
+    postHashTags: '',
+    tmpStore: undefined,
   });
   const input = useRef<HTMLInputElement>(null);
   const editorRef: any = useRef();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { postData } = useGetMyPostData(id);
-
+  console.log(postData);
   const isButtonBlock =
     !detailPostData.category.categoryName ||
     !detailPostData.title ||
     detailPostData.content.length < 10;
-
   const handleDraft = async () => {
-    try {
-      setDetailPostData(() => {
-        return { ...detailPostData, tmpStore: true };
-      });
-      await API.postPostData(detailPostData);
-      await setAlert({
-        ...alert,
-        alertStatus: 'success',
-        alertHandle: true,
-        alertMessage: '임시 저장에 성공했어요',
-      });
-      await navigate(`/category/all`);
-    } catch (e) {
-      setAlert({
-        ...alert,
-        alertStatus: 'error',
-        alertHandle: true,
-        alertMessage: '임시 저장에 실패했어요',
-      });
+    if (detailPostData.tmpStore != undefined) {
+      try {
+        await API.postPostData(detailPostData);
+        await setAlert({
+          ...alert,
+          alertStatus: 'success',
+          alertHandle: true,
+          alertMessage: '임시 저장에 성공했어요',
+        });
+        await navigate(`/category/all`);
+      } catch (e) {
+        setAlert({
+          ...alert,
+          alertStatus: 'error',
+          alertHandle: true,
+          alertMessage: '임시 저장에 실패했어요',
+        });
+      }
     }
   };
 
   const handleSubmit = async () => {
-    try {
-      setDetailPostData(() => {
-        return { ...detailPostData, tmpStore: false };
-      });
-      await API.postPostData(detailPostData);
-      await navigate(`/category/all`);
-      setModal({
-        ...modal,
-        isOpen: false,
-      });
-      await setAlert({
-        ...alert,
-        alertStatus: 'success',
-        alertHandle: true,
-        alertMessage: '업로드에 성공했어요',
-      });
-    } catch (error) {
-      setAlert({
-        ...alert,
-        alertHandle: true,
-        alertMessage: '포스트 업로드에 실패했어요.',
-      });
+    setDetailPostData((prevState) => {
+      return { ...prevState, tmpStore: false };
+    });
+    if (detailPostData.tmpStore != undefined) {
+      try {
+        await API.postPostData(detailPostData);
+        await navigate(`/category/all`);
+        setModal({
+          ...modal,
+          isOpen: false,
+        });
+        await setAlert({
+          ...alert,
+          alertStatus: 'success',
+          alertHandle: true,
+          alertMessage: '업로드에 성공했어요',
+        });
+      } catch (error) {
+        setAlert({
+          ...alert,
+          alertHandle: true,
+          alertMessage: '포스트 업로드에 실패했어요.',
+        });
+      }
     }
   };
 
   const submitHandler = (type: string) => {
-    //포스트 하는거
+    //포스트
     if (type === 'uploadPost') {
-      setDetailPostData(() => {
-        return { ...detailPostData, tmpStore: false };
-      });
+      console.log(detailPostData);
       setModal({
         ...modal,
         isOpen: true,
@@ -158,6 +158,9 @@ const PostWrite = () => {
     }
     // 임시저장
     if (type === 'draft') {
+      setDetailPostData((prevState) => {
+        return { ...prevState, tmpStore: true };
+      });
       handleDraft();
     }
     if (type === 'backBlock') {
@@ -241,11 +244,6 @@ const PostWrite = () => {
     window.addEventListener('popstate', preventGoBack);
     return () => window.removeEventListener('popstate', preventGoBack);
   }, []);
-  useEffect(() => {
-    document.querySelectorAll('.toastui-editor-contents pre').forEach((el) => {
-      hljs.highlightElement(el as HTMLElement);
-    });
-  }, [detailPostData]);
   return (
     <>
       <NavigationBlock />
@@ -350,9 +348,13 @@ const PostWrite = () => {
           )}
           <BottomPostButtonBox
             postCancel={() => submitHandler('backBlock')}
-            postSubmit={() => submitHandler('uploadPost')}
+            postSubmit={() => {
+              submitHandler('uploadPost');
+            }}
             disable={isButtonBlock}
-            draft={() => submitHandler('draft')}
+            draft={() => {
+              submitHandler('draft');
+            }}
           />
         </ContainerInner>
       </LayoutContainer>
