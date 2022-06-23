@@ -29,6 +29,7 @@ import PageBar from '../../../components/common/PageBar';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { useGetMyPostsData } from '../../../api/hooks/useGetUserPostListData';
 import { useCookies } from 'react-cookie';
+import { imageUrlSlice } from '../../../Utils/imageUrlSlice';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -89,7 +90,7 @@ const BlogHome = () => {
                 <ProfileImageWrapper>
                   <Suspense fallback={<div>이미지</div>}>
                     <ProfileImage
-                      image={userData.profileImageUrl}
+                      image={imageUrlSlice(userData.profileImageUrl)}
                       position={userInfoData.positionType}
                     />
                   </Suspense>

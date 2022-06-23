@@ -23,6 +23,7 @@ import { useCookies } from 'react-cookie';
 import { alertState } from '../../../../store/alert';
 import { useGetUserData } from '../../../../api/hooks/useGetUserData';
 import { IUserDataType } from '../../../../types/userDataType';
+import { imageUrlSlice } from '../../../../Utils/imageUrlSlice';
 
 const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
   userData,
@@ -52,7 +53,7 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
         <>
           <ProfileImageWrapper>
             <ProfileImage
-              image={userData.profileImageUrl}
+              image={imageUrlSlice(userData.profileImageUrl)}
               position={userData.memberInfo.positionType ?? ''}
             />
           </ProfileImageWrapper>
