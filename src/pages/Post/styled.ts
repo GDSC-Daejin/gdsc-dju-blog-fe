@@ -9,9 +9,12 @@ export const PostHead = styled.div`
   margin-bottom: 15px;
 `;
 export const PostTitle = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize.h3};
+  font-size: ${({ theme }) => theme.fontSize.h4};
   color: ${({ theme }) => theme.color.grey900};
+  width: 100%;
+  word-break: break-word;
   margin-bottom: 23px;
+  margin-right: 26px;
 `;
 export const ContentWrapper = styled.article`
   margin-bottom: 70px;
@@ -41,16 +44,16 @@ export const AuthorWrapper = styled.div`
   margin-bottom: 50px;
 `;
 export const AuthorImage = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 4px;
 `;
 export const Author = styled.div<{
   color?: keyof typeof theme.color;
   marginRight?: number;
 }>`
-  font-size: ${({ theme }) => theme.fontSize.h6};
+  font-size: ${({ theme }) => theme.fontSize.body1};
   font-weight: 500;
   ${({ color }) =>
     color &&
@@ -64,7 +67,7 @@ export const Author = styled.div<{
     `};
 `;
 export const Date = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.h6};
+  font-size: ${({ theme }) => theme.fontSize.body1};
   color: ${({ theme }) => theme.color.grey500};
   font-weight: 400;
 `;
@@ -87,4 +90,28 @@ export const Category = styled.div`
   display: flex;
   padding: 4px 0;
   margin-bottom: 20px;
+`;
+export const PostTitleWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+`;
+export const PostIconWrapper = styled.div`
+  display: flex;
+  position: relative;
+  top: 12px;
+  right: 0;
+`;
+export const BookmarkWrapper = styled.div`
+  display: flex;
+  margin-right: 26px;
+`;
+export const PostTrashIconWrapper = styled.div`
+  display: flex;
+  cursor: pointer;
+`;
+export const PostEditIconWrapper = styled.div`
+  display: flex;
+  cursor: pointer;
+  margin-right: 24px;
 `;

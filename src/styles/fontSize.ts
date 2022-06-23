@@ -10,4 +10,5 @@ export const fontSize = {
   body2: '1.4rem',
   body3: '1.2rem',
   body4: '1rem',
+  body5: '0.75rem',
 };

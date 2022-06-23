@@ -22,7 +22,7 @@ const OutsideClickHandler: React.FC<Props> = ({
   );
   useEffect(() => {
     if (trigger) {
-      document.addEventListener('click', handleClick);
+      setTimeout(() => document.addEventListener('click', handleClick), 0);
     }
     return () => {
       document.removeEventListener('click', handleClick);

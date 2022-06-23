@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useScroll } from 'react-use';
-import { useSearchParams } from 'react-router-dom';
-import BlogCardScrollButton from '../../components/common/BlogCardButton';
 import BlogCard from '../../components/common/BlogCard';
 import {
   BlogCardWrapper,
@@ -15,11 +13,11 @@ import {
 import CategoryMenu from '../../components/common/CategoryMenu';
 import { useGetPostListData } from '../../api/hooks/useGetPostListData';
 import HomePhrase from '../../components/common/HomePhrase';
-import { homePhraseData } from '../../api/Mocks/homePhraseData';
-import {
-  blogCardAnimate,
-  listAnimate,
-} from '../../components/common/Animation';
+
+import { Link } from 'react-router-dom';
+import Plus from '../../assets/Plus';
+import BlogCardScrollButton from './BlogCardButton';
+import api from '../../api';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -29,6 +27,7 @@ function Home() {
   const [category, setCategory] = useState('all');
 
   const { postListData } = useGetPostListData(category, 0, 11);
+
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsDrag(true);
@@ -56,6 +55,7 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
+  console.log(api.getToken());
 
   return (
     <>
@@ -67,30 +67,37 @@ function Home() {
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
+
       <CardSectionWrapper>
         {postListData && (
           <CardSection
-            ref={scrollRef}
             isDrag={isDrag}
+            ref={scrollRef}
             onMouseDown={onDragStart}
             onMouseMove={isDrag ? onDragMove : undefined}
             onMouseUp={onDragEnd}
             onMouseLeave={onDragEnd}
-            variants={listAnimate}
-            initial={'start'}
-            animate={'end'}
           >
             {postListData.content.map((postData) => (
-              <BlogCardWrapper key={postData.postId} variants={blogCardAnimate}>
+              <BlogCardWrapper key={postData.postId}>
                 <BlogCard postData={postData} />
               </BlogCardWrapper>
             ))}
+            <BlogCardWrapper>
+              <div className="viewmore-item">
+                <Link to={`/category/${category}`}>
+                  <button type="button" className="viewmore-item__button">
+                    <Plus />
+                  </button>
+                </Link>
+              </div>
+            </BlogCardWrapper>
           </CardSection>
         )}
       </CardSectionWrapper>
       <HomeLayoutContainer>
         <ButtonWrapper>
-          <BlogCardScrollButton ScrollX={x} scrollRef={scrollRef} />
+          <BlogCardScrollButton scrollX={x} scrollRef={scrollRef} />
         </ButtonWrapper>
       </HomeLayoutContainer>
     </>

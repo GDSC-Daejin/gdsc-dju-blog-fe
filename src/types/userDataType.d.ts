@@ -1,26 +1,9 @@
-import { MemberUrlsType } from './userInfoData';
+import { IUserInfoDataType } from './userInfoData';
 
-export interface UserDataType {
+export interface IUserDataType {
   email: string;
   emailVerifiedYn: string;
-  memberInfo: {
-    generation: number;
-    gitEmail: string;
-    hashTag: string;
-    introduce: string;
-    major: string;
-    memberInfoId: number;
-    birthday: string;
-    memberPortfolioUrls: {
-      id: number;
-      webUrl: string | null;
-    }[];
-    nickname: string;
-    phoneNumber: string;
-    positionType: string;
-    studentID: string;
-    userID: string;
-  };
+  memberInfo: IUserInfoDataType;
   modifiedAt: string;
   password: string;
   profileImageUrl: string;
@@ -33,7 +16,7 @@ export interface UserDataType {
 export interface RowMemberDataType {
   header: string;
   body: {
-    data: UserDataType;
+    data: IUserDataType;
   };
 }
 export interface MemberDataInfoType {
@@ -51,5 +34,4 @@ export interface MemberDataInfoType {
   userID: string;
   name: string;
   email: string;
-  memberPortfolioUrls: MemberUrlsType[];
 }

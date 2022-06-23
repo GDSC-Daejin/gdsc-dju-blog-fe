@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   SideBarWrapper,
   SideBarInner,
@@ -6,16 +7,17 @@ import {
   MenuToggleIconWrapper,
   MobileMenuIconWrapper,
 } from './styled';
-import React, { useEffect } from 'react';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
 import SideBarLogout from './SideBarLogout';
-import { useLocation } from 'react-router';
 import SideBarCategory from './SideBarCategory';
 import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
+import { useCookies } from 'react-cookie';
+import api from '../../../api';
+import { useGetUserData } from '../../../api/hooks/useGetUserData';
 
 export const sideBarMenuData = [
   {
@@ -46,12 +48,13 @@ export const sideBarMenuData = [
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
+  const [cookies] = useCookies(['user']);
+  const [token, setTokenCookie, removeTokenCookie] = useCookies(['token']);
   const menuHandler = () => {
     const menuState = menu.appMenu;
     setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
-    console.log(menu);
   };
-
+  const { userData } = useGetUserData(token.token);
   return (
     <>
       <SideBarWrapper
@@ -62,18 +65,17 @@ export const SideBar = () => {
         <MobileMenuIconWrapper onClick={() => menuHandler()}>
           <MenuToggleIcon active="open" />
         </MobileMenuIconWrapper>
-
         <SideBarInner>
           <SideBarDesign>
-            {/*<SideBarLogout />*/}
-            <SideBarLogin />
+            {cookies.user ? (
+              <SideBarLogin userData={userData} />
+            ) : (
+              <SideBarLogout loginURL={api.getRedirectURL()} />
+            )}
             <SideBarCategory />
           </SideBarDesign>
         </SideBarInner>
       </SideBarWrapper>
-      <MenuToggleIconWrapper onClick={() => menuHandler()}>
-        <MenuToggleIcon active="closed" />
-      </MenuToggleIconWrapper>
       <AnimatePresence>
         {menu.appMenu && (
           <GrayBox

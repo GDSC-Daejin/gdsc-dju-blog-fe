@@ -1,18 +1,30 @@
 import { atom } from 'recoil';
+import { theme } from '../styles/theme';
 const MODAL = 'modal';
 
-export const MODAL_KEY = {
-  SHOW: 'show',
-  TYPE: 'type',
+export const ModalState: IModalState = {
+  isOpen: false,
+  type: 'login',
+  onClick: null,
 };
-export const ModalState = {
-  [MODAL_KEY.SHOW]: false,
-  [MODAL_KEY.TYPE]: 'login',
-  onClick: () => {
-    return 0;
-  },
+
+export type ModalType = 'login' | 'backBlock' | 'uploadPost' | 'deleteCheck';
+
+export type IModalState = {
+  onClick: null | (() => void);
+  isOpen: boolean;
+  type: ModalType;
 };
-export const modalState = atom<typeof ModalState>({
+export type IModalType = {
+  [key in ModalType]: {
+    description: string;
+    leftButton: string;
+    rightButton: string;
+    rightColor: keyof typeof theme.color;
+  };
+};
+
+export const modalState = atom<IModalState>({
   key: MODAL,
   default: ModalState,
 });

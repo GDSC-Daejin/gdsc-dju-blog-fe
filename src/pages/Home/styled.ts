@@ -24,11 +24,20 @@ export const HomeLayoutContainer = styled.div`
 `;
 export const HomePhraseWrapper = styled(motion.div)`
   height: 180px;
-  margin-top: 50px;
+  margin-top: 120px;
   margin-bottom: 30px;
 `;
 export const CardSectionWrapper = styled.div`
   height: 400px;
+  .CardSection_Circle {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
+    border: 1px solid #ebebeb;
+    border-radius: 50%;
+  }
 `;
 
 export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
@@ -39,6 +48,7 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   height: 100%;
   cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
+  overflow-y: hidden;
   div:last-child {
     margin-right: 0;
   }
@@ -51,11 +61,32 @@ export const BlogCardWrapper = styled(motion.div)`
   width: 248px;
   height: 294px;
   margin: 0 15px;
+  transform: translateX(calc((100vw - 1200px) / 2 + 20px));
   :first-child {
     margin-left: 0;
   }
   :last-child {
     margin-right: 0;
+  }
+  .viewmore-item {
+    width: 248px;
+    height: 294px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .viewmore-item__button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
+      border: 1px solid #ebebeb;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
   }
 `;
 

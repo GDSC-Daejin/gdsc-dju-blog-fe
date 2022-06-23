@@ -1,11 +1,10 @@
 import React from 'react';
 
-const Bookmark = (props: { marked: boolean }) => {
-  const { marked } = props;
+const Bookmark = (props: { marked: boolean; height?: string }) => {
+  const { marked, height = '30' } = props;
   return (
     <svg
-      width="24"
-      height="30"
+      height={height}
       viewBox="0 0 24 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

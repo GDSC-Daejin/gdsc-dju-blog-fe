@@ -5,10 +5,10 @@ import {
   RowDetailPostListType,
   RowPostDataType,
 } from '../types/postData';
+import Cookies from 'js-cookie';
 
 export class Api {
   private API: string;
-
   private Header: {
     headers: {
       'Access-Control-Allow-Origin': string;
@@ -27,7 +27,7 @@ export class Api {
     this.Header = {
       headers: {
         'Access-Control-Allow-Origin': this.API,
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
       withCredentials: true,
       baseURL: this.API,
@@ -44,16 +44,33 @@ export class Api {
         localStorage.setItem('token', res.data.body.token);
       });
   };
-  updateUserData = (userInfoData: MemberDataInfoType) => {
-    return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, this.Header);
+  updateUserData = (userInfoData: MemberDataInfoType, token?: any) => {
+    const Header = {
+      headers: {
+        'Access-Control-Allow-Origin': this.API,
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+      baseURL: this.API,
+    };
+    return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, {
+      ...Header,
+    });
   };
-  getUserData = () => {
-    return axios.get<RowMemberDataType>(
-      `${this.API}/api/guest/v1/me`,
-      this.Header,
-    );
+  getUserData = (token?: string) => {
+    const Header = {
+      headers: {
+        'Access-Control-Allow-Origin': this.API,
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+      baseURL: this.API,
+    };
+    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
+      ...Header,
+    });
   };
-  getUserPostListData = (params: string) => {
+  getMyPostsData = (params: string) => {
     return axios.get<RowDetailPostListType>(
       `${this.API}/api/member/v1/${params}`,
       this.Header,
@@ -63,7 +80,16 @@ export class Api {
     return axios.get<RowDetailPostListType>(`${this.API}/api/v1/${params}`);
   };
   getPostData = (postId: string) => {
-    return axios.get<RowPostDataType>(`${this.API}/api/v1/post/${postId}`);
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/v1/post/${postId}`,
+      this.Header,
+    );
+  };
+  getMyPostData = (postId: string) => {
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/member/v1/myPost/${postId}`,
+      this.Header,
+    );
   };
 
   getUserScrapData = () => {
@@ -78,5 +104,51 @@ export class Api {
   postPostData = (postData: PostPostDataType) => {
     return axios.post(`${this.API}/api/member/v2/post`, postData, this.Header);
   };
+  getRedirectURL() {
+    const OAUTH2_REDIRECT_URI_Dev = 'http://localhost:3000/oauth2/redirect';
+    const OAUTH2_REDIRECT_URI = 'https://gdsc-dju-blog.web.app/';
+
+    return `${this.API}/oauth2/authorization/google?redirect_uri=${
+      process.env.NODE_ENV === 'development'
+        ? OAUTH2_REDIRECT_URI_Dev
+        : OAUTH2_REDIRECT_URI
+    }`;
+  }
+  deletePostData = (postId: string) => {
+    return axios.delete(
+      `${this.API}/api/member/v2/post/${postId}`,
+      this.Header,
+    );
+  };
+  updatePostData = (postData: PostPostDataType, postId: string) => {
+    return axios.put(
+      `${this.API}/api/member/v2/post/${postId}`,
+      postData,
+      this.Header,
+    );
+  };
+  getUserPostListTempData = (params: string) => {
+    return axios.get<RowDetailPostListType>(
+      `${this.API}/api/member/v1/${params}`,
+      this.Header,
+    );
+  };
+
+  getPostTempData = (postId: string) => {
+    return axios.get<RowPostDataType>(
+      `${this.API}/api/member/v1/myPost/temp/post/${postId}`,
+      this.Header,
+    );
+  };
+  setToken = (token: string) => {
+    this.Header.headers.Authorization = token;
+  };
+  getToken = (): string => {
+    return this.Header.headers.Authorization;
+  };
+  getAPI = (): string => {
+    return this.API;
+  };
 }
+
 export default new Api();

@@ -8,14 +8,15 @@ export const SideBarWrapper = styled(motion.div)`
   left: 0px;
   top: 0px;
   width: 400px;
-  height: 100vh;
+  height: 100%;
   @media screen and (max-width: 500px) {
     width: 100vw;
+    height: 100vh;
   }
 `;
 export const SideBarInner = styled(motion.aside)`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${(props) => props.theme.color.white};
   display: flex;
   justify-content: center;
@@ -26,16 +27,7 @@ export const SideBarInner = styled(motion.aside)`
 export const MenuToggleIconWrapper = styled.div`
   display: flex;
   border: none;
-  position: absolute;
-  top: 24px;
-  left: 55px;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    top: 17px;
-    left: 20px;
-    & svg {
-      width: 20px;
-      height: 20px;
-    }
+  @media (max-width: ${({ theme }) => theme.windowSize.tablet}px) {
   }
 `;
 /*export const SideBarBtnInner = styled.div`

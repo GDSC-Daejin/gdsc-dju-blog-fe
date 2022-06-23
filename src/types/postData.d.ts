@@ -1,4 +1,4 @@
-import { MemberDataInfoType } from './userDataType';
+import { MemberDataInfoType } from './userData';
 
 export interface DetailPostDataType {
   modifiedAt: string;
@@ -13,8 +13,10 @@ export interface DetailPostDataType {
   postId: number;
   title: string;
   likes: string[];
+  imagePath: string;
   memberInfo: AuthorProps;
 }
+
 export interface AuthorProps {
   member: {
     profileImageUrl: string;
@@ -36,6 +38,7 @@ export interface PostPostDataType {
   };
   content: string;
   postHashTags: string;
+  tmpStore: boolean | undefined;
 }
 export interface RowDetailPostListType {
   body: {

@@ -34,32 +34,25 @@ const PostTextVariants = {
       duration: 0.2,
     },
   },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.1,
+    },
+  },
 };
 
 interface BlogCardProps {
   postData: DetailPostDataType;
 }
+
 const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const [IsHovered, setIsHovered] = useState(false);
-  const [marked, setMarked] = useState(false);
-
-  const nowLogin = false;
   const navigate = useNavigate();
 
   const linkToPost = useCallback(() => {
     navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
   }, [postData]);
-
-  const setBookmarkClip = () => {
-    if (nowLogin)
-      setMarked((prev) => {
-        return !prev;
-      });
-    else {
-      alert('로그인 후 이용가능합니다');
-      navigate('/', { replace: false });
-    }
-  };
 
   const removeImageInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
@@ -69,9 +62,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     <AnimateSharedLayout>
       <BlogCardInner onClick={linkToPost}>
         {/* 북마크 */}
-        <BookMarkWrapper onClick={setBookmarkClip}>
+        {/* <BookMarkWrapper onClick={setBookmarkClip}>
           <Bookmark marked={marked} />
-        </BookMarkWrapper>
+        </BookMarkWrapper> */}
         {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}
@@ -94,9 +87,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
           <AnimatePresence>
             {IsHovered && (
               <BlogCardPostText
+                key="BlogCardPostText"
                 variants={PostTextVariants}
                 initial={'initial'}
                 animate={'visible'}
+                exit={'exit'}
               >
                 <PostText children={removeImageInContent} />
               </BlogCardPostText>

@@ -1,20 +1,16 @@
 import API from '../index';
 import useSWR from 'swr';
-import { url } from './postPagination';
+import { userPostUrlFilter } from './postPagination';
 
-async function getUserPostListData(params: string) {
-  const res = await API.getUserPostListData(params);
+async function getMyPostsData(params: string) {
+  const res = await API.getMyPostsData(params);
   return res.data.body.data;
 }
 
-export function useGetUserPostListData(
-  category: string,
-  page = 0,
-  size: number,
-) {
+export function useGetMyPostsData(category: string, page = 0, size: number) {
   const { data: userPostData } = useSWR(
-    [`myPost${url(category, page, size)}`],
-    getUserPostListData,
+    [`myPost/${userPostUrlFilter(category, page, size)}`],
+    getMyPostsData,
   );
   return { userPostData: userPostData && userPostData };
 }
