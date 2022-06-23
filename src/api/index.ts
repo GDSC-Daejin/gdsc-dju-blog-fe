@@ -146,6 +146,9 @@ export class Api {
   getToken = (): string => {
     return this.Header.headers.Authorization;
   };
+  getAPI = (): string => {
+    return this.API;
+  };
 }
 
 export default new Api();
