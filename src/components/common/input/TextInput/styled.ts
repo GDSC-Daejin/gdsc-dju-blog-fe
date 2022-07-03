@@ -7,32 +7,22 @@ export const StyledInput = styled(Field)<{ disabled?: boolean }>`
   border: 0;
   border-radius: 10px;
   height: 48px;
-  font-size: ${(props) => props.theme.fontSize.body1};
+  font-size: ${({ theme }) => theme.fontSize.body1};
   outline: none;
   flex-grow: 1;
   background: none;
   font-weight: 400;
-  color: ${(props) => props.theme.color.grey700};
+  color: ${({ theme }) => theme.color.grey700};
   &::placeholder {
-    color: ${(props) => props.theme.color.grey400};
+    color: ${({ theme }) => theme.color.grey400};
     font-weight: 300;
   }
-  ${(props) =>
-    props.disabled &&
+  ${({ disabled }) =>
+    disabled &&
     css`
-      background: ${(props) => props.theme.color.grey100};
-      color: ${(props) => props.theme.color.grey400};
+      background: ${({ theme }) => theme.colors.grey100};
+      color: ${({ theme }) => theme.colors.grey400};
     `}
-`;
-export const StyledFileInput = styled.form`
-  color: ${(props) => props.theme.color.grey500};
-  cursor: pointer;
-  overflow: hidden;
-  white-space: nowrap;
-  flex-grow: 1;
-  font-weight: 300;
-  font-size: ${(props) => props.theme.fontSize.h7};
-  padding: 0 18px;
 `;
 
 export const StyledInputWrapper = styled.div<{
@@ -50,32 +40,32 @@ export const StyledInputWrapper = styled.div<{
   border: solid 0;
   border-radius: 10px;
   box-sizing: border-box;
-  box-shadow: inset 0 0 0 1px ${(props) => props.theme.color.grey300};
-  ${(props) =>
-    props.error &&
+  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
+  ${(error) =>
+    error &&
     css`
-      box-shadow: inset 0 0 0 2px ${props.theme.color.tossRed};
+      box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
     `}
   transition: 0.3s;
   &:hover {
-    box-shadow: inset 0 0 0 2px ${(props) => props.theme.color.tossBlue200};
-    ${(props) =>
-      props.error &&
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossBlue200};
+    ${({ error }) =>
+      error &&
       css`
-        box-shadow: inset 0 0 0 2px ${props.theme.color.tossRed};
+        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
       `}
   }
   .formInput:focus {
     box-sizing: border-box;
-    box-shadow: inset 0 0 0 2px ${(props) => props.theme.color.tossBlue500};
-    ${(props) =>
-      props.error &&
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossBlue500};
+    ${({ error }) =>
+      error &&
       css`
-        box-shadow: inset 0 0 0 2px ${props.theme.color.tossRed};
+        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
       `}
   }
-  ${(props) =>
-    !props.disabled &&
+  ${({ disabled }) =>
+    !disabled &&
     css`
       &:hover {
         box-shadow: none;
@@ -93,7 +83,7 @@ export const ErrorBox = styled.div`
   height: 20px;
   display: flex;
   align-items: center;
-  color: ${(props) => props.theme.color.tossRed};
-  font-size: ${(props) => props.theme.fontSize.body2};
+  color: ${({ theme }) => theme.colors.tossRed};
+  font-size: ${({ theme }) => theme.fontSize.body2};
   padding-left: 5px;
 `;

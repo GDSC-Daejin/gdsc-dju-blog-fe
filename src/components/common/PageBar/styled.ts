@@ -7,10 +7,10 @@ export const PageBarWrapper = styled.div`
   flex-direction: row;
 `;
 export const Number = styled.p`
-  font-size: ${(props) => props.theme.fontSize.body1};
+  font-size: ${({ theme }) => theme.fontSize.body1};
 `;
 export const NumberCircle = styled(motion.div)`
-  background: ${(props) => props.theme.color.grey900};
+  background: ${({ theme }) => theme.colors.grey900};
   width: 6px;
   height: 6px;
   position: absolute;
@@ -28,13 +28,13 @@ export const NumberWrapper = styled.div<{ active: boolean }>`
   justify-content: center;
   flex-direction: column;
   position: relative;
-  color: ${(props) => props.theme.color.grey400};
+  color: ${({ theme }) => theme.colors.grey400};
   transition: all 0.3s ease-in-out;
-  ${(props) =>
-    props.active &&
+  ${({ active }) =>
+    active &&
     css`
-      border-bottom: 1px solid ${(props) => props.theme.color.grey900};
-      color: ${(props) => props.theme.color.grey900};
+      border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
+      color: ${({ theme }) => theme.colors.grey900};
     `}
   &:last-child {
     margin-right: 0;

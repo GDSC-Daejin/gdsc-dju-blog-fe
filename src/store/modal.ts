@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
-import { theme } from '../styles/theme';
+import { lightTheme } from '../styles/theme';
+
 const MODAL = 'modal';
 
 export const ModalState: IModalState = {
@@ -20,7 +21,7 @@ export type IModalType = {
     description: string;
     leftButton: string;
     rightButton: string;
-    rightColor: keyof typeof theme.color;
+    rightColor: keyof typeof lightTheme.colors;
   };
 };
 

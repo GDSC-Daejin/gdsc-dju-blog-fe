@@ -16,7 +16,7 @@ import {
 import { positionColor } from '../../../../store/positionColor';
 import GdscLogo from '../../../../assets/GdscLogo';
 import { useRecoilState } from 'recoil';
-import { MENU_KEY, menuState } from '../../../../store/menu';
+import { menuState } from '../../../../store/menu';
 
 const SideBarCategory = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const SideBarCategory = () => {
             key={id}
             onClick={() => {
               navigate(`/category/${data.subtitle}`);
-              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+              setMenu({ ...menu, isOpen: false });
             }}
           >
             <SideCategoryCircleWrapper

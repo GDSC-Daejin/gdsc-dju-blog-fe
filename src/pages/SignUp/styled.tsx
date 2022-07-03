@@ -10,7 +10,7 @@ export const SignUpContentWrapper = styled.div`
 export const SignUpFormTitle = styled.h4`
   font-style: normal;
   font-weight: 700;
-  font-size: ${(props) => props.theme.fontSize.h4};
+  font-size: ${({ theme }) => theme.fontSize.h4};
 `;
 
 export const SignUpForm = styled.form`
@@ -31,12 +31,12 @@ export const SignUpErrorMessage = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  color: ${(props) => props.theme.color.tossRed};
+  color: ${({ theme }) => theme.colors.tossRed};
   bottom: -20px;
   span {
     font-style: normal;
     font-weight: 400;
-    font-size: ${(props) => props.theme.fontSize.body3};
+    font-size: ${({ theme }) => theme.fontSize.body3};
   }
 `;
 
@@ -48,10 +48,10 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-size: ${(props) => props.theme.fontSize.h7};
+  font-size: ${({ theme }) => theme.fontSize.h7};
   font-style: normal;
   font-weight: 500;
-  color: ${(props) => props.theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
 `;
 
 export const SignUpInputLabelCircle = styled.div`
@@ -66,15 +66,15 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   height: 48px;
   padding: 8px 20px;
   border: 1px solid
-    ${(props) =>
-      props.errorCheck ? props.theme.color.tossRed : props.theme.color.grey400};
+    ${({ theme, errorCheck }) =>
+      errorCheck ? theme.colors.tossRed : theme.colors.grey400};
   box-sizing: border-box;
   border-radius: 10px;
   ::placeholder {
-    color: ${(props) => props.theme.color.grey400};
+    color: ${({ theme }) => theme.colors.grey400};
   }
   ::-webkit-input-placeholder {
-    color: ${(props) => props.theme.color.grey400};
+    color: ${({ theme }) => theme.colors.grey400};
   }
   &:hover {
     filter: drop-shadow(0px 0px 2px #90c2ff);
@@ -88,17 +88,17 @@ export const SignUpButton = styled.button<{ isValid: boolean }>`
   align-content: flex-end;
   width: 111px;
   height: 36px;
-  background-color: ${(props) =>
-    props.isValid ? '#4385F3' : props.theme.color.tossBlue200};
+  background-color: ${({ isValid, theme }) =>
+    isValid ? '#4385F3' : theme.colors.tossBlue200};
   color: #fff;
-  border: 1px solid ${(props) => props.theme.color.grey200};
+  border: 1px solid ${({ theme }) => theme.colors.grey200};
   box-sizing: border-box;
   box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
   border-radius: 18px;
   font-style: normal;
   font-weight: 500;
-  font-size: ${(props) => props.theme.fontSize.body2};
+  font-size: ${({ theme }) => theme.fontSize.body2};
   text-align: center;
   align-self: flex-end;
-  cursor: ${(props) => (props.isValid ? 'pointer' : 'not-allowed')};
+  cursor: ${({ isValid }) => (isValid ? 'pointer' : 'not-allowed')};
 `;

@@ -9,17 +9,28 @@ export const CategoryText = styled.div<{ active?: boolean }>`
   ${(props) =>
     props.active &&
     css`
-      color: ${(props) => props.theme.color.grey900};
+      color: ${(props) => props.theme.colors.grey900};
     `}
   padding: 2px 0;
 `;
-export const CategoryTextWrapper = styled(motion.div)`
+export const CategoryTextWrapper = styled(motion.div)<{ isActive: boolean }>`
   cursor: pointer;
-  color: ${(props) => props.theme.color.grey300};
+  color: ${({ theme }) => theme.colors.grey300};
   position: relative;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
+    transform: translateY(-10px);
+  }
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
+      color: ${({ theme }) => theme.colors.grey900};
+    `}
 `;
 export const CategoryMenuWrapper = styled(motion.div)`
   display: flex;
@@ -27,6 +38,7 @@ export const CategoryMenuWrapper = styled(motion.div)`
   flex-direction: row;
   width: 713px;
   justify-content: space-between;
+  margin-top: 100px;
 `;
 export const CategoryCircleWrapper = styled(motion.div)`
   position: absolute;
@@ -37,11 +49,11 @@ export const CategoryCircleWrapper = styled(motion.div)`
   justify-content: center;
   opacity: 0;
 `;
-export const CategoryCircle = styled.div<{ color: string }>`
+export const CategoryCircle = styled.div<{ colors: string }>`
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: ${(props) => props.color};
+  background: ${(props) => props.colors};
 `;
 export const GDSCLogoWrapper = styled.div`
   position: absolute;

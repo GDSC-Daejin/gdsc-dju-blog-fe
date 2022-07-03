@@ -14,25 +14,25 @@ export const AlertIcon = styled.img`
   margin-right: 3px;
 `;
 export const AlertText = styled.div`
-  font-size: ${(props) => props.theme.fontSize.body1};
+  font-size: ${({ theme }) => theme.fontSize.body1};
   opacity: 100%;
   margin-left: 5px;
   display: flex;
   align-items: center;
-  color: ${(props) => props.theme.color.grey800};
+  color: ${({ theme }) => theme.colors.grey800};
   @media (max-width: 500px) {
-    font-size: ${(props) => props.theme.fontSize.body1};
+    font-size: ${({ theme }) => theme.fontSize.body1};
   }
   @media (max-width: 320px) {
-    font-size: ${(props) => props.theme.fontSize.body2};
+    font-size: ${({ theme }) => theme.fontSize.body2};
   }
 `;
 export const AlertInner = styled(motion.div)`
   position: fixed;
   background: #fff;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.color.grey300};
-  box-shadow: inset 0 0 0 1px ${(props) => props.theme.color.grey300};
+  border: 1px solid ${({ theme }) => theme.colors.grey300};
+  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
   padding: 7px 20px;
   top: 100px;
   right: 7%;

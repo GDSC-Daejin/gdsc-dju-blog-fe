@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { lightColors } from '../../../styles/lightColors';
 
 export const ProfileWrapper = styled.section`
   display: flex;
@@ -15,8 +16,8 @@ export const ProfileDetailWrapper = styled.section`
   flex-direction: column;
 `;
 export const Role = styled.p`
-  color: ${(props) => props.theme.color.grey500};
-  font-size: ${(props) => props.theme.fontSize.body1};
+  color: ${({ theme }) => theme.colors.grey500};
+  font-size: ${({ theme }) => theme.fontSize.body1};
   font-family: 'Google Sans', sans-serif;
 `;
 export const BlogNameWrapper = styled.div`
@@ -28,17 +29,22 @@ export const BlogNameWrapper = styled.div`
 `;
 export const BlogName = styled.h2`
   margin-right: 10px;
-  font-size: ${(props) => props.theme.fontSize.h2};
+  font-size: ${({ theme }) => theme.fontSize.h2};
   font-weight: bold;
   font-family: 'Google Sans', sans-serif;
   line-height: 1.2;
 `;
 export const BlogNamePosition = styled.p<{ color: string }>`
-  font-size: ${(props) => props.theme.fontSize.h5};
-  color: ${(props) => props.color};
+  font-size: ${({ theme }) => theme.fontSize.h5};
+
   font-family: 'Google Sans', sans-serif;
   position: relative;
   bottom: -7px;
+  ${({ color }) =>
+    color &&
+    css`
+      color: ${({ theme }) => theme.colors[color as keyof typeof lightColors]};
+    `}
 `;
 export const SettingIconWrapper = styled.div`
   margin-left: 43px;
@@ -48,19 +54,11 @@ export const SettingIconWrapper = styled.div`
   cursor: pointer;
 `;
 export const IntroduceText = styled.p`
-  font-size: ${(props) => props.theme.fontSize.body1};
-  color: ${(props) => props.theme.color.grey900};
+  font-size: ${({ theme }) => theme.fontSize.body1};
+  color: ${({ theme }) => theme.colors.grey900};
   max-width: 555px;
 `;
-export const HashTageSection = styled.section`
-  margin-top: 25px;
-  display: flex;
-  max-width: 555px;
-  flex-wrap: wrap;
-`;
-export const HashTageWrapper = styled.div`
-  margin-bottom: 12px;
-`;
+
 export const TopMenuWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -86,7 +84,7 @@ export const NoPosts = styled.div`
   align-items: center;
   justify-content: center;
   font-size: ${({ theme }) => theme.fontSize.h5};
-  color: ${({ theme }) => theme.color.grey400};
+  color: ${({ theme }) => theme.colors.grey400};
 `;
 export const PostCardWrapper = styled.div`
   display: flex;

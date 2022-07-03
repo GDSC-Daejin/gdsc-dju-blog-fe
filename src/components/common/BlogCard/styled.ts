@@ -30,7 +30,7 @@ export const BlogCardThumbnail = styled.img`
 export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
   display: flex;
   position: absolute;
-  bottom: ${(props) => (props.IsHovered ? '254px' : '92px')};
+  bottom: ${({ IsHovered }) => (IsHovered ? '254px' : '92px')};
   transition: all 0.3s ease;
   left: 9px;
 `;
@@ -54,23 +54,23 @@ export const BlogCardTag = styled.div`
 `;
 export const BlogCardBottomBox = styled(motion.div)<{ isHovered: boolean }>`
   position: absolute;
-  transition: all 0.3s ease-in;
   border-radius: 10px;
   width: 100%;
   bottom: 0;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.cardBackground};
   padding: 8px 20px 12px;
-  gap: ${(props) => (props.isHovered ? '170px' : '8px')};
+  gap: ${({ isHovered }) => (isHovered ? '170px' : '8px')};
   transition: all 0.3s ease;
   cursor: pointer;
+  overflow: hidden;
 `;
 export const BlogCardTitle = styled(motion.h6)`
-  font-size: ${(props) => props.theme.fontSize.h6};
+  font-size: ${({ theme }) => theme.fontSize.h6};
   font-weight: 400;
-  color: ${(props) => props.theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -85,7 +85,7 @@ export const BlogCardAuthorWrapper = styled.div`
   align-items: center;
 `;
 export const BlogCardAuthorImage = styled.img`
-  background: ${(props) => props.theme.color.grey400};
+  background: ${({ theme }) => theme.colors.grey400};
   border-radius: 100%;
   margin-right: 7px;
   height: 18px;
@@ -95,89 +95,35 @@ export const BlogCardPostText = styled(motion.div)`
   position: absolute;
   transform: translate(-50%, 0%);
   top: 53px;
-  font-size: 12px;
-  width: 208px;
+  font-size: ${({ theme }) => theme.fontSize.body3}
   min-height: 120px;
   max-height: 120px;
   word-break: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-export const PostText = styled(ReactMarkdown)`
-  height: 100%;
-  div,
-  span,
-  applet,
-  object,
-  iframe,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  blockquote,
-  pre,
-  a,
-  abbr,
-  acronym,
-  address,
-  big,
-  cite,
-  code,
-  del,
-  dfn,
-  em,
-  img,
-  ins,
-  kbd,
-  q,
-  s,
-  samp,
-  small,
-  strike,
-  strong,
-  sub,
-  sup,
-  tt,
-  var,
-  b,
-  u,
-  i,
-  center,
-  dl,
-  dt,
-  dd,
-  ol,
-  ul,
-  li,
-  fieldset,
-  form,
-  label,
-  legend {
-    font-size: ${({ theme }) => theme.fontSize.body3};
-    word-break: break-word;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  word-break: break-word;
+export const PostText = styled.article`
+  width: 208px;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -webkit-line-clamp: 9;
+  color: ${({ theme }) => theme.colors.grey700};
 `;
 
 export const BlogCardSubText = styled.div<{
   subText?: boolean;
   bold?: boolean;
 }>`
-  font-size: ${(props) => props.theme.fontSize.body3};
-  ${(props) =>
-    props.subText &&
+  font-size: ${({ theme }) => theme.fontSize.body3};
+  ${({ subText }) =>
+    subText &&
     css`
-      color: ${(props) => props.theme.color.grey400};
+      color: ${({ theme }) => theme.colors.grey400};
     `}
-  ${(props) =>
-    props.bold &&
+  ${({ bold }) =>
+    bold &&
     css`
       font-weight: 600;
     `}
@@ -185,8 +131,4 @@ export const BlogCardSubText = styled.div<{
   &:last-child {
     margin-right: 0;
   }
-`;
-export const SilverCard = styled.div`
-  width: 248px;
-  height: 294px;
 `;

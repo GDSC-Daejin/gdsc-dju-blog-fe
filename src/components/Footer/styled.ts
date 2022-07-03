@@ -34,21 +34,20 @@ export const CreatorTitleWrapper = styled.thead`
   min-width: 100px;
 `;
 export const CreatorTitle = styled.tr`
-  color: ${(props) => props.theme.color.grey700};
+  color: ${({ theme }) => theme.colors.grey700};
   font-weight: bold;
-  font-size: ${(props) => props.theme.fontSize.body1};
+  font-size: ${({ theme }) => theme.fontSize.body1};
  
   @media (max-width: 512px) {
-    font-size: ${(props) => props.theme.fontSize.body2};
+    font-size: ${({ theme }) => theme.fontSize.body2};
   }
 }
 `;
 export const CreatorName = styled.th`
-  color: ${(props) => props.theme.color.grey600};
-  font-size: ${(props) => props.theme.fontSize.body2};
+  color: ${({ theme }) => theme.colors.grey600};
+  font-size: ${({ theme }) => theme.fontSize.body2};
   display: flex;
   justify-content: flex-start;
-  //display: inline-block;
   max-width: 120px;
   margin-bottom: 6px;
  font-weight: normal;
@@ -94,7 +93,7 @@ export const StyledTr = styled.tr`
 export const StyledColumn = styled.div`
   width: 1px;
   height: 100px;
-  background: ${(props) => props.theme.color.grey300};
+  background: ${({ theme }) => theme.colors.grey300};
   margin: 0 50px;
   border: 0 solid;
   @media (max-width: 720px) {
@@ -119,6 +118,6 @@ export const Copyright = styled.span`
   display: flex;
   right: 10px;
   bottom: 10px;
-  font-size: ${(props) => props.theme.fontSize.body3};
-  color: ${(props) => props.theme.color.grey600};
+  font-size: ${({ theme }) => theme.fontSize.body3};
+  color: ${({ theme }) => theme.colors.grey600};
 `;

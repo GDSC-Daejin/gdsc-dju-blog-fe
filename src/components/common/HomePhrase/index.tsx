@@ -6,18 +6,18 @@ import { homePhraseData } from '../../../api/Mocks/homePhraseData';
 const From = styled.div`
   font-size: ${({ theme }) => theme.fontSize.h7};
   margin-bottom: 5px;
-  color: ${({ theme }) => theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
 `;
 const Phrase = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.h3};
   margin-bottom: 26px;
-  color: ${({ theme }) => theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
   font-weight: 500;
   width: 600px;
 `;
 const By = styled.div`
   font-size: ${({ theme }) => theme.fontSize.body1};
-  color: ${({ theme }) => theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
 `;
 const HomePhrase: React.FC = () => {
   const [phrase, setPhrase] = useState(homePhraseData[0]);

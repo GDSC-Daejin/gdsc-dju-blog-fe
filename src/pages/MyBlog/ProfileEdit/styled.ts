@@ -15,8 +15,8 @@ export const FormInner = styled.form`
   flex-direction: column;
 `;
 export const FormTitle = styled.h3`
-  color: ${(props) => props.theme.color.grey900};
-  font-size: ${(props) => props.theme.fontSize.h3};
+  color: ${({ theme }) => theme.colors.grey900};
+  font-size: ${({ theme }) => theme.fontSize.h3};
 `;
 export const FormTitleWrapper = styled.div`
   margin-top: 60px;
@@ -27,13 +27,13 @@ export const FormTitleWrapper = styled.div`
 export const FormLabel = styled.label<{ essential?: boolean }>`
   padding: 5px 0;
   display: inline-block;
-  font-size: ${(props) => props.theme.fontSize.h7};
+  font-size: ${({ theme }) => theme.fontSize.h7};
   font-weight: 400;
   line-height: 1.5;
-  color: ${(props) => props.theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
    {
-    ${(props) =>
-      props.essential &&
+    ${({ essential }) =>
+      essential &&
       css`
         &::after {
           display: inline-block;
@@ -41,7 +41,7 @@ export const FormLabel = styled.label<{ essential?: boolean }>`
           content: '';
           width: 6px;
           height: 6px;
-          background-color: ${(props) => props.theme.color.tossRed};
+          background-color: ${({ theme }) => theme.colors.tossRed};
           border-radius: 3px;
         }
       `}

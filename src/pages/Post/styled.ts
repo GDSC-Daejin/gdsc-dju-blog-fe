@@ -1,16 +1,15 @@
-import { Viewer } from '@toast-ui/react-editor';
 import styled, { css } from 'styled-components';
-import { theme } from '../../styles/theme';
-
+import { lightTheme } from '../../styles/theme';
 export const PostHead = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 110px;
   margin-bottom: 15px;
 `;
+
 export const PostTitle = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.h4};
-  color: ${({ theme }) => theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
   width: 100%;
   word-break: break-word;
   margin-bottom: 23px;
@@ -50,7 +49,7 @@ export const AuthorImage = styled.img`
   margin-right: 4px;
 `;
 export const Author = styled.div<{
-  color?: keyof typeof theme.color;
+  color?: keyof typeof lightTheme.colors;
   marginRight?: number;
 }>`
   font-size: ${({ theme }) => theme.fontSize.body1};
@@ -58,7 +57,7 @@ export const Author = styled.div<{
   ${({ color }) =>
     color &&
     css`
-      color: ${theme.color[color as keyof typeof theme.color]};
+      color: ${({ theme }) => theme.colors[color]};
     `};
   ${({ marginRight }) =>
     marginRight &&
@@ -68,7 +67,7 @@ export const Author = styled.div<{
 `;
 export const Date = styled.p`
   font-size: ${({ theme }) => theme.fontSize.body1};
-  color: ${({ theme }) => theme.color.grey500};
+  color: ${({ theme }) => theme.colors.grey500};
   font-weight: 400;
 `;
 export const HashTageSection = styled.section`
@@ -83,7 +82,7 @@ export const CategoryWrapper = styled.div`
 `;
 export const Category = styled.div`
   font-size: ${({ theme }) => theme.fontSize.body1};
-  color: ${({ theme }) => theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
   font-weight: 400;
   flex-wrap: wrap;
   border-bottom: 1px solid black;

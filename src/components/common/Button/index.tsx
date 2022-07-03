@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTheme } from 'styled-components';
 import { StyledButton } from './styled';
-import { theme } from '../../../styles/theme';
+import { lightColors } from '../../../styles/lightColors';
+import { lightTheme } from '../../../styles/theme';
 
 interface ButtonProps {
   text: string;
-  color?: keyof typeof theme.color;
+  color?: keyof typeof lightTheme.colors;
   disable?: boolean;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
@@ -16,6 +18,7 @@ const GDSCButtonL: React.FC<ButtonProps> = ({
   onClick,
   type,
 }) => {
+  const theme = useTheme();
   return (
     <StyledButton
       color={color ? 'white' : 'grey900'}

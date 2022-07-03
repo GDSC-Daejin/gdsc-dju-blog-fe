@@ -1,10 +1,17 @@
-import { DefaultTheme } from 'styled-components';
 import { windowSize } from './windowSize';
 import { fontSize } from './fontSize';
-import { assetColors } from './assetColors';
 
-export const theme: DefaultTheme = {
+import { lightColors } from './lightColors';
+import { darkColors } from './darkColors';
+import { DefaultTheme } from 'styled-components';
+
+export const darkTheme: DefaultTheme = {
+  colors: darkColors,
   windowSize: windowSize,
   fontSize: fontSize,
-  color: assetColors,
+};
+export const lightTheme: DefaultTheme = {
+  colors: lightColors,
+  windowSize: windowSize,
+  fontSize: fontSize,
 };

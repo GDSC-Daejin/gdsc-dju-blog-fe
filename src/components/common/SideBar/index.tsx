@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
-  SideBarWrapper,
-  SideBarInner,
   GrayBox,
-  SideBarDesign,
-  MenuToggleIconWrapper,
   MobileMenuIconWrapper,
+  SideBarDesign,
+  SideBarInner,
+  SideBarWrapper,
 } from './styled';
 import MenuToggleIcon from '../MenuToggleIcon';
 import SideBarLogin from './SideBarLogin';
@@ -50,10 +49,8 @@ export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
   const [cookies] = useCookies(['user']);
   const [token, setTokenCookie, removeTokenCookie] = useCookies(['token']);
-  const menuHandler = () => {
-    const menuState = menu.appMenu;
-    setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
-  };
+
+  console.log(menu);
   const { userData } = useGetUserData(token.token);
   return (
     <>
@@ -62,9 +59,6 @@ export const SideBar = () => {
         variants={SideBarAnimation}
         animate={menu.appMenu ? 'isActive' : 'isUnActive'}
       >
-        <MobileMenuIconWrapper onClick={() => menuHandler()}>
-          <MenuToggleIcon active="open" />
-        </MobileMenuIconWrapper>
         <SideBarInner>
           <SideBarDesign>
             {cookies.user ? (

@@ -10,7 +10,6 @@ import {
   PageBarWrapper,
 } from './styled';
 import { useNavigate } from 'react-router';
-import { createSearchParams } from 'react-router-dom';
 
 const circleMotion = {
   isActive: {

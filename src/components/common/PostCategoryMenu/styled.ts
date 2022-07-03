@@ -2,22 +2,22 @@ import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 
 export const PostCategoryText = styled(motion.div)<{ active?: boolean }>`
-  font-size: ${(props) => props.theme.fontSize.body1};
+  font-size: ${({ theme }) => theme.fontSize.body1};
 
   font-weight: normal;
   font-family: 'Google Sans', sans-serif;
   ${(props) =>
     props.active &&
     css`
-      color: ${(props) => props.theme.color.grey900};
+      color: ${({ theme }) => theme.colors.grey900};
     `}
   padding: 2px 0;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-   font-size: ${(props) => props.theme.fontSize.body2};
+  @media screen and (max-width: ${({ theme }) => theme.windowSize.tablet}px) {
+   font-size: ${({ theme }) => theme.fontSize.body2};
 `;
 export const PostCategoryTextWrapper = styled(motion.div)`
   cursor: pointer;
-  color: ${(props) => props.theme.color.grey300};
+  color: ${({ theme }) => theme.colors.grey300};
   position: relative;
   display: flex;
   flex-direction: column;

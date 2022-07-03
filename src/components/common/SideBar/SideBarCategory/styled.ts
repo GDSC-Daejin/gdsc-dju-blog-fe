@@ -1,21 +1,22 @@
 import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
+import { lightColors } from '../../../../styles/lightColors';
 
 export const SideCategoryText = styled(motion.div)<{ active?: boolean }>`
-  font-size: ${(props) => props.theme.fontSize.h7};
+  font-size: ${({ theme }) => theme.fontSize.h7};
   font-weight: normal;
   font-family: 'Google Sans', sans-serif;
-  ${(props) =>
-    props.active &&
+  ${(active) =>
+    active &&
     css`
-      color: ${(props) => props.theme.color.grey900};
+      color: ${({ theme }) => theme.colors.grey900};
     `}
   margin-bottom: 8px;
-  border-bottom: 1px solid ${(props) => props.theme.color.white};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.white};
 `;
 export const SideCategoryTextWrapper = styled(motion.div)`
   cursor: pointer;
-  color: ${(props) => props.theme.color.grey300};
+  color: ${({ theme }) => theme.colors.grey300};
   position: relative;
   display: flex;
   margin-bottom: 24px;
@@ -37,11 +38,18 @@ export const SideCategoryCircleWrapper = styled(motion.div)`
   justify-content: center;
   opacity: 0;
 `;
-export const SideCategoryCircle = styled.div<{ color: string }>`
+export const SideCategoryCircle = styled.div<{
+  color: string;
+}>`
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: ${(props) => props.color};
+  ${({ color }) =>
+    color &&
+    css`
+      background: ${({ theme }) =>
+        theme.colors[color as keyof typeof lightColors]};
+    `}
 `;
 export const SideBarGDSCLogoWrapper = styled(motion.div)`
   position: absolute;

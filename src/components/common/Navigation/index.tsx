@@ -2,59 +2,42 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  BlogWrapper,
-  DeskNavigationWrapper,
-  GdscLogoWrapper,
-  LogoWrapper,
-  NavigationDesign,
-  NavigationInner,
-  NavigationWrapper,
+  BlogLogo,
+  NavDesign,
+  NavInner,
+  NavTask,
+  NavTaskWrapper,
+  NavWrapper,
   Search,
   SearchInputWrapper,
-  SearchWrapper,
-  VectorWrapper,
+  StyledLogoWrapper,
 } from './styled';
-import MainLogo from '../MainLogo';
-import { MENU_KEY, menuState } from '../../../store/menu';
+import { menuState } from '../../../store/menu';
 import MenuToggleIcon from '../MenuToggleIcon';
 import { useRecoilState } from 'recoil';
 import Vector from '../../../assets/Vector';
-import GdscLogo from '../../../assets/GdscLogo';
-import { MenuToggleIconWrapper } from '../SideBar/styled';
+
+import SideBar from '../SideBar';
+import GdscBlogLogo from '../../../assets/GdscBlogLogo';
 
 function Navigation() {
-  const navigate = useNavigate();
-  const [menu, setMenu] = useRecoilState(menuState);
-  const menuHandler = () => {
-    const menuState = menu.appMenu;
-    setMenu({ ...menu, [MENU_KEY.APP_MENU]: !menuState });
-  };
   return (
-    <NavigationDesign>
-      <NavigationWrapper>
-        <NavigationInner>
-          <DeskNavigationWrapper>
-            <BlogWrapper>
-              <MenuToggleIconWrapper onClick={() => menuHandler()}>
-                <MenuToggleIcon active="closed" />
-              </MenuToggleIconWrapper>
-              <LogoWrapper onClick={() => navigate('/')}>
-                <MainLogo />
-              </LogoWrapper>
-            </BlogWrapper>
-            <GdscLogoWrapper onClick={() => navigate('/')}>
-              <GdscLogo />
-            </GdscLogoWrapper>
-            <VectorWrapper>
-              <Vector />
-            </VectorWrapper>
-            <SearchWrapper>
-              <SearchInput />
-            </SearchWrapper>
-          </DeskNavigationWrapper>
-        </NavigationInner>
-      </NavigationWrapper>
-    </NavigationDesign>
+    <NavDesign>
+      <NavWrapper>
+        <NavInner>
+          <NavTaskWrapper>
+            <NavTask>
+              <MenuToggleIcon />
+              <StyledLogoWrapper href={'/'}>
+                <GdscBlogLogo />
+              </StyledLogoWrapper>
+            </NavTask>
+          </NavTaskWrapper>
+          <SearchInput />
+        </NavInner>
+      </NavWrapper>
+      <SideBar />
+    </NavDesign>
   );
 }
 

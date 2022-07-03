@@ -5,8 +5,8 @@ export const SideBarWrapper = styled(motion.div)`
   display: flex;
   position: fixed;
   z-index: 1009;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   width: 400px;
   height: 100%;
   @media screen and (max-width: 500px) {
@@ -17,7 +17,7 @@ export const SideBarWrapper = styled(motion.div)`
 export const SideBarInner = styled(motion.aside)`
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.color.white};
+  background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   justify-content: center;
   @media screen and (max-width: 500px) {
@@ -30,42 +30,20 @@ export const MenuToggleIconWrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.windowSize.tablet}px) {
   }
 `;
-/*export const SideBarBtnInner = styled.div`
-  position: absolute;
-  left: 55px;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
-    left: 20px;
-`;
-export const SideBarBtnWrapper = styled.div`
-  position: fixed;
-  top: 24px;
-  z-index: 1002;
-  @media screen and (max-width: ${(props) => props.theme.windowSize.mobile}px) {
-    top: 17px;
-`;*/
+
 export const SideBarText = styled(motion.a)`
   display: block;
   margin: 20px;
-  color: ${(props) => props.theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
   text-decoration: none;
-  font-size: ${(props) => props.theme.fontSize.h7};
+  font-size: ${({ theme }) => theme.fontSize.h7};
   font-weight: 600;
 `;
-/*export const SideBarBtnIconWrapper = styled.div`
-  border: none;
-  color: ${(props) => props.theme.color.white};
-  cursor: pointer;
-  & svg {
-    @media screen and (max-width: ${(props) =>
-      props.theme.windowSize.tablet}px) {
-      width: 20px;
-      height: 20px;
-  }
-`;*/
+
 export const GrayBox = styled(motion.div)`
   display: flex;
   position: fixed;
-  background: ${(props) => props.theme.color.grey900};
+  background: ${({ theme }) => theme.colors.grey900};
   right: 0;
   top: 0;
   bottom: 0;
@@ -99,20 +77,20 @@ export const ProfileInformation = styled.div`
 export const ProfileName = styled.div`
   display: flex;
   padding-right: 10px;
-  font-size: ${(props) => props.theme.fontSize.h4};
+  font-size: ${({ theme }) => theme.fontSize.h4};
   font-weight: bold;
   @media screen and (max-width: 500px) {
-    font-size: ${(props) => props.theme.fontSize.h5};
+    font-size: ${({ theme }) => theme.fontSize.h5};
   }
 `;
 export const ProfileJobPosition = styled.div`
   display: flex;
   padding-right: 10px;
   padding-bottom: 5px;
-  font-size: ${(props) => props.theme.fontSize.body1};
-  color: ${(props) => props.theme.color.grey600};
+  font-size: ${({ theme }) => theme.fontSize.body1};
+  color: ${({ theme }) => theme.colors.grey600};
   @media screen and (max-width: 500px) {
-    font-size: ${(props) => props.theme.fontSize.body3};
+    font-size: ${({ theme }) => theme.fontSize.body3};
   }
 `;
 export const SettingIconWrapper = styled.div`
@@ -134,7 +112,7 @@ export const BottomButtonWrapper = styled.div`
   display: flex;
   margin-bottom: 40px;
 `;
-export const WrittingButtonWrapper = styled.div`
+export const WriteButtonWrapper = styled.div`
   display: flex;
   margin-right: 16px;
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const ModalInner = styled(motion.div)`
   margin: 0 auto;
-  background: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
   border-radius: 10px;
   display: flex;
@@ -17,7 +17,6 @@ export const ModalContent = styled.div`
   text-align: center;
 `;
 export const ModalContentWrapper = styled.div`
-  padding: 0 46px;
   padding-top: 40px;
   padding-bottom: 20px;
   display: flex;

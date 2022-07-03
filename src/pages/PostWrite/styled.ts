@@ -26,9 +26,9 @@ export const PostTitle = styled.input`
   border: none;
   width: 100%;
   padding-bottom: 10px;
-  font-size: ${(props) => props.theme.fontSize.h4};
+  font-size: ${({ theme }) => theme.fontSize.h4};
   &::placeholder {
-    color: ${(props) => props.theme.color.grey400};
+    color: ${({ theme }) => theme.colors.grey400};
   }
   @media screen and (max-width: 530px) {
     font-size: ${(props) => props.theme.fontSize.h6};
@@ -38,11 +38,11 @@ export const PostHashtag = styled.input`
   display: flex;
   font-size: ${(props) => props.theme.fontSize.body1};
   &::placeholder {
-    color: ${(props) => props.theme.color.grey400};
+    color: ${({ theme }) => theme.colors.grey400};
   }
   border: none;
   @media screen and (max-width: 530px) {
-    font-size: ${(props) => props.theme.fontSize.body3};
+    font-size: ${({ theme }) => theme.fontSize.body3};
 `;
 export const PostGDSCButtonWrapper = styled.div`
   width: 100%;
@@ -61,7 +61,7 @@ export const PostBottomButtonLWrapper = styled.div`
   @media screen and (max-width: 530px) {
     display: none;
   }
-  @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
+  @media screen and (max-width: ${({ theme }) => theme.windowSize.tablet}px) {
     display: none;
 `;
 export const PostBottomButtonCWrapper = styled.div`
@@ -103,5 +103,5 @@ export const ThumbnailText = styled.div`
   position: absolute;
   top: 50px;
   font-size: ${({ theme }) => theme.fontSize.body3};
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.colors.white};
 `;

@@ -15,11 +15,11 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-size: ${(props) => props.theme.fontSize.body4};
+  font-size: ${({ theme }) => theme.fontSize.body4};
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0em;
-  color: ${(props) => props.theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
 `;
 
 export const CheckCircleWrapper = styled.div<{
@@ -28,10 +28,8 @@ export const CheckCircleWrapper = styled.div<{
   display: flex;
   align-items: center;
   path {
-    fill: ${(props) =>
-      props.checkState
-        ? props.theme.color.googleGreen
-        : props.theme.color.grey300};
+    fill: ${({ checkState, theme }) =>
+      checkState ? theme.colors.googleGreen : theme.colors.grey300};
   }
 `;
 
@@ -50,19 +48,19 @@ export const SignUpInputBox = styled.input<{ errorCheck: boolean }>`
   width: 512px;
   height: 48px;
   padding: 8px 20px;
-  font-size: ${(props) => props.theme.fontSize.body1};
+  font-size: ${({ theme }) => theme.fontSize.body1};
   border: 1px solid
-    ${(props) =>
-      props.errorCheck ? props.theme.color.tossRed : props.theme.color.grey400};
+    ${({ errorCheck, theme }) =>
+      errorCheck ? theme.colors.tossRed : theme.colors.grey400};
   box-sizing: border-box;
   border-radius: 10px;
   ::placeholder {
     font-weight: normal;
-    font-size: ${(props) => props.theme.fontSize.body1};
-    color: ${(props) => props.theme.color.grey400};
+    font-size: ${({ theme }) => theme.fontSize.body1};
+    color: ${({ theme }) => theme.colors.grey400};
   }
   ::-webkit-input-placeholder {
-    color: ${(props) => props.theme.color.grey400};
+    color: ${({ theme }) => theme.colors.grey400};
   }
   &:hover {
     filter: drop-shadow(0px 0px 2px #90c2ff);
@@ -78,10 +76,10 @@ export const NickNameCheckButton = styled.button`
   top: 7px;
   width: 90px;
   height: 34px;
-  font-size: ${(props) => props.theme.fontSize.body4};
-  background-color: ${(props) => props.theme.color.grey500};
+  font-size: ${({ theme }) => theme.fontSize.body4};
+  background-color: ${({ theme }) => theme.colors.grey500};
   border-radius: 17px;
-  color: ${(props) => props.theme.color.grey50};
+  color: ${({ theme }) => theme.colors.grey50};
   border: 0px;
 `;
 
@@ -90,12 +88,12 @@ export const SignUpErrorMessage = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  color: ${(props) => props.theme.color.tossRed};
+  color: ${({ theme }) => theme.colors.tossRed};
   bottom: -20px;
   span {
     font-style: normal;
     font-weight: 400;
-    font-size: ${(props) => props.theme.fontSize.body5};
+    font-size: ${({ theme }) => theme.fontSize.body5};
     line-height: 17px;
     letter-spacing: -0.03em;
   }

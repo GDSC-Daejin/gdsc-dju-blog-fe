@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { ILoginUserData } from '../../../../types/userData';
+import React from 'react';
 import {
   BottomButtonWrapper,
   LogoutButtonWrapper,
@@ -9,19 +8,15 @@ import {
   ProfileJobPosition,
   ProfileName,
   SettingIconWrapper,
-  WrittingButtonWrapper,
+  WriteButtonWrapper,
 } from '../styled';
 import ProfileImage from '../../ProfileImage';
-import MockProfile from '../../../../assets/MockProfile.png';
 import SettingIcon from '../../../../assets/SettingIcon';
 import { GDSCButton, GDSCButtonL } from '../../Button';
-import { userData } from '../../../../api/Mocks/userData';
 import { useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
-import { MENU_KEY, menuState } from '../../../../store/menu';
+import { menuState } from '../../../../store/menu';
 import { useCookies } from 'react-cookie';
-import { alertState } from '../../../../store/alert';
-import { useGetUserData } from '../../../../api/hooks/useGetUserData';
 import { IUserDataType } from '../../../../types/userDataType';
 
 const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
@@ -64,7 +59,7 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
             <SettingIconWrapper
               onClick={() => {
                 navigate(`/${userData.memberInfo.nickname}/edit`);
-                setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+                setMenu({ ...menu, isOpen: false });
               }}
             >
               <SettingIcon />
@@ -75,22 +70,21 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
               text="내 블로그"
               onClick={() => {
                 navigate(`/${userData.memberInfo.nickname}`);
-                setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+                setMenu({ ...menu, isOpen: false });
               }}
             />
           </MyBlogButtonWrapper>
           <BottomButtonWrapper>
-            <WrittingButtonWrapper>
+            <WriteButtonWrapper>
               <GDSCButton
                 text="글쓰기"
                 disable={postBlock}
                 onClick={() => {
                   !postBlock && navigate(`/post/write`);
-                  !postBlock &&
-                    setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
+                  !postBlock && setMenu({ ...menu, isOpen: false });
                 }}
               />
-            </WrittingButtonWrapper>
+            </WriteButtonWrapper>
             <LogoutButtonWrapper>
               <GDSCButton text="로그아웃" onClick={handleLogout} />
             </LogoutButtonWrapper>

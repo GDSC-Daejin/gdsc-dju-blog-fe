@@ -12,7 +12,7 @@ export const SignUpSelectBoxInner = styled.div`
   position: relative;
   width: 512px;
   height: 48px;
-  background-color: ${(props) => props.theme.color.white};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 export const SignUpDefaultSelectBox = styled.input`
@@ -25,17 +25,17 @@ export const SignUpSelectBox = styled.ul<{
 }>`
   position: relative;
   width: 512px;
-  height: ${(props) => (props.BoxOpen ? '288px' : '48px')};
+  height: ${({ theme, BoxOpen }) => (BoxOpen ? '288px' : '48px')};
   box-sizing: border-box;
   z-index: 30;
-  background-color: ${(props) => props.theme.color.white};
+  background-color: ${({ theme }) => theme.colors.white};
   list-style-type: none;
   overflow: hidden;
-  border: 1px solid ${(props) => props.theme.color.grey400};
+  border: 1px solid ${({ theme }) => theme.colors.grey400};
   border-radius: 10px;
   border: 1px solid
-    ${(props) =>
-      props.errorCheck ? props.theme.color.tossRed : props.theme.color.grey400};
+    ${({ theme, errorCheck }) =>
+      errorCheck ? theme.colors.tossRed : theme.colors.grey400};
   li:first-child {
     display: flex;
     justify-content: space-between;
@@ -53,14 +53,15 @@ export const SignUpSelectOption = styled.li<{ selected: boolean }>`
   box-sizing: border-box;
   cursor: pointer;
   padding: 11px 20px;
-  color: ${(props) => props.theme.color.grey400};
+  color: ${({ theme }) => theme.colors.grey400};
   font-style: normal;
   font-weight: 400;
-  font-size: ${(props) => props.theme.fontSize.body4};
+  font-size: ${({ theme }) => theme.fontSize.body4};
   line-height: 26px;
-  background-color: ${(props) => props.selected && props.theme.color.grey100};
+  background-color: ${({ theme, selected }) =>
+    selected && theme.colors.grey100};
   &:hover {
-    background-color: ${(props) => props.theme.color.grey100};
+    background-color: ${({ theme }) => theme.colors.grey100};
   }
 `;
 
@@ -82,7 +83,7 @@ const handleColorType = (position: string) => {
 export const SignUpColorCircle = styled.div<{ position: string }>`
   width: 8px;
   height: 8px;
-  background-color: ${(props) => handleColorType(props.position)};
+  background-color: ${({ theme, position }) => handleColorType(position)};
   border-radius: 50%;
 `;
 
@@ -90,7 +91,7 @@ export const ArrowWrapper = styled.div<{ BoxOpen: boolean }>`
   display: flex;
   align-items: center;
   svg {
-    transform: ${(props) => props.BoxOpen && 'rotate(180deg)'};
+    transform: ${({ BoxOpen }) => BoxOpen && 'rotate(180deg)'};
   }
 `;
 
@@ -102,12 +103,12 @@ export const SignUpInputLabel = styled.div`
 `;
 
 export const SignUpInputLabelText = styled.label`
-  font-size: ${(props) => props.theme.fontSize.body4};
+  font-size: ${({ theme }) => theme.fontSize.body4};
   font-style: normal;
   font-weight: 500;
   line-height: 26px;
   letter-spacing: 0em;
-  color: ${(props) => props.theme.color.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
 `;
 
 export const SignUpInputLabelCircle = styled.div`

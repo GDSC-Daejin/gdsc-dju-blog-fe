@@ -12,11 +12,9 @@ import {
   BlogCardTagWrapper,
   BlogCardThumbnail,
   BlogCardTitle,
-  BookMarkWrapper,
   PostText,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import Bookmark from '../../../assets/Bookmark';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { HashTageLight } from '../HashTage';
@@ -54,9 +52,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
   }, [postData]);
 
-  const removeImageInContent = postData.content
+  const removeMarkdownInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
-    .replace(/\(.*\)/gi, ''); // ( ) 제거
+    .replace(/\(.*\)/gi, '') // ( ) 제거
+    .replace(/\|/gi, '') // | 제거
+    .replace(/#/gi, '') // # 제거
+    .replace(/-/gi, ''); // @ 제거
 
   return (
     <AnimateSharedLayout>
@@ -93,7 +94,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
                 animate={'visible'}
                 exit={'exit'}
               >
-                <PostText children={removeImageInContent} />
+                <PostText children={removeMarkdownInContent} />
               </BlogCardPostText>
             )}
           </AnimatePresence>

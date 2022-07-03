@@ -1,17 +1,17 @@
 import styled, { css } from 'styled-components';
-import { theme } from '../../../styles/theme';
+import { lightTheme } from '../../../styles/theme';
 
 export const StyledButton = styled.button<{
-  color?: keyof typeof theme.color;
-  background?: keyof typeof theme.color;
+  color?: keyof typeof lightTheme.colors;
+  background?: keyof typeof lightTheme.colors;
   size?: string;
   disable?: boolean;
   border?: string;
 }>`
   display: flex;
   align-items: center;
-  border: 1px solid ${(props) => props.theme.color.grey300};
-  font-size: ${(props) => props.theme.fontSize.body2};
+  border: 1px solid ${({ theme }) => theme.colors.grey300};
+  font-size: ${({ theme }) => theme.fontSize.body2};
   padding: 8px 30px;
   cursor: pointer;
   box-shadow: 0 2px 12px rgba(25, 31, 40, 0.08);
@@ -35,11 +35,11 @@ export const StyledButton = styled.button<{
   ${({ background }) =>
     background &&
     css`
-      background: ${({ theme }) => theme.color[background]};
+      background: ${({ theme }) => theme.colors[background]};
     `}
   ${({ color }) =>
     color &&
     css`
-      color: ${({ theme }) => theme.color[color]};
+      color: ${({ theme }) => theme.colors[color]};
     `}
 `;
