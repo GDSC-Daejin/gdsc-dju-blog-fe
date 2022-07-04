@@ -15,7 +15,7 @@ export const HashTageWrapper = styled.div<{ light: boolean; size?: 'S' | 'L' }>`
     light &&
     css`
       border: 1px solid rgba(255, 255, 255, 0.6);
-      color: ${({ theme }) => theme.colors.white};
+      color: #fff;
       opacity: 1;
     `};
   ${({ size }) =>

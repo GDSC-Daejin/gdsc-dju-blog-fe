@@ -1,6 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
 
 export const BlogCardInner = styled(motion.article)`
   position: relative;
@@ -95,7 +94,7 @@ export const BlogCardPostText = styled(motion.div)`
   position: absolute;
   transform: translate(-50%, 0%);
   top: 53px;
-  font-size: ${({ theme }) => theme.fontSize.body3}
+
   min-height: 120px;
   max-height: 120px;
   word-break: break-word;
@@ -108,7 +107,8 @@ export const PostText = styled.article`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  -webkit-line-clamp: 9;
+  -webkit-line-clamp: 7;
+  font-size: ${({ theme }) => theme.fontSize.body3};
   color: ${({ theme }) => theme.colors.grey700};
 `;
 
@@ -117,6 +117,7 @@ export const BlogCardSubText = styled.div<{
   bold?: boolean;
 }>`
   font-size: ${({ theme }) => theme.fontSize.body3};
+  color: ${({ theme }) => theme.colors.grey900};
   ${({ subText }) =>
     subText &&
     css`

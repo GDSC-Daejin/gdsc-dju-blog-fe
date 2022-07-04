@@ -12,6 +12,7 @@ import {
   BlogCardTagWrapper,
   BlogCardThumbnail,
   BlogCardTitle,
+  BookMarkWrapper,
   PostText,
 } from './styled';
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
@@ -19,6 +20,7 @@ import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { HashTageLight } from '../HashTage';
 import { DetailPostDataType } from '../../../types/postData';
+import Bookmark from '../../../assets/Bookmark';
 
 const PostTextVariants = {
   initial: {
@@ -63,9 +65,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     <AnimateSharedLayout>
       <BlogCardInner onClick={linkToPost}>
         {/* 북마크 */}
-        {/* <BookMarkWrapper onClick={setBookmarkClip}>
-          <Bookmark marked={marked} />
-        </BookMarkWrapper> */}
+        {/*<BookMarkWrapper onClick={setBookmarkClip}>*/}
+        {/*  <Bookmark marked={marked} />*/}
+        {/*</BookMarkWrapper>*/}
         {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}
