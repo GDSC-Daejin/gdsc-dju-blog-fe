@@ -20,7 +20,7 @@ export const SideBarInner = styled(motion.aside)`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   justify-content: center;
-  padding-top: 227px;
+
   @media screen and (max-width: 500px) {
     align-items: center;
     padding-top: 0;
@@ -81,6 +81,7 @@ export const ProfileName = styled.div`
   padding-right: 10px;
   font-size: ${({ theme }) => theme.fontSize.h4};
   font-weight: bold;
+  color: ${({ theme }) => theme.colors.grey900};
   @media screen and (max-width: 500px) {
     font-size: ${({ theme }) => theme.fontSize.h5};
   }
@@ -151,6 +152,7 @@ export const GdscSideUnivWrapper = styled.div`
 export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
   margin-bottom: 8px;
+  padding-top: 227px;
 `;
 export const GoogleLogoWrapper = styled.div`
   display: flex;
