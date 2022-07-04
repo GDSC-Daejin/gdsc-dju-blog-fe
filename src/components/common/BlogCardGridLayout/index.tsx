@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlogCardWrapper, BlogCardGridLayoutStyle } from './styled';
+import { BlogCardGridLayoutStyle, BlogCardWrapper } from './styled';
 import BlogCard from '../BlogCard/index';
 import { DetailPostDataType } from '../../../types/postData';
 

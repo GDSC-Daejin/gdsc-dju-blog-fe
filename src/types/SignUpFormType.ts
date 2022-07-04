@@ -1,10 +1,10 @@
 import {
+  FieldValues,
   RegisterOptions,
   UseFormRegister,
-  FieldValues,
   UseFormSetValue,
-  UseFormWatch,
   UseFormTrigger,
+  UseFormWatch,
 } from 'react-hook-form';
 
 export interface IFormStructure {

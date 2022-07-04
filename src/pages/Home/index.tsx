@@ -1,6 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+
+import { Link } from 'react-router-dom';
 import { useScroll } from 'react-use';
+import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import Plus from '../../assets/Plus';
 import BlogCard from '../../components/common/BlogCard';
+import CategoryMenu from '../../components/common/CategoryMenu';
+import HomePhrase from '../../components/common/HomePhrase';
+import BlogCardScrollButton from './BlogCardButton';
 import {
   BlogCardWrapper,
   ButtonWrapper,
@@ -10,14 +17,6 @@ import {
   HomeLayoutContainer,
   HomePhraseWrapper,
 } from './styled';
-import CategoryMenu from '../../components/common/CategoryMenu';
-import { useGetPostListData } from '../../api/hooks/useGetPostListData';
-import HomePhrase from '../../components/common/HomePhrase';
-
-import { Link } from 'react-router-dom';
-import Plus from '../../assets/Plus';
-import BlogCardScrollButton from './BlogCardButton';
-import api from '../../api';
 
 function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -55,7 +54,6 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
-  console.log(api.getToken());
 
   return (
     <>

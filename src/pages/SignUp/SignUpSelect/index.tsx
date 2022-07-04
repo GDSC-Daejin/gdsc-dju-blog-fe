@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import BottomArrowIcon from '../../../assets/icons/BottomArrowIcon';
 import { IFormStructure, errorCheck } from '../../../types/SignUpFormType';
 import {
-  SelectBoxWrapper,
-  SignUpSelectBoxInner,
-  SignUpDefaultSelectBox,
-  SignUpSelectBox,
-  SignUpSelectOption,
   ArrowWrapper,
+  SelectBoxWrapper,
   SignUpColorCircle,
+  SignUpDefaultSelectBox,
   SignUpInputLabel,
-  SignUpInputLabelText,
   SignUpInputLabelCircle,
+  SignUpInputLabelText,
+  SignUpSelectBox,
+  SignUpSelectBoxInner,
+  SignUpSelectOption,
 } from './styled';
 
 const SignUpSelect = ({

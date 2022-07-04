@@ -10,12 +10,24 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "no-constant-condition": ["error", { "checkLoops": false }],
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "react/no-children-prop" : "off"
+    "sort-imports": ["error", {
+      "ignoreCase": false,
+      "ignoreDeclarationSort": true,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["all", "single", "multiple", "none"],
+      "allowSeparatedGroups": false
+    }],
+    "react/react-in-jsx-scope": 0,
+    "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/no-children-prop": "off",
+    "no-nested-ternary": 0,
+    "react/display-name": "off",
+    "no-console": "error",
+    "no-unused-vars": "warn",
+    "un-useless-escape": "off",
+    "quotes": [2, "single", { "allowTemplateLiterals": true }]
   },
   "settings": {
     "react": {

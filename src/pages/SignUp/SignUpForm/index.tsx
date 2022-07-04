@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
-
-import { SignUpFormStyle } from './styled';
+import { useNavigate } from 'react-router';
+import api from '../../../api';
+import { GDSCButton } from '../../../components/common/Button';
+import { IFormStructure } from '../../../types/SignUpFormType';
 import SignUpInput from '../SignUpInput';
 import SignUpSelect from '../SignUpSelect';
-import { IFormStructure } from '../../../types/SignUpFormType';
-import { GDSCButton } from '../../../components/common/Button';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
-import { useCookies } from 'react-cookie';
-import api from '../../../api';
+
+import { SignUpFormStyle } from './styled';
 
 const SignUpForm = () => {
   const {

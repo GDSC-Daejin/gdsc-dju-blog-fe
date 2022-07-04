@@ -1,19 +1,18 @@
 import React from 'react';
+import CheckCircle from '../../../assets/CheckCircle';
+import InputWarning from '../../../assets/InputWarning';
 
 import { IFormStructure, errorCheck } from '../../../types/SignUpFormType';
 import {
-  SignUpInputWrapper,
+  CheckCircleWrapper,
+  SignUpErrorMessage,
+  SignUpInputBox,
+  SignUpInputBoxWrapper,
   SignUpInputLabel,
   SignUpInputLabelCircle,
   SignUpInputLabelText,
-  CheckCircleWrapper,
-  SignUpInputBoxWrapper,
-  SignUpInputBox,
-  NickNameCheckButton,
-  SignUpErrorMessage,
+  SignUpInputWrapper,
 } from './styled';
-import InputWarning from '../../../assets/InputWarning';
-import CheckCircle from '../../../assets/CheckCircle';
 
 const SignUpInput = ({
   refName,

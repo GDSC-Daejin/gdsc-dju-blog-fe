@@ -1,6 +1,7 @@
 import React from 'react';
-import RightArrow from '../../../assets/RightArrow';
+import { useNavigate } from 'react-router';
 import LeftArrowIcon from '../../../assets/icons/LeftArrowIcon';
+import RightArrow from '../../../assets/RightArrow';
 import {
   ArrowWrapper,
   Number,
@@ -9,7 +10,6 @@ import {
   NumberWrapper,
   PageBarWrapper,
 } from './styled';
-import { useNavigate } from 'react-router';
 
 const circleMotion = {
   isActive: {
@@ -53,8 +53,6 @@ const PageBar = (props: {
     const PAGE_LENGTH = 8;
     const PAGES = division(array, PAGE_LENGTH - 1);
     const pageNum = Math.floor(page / PAGE_LENGTH);
-    console.log(page / PAGE_LENGTH);
-    console.log(pageNum);
     return PAGES[pageNum];
   };
 

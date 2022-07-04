@@ -1,29 +1,21 @@
-import React from 'react';
-import {
-  GrayBox,
-  MobileMenuIconWrapper,
-  SideBarDesign,
-  SideBarInner,
-  SideBarWrapper,
-} from './styled';
-import MenuToggleIcon from '../MenuToggleIcon';
-import SideBarLogin from './SideBarLogin';
-import SideBarLogout from './SideBarLogout';
-import SideBarCategory from './SideBarCategory';
-import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
-import { MENU_KEY, menuState } from '../../../store/menu';
-import { useRecoilState } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
+import React from 'react';
 import { useCookies } from 'react-cookie';
+import { useRecoilState } from 'recoil';
 import api from '../../../api';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { MENU_KEY, menuState } from '../../../store/menu';
+import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
+import SideBarCategory from './SideBarCategory';
+import SideBarLogin from './SideBarLogin';
+import SideBarLogout from './SideBarLogout';
+import { GrayBox, SideBarDesign, SideBarInner, SideBarWrapper } from './styled';
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
   const [cookies] = useCookies(['user']);
   const [token, setTokenCookie, removeTokenCookie] = useCookies(['token']);
 
-  console.log(menu);
   const { userData } = useGetUserData(token.token);
   return (
     <>

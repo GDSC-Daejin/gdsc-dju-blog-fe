@@ -1,9 +1,27 @@
-import React from 'react';
 import { Giscus } from '@giscus/react';
-import { ContainerInner, LayoutContainer } from '../../styles/layouts';
+import { Viewer } from '@toast-ui/react-editor';
+import React from 'react';
+import { useCookies } from 'react-cookie';
+import { useLocation } from 'react-router';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+
+import { useRecoilState } from 'recoil';
 import API from '../../api';
+import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+import { useGetUserData } from '../../api/hooks/useGetUserData';
+import Bookmark from '../../assets/Bookmark';
+import PostEditIcon from '../../assets/PostEditIcon';
+import PostTrashIcon from '../../assets/PostTrashIcon';
+import { HashTageDark } from '../../components/common/HashTage';
+import { alertState } from '../../store/alert';
+import { modalState } from '../../store/modal';
+import { positionColor } from '../../store/positionColor';
+
+import { ContainerInner, LayoutContainer } from '../../styles/layouts';
+import { AuthorProps, DetailPostDataType } from '../../types/postData';
+import { IUserInfoDataType } from '../../types/userInfoData';
+import { dateFilter } from '../../Utils/dateFilter';
+import { hashTageSpreader } from '../../Utils/hashTageSpreader';
 import {
   Author,
   AuthorImage,
@@ -11,6 +29,7 @@ import {
   BookmarkWrapper,
   Category,
   CategoryWrapper,
+  ContentBox,
   ContentWrapper,
   Date,
   GiscusWrapper,
@@ -24,24 +43,7 @@ import {
   PostTitleWrapper,
   PostTrashIconWrapper,
 } from './styled';
-import { AuthorProps, DetailPostDataType } from '../../types/postData';
-import { dateFilter } from '../../Utils/dateFilter';
-import { hashTageSpreader } from '../../Utils/hashTageSpreader';
-import { HashTageDark } from '../../components/common/HashTage';
-import { positionColor } from '../../store/positionColor';
-import hljs from 'highlight.js';
-import { Viewer } from '@toast-ui/react-editor';
-import PostTrashIcon from '../../assets/PostTrashIcon';
-import PostEditIcon from '../../assets/PostEditIcon';
-import Bookmark from '../../assets/Bookmark';
-import { useLocation } from 'react-router';
-import { useGetUserData } from '../../api/hooks/useGetUserData';
-import './post.css';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../../store/modal';
-import { IUserInfoDataType } from '../../types/userInfoData';
-import { useCookies } from 'react-cookie';
-import { alertState } from '../../store/alert';
+
 interface PostIconBoxProps {
   userInfoData: IUserInfoDataType;
   postData: DetailPostDataType;
@@ -53,7 +55,7 @@ interface AuthorBoxProps extends AuthorProps {
 }
 const Post = () => {
   const { postId } = useParams<'postId'>();
-
+  const theme = localStorage.getItem('theme') || 'light';
   return (
     <LayoutContainer>
       <ContainerInner>
@@ -67,7 +69,7 @@ const Post = () => {
             category="Announcements"
             categoryId="DIC_kwDOGwlX0c4CBQA5"
             mapping="pathname"
-            theme={'light'}
+            theme={theme}
             lang="ko"
           />
         </GiscusWrapper>
@@ -79,13 +81,8 @@ const Post = () => {
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const [cookie, setCookie] = useCookies(['token']);
   const { postData } = useGetDetailPost(postId);
-  const location = useLocation();
   const { userData } = useGetUserData(cookie.token);
   const userInfoData = userData?.memberInfo;
-
-  document.querySelectorAll('pre').forEach((el) => {
-    hljs.highlightElement(el as HTMLPreElement);
-  });
 
   return (
     <>
@@ -114,8 +111,9 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
               <AuthorBox {...postData.memberInfo} {...postData} />
             </PostAuthorWrapper>
           </PostHead>
-
-          <Viewer initialValue={postData.content} />
+          <ContentBox>
+            <Viewer initialValue={postData.content} />
+          </ContentBox>
         </>
       )}
     </>

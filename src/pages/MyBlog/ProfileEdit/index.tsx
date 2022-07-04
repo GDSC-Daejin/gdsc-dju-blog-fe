@@ -1,6 +1,16 @@
-import React, { memo, useLayoutEffect } from 'react';
 import { FormikProvider, useFormik } from 'formik';
+import React, { memo, useLayoutEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { useRecoilState } from 'recoil';
+import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { GDSCButton } from '../../../components/common/Button';
+import TextInput from '../../../components/common/input/TextInput';
+import ProfileEditImage from '../../../components/common/ProfileEditImage';
+import { profileEditSchema } from '../../../components/Validation/profileEdit';
+import { userState } from '../../../store/user';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
+import { IUserDataType } from '../../../types/userDataType';
+import { IUserInfoDataType } from '../../../types/userInfoData';
 import {
   FormButtonWrapper,
   FormElementWrapper,
@@ -10,19 +20,6 @@ import {
   FormTitleWrapper,
   FormWrapper,
 } from './styled';
-import TextInput from '../../../components/common/input/TextInput';
-import ProfileEditImage from '../../../components/common/ProfileEditImage';
-import { GDSCButton } from '../../../components/common/Button';
-import { profileEditSchema } from '../../../components/Validation/profileEdit';
-import { useRecoilState } from 'recoil';
-import { userState } from '../../../store/user';
-
-import API from '../../../api';
-import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { IUserDataType, MemberDataInfoType } from '../../../types/userDataType';
-import { useNavigate } from 'react-router';
-import { IUserInfoDataType } from '../../../types/userInfoData';
-import { useCookies } from 'react-cookie';
 
 const ProfileEdit = () => {
   const [user, setUser] = useRecoilState(userState);
@@ -68,7 +65,7 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
       etcUrl: userData.memberInfo.etcUrl,
     } as IUserInfoDataType,
     onSubmit: async (values) => {
-      console.log(`1`);
+      const a = 1;
     },
     //validation setting
     validationSchema: profileEditSchema,

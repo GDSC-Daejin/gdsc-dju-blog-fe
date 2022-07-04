@@ -43,7 +43,7 @@ import { GDSCButton } from '../../components/common/Button';
 import API from '../../api';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { modalState, ModalType } from '../../store/modal';
+import { ModalType, modalState } from '../../store/modal';
 import { PostPostDataType } from '../../types/postData';
 import { alertState } from '../../store/alert';
 import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
@@ -115,7 +115,6 @@ const PostWrite = () => {
 
   const handleSubmit = async (temp: boolean) => {
     const postData = { ...detailPostData, tmpStore: temp };
-    console.log(postData);
     try {
       await API.postPostData(postData);
       await navigate(`/category/all`);
@@ -136,7 +135,6 @@ const PostWrite = () => {
         alertMessage: '포스트 업로드에 실패했어요.',
       });
     }
-    console.log(detailPostData);
   };
 
   const submitHandler = (type: string) => {
