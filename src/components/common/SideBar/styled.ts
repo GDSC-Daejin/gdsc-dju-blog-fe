@@ -20,8 +20,10 @@ export const SideBarInner = styled(motion.aside)`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   justify-content: center;
+  padding-top: 227px;
   @media screen and (max-width: 500px) {
     align-items: center;
+    padding-top: 0;
   }
 `;
 export const MenuToggleIconWrapper = styled.div`
@@ -43,13 +45,13 @@ export const SideBarText = styled(motion.a)`
 export const GrayBox = styled(motion.div)`
   display: flex;
   position: fixed;
-  background: ${({ theme }) => theme.colors.grey900};
+  background: #191f28;
+  backdrop-filter: ${({ theme }) => theme.colors.blurBackground};
   right: 0;
   top: 0;
   bottom: 0;
   left: 0;
   z-index: 1000;
-  opacity: 0.35;
 `;
 export const SideBarDesign = styled.div`
   display: flex;
@@ -149,14 +151,6 @@ export const GdscSideUnivWrapper = styled.div`
 export const GdscSideBlogLogoWrapper = styled.div`
   display: flex;
   margin-bottom: 8px;
-  & svg {
-    width: 216px;
-    height: 40px;
-    @media screen and (max-width: 500px) {
-      width: 182px;
-      height: 35px;
-    }
-  }
 `;
 export const GoogleLogoWrapper = styled.div`
   display: flex;

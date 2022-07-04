@@ -9,8 +9,7 @@ import {
 } from './styled';
 import { positionColor } from '../../../store/positionColor';
 import GdscLogo from '../../../assets/GdscLogo';
-
-const category = ['ALL', 'Frontend', 'Backend', 'Android', 'Design', 'Common'];
+import { category } from '../../../api/pageData/category';
 
 const circleMotion = {
   isActive: {
@@ -49,7 +48,7 @@ const CategoryMenu: React.FC<CategoryMenuProps> = ({ onClick, type }) => {
               variants={circleMotion}
               animate={animate(type, categoryValue) ? 'isActive' : 'isUnActive'}
             >
-              {category[id].toLowerCase() === 'all' ? (
+              {categoryValue === 'all' ? (
                 <GDSCLogoWrapper>
                   <GdscLogo />
                 </GDSCLogoWrapper>

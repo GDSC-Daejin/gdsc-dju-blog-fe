@@ -1,6 +1,6 @@
 import React from 'react';
 import RightArrow from '../../../assets/RightArrow';
-import LeftArrow from '../../../assets/LeftArrow';
+import LeftArrowIcon from '../../../assets/icons/LeftArrowIcon';
 import {
   ArrowWrapper,
   Number,
@@ -62,7 +62,7 @@ const PageBar = (props: {
     <PageBarWrapper>
       {totalPage !== 1 && (
         <ArrowWrapper onClick={() => onClick(page - 1)}>
-          <LeftArrow />
+          <LeftArrowIcon />
         </ArrowWrapper>
       )}
       <NumberSection>

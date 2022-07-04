@@ -14,22 +14,7 @@ export const SideBarAnimation = {
     },
   },
 };
-export const SideBarCategoryAnimation = {
-  isActive: {
-    translateX: 10,
-    color: '#191F28',
-    transition: {
-      duration: 0.3,
-    },
-    borderBottom: '1px solid #191F28',
-  },
-  isUnActive: {
-    transition: {
-      duration: 0.3,
-    },
-    borderBottom: '1px solid #fff',
-  },
-};
+
 export const SideBarCircleAnimation = {
   isActive: {
     opacity: 1,

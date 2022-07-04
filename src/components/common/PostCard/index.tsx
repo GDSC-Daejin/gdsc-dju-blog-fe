@@ -10,7 +10,7 @@ import {
   PostHashTageSection,
   PostTitle,
 } from './styled';
-import MockPostImage from '../../../assets/MockPostImage.jpg';
+import MockPostImage from '../../../assets/mocks/MockPostImage.jpg';
 import { HashTageDark } from '../HashTage';
 import Bookmark from '../../../assets/Bookmark';
 

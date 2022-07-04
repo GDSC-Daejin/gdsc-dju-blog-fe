@@ -2,24 +2,38 @@ import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
 import { lightColors } from '../../../../styles/lightColors';
 
-export const SideCategoryText = styled(motion.div)<{ active?: boolean }>`
+export const SideCategoryText = styled(motion.div)<{ isActive?: boolean }>`
   font-size: ${({ theme }) => theme.fontSize.h7};
   font-weight: normal;
   font-family: 'Google Sans', sans-serif;
-  ${(active) =>
-    active &&
+  color: ${({ theme }) => theme.colors.grey300};
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid transparent;
+  ${({ isActive }) =>
+    isActive &&
     css`
+      border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
+      transform: translateX(10px);
       color: ${({ theme }) => theme.colors.grey900};
     `}
   margin-bottom: 8px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.white};
 `;
-export const SideCategoryTextWrapper = styled(motion.div)`
+export const SideCategoryTextWrapper = styled(motion.div)<{
+  isActive: boolean;
+}>`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.grey300};
   position: relative;
   display: flex;
   margin-bottom: 24px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    .sideBarText {
+      border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
+      transform: translateX(10px);
+      color: ${({ theme }) => theme.colors.grey900};
+    }
+  }
   &:last-child {
     margin-bottom: 0;
   }
@@ -37,6 +51,7 @@ export const SideCategoryCircleWrapper = styled(motion.div)`
   align-items: center;
   justify-content: center;
   opacity: 0;
+  z-index: 99999;
 `;
 export const SideCategoryCircle = styled.div<{
   color: string;
@@ -47,8 +62,7 @@ export const SideCategoryCircle = styled.div<{
   ${({ color }) =>
     color &&
     css`
-      background: ${({ theme }) =>
-        theme.colors[color as keyof typeof lightColors]};
+      background: ${color};
     `}
 `;
 export const SideBarGDSCLogoWrapper = styled(motion.div)`

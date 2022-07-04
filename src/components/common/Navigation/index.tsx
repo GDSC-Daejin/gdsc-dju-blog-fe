@@ -1,8 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import {
-  BlogLogo,
   NavDesign,
   NavInner,
   NavTask,
@@ -12,13 +10,11 @@ import {
   SearchInputWrapper,
   StyledLogoWrapper,
 } from './styled';
-import { menuState } from '../../../store/menu';
 import MenuToggleIcon from '../MenuToggleIcon';
-import { useRecoilState } from 'recoil';
 import Vector from '../../../assets/Vector';
 
 import SideBar from '../SideBar';
-import GdscBlogLogo from '../../../assets/GdscBlogLogo';
+import GdscBlogLogo from '../../../assets/logos/GdscBlogLogo';
 
 function Navigation() {
   return (

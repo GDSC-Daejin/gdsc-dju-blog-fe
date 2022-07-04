@@ -18,33 +18,6 @@ import { useCookies } from 'react-cookie';
 import api from '../../../api';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 
-export const sideBarMenuData = [
-  {
-    title: 'ALL',
-    subtitle: 'all',
-  },
-  {
-    title: 'Frontend',
-    subtitle: 'frontend',
-  },
-  {
-    title: 'Backend',
-    subtitle: 'backend',
-  },
-  {
-    title: 'Android',
-    subtitle: 'android',
-  },
-  {
-    title: 'Design',
-    subtitle: 'design',
-  },
-  {
-    title: 'Common',
-    subtitle: 'common',
-  },
-];
-
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
   const [cookies] = useCookies(['user']);

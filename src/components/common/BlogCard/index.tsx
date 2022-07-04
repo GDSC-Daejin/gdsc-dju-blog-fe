@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
-import BlogCardImage from '../../../assets/unknown.png';
+import BlogCardImage from '../../../assets/mocks/unknown.png';
 import { useNavigate } from 'react-router';
 import {
   BlogCardAuthorImage,

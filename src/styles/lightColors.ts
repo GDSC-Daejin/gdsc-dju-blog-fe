@@ -84,6 +84,7 @@ export const themeColor = {
   greyOpacity700: 'rgba(3, 18, 40, 0.7)',
   greyOpacity800: 'rgba(0, 12, 30, 0.8)',
   greyOpacity900: 'rgba(2, 9, 19, 0.91)',
+  blurBackground: 'saturate(50%) blur(8px)',
 };
 export const primaryColor = {
   ...assetGrey,

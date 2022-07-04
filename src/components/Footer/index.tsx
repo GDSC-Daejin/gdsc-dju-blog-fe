@@ -16,6 +16,7 @@ import {
 } from './styled';
 import BlogIcon from '../../assets/BlogIcon';
 import { useNavigate } from 'react-router';
+import GdscBlogLogo from '../../assets/logos/GdscBlogLogo';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Footer = () => {
       <FooterInner>
         <CreatorWrapper>
           <BlogIconWrapper>
-            <BlogIcon />
+            <GdscBlogLogo />
           </BlogIconWrapper>
           <CreatorSection>
             <CreatorTitleWrapper>

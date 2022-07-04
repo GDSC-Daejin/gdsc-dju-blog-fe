@@ -1,16 +1,12 @@
 import React from 'react';
 import {
-  GdscSideLogoWrapper,
-  GdscSideUnivWrapper,
   GdscSideBlogLogoWrapper,
   GoogleButtonWrapper,
   GoogleLogoWrapper,
 } from '../styled';
-import GdscLogo from '../../../../assets/GdscLogo';
-import DaejinUnivLogo from '../../../../assets/DaejinUnivLogo';
-import GdscBlogLogo from '../../../../assets/GdscBlogLogo';
 import GoogleLogo from '../../../../assets/GoogleLogo';
 import { GDSCButton } from '../../Button';
+import GdscSideBarLogo from '../../../../assets/logos/GDSCSideBarLogo';
 
 interface IProps {
   loginURL: string;
@@ -18,14 +14,8 @@ interface IProps {
 const SideBarLogout: React.FC<IProps> = ({ loginURL }) => {
   return (
     <>
-      <GdscSideLogoWrapper>
-        <GdscLogo />
-      </GdscSideLogoWrapper>
-      <GdscSideUnivWrapper>
-        <DaejinUnivLogo />
-      </GdscSideUnivWrapper>
       <GdscSideBlogLogoWrapper>
-        <GdscBlogLogo />
+        <GdscSideBarLogo />
       </GdscSideBlogLogoWrapper>
       <GoogleButtonWrapper>
         <GDSCButton

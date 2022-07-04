@@ -24,6 +24,7 @@ export const CategoryTextWrapper = styled(motion.div)<{ isActive: boolean }>`
   &:hover {
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
     transform: translateY(-10px);
+    color: ${({ theme }) => theme.colors.grey900};
   }
   ${({ isActive }) =>
     isActive &&

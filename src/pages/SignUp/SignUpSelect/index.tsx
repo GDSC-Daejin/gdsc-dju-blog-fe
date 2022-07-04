@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BottomArrow from '../../../assets/BottomArrow';
+import BottomArrowIcon from '../../../assets/icons/BottomArrowIcon';
 import { IFormStructure, errorCheck } from '../../../types/SignUpFormType';
 import {
   SelectBoxWrapper,
@@ -63,7 +63,7 @@ const SignUpSelect = ({
               ? '선택'
               : watch && watch('positionType')}
             <ArrowWrapper BoxOpen={selectOpen}>
-              <BottomArrow />
+              <BottomArrowIcon />
             </ArrowWrapper>
           </SignUpSelectOption>
           {PositionOption.map((data, index) => (

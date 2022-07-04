@@ -1,10 +1,6 @@
 import React from 'react';
-import { sideBarMenuData } from '../../SideBar/index';
 import { useLocation, useNavigate } from 'react-router';
-import {
-  SideBarCategoryAnimation,
-  SideBarCircleAnimation,
-} from '../../Animation';
+import { SideBarCircleAnimation } from '../../Animation';
 import {
   SideBarGDSCLogoWrapper,
   SideCategoryCircle,
@@ -16,50 +12,53 @@ import {
 import { positionColor } from '../../../../store/positionColor';
 import GdscLogo from '../../../../assets/GdscLogo';
 import { useRecoilState } from 'recoil';
-import { menuState } from '../../../../store/menu';
+import { MENU_KEY, menuState } from '../../../../store/menu';
+import { category } from '../../../../api/pageData/category';
 
 const SideBarCategory = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [menu, setMenu] = useRecoilState(menuState);
 
-  const sideBarAnimate = (category: string) => {
-    return location.pathname.includes(category) ? 'isActive' : 'isUnActive';
+  const animate = (value: string) => {
+    return location.pathname.includes(value);
   };
+
   return (
-    <>
-      <SideCategoryMenuWrapper>
-        {sideBarMenuData.map((data, id) => (
+    <SideCategoryMenuWrapper>
+      {category.map((data, id) => {
+        const categoryValue = category[id].toLowerCase();
+        return (
           <SideCategoryTextWrapper
             key={id}
+            isActive={animate(categoryValue)}
             onClick={() => {
-              navigate(`/category/${data.subtitle}`);
-              setMenu({ ...menu, isOpen: false });
+              navigate(`/category/${categoryValue}`);
+              setMenu({ ...menu, [MENU_KEY.APP_MENU]: false });
             }}
           >
             <SideCategoryCircleWrapper
               variants={SideBarCircleAnimation}
-              animate={sideBarAnimate(data.subtitle)}
+              animate={animate(categoryValue) ? 'isActive' : 'isUnActive'}
             >
-              {data.subtitle === 'all' ? (
+              {categoryValue === 'all' ? (
                 <SideBarGDSCLogoWrapper>
                   <GdscLogo />
                 </SideBarGDSCLogoWrapper>
               ) : (
-                <SideCategoryCircle color={positionColor(data.subtitle)} />
+                <SideCategoryCircle color={positionColor(categoryValue)} />
               )}
             </SideCategoryCircleWrapper>
             <SideCategoryText
-              variants={SideBarCategoryAnimation}
-              whileHover={'isActive'}
-              animate={sideBarAnimate(data.subtitle)}
+              isActive={animate(categoryValue)}
+              className={'sideBarText'}
             >
-              {data.title}
+              {data}
             </SideCategoryText>
           </SideCategoryTextWrapper>
-        ))}
-      </SideCategoryMenuWrapper>
-    </>
+        );
+      })}
+    </SideCategoryMenuWrapper>
   );
 };
 

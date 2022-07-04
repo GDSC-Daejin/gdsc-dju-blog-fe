@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BottomArrow = () => {
+const BottomArrowIcon = () => {
   return (
     <svg
       width="20"
@@ -20,4 +20,4 @@ const BottomArrow = () => {
   );
 };
 
-export default BottomArrow;
+export default BottomArrowIcon;
