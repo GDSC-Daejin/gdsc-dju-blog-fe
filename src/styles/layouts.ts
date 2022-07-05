@@ -14,6 +14,12 @@ export const LayoutContainer = styled.div`
 export const ContainerInner = styled.div`
   padding: 0 20px;
 `;
+export const PostContainerInner = styled.div`
+  padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+`;
 export const NavigationBlock = styled.div`
-  height: 120px;
+  height: 70px;
 `;

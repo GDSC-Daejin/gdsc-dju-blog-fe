@@ -30,6 +30,7 @@ export const BlogNameWrapper = styled.div`
 export const BlogName = styled.h2`
   margin-right: 10px;
   font-size: ${({ theme }) => theme.fontSize.h2};
+  color: ${({ theme }) => theme.colors.grey900};
   font-weight: bold;
   font-family: 'Google Sans', sans-serif;
   line-height: 1.2;
@@ -40,10 +41,11 @@ export const BlogNamePosition = styled.p<{ color: string }>`
   font-family: 'Google Sans', sans-serif;
   position: relative;
   bottom: -7px;
+
   ${({ color }) =>
     color &&
     css`
-      color: ${({ theme }) => theme.colors[color as keyof typeof lightColors]};
+      color: ${color};
     `}
 `;
 export const SettingIconWrapper = styled.div`
@@ -68,6 +70,7 @@ export const TopMenuWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   width: 216px;
   display: flex;
+  height: min-content;
   flex-direction: row;
   justify-content: space-between;
 `;

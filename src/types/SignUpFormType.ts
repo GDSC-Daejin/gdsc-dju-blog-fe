@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import {
   FieldValues,
   RegisterOptions,
@@ -18,12 +19,10 @@ export interface IFormStructure {
   watch?: UseFormWatch<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
   checkNicknameState?: boolean;
-  setCheckNickname?: React.Dispatch<React.SetStateAction<boolean>>;
+  setCheckNickname?: Dispatch<SetStateAction<boolean>>;
   placeholder?: string;
   condition?: RegisterOptions;
-  errors: {
-    [x: string]: any;
-  };
+  errors: any;
 }
 
 export const errorCheck = (error: string | undefined) => {

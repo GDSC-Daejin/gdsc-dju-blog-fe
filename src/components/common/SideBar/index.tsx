@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 import api from '../../../api';
@@ -13,10 +13,23 @@ import { GrayBox, SideBarDesign, SideBarInner, SideBarWrapper } from './styled';
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
-  const [cookies] = useCookies(['user']);
-  const [token, setTokenCookie, removeTokenCookie] = useCookies(['token']);
 
-  const { userData } = useGetUserData(token.token);
+  const [cookies, setCookies, removeCookies] = useCookies([
+    'token',
+    'refresh_token',
+    'user',
+  ]);
+
+  const { userData } = useGetUserData(cookies.token);
+  useEffect(() => {
+    console.log(userData);
+    if (userData == undefined) {
+      // removeCookies('token');
+      // removeCookies('refresh_token');
+      // removeCookies('user');
+    }
+  }, [userData]);
+
   return (
     <>
       <SideBarWrapper

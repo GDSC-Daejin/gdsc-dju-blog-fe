@@ -8,6 +8,7 @@ import GoogleLoader from '../components/common/GoogleLoader';
 import { useRecoilState } from 'recoil';
 import { loaderState } from '../store/loader';
 import GlobalStyles from '../styles/globalStyles';
+import { NavigationBlock } from '../styles/layouts';
 
 const ComponentLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -19,6 +20,7 @@ const ComponentLayout: React.FC<{ children: React.ReactNode }> = ({
       <Modal />
       <SideBar />
       <Navigation />
+      <NavigationBlock />
       <AnimatePresence>
         {loader.loading && <GoogleLoader background={loader.background} />}
       </AnimatePresence>

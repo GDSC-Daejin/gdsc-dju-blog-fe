@@ -2,22 +2,24 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'Google Sans Display';
+    font-family: 'Google Sans Display', sans-serif;
     src: url('../fonts/GoogleSansDisplay-Regular.ttf') format('truetype');;
-    font-weight: normal;
+    font-weight: 400;
+    font-display: swap;
   }
   @font-face {
-    font-family: 'Google Sans Display';
+    font-family: 'Google Sans Display', sans-serif;
     src: url('../fonts/GoogleSansDisplay-Bold.ttf') format('truetype');
-    font-weight: bold;
+    font-weight: 700;
+    font-display: swap;
   }
   @font-face {
-    font-family: 'Google Sans Display';
+    font-family: 'Google Sans Display', sans-serif;
     src: url('../fonts/GoogleSansDisplay-Medium.ttf') format('truetype');
-
-    font-weight: 600;
+    font-weight: 500;
+    font-display: swap;
   }@font-face {
-    font-family: 'D2Coding ligature';
+    font-family: 'D2Coding ligature', sans-serif;
     src: url('../fonts/D2Coding-ligature.ttf') format('truetype');
   }
   @font-face {

@@ -32,15 +32,14 @@ import { useCookies } from 'react-cookie';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [tokenCookies, setTokenCookies] = useCookies(['token']);
-  const token = tokenCookies.token;
+  const [cookie, setCookies] = useCookies(['token']);
   const categoryName = searchParams.get('type');
   const category = categoryName ? categoryName : 'all';
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const { userData } = useGetUserData(token);
+  const { userData } = useGetUserData(cookie.token);
   const userInfoData = userData?.memberInfo;
   const { userPostData } = useGetMyPostsData(category, page - 1, 6);
   const navigate = useNavigate();

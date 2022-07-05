@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { GoogleIcon, LoaderBackground } from './styled';
 import lottie from 'lottie-web';
+import animation from './GoogleAnimation.json';
 
 const GoogleLoader = (props: { background?: boolean }) => {
   const { background } = props;
@@ -32,22 +33,20 @@ const GoogleLoader = (props: { background?: boolean }) => {
         renderer: 'svg',
         loop: true,
         autoplay: true,
-        animationData: require('./GoogleAnimation.json'),
+        animationData: animation,
       }),
     [],
   );
   return (
-    <>
-      <LoaderBackground
-        background={background}
-        variants={loaderAnimation}
-        initial={'start'}
-        animate={'end'}
-        exit={'exit'}
-      >
-        <GoogleIcon ref={googleContainer} />
-      </LoaderBackground>
-    </>
+    <LoaderBackground
+      background={background}
+      variants={loaderAnimation}
+      initial={'start'}
+      animate={'end'}
+      exit={'exit'}
+    >
+      <GoogleIcon ref={googleContainer} />
+    </LoaderBackground>
   );
 };
 

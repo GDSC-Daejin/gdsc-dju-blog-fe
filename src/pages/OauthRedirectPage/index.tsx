@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
-import GoogleLoader from '../../components/common/GoogleLoader';
 import api from '../../api';
 import { useCookies } from 'react-cookie';
 import { IUserDataType } from '../../types/userDataType';
@@ -12,20 +10,23 @@ type SelectedUserType = Pick<
 >;
 export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const token = searchParams.get('token') ?? '';
-  const [userCookies, setUserCookies] = useCookies(['user']);
-  const [tokenCookies, setTokenCookies] = useCookies(['token']);
+  const refresh_token = searchParams.get('refresh_token') ?? '';
+
+  const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
 
   const setCookieData = (user: SelectedUserType) => {
-    setUserCookies(
+    setCookies(
       'user',
       { ...user },
       {
         path: '/',
       },
     );
-    setTokenCookies('token', token, {
+    setCookies('token', token, {
+      path: '/',
+    });
+    setCookies('refresh_token', refresh_token, {
       path: '/',
     });
   };
@@ -42,11 +43,10 @@ export default function OauthRedirectPage() {
       });
       api.setToken(token);
     })();
-
     process.env.NODE_ENV === 'development'
       ? (window.location.href = 'http://localhost:3000/')
       : (window.location.href = 'https://gdsc-dju-blog.web.app/');
   }, []);
 
-  return <GoogleLoader />;
+  return null;
 }

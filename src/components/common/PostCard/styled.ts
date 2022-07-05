@@ -9,7 +9,7 @@ export const PostCardWrapper = styled(motion.div)`
   width: 100%;
   cursor: pointer;
   border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(25, 31, 40, 0.08);
+  box-shadow: ${({ theme }) => theme.colors.boxShadow100}
   box-sizing: border-box;
 `;
 export const PostCardImage = styled.img`
@@ -37,7 +37,7 @@ export const PostCardContentWrapper = styled(motion.div)<{ hover: boolean }>`
   position: relative;
   padding: 30px 40px;
   z-index: 2;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.background};
   left: 30%;
   width: 70%;
   flex-direction: column;
@@ -81,9 +81,9 @@ export const PostContent = styled(motion.p)`
   color: ${({ theme }) => theme.colors.grey600};
   box-sizing: border-box;
   transition: all 0.3s ease;
-  height: 68px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  white-space: normal;
+  -webkit-line-clamp: 3;
 `;

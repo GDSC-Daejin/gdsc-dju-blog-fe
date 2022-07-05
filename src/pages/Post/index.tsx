@@ -17,7 +17,11 @@ import { alertState } from '../../store/alert';
 import { modalState } from '../../store/modal';
 import { positionColor } from '../../store/positionColor';
 
-import { ContainerInner, LayoutContainer } from '../../styles/layouts';
+import {
+  ContainerInner,
+  LayoutContainer,
+  PostContainerInner,
+} from '../../styles/layouts';
 import { AuthorProps, DetailPostDataType } from '../../types/postData';
 import { IUserInfoDataType } from '../../types/userInfoData';
 import { dateFilter } from '../../Utils/dateFilter';
@@ -58,7 +62,7 @@ const Post = () => {
   const theme = localStorage.getItem('theme') || 'light';
   return (
     <LayoutContainer>
-      <ContainerInner>
+      <PostContainerInner>
         <ContentWrapper>
           {postId && <PostContent postId={postId} />}
         </ContentWrapper>
@@ -73,7 +77,7 @@ const Post = () => {
             lang="ko"
           />
         </GiscusWrapper>
-      </ContainerInner>
+      </PostContainerInner>
     </LayoutContainer>
   );
 };

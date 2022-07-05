@@ -96,7 +96,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
                 animate={'visible'}
                 exit={'exit'}
               >
-                <PostText children={removeMarkdownInContent} />
+                <PostText>{removeMarkdownInContent}</PostText>
               </BlogCardPostText>
             )}
           </AnimatePresence>

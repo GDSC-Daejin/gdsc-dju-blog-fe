@@ -52,7 +52,7 @@ const SignUpSelect = ({
       <SignUpSelectBoxInner>
         <SignUpDefaultSelectBox type={type} {...register(refName, condition)} />
         <SignUpSelectBox
-          errorCheck={errorCheck(errors?.message)}
+          errorCheck={errorCheck(errors?.message && errors?.message)}
           BoxOpen={selectOpen}
         >
           <SignUpSelectOption

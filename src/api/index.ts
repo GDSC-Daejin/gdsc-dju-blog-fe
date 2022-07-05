@@ -58,16 +58,10 @@ export class Api {
     });
   };
   getUserData = (token?: string) => {
-    const Header = {
+    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
       headers: {
-        'Access-Control-Allow-Origin': this.API,
         Authorization: `Bearer ${token}`,
       },
-      withCredentials: true,
-      baseURL: this.API,
-    };
-    return axios.get<RowMemberDataType>(`${this.API}/api/guest/v1/me`, {
-      ...Header,
     });
   };
   getMyPostsData = (params: string) => {
