@@ -11,7 +11,7 @@ type SelectedUserType = Pick<
 export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token') ?? '';
-  const refresh_token = searchParams.get('refresh_token') ?? '';
+  const refresh_token = searchParams.get('refreshToken') ?? '';
 
   const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
 
