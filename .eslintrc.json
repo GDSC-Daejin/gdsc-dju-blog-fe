@@ -25,13 +25,16 @@
   },
 
   "rules": {
-    "sort-imports": ["error", {
-      "ignoreCase": false,
-      "ignoreDeclarationSort": true,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["all", "single", "multiple", "none"],
-      "allowSeparatedGroups": false
-    }],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["all", "single", "multiple", "none"],
+        "allowSeparatedGroups": false
+      }
+    ],
     "react/react-in-jsx-scope": 0,
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
@@ -41,6 +44,7 @@
     "no-console": "error",
     "no-unused-vars": "warn",
     "un-useless-escape": "off",
-    "quotes": [2, "single", { "allowTemplateLiterals": true }]
+    "quotes": [2, "single", { "allowTemplateLiterals": true }],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }
