@@ -23,6 +23,7 @@
     "framer-motion": "^6.3.16",
     "highlight.js": "^11.5.1",
     "lottie-web": "^5.8.1",
+    "moment": "^2.29.3",
     "react": "^18.0.0",
     "react-app-rewired": "^2.1.8",
     "react-cookie": "^4.1.1",

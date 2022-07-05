@@ -43,10 +43,10 @@ export default function OauthRedirectPage() {
       });
       api.setToken(token);
     })();
-    process.env.NODE_ENV === 'development'
+    cookies.token && process.env.NODE_ENV === 'development'
       ? (window.location.href = 'http://localhost:3000/')
       : (window.location.href = 'https://gdsc-dju-blog.web.app/');
-  }, []);
+  }, [cookies]);
 
   return null;
 }

@@ -134,6 +134,14 @@ export class Api {
       this.Header,
     );
   };
+  getRefresh = (refreshToken: string, token: string) => {
+    return axios.get(`${this.API}/refresh`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        RefreshToken: `Bearer ${refreshToken}`,
+      },
+    });
+  };
   setToken = (token: string) => {
     this.Header.headers.Authorization = token;
   };
