@@ -1,4 +1,4 @@
-## (GDSC) Daejin University Tech blog Project
+## (GDSC) Daejin University Tech blog Project1
 
 ### Description
 
