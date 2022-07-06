@@ -1,7 +1,8 @@
 import useSWR from 'swr';
 import API from '../index';
+import PostService from '../PostService';
 async function getDetailPost(postId: string) {
-  const res = await API.getPostData(postId);
+  const res = await PostService.getPostData(postId);
   return res.data;
 }
 

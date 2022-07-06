@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
-import api from '../../api';
+import TokenService from '../../api/TokenService';
+import UserService from '../../api/UserService';
 import { IUserDataType } from '../../types/userDataType';
 
 type SelectedUserType = Pick<
@@ -31,7 +32,7 @@ export default function OauthRedirectPage() {
 
   useEffect(() => {
     (async function () {
-      const result = await api.getUserData(token);
+      const result = await UserService.getMyData(token);
       const data = result.data.body.data;
       setCookieData({
         role: data.role,
@@ -39,7 +40,7 @@ export default function OauthRedirectPage() {
         userId: data.userId,
         memberInfo: data.memberInfo,
       });
-      api.setToken(token);
+      TokenService.setToken(token);
     })();
     cookies.token &&
       (import.meta.env.MODE === 'development'

@@ -1,9 +1,9 @@
-import API from '../index';
 import useSWR from 'swr';
+import UserService from '../UserService';
 import { userPostUrlFilter } from './postPagination';
 
 async function getMyPostsData(params: string) {
-  const res = await API.getMyPostsData(params);
+  const res = await UserService.getMyPostsData(params);
   return res.data.body.data;
 }
 

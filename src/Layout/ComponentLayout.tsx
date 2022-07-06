@@ -16,11 +16,7 @@ const ComponentLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [loader] = useRecoilState(loaderState);
-  const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
-  const { newToken } = useGetUserToken(cookies.refresh_token, cookies.token);
-  useEffect(() => {
-    newToken && setCookies('token', newToken);
-  }, []);
+  useGetUserToken();
   return (
     <div>
       <Alert />

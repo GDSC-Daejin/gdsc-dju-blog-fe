@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import UserService from '../../api/UserService';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -95,7 +96,7 @@ const PostWrite = () => {
   const handleDraft = async (temp: boolean) => {
     const postData = { ...detailPostData, tmpStore: temp };
     try {
-      await API.postPostData(postData);
+      await UserService.postMyPostData(postData);
       await setAlert({
         ...alert,
         alertStatus: 'success',
@@ -116,7 +117,7 @@ const PostWrite = () => {
   const handleSubmit = async (temp: boolean) => {
     const postData = { ...detailPostData, tmpStore: temp };
     try {
-      await API.postPostData(postData);
+      await UserService.postMyPostData(postData);
       await navigate(`/category/all`);
       setModal({
         ...modal,

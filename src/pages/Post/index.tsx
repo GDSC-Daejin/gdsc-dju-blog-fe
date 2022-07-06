@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 import API from '../../api';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import { useGetUserData } from '../../api/hooks/useGetUserData';
+import UserService from '../../api/UserService';
 import Bookmark from '../../assets/Bookmark';
 import PostEditIcon from '../../assets/PostEditIcon';
 import PostTrashIcon from '../../assets/PostTrashIcon';
@@ -128,7 +129,7 @@ const PostIconBlock: React.FC<PostIconBoxProps> = ({
   const deleteHandler = async () => {
     setModal({ ...modal, isOpen: false });
     try {
-      await API.deletePostData(postId);
+      await UserService.deleteMyPostData(postId);
       await setAlert({
         ...alert,
         alertStatus: 'success',

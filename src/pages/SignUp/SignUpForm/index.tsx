@@ -2,9 +2,10 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
-import api from '../../../api';
+import UserService from '../../../api/UserService';
 import { GDSCButton } from '../../../components/common/Button';
 import { IFormStructure } from '../../../types/SignUpFormType';
+
 import SignUpInput from '../SignUpInput';
 import SignUpSelect from '../SignUpSelect';
 
@@ -23,7 +24,10 @@ const SignUpForm = () => {
   const [tokenCookie] = useCookies(['token']);
   const navigate = useNavigate();
   const onSubmit = async (values: any) => {
-    const response = await api.updateUserData({ ...values }, tokenCookie.token);
+    const response = await UserService.updateMyData(
+      { ...values },
+      tokenCookie.token,
+    );
     if (response.data.body.message === 'SUCCESS')
       navigate('/', { replace: true });
     else alert('에러가 발생했습니다');

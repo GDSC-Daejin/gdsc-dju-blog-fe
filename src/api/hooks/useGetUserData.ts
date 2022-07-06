@@ -1,10 +1,10 @@
 import { useCookies } from 'react-cookie';
 import { useQuery } from 'react-query';
-import useSWR from 'swr';
-import API from '../../api';
+import TokenService from '../TokenService';
+import UserService from '../UserService';
 
 export const getUserData = async (token: string) => {
-  const response = await API.getUserData(token);
+  const response = await UserService.getMyData(token);
   return response.data.body.data;
 };
 
@@ -18,7 +18,8 @@ export const useGetUserData = () => {
       retry: 2,
       refetchOnWindowFocus: true,
       onError: () => {
-        cookie.token && API.getRefresh(cookie.refresh_token, cookie.token);
+        cookie.token &&
+          TokenService.getRefresh(cookie.refresh_token, cookie.token);
       },
     },
   );
@@ -26,18 +27,23 @@ export const useGetUserData = () => {
   return { userData: userData ?? userData };
 };
 export const getUserToken = async (refreshToken: string, token: string) => {
-  const response = await API.getRefresh(refreshToken, token);
+  const response = await TokenService.getRefresh(refreshToken, token);
   return response.data.body.data.token;
 };
 
-export const useGetUserToken = (refreshToken: string, token: string) => {
-  const { data: newToken } = useSWR([refreshToken, token], getUserToken, {
-    refreshInterval: 30 * 60 * 1000,
-    revalidateOnReconnect: true,
-    revalidateOnMount: true,
-    onError: () => {
-      API.getRefresh(refreshToken, token);
+export const useGetUserToken = () => {
+  const [cookies, setCookies] = useCookies(['token', 'refresh_token']);
+  const { data: newToken } = useQuery(
+    [cookies.refresh_token, cookies.refresh_token],
+    () => getUserToken(cookies.refresh_token, cookies.token),
+    {
+      refetchInterval: 30 * 60 * 1000,
+      retry: 2,
+      refetchOnWindowFocus: true,
+      onError: () => {
+        TokenService.getRefresh(cookies.refresh_token, cookies.token);
+      },
     },
-  });
-  return { newToken: newToken ?? newToken };
+  );
+  newToken && setCookies('token', newToken);
 };

@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 import api from '../../../api';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import TokenService from '../../../api/TokenService';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
 import SideBarCategory from './SideBarCategory';
@@ -14,11 +15,7 @@ import { GrayBox, SideBarDesign, SideBarInner, SideBarWrapper } from './styled';
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
 
-  const [cookies, setCookies, removeCookies] = useCookies([
-    'token',
-    'refresh_token',
-    'user',
-  ]);
+  const [cookies] = useCookies(['token', 'refresh_token', 'user']);
 
   const { userData } = useGetUserData();
 
@@ -32,9 +29,14 @@ export const SideBar = () => {
         <SideBarInner>
           <SideBarDesign>
             {cookies.user ? (
-              <SideBarLogin userData={userData} />
+              <SideBarLogin
+                userData={userData}
+                closeSideBar={() =>
+                  setMenu({ ...menu, [MENU_KEY.APP_MENU]: false })
+                }
+              />
             ) : (
-              <SideBarLogout loginURL={api.getRedirectURL()} />
+              <SideBarLogout loginURL={TokenService.getRedirectURL()} />
             )}
             <SideBarCategory />
           </SideBarDesign>
