@@ -1,6 +1,5 @@
 import { FormikProvider, useFormik } from 'formik';
 import React, { memo, useLayoutEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 import { useGetUserData } from '../../../api/hooks/useGetUserData';
 import { GDSCButton } from '../../../components/common/Button';
@@ -23,9 +22,8 @@ import {
 
 const ProfileEdit = () => {
   const [user, setUser] = useRecoilState(userState);
-  const [tokenCookies, setTokenCookies] = useCookies(['token']);
-  const token = tokenCookies.token;
-  const { userData } = useGetUserData(token);
+
+  const { userData } = useGetUserData();
 
   useLayoutEffect(() => {
     if (userData) {

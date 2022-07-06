@@ -1,5 +1,15 @@
 import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
+import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { useGetMyPostsData } from '../../../api/hooks/useGetUserPostListData';
+import Setting from '../../../assets/Setting';
+import { GDSCButton } from '../../../components/common/Button';
+import CategoryMenu from '../../../components/common/CategoryMenu';
+import PageBar from '../../../components/common/PageBar';
+import PostCard from '../../../components/common/PostCard';
+import ProfileImage from '../../../components/common/ProfileImage';
+import { positionColor } from '../../../store/positionColor';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
 import {
   BlogName,
@@ -18,28 +28,17 @@ import {
   SettingIconWrapper,
   TopMenuWrapper,
 } from './styled';
-import ProfileImage from '../../../components/common/ProfileImage';
-import { positionColor } from '../../../store/positionColor';
-import CategoryMenu from '../../../components/common/CategoryMenu';
-import { GDSCButton } from '../../../components/common/Button';
-import PostCard from '../../../components/common/PostCard';
-import { createSearchParams, useSearchParams } from 'react-router-dom';
-import Setting from '../../../assets/Setting';
-import PageBar from '../../../components/common/PageBar';
-import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { useGetMyPostsData } from '../../../api/hooks/useGetUserPostListData';
-import { useCookies } from 'react-cookie';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [cookie, setCookies] = useCookies(['token']);
+
   const categoryName = searchParams.get('type');
   const category = categoryName ? categoryName : 'all';
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const { userData } = useGetUserData(cookie.token);
+  const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
   const { userPostData } = useGetMyPostsData(category, page - 1, 6);
   const navigate = useNavigate();

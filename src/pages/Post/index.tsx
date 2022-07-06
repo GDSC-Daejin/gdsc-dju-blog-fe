@@ -1,8 +1,6 @@
 import { Giscus } from '@giscus/react';
 import { Viewer } from '@toast-ui/react-editor';
 import React from 'react';
-import { useCookies } from 'react-cookie';
-import { useLocation } from 'react-router';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useRecoilState } from 'recoil';
@@ -17,11 +15,7 @@ import { alertState } from '../../store/alert';
 import { modalState } from '../../store/modal';
 import { positionColor } from '../../store/positionColor';
 
-import {
-  ContainerInner,
-  LayoutContainer,
-  PostContainerInner,
-} from '../../styles/layouts';
+import { LayoutContainer, PostContainerInner } from '../../styles/layouts';
 import { AuthorProps, DetailPostDataType } from '../../types/postData';
 import { IUserInfoDataType } from '../../types/userInfoData';
 import { dateFilter } from '../../Utils/dateFilter';
@@ -83,9 +77,8 @@ const Post = () => {
 };
 
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
-  const [cookie, setCookie] = useCookies(['token']);
   const { postData } = useGetDetailPost(postId);
-  const { userData } = useGetUserData(cookie.token);
+  const { userData } = useGetUserData();
   const userInfoData = userData?.memberInfo;
 
   return (

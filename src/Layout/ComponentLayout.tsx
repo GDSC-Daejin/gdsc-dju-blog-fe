@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { useGetUserToken } from '../api/hooks/useGetUserData';
 import Alert from '../components/common/Alert';
 import Modal from '../components/common/modal';
 import SideBar from '../components/common/SideBar';
@@ -14,6 +16,11 @@ const ComponentLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [loader] = useRecoilState(loaderState);
+  const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
+  const { newToken } = useGetUserToken(cookies.refresh_token, cookies.token);
+  useEffect(() => {
+    newToken && setCookies('token', newToken);
+  }, []);
   return (
     <div>
       <Alert />

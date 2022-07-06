@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
 import api from '../../api';
-import { useCookies } from 'react-cookie';
 import { IUserDataType } from '../../types/userDataType';
 
 type SelectedUserType = Pick<
@@ -12,9 +12,7 @@ export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token') ?? '';
   const refresh_token = searchParams.get('refreshToken') ?? '';
-
   const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
-
   const setCookieData = (user: SelectedUserType) => {
     setCookies(
       'user',
@@ -43,9 +41,10 @@ export default function OauthRedirectPage() {
       });
       api.setToken(token);
     })();
-    cookies.token && process.env.NODE_ENV === 'development'
-      ? (window.location.href = 'http://localhost:3000/')
-      : (window.location.href = 'https://gdsc-dju-blog.web.app/');
+    cookies.token &&
+      (import.meta.env.MODE === 'development'
+        ? (window.location.href = 'http://localhost:3000/')
+        : (window.location.href = 'https://gdsc-dju-blog.web.app/'));
   }, [cookies]);
 
   return null;

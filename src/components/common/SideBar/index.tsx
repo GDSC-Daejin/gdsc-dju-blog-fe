@@ -20,15 +20,7 @@ export const SideBar = () => {
     'user',
   ]);
 
-  const { userData } = useGetUserData(cookies.token);
-  console.log(cookies.token);
-  useEffect(() => {
-    if (userData == undefined) {
-      // removeCookies('token');
-      // removeCookies('refresh_token');
-      // removeCookies('user');
-    }
-  }, [userData]);
+  const { userData } = useGetUserData();
 
   return (
     <>
