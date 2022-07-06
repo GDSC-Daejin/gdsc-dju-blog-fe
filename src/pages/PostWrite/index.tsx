@@ -1,5 +1,37 @@
+/*Chart Plugin*/
+import '@toast-ui/chart/dist/toastui-chart.css';
+import chart from '@toast-ui/editor-plugin-chart';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
+/*Table Cell Plugin*/
+import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
+/*Code Syntax Highlight */
+import 'prismjs/themes/prism.css';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+/*color plugin*/
+import 'tui-color-picker/dist/tui-color-picker.css';
+import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
 import UserService from '../../api/UserService';
+import { GDSCButton } from '../../components/common/Button';
+import PostCategoryMenu from '../../components/common/PostCategoryMenu';
+import PostThumbnail from '../../Images/PostThumbnail';
+import { alertState } from '../../store/alert';
+import { ModalType, modalState } from '../../store/modal';
+import {
+  ContainerInner,
+  LayoutContainer,
+  NavigationBlock,
+} from '../../styles/layouts';
+import { PostPostDataType } from '../../types/postData';
 import {
   PostBottomButtonCWrapper,
   PostBottomButtonLWrapper,
@@ -15,39 +47,6 @@ import {
   PostTitle,
   ThumbnailText,
 } from './styled';
-import {
-  ContainerInner,
-  LayoutContainer,
-  NavigationBlock,
-} from '../../styles/layouts';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor } from '@toast-ui/react-editor';
-/*color plugin*/
-import 'tui-color-picker/dist/tui-color-picker.css';
-import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
-/*Code Syntax Highlight */
-import 'prismjs/themes/prism.css';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-clojure.js';
-import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-/*Chart Plugin*/
-import '@toast-ui/chart/dist/toastui-chart.css';
-import chart from '@toast-ui/editor-plugin-chart';
-/*Table Cell Plugin*/
-import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-table-merged-cell.css';
-import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import PostCategoryMenu from '../../components/common/PostCategoryMenu';
-import PostThumbnail from '../../Images/PostThumbnail';
-import { GDSCButton } from '../../components/common/Button';
-import API from '../../api';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { ModalType, modalState } from '../../store/modal';
-import { PostPostDataType } from '../../types/postData';
-import { alertState } from '../../store/alert';
-import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
 
 export const PostCategoryMenuData = [
   {
@@ -132,6 +131,7 @@ const PostWrite = () => {
     } catch (error) {
       setAlert({
         ...alert,
+        alertStatus: 'error',
         alertHandle: true,
         alertMessage: '포스트 업로드에 실패했어요.',
       });
@@ -307,6 +307,8 @@ const PostWrite = () => {
                   initialEditType="markdown"
                   initialValue={detailPostData.content}
                   ref={editorRef}
+                  theme={'dark'}
+                  language="ko-KR"
                   onChange={setEditorValue}
                   plugins={[
                     colorSyntax,
@@ -326,6 +328,7 @@ const PostWrite = () => {
                 initialValue={detailPostData.content}
                 ref={editorRef}
                 onChange={setEditorValue}
+                theme={'dark'}
                 plugins={[
                   colorSyntax,
                   [codeSyntaxHighlight, { highlighter: Prism }],

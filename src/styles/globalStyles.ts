@@ -93,8 +93,12 @@ const GlobalStyles = createGlobalStyle`
   html{
     background: ${({ theme }) => theme.colors.background};
   }
-  
-
+  input:focus {
+    outline: none;
+  }
+  textarea:focus {
+    outline: none;
+  }
   a {
     text-decoration: none;
   }

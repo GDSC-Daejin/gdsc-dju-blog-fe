@@ -20,12 +20,14 @@ const PostCategoryMenu: React.FC<{
         {PostCategoryMenuData.map((data, id) => (
           <PostCategoryTextWrapper
             key={id}
-            whileHover={'isActive'}
-            variants={PostCategoryAnimation}
             onClick={() => onClick(data.title)}
-            animate={data.title === category ? 'isActive' : 'unActive'}
+            className={'category'}
+            isActive={data.title === category}
           >
-            <PostCategoryCircleWrapper variants={PostCircleAnimation}>
+            <PostCategoryCircleWrapper
+              variants={PostCircleAnimation}
+              animate={data.title === category ? 'isActive' : 'unActive'}
+            >
               <PostCategoryCircle color={positionColor(data.title)} />
             </PostCategoryCircleWrapper>
             <PostCategoryText>{data.title}</PostCategoryText>

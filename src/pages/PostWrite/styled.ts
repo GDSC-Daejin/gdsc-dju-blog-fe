@@ -27,6 +27,8 @@ export const PostTitle = styled.input`
   width: 100%;
   padding-bottom: 10px;
   font-size: ${({ theme }) => theme.fontSize.h4};
+  background: ${({ theme }) => theme.colors.background};
+  caret-color: ${({ theme }) => theme.colors.grey400};ㅈ
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
   }
@@ -37,6 +39,8 @@ export const PostTitle = styled.input`
 export const PostHashtag = styled.input`
   display: flex;
   font-size: ${(props) => props.theme.fontSize.body1};
+  background: ${({ theme }) => theme.colors.background};
+  caret-color: ${({ theme }) => theme.colors.grey400};
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
   }
@@ -74,7 +78,7 @@ export const PostBottomButtonRWrapper = styled.div`
 export const PostThumbnailInner = styled.div`
   cursor: pointer;
   position: relative;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${({ theme }) => theme.colors.greyOpacity500}
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -103,5 +107,5 @@ export const ThumbnailText = styled.div`
   position: absolute;
   top: 50px;
   font-size: ${({ theme }) => theme.fontSize.body3};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.grey900};
 `;

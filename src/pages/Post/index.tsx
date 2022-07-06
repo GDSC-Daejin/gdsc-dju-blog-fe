@@ -1,10 +1,12 @@
-import { Giscus } from '@giscus/react';
-import { Viewer } from '@toast-ui/react-editor';
 import React from 'react';
+import { Giscus } from '@giscus/react';
+import Prism from 'prismjs';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
+import { Viewer } from '@toast-ui/react-editor';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useRecoilState } from 'recoil';
-import API from '../../api';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import { useGetMyData } from '../../api/hooks/useGetMyData';
 import UserService from '../../api/UserService';
@@ -110,7 +112,13 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
             </PostAuthorWrapper>
           </PostHead>
           <ContentBox>
-            <Viewer initialValue={postData.content} />
+            <Viewer
+              initialValue={postData.content}
+              plugins={[
+                [codeSyntaxHighlight, { highlighter: Prism }],
+                tableMergedCell,
+              ]}
+            />
           </ContentBox>
         </>
       )}
