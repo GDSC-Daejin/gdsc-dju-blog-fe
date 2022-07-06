@@ -3,8 +3,10 @@ import { RowDetailPostListType, RowPostDataType } from '../types/postData';
 import { Api } from './index';
 
 class PostService extends Api {
-  getPostListData = (params: string) => {
-    return axios.get<RowDetailPostListType>(`${this.API}/api/v1/${params}`);
+  getPostsData = (params: string) => {
+    return axios.get<RowDetailPostListType>(
+      `${this.API}/api/v1/post/list${params}`,
+    );
   };
   getPostData = (postId: string) => {
     return axios.get<RowPostDataType>(

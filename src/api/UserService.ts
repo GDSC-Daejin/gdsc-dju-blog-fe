@@ -22,7 +22,7 @@ class UserService extends Api {
   };
   getMyPostsData = (params: string) => {
     return axios.get<RowDetailPostListType>(
-      `${this.API}/api/member/v1/${params}`,
+      `${this.API}/api/member/v1/myPost/${params}`,
       this.Header,
     );
   };
@@ -34,7 +34,7 @@ class UserService extends Api {
   };
   getMyPostsTempData = (params: string) => {
     return axios.get<RowDetailPostListType>(
-      `${this.API}/api/member/v1/${params}`,
+      `${this.API}/api/member/v1/myPost/temp${params}`,
       this.Header,
     );
   };

@@ -11,7 +11,7 @@ async function getMyPostData(postId: string | undefined) {
 export function useGetMyPostData(postId: string | undefined) {
   const { data: postData } = useQuery(
     [postId, `/post/${postId}`],
-    () => getMyPostData(`/post/${postId}`),
+    () => getMyPostData(postId),
     {
       enabled: !postId,
     },

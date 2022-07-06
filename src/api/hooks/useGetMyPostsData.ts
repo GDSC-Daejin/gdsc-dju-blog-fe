@@ -10,7 +10,7 @@ async function getMyPostsData(params: string) {
 export function useGetMyPostsData(category: string, page = 0, size: number) {
   const { data: userPostData } = useQuery(
     [`myPost/${userPostUrlFilter(category, page, size)}`],
-    () => getMyPostsData(`myPost/${userPostUrlFilter(category, page, size)}`),
+    () => getMyPostsData(userPostUrlFilter(category, page, size)),
   );
   return { userPostData: userPostData && userPostData };
 }

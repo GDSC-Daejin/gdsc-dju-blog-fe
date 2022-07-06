@@ -8,7 +8,7 @@ async function getDetailPost(postId: string) {
 
 export function useGetDetailPost(postId: string) {
   const { data: postData } = useQuery([postId, `/post/${postId}`], () =>
-    getDetailPost(`/post/${postId}`),
+    getDetailPost(postId),
   );
   return {
     postData: postData && postData.body.data,
