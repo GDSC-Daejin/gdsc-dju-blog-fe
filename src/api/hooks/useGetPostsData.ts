@@ -9,7 +9,7 @@ async function getPostListData(params: string) {
 export function useGetPostsData(category: string, page = 0, size?: number) {
   const { data: postListData } = useQuery(
     [`post/list${postUrlFilter(category, page, size)}`],
-    () => getPostListData(postUrlFilter(category, page, size)),
+    () => getPostListData(`post/list${postUrlFilter(category, page, size)}`),
   );
   return {
     postListData: postListData && postListData,

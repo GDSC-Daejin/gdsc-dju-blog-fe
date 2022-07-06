@@ -13,7 +13,10 @@ export function useGetMyPostsTempData(
 ) {
   const { data: userPostTempData } = useQuery(
     [`myPost/temp${userPostUrlFilter(category, page, size)}`],
-    () => getMyPostListTempData(userPostUrlFilter(category, page, size)),
+    () =>
+      getMyPostListTempData(
+        `myPost/temp${userPostUrlFilter(category, page, size)}`,
+      ),
   );
   return { userPostTempData: userPostTempData && userPostTempData };
 }
