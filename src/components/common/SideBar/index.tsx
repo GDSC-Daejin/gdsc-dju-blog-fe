@@ -18,7 +18,19 @@ export const SideBar = () => {
   const [cookies] = useCookies(['token', 'refresh_token', 'user']);
 
   const { userData } = useGetMyData();
+  useEffect(() => {
+    document.body.style.cssText = `
+    position: fixed; 
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`;
 
+    if (!menu.appMenu) {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    }
+  }, [menu]);
   return (
     <>
       <SideBarWrapper

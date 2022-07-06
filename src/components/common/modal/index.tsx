@@ -55,7 +55,7 @@ const modalType: IModalType = {
     rightColor: 'googleRed',
   },
 };
-const Modal: React.FC<ModalProps> = ({ onClick }) => {
+const Modal: React.FC<ModalProps> = () => {
   const [modal, setModal] = useRecoilState(modalState);
   useEffect(() => {
     document.body.style.cssText = `

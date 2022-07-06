@@ -15,7 +15,9 @@ const ComponentLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [loader] = useRecoilState(loaderState);
+
   useGetMyToken();
+
   return (
     <div>
       <Alert />
