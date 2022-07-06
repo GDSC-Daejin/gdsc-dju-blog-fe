@@ -8,7 +8,7 @@ export const getUserData = async (token: string) => {
   return response.data.body.data;
 };
 
-export const useGetUserData = () => {
+export const useGetMyData = () => {
   const [cookie] = useCookies(['refresh_token', 'token']);
   const { data: userData } = useQuery(
     [cookie.token, `${cookie.token}`],
@@ -26,16 +26,16 @@ export const useGetUserData = () => {
 
   return { userData: userData ?? userData };
 };
-export const getUserToken = async (refreshToken: string, token: string) => {
+export const getMyToken = async (refreshToken: string, token: string) => {
   const response = await TokenService.getRefresh(refreshToken, token);
   return response.data.body.data.token;
 };
 
-export const useGetUserToken = () => {
+export const useGetMyToken = () => {
   const [cookies, setCookies] = useCookies(['token', 'refresh_token']);
   const { data: newToken } = useQuery(
     [cookies.refresh_token, cookies.refresh_token],
-    () => getUserToken(cookies.refresh_token, cookies.token),
+    () => getMyToken(cookies.refresh_token, cookies.token),
     {
       refetchInterval: 30 * 60 * 1000,
       retry: 2,

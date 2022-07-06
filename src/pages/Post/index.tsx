@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import API from '../../api';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-import { useGetUserData } from '../../api/hooks/useGetUserData';
+import { useGetMyData } from '../../api/hooks/useGetMyData';
 import UserService from '../../api/UserService';
 import Bookmark from '../../assets/Bookmark';
 import PostEditIcon from '../../assets/PostEditIcon';
@@ -79,7 +79,7 @@ const Post = () => {
 
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
   const { postData } = useGetDetailPost(postId);
-  const { userData } = useGetUserData();
+  const { userData } = useGetMyData();
   const userInfoData = userData?.memberInfo;
 
   return (

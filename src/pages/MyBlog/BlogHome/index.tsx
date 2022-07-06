@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
-import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { useGetMyPostsData } from '../../../api/hooks/useGetUserPostListData';
+import { useGetMyData } from '../../../api/hooks/useGetMyData';
+import { useGetMyPostsData } from '../../../api/hooks/useGetMyPostsData';
 import Setting from '../../../assets/Setting';
 import { GDSCButton } from '../../../components/common/Button';
 import CategoryMenu from '../../../components/common/CategoryMenu';
@@ -38,7 +38,7 @@ const BlogHome = () => {
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const { userData } = useGetUserData();
+  const { userData } = useGetMyData();
   const userInfoData = userData?.memberInfo;
   const { userPostData } = useGetMyPostsData(category, page - 1, 6);
   const navigate = useNavigate();

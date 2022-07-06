@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 import api from '../../../api';
-import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { useGetMyData } from '../../../api/hooks/useGetMyData';
 import TokenService from '../../../api/TokenService';
 import { MENU_KEY, menuState } from '../../../store/menu';
 import { SideBarAnimation, SideBarGrayBoxAnimation } from '../Animation';
@@ -17,7 +17,7 @@ export const SideBar = () => {
 
   const [cookies] = useCookies(['token', 'refresh_token', 'user']);
 
-  const { userData } = useGetUserData();
+  const { userData } = useGetMyData();
 
   return (
     <>

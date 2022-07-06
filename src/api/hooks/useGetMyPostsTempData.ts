@@ -6,7 +6,7 @@ async function getMyPostListTempData(params: string) {
   const res = await UserService.getMyPostsTempData(params);
   return res.data.body.data;
 }
-export function useGetUserPostListTempData(
+export function useGetMyPostsTempData(
   category: string,
   page = 0,
   size: number,

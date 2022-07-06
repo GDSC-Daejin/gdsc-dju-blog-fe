@@ -11,7 +11,7 @@ import { CategoryPageInner, PageBarWrapper } from './styled';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import PageBar from '../../components/common/PageBar';
-import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import { useGetPostsData } from '../../api/hooks/useGetPostsData';
 import { NoPosts } from '../MyBlog/BlogHome/styled';
 
 const Category = () => {
@@ -22,7 +22,7 @@ const Category = () => {
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const { postListData } = useGetPostListData(category, page - 1);
+  const { postListData } = useGetPostsData(category, page - 1);
 
   const navigate = useNavigate();
   useEffect(() => {

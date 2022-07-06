@@ -6,7 +6,7 @@ async function getPostListData(params: string) {
   const res = await PostService.getPostListData(params);
   return res.data.body.data;
 }
-export function useGetPostListData(category: string, page = 0, size?: number) {
+export function useGetPostsData(category: string, page = 0, size?: number) {
   const { data: postListData } = useQuery(
     [`post/list${postUrlFilter(category, page, size)}`],
     () => getPostListData(postUrlFilter(category, page, size)),

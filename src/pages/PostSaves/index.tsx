@@ -15,8 +15,8 @@ import { GDSCButton } from '../../components/common/Button';
 import PostCard from '../../components/common/PostCard';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
 import PageBar from '../../components/common/PageBar';
-import { useGetUserData } from '../../api/hooks/useGetUserData';
-import { useGetUserPostListTempData } from '../../api/hooks/useGetUserPostListTempData';
+import { useGetMyData } from '../../api/hooks/useGetMyData';
+import { useGetMyPostsTempData } from '../../api/hooks/useGetMyPostsTempData';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import { POST_KEY, postState } from '../../store/postEdit';
 import { useRecoilState } from 'recoil';
@@ -28,13 +28,9 @@ const PostSaves = () => {
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const { userData } = useGetUserData();
+  const { userData } = useGetMyData();
   const userInfoData = userData?.memberInfo;
-  const { userPostTempData } = useGetUserPostListTempData(
-    category,
-    page - 1,
-    6,
-  );
+  const { userPostTempData } = useGetMyPostsTempData(category, page - 1, 6);
   const navigate = useNavigate();
 
   useEffect(() => {

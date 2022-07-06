@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { useScroll } from 'react-use';
-import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import { useGetPostsData } from '../../api/hooks/useGetPostsData';
 import Plus from '../../assets/Plus';
 import BlogCard from '../../components/common/BlogCard';
 import CategoryMenu from '../../components/common/CategoryMenu';
@@ -25,7 +25,7 @@ function Home() {
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
 
-  const { postListData } = useGetPostListData(category, 0, 11);
+  const { postListData } = useGetPostsData(category, 0, 11);
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

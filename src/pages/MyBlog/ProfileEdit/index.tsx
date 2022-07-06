@@ -1,7 +1,7 @@
 import { FormikProvider, useFormik } from 'formik';
 import React, { memo, useLayoutEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { useGetUserData } from '../../../api/hooks/useGetUserData';
+import { useGetMyData } from '../../../api/hooks/useGetMyData';
 import { GDSCButton } from '../../../components/common/Button';
 import TextInput from '../../../components/common/input/TextInput';
 import ProfileEditImage from '../../../components/common/ProfileEditImage';
@@ -23,7 +23,7 @@ import {
 const ProfileEdit = () => {
   const [user, setUser] = useRecoilState(userState);
 
-  const { userData } = useGetUserData();
+  const { userData } = useGetMyData();
 
   useLayoutEffect(() => {
     if (userData) {
