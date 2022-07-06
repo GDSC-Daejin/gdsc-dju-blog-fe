@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
-import UserService from '../UserService';
+import PostService from '../PostService';
 
 async function getMyPostData(postId: string | undefined) {
   if (postId) {
-    const res = await UserService.getMyPostData(postId);
+    const res = await PostService.getMyPostData(postId);
     return res.data;
   }
 }

@@ -1,15 +1,15 @@
-import React from 'react';
 import { Giscus } from '@giscus/react';
-import Prism from 'prismjs';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 import { Viewer } from '@toast-ui/react-editor';
+import Prism from 'prismjs';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useRecoilState } from 'recoil';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 import { useGetMyData } from '../../api/hooks/useGetMyData';
-import UserService from '../../api/UserService';
+import PostService from '../../api/PostService';
 import Bookmark from '../../assets/Bookmark';
 import PostEditIcon from '../../assets/PostEditIcon';
 import PostTrashIcon from '../../assets/PostTrashIcon';
@@ -137,7 +137,7 @@ const PostIconBlock: React.FC<PostIconBoxProps> = ({
   const deleteHandler = async () => {
     setModal({ ...modal, isOpen: false });
     try {
-      await UserService.deleteMyPostData(postId);
+      await PostService.deleteMyPostData(postId);
       await setAlert({
         ...alert,
         alertStatus: 'success',

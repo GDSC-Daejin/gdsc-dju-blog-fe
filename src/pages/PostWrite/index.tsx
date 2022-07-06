@@ -20,7 +20,7 @@ import { useRecoilState } from 'recoil';
 /*color plugin*/
 import 'tui-color-picker/dist/tui-color-picker.css';
 import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
-import UserService from '../../api/UserService';
+import PostService from '../../api/PostService';
 import { GDSCButton } from '../../components/common/Button';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
 import PostThumbnail from '../../Images/PostThumbnail';
@@ -95,7 +95,7 @@ const PostWrite = () => {
   const handleDraft = async (temp: boolean) => {
     const postData = { ...detailPostData, tmpStore: temp };
     try {
-      await UserService.postMyPostData(postData);
+      await PostService.postMyPostData(postData);
       await setAlert({
         ...alert,
         alertStatus: 'success',
@@ -116,7 +116,7 @@ const PostWrite = () => {
   const handleSubmit = async (temp: boolean) => {
     const postData = { ...detailPostData, tmpStore: temp };
     try {
-      await UserService.postMyPostData(postData);
+      await PostService.postMyPostData(postData);
       await navigate(`/category/all`);
       setModal({
         ...modal,

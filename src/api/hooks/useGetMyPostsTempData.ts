@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
-import UserService from '../UserService';
+import PostService from '../PostService';
 import { userPostUrlFilter } from './postPagination';
 
 async function getMyPostListTempData(params: string) {
-  const res = await UserService.getMyPostsTempData(params);
+  const res = await PostService.getMyPostsTempData(params);
   return res.data.body.data;
 }
 export function useGetMyPostsTempData(
