@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import { SWRConfig } from 'swr';
 
 import App from './App';
 
@@ -14,16 +13,14 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <SWRConfig>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <RecoilRoot>
-            <CookiesProvider>
-              <App />
-            </CookiesProvider>
-          </RecoilRoot>
-        </QueryClientProvider>
-      </SWRConfig>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <RecoilRoot>
+          <CookiesProvider>
+            <App />
+          </CookiesProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

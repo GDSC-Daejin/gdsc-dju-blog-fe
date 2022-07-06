@@ -65,7 +65,6 @@ function Home() {
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
-
       <CardSectionWrapper>
         <CardSection
           isDrag={isDrag}

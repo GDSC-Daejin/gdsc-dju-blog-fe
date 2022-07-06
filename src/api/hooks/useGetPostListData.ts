@@ -1,5 +1,4 @@
-import useSWR from 'swr';
-import API from '../index';
+import { useQuery } from 'react-query';
 import PostService from '../PostService';
 import { postUrlFilter } from './postPagination';
 
@@ -8,9 +7,9 @@ async function getPostListData(params: string) {
   return res.data.body.data;
 }
 export function useGetPostListData(category: string, page = 0, size?: number) {
-  const { data: postListData } = useSWR(
+  const { data: postListData } = useQuery(
     [`post/list${postUrlFilter(category, page, size)}`],
-    getPostListData,
+    () => getPostListData(postUrlFilter(category, page, size)),
   );
   return {
     postListData: postListData && postListData,

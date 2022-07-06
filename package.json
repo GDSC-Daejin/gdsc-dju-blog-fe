@@ -42,7 +42,6 @@
     "styled-components": "^5.3.3",
     "styled-normalize": "^8.0.7",
     "styled-reset": "^4.3.4",
-    "swr": "^1.0.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

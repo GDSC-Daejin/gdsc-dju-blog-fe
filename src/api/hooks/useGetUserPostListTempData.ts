@@ -1,9 +1,8 @@
-import API from '../index';
-import useSWR from 'swr';
+import { useQuery } from 'react-query';
 import UserService from '../UserService';
 import { userPostUrlFilter } from './postPagination';
 
-async function getUserPostListTempData(params: string) {
+async function getMyPostListTempData(params: string) {
   const res = await UserService.getMyPostsTempData(params);
   return res.data.body.data;
 }
@@ -12,9 +11,9 @@ export function useGetUserPostListTempData(
   page = 0,
   size: number,
 ) {
-  const { data: userPostTempData } = useSWR(
+  const { data: userPostTempData } = useQuery(
     [`myPost/temp${userPostUrlFilter(category, page, size)}`],
-    getUserPostListTempData,
+    () => getMyPostListTempData(userPostUrlFilter(category, page, size)),
   );
   return { userPostTempData: userPostTempData && userPostTempData };
 }

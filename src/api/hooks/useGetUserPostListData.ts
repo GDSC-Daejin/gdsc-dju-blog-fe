@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import { useQuery } from 'react-query';
 import UserService from '../UserService';
 import { userPostUrlFilter } from './postPagination';
 
@@ -8,9 +8,9 @@ async function getMyPostsData(params: string) {
 }
 
 export function useGetMyPostsData(category: string, page = 0, size: number) {
-  const { data: userPostData } = useSWR(
+  const { data: userPostData } = useQuery(
     [`myPost/${userPostUrlFilter(category, page, size)}`],
-    getMyPostsData,
+    () => getMyPostsData(userPostUrlFilter(category, page, size)),
   );
   return { userPostData: userPostData && userPostData };
 }
