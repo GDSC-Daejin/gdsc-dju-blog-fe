@@ -28,7 +28,7 @@ export const PostTitle = styled.input`
   padding-bottom: 10px;
   font-size: ${({ theme }) => theme.fontSize.h4};
   background: ${({ theme }) => theme.colors.background};
-  caret-color: ${({ theme }) => theme.colors.grey400};ㅈ
+  caret-color: ${({ theme }) => theme.colors.grey400};
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
   }

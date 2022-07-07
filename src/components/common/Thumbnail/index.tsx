@@ -1,5 +1,5 @@
 import React from 'react';
-import PostThumbnail from '../../../Images/PostThumbnail';
+import PostThumbnail from '../../../assets/PostThumbnail';
 import { PostThumbnailWrapper } from '../../../pages/PostWrite/styled';
 
 const Thumbnail = () => {

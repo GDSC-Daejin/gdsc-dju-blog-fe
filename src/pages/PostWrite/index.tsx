@@ -23,7 +23,7 @@ import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
 import PostService from '../../api/PostService';
 import { GDSCButton } from '../../components/common/Button';
 import PostCategoryMenu from '../../components/common/PostCategoryMenu';
-import PostThumbnail from '../../Images/PostThumbnail';
+import PostThumbnail from '../../assets/PostThumbnail';
 import { alertState } from '../../store/alert';
 import { ModalType, modalState } from '../../store/modal';
 import {
@@ -115,13 +115,13 @@ const PostWrite = () => {
 
   const handleSubmit = async (temp: boolean) => {
     const postData = { ...detailPostData, tmpStore: temp };
+    setModal({
+      ...modal,
+      isOpen: false,
+    });
     try {
       await PostService.postMyPostData(postData);
       await navigate(`/category/all`);
-      setModal({
-        ...modal,
-        isOpen: false,
-      });
       await setAlert({
         ...alert,
         alertStatus: 'success',
@@ -177,6 +177,7 @@ const PostWrite = () => {
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result?.toString();
+      console.log(base64);
       if (base64) {
         setDetailPostData((prev) => {
           return { ...prev, base64Thumbnail: base64.split(',')[1] };
@@ -307,7 +308,6 @@ const PostWrite = () => {
                   initialEditType="markdown"
                   initialValue={detailPostData.content}
                   ref={editorRef}
-                  theme={'dark'}
                   language="ko-KR"
                   onChange={setEditorValue}
                   plugins={[
@@ -328,7 +328,7 @@ const PostWrite = () => {
                 initialValue={detailPostData.content}
                 ref={editorRef}
                 onChange={setEditorValue}
-                theme={'dark'}
+                language="ko-KR"
                 plugins={[
                   colorSyntax,
                   [codeSyntaxHighlight, { highlighter: Prism }],
