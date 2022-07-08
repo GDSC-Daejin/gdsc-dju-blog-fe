@@ -29,6 +29,7 @@ export const PostTitle = styled.input`
   font-size: ${({ theme }) => theme.fontSize.h4};
   background: ${({ theme }) => theme.colors.background};
   caret-color: ${({ theme }) => theme.colors.grey400};
+  color: ${({ theme }) => theme.colors.grey900};
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
   }
@@ -40,6 +41,7 @@ export const PostHashtag = styled.input`
   display: flex;
   font-size: ${(props) => props.theme.fontSize.body1};
   background: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.grey900};
   caret-color: ${({ theme }) => theme.colors.grey400};
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};

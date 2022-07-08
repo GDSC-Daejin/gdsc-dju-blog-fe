@@ -17,8 +17,7 @@ export const ModalContent = styled.div`
   text-align: center;
 `;
 export const ModalContentWrapper = styled.div`
-  padding-top: 40px;
-  padding-bottom: 20px;
+  padding: 40px 50px 20px 50px;
   display: flex;
   align-items: center;
   justify-content: center;

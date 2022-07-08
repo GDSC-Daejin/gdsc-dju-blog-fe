@@ -124,6 +124,31 @@ export const ContentBox = styled.article`
     font-size: ${({ theme }) => theme.fontSize.body2};
     font-family: 'D2Coding ligature', sans-serif;
   }
+  .toastui-editor-defaultUI {
+    border: 1px solid ${({ theme }) => theme.colors.grey200};
+  }
+  .toastui-editor-defaultUI-toolbar {
+    background: ${({ theme }) => theme.colors.background} !important;
+    border-color: ${({ theme }) => theme.colors.background} !important;
+    button {
+      border-color: ${({ theme }) => theme.colors.background} !important;
+    }
+  }
+  .toastui-editor-mode-switch {
+    background: ${({ theme }) => theme.colors.background} !important;
+  }
+  .toastui-editor-mode-switch .tab-item {
+    .tab-item.active {
+      background: ${({ theme }) => theme.colors.background} !important;
+    }
+  }
+
+  .toastui-editor-defaultUI .ProseMirror {
+    background: ${({ theme }) => theme.colors.background} !important;
+  }
+  .toastui-editor-md-preview {
+    background: ${({ theme }) => theme.colors.background} !important;
+  }
   .toastui-editor-contents {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -1213,5 +1238,40 @@ export const ContentBox = styled.article`
 
   .token.inserted {
     color: green;
+  }
+  .toastui-editor-md-code.toastui-editor-md-delimiter {
+    color: ${({ theme }) => theme.colors.grey900};
+    background: transparent;
+  }
+  .toastui-editor-md-code {
+    border-radius: 2px;
+    background: transparent;
+    color: #42a5f5;
+  }
+  .toastui-editor-md-thematic-break {
+    font-size: ${({ theme }) => theme.fontSize.body2};
+  }
+  .toastui-editor-md-code-block-line-background {
+    background: ${({ theme }) => theme.colors.background};
+  }
+  .ProseMirror > div {
+    font-size: ${({ theme }) => theme.fontSize.body2};
+    color: ${({ theme }) => theme.colors.grey900};
+  }
+  .toastui-editor-md-link {
+    font-size: ${({ theme }) => theme.fontSize.body2};
+  }
+  .toastui-editor-md-code.toastui-editor-md-marked-text {
+    font-size: ${({ theme }) => theme.fontSize.body2};
+  }
+
+  .toastui-editor-md-strong {
+    font-size: ${({ theme }) => theme.fontSize.body2};
+  }
+  .toastui-editor-md-code-block {
+    font-size: ${({ theme }) => theme.fontSize.body2};
+  }
+  .toastui-editor-md-block-quote {
+    font-size: ${({ theme }) => theme.fontSize.body1};
   }
 `;

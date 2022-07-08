@@ -13,7 +13,7 @@ export function useGetMyPostData(postId: string | undefined) {
     [postId, `/post/${postId}`],
     () => getMyPostData(postId),
     {
-      enabled: !postId,
+      enabled: !!postId,
     },
   );
   return {

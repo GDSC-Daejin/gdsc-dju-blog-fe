@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import PostService from '../PostService';
-import { userPostUrlFilter } from './postPagination';
+import { userPostTempUrlFilter } from './postPagination';
 
 async function getMyPostListTempData(params: string) {
   const res = await PostService.getMyPostsTempData(params);
@@ -12,8 +12,8 @@ export function useGetMyPostsTempData(
   size: number,
 ) {
   const { data: userPostTempData } = useQuery(
-    [`myPost/temp${userPostUrlFilter(category, page, size)}`],
-    () => getMyPostListTempData(userPostUrlFilter(category, page, size)),
+    [`myPost/temp${userPostTempUrlFilter(category, page, size)}`],
+    () => getMyPostListTempData(userPostTempUrlFilter(category, page, size)),
   );
   return { userPostTempData: userPostTempData && userPostTempData };
 }

@@ -9,6 +9,7 @@ export const BlogCardInner = styled(motion.article)`
   display: flex;
   flex-direction: column;
   box-shadow: 0px 19px 32px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `;
 
 export const BookMarkWrapper = styled.div`

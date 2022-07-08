@@ -54,6 +54,12 @@ const modalType: IModalType = {
     rightButton: '삭제하기',
     rightColor: 'googleRed',
   },
+  update: {
+    description: '작성하신 글을 수정할까요?',
+    leftButton: '뒤로가기',
+    rightButton: '업로드',
+    rightColor: 'googleBlue',
+  },
 };
 const Modal: React.FC<ModalProps> = () => {
   const [modal, setModal] = useRecoilState(modalState);

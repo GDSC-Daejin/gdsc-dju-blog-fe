@@ -90,7 +90,7 @@ const PostSaves = () => {
                     key={data.postId}
                     onClick={() => {
                       setPost({ ...post, [POST_KEY.POST_TMPSTORE]: true });
-                      navigate(`/post/write/${data.postId}`);
+                      navigate(`/post/edit/${data.postId}`);
                     }}
                   >
                     <PostCard {...data} />

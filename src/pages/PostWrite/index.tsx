@@ -19,6 +19,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 /*color plugin*/
 import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 import { useGetMyPostData } from '../../api/hooks/useGetMyPostData';
 import PostService from '../../api/PostService';
 import { GDSCButton } from '../../components/common/Button';
@@ -47,6 +49,8 @@ import {
   PostTitle,
   ThumbnailText,
 } from './styled';
+import { ContentBox } from '../Post/styled';
+import { useTheme } from '../../hooks/ThemeHandler';
 
 export const PostCategoryMenuData = [
   {
@@ -83,15 +87,18 @@ const PostWrite = () => {
     postHashTags: '',
     tmpStore: undefined,
   });
+  console.log(detailPostData);
   const input = useRef<HTMLInputElement>(null);
   const editorRef: any = useRef();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { postData } = useGetMyPostData(id);
+  const isUpdate = id !== undefined;
   const isButtonBlock =
     !detailPostData.category.categoryName ||
     !detailPostData.title ||
     detailPostData.content.length < 10;
+
   const handleDraft = async (temp: boolean) => {
     const postData = { ...detailPostData, tmpStore: temp };
     try {
@@ -137,6 +144,30 @@ const PostWrite = () => {
       });
     }
   };
+  const updatePost = async () => {
+    const postData = { ...detailPostData, tmpStore: false };
+    setModal({
+      ...modal,
+      isOpen: false,
+    });
+    try {
+      id && (await PostService.updateMyPostData(postData, id));
+      await setAlert({
+        ...alert,
+        alertStatus: 'success',
+        alertHandle: true,
+        alertMessage: '업데이트에 성공했어요',
+      });
+      await navigate(`/category/all`);
+    } catch (error) {
+      setAlert({
+        ...alert,
+        alertStatus: 'error',
+        alertHandle: true,
+        alertMessage: '업데이트에 실패했어요',
+      });
+    }
+  };
 
   const submitHandler = (type: string) => {
     //포스트
@@ -151,6 +182,14 @@ const PostWrite = () => {
     // 임시저장
     if (type === 'draft') {
       handleDraft(true);
+    }
+    if (type === 'update') {
+      setModal({
+        ...modal,
+        isOpen: true,
+        type: type as ModalType,
+        onClick: () => updatePost(),
+      });
     }
     if (type === 'backBlock') {
       setModal({
@@ -234,6 +273,7 @@ const PostWrite = () => {
     window.addEventListener('popstate', preventGoBack);
     return () => window.removeEventListener('popstate', preventGoBack);
   }, []);
+  const { theme } = useTheme();
   return (
     <>
       <NavigationBlock />
@@ -299,16 +339,36 @@ const PostWrite = () => {
               }}
             />
           </PostGDSCButtonWrapper>
-          {id ? (
-            <>
-              {detailPostData.content.length > 0 && (
+          <ContentBox>
+            {id ? (
+              <>
+                {detailPostData.content.length > 0 && (
+                  <Editor
+                    theme={theme}
+                    previewStyle="vertical"
+                    height="627px"
+                    initialEditType="markdown"
+                    initialValue={detailPostData.content}
+                    ref={editorRef}
+                    onChange={setEditorValue}
+                    plugins={[
+                      colorSyntax,
+                      [codeSyntaxHighlight, { highlighter: Prism }],
+                      chart,
+                      tableMergedCell,
+                    ]}
+                  />
+                )}
+              </>
+            ) : (
+              <>
                 <Editor
+                  theme={theme}
                   previewStyle="vertical"
                   height="627px"
                   initialEditType="markdown"
                   initialValue={detailPostData.content}
                   ref={editorRef}
-                  language="ko-KR"
                   onChange={setEditorValue}
                   plugins={[
                     colorSyntax,
@@ -317,32 +377,15 @@ const PostWrite = () => {
                     tableMergedCell,
                   ]}
                 />
-              )}
-            </>
-          ) : (
-            <>
-              <Editor
-                previewStyle="vertical"
-                height="627px"
-                initialEditType="markdown"
-                initialValue={detailPostData.content}
-                ref={editorRef}
-                onChange={setEditorValue}
-                language="ko-KR"
-                plugins={[
-                  colorSyntax,
-                  [codeSyntaxHighlight, { highlighter: Prism }],
-                  chart,
-                  tableMergedCell,
-                ]}
-              />
-            </>
-          )}
+              </>
+            )}
+          </ContentBox>
           <BottomPostButtonBox
+            isUpdate={isUpdate}
             postCancel={() => submitHandler('backBlock')}
             postSubmit={() => {
               setTemp(false);
-              submitHandler('uploadPost');
+              submitHandler(isUpdate ? 'update' : 'uploadPost');
             }}
             disable={isButtonBlock}
             draft={() => {
@@ -360,7 +403,8 @@ const BottomPostButtonBox: React.FC<{
   postSubmit: () => void;
   draft: () => void;
   disable: boolean;
-}> = ({ postCancel, postSubmit, draft, disable }) => {
+  isUpdate: boolean;
+}> = ({ postCancel, postSubmit, draft, disable, isUpdate }) => {
   return (
     <PostBottomButtonWrapper>
       <PostBottomButtonLWrapper>
@@ -371,9 +415,9 @@ const BottomPostButtonBox: React.FC<{
       </PostBottomButtonCWrapper>
       <PostBottomButtonRWrapper>
         <GDSCButton
-          text="업로드"
+          text={isUpdate ? '수정하기' : '업로드'}
           onClick={() => {
-            !disable && postSubmit();
+            !disable && (isUpdate ? postSubmit() : postSubmit());
           }}
           color={'googleBlue'}
           disable={disable}

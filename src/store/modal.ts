@@ -9,7 +9,12 @@ export const ModalState: IModalState = {
   onClick: null,
 };
 
-export type ModalType = 'login' | 'backBlock' | 'uploadPost' | 'deleteCheck';
+export type ModalType =
+  | 'login'
+  | 'backBlock'
+  | 'uploadPost'
+  | 'deleteCheck'
+  | 'update';
 
 export type IModalState = {
   onClick: null | (() => void);

@@ -39,12 +39,6 @@ class PostService extends Api {
       this.Header,
     );
   };
-  getMyPostTempData = (postId: string) => {
-    return axios.get<RowPostDataType>(
-      `${this.API}/api/member/v1/myPost/temp/post/${postId}`,
-      this.Header,
-    );
-  };
   getMyPostsNotTempData = (params: string) => {
     return axios.get<RowDetailPostListType>(
       `${this.API}/api/member/v1/myPost/notTemp${params}`,
