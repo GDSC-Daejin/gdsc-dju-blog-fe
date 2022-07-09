@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { useScroll } from 'react-use';
@@ -24,6 +24,7 @@ function Home() {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
+  const [homeWidth, setHomeWidth] = useState(0);
 
   const { postListData } = useGetPostsData(category, 0, 11);
 
@@ -54,11 +55,15 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
+  const homeRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    homeRef.current && setHomeWidth(homeRef.current?.offsetWidth);
+  }, [homeRef.current]);
   return (
     <>
       <HomeLayoutContainer>
-        <HomeContentWrapper>
+        <HomeContentWrapper ref={homeRef}>
           <HomePhraseWrapper>
             <HomePhrase />
           </HomePhraseWrapper>
@@ -76,18 +81,19 @@ function Home() {
         >
           {postListData &&
             postListData.content.map((postData) => (
-              <BlogCardWrapper key={postData.postId}>
+              <BlogCardWrapper
+                key={postData.postId}
+                homeWidth={`${homeWidth}px`}
+              >
                 <BlogCard postData={postData} />
               </BlogCardWrapper>
             ))}
-          <BlogCardWrapper>
-            <div className="viewmore-item">
-              <Link to={`/category/${category}`}>
-                <button type="button" className="viewmore-item__button">
-                  <Plus />
-                </button>
-              </Link>
-            </div>
+          <BlogCardWrapper className="viewmore-item">
+            <Link to={`/category/${category}`}>
+              <button type="button" className="viewmore-item__button">
+                <Plus />
+              </button>
+            </Link>
           </BlogCardWrapper>
         </CardSection>
       </CardSectionWrapper>

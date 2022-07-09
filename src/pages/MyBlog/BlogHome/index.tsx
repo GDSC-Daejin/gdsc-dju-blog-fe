@@ -124,7 +124,7 @@ const BlogHome = () => {
                     {userInfoData.hashTag ? (
                       hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
                         <HashTageWrapper key={id} light={false}>
-                          <HashTageDark text={tag} />
+                          # {tag}
                         </HashTageWrapper>
                       ))
                     ) : (

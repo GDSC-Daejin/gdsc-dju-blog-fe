@@ -74,6 +74,7 @@ export const Date = styled.p`
 export const HashTageSection = styled.section`
   display: flex;
   flex-direction: row;
+  margin-top: 24px;
 `;
 export const CategoryWrapper = styled.div`
   position: relative;

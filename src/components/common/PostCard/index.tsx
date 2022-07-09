@@ -25,6 +25,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
   postId,
   postHashTags,
   memberInfo,
+  imagePath,
 }) => {
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
@@ -48,7 +49,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
         <Bookmark marked={marked} />
       </BookmarkWrapper>
       <PostCardImageWrapper>
-        <PostCardImage src={MockPostImage} />
+        <PostCardImage src={imagePath ?? MockPostImage} />
       </PostCardImageWrapper>
       <PostCardContentWrapper hover={hover}>
         <PostDate>{dateFilter(category.uploadDate)}</PostDate>

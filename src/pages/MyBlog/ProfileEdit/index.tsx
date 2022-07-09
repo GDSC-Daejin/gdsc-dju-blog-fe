@@ -1,13 +1,15 @@
 import { FormikProvider, useFormik } from 'formik';
-import React, { memo, useLayoutEffect } from 'react';
+import React, { memo, useLayoutEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useGetMyData } from '../../../api/hooks/useGetMyData';
+import UserService from '../../../api/UserService';
 import { GDSCButton } from '../../../components/common/Button';
 import TextInput from '../../../components/common/input/TextInput';
 import ProfileEditImage from '../../../components/common/ProfileEditImage';
 import { profileEditSchema } from '../../../components/Validation/profileEdit';
 import { userState } from '../../../store/user';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
+import { ILoginUserData } from '../../../types/userData';
 import { IUserDataType } from '../../../types/userDataType';
 import { IUserInfoDataType } from '../../../types/userInfoData';
 import {
@@ -21,20 +23,9 @@ import {
 } from './styled';
 
 const ProfileEdit = () => {
-  const [user, setUser] = useRecoilState(userState);
+  const [user, setUser] = useState<IUserDataType>();
 
   const { userData } = useGetMyData();
-
-  useLayoutEffect(() => {
-    if (userData) {
-      setUser({
-        ...user,
-        ...userData.memberInfo,
-        name: userData.username,
-        email: userData.email,
-      });
-    }
-  }, [userData]);
 
   return (
     <LayoutContainer>
@@ -63,11 +54,14 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
       etcUrl: userData.memberInfo.etcUrl,
     } as IUserInfoDataType,
     onSubmit: async (values) => {
-      const a = 1;
+      await UserService.updateMyData(values);
     },
     //validation setting
     validationSchema: profileEditSchema,
   });
+  const onSubmit = async (values: IUserInfoDataType) => {
+    await UserService.updateMyData(values);
+  };
   return (
     <FormikProvider value={userEditFormik}>
       <FormWrapper>
@@ -82,7 +76,7 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
               <TextInput
                 name={'name'}
                 // disabled={true}
-                placeholder={userData.username}
+                placeholder={'이름(실명)'}
                 value={userEditFormik.values.name}
                 onChange={userEditFormik.handleChange}
               />
@@ -213,7 +207,7 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
             <GDSCButton
               text={'저장하기'}
               color={'googleBlue'}
-              type={'submit'}
+              onClick={() => onSubmit(userEditFormik.values)}
             />
           </FormButtonWrapper>
         </FormInner>

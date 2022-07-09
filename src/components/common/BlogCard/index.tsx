@@ -16,6 +16,7 @@ import {
   BlogCardSubTextWrapper,
   BlogCardTagWrapper,
   BlogCardThumbnail,
+  BlogCardThumbnailWrapper,
   BlogCardTitle,
   PostText,
 } from './styled';
@@ -67,7 +68,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
         {/*  <Bookmark marked={marked} />*/}
         {/*</BookMarkWrapper>*/}
         {/* 이미지 */}
-        <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
+        <BlogCardThumbnailWrapper>
+          <BlogCardThumbnail
+            src={postData.imagePath ?? BlogCardImage}
+            alt="BlogCardThumbnail"
+          />
+        </BlogCardThumbnailWrapper>
         {/* 태그 */}
         {postData.postHashTags && (
           <BlogCardTagWrapper IsHovered={IsHovered}>

@@ -1,14 +1,9 @@
 import axios from 'axios';
-import {
-  PostPostDataType,
-  RowDetailPostListType,
-  RowPostDataType,
-} from '../types/postData';
 import { MemberDataInfoType, RowMemberDataType } from '../types/userDataType';
 import { Api } from './index';
 
 class UserService extends Api {
-  updateMyData = (userInfoData: MemberDataInfoType, token?: any) => {
+  updateMyData = (userInfoData: MemberDataInfoType) => {
     return axios.put(`${this.API}/api/guest/v1/me`, userInfoData, {
       ...this.Header,
     });

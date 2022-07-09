@@ -24,6 +24,7 @@ export interface Iprops {
 const TextInput = (props: Iprops) => {
   const { name, placeholder, onChange, type, disabled, error, touched } = props;
   const errorToggle = error != undefined && error != '필수입력란입니다.';
+
   return (
     <>
       <StyledInputWrapper error={errorToggle} disabled={!disabled}>

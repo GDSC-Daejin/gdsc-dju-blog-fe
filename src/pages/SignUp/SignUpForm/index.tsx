@@ -24,10 +24,7 @@ const SignUpForm = () => {
   const [tokenCookie] = useCookies(['token']);
   const navigate = useNavigate();
   const onSubmit = async (values: any) => {
-    const response = await UserService.updateMyData(
-      { ...values },
-      tokenCookie.token,
-    );
+    const response = await UserService.updateMyData({ ...values });
     if (response.data.body.message === 'SUCCESS')
       navigate('/', { replace: true });
     else alert('에러가 발생했습니다');
@@ -150,16 +147,8 @@ const SignUpForm = () => {
     },
   ];
 
-  return (
-    <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
-      {formData.map((data, index) =>
-        data.select ? (
-          <SignUpSelect {...data} key={data.refName} />
-        ) : (
-          <SignUpInput {...data} key={data.refName} />
-        ),
-      )}
-      {/* 
+  {
+    /*
             넘겨주는 값들
             key={index}
             refName={data.refName}
@@ -170,7 +159,17 @@ const SignUpForm = () => {
             setValue={setValue}
             condition={data.condition}
             trigger={trigger}
-            errors={data.errors}*/}
+            errors={data.errors}*/
+  }
+  return (
+    <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
+      {formData.map((formData) =>
+        formData.select ? (
+          <SignUpSelect {...formData} key={formData.refName} />
+        ) : (
+          <SignUpInput {...formData} key={formData.refName} />
+        ),
+      )}
       <GDSCButton
         color={isValid ? 'googleBlue' : 'tossBlue200'}
         text="가입하기"

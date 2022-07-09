@@ -1,9 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
+export const PostLayoutWrapper = styled.div`
+  margin-top: 110px;
+`;
 
 export const PostInformation = styled.div`
   display: flex;
   align-items: center;
-  margin: 50px 0px 12px 0px;
+  margin: 50px 0 12px 0;
 `;
 export const PostThumbnailWrapper = styled.div`
   display: flex;
@@ -13,7 +17,7 @@ export const PostContentWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   margin-left: 30px;
-  @media screen and (max-width: 530px) {
+  @media (max-width: 530px) {
     margin-left: 8px;
   }
   min-width: 250px;
@@ -56,27 +60,23 @@ export const PostGDSCButtonWrapper = styled.div`
   flex-direction: row-reverse;
   margin-bottom: 20px;
 `;
-export const PostBottomButtonWrapper = styled.div`
+export const PostBottomButtonBox = styled.div`
   display: flex;
   justify-content: end;
   margin: 40px 0px 200px 0px;
 `;
-export const PostBottomButtonLWrapper = styled.div`
+export const PostBottomButtonWrapper = styled.div`
   display: flex;
   padding-right: 12px;
-  @media screen and (max-width: 530px) {
-    display: none;
+  .cancel-button {
+    @media (max-width: ${({ theme }) => theme.windowSize.mobile}px) {
+    }
   }
-  @media screen and (max-width: ${({ theme }) => theme.windowSize.tablet}px) {
-    display: none;
+  &:last-child {
+    padding-right: 0;
+  }
 `;
-export const PostBottomButtonCWrapper = styled.div`
-  display: flex;
-  padding-right: 12px;
-`;
-export const PostBottomButtonRWrapper = styled.div`
-  display: flex;
-`;
+
 export const PostThumbnailInner = styled.div`
   cursor: pointer;
   position: relative;
