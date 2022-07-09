@@ -65,31 +65,30 @@ function Home() {
         </HomeContentWrapper>
       </HomeLayoutContainer>
       <CardSectionWrapper>
-        {postListData && (
-          <CardSection
-            isDrag={isDrag}
-            ref={scrollRef}
-            onMouseDown={onDragStart}
-            onMouseMove={isDrag ? onDragMove : undefined}
-            onMouseUp={onDragEnd}
-            onMouseLeave={onDragEnd}
-          >
-            {postListData.content.map((postData) => (
+        <CardSection
+          isDrag={isDrag}
+          ref={scrollRef}
+          onMouseDown={onDragStart}
+          onMouseMove={isDrag ? onDragMove : undefined}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
+        >
+          {postListData &&
+            postListData.content.map((postData) => (
               <BlogCardWrapper key={postData.postId}>
                 <BlogCard postData={postData} />
               </BlogCardWrapper>
             ))}
-            <BlogCardWrapper>
-              <div className="viewmore-item">
-                <Link to={`/category/${category}`}>
-                  <button type="button" className="viewmore-item__button">
-                    <Plus />
-                  </button>
-                </Link>
-              </div>
-            </BlogCardWrapper>
-          </CardSection>
-        )}
+          <BlogCardWrapper>
+            <div className="viewmore-item">
+              <Link to={`/category/${category}`}>
+                <button type="button" className="viewmore-item__button">
+                  <Plus />
+                </button>
+              </Link>
+            </div>
+          </BlogCardWrapper>
+        </CardSection>
       </CardSectionWrapper>
       <HomeLayoutContainer>
         <ButtonWrapper>

@@ -45,7 +45,6 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
     });
     window.location.href = 'https://gdsc-dju-blog.web.app/';
   };
-  console.log(userData);
 
   return (
     <>
