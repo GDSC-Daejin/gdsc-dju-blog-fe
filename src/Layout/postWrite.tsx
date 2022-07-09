@@ -42,6 +42,8 @@ interface PostWriteProps {
     setDetailPostData: Dispatch<React.SetStateAction<PostPostDataType>>,
     files: FileList | undefined | null,
   ) => void;
+  setFileImage: Dispatch<React.SetStateAction<string | null>>;
+  fileImage: string | null;
   id: string | undefined;
 }
 
@@ -49,6 +51,8 @@ const PostWriteLayout: React.FC<PostWriteProps> = ({
   postData,
   submitHandler,
   fileHandler,
+  fileImage,
+  setFileImage,
   id,
 }) => {
   const [detailPostData, setDetailPostData] = useState<PostPostDataType>({
@@ -62,7 +66,6 @@ const PostWriteLayout: React.FC<PostWriteProps> = ({
     postHashTags: '',
     tmpStore: undefined,
   });
-  const [fileImage, setFileImage] = useState<string | null>(null);
   const editorRef: any = useRef();
   const input = useRef<HTMLInputElement>(null);
 

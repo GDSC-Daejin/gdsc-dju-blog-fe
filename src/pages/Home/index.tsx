@@ -7,7 +7,6 @@ import Plus from '../../assets/Plus';
 import BlogCard from '../../components/common/BlogCard';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import HomePhrase from '../../components/common/HomePhrase';
-import useThrottle from '../../hooks/usethrottle';
 import BlogCardScrollButton from './BlogCardButton';
 import {
   BlogCardWrapper,
@@ -59,10 +58,8 @@ function Home() {
   const homeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    useThrottle(() => {
-      homeRef.current && setHomeWidth(homeRef.current?.offsetWidth);
-    }, 200);
-  }, [homeRef.current]);
+    homeRef.current && setHomeWidth(homeRef.current?.offsetWidth);
+  }, [homeRef]);
   return (
     <>
       <HomeLayoutContainer>

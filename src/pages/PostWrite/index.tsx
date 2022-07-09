@@ -168,6 +168,7 @@ const PostWrite = () => {
       const base64 = reader.result?.toString();
 
       if (base64) {
+        console.log(base64);
         setDetailPostData((prev) => {
           return {
             ...prev,
@@ -221,6 +222,8 @@ const PostWrite = () => {
             submitHandler={submitHandler}
             fileHandler={fileHandler}
             id={id}
+            fileImage={fileImage}
+            setFileImage={setFileImage}
           />
         </ContainerInner>
       </LayoutContainer>

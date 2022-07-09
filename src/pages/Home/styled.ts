@@ -9,7 +9,6 @@ export const HomeContentWrapper = styled.div`
   align-items: flex-start;
   box-sizing: border-box;
   gap: 3.75rem;
-  margin-top: 50px;
   padding: 0 20px;
   overflow: hidden;
 `;
