@@ -18,7 +18,11 @@ export const LayoutInner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin: 0px auto;
+  margin: 50px auto;
+`;
+
+export const BlogCardGridLayoutWrapper = styled.div`
+  padding: 10px 0px;
 `;
 
 export const NoResult = styled.div`

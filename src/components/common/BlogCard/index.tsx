@@ -1,7 +1,6 @@
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
-import BlogCardImage from '../../../assets/mocks/unknown.png';
 import { DetailPostDataType } from '../../../types/postData';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
@@ -63,14 +62,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   return (
     <AnimateSharedLayout>
       <BlogCardInner onClick={linkToPost}>
-        {/* 북마크 */}
-        {/*<BookMarkWrapper onClick={setBookmarkClip}>*/}
-        {/*  <Bookmark marked={marked} />*/}
-        {/*</BookMarkWrapper>*/}
         {/* 이미지 */}
         <BlogCardThumbnailWrapper>
           <BlogCardThumbnail
-            src={postData.imagePath ?? BlogCardImage}
+            src={postData.imagePath ?? '../../../assets/mocks/unknown.png'}
             alt="BlogCardThumbnail"
           />
         </BlogCardThumbnailWrapper>

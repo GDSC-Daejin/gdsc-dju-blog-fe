@@ -23,7 +23,6 @@ const Layout = () => {
         <Route path={'/post/edit/:id'} element={<PostWrite />} />
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
-        <Route path={'/search'} element={<SearchResult />} />
         <Route path={'/signup'} element={<SignUp />} />
         <Route path={'/oauth2/redirect'} element={<OauthRedirectPage />} />
         <Route path={'/search/:title'} element={<SearchResult />} />

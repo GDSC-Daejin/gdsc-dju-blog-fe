@@ -15,6 +15,7 @@ import Vector from '../../../assets/Vector';
 
 import SideBar from '../SideBar';
 import GdscBlogLogo from '../../../assets/logos/GdscBlogLogo';
+import { useNavigate } from 'react-router';
 
 function Navigation() {
   return (
@@ -38,9 +39,29 @@ function Navigation() {
 }
 
 const SearchInput: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+  const [searchData, setSearchData] = React.useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchData(searchData.trim());
+
+    if (searchData !== '') navigate(`/search/${searchData}`);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchData(e.target.value);
+  };
+
   return (
     <SearchInputWrapper>
-      <Search type="text" placeholder="궁금한 정보나 계정을 입력해주세요" />
+      <form onSubmit={handleSubmit}>
+        <Search
+          name="search"
+          onChange={handleChange}
+          type="text"
+          placeholder="궁금한 정보나 계정을 입력해주세요"
+        />
+      </form>
       <Vector onClick={onClick} />
     </SearchInputWrapper>
   );
