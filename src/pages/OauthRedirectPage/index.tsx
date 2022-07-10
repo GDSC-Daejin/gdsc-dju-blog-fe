@@ -11,8 +11,8 @@ type SelectedUserType = Pick<
 >;
 export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
-  const token = searchParams.get('token') ?? '';
-  const refresh_token = searchParams.get('refreshToken') ?? '';
+  const token = searchParams.get('token') ?? null;
+  const refresh_token = searchParams.get('refreshToken') ?? null;
   const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
   const setCookieData = (user: SelectedUserType) => {
     setCookies(
@@ -32,17 +32,20 @@ export default function OauthRedirectPage() {
 
   useEffect(() => {
     (async function () {
-      const result = await UserService.getMyData(token);
-      const data = result.data.body.data;
-      setCookieData({
-        role: data.role,
-        username: data.username,
-        userId: data.userId,
-        memberInfo: data.memberInfo,
-      });
-      TokenService.setToken(token);
+      if (token && refresh_token) {
+        const result = await UserService.getMyData(token);
+        const data = result.data.body.data;
+        setCookieData({
+          role: data.role,
+          username: data.username,
+          userId: data.userId,
+          memberInfo: data.memberInfo,
+        });
+        TokenService.setToken(token);
+      }
     })();
     cookies.token &&
+      //@ts-ignore
       (import.meta.env.MODE === 'development'
         ? (window.location.href = 'http://localhost:3000/')
         : (window.location.href = 'https://gdsc-dju-blog.web.app/'));
