@@ -103,7 +103,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
             <BlogCardAuthorWrapper>
               <BlogCardAuthorImage
                 alt="AuthorImage"
-                src={postData.memberInfo.member.profileImageUrl}
+                // src={postData.memberInfo.member.profileImageUrl}
               />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>

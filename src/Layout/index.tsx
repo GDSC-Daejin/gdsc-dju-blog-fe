@@ -25,7 +25,7 @@ const Layout = () => {
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/signup'} element={<SignUp />} />
         <Route path={'/oauth2/redirect'} element={<OauthRedirectPage />} />
-        <Route path={'/search/:title'} element={<SearchResult />} />
+        <Route path={'/search/:postContent'} element={<SearchResult />} />
         <Route path={'/post/saves'} element={<PostSaves />} />
       </Routes>
       <Footer />

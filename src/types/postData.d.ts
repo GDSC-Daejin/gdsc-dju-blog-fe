@@ -52,3 +52,20 @@ export interface RowDetailPostListType {
     };
   };
 }
+
+export interface SearchPostDataType {
+  content: DetailPostDataType[];
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  first: boolean;
+  sort: {
+    sorted: boolean;
+    unsorted: boolean;
+    empty: boolean;
+  };
+  numberOfElements: number;
+  size: number;
+  number: number;
+  empty: boolean;
+}

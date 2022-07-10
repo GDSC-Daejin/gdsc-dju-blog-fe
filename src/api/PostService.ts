@@ -70,5 +70,10 @@ class PostService extends Api {
       this.Header,
     );
   };
+  getSearchPosts = (postContent: string) => {
+    return axios.get(
+      `https://gdsc-dju.kro.kr/api/v1/post/search/${postContent}`,
+    );
+  };
 }
 export default new PostService();
