@@ -26,7 +26,7 @@ const Layout = () => {
         <Route path={'/search'} element={<SearchResult />} />
         <Route path={'/signup'} element={<SignUp />} />
         <Route path={'/oauth2/redirect'} element={<OauthRedirectPage />} />
-        <Route path={'/search'} element={<SearchResult />} />
+        <Route path={'/search/:title'} element={<SearchResult />} />
         <Route path={'/post/saves'} element={<PostSaves />} />
       </Routes>
       <Footer />

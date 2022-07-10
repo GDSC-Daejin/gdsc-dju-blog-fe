@@ -16,8 +16,8 @@ export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
 
   const [cookies] = useCookies(['token', 'refresh_token', 'user']);
-
   const { userData } = useGetMyData();
+
   useEffect(() => {
     document.body.style.cssText = `
     position: fixed; 
@@ -31,6 +31,7 @@ export const SideBar = () => {
       window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     }
   }, [menu]);
+
   return (
     <>
       <SideBarWrapper

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { useScroll } from 'react-use';
+import { useCookie, useScroll } from 'react-use';
 import { useGetPostsData } from '../../api/hooks/useGetPostsData';
+import UserService from '../../api/UserService';
 import Plus from '../../assets/Plus';
 import BlogCard from '../../components/common/BlogCard';
 import CategoryMenu from '../../components/common/CategoryMenu';
@@ -25,7 +26,6 @@ function Home() {
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
   const [homeWidth, setHomeWidth] = useState(0);
-
   const { postListData } = useGetPostsData(category, 0, 11);
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -60,6 +60,7 @@ function Home() {
   useEffect(() => {
     homeRef.current && setHomeWidth(homeRef.current?.offsetWidth);
   }, [homeRef]);
+
   return (
     <>
       <HomeLayoutContainer>
