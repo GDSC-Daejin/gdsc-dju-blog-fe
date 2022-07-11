@@ -8,7 +8,7 @@ import { useGetSearchPosts } from '../../api/hooks/useGetSearchPost';
 
 const SearchResult = () => {
   const { postContent } = useParams();
-  const { isLoading, postListData } = useGetSearchPosts(postContent!);
+  const { postListDataLoading, postListData } = useGetSearchPosts(postContent!);
 
   return (
     <LayoutContainer>
@@ -18,7 +18,7 @@ const SearchResult = () => {
           <h3>를(을) 검색하신 결과입니다.</h3>
         </SearchResultTitle>
         <BlogCardGridLayoutWrapper>
-          {isLoading && postListData?.content ? (
+          {!postListDataLoading && postListData?.content.length ? (
             <BlogCardGridLayout PostData={postListData.content} />
           ) : (
             <NoResult>

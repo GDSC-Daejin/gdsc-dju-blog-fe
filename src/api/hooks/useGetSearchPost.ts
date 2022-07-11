@@ -10,9 +10,9 @@ async function getSearchPostsData(params: string) {
   return res.data.body.data;
 }
 export function useGetSearchPosts(postContent: string) {
-  const { isLoading, data: postListData } = useQuery<SearchPostDataType>(
-    [`post/search/${postContent}`],
-    () => getSearchPostsData(postContent),
-  );
-  return { isLoading, postListData };
+  const { isLoading: postListDataLoading, data: postListData } =
+    useQuery<SearchPostDataType>([`post/search/${postContent}`], () =>
+      getSearchPostsData(postContent),
+    );
+  return { postListDataLoading, postListData };
 }

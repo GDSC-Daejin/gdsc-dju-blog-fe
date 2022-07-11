@@ -7,8 +7,9 @@ interface IBlogCardGridLayout {
   PostData: DetailPostDataType[];
 }
 
-const BlogCardGridLayout = (props: IBlogCardGridLayout) => {
+const BlogCardGridLayout: React.FC<IBlogCardGridLayout> = (props) => {
   const { PostData } = props;
+
   return (
     <BlogCardGridLayoutStyle>
       {PostData.map((data) => (
