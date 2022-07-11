@@ -1,15 +1,19 @@
 import styled from 'styled-components';
 
 export const SearchResultTitle = styled.div`
-  display: flex;
-  gap: 5px;
-  align-items: end;
-  margin: 6.25rem 0px 6.25rem;
-  h2 {
-    font-size: ${({ theme }) => theme.fontSize.body1};
-  }
-  h3 {
-    font-size: ${({ theme }) => theme.fontSize.body3};
+  width: 1200px;
+  .searchResultTitle {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 20px 0px;
+    h2 {
+      font-size: ${({ theme }) => theme.fontSize.body1};
+      margin-right: 4px;
+    }
+    h3 {
+      font-size: ${({ theme }) => theme.fontSize.body3};
+    }
   }
 `;
 
