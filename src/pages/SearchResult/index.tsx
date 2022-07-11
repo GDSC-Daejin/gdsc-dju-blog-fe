@@ -19,8 +19,8 @@ const SearchResult = () => {
             <h2>{postContent}</h2>
             <h3>를(을) 검색하신 결과입니다.</h3>
           </div>
-          <div className="searchResulSubTitle">
-            <span>개의 검색결과가 있습니다</span>
+          <div className="searchResult">
+            <span>{postListData?.content.length}개의 검색결과가 있습니다</span>
           </div>
         </SearchResultTitle>
         <BlogCardGridLayoutWrapper>

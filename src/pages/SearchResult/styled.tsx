@@ -15,6 +15,13 @@ export const SearchResultTitle = styled.div`
       font-size: ${({ theme }) => theme.fontSize.body3};
     }
   }
+  .searchResult {
+    span {
+      font-size: ${({ theme }) => theme.fontSize.body3};
+      font-weight: 500;
+      line-height: 1.625rem;
+    }
+  }
 `;
 
 export const LayoutInner = styled.div`
