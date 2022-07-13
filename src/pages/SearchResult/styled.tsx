@@ -24,6 +24,13 @@ export const SearchResultTitle = styled.div`
   }
 `;
 
+export const PageBarWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0px;
+`;
+
 export const LayoutInner = styled.div`
   display: flex;
   flex-direction: column;

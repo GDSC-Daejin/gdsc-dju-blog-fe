@@ -1,15 +1,23 @@
 import React from 'react';
-import { BlogCardGridLayoutWrapper, SearchResultTitle } from './styled';
+import {
+  BlogCardGridLayoutWrapper,
+  PageBarWrapper,
+  SearchResultTitle,
+} from './styled';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
 import { LayoutContainer } from '../../styles/layouts';
 import { LayoutInner, NoResult } from './styled';
 import { useParams } from 'react-router';
 import { useGetSearchPosts } from '../../api/hooks/useGetSearchPost';
 import GoogleLoader from '../../components/common/GoogleLoader';
+import PageBar from '../../components/common/PageBar';
+import { useSearchParams } from 'react-router-dom';
 
 const SearchResult = () => {
+  const [getPageNumber, setPageNumber] = React.useState(0);
   const { postContent } = useParams();
   const { postListDataLoading, postListData } = useGetSearchPosts(postContent!);
+  const handleClick = () => {};
 
   return (
     <LayoutContainer>
