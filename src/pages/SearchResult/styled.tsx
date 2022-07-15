@@ -2,20 +2,21 @@ import styled from 'styled-components';
 
 export const SearchResultTitle = styled.div`
   width: 1200px;
+  color: ${(props) => props.theme.colors.grey900};
   .searchResultTitle {
     display: flex;
     align-items: center;
     align-self: flex-start;
-    padding: 20px 0px;
+    padding: 50px 0px;
     h2 {
       font-size: ${({ theme }) => theme.fontSize.body1};
-      margin-right: 4px;
     }
     h3 {
       font-size: ${({ theme }) => theme.fontSize.body3};
     }
   }
-  .searchResult {
+  .searchResultContent {
+    padding: 20px 0px;
     span {
       font-size: ${({ theme }) => theme.fontSize.body3};
       font-weight: 500;
@@ -25,10 +26,11 @@ export const SearchResultTitle = styled.div`
 `;
 
 export const PageBarWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px 0px;
+  padding: 110px 0px;
 `;
 
 export const LayoutInner = styled.div`
