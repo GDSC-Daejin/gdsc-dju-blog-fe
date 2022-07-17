@@ -5,10 +5,10 @@ export const FooterWrapper = styled.footer`
   position: relative;
   background: linear-gradient(
       180deg,
-      rgba(135, 135, 135, 0.1) 0%,
-      rgba(177, 177, 177, 0) 18.76%
+      ${({ theme }) => theme.colors.background} 0%,
+      ${({ theme }) => theme.colors.background} 18.76%
     ),
-    #ffffff;
+    ${({ theme }) => theme.colors.background};
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -19,7 +19,7 @@ export const FooterInner = styled.div`
   padding: 55px 0;
   box-sizing: border-box;
   overflow: hidden;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid ${({ theme }) => theme.colors.grey100};
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;

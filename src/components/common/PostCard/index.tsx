@@ -25,9 +25,17 @@ const PostCard: React.FC<DetailPostDataType> = ({
   postId,
   postHashTags,
   memberInfo,
+  imagePath,
 }) => {
   const [hover, setHover] = useState(false);
   const [marked, setMarked] = useState(false);
+  const removeMarkdownInContent = content
+    .replace(/!\[.*\]/gi, '') // ![] 제거
+    .replace(/\(.*\)/gi, '') // ( ) 제거
+    .replace(/\|/gi, '') // | 제거
+    .replace(/#/gi, '') // # 제거
+    .replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, ' ') // # 제거
+    .replace(/-/gi, ''); // @ 제거
   return (
     <PostCardWrapper
       onMouseOver={() => setHover(true)}
@@ -41,7 +49,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
         <Bookmark marked={marked} />
       </BookmarkWrapper>
       <PostCardImageWrapper>
-        <PostCardImage src={MockPostImage} />
+        <PostCardImage src={imagePath ?? MockPostImage} />
       </PostCardImageWrapper>
       <PostCardContentWrapper hover={hover}>
         <PostDate>{dateFilter(category.uploadDate)}</PostDate>
@@ -53,7 +61,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
             ))}
           </PostHashTageSection>
         )}
-        <PostContent>{content}</PostContent>
+        <PostContent>{removeMarkdownInContent}</PostContent>
       </PostCardContentWrapper>
     </PostCardWrapper>
   );

@@ -19,6 +19,19 @@ export const userPostUrlFilter = (tage: string, page: number, size = 16) => {
     }?page=${page}&size=${size}`;
   }
 };
+export const userPostTempUrlFilter = (
+  tage: string,
+  page: number,
+  size = 16,
+) => {
+  if (tage === 'all') {
+    return `?page=${page}&size=${size}`;
+  } else {
+    return `/${
+      category[tage as keyof typeof category]
+    }?page=${page}&size=${size}`;
+  }
+};
 export const postUrlFilter = (tage: string, page: number, size = 16) => {
   if (tage === 'all') {
     return `?page=${page}&size=${size}`;

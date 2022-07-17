@@ -14,7 +14,7 @@ export interface IUserDataType {
   username: string;
 }
 export interface RowMemberDataType {
-  header: string;
+  header: { code: string };
   body: {
     data: IUserDataType;
   };

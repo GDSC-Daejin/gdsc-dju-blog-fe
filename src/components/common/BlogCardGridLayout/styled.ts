@@ -9,7 +9,7 @@ export const BlogCardGridLayoutStyle = styled.section`
   grid-column-gap: 30px;
 `;
 
-export const BlogCardWrapper = styled.article`
+export const BlogCardWrapper = styled.div`
   width: 248px;
   height: 294px;
 `;

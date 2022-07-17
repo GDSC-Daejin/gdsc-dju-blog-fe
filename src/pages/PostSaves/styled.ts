@@ -5,6 +5,7 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
   cursor: pointer;
+  height: min-content;
 `;
 export const PostSavesTitle = styled.div`
   display: flex;

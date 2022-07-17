@@ -9,6 +9,7 @@ export const BlogCardInner = styled(motion.article)`
   display: flex;
   flex-direction: column;
   box-shadow: 0px 19px 32px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `;
 
 export const BookMarkWrapper = styled.div`
@@ -20,10 +21,17 @@ export const BookMarkWrapper = styled.div`
   cursor: pointer;
 `;
 
-export const BlogCardThumbnail = styled.img`
+export const BlogCardThumbnailWrapper = styled.div`
   width: 248px;
   height: 294px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 13px;
+  overflow: hidden;
+`;
+export const BlogCardThumbnail = styled.img`
+  height: 294px;
 `;
 
 export const BlogCardTagWrapper = styled.div<{ IsHovered: boolean }>`
