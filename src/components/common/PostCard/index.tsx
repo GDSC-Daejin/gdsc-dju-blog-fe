@@ -34,7 +34,7 @@ const PostCard: React.FC<DetailPostDataType> = ({
     .replace(/\(.*\)/gi, '') // ( ) 제거
     .replace(/\|/gi, '') // | 제거
     .replace(/#/gi, '') // # 제거
-    .replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, ' ') // # 제거
+    // .replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, ' ') // # 제거
     .replace(/-/gi, ''); // @ 제거
   return (
     <PostCardWrapper

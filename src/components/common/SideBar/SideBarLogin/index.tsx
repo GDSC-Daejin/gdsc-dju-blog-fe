@@ -24,16 +24,12 @@ const SideBarLogin: React.FC<{
   closeSideBar: () => void;
 }> = ({ userData, closeSideBar }) => {
   const navigate = useNavigate();
-  const [UserCookies, setUserCookie, removeUserCookie] = useCookies(['user']);
   const [TokenCookies, setTokenCookie, removeTokenCookie] = useCookies([
     'token',
   ]);
   const postBlock = userData?.role === 'GUEST';
 
   const handleLogout = () => {
-    removeUserCookie('user', {
-      path: '/',
-    });
     removeTokenCookie('token', {
       path: '/',
     });
