@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
-import { useGetMyData } from '../../api/hooks/useGetMyData';
+import { getUserData, useGetMyData } from '../../api/hooks/useGetMyData';
 import TokenService from '../../api/TokenService';
 import UserService from '../../api/UserService';
 import { IUserDataType } from '../../types/userDataType';
@@ -15,7 +15,6 @@ export default function OauthRedirectPage() {
   const token = searchParams.get('token') ?? null;
   const refresh_token = searchParams.get('refreshToken') ?? null;
   const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
-  const { userData } = useGetMyData();
   const setCookieData = () => {
     setCookies('token', token, {
       path: '/',
@@ -26,29 +25,33 @@ export default function OauthRedirectPage() {
   };
 
   useEffect(() => {
-    if (!cookies.token && token && refresh_token) {
-      setCookieData();
-      TokenService.setToken(token);
-      sessionStorage.setItem(
-        'user',
-        JSON.stringify({
-          role: userData?.role,
-          username: userData?.username,
-          userId: userData?.userId,
-        }),
-      );
-    }
-    if (cookies.token && cookies.refresh_token) {
-      if (userData?.role.toLowerCase() === 'guest') {
-        import.meta.env.MODE === 'development'
-          ? (window.location.href = 'http://localhost:3000/signup')
-          : (window.location.href = 'https://gdsc-dju-blog.web.app/signup');
+    (async function () {
+      if (token) {
+        const userData = await getUserData(token || '');
+        TokenService.setToken(token);
+        setCookieData();
+        sessionStorage.setItem(
+          'user',
+          JSON.stringify({
+            role: userData?.role,
+            username: userData?.username,
+            userId: userData?.userId,
+          }),
+        );
+        if (userData) {
+          if (userData.role.toUpperCase() === 'GUEST'.toUpperCase()) {
+            import.meta.env.MODE === 'development'
+              ? (window.location.href = 'http://localhost:3000/signup')
+              : (window.location.href = 'https://gdsc-dju-blog.web.app/signup');
+          } else {
+            import.meta.env.MODE === 'development'
+              ? (window.location.href = 'http://localhost:3000/')
+              : (window.location.href = 'https://gdsc-dju-blog.web.app/');
+          }
+        }
       }
-      import.meta.env.MODE === 'development'
-        ? (window.location.href = 'http://localhost:3000/')
-        : (window.location.href = 'https://gdsc-dju-blog.web.app/');
-    }
-  }, [cookies]);
+    })();
+  }, []);
 
   return null;
 }
