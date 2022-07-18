@@ -39,6 +39,11 @@ export default function OauthRedirectPage() {
       );
     }
     if (cookies.token && cookies.refresh_token) {
+      if (userData?.role.toLowerCase() === 'guest') {
+        import.meta.env.MODE === 'development'
+          ? (window.location.href = 'http://localhost:3000/signup')
+          : (window.location.href = 'https://gdsc-dju-blog.web.app/signup');
+      }
       import.meta.env.MODE === 'development'
         ? (window.location.href = 'http://localhost:3000/')
         : (window.location.href = 'https://gdsc-dju-blog.web.app/');
