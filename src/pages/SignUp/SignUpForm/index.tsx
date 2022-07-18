@@ -21,13 +21,13 @@ const SignUpForm = () => {
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
-  const [tokenCookie] = useCookies(['token']);
   const navigate = useNavigate();
   const onSubmit = async (values: any) => {
     const response = await UserService.updateMyData({ ...values });
-    if (response.data.body.message === 'SUCCESS')
+    if (response.data.body.message === 'SUCCESS') {
+      alert('회원가입이 완료되었습니다');
       navigate('/', { replace: true });
-    else alert('에러가 발생했습니다');
+    } else alert('에러가 발생했습니다');
   };
 
   const formData: IFormStructure[] = [
@@ -147,20 +147,6 @@ const SignUpForm = () => {
     },
   ];
 
-  {
-    /*
-            넘겨주는 값들
-            key={index}
-            refName={data.refName}
-            type={data.type}
-            title={data.title}
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            condition={data.condition}
-            trigger={trigger}
-            errors={data.errors}*/
-  }
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
       {formData.map((formData) =>
