@@ -21,6 +21,9 @@ import { dateFilter } from '../../../Utils/dateFilter';
 import { HashTageLight } from '../HashTage';
 import { DetailPostDataType } from '../../../types/postData';
 import Bookmark from '../../../assets/Bookmark';
+import { setBookMarkScrapAPI } from '../../../api/hooks/setBookMark';
+import { result } from 'lodash';
+import { useCookies } from 'react-cookie';
 
 const PostTextVariants = {
   initial: {
@@ -48,11 +51,19 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const [IsHovered, setIsHovered] = useState(false);
+  const [cookie] = useCookies(['token']);
+  const isMarked = false;
   const navigate = useNavigate();
 
   const linkToPost = useCallback(() => {
     navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
   }, [postData]);
+
+  const setBookMarkScrap = async () => {
+    console.log(cookie);
+    // const result = await setBookMarkScrapAPI(postData.postId);
+    // console.log(result);
+  };
 
   const removeMarkdownInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
@@ -65,9 +76,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     <AnimateSharedLayout>
       <BlogCardInner onClick={linkToPost}>
         {/* 북마크 */}
-        {/*<BookMarkWrapper onClick={setBookmarkClip}>*/}
-        {/*  <Bookmark marked={marked} />*/}
-        {/*</BookMarkWrapper>*/}
+        <BookMarkWrapper onClick={setBookMarkScrap}>
+          <Bookmark marked={isMarked} />
+        </BookMarkWrapper>
         {/* 이미지 */}
         <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
         {/* 태그 */}

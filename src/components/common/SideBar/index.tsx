@@ -13,22 +13,12 @@ import { GrayBox, SideBarDesign, SideBarInner, SideBarWrapper } from './styled';
 
 export const SideBar = () => {
   const [menu, setMenu] = useRecoilState(menuState);
-
   const [cookies, setCookies, removeCookies] = useCookies([
     'token',
     'refresh_token',
     'user',
   ]);
-
   const { userData } = useGetUserData(cookies.token);
-  useEffect(() => {
-    console.log(userData);
-    if (userData == undefined) {
-      // removeCookies('token');
-      // removeCookies('refresh_token');
-      // removeCookies('user');
-    }
-  }, [userData]);
 
   return (
     <>

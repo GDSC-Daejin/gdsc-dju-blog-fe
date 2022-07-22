@@ -134,6 +134,9 @@ export class Api {
       this.Header,
     );
   };
+  setBookMarkScrap = (postId: number) => {
+    return axios.post(`${this.API}/api/member/v1/scrap/${postId}`, this.Header);
+  };
   setToken = (token: string) => {
     this.Header.headers.Authorization = token;
   };
