@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const ModalInner = styled(motion.div)`
   margin: 0 auto;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.background};
   box-shadow: 0px 2px 12px rgba(25, 31, 40, 0.08);
   border-radius: 10px;
   display: flex;
@@ -15,10 +15,10 @@ export const ModalContent = styled.div`
   font-size: ${({ theme }) => theme.fontSize.h7};
   max-width: 200px;
   text-align: center;
+  color: ${({ theme }) => theme.colors.grey900};
 `;
 export const ModalContentWrapper = styled.div`
-  padding-top: 40px;
-  padding-bottom: 20px;
+  padding: 40px 30px 20px 30px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -45,10 +45,10 @@ const HomePhrase: React.FC = () => {
         <From>From {phrase.from}</From>
         <Phrase>
           {phrases.map((text, id) => (
-            <>
+            <React.Fragment key={id}>
               {text}
               <br />
-            </>
+            </React.Fragment>
           ))}
         </Phrase>
         <By>By {phrase.by}</By>

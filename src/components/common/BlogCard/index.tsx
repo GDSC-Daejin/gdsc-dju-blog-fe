@@ -1,6 +1,13 @@
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { memo, useCallback, useState } from 'react';
-import BlogCardImage from '../../../assets/mocks/unknown.png';
 import { useNavigate } from 'react-router';
+import { useCookies } from 'react-cookie';
+
+import { DetailPostDataType } from '../../../types/postData';
+import { dateFilter } from '../../../Utils/dateFilter';
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import Bookmark from '../../../assets/Bookmark';
+import { HashTageLight } from '../HashTage';
 import {
   BlogCardAuthorImage,
   BlogCardAuthorWrapper,
@@ -11,19 +18,11 @@ import {
   BlogCardSubTextWrapper,
   BlogCardTagWrapper,
   BlogCardThumbnail,
+  BlogCardThumbnailWrapper,
   BlogCardTitle,
   BookMarkWrapper,
   PostText,
 } from './styled';
-import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
-import { dateFilter } from '../../../Utils/dateFilter';
-import { HashTageLight } from '../HashTage';
-import { DetailPostDataType } from '../../../types/postData';
-import Bookmark from '../../../assets/Bookmark';
-import { setBookMarkScrapAPI } from '../../../api/hooks/setBookMark';
-import { result } from 'lodash';
-import { useCookies } from 'react-cookie';
 
 const PostTextVariants = {
   initial: {
@@ -80,7 +79,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
           <Bookmark marked={isMarked} />
         </BookMarkWrapper>
         {/* 이미지 */}
-        <BlogCardThumbnail src={BlogCardImage} alt="BlogCardThumbnail" />
+        <BlogCardThumbnailWrapper>
+          <BlogCardThumbnail
+            src={postData.imagePath ?? '../../../assets/mocks/unknown.png'}
+            alt="BlogCardThumbnail"
+          />
+        </BlogCardThumbnailWrapper>
         {/* 태그 */}
         {postData.postHashTags && (
           <BlogCardTagWrapper IsHovered={IsHovered}>
@@ -115,7 +119,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
             <BlogCardAuthorWrapper>
               <BlogCardAuthorImage
                 alt="AuthorImage"
-                src={postData.memberInfo.member.profileImageUrl}
+                // src={postData.memberInfo.member.profileImageUrl}
               />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>

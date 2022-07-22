@@ -7,7 +7,7 @@ export const NavTask = styled.li`
   margin: 0 5px;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.grey800};
-  font-size: 1.4rem;
+  font-size: ${({ theme }) => theme.fontSize.body2}
   font-weight: 500;
   word-break: keep-all;
   list-style: none;
@@ -152,6 +152,7 @@ export const Search = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.grey300};
   padding-left: 20px;
   color: ${({ theme }) => theme.colors.grey900};
+  background: ${({ theme }) => theme.colors.background};
   @media (max-width: ${({ theme }) => theme.windowSize.desk}px) {
     min-width: 280px;
   }

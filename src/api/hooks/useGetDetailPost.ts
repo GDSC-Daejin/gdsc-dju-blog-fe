@@ -1,14 +1,14 @@
-import useSWR from 'swr';
-import API from '../index';
+import { useQuery } from 'react-query';
+import PostService from '../PostService';
+
 async function getDetailPost(postId: string) {
-  const res = await API.getPostData(postId);
+  const res = await PostService.getPostData(postId);
   return res.data;
 }
 
-export function useGetDetailPost(postId: string | undefined) {
-  const { data: postData } = useSWR(
-    postId && [postId, `/post/${postId}`],
-    getDetailPost,
+export function useGetDetailPost(postId: string) {
+  const { data: postData } = useQuery([postId, `/post/${postId}`], () =>
+    getDetailPost(postId),
   );
   return {
     postData: postData && postData.body.data,

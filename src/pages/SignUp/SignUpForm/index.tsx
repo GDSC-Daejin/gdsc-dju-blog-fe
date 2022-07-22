@@ -2,9 +2,10 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
-import api from '../../../api';
+import UserService from '../../../api/UserService';
 import { GDSCButton } from '../../../components/common/Button';
 import { IFormStructure } from '../../../types/SignUpFormType';
+
 import SignUpInput from '../SignUpInput';
 import SignUpSelect from '../SignUpSelect';
 
@@ -20,13 +21,13 @@ const SignUpForm = () => {
     formState: { errors, isValid },
   } = useForm({ mode: 'onTouched' });
   // { mode: 'onChange' }
-  const [tokenCookie] = useCookies(['token']);
   const navigate = useNavigate();
   const onSubmit = async (values: any) => {
-    const response = await api.updateUserData({ ...values }, tokenCookie.token);
-    if (response.data.body.message === 'SUCCESS')
+    const response = await UserService.updateMyData({ ...values });
+    if (response.data.body.message === 'SUCCESS') {
+      alert('회원가입이 완료되었습니다');
       navigate('/', { replace: true });
-    else alert('에러가 발생했습니다');
+    } else alert('에러가 발생했습니다');
   };
 
   const formData: IFormStructure[] = [
@@ -148,25 +149,13 @@ const SignUpForm = () => {
 
   return (
     <SignUpFormStyle onSubmit={handleSubmit(onSubmit)}>
-      {formData.map((data, index) =>
-        data.select ? (
-          <SignUpSelect {...data} key={data.refName} />
+      {formData.map((formData) =>
+        formData.select ? (
+          <SignUpSelect {...formData} key={formData.refName} />
         ) : (
-          <SignUpInput {...data} key={data.refName} />
+          <SignUpInput {...formData} key={formData.refName} />
         ),
       )}
-      {/* 
-            넘겨주는 값들
-            key={index}
-            refName={data.refName}
-            type={data.type}
-            title={data.title}
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            condition={data.condition}
-            trigger={trigger}
-            errors={data.errors}*/}
       <GDSCButton
         color={isValid ? 'googleBlue' : 'tossBlue200'}
         text="가입하기"

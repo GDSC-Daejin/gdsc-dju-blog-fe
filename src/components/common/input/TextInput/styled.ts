@@ -12,9 +12,9 @@ export const StyledInput = styled(Field)<{ disabled?: boolean }>`
   flex-grow: 1;
   background: none;
   font-weight: 400;
-  color: ${({ theme }) => theme.color.grey700};
+  color: ${({ theme }) => theme.colors.grey700};
   &::placeholder {
-    color: ${({ theme }) => theme.color.grey400};
+    color: ${({ theme }) => theme.colors.grey400};
     font-weight: 300;
   }
   ${({ disabled }) =>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const HomeContentWrapper = styled.div`
@@ -7,10 +7,10 @@ export const HomeContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  box-sizing: border-box;
   gap: 3.75rem;
-  margin-top: 50px;
   padding: 0 20px;
-  min-width: 1160px;
+  overflow: hidden;
 `;
 export const HomeLayoutContainer = styled.div`
   position: relative;
@@ -18,9 +18,10 @@ export const HomeLayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1160px;
+  max-width: 1200px;
   margin: 0 auto;
   min-width: 320px;
+  overflow: hidden;
 `;
 export const HomePhraseWrapper = styled(motion.div)`
   height: 180px;
@@ -29,6 +30,7 @@ export const HomePhraseWrapper = styled(motion.div)`
 `;
 export const CardSectionWrapper = styled.div`
   height: 400px;
+
   .CardSection_Circle {
     background-color: white;
     width: 50px;
@@ -44,11 +46,11 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
-  min-width: 1160px;
+  width: 100%;
   height: 100%;
-  cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   overflow-x: scroll;
   overflow-y: hidden;
+  cursor: ${(props) => (props.isDrag ? 'grabbing' : 'grab')};
   div:last-child {
     margin-right: 0;
   }
@@ -57,19 +59,24 @@ export const CardSection = styled(motion.section)<{ isDrag: boolean }>`
   }
 `;
 
-export const BlogCardWrapper = styled(motion.div)`
+export const BlogCardWrapper = styled(motion.div)<{ homeWidth?: string }>`
   width: 248px;
   height: 294px;
   margin: 0 15px;
-  transform: translateX(calc((100vw - 1200px) / 2 + 20px));
+  ${({ homeWidth }) =>
+    homeWidth &&
+    css`
+      transform: translateX(calc((100vw - ${homeWidth}) / 2 + 20px));
+    `}
+
   :first-child {
     margin-left: 0;
   }
   :last-child {
     margin-right: 0;
   }
-  .viewmore-item {
-    width: 248px;
+  &.viewmore-item {
+    min-width: 248px;
     height: 294px;
     display: flex;
     justify-content: center;

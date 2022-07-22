@@ -9,7 +9,7 @@ export const PostCardWrapper = styled(motion.div)`
   width: 100%;
   cursor: pointer;
   border-radius: 10px;
-  box-shadow: ${({ theme }) => theme.colors.boxShadow100}
+  box-shadow: ${({ theme }) => theme.colors.boxShadow100};
   box-sizing: border-box;
 `;
 export const PostCardImage = styled.img`
