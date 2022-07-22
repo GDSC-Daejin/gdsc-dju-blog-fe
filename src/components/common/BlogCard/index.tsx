@@ -23,6 +23,8 @@ import {
   BookMarkWrapper,
   PostText,
 } from './styled';
+import { setBookMarkPostAPI } from '../../../api/hooks/setBookMark';
+import Cookies from 'js-cookie';
 
 const PostTextVariants = {
   initial: {
@@ -58,10 +60,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
   }, [postData]);
 
-  const setBookMarkScrap = async () => {
-    console.log(cookie);
-    // const result = await setBookMarkScrapAPI(postData.postId);
-    // console.log(result);
+  const setBookMarkScrap = async (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (cookie.token) {
+      const result = await setBookMarkPostAPI(postData.postId);
+      // console.log(result);
+    } else {
+      alert('로그인이 필요한 서비스입니다.');
+    }
   };
 
   const removeMarkdownInContent = postData.content

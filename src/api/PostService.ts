@@ -4,6 +4,7 @@ import {
   RowDetailPostListType,
   RowPostDataType,
 } from '../types/postData';
+import Cookies from 'js-cookie';
 import { Api } from './index';
 
 class PostService extends Api {
@@ -74,6 +75,11 @@ class PostService extends Api {
     return axios.get(
       `https://gdsc-dju.kro.kr/api/v1/post/search/${postContent}`,
     );
+  };
+  setBookMarkPost = (postId: number) => {
+    const token = Cookies.get('token');
+
+    return axios.post(`${this.API}/api/member/v1/scrap/${postId}`, {});
   };
 }
 export default new PostService();

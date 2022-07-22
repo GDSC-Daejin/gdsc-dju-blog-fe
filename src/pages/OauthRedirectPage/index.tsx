@@ -14,7 +14,7 @@ export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token') ?? null;
   const refresh_token = searchParams.get('refreshToken') ?? null;
-  const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
+  const [cookies, setCookies] = useCookies(['token', 'refresh_token']);
   const setCookieData = () => {
     setCookies('token', token, {
       path: '/',
