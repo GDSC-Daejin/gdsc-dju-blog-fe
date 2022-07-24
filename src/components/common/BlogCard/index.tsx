@@ -25,6 +25,7 @@ import {
 } from './styled';
 import { setBookMarkPostAPI } from '../../../api/hooks/setBookMark';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 const PostTextVariants = {
   initial: {
@@ -63,8 +64,15 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
   const setBookMarkScrap = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (cookie.token) {
-      const result = await setBookMarkPostAPI(postData.postId);
-      // console.log(result);
+      const result = await axios.post(
+        `https://gdsc-dju.kro.kr/api/member/v1/scrap/${postData.postId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${cookie.token}`,
+          },
+        },
+      );
     } else {
       alert('로그인이 필요한 서비스입니다.');
     }

@@ -79,11 +79,15 @@ class PostService extends Api {
   setBookMarkPost = (postId: number) => {
     const token = Cookies.get('token');
 
-    return axios.post(`${this.API}/api/member/v1/scrap/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    return axios.post(
+      `${this.API}/api/member/v1/scrap/${postId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Barer ${token}`,
+        },
       },
-    });
+    );
   };
 }
 export default new PostService();
