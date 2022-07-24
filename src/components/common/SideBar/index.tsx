@@ -48,10 +48,8 @@ export const SideBar = () => {
                 }
               />
             ) : (
-              // <SideBarLogout loginURL={TokenService.getRedirectURL()} />
-              <></>
+              <SideBarLogout loginURL={TokenService.getRedirectURL()} />
             )}
-            <SideBarLogout loginURL={TokenService.getRedirectURL()} />
             <SideBarCategory />
           </SideBarDesign>
         </SideBarInner>
