@@ -81,7 +81,7 @@ function Home() {
           onMouseLeave={onDragEnd}
         >
           {postListData &&
-            postListData.content.map((postData) => (
+            postListData.content.map((postData, index) => (
               <BlogCardWrapper
                 key={postData.postId}
                 homeWidth={`${homeWidth}px`}

@@ -80,11 +80,11 @@ class PostService extends Api {
     const token = Cookies.get('token');
 
     return axios.post(
-      `${this.API}/api/member/v1/scrap/${postId}`,
+      `https://gdsc-dju.kro.kr/api/member/v1/scrap/${postId}`,
       {},
       {
         headers: {
-          Authorization: `Barer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       },
     );
