@@ -89,7 +89,10 @@ function Home() {
                 <BlogCard postData={postData} />
               </BlogCardWrapper>
             ))}
-          <BlogCardWrapper className="viewmore-item">
+          <BlogCardWrapper
+            homeWidth={`${homeWidth}px`}
+            className="viewmore-item"
+          >
             <Link to={`/category/${category}`}>
               <button type="button" className="viewmore-item__button">
                 <Plus />
