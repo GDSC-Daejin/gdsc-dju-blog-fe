@@ -47,11 +47,12 @@ const PostTextVariants = {
 
 interface BlogCardProps {
   postData: DetailPostDataType;
+  isScrap: boolean;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ postData, isScrap }) => {
   const [IsHovered, setIsHovered] = useState(false);
-  const [isMarked, setIsMarked] = useState(false);
+  const [isMarked, setIsMarked] = useState(isScrap);
   const [cookie] = useCookies(['token']);
   const navigate = useNavigate();
 

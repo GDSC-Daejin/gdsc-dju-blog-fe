@@ -29,8 +29,9 @@ function Home() {
   const [homeWidth, setHomeWidth] = useState(0);
   const { postListData } = useGetPostsData(category, 0, 11);
   const { scrapData } = useGetMyScrapData();
-
-  console.log(scrapData);
+  const scrapList = scrapData?.data.content.map((v) => {
+    return v.post[0].postId;
+  });
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -85,14 +86,19 @@ function Home() {
           onMouseLeave={onDragEnd}
         >
           {postListData &&
-            postListData.content.map((postData, index) => (
-              <BlogCardWrapper
-                key={postData.postId}
-                homeWidth={`${homeWidth}px`}
-              >
-                <BlogCard postData={postData} />
-              </BlogCardWrapper>
-            ))}
+            postListData.content.map((postData, index) => {
+              return (
+                <BlogCardWrapper
+                  key={postData.postId}
+                  homeWidth={`${homeWidth}px`}
+                >
+                  <BlogCard
+                    postData={postData}
+                    isScrap={scrapList?.includes(postData.postId)}
+                  />
+                </BlogCardWrapper>
+              );
+            })}
           <BlogCardWrapper
             homeWidth={`${homeWidth}px`}
             className="viewmore-item"

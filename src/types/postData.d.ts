@@ -54,7 +54,9 @@ export interface RowDetailPostListType {
 }
 
 export interface SearchPostDataType {
-  content: DetailPostDataType[];
+  content: {
+    post: DetailPostDataType[];
+  };
   totalPages: number;
   totalElements: number;
   last: boolean;
@@ -68,4 +70,38 @@ export interface SearchPostDataType {
   size: number;
   number: number;
   empty: boolean;
+}
+
+export interface RowScrapDataType {
+  body: {
+    data: {
+      content: ScrapDataType[];
+    };
+  };
+}
+
+interface ScrapDataType {
+  post: ScrapPostDetailType[];
+}
+
+export interface ScrapPostDetailType {
+  postId: number;
+  tmpStore: false;
+  modifiedAt: string;
+  uploadDate: string;
+  postHashTags: string;
+  memberInfo: {
+    member: {
+      profileImageUrl: string;
+    };
+    nickname: string;
+  };
+  category: {
+    categoryName: string;
+    modifiedAt: string;
+    uploadDate: string;
+  };
+  title: string;
+  imagePath: string;
+  content: string;
 }
