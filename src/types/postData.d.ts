@@ -1,5 +1,3 @@
-import { MemberDataInfoType } from './userData';
-
 export interface DetailPostDataType {
   modifiedAt: string;
   uploadDate: string;

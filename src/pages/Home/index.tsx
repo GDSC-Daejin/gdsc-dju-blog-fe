@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { useCookie, useScroll } from 'react-use';
+import { useScroll } from 'react-use';
 import { useGetMyScrapData } from '../../api/hooks/useGetMyScrapData';
 import { useGetPostsData } from '../../api/hooks/useGetPostsData';
-import UserService from '../../api/UserService';
 import Plus from '../../assets/Plus';
 import BlogCard from '../../components/common/BlogCard';
 import CategoryMenu from '../../components/common/CategoryMenu';
@@ -29,9 +28,10 @@ function Home() {
   const [homeWidth, setHomeWidth] = useState(0);
   const { postListData } = useGetPostsData(category, 0, 11);
   const { scrapData } = useGetMyScrapData();
-  const scrapList = scrapData?.data.content.map((v) => {
-    return v.post[0].postId;
-  });
+  const scrapList =
+    scrapData?.data.content.map((v) => {
+      return v.post[0].postId;
+    }) ?? [];
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
