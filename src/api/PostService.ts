@@ -65,20 +65,8 @@ class PostService extends Api {
   getMyScrapData = () => {
     return axios.get(`${this.API}/api/member/v1/myScrap`, this.Header);
   };
-  updateMyScrapData = (postId: string) => {
-    return axios.post(
-      `${this.API}/api/member/v1/myScrap${postId}`,
-      this.Header,
-    );
-  };
-  getSearchPosts = (postContent: string) => {
-    return axios.get(
-      `https://gdsc-dju.kro.kr/api/v1/post/search/${postContent}`,
-    );
-  };
-  setBookMarkPost = (postId: number) => {
+  updateMyScrapData = (postId: number) => {
     const token = Cookies.get('token');
-
     return axios.post(
       `https://gdsc-dju.kro.kr/api/member/v1/scrap/${postId}`,
       {},
@@ -87,6 +75,11 @@ class PostService extends Api {
           Authorization: `Bearer ${token}`,
         },
       },
+    );
+  };
+  getSearchPosts = (postContent: string) => {
+    return axios.get(
+      `https://gdsc-dju.kro.kr/api/v1/post/search/${postContent}`,
     );
   };
 }

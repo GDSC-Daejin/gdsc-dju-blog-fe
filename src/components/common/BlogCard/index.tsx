@@ -24,8 +24,6 @@ import {
   PostText,
 } from './styled';
 import { setBookMarkPostAPI } from '../../../api/hooks/setBookMark';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 
 const PostTextVariants = {
   initial: {

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { useCookie, useScroll } from 'react-use';
+import { useGetMyScrapData } from '../../api/hooks/useGetMyScrapData';
 import { useGetPostsData } from '../../api/hooks/useGetPostsData';
 import UserService from '../../api/UserService';
 import Plus from '../../assets/Plus';
@@ -27,6 +28,9 @@ function Home() {
   const [category, setCategory] = useState('all');
   const [homeWidth, setHomeWidth] = useState(0);
   const { postListData } = useGetPostsData(category, 0, 11);
+  const { scrapData } = useGetMyScrapData();
+
+  console.log(scrapData);
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

@@ -1,7 +1,6 @@
-import API from '../index';
 import PostService from '../PostService';
 
 export async function setBookMarkPostAPI(postId: number) {
-  const res = await PostService.setBookMarkPost(postId);
+  const res = await PostService.updateMyScrapData(postId);
   return res.data;
 }
