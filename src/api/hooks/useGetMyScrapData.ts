@@ -11,7 +11,7 @@ async function getMyScrapData() {
 export function useGetMyScrapData() {
   const token = Cookies.get('token');
 
-  const { isLoading, data: scrapData } = useQuery<RowScrapDataType>(
+  const { data: scrapData } = useQuery<RowScrapDataType>(
     ['scrap'],
     () => getMyScrapData(),
     {
