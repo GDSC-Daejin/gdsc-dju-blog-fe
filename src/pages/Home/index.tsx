@@ -86,7 +86,7 @@ function Home() {
           onMouseLeave={onDragEnd}
         >
           {postListData &&
-            postListData.content.map((postData, index) => {
+            postListData.content.map((postData) => {
               return (
                 <BlogCardWrapper
                   key={postData.postId}
