@@ -2,7 +2,6 @@ import { AnimatePresence } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
-import api from '../../../api';
 import { useGetMyData } from '../../../api/hooks/useGetMyData';
 import TokenService from '../../../api/TokenService';
 import { MENU_KEY, menuState } from '../../../store/menu';

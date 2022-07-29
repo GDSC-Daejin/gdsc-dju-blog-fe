@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { useCookie, useScroll } from 'react-use';
+import { useScroll } from 'react-use';
+import { useGetMyScrapData } from '../../api/hooks/useGetMyScrapData';
 import { useGetPostsData } from '../../api/hooks/useGetPostsData';
-import UserService from '../../api/UserService';
 import Plus from '../../assets/Plus';
 import BlogCard from '../../components/common/BlogCard';
 import CategoryMenu from '../../components/common/CategoryMenu';
@@ -27,6 +27,11 @@ function Home() {
   const [category, setCategory] = useState('all');
   const [homeWidth, setHomeWidth] = useState(0);
   const { postListData } = useGetPostsData(category, 0, 11);
+  const { scrapData } = useGetMyScrapData();
+  const scrapList =
+    scrapData?.data.content.map((v) => {
+      return v.post[0].postId;
+    }) ?? [];
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -81,15 +86,23 @@ function Home() {
           onMouseLeave={onDragEnd}
         >
           {postListData &&
-            postListData.content.map((postData) => (
-              <BlogCardWrapper
-                key={postData.postId}
-                homeWidth={`${homeWidth}px`}
-              >
-                <BlogCard postData={postData} />
-              </BlogCardWrapper>
-            ))}
-          <BlogCardWrapper className="viewmore-item">
+            postListData.content.map((postData) => {
+              return (
+                <BlogCardWrapper
+                  key={postData.postId}
+                  homeWidth={`${homeWidth}px`}
+                >
+                  <BlogCard
+                    postData={postData}
+                    isScrap={scrapList?.includes(postData.postId)}
+                  />
+                </BlogCardWrapper>
+              );
+            })}
+          <BlogCardWrapper
+            homeWidth={`${homeWidth}px`}
+            className="viewmore-item"
+          >
             <Link to={`/category/${category}`}>
               <button type="button" className="viewmore-item__button">
                 <Plus />

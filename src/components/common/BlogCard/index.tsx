@@ -1,10 +1,12 @@
 import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
-import BlogCardImage from '../../../assets/mocks/unknown.png';
+import { useCookies } from 'react-cookie';
+
 import { DetailPostDataType } from '../../../types/postData';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import Bookmark from '../../../assets/Bookmark';
 import { HashTageLight } from '../HashTage';
 import {
   BlogCardAuthorImage,
@@ -18,8 +20,10 @@ import {
   BlogCardThumbnail,
   BlogCardThumbnailWrapper,
   BlogCardTitle,
+  BookMarkWrapper,
   PostText,
 } from './styled';
+import { setBookMarkPostAPI } from '../../../api/hooks/setBookMark';
 
 const PostTextVariants = {
   initial: {
@@ -43,15 +47,28 @@ const PostTextVariants = {
 
 interface BlogCardProps {
   postData: DetailPostDataType;
+  isScrap: boolean;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ postData, isScrap }) => {
   const [IsHovered, setIsHovered] = useState(false);
+  const [isMarked, setIsMarked] = useState(isScrap);
+  const [cookie] = useCookies(['token']);
   const navigate = useNavigate();
 
   const linkToPost = useCallback(() => {
     navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
   }, [postData]);
+
+  const setBookMarkScrap = async (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (cookie.token) {
+      const result = await setBookMarkPostAPI(postData.postId);
+      if (result.body.message === 'SUCCESS') setIsMarked(!isMarked);
+    } else {
+      alert('로그인이 필요한 서비스입니다.');
+    }
+  };
 
   const removeMarkdownInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
@@ -64,13 +81,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
     <AnimateSharedLayout>
       <BlogCardInner onClick={linkToPost}>
         {/* 북마크 */}
-        {/*<BookMarkWrapper onClick={setBookmarkClip}>*/}
-        {/*  <Bookmark marked={marked} />*/}
-        {/*</BookMarkWrapper>*/}
+        <BookMarkWrapper onClick={setBookMarkScrap}>
+          <Bookmark marked={isMarked} />
+        </BookMarkWrapper>
         {/* 이미지 */}
         <BlogCardThumbnailWrapper>
           <BlogCardThumbnail
-            src={postData.imagePath ?? BlogCardImage}
+            src={postData.imagePath ?? '../../../assets/mocks/unknown.png'}
             alt="BlogCardThumbnail"
           />
         </BlogCardThumbnailWrapper>
@@ -108,7 +125,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData }) => {
             <BlogCardAuthorWrapper>
               <BlogCardAuthorImage
                 alt="AuthorImage"
-                src={postData.memberInfo.member.profileImageUrl}
+                // src={postData.memberInfo.member.profileImageUrl}
               />
               <BlogCardSubText subText={true}>by</BlogCardSubText>
               <BlogCardSubText bold={true}>

@@ -4,6 +4,7 @@ import {
   RowDetailPostListType,
   RowPostDataType,
 } from '../types/postData';
+import Cookies from 'js-cookie';
 import { Api } from './index';
 
 class PostService extends Api {
@@ -64,10 +65,21 @@ class PostService extends Api {
   getMyScrapData = () => {
     return axios.get(`${this.API}/api/member/v1/myScrap`, this.Header);
   };
-  updateMyScrapData = (postId: string) => {
+  updateMyScrapData = (postId: number) => {
+    const token = Cookies.get('token');
     return axios.post(
-      `${this.API}/api/member/v1/myScrap${postId}`,
-      this.Header,
+      `https://gdsc-dju.kro.kr/api/member/v1/scrap/${postId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+  };
+  getSearchPosts = (postContent: string) => {
+    return axios.get(
+      `https://gdsc-dju.kro.kr/api/v1/post/search/${postContent}`,
     );
   };
 }

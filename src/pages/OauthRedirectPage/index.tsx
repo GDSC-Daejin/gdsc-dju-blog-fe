@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
+import { getUserData, useGetMyData } from '../../api/hooks/useGetMyData';
 import TokenService from '../../api/TokenService';
 import UserService from '../../api/UserService';
 import { IUserDataType } from '../../types/userDataType';
@@ -13,15 +14,8 @@ export default function OauthRedirectPage() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token') ?? null;
   const refresh_token = searchParams.get('refreshToken') ?? null;
-  const [cookies, setCookies] = useCookies(['token', 'refresh_token', 'user']);
-  const setCookieData = (user: SelectedUserType) => {
-    setCookies(
-      'user',
-      { ...user },
-      {
-        path: '/',
-      },
-    );
+  const [cookies, setCookies] = useCookies(['token', 'refresh_token']);
+  const setCookieData = () => {
     setCookies('token', token, {
       path: '/',
     });
@@ -32,24 +26,32 @@ export default function OauthRedirectPage() {
 
   useEffect(() => {
     (async function () {
-      if (token && refresh_token) {
-        const result = await UserService.getMyData(token);
-        const data = result.data.body.data;
-        setCookieData({
-          role: data.role,
-          username: data.username,
-          userId: data.userId,
-          memberInfo: data.memberInfo,
-        });
+      if (token) {
+        const userData = await getUserData(token || '');
         TokenService.setToken(token);
+        setCookieData();
+        sessionStorage.setItem(
+          'user',
+          JSON.stringify({
+            role: userData?.role,
+            username: userData?.username,
+            userId: userData?.userId,
+          }),
+        );
+        if (userData) {
+          if (userData.role.toUpperCase() === 'GUEST'.toUpperCase()) {
+            import.meta.env.MODE === 'development'
+              ? (window.location.href = 'http://localhost:3000/signup')
+              : (window.location.href = 'https://gdsc-dju-blog.web.app/signup');
+          } else {
+            import.meta.env.MODE === 'development'
+              ? (window.location.href = 'http://localhost:3000/')
+              : (window.location.href = 'https://gdsc-dju-blog.web.app/');
+          }
+        }
       }
     })();
-    cookies.token &&
-      //@ts-ignore
-      (import.meta.env.MODE === 'development'
-        ? (window.location.href = 'http://localhost:3000/')
-        : (window.location.href = 'https://gdsc-dju-blog.web.app/'));
-  }, [cookies]);
+  }, []);
 
   return null;
 }

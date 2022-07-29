@@ -24,19 +24,20 @@ const SideBarLogin: React.FC<{
   closeSideBar: () => void;
 }> = ({ userData, closeSideBar }) => {
   const navigate = useNavigate();
-  const [UserCookies, setUserCookie, removeUserCookie] = useCookies(['user']);
   const [TokenCookies, setTokenCookie, removeTokenCookie] = useCookies([
     'token',
+    'refresh_token',
   ]);
   const postBlock = userData?.role === 'GUEST';
 
   const handleLogout = () => {
-    removeUserCookie('user', {
-      path: '/',
-    });
     removeTokenCookie('token', {
       path: '/',
     });
+    removeTokenCookie('refresh_token', {
+      path: '/',
+    });
+    sessionStorage.removeItem('user');
     window.location.href =
       import.meta.env.MODE === 'development'
         ? (window.location.href = 'http://localhost:3000/')
