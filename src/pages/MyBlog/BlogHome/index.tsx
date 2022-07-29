@@ -1,6 +1,20 @@
 import React, { Suspense, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
+import { useGetMyData } from '../../../api/hooks/useGetMyData';
+import { useGetMyPostsNotTempData } from '../../../api/hooks/useGetMyPostsNotTempData';
+import Setting from '../../../assets/Setting';
+import { GDSCButton } from '../../../components/common/Button';
+import CategoryMenu from '../../../components/common/CategoryMenu';
+import { HashTageDark } from '../../../components/common/HashTage';
+import { HashTageWrapper } from '../../../components/common/HashTage/styled';
+import PageBar from '../../../components/common/PageBar';
+import PostCard from '../../../components/common/PostCard';
+import ProfileImage from '../../../components/common/ProfileImage';
+import { positionColor } from '../../../store/positionColor';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import { HashTageSection } from '../../Post/styled';
 import {
   BlogName,
   BlogNamePosition,
@@ -18,30 +32,23 @@ import {
   SettingIconWrapper,
   TopMenuWrapper,
 } from './styled';
-import ProfileImage from '../../../components/common/ProfileImage';
-import { positionColor } from '../../../store/positionColor';
-import CategoryMenu from '../../../components/common/CategoryMenu';
-import { GDSCButton } from '../../../components/common/Button';
-import PostCard from '../../../components/common/PostCard';
-import { createSearchParams, useSearchParams } from 'react-router-dom';
-import Setting from '../../../assets/Setting';
-import PageBar from '../../../components/common/PageBar';
-import { useGetUserData } from '../../../api/hooks/useGetUserData';
-import { useGetMyPostsData } from '../../../api/hooks/useGetUserPostListData';
-import { useCookies } from 'react-cookie';
 
 const BlogHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [cookie, setCookies] = useCookies(['token']);
+
   const categoryName = searchParams.get('type');
   const category = categoryName ? categoryName : 'all';
 
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
 
-  const { userData } = useGetUserData(cookie.token);
+  const { userData } = useGetMyData();
   const userInfoData = userData?.memberInfo;
-  const { userPostData } = useGetMyPostsData(category, page - 1, 6);
+  const { userPostNotTempData } = useGetMyPostsNotTempData(
+    category,
+    page - 1,
+    6,
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -112,13 +119,18 @@ const BlogHome = () => {
                     </SettingIconWrapper>
                   </BlogNameWrapper>
                   <IntroduceText>{userInfoData.introduce}</IntroduceText>
-                  {/* <HashTageSection>
-                    {hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
-                      <HashTageWrapper key={id}>
-                        <HashTageDark text={tag} />
-                      </HashTageWrapper>
-                    ))}
-                  </HashTageSection> */}
+
+                  <HashTageSection>
+                    {userInfoData.hashTag ? (
+                      hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
+                        <HashTageWrapper key={id} light={false}>
+                          # {tag}
+                        </HashTageWrapper>
+                      ))
+                    ) : (
+                      <div>해시태그가 없어요.</div>
+                    )}
+                  </HashTageSection>
                 </ProfileDetailWrapper>
               </ProfileWrapper>
               <TopMenuWrapper>
@@ -139,10 +151,10 @@ const BlogHome = () => {
               </TopMenuWrapper>
             </>
           )}
-          {userPostData && (
+          {userPostNotTempData && (
             <PostSectionWrapper>
-              {!userPostData.empty ? (
-                userPostData.content.map((data) => (
+              {!userPostNotTempData.empty ? (
+                userPostNotTempData.content.map((data) => (
                   <PostCardWrapper
                     key={data.postId}
                     onClick={() =>
@@ -158,15 +170,17 @@ const BlogHome = () => {
             </PostSectionWrapper>
           )}
           <PageBarSection>
-            {userPostData && userInfoData && !userPostData.empty && (
-              <PageBar
-                page={page}
-                totalPage={userPostData.totalPages}
-                nickname={userInfoData.nickname}
-                type={category}
-                onClick={pageHandler}
-              />
-            )}
+            {userPostNotTempData &&
+              userInfoData &&
+              !userPostNotTempData.empty && (
+                <PageBar
+                  page={page}
+                  totalPage={userPostNotTempData.totalPages}
+                  nickname={userInfoData.nickname}
+                  type={category}
+                  onClick={pageHandler}
+                />
+              )}
           </PageBarSection>
         </ContainerInner>
       </LayoutContainer>

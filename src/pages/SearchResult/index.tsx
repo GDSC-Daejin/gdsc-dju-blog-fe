@@ -11,6 +11,7 @@ import { LayoutInner, NoResult } from './styled';
 const SearchResult = () => {
   const [postData, setPostData] = useState<DetailPostDataType[]>();
   const params = useSearchParam('title');
+
   const getSearchList = async () => {
     const response = await axios.get(
       `https://gdsc-dju.com/api/v1/post/search/${params}`,
