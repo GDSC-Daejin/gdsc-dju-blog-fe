@@ -29,6 +29,7 @@
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.32.2",
+    "react-query": "^3.39.1",
     "react-router": "^6.0.1",
     "react-router-dom": "^6.0.1",
     "react-scripts": "^4.0.3",
@@ -40,7 +41,6 @@
     "styled-components": "^5.3.3",
     "styled-normalize": "^8.0.7",
     "styled-reset": "^4.3.4",
-    "swr": "^1.0.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

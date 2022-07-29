@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { useScroll } from 'react-use';
-import { useGetPostListData } from '../../api/hooks/useGetPostListData';
+import { useGetMyScrapData } from '../../api/hooks/useGetMyScrapData';
+import { useGetPostsData } from '../../api/hooks/useGetPostsData';
 import Plus from '../../assets/Plus';
 import BlogCard from '../../components/common/BlogCard';
 import CategoryMenu from '../../components/common/CategoryMenu';
@@ -24,8 +25,13 @@ function Home() {
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [category, setCategory] = useState('all');
-
-  const { postListData } = useGetPostListData(category, 0, 11);
+  const [homeWidth, setHomeWidth] = useState(0);
+  const { postListData } = useGetPostsData(category, 0, 11);
+  const { scrapData } = useGetMyScrapData();
+  const scrapList =
+    scrapData?.data.content.map((v) => {
+      return v.post[0].postId;
+    }) ?? [];
 
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -54,18 +60,22 @@ function Home() {
   const changeCategory = (category: string) => {
     setCategory(category);
   };
+  const homeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    homeRef.current && setHomeWidth(homeRef.current?.offsetWidth);
+  }, [homeRef]);
 
   return (
     <>
       <HomeLayoutContainer>
-        <HomeContentWrapper>
+        <HomeContentWrapper ref={homeRef}>
           <HomePhraseWrapper>
             <HomePhrase />
           </HomePhraseWrapper>
           <CategoryMenu type={category} onClick={changeCategory} />
         </HomeContentWrapper>
       </HomeLayoutContainer>
-
       <CardSectionWrapper>
         <CardSection
           isDrag={isDrag}
@@ -76,19 +86,28 @@ function Home() {
           onMouseLeave={onDragEnd}
         >
           {postListData &&
-            postListData.content.map((postData) => (
-              <BlogCardWrapper key={postData.postId}>
-                <BlogCard postData={postData} />
-              </BlogCardWrapper>
-            ))}
-          <BlogCardWrapper>
-            <div className="viewmore-item">
-              <Link to={`/category/${category}`}>
-                <button type="button" className="viewmore-item__button">
-                  <Plus />
-                </button>
-              </Link>
-            </div>
+            postListData.content.map((postData) => {
+              return (
+                <BlogCardWrapper
+                  key={postData.postId}
+                  homeWidth={`${homeWidth}px`}
+                >
+                  <BlogCard
+                    postData={postData}
+                    isScrap={scrapList?.includes(postData.postId)}
+                  />
+                </BlogCardWrapper>
+              );
+            })}
+          <BlogCardWrapper
+            homeWidth={`${homeWidth}px`}
+            className="viewmore-item"
+          >
+            <Link to={`/category/${category}`}>
+              <button type="button" className="viewmore-item__button">
+                <Plus />
+              </button>
+            </Link>
           </BlogCardWrapper>
         </CardSection>
       </CardSectionWrapper>

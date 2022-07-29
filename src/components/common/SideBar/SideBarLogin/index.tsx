@@ -19,25 +19,29 @@ import { menuState } from '../../../../store/menu';
 import { useCookies } from 'react-cookie';
 import { IUserDataType } from '../../../../types/userDataType';
 
-const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
-  userData,
-}) => {
+const SideBarLogin: React.FC<{
+  userData: IUserDataType | undefined;
+  closeSideBar: () => void;
+}> = ({ userData, closeSideBar }) => {
   const navigate = useNavigate();
-  const [menu, setMenu] = useRecoilState(menuState);
-  const [UserCookies, setUserCookie, removeUserCookie] = useCookies(['user']);
   const [TokenCookies, setTokenCookie, removeTokenCookie] = useCookies([
     'token',
+    'refresh_token',
   ]);
   const postBlock = userData?.role === 'GUEST';
 
   const handleLogout = () => {
-    removeUserCookie('user', {
-      path: '/',
-    });
     removeTokenCookie('token', {
       path: '/',
     });
-    window.location.href = 'https://gdsc-dju-blog.web.app/';
+    removeTokenCookie('refresh_token', {
+      path: '/',
+    });
+    sessionStorage.removeItem('user');
+    window.location.href =
+      import.meta.env.MODE === 'development'
+        ? (window.location.href = 'http://localhost:3000/')
+        : (window.location.href = 'https://gdsc-dju-blog.web.app/');
   };
 
   return (
@@ -58,7 +62,7 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
             <SettingIconWrapper
               onClick={() => {
                 navigate(`/${userData.memberInfo.nickname}/edit`);
-                setMenu({ ...menu, isOpen: false });
+                closeSideBar();
               }}
             >
               <SettingIcon />
@@ -69,7 +73,7 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
               text="내 블로그"
               onClick={() => {
                 navigate(`/${userData.memberInfo.nickname}`);
-                setMenu({ ...menu, isOpen: false });
+                closeSideBar();
               }}
             />
           </MyBlogButtonWrapper>
@@ -80,7 +84,7 @@ const SideBarLogin: React.FC<{ userData: IUserDataType | undefined }> = ({
                 disable={postBlock}
                 onClick={() => {
                   !postBlock && navigate(`/post/write`);
-                  !postBlock && setMenu({ ...menu, isOpen: false });
+                  !postBlock && closeSideBar();
                 }}
               />
             </WriteButtonWrapper>

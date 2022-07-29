@@ -1,6 +1,6 @@
 import React from 'react';
-import PostThumbnail from '../../../Images/PostThumbnail';
-import { PostThumbnailWrapper } from '../../../pages/PostWrite/styled';
+import PostThumbnail from '../../../assets/PostThumbnail';
+import { PostThumbnailWrapper } from '../../../Layout/postWrite.styled';
 
 const Thumbnail = () => {
   return (

@@ -15,13 +15,28 @@ export const PostCategoryText = styled(motion.div)<{ active?: boolean }>`
   @media screen and (max-width: ${({ theme }) => theme.windowSize.tablet}px) {
    font-size: ${({ theme }) => theme.fontSize.body2};
 `;
-export const PostCategoryTextWrapper = styled(motion.div)`
+export const PostCategoryTextWrapper = styled(motion.div)<{
+  isActive: boolean;
+}>`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.grey300};
   position: relative;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: translateY(-5px);
+    border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
+    color: ${({ theme }) => theme.colors.grey900};
+  }
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      transform: translateY(-5px);
+      border-bottom: 1px solid ${({ theme }) => theme.colors.grey900};
+      color: ${({ theme }) => theme.colors.grey900};
+    `}
 `;
 export const PostCategoryMenuWrapper = styled(motion.div)`
   display: flex;
@@ -31,6 +46,7 @@ export const PostCategoryMenuWrapper = styled(motion.div)`
   justify-content: space-between;
   @media screen and (max-width: ${(props) => props.theme.windowSize.tablet}px) {
     width: 320px;
+  }
 `;
 export const PostCategoryCircleWrapper = styled(motion.div)`
   position: absolute;

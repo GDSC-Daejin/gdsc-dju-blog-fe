@@ -1,14 +1,15 @@
 import { Giscus } from '@giscus/react';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 import { Viewer } from '@toast-ui/react-editor';
+import Prism from 'prismjs';
 import React from 'react';
-import { useCookies } from 'react-cookie';
-import { useLocation } from 'react-router';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useRecoilState } from 'recoil';
-import API from '../../api';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-import { useGetUserData } from '../../api/hooks/useGetUserData';
+import { useGetMyData } from '../../api/hooks/useGetMyData';
+import PostService from '../../api/PostService';
 import Bookmark from '../../assets/Bookmark';
 import PostEditIcon from '../../assets/PostEditIcon';
 import PostTrashIcon from '../../assets/PostTrashIcon';
@@ -17,11 +18,7 @@ import { alertState } from '../../store/alert';
 import { modalState } from '../../store/modal';
 import { positionColor } from '../../store/positionColor';
 
-import {
-  ContainerInner,
-  LayoutContainer,
-  PostContainerInner,
-} from '../../styles/layouts';
+import { LayoutContainer, PostContainerInner } from '../../styles/layouts';
 import { AuthorProps, DetailPostDataType } from '../../types/postData';
 import { IUserInfoDataType } from '../../types/userInfoData';
 import { dateFilter } from '../../Utils/dateFilter';
@@ -83,9 +80,8 @@ const Post = () => {
 };
 
 const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
-  const [cookie, setCookie] = useCookies(['token']);
   const { postData } = useGetDetailPost(postId);
-  const { userData } = useGetUserData(cookie.token);
+  const { userData } = useGetMyData();
   const userInfoData = userData?.memberInfo;
 
   return (
@@ -116,7 +112,13 @@ const PostContent: React.FC<{ postId: string }> = ({ postId }) => {
             </PostAuthorWrapper>
           </PostHead>
           <ContentBox>
-            <Viewer initialValue={postData.content} />
+            <Viewer
+              initialValue={postData.content}
+              plugins={[
+                [codeSyntaxHighlight, { highlighter: Prism }],
+                tableMergedCell,
+              ]}
+            />
           </ContentBox>
         </>
       )}
@@ -135,7 +137,7 @@ const PostIconBlock: React.FC<PostIconBoxProps> = ({
   const deleteHandler = async () => {
     setModal({ ...modal, isOpen: false });
     try {
-      await API.deletePostData(postId);
+      await PostService.deleteMyPostData(postId);
       await setAlert({
         ...alert,
         alertStatus: 'success',
