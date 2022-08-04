@@ -10,11 +10,7 @@ export class Api {
   };
 
   constructor() {
-    if (process.env.NODE_ENV === 'development') {
-      this.API = 'https://gdsc-dju.kro.kr';
-    } else {
-      this.API = 'https://gdsc-dju.com';
-    }
+    this.API = 'https://api.gdsc-dju.com';
     this.Header = {
       headers: {
         Authorization: `Bearer ${Cookies.get('token')}`,
