@@ -10,13 +10,14 @@ export const getUserData = async (token: string) => {
 
 export const useGetMyData = () => {
   const [cookies] = useCookies(['refresh_token', 'token']);
+  const isEnabled = !!(cookies.token && cookies.refresh_token);
   const { data: userData } = useQuery(
     [cookies.token, `${cookies.token}`],
     () => getUserData(cookies.token),
     {
       refetchInterval: 30 * 60 * 1000,
       retry: 2,
-      enabled: cookies.token && cookies.refresh_token,
+      enabled: isEnabled,
       refetchOnWindowFocus: true,
       onError: () => {
         cookies.token &&
@@ -34,13 +35,14 @@ export const getMyToken = async (refreshToken: string, token: string) => {
 
 export const useGetMyToken = () => {
   const [cookies, setCookies] = useCookies(['token', 'refresh_token']);
+  const isEnabled = !!(cookies.token && cookies.refresh_token);
   const { data: newToken } = useQuery(
     [cookies.refresh_token, cookies.refresh_token],
     () => getMyToken(cookies.refresh_token, cookies.token),
     {
       refetchInterval: 30 * 60 * 1000,
       retry: 2,
-      enabled: cookies.token && cookies.refresh_token,
+      enabled: isEnabled,
       refetchOnWindowFocus: true,
       onError: () => {
         TokenService.getRefresh(cookies.refresh_token, cookies.token);
