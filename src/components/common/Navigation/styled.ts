@@ -7,7 +7,7 @@ export const NavTask = styled.li`
   margin: 0 5px;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.grey800};
-  font-size: ${({ theme }) => theme.fontSize.body2}
+  font-size: ${({ theme }) => theme.fontSize.body2};
   font-weight: 500;
   word-break: keep-all;
   list-style: none;
@@ -133,6 +133,10 @@ export const SearchInputWrapper = styled.div`
       fill: ${({ theme }) => theme.colors.grey300};
     }
   }
+  button {
+    background: none;
+    border: none;
+  }
 `;
 export const SearchWrapper = styled.label`
   display: flex;
@@ -168,7 +172,8 @@ export const GdscLogoWrapper = styled.div`
   & svg {
     width: 40px;
     height: 20px;
-    @media(min-width:  ${({ theme }) => theme.windowSize.tablet}px) {
+    @media (min-width: ${({ theme }) => theme.windowSize.tablet}px) {
       display: none;
     }
+  }
 `;

@@ -60,8 +60,10 @@ const SearchInput: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
           type="text"
           placeholder="궁금한 정보나 계정을 입력해주세요"
         />
+        <button type="submit">
+          <Vector />
+        </button>
       </form>
-      <Vector onClick={onClick} />
     </SearchInputWrapper>
   );
 };
