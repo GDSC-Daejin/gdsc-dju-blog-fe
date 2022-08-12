@@ -23,6 +23,7 @@ export default function OauthRedirectPage() {
       path: '/',
     });
   };
+  console.log(cookies);
 
   useEffect(() => {
     (async function () {
@@ -51,7 +52,7 @@ export default function OauthRedirectPage() {
         }
       }
     })();
-  }, []);
+  }, [cookies]);
 
   return null;
 }

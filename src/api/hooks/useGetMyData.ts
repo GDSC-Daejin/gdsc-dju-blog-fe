@@ -18,10 +18,8 @@ export const useGetMyData = () => {
       refetchInterval: 30 * 60 * 1000,
       retry: 2,
       enabled: isEnabled,
-      refetchOnWindowFocus: true,
       onError: () => {
-        cookies.token &&
-          TokenService.getRefresh(cookies.refresh_token, cookies.token);
+        useGetMyToken();
       },
     },
   );
@@ -43,7 +41,6 @@ export const useGetMyToken = () => {
       refetchInterval: 30 * 60 * 1000,
       retry: 2,
       enabled: isEnabled,
-      refetchOnWindowFocus: true,
       onError: () => {
         TokenService.getRefresh(cookies.refresh_token, cookies.token);
       },
