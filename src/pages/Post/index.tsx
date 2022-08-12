@@ -20,7 +20,8 @@ import { positionColor } from '../../store/positionColor';
 
 import { LayoutContainer, PostContainerInner } from '../../styles/layouts';
 import { AuthorProps, DetailPostDataType } from '../../types/postData';
-import { IUserInfoDataType } from '../../types/userInfoData';
+import { MemberInfo } from '../../types/userDataType';
+
 import { dateFilter } from '../../Utils/dateFilter';
 import { hashTageSpreader } from '../../Utils/hashTageSpreader';
 import {
@@ -46,7 +47,7 @@ import {
 } from './styled';
 
 interface PostIconBoxProps {
-  userInfoData: IUserInfoDataType;
+  userInfoData: MemberInfo;
   postData: DetailPostDataType;
   postId: string;
 }

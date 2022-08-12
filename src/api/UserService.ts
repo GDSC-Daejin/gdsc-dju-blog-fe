@@ -1,9 +1,14 @@
 import axios from 'axios';
-import { MemberDataInfoType, RowMemberDataType } from '../types/userDataType';
+import {
+  MemberInfo,
+  RowMemberDataType,
+  ValidationMemberInfo,
+} from '../types/userDataType';
+
 import { Api } from './index';
 
 class UserService extends Api {
-  updateMyData = (userInfoData: MemberDataInfoType) => {
+  updateMyData = (userInfoData: MemberInfo) => {
     return axios.put(`${this.API}/member-route/api/guest/v1/me`, userInfoData, {
       ...this.Header,
     });

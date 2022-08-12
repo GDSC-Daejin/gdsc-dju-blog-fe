@@ -1,16 +1,12 @@
-import React, { memo } from 'react';
+import React, { forwardRef, memo } from 'react';
+import { FieldError } from 'react-hook-form';
 
 import { ErrorBox, StyledInput, StyledInputWrapper } from './styled';
 import { FormikErrors, FormikTouched } from 'formik';
 
 export interface Iprops {
   name?: string;
-  error?:
-    | string
-    | string[]
-    | FormikErrors<any>
-    | FormikErrors<any>[]
-    | undefined;
+  error?: FieldError | undefined;
   touched?: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
   placeholder?: string;
   image?: string;
@@ -18,28 +14,30 @@ export interface Iprops {
   onChange?: (e: any) => void;
   type?: string;
   value?: string | null;
-  checkError?: (props: boolean) => void;
   disabled?: boolean;
 }
-const TextInput = (props: Iprops) => {
-  const { name, placeholder, onChange, type, disabled, error, touched } = props;
-  const errorToggle = error != undefined && error != '필수입력란입니다.';
+const TextInput = forwardRef<HTMLInputElement, Iprops>(
+  (
+    { name, placeholder, onChange, type, disabled, error, touched, value },
+    ref,
+  ) => {
+    return (
+      <>
+        <StyledInputWrapper error={false} disabled={!disabled}>
+          <StyledInput
+            className={'formInput'}
+            name={name}
+            type={type}
+            ref={ref}
+            onChange={onChange && onChange}
+            placeholder={placeholder}
+            disabled={disabled}
+          />
+        </StyledInputWrapper>
+        <ErrorBox>{error && <>{error.message}</>}</ErrorBox>
+      </>
+    );
+  },
+);
 
-  return (
-    <>
-      <StyledInputWrapper error={errorToggle} disabled={!disabled}>
-        <StyledInput
-          className={'formInput'}
-          name={name}
-          type={type}
-          onChange={onChange && onChange}
-          placeholder={placeholder}
-          disabled={disabled}
-        />
-      </StyledInputWrapper>
-      <ErrorBox>{errorToggle && <>{error}</>}</ErrorBox>
-    </>
-  );
-};
-
-export default memo(TextInput);
+export default TextInput;

@@ -1,7 +1,7 @@
 import { Field } from 'formik';
 import styled, { css } from 'styled-components';
 
-export const StyledInput = styled(Field)<{ disabled?: boolean }>`
+export const StyledInput = styled.input<{ disabled?: boolean }>`
   padding: 0 18px;
   margin: 2px 0;
   border: 0;
@@ -28,7 +28,7 @@ export const StyledInput = styled(Field)<{ disabled?: boolean }>`
 export const StyledInputWrapper = styled.div<{
   color?: string;
   disabled?: boolean;
-  error?: boolean;
+  error: boolean;
 }>`
   overflow: hidden;
   display: flex;
@@ -40,29 +40,29 @@ export const StyledInputWrapper = styled.div<{
   border: solid 0;
   border-radius: 10px;
   box-sizing: border-box;
-  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
-  ${(error) =>
-    error &&
-    css`
-      box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
-    `}
+  ${({ error }) =>
+    error
+      ? css`
+          box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
+        `
+      : css`
+          box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
+        `};
   transition: 0.3s;
   &:hover {
-    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossBlue200};
     ${({ error }) =>
-      error &&
-      css`
-        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
-      `}
+      error
+        ? css`
+            box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
+          `
+        : css`
+            box-shadow: inset 0 0 0 2px
+              ${({ theme }) => theme.colors.tossBlue200};
+          `}
   }
   .formInput:focus {
     box-sizing: border-box;
     box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossBlue500};
-    ${({ error }) =>
-      error &&
-      css`
-        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
-      `}
   }
   ${({ disabled }) =>
     !disabled &&

@@ -1,9 +1,7 @@
-import { IUserInfoDataType } from './userInfoData';
-
 export interface IUserDataType {
   email: string;
   emailVerifiedYn: string;
-  memberInfo: IUserInfoDataType;
+  memberInfo: MemberInfo;
   modifiedAt: string;
   password: string;
   profileImageUrl: string;
@@ -19,19 +17,24 @@ export interface RowMemberDataType {
     data: IUserDataType;
   };
 }
-export interface MemberDataInfoType {
+
+export interface ValidationMemberInfo {
   generation: number;
-  gitEmail: string;
-  hashTag: string;
   introduce: string;
-  major: string;
-  memberInfoId: number;
-  birthday: string;
   nickname: string;
   phoneNumber: string;
-  positionType: string;
+  major: string;
+  gitEmail: string;
   studentID: string;
-  userID: string;
-  name: string;
-  email: string;
+  hashTag: string;
+  githubUrl: string;
+  blogUrl: string;
+  etcUrl: string;
+  birthday: string;
+  positionType: string;
+}
+
+export interface MemberInfo extends ValidationMemberInfo {
+  memberInfoId: number;
+  id: string;
 }
