@@ -6,14 +6,15 @@ import PostService from '../PostService';
 export const useSetBookMark = (
   id: number | undefined,
   token: string,
-  setMarked: () => void,
+  setMarked: (check: boolean) => void,
 ) => {
   const [alert, setAlert] = useRecoilState(alertState);
+
   const bookMarkHandler = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (token && id) {
       const result = await setBookMarkPostAPI(id);
-      if (result.body.message === 'SUCCESS') setMarked();
+      if (result.body.message === 'SUCCESS') setMarked(true);
     } else {
       setAlert({
         ...alert,

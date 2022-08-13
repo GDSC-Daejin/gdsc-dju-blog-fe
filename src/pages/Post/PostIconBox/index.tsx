@@ -25,8 +25,8 @@ const PostIconBox = ({ isUser, postId }: Props) => {
   const [alert, setAlert] = useRecoilState(alertState);
   const [cookie] = useCookies(['token']);
   const [isMarked, setIsMarked] = useState(false);
-  const { bookMarkHandler } = useSetBookMark(postId, cookie.token, () =>
-    setIsMarked(!isMarked),
+  const { bookMarkHandler } = useSetBookMark(postId, cookie.token, (check) =>
+    setIsMarked(check),
   );
   const navigate = useNavigate();
   const deleteHandler = async () => {
