@@ -24,7 +24,7 @@ const Layout = () => {
         <Route path={'/category/*'} element={<Category />} />
         <Route path={'/category/:categoryName'} element={<Category />} />
         <Route path={'/signup'} element={<SignUp />} />
-        <Route path={'/oauth2/redirect'} element={<OauthRedirectPage />} />
+        <Route path={'/redirect'} element={<OauthRedirectPage />} />
         <Route path={'/search/:postContent'} element={<SearchResult />} />
         <Route path={'/post/saves'} element={<PostSaves />} />
       </Routes>

@@ -16,7 +16,6 @@ const variants = {
   active: {
     opacity: 1,
     scale: 1,
-    y: 0,
   },
   unActive: {
     opacity: 0,
@@ -32,8 +31,8 @@ const Alert = () => {
         ...alert,
         alertHandle: false,
       });
-      clearTimeout(alertTimer);
     }, 4000);
+    return () => clearTimeout(alertTimer);
   }, [alert.alertHandle]);
   const alertStatusColor = {
     success: '#55af7a',
@@ -47,8 +46,8 @@ const Alert = () => {
   };
   return (
     <AnimatePresence>
-      <AlertWrapper>
-        {alert.alertHandle && (
+      {alert.alertHandle && (
+        <AlertWrapper>
           <AlertInner
             variants={variants}
             exit={'unActive'}
@@ -61,8 +60,8 @@ const Alert = () => {
               <AlertText>{alert.alertMessage}</AlertText>
             </AlertInnerWrapper>
           </AlertInner>
-        )}
-      </AlertWrapper>
+        </AlertWrapper>
+      )}
     </AnimatePresence>
   );
 };

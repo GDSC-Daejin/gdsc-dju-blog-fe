@@ -9,6 +9,7 @@ const MyBlog = () => {
     <Routes>
       <Route path={'/*'} element={<BlogHome />} />
       <Route path={'/edit'} element={<ProfileEdit />} />
+      <Route path={'/likes'} element={<BlogHome />} />
       <Route path={'/:postId'} element={<Post />} />
     </Routes>
   );

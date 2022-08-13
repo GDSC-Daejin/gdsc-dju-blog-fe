@@ -168,7 +168,6 @@ const PostWrite = () => {
       const base64 = reader.result?.toString();
 
       if (base64) {
-        console.log(base64);
         setDetailPostData((prev) => {
           return {
             ...prev,
@@ -208,8 +207,11 @@ const PostWrite = () => {
         },
       });
     };
-    history.pushState(null, '', location.href);
-    window.addEventListener('popstate', preventGoBack);
+
+    if (!location.pathname.includes('edit')) {
+      history.pushState(null, '', location.href);
+      window.addEventListener('popstate', preventGoBack);
+    }
     return () => window.removeEventListener('popstate', preventGoBack);
   }, []);
 

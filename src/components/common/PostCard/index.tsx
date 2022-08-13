@@ -1,4 +1,13 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useSetBookMark } from '../../../api/hooks/useSetBookMark';
+import Bookmark from '../../../assets/Bookmark';
+import MockPostImage from '../../../assets/mocks/MockPostImage.jpg';
+import { DetailPostDataType } from '../../../types/postData';
+import { dateFilter } from '../../../Utils/dateFilter';
+
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import { HashTageDark } from '../HashTage';
 import {
   BookmarkWrapper,
   PostCardContentWrapper,
@@ -10,13 +19,6 @@ import {
   PostHashTageSection,
   PostTitle,
 } from './styled';
-import MockPostImage from '../../../assets/mocks/MockPostImage.jpg';
-import { HashTageDark } from '../HashTage';
-import Bookmark from '../../../assets/Bookmark';
-
-import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
-import { dateFilter } from '../../../Utils/dateFilter';
-import { DetailPostDataType } from '../../../types/postData';
 
 const PostCard: React.FC<DetailPostDataType> = ({
   title,
@@ -28,7 +30,11 @@ const PostCard: React.FC<DetailPostDataType> = ({
   imagePath,
 }) => {
   const [hover, setHover] = useState(false);
-  const [marked, setMarked] = useState(false);
+  const [isMarked, setIsMarked] = useState(false);
+  const [cookie] = useCookies(['token']);
+  const { bookMarkHandler } = useSetBookMark(postId, cookie.token, () =>
+    setIsMarked(!isMarked),
+  );
   const removeMarkdownInContent = content
     .replace(/!\[.*\]/gi, '') // ![] 제거
     .replace(/\(.*\)/gi, '') // ( ) 제거
@@ -36,17 +42,14 @@ const PostCard: React.FC<DetailPostDataType> = ({
     .replace(/#/gi, '') // # 제거
     // .replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, ' ') // # 제거
     .replace(/-/gi, ''); // @ 제거
+
   return (
     <PostCardWrapper
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <BookmarkWrapper
-        onClick={() => {
-          setMarked(!marked);
-        }}
-      >
-        <Bookmark marked={marked} />
+      <BookmarkWrapper onClick={bookMarkHandler}>
+        <Bookmark marked={isMarked} />
       </BookmarkWrapper>
       <PostCardImageWrapper>
         <PostCardImage src={imagePath ?? MockPostImage} />

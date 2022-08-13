@@ -5,14 +5,20 @@ import {
   useParams,
   useSearchParams,
 } from 'react-router-dom';
-
-import { LayoutContainer } from '../../styles/layouts';
-import { CategoryPageInner, PageBarWrapper } from './styled';
+import { useGetPostsData } from '../../api/hooks/useGetPostsData';
 import BlogCardGridLayout from '../../components/common/BlogCardGridLayout';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import PageBar from '../../components/common/PageBar';
-import { useGetPostsData } from '../../api/hooks/useGetPostsData';
-import { NoPosts } from '../MyBlog/BlogHome/styled';
+
+import { LayoutContainer } from '../../styles/layouts';
+import { Notice } from '../MyBlog/BlogHome/styled';
+import {
+  CategoryMenuWrapper,
+  CategoryPageInner,
+  PageBarWrapper,
+  PostLayoutWrapper,
+  PostSectionWrapper,
+} from './styled';
 
 const Category = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -59,24 +65,32 @@ const Category = () => {
   return (
     <LayoutContainer>
       <CategoryPageInner>
-        <CategoryMenu type={category} onClick={categoryHandler} />
-        {postListData && (
-          <>
-            {postListData.empty ? (
-              <NoPosts>포스팅된 글이 없습니다</NoPosts>
-            ) : (
-              <BlogCardGridLayout PostData={postListData.content} />
+        <PostLayoutWrapper>
+          <CategoryMenuWrapper>
+            <CategoryMenu type={category} onClick={categoryHandler} />
+          </CategoryMenuWrapper>
+          <PostSectionWrapper>
+            {postListData && (
+              <>
+                {postListData.empty ? (
+                  <Notice>포스팅된 글이 없습니다</Notice>
+                ) : (
+                  <BlogCardGridLayout PostData={postListData.content} />
+                )}
+              </>
             )}
-          </>
+          </PostSectionWrapper>
+        </PostLayoutWrapper>
+        {postListData && !postListData.empty && (
+          <PageBarWrapper>
+            <PageBar
+              type={category}
+              page={page}
+              totalPage={postListData?.totalPages || 0}
+              onClick={pageHandler}
+            />
+          </PageBarWrapper>
         )}
-        <PageBarWrapper>
-          <PageBar
-            type={category}
-            page={page}
-            totalPage={postListData?.totalPages || 0}
-            onClick={pageHandler}
-          />
-        </PageBarWrapper>
       </CategoryPageInner>
     </LayoutContainer>
   );

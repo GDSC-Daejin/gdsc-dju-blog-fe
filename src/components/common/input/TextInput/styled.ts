@@ -1,7 +1,7 @@
 import { Field } from 'formik';
 import styled, { css } from 'styled-components';
 
-export const StyledInput = styled(Field)<{ disabled?: boolean }>`
+export const StyledInput = styled.input<{ disabled?: boolean }>`
   padding: 0 18px;
   margin: 2px 0;
   border: 0;
@@ -10,12 +10,13 @@ export const StyledInput = styled(Field)<{ disabled?: boolean }>`
   font-size: ${({ theme }) => theme.fontSize.body1};
   outline: none;
   flex-grow: 1;
-  background: none;
+  background: ${({ theme }) => theme.colors.background};
   font-weight: 400;
   color: ${({ theme }) => theme.colors.grey700};
+  transition: 0.3s;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.grey400};
-    font-weight: 300;
+    color: ${({ theme }) => theme.colors.grey500};
+    font-weight: 400;
   }
   ${({ disabled }) =>
     disabled &&
@@ -28,7 +29,7 @@ export const StyledInput = styled(Field)<{ disabled?: boolean }>`
 export const StyledInputWrapper = styled.div<{
   color?: string;
   disabled?: boolean;
-  error?: boolean;
+  error: boolean;
 }>`
   overflow: hidden;
   display: flex;
@@ -36,33 +37,36 @@ export const StyledInputWrapper = styled.div<{
   justify-content: center;
   margin: 1px auto 0;
   height: 48px;
-  background: #fff;
   border: solid 0;
   border-radius: 10px;
   box-sizing: border-box;
-  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
-  ${(error) =>
-    error &&
-    css`
-      box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
-    `}
-  transition: 0.3s;
-  &:hover {
-    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossBlue200};
+  .formInput {
     ${({ error }) =>
-      error &&
-      css`
-        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
-      `}
+      error
+        ? css`
+            box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
+          `
+        : css`
+            box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
+          `};
+  }
+
+  background: ${({ theme }) => theme.colors.background};
+
+  .formInput:hover {
+    ${({ error }) =>
+      error
+        ? css`
+            box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
+          `
+        : css`
+            box-shadow: inset 0 0 0 2px
+              ${({ theme }) => theme.colors.tossBlue200};
+          `}
   }
   .formInput:focus {
     box-sizing: border-box;
     box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossBlue500};
-    ${({ error }) =>
-      error &&
-      css`
-        box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
-      `}
   }
   ${({ disabled }) =>
     !disabled &&

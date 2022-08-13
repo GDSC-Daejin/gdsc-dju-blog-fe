@@ -10,7 +10,7 @@ export const StyledButton = styled.button<{
 }>`
   display: flex;
   align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors.grey300};
+  border: 1px solid ${({ theme }) => theme.colors.grey200};
   font-size: ${({ theme }) => theme.fontSize.body2};
   padding: 8px 30px;
   cursor: pointer;

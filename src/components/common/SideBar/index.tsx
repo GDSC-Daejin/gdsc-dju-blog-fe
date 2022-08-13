@@ -40,7 +40,7 @@ export const SideBar = () => {
       >
         <SideBarInner>
           <SideBarDesign>
-            {cookies.user ? (
+            {cookies.token && cookies.refresh_token ? (
               <SideBarLogin
                 userData={userData}
                 closeSideBar={() =>

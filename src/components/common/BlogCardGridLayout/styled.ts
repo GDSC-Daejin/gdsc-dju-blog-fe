@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const BlogCardGridLayoutStyle = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 248px);
-  justify-content: center;
-  align-items: center;
   grid-row-gap: 80px;
   grid-column-gap: 30px;
 `;

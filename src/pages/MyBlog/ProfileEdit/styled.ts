@@ -22,6 +22,9 @@ export const FormTitleWrapper = styled.div`
   margin-top: 60px;
   margin-bottom: 50px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 `;
 
 export const FormLabel = styled.label<{ essential?: boolean }>`
