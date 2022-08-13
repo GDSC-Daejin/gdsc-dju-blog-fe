@@ -1,8 +1,9 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useSetBookMark } from '../../../api/hooks/useSetBookMark';
+
 import Bookmark from '../../../assets/Bookmark';
 import MockPostImage from '../../../assets/mocks/MockPostImage.jpg';
+import { useSetBookMark } from '../../../hooks/useSetBookMark';
 import { DetailPostDataType } from '../../../types/postData';
 import { dateFilter } from '../../../Utils/dateFilter';
 

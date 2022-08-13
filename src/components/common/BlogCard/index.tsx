@@ -1,14 +1,13 @@
-import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { memo, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { useCookies } from 'react-cookie';
-import { useRecoilState } from 'recoil';
-import { alertState } from '../../../store/alert';
+import { useNavigate } from 'react-router';
+import Bookmark from '../../../assets/Bookmark';
+import { useSetBookMark } from '../../../hooks/useSetBookMark';
 
 import { DetailPostDataType } from '../../../types/postData';
 import { dateFilter } from '../../../Utils/dateFilter';
 import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
-import Bookmark from '../../../assets/Bookmark';
 import { HashTageLight } from '../HashTage';
 import {
   BlogCardAuthorImage,
@@ -25,10 +24,6 @@ import {
   BookMarkWrapper,
   PostText,
 } from './styled';
-import {
-  setBookMarkPostAPI,
-  useSetBookMark,
-} from '../../../api/hooks/useSetBookMark';
 
 const PostTextVariants = {
   initial: {

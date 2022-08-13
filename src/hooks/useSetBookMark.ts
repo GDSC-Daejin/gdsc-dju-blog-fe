@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { alertState } from '../../store/alert';
-import PostService from '../PostService';
+import PostService from '../api/PostService';
+import { alertState } from '../store/alert';
 
 export const useSetBookMark = (
   id: number | undefined,

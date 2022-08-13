@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { useSetBookMark } from '../../../api/hooks/useSetBookMark';
+
 import PostService from '../../../api/PostService';
 import Bookmark from '../../../assets/Bookmark';
 import PostEditIcon from '../../../assets/PostEditIcon';
 import PostTrashIcon from '../../../assets/PostTrashIcon';
+import { useSetBookMark } from '../../../hooks/useSetBookMark';
 import { alertState } from '../../../store/alert';
 import { modalState } from '../../../store/modal';
 import {
