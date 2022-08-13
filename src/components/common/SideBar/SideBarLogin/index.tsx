@@ -49,13 +49,17 @@ const SideBarLogin: React.FC<{
       {userData && (
         <>
           <ProfileImageWrapper>
-            <ProfileImage
-              image={userData.profileImageUrl}
-              position={userData.memberInfo.positionType}
-            />
+            {userData.profileImageUrl && (
+              <ProfileImage
+                image={userData.profileImageUrl}
+                position={userData.memberInfo.positionType}
+              />
+            )}
           </ProfileImageWrapper>
           <ProfileInformation>
-            <ProfileName>{userData.memberInfo.nickname}</ProfileName>
+            <ProfileName>
+              {userData.memberInfo.nickname ?? userData.username}
+            </ProfileName>
             <ProfileJobPosition>
               {userData.memberInfo.positionType}
             </ProfileJobPosition>

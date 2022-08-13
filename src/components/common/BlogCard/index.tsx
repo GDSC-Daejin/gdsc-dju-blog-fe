@@ -2,6 +2,8 @@ import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import React, { memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
+import { useRecoilState } from 'recoil';
+import { alertState } from '../../../store/alert';
 
 import { DetailPostDataType } from '../../../types/postData';
 import { dateFilter } from '../../../Utils/dateFilter';
@@ -23,7 +25,10 @@ import {
   BookMarkWrapper,
   PostText,
 } from './styled';
-import { setBookMarkPostAPI } from '../../../api/hooks/setBookMark';
+import {
+  setBookMarkPostAPI,
+  useSetBookMark,
+} from '../../../api/hooks/useSetBookMark';
 
 const PostTextVariants = {
   initial: {
@@ -54,21 +59,17 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData, isScrap }) => {
   const [IsHovered, setIsHovered] = useState(false);
   const [isMarked, setIsMarked] = useState(isScrap);
   const [cookie] = useCookies(['token']);
+  const { bookMarkHandler } = useSetBookMark(
+    postData.postId,
+    cookie.token,
+    () => setIsMarked(!isMarked),
+  );
+
   const navigate = useNavigate();
 
   const linkToPost = useCallback(() => {
     navigate(`/${postData.memberInfo.nickname}/${postData.postId}`);
   }, [postData]);
-
-  const setBookMarkScrap = async (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    if (cookie.token) {
-      const result = await setBookMarkPostAPI(postData.postId);
-      if (result.body.message === 'SUCCESS') setIsMarked(!isMarked);
-    } else {
-      alert('로그인이 필요한 서비스입니다.');
-    }
-  };
 
   const removeMarkdownInContent = postData.content
     .replace(/!\[.*\]/gi, '') // ![] 제거
@@ -81,7 +82,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData, isScrap }) => {
     <AnimateSharedLayout>
       <BlogCardInner onClick={linkToPost}>
         {/* 북마크 */}
-        <BookMarkWrapper onClick={setBookMarkScrap}>
+        <BookMarkWrapper onClick={(e) => bookMarkHandler(e)}>
           <Bookmark marked={isMarked} />
         </BookMarkWrapper>
         {/* 이미지 */}
@@ -101,7 +102,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData, isScrap }) => {
               ))}
           </BlogCardTagWrapper>
         )}
-        {/* 하단 Content */}
+        {/* 하단 PostHeader */}
         <BlogCardBottomBox
           isHovered={IsHovered}
           onMouseOver={() => setIsHovered(true)}

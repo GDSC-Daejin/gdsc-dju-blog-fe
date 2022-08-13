@@ -6,7 +6,10 @@ const colorList = {
   beginner: '#FF740F',
   common: '#FF740F',
 } as const;
-export const positionColor = (position: string) => {
+export const positionColor = (position: string | undefined) => {
+  if (!position) {
+    return '#000';
+  }
   const lowerCasePosition = position.toLowerCase();
   return colorList[lowerCasePosition as keyof typeof colorList];
 };

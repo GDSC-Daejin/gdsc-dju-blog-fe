@@ -106,6 +106,7 @@ export const PostIconWrapper = styled.div`
 export const BookmarkWrapper = styled.div`
   display: flex;
   margin-right: 26px;
+  cursor: pointer;
 `;
 export const PostTrashIconWrapper = styled.div`
   display: flex;

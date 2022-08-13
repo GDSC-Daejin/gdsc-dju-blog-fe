@@ -1,30 +1,32 @@
 import { ValidationMemberInfo } from '../../types/userDataType';
 
 export type FormElementsType<T extends string> = {
-  [key in T]: {
-    label?: string;
-    placeholder?: string;
-    isModifyBlock?: boolean;
-    isBlock?: boolean;
-    valueAsDate?: true;
-    required?: {
-      value: boolean;
-      message: string;
-    };
-    pattern?: {
-      value: RegExp;
-      message: string;
-    };
-    minLength?: {
-      value: number;
-      message: string;
-    };
+  [key in T]: FormElement;
+};
+export type FormElement = {
+  label?: string;
+  placeholder?: string;
+  isModifyBlock?: boolean;
+  isBlock?: boolean;
+  valueAsDate?: true;
+  required?: {
+    value: boolean;
+    message: string;
+  };
+  pattern?: {
+    value: RegExp;
+    message: string;
+  };
+  minLength?: {
+    value: number;
+    message: string;
   };
 };
 //<keyof IUserInfoDataType>
 export const formValidation: FormElementsType<keyof ValidationMemberInfo> = {
   generation: {
     label: '기수',
+    placeholder: '관리자 권한입니다.',
     isBlock: true,
     required: {
       value: true,
@@ -107,6 +109,7 @@ export const formValidation: FormElementsType<keyof ValidationMemberInfo> = {
   },
   positionType: {
     label: '포지션',
+    placeholder: '관리자 권한입니다.',
     isBlock: true,
     required: {
       value: true,
@@ -115,6 +118,7 @@ export const formValidation: FormElementsType<keyof ValidationMemberInfo> = {
   },
   gitEmail: {
     label: '깃허브 이메일',
+    placeholder: 'gdscdju@gmail.com',
     required: {
       value: true,
       message: '필수 입력 값이에요.',

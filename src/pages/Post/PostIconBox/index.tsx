@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import { useSetBookMark } from '../../../api/hooks/useSetBookMark';
 import PostService from '../../../api/PostService';
 import Bookmark from '../../../assets/Bookmark';
 import PostEditIcon from '../../../assets/PostEditIcon';
 import PostTrashIcon from '../../../assets/PostTrashIcon';
 import { alertState } from '../../../store/alert';
 import { modalState } from '../../../store/modal';
-import { DetailPostDataType } from '../../../types/postData';
-import { MemberInfo } from '../../../types/userDataType';
 import {
   BookmarkWrapper,
   PostEditIconWrapper,
@@ -17,14 +17,17 @@ import {
 } from '../styled';
 
 interface Props {
-  userInfoData: MemberInfo;
-  postData: DetailPostDataType;
-  postId: string;
+  isUser: boolean;
+  postId: number;
 }
-const PostIconBox: React.FC<Props> = ({ postData, userInfoData, postId }) => {
+const PostIconBox = ({ isUser, postId }: Props) => {
   const [modal, setModal] = useRecoilState(modalState);
   const [alert, setAlert] = useRecoilState(alertState);
-
+  const [cookie] = useCookies(['token']);
+  const [isMarked, setIsMarked] = useState(false);
+  const { bookMarkHandler } = useSetBookMark(postId, cookie.token, () =>
+    setIsMarked(!isMarked),
+  );
   const navigate = useNavigate();
   const deleteHandler = async () => {
     setModal({ ...modal, isOpen: false });
@@ -54,25 +57,23 @@ const PostIconBox: React.FC<Props> = ({ postData, userInfoData, postId }) => {
       onClick: deleteHandler,
     });
   };
-  const isUserEqual = userInfoData.nickname == postData.memberInfo.nickname;
+
   return (
     <PostIconWrapper>
-      <BookmarkWrapper>
-        <Bookmark marked={!isUserEqual} height={'25'} />
+      <BookmarkWrapper onClick={bookMarkHandler}>
+        <Bookmark marked={isMarked} height={'25'} />
       </BookmarkWrapper>
-      {isUserEqual && (
+      {isUser && (
         <>
           <PostEditIconWrapper
             onClick={() => {
               navigate(`/post/edit/${postId}`);
             }}
           >
-            <PostEditIcon marked={isUserEqual} height={'25'} />
+            <PostEditIcon marked={isUser} height={'25'} />
           </PostEditIconWrapper>
-          <PostTrashIconWrapper
-            onClick={isUserEqual ? handleRemove : undefined}
-          >
-            <PostTrashIcon marked={isUserEqual} height={'25'} />
+          <PostTrashIconWrapper onClick={isUser ? handleRemove : undefined}>
+            <PostTrashIcon marked={isUser} height={'25'} />
           </PostTrashIconWrapper>
         </>
       )}

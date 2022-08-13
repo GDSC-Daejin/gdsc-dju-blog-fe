@@ -1,13 +1,13 @@
 import React, { forwardRef, memo } from 'react';
-import { FieldError } from 'react-hook-form';
+import { FieldError, FieldErrorsImpl } from 'react-hook-form';
+import { FieldErrors } from 'react-hook-form/dist/types/errors';
 
 import { ErrorBox, StyledInput, StyledInputWrapper } from './styled';
 import { FormikErrors, FormikTouched } from 'formik';
 
 export interface Iprops {
   name?: string;
-  error?: FieldError | undefined;
-  touched?: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined;
+  error?: any;
   placeholder?: string;
   image?: string;
   file?: boolean;
@@ -17,10 +17,7 @@ export interface Iprops {
   disabled?: boolean;
 }
 const TextInput = forwardRef<HTMLInputElement, Iprops>(
-  (
-    { name, placeholder, onChange, type, disabled, error, touched, value },
-    ref,
-  ) => {
+  ({ name, placeholder, onChange, type, disabled, error, value }, ref) => {
     return (
       <>
         <StyledInputWrapper error={false} disabled={!disabled}>

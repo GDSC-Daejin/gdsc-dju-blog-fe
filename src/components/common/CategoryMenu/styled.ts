@@ -39,7 +39,6 @@ export const CategoryMenuWrapper = styled(motion.div)`
   flex-direction: row;
   width: 713px;
   justify-content: space-between;
-  margin-top: 100px;
 `;
 export const CategoryCircleWrapper = styled(motion.div)`
   position: absolute;

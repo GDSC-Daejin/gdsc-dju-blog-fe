@@ -16,7 +16,7 @@ export const StyledInput = styled.input<{ disabled?: boolean }>`
   transition: 0.3s;
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey500};
-    font-weight: 300;
+    font-weight: 400;
   }
   ${({ disabled }) =>
     disabled &&

@@ -1,20 +1,38 @@
+import { Giscus } from '@giscus/react';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
+import { Viewer } from '@toast-ui/react-editor';
+import Prism from 'prismjs';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Giscus } from '@giscus/react';
+import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
 
 import { LayoutContainer, PostContainerInner } from '../../styles/layouts';
-import PostContent from './Content';
-import { ContentWrapper, GiscusWrapper } from './styled';
+import PostHeader from './PostHeader';
+import { ContentBox, ContentWrapper, GiscusWrapper } from './styled';
 
 const Post = () => {
   const { postId } = useParams<'postId'>();
+  const { postData } = useGetDetailPost(postId);
   const theme = localStorage.getItem('theme') || 'light';
+
   return (
     <LayoutContainer>
       <PostContainerInner>
-        <ContentWrapper>
-          {postId && <PostContent postId={postId} />}
-        </ContentWrapper>
+        {postId && postData && (
+          <ContentWrapper>
+            <PostHeader postId={Number(postId)} postData={postData} />
+            <ContentBox>
+              <Viewer
+                initialValue={postData.content}
+                plugins={[
+                  [codeSyntaxHighlight, { highlighter: Prism }],
+                  tableMergedCell,
+                ]}
+              />
+            </ContentBox>
+          </ContentWrapper>
+        )}
         <GiscusWrapper>
           <Giscus
             repo="GDSC-Daejin/gdsc-dju-blog-fe"

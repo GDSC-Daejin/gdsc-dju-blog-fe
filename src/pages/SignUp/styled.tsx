@@ -11,6 +11,7 @@ export const SignUpFormTitle = styled.h4`
   font-style: normal;
   font-weight: 700;
   font-size: ${({ theme }) => theme.fontSize.h4};
+  color: ${({ theme }) => theme.colors.grey900};
 `;
 
 export const SignUpForm = styled.form`

@@ -1,25 +1,23 @@
-import React, { Suspense, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { useGetMyData } from '../../api/hooks/useGetMyData';
+import { useGetMyPostsTempData } from '../../api/hooks/useGetMyPostsTempData';
+import { GDSCButton } from '../../components/common/Button';
+import CategoryMenu from '../../components/common/CategoryMenu';
+import PageBar from '../../components/common/PageBar';
+import PostCard from '../../components/common/PostCard';
+import { POST_KEY, postState } from '../../store/postEdit';
 import { ContainerInner, LayoutContainer } from '../../styles/layouts';
 import {
-  NoPosts,
+  Notice,
   PageBarSection,
   PostCardWrapper,
   PostSectionWrapper,
   TopMenuWrapper,
 } from '../MyBlog/BlogHome/styled';
 import { ButtonWrapper, PostSavesTitle } from '../PostSaves/styled';
-import CategoryMenu from '../../components/common/CategoryMenu';
-import { GDSCButton } from '../../components/common/Button';
-import PostCard from '../../components/common/PostCard';
-import { createSearchParams, useSearchParams } from 'react-router-dom';
-import PageBar from '../../components/common/PageBar';
-import { useGetMyData } from '../../api/hooks/useGetMyData';
-import { useGetMyPostsTempData } from '../../api/hooks/useGetMyPostsTempData';
-import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
-import { POST_KEY, postState } from '../../store/postEdit';
-import { useRecoilState } from 'recoil';
 
 const PostSaves = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -83,7 +81,7 @@ const PostSaves = () => {
             </ButtonWrapper>
           </TopMenuWrapper>
           {userPostTempData && (
-            <PostSectionWrapper>
+            <PostSectionWrapper isNull={userPostTempData.empty}>
               {!userPostTempData.empty ? (
                 userPostTempData.content.map((data) => (
                   <PostCardWrapper
@@ -97,7 +95,7 @@ const PostSaves = () => {
                   </PostCardWrapper>
                 ))
               ) : (
-                <NoPosts>작성된 글이 없습니다.</NoPosts>
+                <Notice>작성된 글이 없습니다.</Notice>
               )}
             </PostSectionWrapper>
           )}
