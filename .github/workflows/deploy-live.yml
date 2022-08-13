@@ -22,7 +22,8 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLOG_PROJECT }}'
           channelId: live
-          projectId: gdsc-dju-blog
+          projectId: gdsc-dju
+          target: gdsc-dju-devlog
       - name: Discord Message Notify
         uses: appleboy/discord-action@0.0.3
         with:
