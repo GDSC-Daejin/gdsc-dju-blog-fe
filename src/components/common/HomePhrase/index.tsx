@@ -1,7 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { homePhraseData } from '../../../api/Mocks/homePhraseData';
+import {
+  HomePhraseData,
+  homePhraseData,
+} from '../../../api/Mocks/homePhraseData';
 
 const From = styled.div`
   font-size: ${({ theme }) => theme.fontSize.h7};
@@ -20,7 +23,7 @@ const By = styled.div`
   color: ${({ theme }) => theme.colors.grey900};
 `;
 const HomePhrase: React.FC = () => {
-  const [phrase, setPhrase] = useState(homePhraseData[0]);
+  const [phrase, setPhrase] = useState<HomePhraseData>(homePhraseData[0]);
   const phrases = phrase.phrase.split('\n');
   const setPhraseData = useCallback(() => {
     let index = 0;
@@ -42,7 +45,7 @@ const HomePhrase: React.FC = () => {
         exit={{ opacity: 0, y: -30, position: 'absolute' }}
         transition={{ duration: 0.6 }}
       >
-        <From>From {phrase.from}</From>
+        {phrase.from && <From>From {phrase.from}</From>}
         <Phrase>
           {phrases.map((text, id) => (
             <React.Fragment key={id}>
@@ -51,7 +54,7 @@ const HomePhrase: React.FC = () => {
             </React.Fragment>
           ))}
         </Phrase>
-        <By>By {phrase.by}</By>
+        {phrase.by && <By>By {phrase.by}</By>}
       </motion.div>
     </AnimatePresence>
   );

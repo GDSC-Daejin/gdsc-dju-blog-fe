@@ -1,28 +1,28 @@
 import styled from 'styled-components';
 
-export const SearchResultTitle = styled.div`
+export const SearchResultTitleWrapper = styled.div`
   width: 1200px;
   color: ${(props) => props.theme.colors.grey900};
-  .searchResultTitle {
-    display: flex;
-    align-items: center;
-    align-self: flex-start;
-    padding: 50px 0px;
-    h2 {
-      font-size: ${({ theme }) => theme.fontSize.body1};
-    }
-    h3 {
-      font-size: ${({ theme }) => theme.fontSize.body3};
-    }
-  }
-  .searchResultContent {
-    padding: 20px 0px;
-    span {
-      font-size: ${({ theme }) => theme.fontSize.body3};
-      font-weight: 500;
-      line-height: 1.625rem;
-    }
-  }
+`;
+export const SearchResultTitle = styled.h1`
+  display: flex;
+  align-self: flex-end;
+  padding: 50px 0px;
+  font-size: ${({ theme }) => theme.fontSize.h5};
+  color: ${(props) => props.theme.colors.grey900};
+`;
+export const SearchResultSubTitle = styled.h3`
+  display: flex;
+  align-self: flex-end;
+  padding: 0 4px;
+  font-size: ${({ theme }) => theme.fontSize.h6};
+  color: ${(props) => props.theme.colors.grey900};
+`;
+export const SearchResultContent = styled.p`
+  padding: 20px 0;
+  font-size: ${({ theme }) => theme.fontSize.h7};
+  line-height: 1.625rem;
+  color: ${(props) => props.theme.colors.grey600};
 `;
 
 export const PageBarWrapper = styled.div`

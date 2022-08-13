@@ -74,19 +74,24 @@ export const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-export const PostSectionWrapper = styled.section`
+export const PostSectionWrapper = styled.section<{ isNull: boolean }>`
   margin-bottom: 110px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
+  min-height: 600px;
+  ${({ isNull }) =>
+    isNull &&
+    css`
+      justify-content: center;
+    `}
 `;
-export const NoPosts = styled.div`
-  height: 600px;
-  width: 100%;
+export const Notice = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${({ theme }) => theme.fontSize.h5};
+  font-size: ${({ theme }) => theme.fontSize.h7};
   color: ${({ theme }) => theme.colors.grey400};
 `;
 export const PostCardWrapper = styled.div`

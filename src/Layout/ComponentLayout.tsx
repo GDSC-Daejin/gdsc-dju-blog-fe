@@ -1,7 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { useGetMyToken } from '../api/hooks/useGetMyData';
 import Alert from '../components/common/Alert';
 import GoogleLoader from '../components/common/GoogleLoader';
 import Modal from '../components/common/modal';
@@ -15,8 +14,6 @@ const ComponentLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [loader] = useRecoilState(loaderState);
-
-  useGetMyToken();
 
   return (
     <div>

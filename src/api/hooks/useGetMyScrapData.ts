@@ -12,7 +12,7 @@ export function useGetMyScrapData() {
   const token = Cookies.get('token');
 
   const { data: scrapData } = useQuery<RowScrapDataType>(
-    ['scrap'],
+    [token],
     () => getMyScrapData(),
     {
       enabled: !!token,

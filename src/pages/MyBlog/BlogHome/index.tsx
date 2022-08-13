@@ -6,7 +6,6 @@ import { useGetMyPostsNotTempData } from '../../../api/hooks/useGetMyPostsNotTem
 import Setting from '../../../assets/Setting';
 import { GDSCButton } from '../../../components/common/Button';
 import CategoryMenu from '../../../components/common/CategoryMenu';
-import { HashTageDark } from '../../../components/common/HashTage';
 import { HashTageWrapper } from '../../../components/common/HashTage/styled';
 import PageBar from '../../../components/common/PageBar';
 import PostCard from '../../../components/common/PostCard';
@@ -21,7 +20,7 @@ import {
   BlogNameWrapper,
   ButtonWrapper,
   IntroduceText,
-  NoPosts,
+  Notice,
   PageBarSection,
   PostCardWrapper,
   PostSectionWrapper,
@@ -84,6 +83,8 @@ const BlogHome = () => {
         page: page.toString(),
       })}`,
     });
+  const postBlock = userData?.role === 'GUEST';
+  const name = userData?.memberInfo.nickname ?? userData?.username;
   return (
     <>
       <LayoutContainer>
@@ -100,9 +101,9 @@ const BlogHome = () => {
                   </Suspense>
                 </ProfileImageWrapper>
                 <ProfileDetailWrapper>
-                  <Role>{userData.role}</Role>
+                  {userData.role && <Role>{userData.role}</Role>}
                   <BlogNameWrapper>
-                    <BlogName>{userInfoData.nickname}</BlogName>
+                    <BlogName>{name}</BlogName>
                     <BlogNamePosition
                       color={positionColor(userInfoData.positionType)}
                     >
@@ -111,15 +112,14 @@ const BlogHome = () => {
                     <SettingIconWrapper
                       onClick={() =>
                         navigate({
-                          pathname: `/${userInfoData.nickname}/edit`,
+                          pathname: `/${name}/edit`,
                         })
                       }
                     >
                       <Setting />
                     </SettingIconWrapper>
                   </BlogNameWrapper>
-                  <IntroduceText>{userInfoData.introduce}</IntroduceText>
-
+                  <IntroduceText>{userInfoData.introduce ?? ''}</IntroduceText>
                   <HashTageSection>
                     {userInfoData.hashTag ? (
                       hashTageSpreader(userInfoData.hashTag).map((tag, id) => (
@@ -128,7 +128,7 @@ const BlogHome = () => {
                         </HashTageWrapper>
                       ))
                     ) : (
-                      <div>해시태그가 없어요.</div>
+                      <Notice>해시태그가 없어요.</Notice>
                     )}
                   </HashTageSection>
                 </ProfileDetailWrapper>
@@ -141,10 +141,11 @@ const BlogHome = () => {
                 <ButtonWrapper>
                   <GDSCButton
                     text={'스크랩'}
-                    onClick={() => navigate(`/${userInfoData.nickname}/likes`)}
+                    onClick={() => navigate(`/${name}/likes`)}
                   />
                   <GDSCButton
                     text={'글쓰기'}
+                    disable={postBlock}
                     onClick={() => navigate('/post/write')}
                   />
                 </ButtonWrapper>
@@ -152,7 +153,7 @@ const BlogHome = () => {
             </>
           )}
           {userPostNotTempData && (
-            <PostSectionWrapper>
+            <PostSectionWrapper isNull={userPostNotTempData.empty}>
               {!userPostNotTempData.empty ? (
                 userPostNotTempData.content.map((data) => (
                   <PostCardWrapper
@@ -165,7 +166,7 @@ const BlogHome = () => {
                   </PostCardWrapper>
                 ))
               ) : (
-                <NoPosts>작성된 글이 없습니다.</NoPosts>
+                <Notice>작성된 글이 없습니다.</Notice>
               )}
             </PostSectionWrapper>
           )}

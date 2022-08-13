@@ -29,7 +29,7 @@ export const AlertText = styled.div`
 `;
 export const AlertInner = styled(motion.div)`
   position: fixed;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.grey300};
   box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
