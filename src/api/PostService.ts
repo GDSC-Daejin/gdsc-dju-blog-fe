@@ -1,10 +1,10 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import {
   PostPostDataType,
   RowDetailPostListType,
   RowPostDataType,
 } from '../types/postData';
-import Cookies from 'js-cookie';
 import { Api } from './index';
 
 class PostService extends Api {

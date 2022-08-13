@@ -123,16 +123,21 @@ const BlogCard: React.FC<BlogCardProps> = ({ postData, isScrap }) => {
             )}
           </AnimatePresence>
           <BlogCardSubTextWrapper>
-            <BlogCardAuthorWrapper>
-              <BlogCardAuthorImage
-                alt="AuthorImage"
-                // src={postData.memberInfo.member.profileImageUrl}
-              />
-              <BlogCardSubText subText={true}>by</BlogCardSubText>
-              <BlogCardSubText bold={true}>
-                {postData.memberInfo.nickname}
-              </BlogCardSubText>
-            </BlogCardAuthorWrapper>
+            {postData.memberInfo &&
+              postData.memberInfo.nickname &&
+              postData.memberInfo.profileImageUrl && (
+                <BlogCardAuthorWrapper>
+                  <BlogCardAuthorImage
+                    alt="AuthorImage"
+                    src={postData.memberInfo.profileImageUrl}
+                  />
+
+                  <BlogCardSubText subText={true}>by</BlogCardSubText>
+                  <BlogCardSubText bold={true}>
+                    {postData.memberInfo.nickname}
+                  </BlogCardSubText>
+                </BlogCardAuthorWrapper>
+              )}
             <BlogCardSubText subText={true}>
               {dateFilter(postData.category.uploadDate)}
             </BlogCardSubText>

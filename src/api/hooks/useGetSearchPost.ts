@@ -7,13 +7,12 @@ async function getSearchPostsData(params: string) {
   return res.data.body.data;
 }
 export function useGetSearchPosts(postContent: string) {
-  const { isLoading: postListDataLoading, data: postListData } =
-    useQuery<SearchPostDataType>(
-      [`post/search/${postContent}`],
-      () => getSearchPostsData(postContent),
-      {
-        cacheTime: 3 * 60 * 1000,
-      },
-    );
-  return { postListDataLoading, postListData };
+  const { data: postListData } = useQuery<SearchPostDataType>(
+    [`post/search/${postContent}`],
+    () => getSearchPostsData(postContent),
+    {
+      cacheTime: 3 * 60 * 1000,
+    },
+  );
+  return { postListData };
 }
