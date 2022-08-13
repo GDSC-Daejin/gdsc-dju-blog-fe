@@ -1,13 +1,17 @@
 import React, { memo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
+import { useRecoilState } from 'recoil';
 import { useGetMyData } from '../../../api/hooks/useGetMyData';
 import UserService from '../../../api/UserService';
 import { GDSCButton } from '../../../components/common/Button';
 import TextInput from '../../../components/common/input/TextInput';
 import ProfileEditImage from '../../../components/common/ProfileEditImage';
 import { formValidation } from '../../../components/Validation/profileEdit';
+import { alertState } from '../../../store/alert';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
 import { IUserDataType, MemberInfo } from '../../../types/userDataType';
+import { dateFilter } from '../../../Utils/dateFilter';
 
 import {
   FormButtonWrapper,
@@ -34,11 +38,19 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
   const { register, handleSubmit, reset, formState } = useForm<MemberInfo>({
     mode: 'onChange',
   });
-
+  const [alert, setAlert] = useRecoilState(alertState);
+  const navigate = useNavigate();
   const { errors } = formState;
 
   const onSubmit = async (values: MemberInfo) => {
     await UserService.updateMyData(values);
+    setAlert({
+      ...alert,
+      alertStatus: 'success',
+      alertHandle: true,
+      alertMessage: '정보 수정이 완료되었습니다.',
+    });
+    await navigate(-1);
   };
   const formElements = Object.keys(formValidation) as Array<
     keyof typeof formValidation
@@ -57,9 +69,10 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
       githubUrl: userData.memberInfo.githubUrl,
       blogUrl: userData.memberInfo.blogUrl,
       etcUrl: userData.memberInfo.etcUrl,
-      birthday: userData.memberInfo.birthday,
+      birthday: dateFilter(userData.memberInfo.birthday),
     });
   }, [userData]);
+
   return (
     <FormWrapper>
       <FormInner>
@@ -91,7 +104,7 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
           <GDSCButton
             text={'저장하기'}
             color={'googleBlue'}
-            onClick={() => handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmit)}
           />
         </FormButtonWrapper>
       </FormInner>

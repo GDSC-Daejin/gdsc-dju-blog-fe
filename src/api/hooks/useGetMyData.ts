@@ -21,7 +21,6 @@ export const useGetMyData = () => {
     {
       refetchInterval: 30 * 60 * 1000,
       retry: 2,
-      refetchOnWindowFocus: true,
       enabled: isEnabled,
       onError: () => {
         getMyToken(cookies.refresh_token, cookies.token).then((token) =>

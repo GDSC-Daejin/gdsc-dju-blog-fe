@@ -6,6 +6,7 @@ export type FormElementsType<T extends string> = {
     placeholder?: string;
     isModifyBlock?: boolean;
     isBlock?: boolean;
+    valueAsDate?: true;
     required?: {
       value: boolean;
       message: string;
@@ -69,14 +70,15 @@ export const formValidation: FormElementsType<keyof ValidationMemberInfo> = {
   },
   birthday: {
     label: '생일',
-    placeholder: '001234',
+    placeholder: '2000.01.01',
+    valueAsDate: true,
     required: {
       value: true,
       message: '필수 입력 값이에요.',
     },
     pattern: {
-      value: /^[0-9]{6}$/,
-      message: '날짜 6자리를 모두 입력해주세요.',
+      value: /^[0-9]{4}.^[0-9]{1,2}.^[0-9]{1,2}$/,
+      message: '날짜 포멧(YYYY.MM.DD)을 지켜 입력해주세요.',
     },
   },
   phoneNumber: {

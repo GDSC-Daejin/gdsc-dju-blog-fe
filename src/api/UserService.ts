@@ -1,9 +1,5 @@
 import axios from 'axios';
-import {
-  MemberInfo,
-  RowMemberDataType,
-  ValidationMemberInfo,
-} from '../types/userDataType';
+import { MemberInfo, RowMemberDataType } from '../types/userDataType';
 
 import { Api } from './index';
 

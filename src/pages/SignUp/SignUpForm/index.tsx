@@ -32,17 +32,6 @@ const SignUpForm = () => {
 
   const formData: IFormStructure[] = [
     {
-      refName: 'name',
-      type: 'text',
-      placeholder: '김구글',
-      title: '이름(실명)',
-      condition: {
-        required: '필수 입력란입니다',
-      },
-      register: register,
-      errors: errors.name,
-    },
-    {
       refName: 'nickname',
       type: 'text',
       placeholder: 'GDSC DJU 닉네임을 입력하세요.',
