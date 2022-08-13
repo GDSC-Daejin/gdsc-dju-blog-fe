@@ -7,6 +7,7 @@ import UserService from '../../../api/UserService';
 import { GDSCButton } from '../../../components/common/Button';
 import TextInput from '../../../components/common/input/TextInput';
 import ProfileEditImage from '../../../components/common/ProfileEditImage';
+import ProfileImage from '../../../components/common/ProfileImage';
 import { formValidation } from '../../../components/Validation/profileEdit';
 import { alertState } from '../../../store/alert';
 import { ContainerInner, LayoutContainer } from '../../../styles/layouts';
@@ -78,8 +79,12 @@ const ProfileEditForm = ({ userData }: { userData: IUserDataType }) => {
       <FormInner>
         <FormTitleWrapper>
           <FormTitle>개인정보수정</FormTitle>
+          <ProfileImage
+            image={userData.profileImageUrl}
+            position={userData.memberInfo.positionType}
+          />
         </FormTitleWrapper>
-        <ProfileEditImage image={userData?.profileImageUrl} />
+
         {formElements.map((element) => {
           const elementName = formValidation[element];
           return (

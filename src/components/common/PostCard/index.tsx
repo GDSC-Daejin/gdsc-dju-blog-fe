@@ -1,4 +1,11 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useState } from 'react';
+import Bookmark from '../../../assets/Bookmark';
+import MockPostImage from '../../../assets/mocks/MockPostImage.jpg';
+import { DetailPostDataType } from '../../../types/postData';
+import { dateFilter } from '../../../Utils/dateFilter';
+
+import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
+import { HashTageDark } from '../HashTage';
 import {
   BookmarkWrapper,
   PostCardContentWrapper,
@@ -10,13 +17,6 @@ import {
   PostHashTageSection,
   PostTitle,
 } from './styled';
-import MockPostImage from '../../../assets/mocks/MockPostImage.jpg';
-import { HashTageDark } from '../HashTage';
-import Bookmark from '../../../assets/Bookmark';
-
-import { hashTageSpreader } from '../../../Utils/hashTageSpreader';
-import { dateFilter } from '../../../Utils/dateFilter';
-import { DetailPostDataType } from '../../../types/postData';
 
 const PostCard: React.FC<DetailPostDataType> = ({
   title,

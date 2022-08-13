@@ -71,11 +71,21 @@ class PostService extends Api {
   };
   updateMyScrapData = (postId: number) => {
     const token = Cookies.get('token');
-    return axios.post(`${this.BLOG_API}/api/member/v1/scrap/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    return axios.post(
+      `${this.BLOG_API}/api/member/v1/scrap/${postId}`,
+      {
+        authorities: [
+          {
+            authority: `Bearer ${token}`,
+          },
+        ],
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
   };
   getSearchPosts = (postContent: string) => {
     return axios.get(`${this.BLOG_API}/api/v1/post/search/${postContent}`);

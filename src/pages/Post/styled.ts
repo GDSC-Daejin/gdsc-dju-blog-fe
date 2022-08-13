@@ -708,6 +708,9 @@ export const ContentBox = styled.article`
   .toastui-editor-contents blockquote > :first-child {
     margin-top: 0;
   }
+  .toastui-editor-contents ul > li::before {
+    margin-top: 9px;
+  }
 
   .toastui-editor-contents blockquote > :last-child {
     margin-bottom: 0;

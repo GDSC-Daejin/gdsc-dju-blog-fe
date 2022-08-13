@@ -10,11 +10,12 @@ export const StyledInput = styled.input<{ disabled?: boolean }>`
   font-size: ${({ theme }) => theme.fontSize.body1};
   outline: none;
   flex-grow: 1;
-  background: none;
+  background: ${({ theme }) => theme.colors.background};
   font-weight: 400;
   color: ${({ theme }) => theme.colors.grey700};
+  transition: 0.3s;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.grey400};
+    color: ${({ theme }) => theme.colors.grey500};
     font-weight: 300;
   }
   ${({ disabled }) =>
@@ -36,20 +37,23 @@ export const StyledInputWrapper = styled.div<{
   justify-content: center;
   margin: 1px auto 0;
   height: 48px;
-  background: #fff;
   border: solid 0;
   border-radius: 10px;
   box-sizing: border-box;
-  ${({ error }) =>
-    error
-      ? css`
-          box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
-        `
-      : css`
-          box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
-        `};
-  transition: 0.3s;
-  &:hover {
+  .formInput {
+    ${({ error }) =>
+      error
+        ? css`
+            box-shadow: inset 0 0 0 2px ${({ theme }) => theme.colors.tossRed};
+          `
+        : css`
+            box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.grey300};
+          `};
+  }
+
+  background: ${({ theme }) => theme.colors.background};
+
+  .formInput:hover {
     ${({ error }) =>
       error
         ? css`

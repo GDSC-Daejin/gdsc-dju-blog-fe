@@ -16,10 +16,9 @@ export interface DetailPostDataType {
 }
 
 export interface AuthorProps {
-  member: {
-    profileImageUrl: string;
-  };
   nickname: string;
+  profileImageUrl: string;
+  role: string;
 }
 
 export interface RowPostDataType {
