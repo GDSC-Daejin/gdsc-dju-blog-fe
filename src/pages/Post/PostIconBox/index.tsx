@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -7,6 +7,7 @@ import PostService from '../../../api/PostService';
 import Bookmark from '../../../assets/Bookmark';
 import PostEditIcon from '../../../assets/PostEditIcon';
 import PostTrashIcon from '../../../assets/PostTrashIcon';
+import { useGetScrap } from '../../../hooks/useGetScrap';
 import { useSetBookMark } from '../../../hooks/useSetBookMark';
 import { alertState } from '../../../store/alert';
 import { modalState } from '../../../store/modal';
@@ -25,10 +26,12 @@ const PostIconBox = ({ isUser, postId }: Props) => {
   const [modal, setModal] = useRecoilState(modalState);
   const [alert, setAlert] = useRecoilState(alertState);
   const [cookie] = useCookies(['token']);
+  const { isScrap } = useGetScrap(postId);
   const [isMarked, setIsMarked] = useState(false);
   const { bookMarkHandler } = useSetBookMark(postId, cookie.token, (check) =>
     setIsMarked(check),
   );
+
   const navigate = useNavigate();
   const deleteHandler = async () => {
     setModal({ ...modal, isOpen: false });
@@ -58,6 +61,9 @@ const PostIconBox = ({ isUser, postId }: Props) => {
       onClick: deleteHandler,
     });
   };
+  useEffect(() => {
+    setIsMarked(isScrap);
+  }, [isScrap]);
 
   return (
     <PostIconWrapper>

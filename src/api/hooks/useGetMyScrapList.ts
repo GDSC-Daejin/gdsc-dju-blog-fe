@@ -4,7 +4,7 @@ import PostService from '../PostService';
 
 async function getMyScrapList() {
   const res = await PostService.getMyScrapList();
-  return res.data;
+  return res.data.body.data;
 }
 export function useGetMyScrapList() {
   const token = Cookies.get('token');

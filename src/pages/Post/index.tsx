@@ -6,6 +6,7 @@ import Prism from 'prismjs';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetDetailPost } from '../../api/hooks/useGetDetailPost';
+import { useGetScrap } from '../../hooks/useGetScrap';
 
 import { LayoutContainer, PostContainerInner } from '../../styles/layouts';
 import PostHeader from './PostHeader';

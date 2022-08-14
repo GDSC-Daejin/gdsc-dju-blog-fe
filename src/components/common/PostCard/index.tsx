@@ -21,7 +21,11 @@ import {
   PostTitle,
 } from './styled';
 
-const PostCard: React.FC<DetailPostDataType> = ({
+interface Props extends DetailPostDataType {
+  isScrap: boolean;
+}
+
+const PostCard: React.FC<Props> = ({
   title,
   category,
   content,
@@ -29,9 +33,10 @@ const PostCard: React.FC<DetailPostDataType> = ({
   postHashTags,
   memberInfo,
   imagePath,
+  isScrap,
 }) => {
   const [hover, setHover] = useState(false);
-  const [isMarked, setIsMarked] = useState(false);
+  const [isMarked, setIsMarked] = useState(isScrap);
   const [cookie] = useCookies(['token']);
   const { bookMarkHandler } = useSetBookMark(postId, cookie.token, () =>
     setIsMarked(!isMarked),

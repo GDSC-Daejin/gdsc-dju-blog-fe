@@ -4,6 +4,7 @@ import {
   PostPostDataType,
   RowDetailPostListType,
   RowPostDataType,
+  RowScrapList,
 } from '../types/postData';
 import { Api } from './index';
 
@@ -67,7 +68,10 @@ class PostService extends Api {
     );
   };
   getMyScrapList = () => {
-    return axios.get(`${this.BLOG_API}/api/guest/v1/myScrap/list`, this.Header);
+    return axios.get<RowScrapList>(
+      `${this.BLOG_API}/api/guest/v1/myScrap/list`,
+      this.Header,
+    );
   };
   getMyScrapData = () => {
     return axios.get(`${this.BLOG_API}/api/guest/v1/myScrap`, this.Header);

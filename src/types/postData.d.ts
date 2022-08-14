@@ -98,6 +98,13 @@ interface ScrapDataType {
   post: ScrapPostDetailType[];
 }
 
+export interface RowScrapList {
+  body: {
+    data: ScrapList;
+  };
+}
+export type ScrapList = number[];
+
 export interface ScrapPostDetailType {
   postId: number;
   tmpStore: false;

@@ -28,7 +28,7 @@ function Home() {
   const [category, setCategory] = useState('all');
   const [homeWidth, setHomeWidth] = useState(0);
   const { postListData } = useGetPostsData(category, 0, 11);
-
+  const { scrapList } = useGetMyScrapList();
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsDrag(true);
@@ -88,7 +88,10 @@ function Home() {
                   key={postData.postId}
                   homeWidth={`${homeWidth}px`}
                 >
-                  <BlogCard postData={postData} isScrap={false} />
+                  <BlogCard
+                    postData={postData}
+                    isScrap={!!scrapList?.find((id) => id == postData.postId)}
+                  />
                 </BlogCardWrapper>
               );
             })}

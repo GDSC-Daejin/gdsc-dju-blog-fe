@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
 import { useGetMyData } from '../../../api/hooks/useGetMyData';
 import { useGetMyPostsNotTempData } from '../../../api/hooks/useGetMyPostsNotTempData';
+import { useGetMyScrapList } from '../../../api/hooks/useGetMyScrapList';
 import Setting from '../../../assets/Setting';
 import { GDSCButton } from '../../../components/common/Button';
 import CategoryMenu from '../../../components/common/CategoryMenu';
@@ -48,6 +49,7 @@ const BlogHome = () => {
     page - 1,
     6,
   );
+  const { scrapList } = useGetMyScrapList();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -162,7 +164,10 @@ const BlogHome = () => {
                       navigate(`/${data.memberInfo.nickname}/${data.postId}`)
                     }
                   >
-                    <PostCard {...data} />
+                    <PostCard
+                      {...data}
+                      isScrap={!!scrapList?.find((id) => id == data.postId)}
+                    />
                   </PostCardWrapper>
                 ))
               ) : (
