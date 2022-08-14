@@ -66,6 +66,9 @@ class PostService extends Api {
       this.Header,
     );
   };
+  getMyScrapList = () => {
+    return axios.get(`${this.BLOG_API}/api/guest/v1/myScrap/list`, this.Header);
+  };
   getMyScrapData = () => {
     return axios.get(`${this.BLOG_API}/api/guest/v1/myScrap`, this.Header);
   };
