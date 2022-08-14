@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
-import { getUserData, useGetMyData } from '../../api/hooks/useGetMyData';
+import { getUserData } from '../../api/hooks/useGetMyData';
 import TokenService from '../../api/TokenService';
-import UserService from '../../api/UserService';
 import { IUserDataType } from '../../types/userDataType';
 
 type SelectedUserType = Pick<
@@ -23,7 +22,6 @@ export default function OauthRedirectPage() {
       path: '/',
     });
   };
-  console.log(cookies);
 
   useEffect(() => {
     (async function () {
@@ -41,13 +39,9 @@ export default function OauthRedirectPage() {
         );
         if (userData) {
           if (userData.role.toUpperCase() === 'GUEST'.toUpperCase()) {
-            import.meta.env.MODE === 'development'
-              ? (window.location.href = 'http://localhost:3000/signup')
-              : (window.location.href = 'https://gdsc-dju-blog.web.app/signup');
+            window.location.href = `${location.origin}/signup`;
           } else {
-            import.meta.env.MODE === 'development'
-              ? (window.location.href = 'http://localhost:3000/')
-              : (window.location.href = 'https://gdsc-dju-blog.web.app/');
+            window.location.href = `${location.origin}`;
           }
         }
       }
