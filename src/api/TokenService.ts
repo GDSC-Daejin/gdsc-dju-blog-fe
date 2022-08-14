@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { RefreshResponse } from '../types/token';
 import { Api } from './index';
 
 class TokenService extends Api {
@@ -7,7 +8,7 @@ class TokenService extends Api {
     return `${this.ACCOUNT_API}/oauth2/authorization/google?redirect_uri=${OAUTH2_REDIRECT_URI}`;
   }
   getRefresh = (refreshToken: string, token: string) => {
-    return axios.get(`${this.API}/refresh`, {
+    return axios.get<RefreshResponse>(`${this.API}/refresh`, {
       headers: {
         Authorization: `Bearer ${token}`,
         RefreshToken: `Bearer ${refreshToken}`,

@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie';
 import { useQuery } from 'react-query';
 import TokenService from '../TokenService';
@@ -9,6 +10,10 @@ export const getUserData = async (token: string) => {
 };
 export const getMyToken = async (refreshToken: string, token: string) => {
   const response = await TokenService.getRefresh(refreshToken, token);
+  if (response.data.header.code == 500) {
+    Cookies.remove('token');
+    Cookies.remove('refresh_token');
+  }
   return response.data.body.data.token;
 };
 
