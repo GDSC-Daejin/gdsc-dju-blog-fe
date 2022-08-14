@@ -19,7 +19,7 @@ const SearchResult = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { postContent } = useParams();
   const { postListData } = useGetSearchPosts(postContent!);
-  const page = parseInt(searchParams.get('page') ?? '0');
+  const page = searchParams.get('page');
   const handleClick = (page: number) => {
     setSearchParams(`page=${page}`);
   };
@@ -44,11 +44,11 @@ const SearchResult = () => {
             <BlogCardGridLayoutWrapper>
               {!postListData.empty ? (
                 <>
-                  <BlogCardGridLayout PostData={postListData.content} />
+                  <BlogCardGridLayout postData={postListData.content} />
                   <PageBarWrapper>
                     <PageBar
-                      page={page}
-                      totalPage={postListData?.totalPages ?? 0}
+                      page={Number(page)}
+                      totalPage={postListData.totalPages}
                       onClick={handleClick}
                     />
                   </PageBarWrapper>

@@ -4,6 +4,7 @@ import { createSearchParams, useSearchParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useGetMyData } from '../../api/hooks/useGetMyData';
 import { useGetMyPostsTempData } from '../../api/hooks/useGetMyPostsTempData';
+import { useGetMyScrapList } from '../../api/hooks/useGetMyScrapList';
 import { GDSCButton } from '../../components/common/Button';
 import CategoryMenu from '../../components/common/CategoryMenu';
 import PageBar from '../../components/common/PageBar';
@@ -25,6 +26,7 @@ const PostSaves = () => {
   const category = categoryName ? categoryName : 'all';
   const pageParams = searchParams.get('page');
   const page = pageParams ? parseInt(pageParams) : 1;
+  const { scrapList } = useGetMyScrapList();
 
   const { userData } = useGetMyData();
   const userInfoData = userData?.memberInfo;
@@ -91,7 +93,10 @@ const PostSaves = () => {
                       navigate(`/post/edit/${data.postId}`);
                     }}
                   >
-                    <PostCard {...data} />
+                    <PostCard
+                      {...data}
+                      isScrap={!!scrapList?.find((id) => id == data.postId)}
+                    />
                   </PostCardWrapper>
                 ))
               ) : (

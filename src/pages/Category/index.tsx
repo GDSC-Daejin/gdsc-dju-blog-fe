@@ -75,7 +75,7 @@ const Category = () => {
                 {postListData.empty ? (
                   <Notice>포스팅된 글이 없습니다</Notice>
                 ) : (
-                  <BlogCardGridLayout PostData={postListData.content} />
+                  <BlogCardGridLayout postData={postListData.content} />
                 )}
               </>
             )}
