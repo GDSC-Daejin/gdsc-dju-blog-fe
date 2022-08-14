@@ -28,11 +28,7 @@ function Home() {
   const [homeWidth, setHomeWidth] = useState(0);
   const { postListData } = useGetPostsData(category, 0, 11);
   const { scrapData } = useGetMyScrapData();
-  const scrapList =
-    scrapData?.data.content.map((v) => {
-      return v.post[0].postId;
-    }) ?? [];
-
+  const scrapList = scrapData?.data.content;
   const onDragStart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsDrag(true);
@@ -92,10 +88,7 @@ function Home() {
                   key={postData.postId}
                   homeWidth={`${homeWidth}px`}
                 >
-                  <BlogCard
-                    postData={postData}
-                    isScrap={scrapList?.includes(postData.postId)}
-                  />
+                  <BlogCard postData={postData} isScrap={false} />
                 </BlogCardWrapper>
               );
             })}
