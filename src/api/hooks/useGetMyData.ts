@@ -20,12 +20,10 @@ export const useGetMyData = () => {
     () => getUserData(cookies.token),
     {
       refetchInterval: 30 * 60 * 1000,
-      retry: 2,
+      retry: 1,
       enabled: isEnabled,
       onError: () => {
-        getMyToken(cookies.refresh_token, cookies.token).then((token) =>
-          setCookies('token', token),
-        );
+        useGetMyToken();
       },
     },
   );
@@ -34,17 +32,21 @@ export const useGetMyData = () => {
 };
 
 export const useGetMyToken = () => {
-  const [cookies, setCookies] = useCookies(['token', 'refresh_token']);
+  const [cookies, setCookies, removeCookies] = useCookies([
+    'token',
+    'refresh_token',
+  ]);
   const isEnabled = !!(cookies.token && cookies.refresh_token);
   const { data: newToken } = useQuery(
     [cookies.refresh_token, cookies.refresh_token],
     () => getMyToken(cookies.refresh_token, cookies.token),
     {
       refetchInterval: 30 * 60 * 1000,
-      retry: 2,
+      retry: 1,
       enabled: isEnabled,
       onError: () => {
-        TokenService.getRefresh(cookies.refresh_token, cookies.token);
+        removeCookies('token');
+        removeCookies('refresh_token');
       },
     },
   );
