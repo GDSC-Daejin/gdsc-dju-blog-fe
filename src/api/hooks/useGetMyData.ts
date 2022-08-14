@@ -10,7 +10,7 @@ export const getUserData = async (token: string) => {
 };
 export const getMyToken = async (refreshToken: string, token: string) => {
   const response = await TokenService.getRefresh(refreshToken, token);
-  if (response.data.header.code == 500) {
+  if (response.data.header.code == 500 || response.status == 500) {
     Cookies.remove('token');
     Cookies.remove('refresh_token');
   }
@@ -24,36 +24,16 @@ export const useGetMyData = () => {
     [cookies.token, `${cookies.token}`],
     () => getUserData(cookies.token),
     {
-      refetchInterval: 30 * 60 * 1000,
-      retry: 1,
+      refetchInterval: 20 * 60 * 1000,
       enabled: isEnabled,
       onError: () => {
-        useGetMyToken();
+        const newToken = getMyToken(cookies.refresh_token, cookies.token);
+        if (newToken) {
+          setCookies('token', newToken);
+        }
       },
     },
   );
 
   return { userData: userData ?? userData };
-};
-
-export const useGetMyToken = () => {
-  const [cookies, setCookies, removeCookies] = useCookies([
-    'token',
-    'refresh_token',
-  ]);
-  const isEnabled = !!(cookies.token && cookies.refresh_token);
-  const { data: newToken } = useQuery(
-    [cookies.refresh_token, cookies.refresh_token],
-    () => getMyToken(cookies.refresh_token, cookies.token),
-    {
-      refetchInterval: 30 * 60 * 1000,
-      retry: 1,
-      enabled: isEnabled,
-      onError: () => {
-        removeCookies('token');
-        removeCookies('refresh_token');
-      },
-    },
-  );
-  newToken && setCookies('token', newToken);
 };
